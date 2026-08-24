@@ -144,6 +144,7 @@ export const ruHomepage = {
           systems: ["ChatGPT", "Gemini", "Perplexity", "Claude", "DeepSeek", "Qwen", "Mistral", "Grok"],
           includes: [
             "Базовый замер Expert Verified включён",
+            "Оплаченный Expert Verified ($399) идёт в зачёт программы при апгрейде в течение 30 дней",
             "До 10 часов внедрения",
             "90 дней мониторинга и повторный замер в том же scope",
           ],
