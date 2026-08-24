@@ -7,7 +7,7 @@ import { commercialFacts } from "@/lib/commercial-facts";
 
 export const ruHomepage = {
   nav: [
-    { label: "AI Systems", href: "/ru#systems" },
+    { label: "AI Automation", href: "/ru#systems" },
     { label: "AI Visibility", href: "/ru/visibility" },
     { label: "Тарифы", href: "/ru/pricing" },
     { label: "Lab", href: "/ru/lab" },
@@ -21,13 +21,13 @@ export const ruHomepage = {
     visibilityLabel: "Наружу · AI Visibility",
     visibilityFlow: "Сигналы → evidence → действие",
     visibilityNote: "Как AI находит, понимает и представляет бизнес.",
-    systemsLabel: "Внутрь · AI Systems",
+    systemsLabel: "Внутрь · AI Automation",
     systemsFlow: "Процессы → правила → передача",
     systemsNote: "Как команда превращает ручную работу в рабочую систему.",
     sharedLayer: "Один слой Selena Systems · исследования поддерживают оба направления",
   },
   hero: {
-    eyebrow: "Selena Systems · AI Visibility и AI Systems",
+    eyebrow: "Selena Systems · AI Visibility и AI Automation",
     headline: "Когда клиент спрашивает AI, ваш бизнес попадает в ответ?",
     subheadline:
       "ChatGPT, Gemini и Perplexity уже советуют людям, куда пойти и у кого покупать. Мы измеряем, попадает ли ваш бизнес в эти ответы, — и показываем, что исправить. Вход бесплатный: проверка того, что AI может прочитать на вашем сайте.",
@@ -36,11 +36,11 @@ export const ruHomepage = {
     primaryNote:
       "Бесплатная проверка — техническая: читаем сайт так, как его читают AI-агенты, и показываем, что починить. Это отдельный шаг, не замер видимости — замеры начинаются с платных шагов.",
     trustLine:
-      "Одна компания, два направления: AI Visibility измеряет, как AI видит ваш бизнес снаружи. AI Systems наводит порядок внутри.",
+      "Одна компания, два направления: AI Visibility измеряет, как AI видит ваш бизнес снаружи. AI Automation наводит порядок внутри.",
     systemsDoor: {
       question: "Ищете не проверку, а порядок в процессах?",
       description:
-        "Это наше второе направление — AI Systems: превращаем разрозненную работу команды в понятные AI-процессы. Для предпринимателей и команд.",
+        "Это наше второе направление — AI Automation: превращаем разрозненную работу команды в понятные AI-процессы. Для предпринимателей и команд.",
       cta: { label: "Разобрать мою задачу", href: "/ru/contact" },
     },
     directions: {
@@ -62,7 +62,7 @@ export const ruHomepage = {
         ],
       },
       systems: {
-        eyebrow: "AI Systems · строим внутри",
+        eyebrow: "AI Automation · строим внутри",
         headline: "Превратим разрозненную работу в практическую AI-систему.",
         description:
           "Разбираем процесс, выбираем нужный сценарий и собираем правила, автоматизации и базу знаний, которыми команда сможет пользоваться.",
@@ -82,7 +82,7 @@ export const ruHomepage = {
   productPaths: {
     heading: "Два продукта. Выберите нужный результат.",
     intro:
-      "AI Visibility смотрит наружу — как AI находит и представляет ваш бизнес. AI Systems смотрит внутрь — какие процессы команды нужно улучшить или автоматизировать.",
+      "AI Visibility смотрит наружу — как AI находит и представляет ваш бизнес. AI Automation смотрит внутрь — какие процессы команды нужно улучшить или автоматизировать.",
     visibility: {
       name: "AI Visibility",
       promise: "Измерить и улучшить то, как AI видит ваш бизнес.",
@@ -155,7 +155,7 @@ export const ruHomepage = {
       secondaryCta: { label: "Открыть AI Visibility", href: "/ru/visibility" },
     },
     systems: {
-      name: "AI Systems",
+      name: "AI Automation",
       promise: "Спроектировать и собрать практические системы внутри бизнеса.",
       description:
         "Выберите аудит, сфокусированный спринт или Business OS для продаж, контента, знаний, автоматизации и операций.",
@@ -165,7 +165,7 @@ export const ruHomepage = {
         { price: commercialFacts.aiSystems.sprint.ru, name: "AI Sprint · 4 недели" },
         { price: commercialFacts.aiSystems.businessOs.ru.replace(",000", "k"), name: "AI Business OS · 8 недель" },
       ],
-      primaryCta: { label: "Посмотреть AI Systems", href: "/ru#ai-systems" },
+      primaryCta: { label: "Посмотреть AI Automation", href: "/ru#ai-systems" },
       secondaryCta: { label: "Записаться на AI-аудит", href: "/contact" },
     },
   },
@@ -227,7 +227,7 @@ export const ruHomepage = {
   },
   sprint: {
     eyebrow: "Главный продукт",
-    headline: "4-недельный AI Systems Sprint",
+    headline: "4-недельный AI Sprint",
     intro:
       "За четыре недели выбираем приоритетный процесс, проектируем систему, собираем первую версию, тестируем и передаём её команде.",
     deliverables: [
@@ -306,7 +306,7 @@ export const ruHomepage = {
     ] as TrackerStep[],
   },
   packagesIntro: {
-    eyebrow: "Услуги AI Systems",
+    eyebrow: "Услуги AI Automation",
     headline: "Выберите глубину внедрения под объём ручной работы и текущую задачу.",
     intro:
       "Индивидуальная работа Selena Systems, отдельная от подписок AI Visibility и привязанная к процессам вашего бизнеса.",
@@ -424,8 +424,8 @@ export const ruHomepage = {
   },
   productSwitch: {
     kicker: "Выше — продукт 01 · AI Visibility",
-    headline: "Дальше — продукт 02: AI Systems",
-    text: "AI Visibility измеряет, как AI видит ваш бизнес снаружи. AI Systems наводит порядок внутри: процессы, правила и автоматизации, с которыми команда реально работает.",
+    headline: "Дальше — продукт 02: AI Automation",
+    text: "AI Visibility измеряет, как AI видит ваш бизнес снаружи. AI Automation наводит порядок внутри: процессы, правила и автоматизации, с которыми команда реально работает.",
   },
   finalCta: {
     eyebrow: "Следующий шаг",

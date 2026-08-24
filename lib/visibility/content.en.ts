@@ -503,7 +503,7 @@ export const visibilityContentEn: VisibilityContent = {
     directory: {
       heading: "One company. Two different things you can buy.",
       intro:
-        "AI Visibility measures your external AI visibility. AI Systems diagnoses and builds the workflows inside your business. The free readiness check belongs only to AI Visibility.",
+        "AI Visibility measures your external AI visibility. AI Automation diagnoses and builds the workflows inside your business. The free readiness check belongs only to AI Visibility.",
       visibility: {
         title: "AI Visibility",
         count: "1 free check + 4 paid options",
@@ -513,12 +513,12 @@ export const visibilityContentEn: VisibilityContent = {
         ctaLabel: "Compare Visibility options",
       },
       systems: {
-        title: "AI Systems",
+        title: "AI Automation",
         count: "4 custom service formats",
         description:
           "Choose this path when you need Selena to diagnose, design or build sales, content, knowledge, automation or operations workflows.",
         href: "#packages",
-        ctaLabel: "See AI Systems services",
+        ctaLabel: "See AI Automation services",
       },
     },
     portal: {

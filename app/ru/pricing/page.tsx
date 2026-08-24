@@ -12,9 +12,9 @@ import { JsonLd } from "@/components/seo/JsonLd";
 const content = visibilityContentRu;
 
 export const metadata = buildMetadata({
-  title: "Цены — AI Visibility и AI Systems",
+  title: "Цены — AI Visibility и AI Automation",
   description:
-    "Сравните бесплатную проверку и четыре варианта AI Visibility отдельно от четырёх индивидуальных услуг AI Systems и выберите следующий шаг.",
+    "Сравните бесплатную проверку и четыре варианта AI Visibility отдельно от четырёх индивидуальных услуг AI Automation и выберите следующий шаг.",
   path: "/ru/pricing",
   locale: "ru_RU",
   languages: visibilityLanguages("pricing"),
@@ -27,7 +27,7 @@ export default function RussianPricingPage() {
       <PageHero
         eyebrow="Цены Selena Systems"
         title="Два продукта — без смешения."
-        intro="AI Visibility измеряет, как AI видит ваш бизнес. AI Systems диагностирует и строит процессы внутри него. Сначала выберите направление, затем сравнивайте только подходящие предложения."
+        intro="AI Visibility измеряет, как AI видит ваш бизнес. AI Automation диагностирует и строит процессы внутри него. Сначала выберите направление, затем сравнивайте только подходящие предложения."
         compact
       />
       <PricingDirectory content={content.pricing.directory} />
