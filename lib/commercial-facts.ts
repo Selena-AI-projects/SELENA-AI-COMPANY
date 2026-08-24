@@ -75,7 +75,7 @@ export const commercialFacts = {
     sprint: {
       id: "ai-systems-sprint",
       productLine: "ai-systems",
-      name: { en: "7-Day AI Sprint", ru: "7-дневный AI Sprint" },
+      name: { en: "4-Week AI Sprint", ru: "4-недельный AI Sprint" },
       description: {
         en: "Design, build, test and hand over one priority operating-system layer.",
         ru: "Спроектировать, собрать, протестировать и передать один приоритетный рабочий контур.",

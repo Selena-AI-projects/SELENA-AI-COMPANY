@@ -179,8 +179,8 @@ export const homepage = {
       items: [
         { price: commercialFacts.aiSystems.miniAudit.en, name: "60-minute mini-audit" },
         { price: commercialFacts.aiSystems.audit.en, name: "AI Audit" },
-        { price: commercialFacts.aiSystems.sprint.en, name: "7-day AI Sprint" },
-        { price: commercialFacts.aiSystems.businessOs.en.replace(",000", "k"), name: "AI Business OS" },
+        { price: commercialFacts.aiSystems.sprint.en, name: "AI Sprint · 4 weeks" },
+        { price: commercialFacts.aiSystems.businessOs.en.replace(",000", "k"), name: "AI Business OS · 8 weeks" },
       ],
       primaryCta: { label: "Explore AI Systems", href: "/ai-systems" },
       secondaryCta: { label: "Book an AI Audit", href: "/en/contact" },
@@ -244,9 +244,9 @@ export const homepage = {
   },
   sprint: {
     eyebrow: "Main offer",
-    headline: "7-Day AI Systems Sprint",
+    headline: "4-Week AI Systems Sprint",
     intro:
-      "A focused build sprint for founders who want a working AI operating layer quickly: mapped, designed, built, tested and handed over with clear rules.",
+      "A focused four-week build for founders who want a working AI operating layer: mapped, designed, built, tested and handed over with clear rules.",
     deliverables: [
       "AI systems audit and workflow map",
       "Priority automation plan",
@@ -258,40 +258,40 @@ export const homepage = {
   },
   process: [
     {
-      day: "Day 1",
+      day: "Week 1",
       title: "Audit",
       text: "We map current workflows, tools, bottlenecks and the highest-leverage manual work.",
     },
     {
-      day: "Day 2",
+      day: "Week 1",
       title: "System Design",
       text: "We define the AI operating layer, approval rules, data flow and first build scope.",
     },
     {
-      day: "Days 3-5",
+      day: "Weeks 2-3",
       title: "Build",
       text: "We assemble automations, prompts, knowledge structures, intake flows and working handoffs.",
     },
     {
-      day: "Day 6",
+      day: "Week 4",
       title: "Test",
       text: "We test edge cases, tone, outputs, broken paths and human-review checkpoints.",
     },
     {
-      day: "Day 7",
+      day: "Week 4",
       title: "Handover",
       text: "You receive the workflow, documentation, operating rules and next-step recommendations.",
     },
   ],
   processIntro: {
     eyebrow: "How the sprint works",
-    headline: "Seven days from scattered workflow to working operating layer.",
+    headline: "Four weeks from scattered workflow to working operating layer.",
   },
   tracker: {
     eyebrow: "During the sprint",
-    headline: "You watch the build move. Day by day, not in a weekly email.",
+    headline: "You watch the build move. Stage by stage, not in a final report.",
     demoLabel: "Demo view — this is what a client sees mid-sprint",
-    dayLabel: "Day 3 of 7",
+    dayLabel: "Week 2 of 4",
     stageLabel: "Build in progress",
     note: "Every sprint runs with a shared tracker: what is done, what is being built right now and what comes next — visible to you the whole time.",
     steps: [
@@ -345,14 +345,15 @@ export const homepage = {
     {
       name: "AI Sprint",
       price: commercialFacts.aiSystems.sprint.en,
-      description: "The 7-day build sprint for one priority operating system layer.",
+      description: "The 4-week build sprint for one priority operating system layer.",
       included: ["System design", "Working build", "Handover docs"],
       featured: true,
     },
     {
       name: "AI Business OS",
       price: commercialFacts.aiSystems.businessOs.en,
-      description: "A broader operating system across sales, operations, knowledge and automation.",
+      description:
+        "An 8-week build of a broader operating system across sales, operations, knowledge and automation.",
       included: ["Multi-system architecture", "Implementation roadmap", "Team operating layer"],
       featured: false,
     },
@@ -425,6 +426,11 @@ export const homepage = {
         metric: null,
       },
     ] as ProofProject[],
+  },
+  productSwitch: {
+    kicker: "Above — product 01 · AI Visibility",
+    headline: "Next — product 02: AI Systems",
+    text: "AI Visibility measures how AI sees your business from the outside. AI Systems brings order inside: processes, rules and automations your team can actually run.",
   },
   finalCta: {
     eyebrow: "Next step",

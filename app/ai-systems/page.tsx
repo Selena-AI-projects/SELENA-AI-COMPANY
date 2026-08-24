@@ -30,15 +30,15 @@ const offers = [
     href: "/ai-systems/ai-audit",
   },
   {
-    name: "7-Day AI Sprint",
+    name: "4-Week AI Sprint",
     price: commercialFacts.aiSystems.sprint.en,
-    description: "Design, build, test and hand over one priority operating-system layer in seven focused days.",
+    description: "Design, build, test and hand over one priority operating-system layer in four focused weeks.",
     href: "/ai-systems/ai-sprint",
   },
   {
     name: "AI Business OS",
     price: commercialFacts.aiSystems.businessOs.en,
-    description: "A broader connected system across sales, operations, knowledge and automation.",
+    description: "An 8-week build of a broader connected system across sales, operations, knowledge and automation.",
     href: "/ai-systems/business-os",
   },
 ] as const;
