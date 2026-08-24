@@ -219,7 +219,7 @@ test("pricing shows exactly the approved RC6 four-plan catalog", () => {
 
     assert.match(allPlans[0].volumeLabel, /300/);
     assert.match(allPlans[1].volumeLabel, /800/);
-    assert.match(allPlans[2].volumeLabel, /800/);
+    assert.match(allPlans[2].volumeLabel, /2000/);
     assert.match(allPlans[3].volumeLabel, /(Custom|Индивидуальный)/);
     assert.ok(allPlans.every((plan) => plan.progressionLabel.length > 0), `${name} needs plan progression copy`);
     assert.equal(allPlans[1].featured, true);

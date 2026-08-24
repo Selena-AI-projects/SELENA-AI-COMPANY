@@ -540,7 +540,7 @@ export const visibilityContentRu: VisibilityContent = {
             description:
               "Для локального бизнеса, которому важно знать, что потенциальный клиент видит в пользовательских AI-сервисах.",
             systemsLabel: "ChatGPT · Gemini · Perplexity",
-            volumeLabel: "100 языковых сценариев × 3 системы = 300 ответов",
+            volumeLabel: "До 25 вопросов × 3 системы × еженедельный замер = 300 ответов в месяц",
             progressionLabel: "Первый реальный замер · только Visitor View",
             features: [
               "1 сайт, бренд и город или район",
@@ -560,7 +560,7 @@ export const visibilityContentRu: VisibilityContent = {
             description:
               "Для команд, которым нужны все восемь систем и понятное сравнение Visitor View с API View.",
             systemsLabel: "ChatGPT · Gemini · Perplexity + Claude · DeepSeek · Qwen · Mistral · Grok",
-            volumeLabel: "100 языковых сценариев × 8 систем = 800 ответов",
+            volumeLabel: "До 25 вопросов × 8 систем × еженедельный замер = 800 ответов в месяц",
             progressionLabel:
               "Всё из Snapshot плюс пять систем API View, divergence и расширенные evidence по источникам.",
             features: [
@@ -587,11 +587,11 @@ export const visibilityContentRu: VisibilityContent = {
             statusLabel: "Результат проверяет аналитик",
             description: "Доказательный baseline с пятью повторами и ручным контролем качества до утверждения результата.",
             systemsLabel: "Все 8: ChatGPT · Gemini · Perplexity · Claude · DeepSeek · Qwen · Mistral · Grok",
-            volumeLabel: "20 языковых сценариев × 8 систем × 5 = 800 ответов",
+            volumeLabel: "25 вопросов × 2 языка × 8 систем × 5 повторов = 2000 ответов",
             progressionLabel:
               "Более глубокий фиксированный baseline: пять повторов и смысловой, citation и factual QC аналитиком.",
             features: [
-              "10 семейств запросов и до 2 языков",
+              "До 25 вопросов на 2 языках; глубокий разбор топ-10 приоритетных",
               "Смысловой QC, проверка цитат и фактических ошибок",
               "Evidence Ledger и полный Action Plan",
               "5–10 приоритетов, утверждённых аналитиком",
