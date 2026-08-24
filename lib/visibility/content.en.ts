@@ -541,7 +541,7 @@ export const visibilityContentEn: VisibilityContent = {
             description:
               "For a local business that needs to know what potential customers see in consumer AI surfaces.",
             systemsLabel: "ChatGPT · Gemini · Perplexity",
-            volumeLabel: "100 language scenarios × 3 systems = 300 answers",
+            volumeLabel: "Up to 25 questions × 3 systems × a weekly run = 300 answers a month",
             progressionLabel: "Entry measurement · Visitor View only",
             features: [
               "1 site, brand and city or district",
@@ -561,7 +561,7 @@ export const visibilityContentEn: VisibilityContent = {
             description:
               "For teams that need all eight systems and a clear comparison between Visitor View and API View.",
             systemsLabel: "ChatGPT · Gemini · Perplexity + Claude · DeepSeek · Qwen · Mistral · Grok",
-            volumeLabel: "100 language scenarios × 8 systems = 800 answers",
+            volumeLabel: "Up to 25 questions × 8 systems × a weekly run = 800 answers a month",
             progressionLabel:
               "Everything in Snapshot, plus five API View systems, divergence and expanded source evidence.",
             features: [
@@ -588,11 +588,11 @@ export const visibilityContentEn: VisibilityContent = {
             statusLabel: "Analyst-reviewed delivery",
             description: "A rigorous baseline with five repeats and manual quality control before the result is approved.",
             systemsLabel: "All 8: ChatGPT · Gemini · Perplexity · Claude · DeepSeek · Qwen · Mistral · Grok",
-            volumeLabel: "20 language scenarios × 8 systems × 5 = 800 answers",
+            volumeLabel: "25 questions × 2 languages × 8 systems × 5 repeats = 2000 answers",
             progressionLabel:
               "A deeper fixed baseline: five repeats per scenario, plus semantic, citation and factual QC by an analyst.",
             features: [
-              "10 prompt families across up to 2 languages",
+              "Up to 25 questions in 2 languages; deep review of the top 10 priorities",
               "Semantic, citation and factual-error QC",
               "Evidence Ledger and full Action Plan",
               "5–10 analyst-approved priorities",
