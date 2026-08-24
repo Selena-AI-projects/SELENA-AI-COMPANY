@@ -136,6 +136,15 @@ export type LiveReportCopy = {
     ctaLabel: string;
     ctaHref: string;
   };
+  /** The free-methodology tiles: what the check did and did not do. */
+  freeMethod: {
+    checksLabel: string;
+    pagesLabel: string;
+    aiAnswersLabel: string;
+    priceLabel: string;
+  };
+  /** Paid-report sections named honestly as locked, never previewed with fake data. */
+  lockedItems: { title: string; body: string }[];
   cta: {
     heading: string;
     body: string;
