@@ -487,9 +487,10 @@ export const visibilityContentRu: VisibilityContent = {
       ctaLabel: "Запустить бесплатную проверку",
     },
     paidPlans: {
-      heading: "Бесплатный вход и четыре платных варианта — в одном ряду",
+      heading: "Бесплатный вход и четыре платных варианта — построчное сравнение",
       intro:
         "Начните бесплатно и сравните, что именно добавляет каждый платный шаг. Snapshot и Landscape — автоматические ежемесячные замеры; Expert Verified и Implementation добавляют проверку человеком и внедрение, не смешивая их объём с подписками.",
+      scrollHint: "Таблица прокручивается вбок — названия строк остаются на месте.",
       comparisonLabels: {
         offer: "Вариант",
         bestFor: "Для кого",
@@ -653,5 +654,7 @@ export const visibilityContentRu: VisibilityContent = {
   cta: {
     primary: { label: "Проверить AI-видимость бесплатно", href: visibilityRoutes.ru.check },
     secondary: { label: "Посмотреть тарифы", href: visibilityRoutes.ru.pricing },
+    compareNote:
+      "Цены — в начале страницы. Построчное сравнение всех пяти вариантов и услуг AI Automation — на странице тарифов.",
   },
 };
