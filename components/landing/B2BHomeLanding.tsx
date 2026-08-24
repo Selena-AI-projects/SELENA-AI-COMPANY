@@ -51,7 +51,7 @@ function LadderCard({ item, highlighted }: { item: LadderItem; highlighted?: boo
   return (
     <article
       className={cn(
-        "relative flex h-full flex-col overflow-hidden rounded-[1rem] border bg-ivory p-5 text-ink",
+        "relative flex h-full flex-col overflow-hidden rounded-[1rem] border bg-ivory p-5 text-ink transition-transform duration-300 hover:-translate-y-1",
         highlighted ? "border-copper-deep shadow-[0_24px_60px_-30px_rgba(185,130,91,0.55)]" : "border-line",
       )}
     >
@@ -545,7 +545,7 @@ export function PackagesSection({ content }: { content: HomepageContent }) {
             <Reveal key={pkg.name} delay={index * 80}>
               <article
                 className={cn(
-                  "flex h-full flex-col border bg-ivory p-6 text-ink sm:p-7",
+                  "flex h-full flex-col border bg-ivory p-6 text-ink transition-transform duration-300 hover:-translate-y-1 sm:p-7",
                   pkg.featured ? "border-copper-deep" : "border-line",
                 )}
               >
