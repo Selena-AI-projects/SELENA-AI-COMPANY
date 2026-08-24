@@ -48,8 +48,8 @@
   /* Palette (from developer TZ §8) */
   --color-ivory: #f7f2ea; /* page background */
   --color-surface: #fffdf8; /* cards, raised surfaces */
-  --color-charcoal: #181614; /* dark contrast sections */
-  --color-charcoal-2: #211e1b; /* dark surface, one step up */
+  --color-charcoal: #0d1421; /* dark contrast sections — deep ink blue */
+  --color-charcoal-2: #141d2e; /* dark surface, one step up */
   --color-ink: #161413; /* primary text */
   --color-muted: #5b5046; /* secondary text (taupe) — darkened for readability, ~6.5:1 on ivory */
   --color-copper: #b9825b; /* primary accent — decorative / large / non-text */
@@ -63,7 +63,7 @@
   --color-warn-soft: #f8efdb; /* attention background */
   --color-bad: #b23a2d; /* critical / broken — AA on ivory */
   --color-bad-soft: #f9e6e1; /* critical background */
-  --color-line-dark: #35302b; /* borders on dark sections */
+  --color-line-dark: #263149; /* borders on dark sections — blue-tinted */
 
   /* Typography */
   --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
