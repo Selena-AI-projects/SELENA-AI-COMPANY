@@ -162,8 +162,8 @@ export const ruHomepage = {
       items: [
         { price: commercialFacts.aiSystems.miniAudit.ru, name: "Мини-аудит · 60 минут" },
         { price: commercialFacts.aiSystems.audit.ru, name: "AI-аудит" },
-        { price: commercialFacts.aiSystems.sprint.ru, name: "AI Sprint · 7 дней" },
-        { price: commercialFacts.aiSystems.businessOs.ru.replace(",000", "k"), name: "AI Business OS" },
+        { price: commercialFacts.aiSystems.sprint.ru, name: "AI Sprint · 4 недели" },
+        { price: commercialFacts.aiSystems.businessOs.ru.replace(",000", "k"), name: "AI Business OS · 8 недель" },
       ],
       primaryCta: { label: "Посмотреть AI Systems", href: "/ru#ai-systems" },
       secondaryCta: { label: "Записаться на AI-аудит", href: "/contact" },
@@ -227,9 +227,9 @@ export const ruHomepage = {
   },
   sprint: {
     eyebrow: "Главный продукт",
-    headline: "7-дневный AI Systems Sprint",
+    headline: "4-недельный AI Systems Sprint",
     intro:
-      "За одну рабочую неделю выбираем приоритетный процесс, проектируем систему, собираем первую версию, тестируем и передаём её команде.",
+      "За четыре недели выбираем приоритетный процесс, проектируем систему, собираем первую версию, тестируем и передаём её команде.",
     deliverables: [
       "Аудит процессов и карта AI-возможностей",
       "Приоритетный план автоматизации",
@@ -241,40 +241,40 @@ export const ruHomepage = {
   },
   process: [
     {
-      day: "День 1",
+      day: "Неделя 1",
       title: "Аудит",
       text: "Разбираем процессы, инструменты, узкие места и ручную работу с максимальным влиянием.",
     },
     {
-      day: "День 2",
+      day: "Неделя 1",
       title: "Архитектура",
       text: "Определяем контур системы, движение данных, правила согласования и границы первой версии.",
     },
     {
-      day: "Дни 3–5",
+      day: "Недели 2–3",
       title: "Сборка",
       text: "Настраиваем автоматизации, промпты, базу знаний, входящие потоки и передачу между этапами.",
     },
     {
-      day: "День 6",
+      day: "Неделя 4",
       title: "Тест",
       text: "Проверяем ошибки, тон ответов, сложные случаи и точки обязательного контроля человеком.",
     },
     {
-      day: "День 7",
+      day: "Неделя 4",
       title: "Передача",
       text: "Передаём рабочую систему, документацию, правила использования и план следующего этапа.",
     },
   ],
   processIntro: {
     eyebrow: "Как проходит спринт",
-    headline: "Семь дней от ручного процесса до работающего системного контура.",
+    headline: "Четыре недели от ручного процесса до работающего системного контура.",
   },
   tracker: {
     eyebrow: "Во время спринта",
-    headline: "Вы видите, как движется сборка. По дням, а не в отчёте раз в неделю.",
+    headline: "Вы видите, как движется сборка. По этапам, а не в отчёте в самом конце.",
     demoLabel: "Демо — так выглядит трекер клиента в середине спринта",
-    dayLabel: "День 3 из 7",
+    dayLabel: "Неделя 2 из 4",
     stageLabel: "Идёт сборка",
     note: "Каждый спринт идёт с общим трекером: что сделано, что собирается прямо сейчас и что дальше — видно вам всё время работы.",
     steps: [
@@ -328,14 +328,14 @@ export const ruHomepage = {
     {
       name: "AI-спринт",
       price: commercialFacts.aiSystems.sprint.ru,
-      description: "7-дневная сборка одного приоритетного контура операционной системы.",
+      description: "4-недельная сборка одного приоритетного контура операционной системы.",
       included: ["Архитектура", "Рабочая версия", "Документация и передача"],
       featured: true,
     },
     {
       name: "AI Business OS",
       price: commercialFacts.aiSystems.businessOs.ru,
-      description: "Связанная система для продаж, операций, знаний и автоматизации.",
+      description: "Связанная система для продаж, операций, знаний и автоматизации — сборка за 8 недель.",
       included: ["Архитектура нескольких контуров", "План внедрения", "Правила работы команды"],
       featured: false,
     },
@@ -408,6 +408,11 @@ export const ruHomepage = {
         metric: null,
       },
     ] as ProofProject[],
+  },
+  productSwitch: {
+    kicker: "Выше — продукт 01 · AI Visibility",
+    headline: "Дальше — продукт 02: AI Systems",
+    text: "AI Visibility измеряет, как AI видит ваш бизнес снаружи. AI Systems наводит порядок внутри: процессы, правила и автоматизации, с которыми команда реально работает.",
   },
   finalCta: {
     eyebrow: "Следующий шаг",

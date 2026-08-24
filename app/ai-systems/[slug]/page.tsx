@@ -14,15 +14,16 @@ const details = {
     items: ["Workflow review", "AI opportunity map", "Priority recommendations", "A scoped next-step brief"],
   },
   "ai-sprint": {
-    title: "7-Day AI Sprint",
+    title: "4-Week AI Sprint",
     price: commercialFacts.aiSystems.sprint.en,
-    intro: "A focused build sprint for one priority operating-system layer, from map to tested handover.",
+    intro: "A focused four-week build for one priority operating-system layer, from map to tested handover.",
     items: ["System design", "Working build", "Edge-case testing", "Handover documentation and operating rules"],
   },
   "business-os": {
     title: "AI Business OS",
     price: commercialFacts.aiSystems.businessOs.en,
-    intro: "A broader custom architecture for businesses that need connected sales, operations, knowledge and automation systems.",
+    intro:
+      "An 8-week custom architecture for businesses that need connected sales, operations, knowledge and automation systems.",
     items: ["Multi-system architecture", "Implementation roadmap", "Team operating layer", "Human approval boundaries"],
   },
 } as const;
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     "ai-audit":
       "Map your workflows and AI opportunities before building, with a focused scope, deliverables and a practical next step for your team.",
     "ai-sprint":
-      "Design, build and test one priority AI workflow in seven focused days, with a practical handover your team can run after launch.",
+      "Design, build and test one priority AI workflow in four focused weeks, with a practical handover your team can run after launch.",
     "business-os":
       "Design a connected AI operating layer across sales, operations, knowledge and automation, with clear human approval boundaries.",
   };

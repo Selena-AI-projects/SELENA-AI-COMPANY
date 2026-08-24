@@ -31,7 +31,7 @@ const nextSteps = [
   },
   {
     title: "Recommended scope",
-    text: "You receive a practical starting point: an AI Audit, a 7-Day Sprint or a broader Business OS build.",
+    text: "You receive a practical starting point: an AI Audit, a 4-Week Sprint or a broader Business OS build.",
   },
 ];
 

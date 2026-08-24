@@ -193,38 +193,41 @@ function VisibilityOverviewSection({ content }: { content: HomepageContent }) {
   const plan = content.productPaths.visibility;
 
   return (
-    <section id="visibility" className="border-t border-line bg-surface py-20 sm:py-28">
+    <section id="visibility" className="border-t border-ivory/10 bg-charcoal py-20 text-ivory sm:py-28">
       <Container size="wide">
         <Reveal>
-          <div className="grid gap-6 border-b border-line pb-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
+          <div className="grid gap-6 border-b border-ivory/12 pb-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
             <div>
-              <Eyebrow>{visibility.eyebrow}</Eyebrow>
-              <h2 className="mt-5 text-h1 text-ink">{plan.name}</h2>
+              <Eyebrow tone="light">{visibility.eyebrow}</Eyebrow>
+              <h2 className="mt-5 text-h1 text-ivory">{plan.name}</h2>
             </div>
             <div>
-              <p className="text-xl font-semibold leading-relaxed text-ink">{plan.promise}</p>
-              <p className="mt-3 max-w-3xl leading-relaxed text-muted">{visibility.description}</p>
+              <p className="text-xl font-semibold leading-relaxed text-ivory">{plan.promise}</p>
+              <p className="mt-3 max-w-3xl leading-relaxed text-ivory/64">{visibility.description}</p>
             </div>
           </div>
         </Reveal>
 
         <Reveal className="mt-10 flex flex-col gap-3 sm:flex-row">
-          <Button href={plan.primaryCta.href} size="lg" className="w-full sm:w-auto">
+          <Button href={plan.primaryCta.href} size="lg" variant="onDark" className="w-full sm:w-auto">
             {plan.primaryCta.label}
           </Button>
-          <Button href={plan.secondaryCta.href} size="lg" variant="secondary" className="w-full sm:w-auto">
+          <a
+            href={plan.secondaryCta.href}
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-ivory/25 px-8 py-4 text-base font-medium text-ivory/85 transition-colors duration-300 hover:border-copper hover:text-copper sm:w-auto"
+          >
             {plan.secondaryCta.label}
-          </Button>
+          </a>
         </Reveal>
 
-        <Reveal delay={100} className="mt-12 border-t border-line pt-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-copper-deep">
+        <Reveal delay={100} className="mt-12 border-t border-ivory/12 pt-10">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-copper">
             {visibility.outcomesLabel}
           </p>
           <ul className="mt-6 grid gap-6 md:grid-cols-3">
             {visibility.proof.map((item, index) => (
-              <li key={item} className="border-t-2 border-copper-deep/25 pt-4 text-lg leading-relaxed text-ink/80">
-                <span className="mr-2 font-semibold text-copper-deep">0{index + 1}</span>
+              <li key={item} className="border-t-2 border-copper/30 pt-4 text-lg leading-relaxed text-ivory/78">
+                <span className="mr-2 font-semibold text-copper">0{index + 1}</span>
                 {item}
               </li>
             ))}
@@ -235,9 +238,32 @@ function VisibilityOverviewSection({ content }: { content: HomepageContent }) {
   );
 }
 
+/**
+ * The visual hand-off between the two products: everything above is
+ * AI Visibility on dark, everything below is AI Systems on light.
+ * The card straddles the boundary so the switch is impossible to miss.
+ */
+function ProductSwitchSection({ content }: { content: HomepageContent }) {
+  const t = content.productSwitch;
+  return (
+    <section aria-label={t.headline} className="relative bg-charcoal">
+      <div className="absolute inset-x-0 bottom-0 top-1/2 bg-surface" aria-hidden />
+      <Container size="wide" className="relative">
+        <Reveal>
+          <div className="rounded-3xl border border-line bg-ivory px-6 py-10 text-center shadow-[0_24px_60px_-30px_rgba(0,0,0,0.45)] sm:px-10 sm:py-12">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted">{t.kicker}</p>
+            <h2 className="mt-4 text-h1 text-ink">{t.headline}</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted">{t.text}</p>
+          </div>
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
 function ProblemSection({ content }: { content: HomepageContent }) {
   return (
-    <section id="ai-systems" className="border-t border-line bg-surface py-20 sm:py-28">
+    <section id="ai-systems" className="bg-surface py-20 sm:py-28">
       <Container size="wide">
         <Reveal>
           <div className="mb-16 grid gap-6 border-b border-line pb-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
@@ -283,26 +309,25 @@ function ProblemSection({ content }: { content: HomepageContent }) {
 
 function SolutionSection({ content }: { content: HomepageContent }) {
   return (
-    <section id="systems" className="bg-charcoal py-20 text-ivory sm:py-28">
+    <section id="systems" className="border-t border-line bg-surface py-20 sm:py-28">
       <Container size="wide">
         <Reveal>
           <SectionIntro
             eyebrow={content.solution.eyebrow}
             headline={content.solution.headline}
             intro={content.solution.intro}
-            tone="light"
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-px overflow-hidden border border-line-dark bg-line-dark lg:grid-cols-5">
+        <div className="mt-14 grid gap-px overflow-hidden border border-line bg-line lg:grid-cols-5">
           {content.solution.systems.map((system, index) => (
             <Reveal key={system.name} delay={index * 70}>
-              <div className="h-full bg-charcoal-2 p-6 transition-colors duration-300 hover:bg-[#29241f] sm:p-7">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper">
+              <div className="h-full bg-ivory p-6 transition-colors duration-300 hover:bg-surface sm:p-7">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper-deep">
                   0{index + 1}
                 </p>
-                <h3 className="mt-9 text-h3 text-ivory">{system.name}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-ivory/62">{system.text}</p>
+                <h3 className="mt-9 text-h3 text-ink">{system.name}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-muted">{system.text}</p>
               </div>
             </Reveal>
           ))}
@@ -450,34 +475,33 @@ function SprintTrackerSection({ content }: { content: HomepageContent }) {
 
 export function PackagesSection({ content }: { content: HomepageContent }) {
   return (
-    <section id="packages" className="bg-charcoal py-20 text-ivory sm:py-28">
+    <section id="packages" className="border-t border-line bg-surface py-20 sm:py-28">
       <Container size="wide">
         <Reveal>
           <SectionIntro
             eyebrow={content.packagesIntro.eyebrow}
             headline={content.packagesIntro.headline}
             intro={content.packagesIntro.intro}
-            tone="light"
           />
         </Reveal>
 
         <Reveal delay={100}>
-          <div className="mt-10 flex flex-col gap-5 border border-line-dark bg-charcoal-2 px-6 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+          <div className="mt-10 flex flex-col gap-5 border border-line bg-ivory px-6 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper-deep">
                 {content.strategyCall.title}
               </p>
-              <p className="mt-2 text-sm leading-relaxed text-ivory/66">
+              <p className="mt-2 text-sm leading-relaxed text-muted">
                 {content.strategyCall.text}
               </p>
             </div>
             <div className="flex shrink-0 items-center gap-5">
-              <p className="font-serif text-3xl font-semibold text-ivory">
+              <p className="font-serif text-3xl font-semibold text-ink">
                 {content.strategyCall.price}
               </p>
               <a
                 href={content.cta.href}
-                className="inline-flex min-h-11 items-center gap-2 whitespace-nowrap rounded-full border border-ivory/25 px-5 py-2.5 text-sm font-medium text-ivory/85 transition-colors duration-300 hover:border-copper hover:text-copper"
+                className="inline-flex min-h-11 items-center gap-2 whitespace-nowrap rounded-full border border-ink/25 px-5 py-2.5 text-sm font-medium text-ink/80 transition-colors duration-300 hover:border-copper-deep hover:text-copper-deep"
               >
                 {content.strategyCall.ctaLabel}
               </a>
@@ -490,15 +514,13 @@ export function PackagesSection({ content }: { content: HomepageContent }) {
             <Reveal key={pkg.name} delay={index * 80}>
               <article
                 className={cn(
-                  "flex h-full flex-col border p-6 sm:p-7",
-                  pkg.featured
-                    ? "border-copper bg-ivory text-ink"
-                    : "border-line-dark bg-charcoal-2 text-ivory",
+                  "flex h-full flex-col border bg-ivory p-6 text-ink sm:p-7",
+                  pkg.featured ? "border-copper-deep" : "border-line",
                 )}
               >
                 <div className="flex items-start justify-between gap-6">
                   <div>
-                    <p className={cn("text-xs font-semibold uppercase tracking-[0.22em]", pkg.featured ? "text-copper-deep" : "text-copper")}>
+                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper-deep">
                       {pkg.name}
                     </p>
                     <h3 className="mt-4 font-serif text-4xl font-semibold">{pkg.price}</h3>
@@ -509,19 +531,19 @@ export function PackagesSection({ content }: { content: HomepageContent }) {
                     </span>
                   ) : null}
                 </div>
-                <p className={cn("mt-6 leading-relaxed", pkg.featured ? "text-muted" : "text-ivory/62")}>
+                <p className="mt-6 leading-relaxed text-muted">
                   {pkg.description}
                 </p>
                 <ul className="mt-8 space-y-3 pb-8">
                   {pkg.included.map((item) => (
-                    <li key={item} className={cn("border-t pt-3 text-sm", pkg.featured ? "border-line text-ink/75" : "border-line-dark text-ivory/66")}>
+                    <li key={item} className="border-t border-line pt-3 text-sm text-ink/75">
                       {item}
                     </li>
                   ))}
                 </ul>
                 <Button
                   href={content.cta.href}
-                  variant={pkg.featured ? "primary" : "onDark"}
+                  variant={pkg.featured ? "primary" : "secondary"}
                   className="mt-auto whitespace-nowrap"
                 >
                   {content.cta.label}
@@ -537,7 +559,7 @@ export function PackagesSection({ content }: { content: HomepageContent }) {
 
 function ProofSection({ content }: { content: HomepageContent }) {
   return (
-    <section id="proof" className="bg-surface py-20 sm:py-28">
+    <section id="proof" className="border-t border-line bg-surface py-20 sm:py-28">
       <Container size="wide">
         <Reveal>
           <SectionIntro
@@ -606,16 +628,16 @@ function ProofSection({ content }: { content: HomepageContent }) {
 
 function FinalCtaSection({ content }: { content: HomepageContent }) {
   return (
-    <section className="bg-charcoal py-20 text-ivory sm:py-28">
+    <section className="border-t border-line bg-ivory py-20 sm:py-28">
       <Container>
         <Reveal>
           <div className="mx-auto max-w-4xl text-center">
-            <Eyebrow tone="light">{content.finalCta.eyebrow}</Eyebrow>
-            <h2 className="mt-5 text-h1 text-ivory">{content.finalCta.headline}</h2>
-            <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ivory/68">
+            <Eyebrow>{content.finalCta.eyebrow}</Eyebrow>
+            <h2 className="mt-5 text-h1 text-ink">{content.finalCta.headline}</h2>
+            <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted">
               {content.finalCta.text}
             </p>
-            <Button href={content.cta.href} size="lg" variant="onDark" className="mt-9 whitespace-nowrap">
+            <Button href={content.cta.href} size="lg" className="mt-9 whitespace-nowrap">
               {content.cta.label}
             </Button>
           </div>
@@ -636,6 +658,7 @@ export function B2BHomeLanding({
     <>
       <HeroSection content={content} />
       <VisibilityOverviewSection content={content} />
+      <ProductSwitchSection content={content} />
       <ProblemSection content={content} />
       <SolutionSection content={content} />
       <SprintSection content={content} />
