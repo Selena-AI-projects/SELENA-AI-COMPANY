@@ -620,6 +620,7 @@ export const visibilityContentEn: VisibilityContent = {
             "Delivery guarantee: the full plan scope is done on time — or your money back / free completion",
               "Measurability guarantee: before and after are captured with the same configuration — the dynamics show honestly",
               "What we do not promise: a specific position in AI answers — nobody controls that",
+              "A paid Expert Verified ($399) counts toward the program when you upgrade within 30 days",
             ],
             href: visibilityRoutes.en.contact,
             ctaLabel: "Discuss the 90-day scope",

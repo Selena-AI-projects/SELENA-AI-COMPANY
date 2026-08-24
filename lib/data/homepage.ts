@@ -161,6 +161,7 @@ export const homepage = {
           systems: ["ChatGPT", "Gemini", "Perplexity", "Claude", "DeepSeek", "Qwen", "Mistral", "Grok"],
           includes: [
             "Expert Verified baseline included",
+            "A paid Expert Verified ($399) counts toward the program when you upgrade within 30 days",
             "Up to 10 implementation hours",
             "90-day monitoring and a locked-scope remeasure",
           ],
