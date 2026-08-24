@@ -148,12 +148,34 @@ function HeroSection({ content }: { content: HomepageContent }) {
           </p>
         </Reveal>
 
-        <div className="mt-6 grid gap-4 pb-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {content.productPaths.visibility.items.map((item, index) => (
-            <Reveal key={`${item.price}-${item.name}`} delay={140 + index * 60} className="h-full">
-              <LadderCard item={item} highlighted={index === 0} />
-            </Reveal>
-          ))}
+        {/* The free check is its own product (the hero CTA above) — the
+            ladder shows only the four paid steps, grouped the way the owner
+            sells them: automatic first, expert-led after. */}
+        <div className="mt-6 grid gap-6 pb-12 lg:grid-cols-2">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ivory/55">
+              {content.hero.directions.visibility.ladderGroups.auto}
+            </p>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              {content.productPaths.visibility.items.slice(1, 3).map((item, index) => (
+                <Reveal key={`${item.price}-${item.name}`} delay={140 + index * 60} className="h-full">
+                  <LadderCard item={item} highlighted={index === 0} />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ivory/55">
+              {content.hero.directions.visibility.ladderGroups.expert}
+            </p>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              {content.productPaths.visibility.items.slice(3).map((item, index) => (
+                <Reveal key={`${item.price}-${item.name}`} delay={260 + index * 60} className="h-full">
+                  <LadderCard item={item} />
+                </Reveal>
+              ))}
+            </div>
+          </div>
         </div>
 
         <Reveal delay={180} className="border-t border-ivory/12 py-6">
