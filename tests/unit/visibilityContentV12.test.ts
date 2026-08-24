@@ -266,8 +266,8 @@ test("the global pricing page keeps four Visibility offers separate from four AI
   const pricingComponent = executableSource("components/visibility/PricingTracks.tsx");
   assert.match(
     pricingComponent,
-    /xl:grid-cols-5/,
-    "the free entry and all four paid plans must share one row of cards",
+    /freeEntry,\s*\.\.\.content\.tracks/,
+    "the free entry and all four paid plans must be compared in one place",
   );
   for (const route of ["app/pricing/page.tsx", "app/ru/pricing/page.tsx"]) {
     const source = executableSource(route);

@@ -488,9 +488,10 @@ export const visibilityContentEn: VisibilityContent = {
       ctaLabel: "Run the free check",
     },
     paidPlans: {
-      heading: "One free entry and four paid options, side by side",
+      heading: "One free entry and four paid options, compared line by line",
       intro:
         "Start free, then compare exactly what each paid step adds. Snapshot and Landscape are automated monthly measurements; Expert Verified and Implementation add human review and execution without mixing their scope with the subscriptions.",
+      scrollHint: "The table scrolls sideways — the row names stay in place.",
       comparisonLabels: {
         offer: "Offer",
         bestFor: "Best for",

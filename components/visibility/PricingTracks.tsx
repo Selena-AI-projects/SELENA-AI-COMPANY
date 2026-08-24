@@ -93,31 +93,17 @@ export function PricingTracks({
           <p className="mt-4 leading-relaxed text-muted">{content.paidPlans.intro}</p>
         </Reveal>
 
-        {/* Every card is a grid item of one shared row track, so "Systems",
-            "Scope" and "Difference" sit on the same line across all five plans
-            and the eye can compare across instead of reading each card whole.
-            The cards reveal together rather than one by one: a per-card wrapper
-            would break the row sharing. */}
-        <div className="mt-10 grid gap-x-5 gap-y-4 sm:grid-cols-2 sm:grid-rows-[auto_auto_auto_auto_auto_auto_auto_auto_1fr_auto] lg:grid-cols-3 xl:grid-cols-5 xl:gap-x-4">
-          {plans.map(({ plan, trackTitle, boundary }, index) => (
-            <Reveal
-              key={plan.name}
-              delay={index * 60}
-              className="h-full sm:row-span-10 sm:grid sm:grid-rows-subgrid"
-            >
-              {/* The anchor id sits on the card itself: a wrapper div here
-                  would break the subgrid row sharing. Direct links like
-                  /visibility#snapshot land on the exact plan card. */}
-              <PlanCard
-                id={planAnchor(plan.name)}
-                plan={plan}
-                trackTitle={trackTitle}
-                boundary={boundary}
-                labels={content.paidPlans.comparisonLabels}
-              />
-            </Reveal>
-          ))}
-        </div>
+        {/* The hero ladders already sell each step one card at a time. This
+            page exists to compare, so the same five offers become one table
+            the eye can read across a single criterion at a time. */}
+        <Reveal className="mt-10">
+          <PlanComparisonTable
+            plans={plans}
+            labels={content.paidPlans.comparisonLabels}
+            caption={content.paidPlans.heading}
+            scrollHint={content.paidPlans.scrollHint}
+          />
+        </Reveal>
 
         <Reveal className="mt-12 border-t border-line pt-6">
           <p className="max-w-4xl text-sm leading-relaxed text-muted">{content.disclosure}</p>
@@ -148,148 +134,141 @@ function planAnchor(name: string): string {
 type ComparedPlan = { plan: PricingPlan; trackTitle: string; boundary?: string };
 type ComparisonLabels = VisibilityContent["pricing"]["paidPlans"]["comparisonLabels"];
 
-function PlanCard({
-  id,
-  plan,
-  trackTitle,
-  boundary,
+/**
+ * One table instead of five sales cards: the columns are the offers, the rows
+ * are the questions a buyer actually compares on. The label column stays put
+ * while the offers scroll sideways, so a narrow screen never loses the row it
+ * is reading.
+ */
+function PlanComparisonTable({
+  plans,
   labels,
+  caption,
+  scrollHint,
 }: {
-  id?: string;
-  plan: PricingPlan;
-  trackTitle: string;
-  boundary?: string;
+  plans: ComparedPlan[];
   labels: ComparisonLabels;
+  caption: string;
+  scrollHint: string;
 }) {
-  const featured = plan.featured === true;
-
-  // Ten shared rows: eyebrow, name, price, status, description, the three
-  // comparison rows, the feature list and the button. The list row absorbs the
-  // slack so every button sits on the same line no matter how many features a
-  // plan has.
-  return (
-    <article
-      id={id}
-      className={cn(
-        "relative flex h-full flex-col gap-4 overflow-hidden rounded-[1rem] border p-6 shadow-[0_2px_2px_rgba(24,22,20,0.02),0_18px_44px_-30px_rgba(24,22,20,0.32)]",
-        "scroll-mt-24 sm:row-span-10 sm:grid sm:grid-rows-subgrid",
-        featured ? "border-copper-deep/65 bg-charcoal text-ivory" : "border-line bg-ivory text-ink",
-      )}
-    >
-      {featured ? <div className="absolute inset-x-0 top-0 h-1 bg-copper" aria-hidden /> : null}
-
-      <p
-        className={cn(
-          "text-[11px] font-semibold uppercase tracking-[0.14em]",
-          featured ? "text-copper" : "text-copper-deep",
-        )}
-      >
-        {trackTitle}
-      </p>
-
-      <h4 className={cn("text-lg font-semibold leading-snug", featured ? "text-ivory" : "text-ink")}>
-        {plan.name}
-      </h4>
-
-      <p
-        className={cn(
-          "font-serif text-3xl font-semibold leading-none tabular-nums",
-          featured ? "text-copper" : "text-copper-deep",
-        )}
-      >
-        {plan.price}
-      </p>
-
-      <div>
-        <span
-          className={cn(
-            "inline-flex w-fit rounded-full border px-3 py-1 text-[11px] font-medium leading-snug tracking-wide",
-            featured && "border-ivory/18 bg-ivory/7 text-ivory/82",
-            !featured && plan.status === "active" && "border-sage/40 bg-sage/15 text-[#5f6b52]",
-            !featured && plan.status === "beta" && "border-copper/30 bg-copper/10 text-copper-deep",
-            !featured && plan.status === "founding_soon" && "border-line bg-surface text-muted",
-          )}
-        >
-          {plan.statusLabel}
-        </span>
-      </div>
-
-      <div>
-        <p className={cn("text-sm leading-relaxed", featured ? "text-ivory/76" : "text-muted")}>
-          {plan.description}
-        </p>
-        {boundary ? (
-          <p className={cn("mt-2 text-sm leading-relaxed", featured ? "text-ivory/58" : "text-muted")}>
-            {boundary}
-          </p>
-        ) : null}
-      </div>
-
-      <dl className="contents">
-        {[
-          [labels.systems, plan.systemsLabel],
-          [labels.scope, plan.volumeLabel],
-          [labels.difference, plan.progressionLabel],
-        ].map(([label, value], row) => (
-          <div
-            key={label}
-            className={cn(
-              "flex flex-col justify-start border-b pb-3",
-              row === 0 && "border-t pt-3",
-              featured ? "border-ivory/12" : "border-line",
-            )}
-          >
-            <dt
-              className={cn(
-                "text-[11px] font-semibold uppercase tracking-[0.12em]",
-                featured ? "text-copper" : "text-copper-deep",
-              )}
-            >
-              {label}
-            </dt>
-            <dd className={cn("mt-1.5 text-sm leading-relaxed", featured ? "text-ivory/90" : "text-ink")}>{value}</dd>
-          </div>
-        ))}
-      </dl>
-
-      <div>
-        <p
-          className={cn(
-            "text-[11px] font-semibold uppercase tracking-[0.12em]",
-            featured ? "text-copper" : "text-copper-deep",
-          )}
-        >
-          {labels.included}
-        </p>
-        <ul className="mt-3 space-y-2.5">
+  const rows: { label: string; render: (entry: ComparedPlan) => React.ReactNode }[] = [
+    {
+      label: labels.bestFor,
+      render: ({ plan, boundary }) => (
+        <>
+          <p>{plan.description}</p>
+          {boundary ? <p className="mt-2 text-muted">{boundary}</p> : null}
+        </>
+      ),
+    },
+    { label: labels.systems, render: ({ plan }) => plan.systemsLabel },
+    { label: labels.scope, render: ({ plan }) => plan.volumeLabel },
+    { label: labels.difference, render: ({ plan }) => plan.progressionLabel },
+    {
+      label: labels.included,
+      render: ({ plan }) => (
+        <ul className="space-y-2">
           {plan.features.map((feature) => (
-            <li
-              key={feature}
-              className={cn(
-                "flex items-start gap-2.5 text-sm leading-relaxed",
-                featured ? "text-ivory/72" : "text-muted",
-              )}
-            >
-              <span
-                className={cn(
-                  "mt-[0.5rem] h-1.5 w-1.5 shrink-0 rounded-full",
-                  featured ? "bg-copper" : "bg-copper-deep",
-                )}
-                aria-hidden
-              />
+            <li key={feature} className="flex items-start gap-2.5">
+              <span className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-copper-deep" aria-hidden />
               <span>{feature}</span>
             </li>
           ))}
         </ul>
-      </div>
+      ),
+    },
+  ];
 
-      <div>
-        {plan.href && plan.ctaLabel ? (
-          <Button href={plan.href} variant={featured ? "onDark" : "secondary"} size="md" className="w-full">
-            {plan.ctaLabel}
-          </Button>
-        ) : null}
+  const columnClass = (plan: PricingPlan) =>
+    cn("border-l border-line p-4 align-top lg:p-5", plan.featured === true && "bg-copper/[0.07]");
+
+  return (
+    <div>
+      <p className="mb-3 text-sm text-muted lg:hidden">{scrollHint}</p>
+      <div className="overflow-x-auto rounded-[1rem] border border-line bg-ivory">
+        <table className="w-full min-w-[64rem] border-collapse text-left">
+          <caption className="sr-only">{caption}</caption>
+          <thead>
+            <tr className="bg-ivory">
+              <th
+                scope="col"
+                className="sticky left-0 z-10 w-32 bg-ivory p-4 align-bottom text-xs font-semibold uppercase tracking-[0.14em] text-copper-deep lg:w-52 lg:p-5"
+              >
+                {labels.offer}
+              </th>
+              {plans.map(({ plan, trackTitle }) => (
+                <th
+                  key={plan.name}
+                  scope="col"
+                  id={planAnchor(plan.name)}
+                  className={cn(columnClass(plan), "scroll-mt-24 align-bottom")}
+                >
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-copper-deep">
+                    {trackTitle}
+                  </p>
+                  <p className="mt-2 text-base font-semibold leading-snug text-ink">{plan.name}</p>
+                  <p className="mt-3 font-serif text-3xl font-semibold leading-none tabular-nums text-copper-deep">
+                    {plan.price}
+                  </p>
+                  <span
+                    className={cn(
+                      "mt-3 inline-flex w-fit rounded-full border px-3 py-1 text-[11px] font-medium leading-snug tracking-wide",
+                      plan.status === "active" && "border-sage/40 bg-sage/15 text-[#5f6b52]",
+                      plan.status === "beta" && "border-copper/30 bg-copper/10 text-copper-deep",
+                      plan.status === "founding_soon" && "border-line bg-surface text-muted",
+                    )}
+                  >
+                    {plan.statusLabel}
+                  </span>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, index) => {
+              const rowBg = index % 2 === 0 ? "bg-surface" : "bg-ivory";
+              return (
+                <tr key={row.label} className={cn("border-t border-line", rowBg)}>
+                  <th
+                    scope="row"
+                    className={cn(
+                      "sticky left-0 z-10 p-4 align-top text-xs font-semibold uppercase tracking-[0.12em] text-copper-deep lg:p-5",
+                      rowBg,
+                    )}
+                  >
+                    {row.label}
+                  </th>
+                  {plans.map((entry) => (
+                    <td
+                      key={entry.plan.name}
+                      className={cn(columnClass(entry.plan), "text-[15px] leading-relaxed text-ink/85")}
+                    >
+                      {row.render(entry)}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+            <tr className="border-t border-line bg-surface">
+              <th scope="row" className="sticky left-0 z-10 bg-surface p-4 lg:p-5" aria-hidden />
+              {plans.map(({ plan }) => (
+                <td key={plan.name} className={columnClass(plan)}>
+                  {plan.href && plan.ctaLabel ? (
+                    <Button
+                      href={plan.href}
+                      variant={plan.featured === true ? "primary" : "secondary"}
+                      size="md"
+                      className="w-full"
+                    >
+                      {plan.ctaLabel}
+                    </Button>
+                  ) : null}
+                </td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </article>
+    </div>
   );
 }
