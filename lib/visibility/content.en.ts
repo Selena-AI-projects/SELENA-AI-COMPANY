@@ -565,7 +565,7 @@ export const visibilityContentEn: VisibilityContent = {
             progressionLabel:
               "Everything in Snapshot, plus five API View systems, divergence and expanded source evidence.",
             features: [
-              "Up to 2 languages within 100 total scenarios",
+              "Up to 2 languages within 25 questions",
               "Visitor/API divergence reported separately",
               "Expanded competitor and source map",
               "Evidence Ledger with data export (formats confirmed at delivery)",

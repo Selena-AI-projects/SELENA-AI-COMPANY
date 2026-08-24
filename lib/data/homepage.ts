@@ -113,7 +113,7 @@ export const homepage = {
           summary: "Measure mentions, positions and citations in the assistants your customers ask.",
           systems: ["ChatGPT", "Gemini", "Perplexity"],
           includes: [
-            "100 questions × 3 systems = 300 AI answers",
+            "Up to 25 questions × 3 systems × a weekly run = 300 answers a month",
             "Mentions, positions, citations, competitors",
             "Dashboard and CSV every month",
           ],
@@ -125,7 +125,7 @@ export const homepage = {
           summary: "Compare all eight systems, competitors and the sources behind the answers.",
           systems: ["ChatGPT", "Gemini", "Perplexity", "Claude", "DeepSeek", "Qwen", "Mistral", "Grok"],
           includes: [
-            "100 questions × 8 systems = 800 AI answers",
+            "Up to 25 questions × 8 systems × a weekly run = 800 answers a month",
             "Consumer and API answers reported apart",
             "Evidence Ledger in PDF, XLSX and CSV",
           ],
@@ -137,7 +137,7 @@ export const homepage = {
           summary: "A human analyst reviews every mention, citation and factual error.",
           systems: ["ChatGPT", "Gemini", "Perplexity", "Claude", "DeepSeek", "Qwen", "Mistral", "Grok"],
           includes: [
-            "20 questions × 8 systems × 5 repeats = 800 answers",
+            "25 questions × 2 languages × 8 systems × 5 repeats = 2000 answers",
             "Analyst QC of mentions and citations",
             "5–10 approved priorities and action plan",
           ],

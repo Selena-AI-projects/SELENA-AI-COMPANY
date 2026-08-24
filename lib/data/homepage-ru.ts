@@ -96,7 +96,7 @@ export const ruHomepage = {
           summary: "Замер упоминаний, позиций и citations в ассистентах, у которых спрашивают ваши клиенты.",
           systems: ["ChatGPT", "Gemini", "Perplexity"],
           includes: [
-            "100 вопросов × 3 системы = 300 ответов AI",
+            "До 25 вопросов × 3 системы × еженедельный замер = 300 ответов в месяц",
             "Упоминания, позиции, citations, конкуренты",
             "Dashboard и CSV каждый месяц",
           ],
@@ -108,7 +108,7 @@ export const ruHomepage = {
           summary: "Сравнение всех восьми систем, конкурентов и источников, стоящих за ответами.",
           systems: ["ChatGPT", "Gemini", "Perplexity", "Claude", "DeepSeek", "Qwen", "Mistral", "Grok"],
           includes: [
-            "100 вопросов × 8 систем = 800 ответов AI",
+            "До 25 вопросов × 8 систем × еженедельный замер = 800 ответов в месяц",
             "Пользовательские и API-ответы отдельно",
             "Evidence Ledger в PDF, XLSX и CSV",
           ],
@@ -120,7 +120,7 @@ export const ruHomepage = {
           summary: "Аналитик вручную проверяет каждое упоминание, citation и фактическую ошибку.",
           systems: ["ChatGPT", "Gemini", "Perplexity", "Claude", "DeepSeek", "Qwen", "Mistral", "Grok"],
           includes: [
-            "20 вопросов × 8 систем × 5 повторов = 800 ответов",
+            "25 вопросов × 2 языка × 8 систем × 5 повторов = 2000 ответов",
             "Ручной QC упоминаний и citations",
             "5–10 утверждённых приоритетов и план действий",
           ],
