@@ -61,12 +61,12 @@ function LadderCard({ item, highlighted }: { item: LadderItem; highlighted?: boo
       {/* The systems measured by this step, still named one by one — but as a
           single quiet line: eight dark chips per card made five cards
           side by side unreadable. */}
-      <p className="min-h-[4rem] border-t border-line pt-3 text-sm font-medium leading-relaxed text-ink/70">
+      <p className="min-h-[4rem] border-t border-line pt-3 text-sm font-medium leading-relaxed text-ink/80">
         {item.systems.join(" · ")}
       </p>
       <ul className="space-y-2 border-t border-line pt-3">
         {item.includes.map((line) => (
-          <li key={line} className="flex items-start gap-2 text-sm leading-snug text-ink/75">
+          <li key={line} className="flex items-start gap-2 text-sm leading-snug text-ink/85">
             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-copper-deep" aria-hidden />
             <span className="font-medium">{line}</span>
           </li>
@@ -82,6 +82,50 @@ function LadderCard({ item, highlighted }: { item: LadderItem; highlighted?: boo
         </Button>
       </div>
     </article>
+  );
+}
+
+/**
+ * The four paid Visibility steps in their two sales groups. Shared by the
+ * homepage hero and the /visibility page hero so the offer reads the same
+ * everywhere and the numbers live in one place.
+ */
+export function VisibilityLadder({ content }: { content: HomepageContent }) {
+  return (
+    <>
+      <Reveal delay={120} className="mt-12">
+        <p className="text-base font-semibold uppercase tracking-[0.18em] text-copper">
+          {content.hero.directions.visibility.ladderLabel}
+        </p>
+      </Reveal>
+
+      <div className="mt-6 grid gap-6 pb-6">
+        <div className="rounded-3xl border border-ivory/12 bg-ivory/[0.03] p-6 sm:p-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ivory/75">
+            {content.hero.directions.visibility.ladderGroups.auto}
+          </p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            {content.productPaths.visibility.items.slice(1, 3).map((item, index) => (
+              <Reveal key={`${item.price}-${item.name}`} delay={140 + index * 60} className="h-full">
+                <LadderCard item={item} highlighted={index === 0} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+        <div className="rounded-3xl border border-ivory/12 bg-ivory/[0.03] p-6 sm:p-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ivory/75">
+            {content.hero.directions.visibility.ladderGroups.expert}
+          </p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            {content.productPaths.visibility.items.slice(3).map((item, index) => (
+              <Reveal key={`${item.price}-${item.name}`} delay={200 + index * 60} className="h-full">
+                <LadderCard item={item} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -120,47 +164,16 @@ function HeroSection({ content }: { content: HomepageContent }) {
               {content.hero.secondaryCta.label}
             </a>
           </div>
-          <p className="mt-4 text-base leading-relaxed text-ivory/60">{content.hero.primaryNote}</p>
+          <p className="mt-4 text-base leading-relaxed text-ivory/75">{content.hero.primaryNote}</p>
         </Reveal>
 
 
         {/* The whole ladder sits in the first screen: a visitor compares the
-            free entry against every paid step without scrolling for it. */}
-        <Reveal delay={120} className="mt-12">
-          <p className="text-base font-semibold uppercase tracking-[0.18em] text-copper">
-            {content.hero.directions.visibility.ladderLabel}
-          </p>
-        </Reveal>
-
-        {/* The free check is its own product (the hero CTA above) — the
+            free entry against every paid step without scrolling for it.
+            The free check is its own product (the hero CTA above) — the
             ladder shows only the four paid steps, grouped the way the owner
             sells them: automatic first, expert-led after. */}
-        <div className="mt-6 grid gap-6 pb-6">
-          <div className="rounded-3xl border border-ivory/12 bg-ivory/[0.03] p-6 sm:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ivory/55">
-              {content.hero.directions.visibility.ladderGroups.auto}
-            </p>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              {content.productPaths.visibility.items.slice(1, 3).map((item, index) => (
-                <Reveal key={`${item.price}-${item.name}`} delay={140 + index * 60} className="h-full">
-                  <LadderCard item={item} highlighted={index === 0} />
-                </Reveal>
-              ))}
-            </div>
-          </div>
-          <div className="rounded-3xl border border-ivory/12 bg-ivory/[0.03] p-6 sm:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ivory/55">
-              {content.hero.directions.visibility.ladderGroups.expert}
-            </p>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              {content.productPaths.visibility.items.slice(3).map((item, index) => (
-                <Reveal key={`${item.price}-${item.name}`} delay={200 + index * 60} className="h-full">
-                  <LadderCard item={item} />
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
+        <VisibilityLadder content={content} />
 
         {/* The second product speaks only after the first one has finished:
             the owner moved this door below the ladder on purpose. */}
@@ -181,7 +194,7 @@ function HeroSection({ content }: { content: HomepageContent }) {
 
 
         <Reveal delay={180} className="border-t border-ivory/12 py-6">
-          <p className="max-w-3xl text-base leading-relaxed text-ivory/60">{content.hero.trustLine}</p>
+          <p className="max-w-3xl text-base leading-relaxed text-ivory/75">{content.hero.trustLine}</p>
         </Reveal>
       </Container>
     </section>
@@ -203,7 +216,7 @@ function VisibilityOverviewSection({ content }: { content: HomepageContent }) {
             </div>
             <div>
               <p className="text-xl font-semibold leading-relaxed text-ivory">{plan.promise}</p>
-              <p className="mt-3 max-w-3xl leading-relaxed text-ivory/64">{visibility.description}</p>
+              <p className="mt-3 max-w-3xl leading-relaxed text-ivory/78">{visibility.description}</p>
             </div>
           </div>
         </Reveal>
@@ -486,18 +499,36 @@ export function PackagesSection({ content }: { content: HomepageContent }) {
         </Reveal>
 
         <Reveal delay={100}>
-          <div className="mt-10 flex flex-col gap-5 border border-line bg-ivory px-6 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
-            <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper-deep">
-                {content.strategyCall.title}
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
-                {content.strategyCall.text}
+          <div className="mt-10 border border-line bg-ivory p-6 sm:p-8">
+            <div className="flex flex-wrap items-start justify-between gap-x-8 gap-y-3">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper-deep">
+                  {content.strategyCall.format}
+                </p>
+                <h3 className="mt-2 font-serif text-3xl font-semibold text-ink">
+                  {content.strategyCall.title}
+                </h3>
+                <p className="mt-2 text-lg font-semibold text-ink">{content.strategyCall.lead}</p>
+              </div>
+              <p className="font-serif text-4xl font-semibold text-ink">
+                {content.strategyCall.price}
               </p>
             </div>
-            <div className="flex shrink-0 items-center gap-5">
-              <p className="font-serif text-3xl font-semibold text-ink">
-                {content.strategyCall.price}
+
+            <ol className="mt-7 grid gap-6 sm:grid-cols-3">
+              {content.strategyCall.steps.map((step, index) => (
+                <li key={step} className="border-t-2 border-copper/40 pt-3">
+                  <span className="font-serif text-2xl font-semibold text-copper-deep">
+                    {index + 1}
+                  </span>
+                  <p className="mt-2 text-base font-medium leading-snug text-ink/85">{step}</p>
+                </li>
+              ))}
+            </ol>
+
+            <div className="mt-7 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-5">
+              <p className="text-sm font-semibold text-copper-deep">
+                {content.strategyCall.note}
               </p>
               <a
                 href={content.cta.href}
@@ -520,7 +551,7 @@ export function PackagesSection({ content }: { content: HomepageContent }) {
               >
                 <div className="flex items-start justify-between gap-6">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper-deep">
+                    <p className="text-sm font-semibold uppercase tracking-[0.22em] text-copper-deep">
                       {pkg.name}
                     </p>
                     <h3 className="mt-4 font-serif text-4xl font-semibold">{pkg.price}</h3>
@@ -531,16 +562,22 @@ export function PackagesSection({ content }: { content: HomepageContent }) {
                     </span>
                   ) : null}
                 </div>
-                <p className="mt-6 leading-relaxed text-muted">
+                <p className="mt-6 text-[17px] font-semibold leading-snug text-ink">
                   {pkg.description}
                 </p>
-                <ul className="mt-8 space-y-3 pb-8">
-                  {pkg.included.map((item) => (
-                    <li key={item} className="border-t border-line pt-3 text-sm text-ink/75">
+                <ol className="mt-7 pb-8">
+                  {pkg.included.map((item, itemIndex) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 border-t border-line py-3 text-base leading-snug text-ink/85"
+                    >
+                      <span className="w-5 shrink-0 pt-px font-serif text-lg font-semibold leading-none text-copper-deep">
+                        {itemIndex + 1}
+                      </span>
                       {item}
                     </li>
                   ))}
-                </ul>
+                </ol>
                 <Button
                   href={content.cta.href}
                   variant={pkg.featured ? "primary" : "secondary"}
