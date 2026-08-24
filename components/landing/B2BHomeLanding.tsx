@@ -123,8 +123,47 @@ function HeroSection({ content }: { content: HomepageContent }) {
           <p className="mt-4 text-base leading-relaxed text-ivory/60">{content.hero.primaryNote}</p>
         </Reveal>
 
-        {/* The second audience gets its door in the first five seconds: one
-            honest strip instead of a tail sentence buried in the subheadline. */}
+
+        {/* The whole ladder sits in the first screen: a visitor compares the
+            free entry against every paid step without scrolling for it. */}
+        <Reveal delay={120} className="mt-12">
+          <p className="text-base font-semibold uppercase tracking-[0.18em] text-copper">
+            {content.hero.directions.visibility.ladderLabel}
+          </p>
+        </Reveal>
+
+        {/* The free check is its own product (the hero CTA above) — the
+            ladder shows only the four paid steps, grouped the way the owner
+            sells them: automatic first, expert-led after. */}
+        <div className="mt-6 grid gap-6 pb-6">
+          <div className="rounded-3xl border border-ivory/12 bg-ivory/[0.03] p-6 sm:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ivory/55">
+              {content.hero.directions.visibility.ladderGroups.auto}
+            </p>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              {content.productPaths.visibility.items.slice(1, 3).map((item, index) => (
+                <Reveal key={`${item.price}-${item.name}`} delay={140 + index * 60} className="h-full">
+                  <LadderCard item={item} highlighted={index === 0} />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-3xl border border-ivory/12 bg-ivory/[0.03] p-6 sm:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ivory/55">
+              {content.hero.directions.visibility.ladderGroups.expert}
+            </p>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              {content.productPaths.visibility.items.slice(3).map((item, index) => (
+                <Reveal key={`${item.price}-${item.name}`} delay={200 + index * 60} className="h-full">
+                  <LadderCard item={item} />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* The second product speaks only after the first one has finished:
+            the owner moved this door below the ladder on purpose. */}
         <Reveal delay={100} className="mt-9">
           <div className="flex max-w-4xl flex-wrap items-center justify-between gap-x-6 gap-y-3 rounded-2xl border border-ivory/15 bg-ivory/5 px-6 py-5">
             <p className="min-w-64 flex-1 text-base leading-relaxed text-ivory/76">
@@ -140,43 +179,6 @@ function HeroSection({ content }: { content: HomepageContent }) {
           </div>
         </Reveal>
 
-        {/* The whole ladder sits in the first screen: a visitor compares the
-            free entry against every paid step without scrolling for it. */}
-        <Reveal delay={120} className="mt-12">
-          <p className="text-base font-semibold uppercase tracking-[0.18em] text-copper">
-            {content.hero.directions.visibility.ladderLabel}
-          </p>
-        </Reveal>
-
-        {/* The free check is its own product (the hero CTA above) — the
-            ladder shows only the four paid steps, grouped the way the owner
-            sells them: automatic first, expert-led after. */}
-        <div className="mt-6 grid gap-6 pb-12 lg:grid-cols-2">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ivory/55">
-              {content.hero.directions.visibility.ladderGroups.auto}
-            </p>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              {content.productPaths.visibility.items.slice(1, 3).map((item, index) => (
-                <Reveal key={`${item.price}-${item.name}`} delay={140 + index * 60} className="h-full">
-                  <LadderCard item={item} highlighted={index === 0} />
-                </Reveal>
-              ))}
-            </div>
-          </div>
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ivory/55">
-              {content.hero.directions.visibility.ladderGroups.expert}
-            </p>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              {content.productPaths.visibility.items.slice(3).map((item, index) => (
-                <Reveal key={`${item.price}-${item.name}`} delay={260 + index * 60} className="h-full">
-                  <LadderCard item={item} />
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
 
         <Reveal delay={180} className="border-t border-ivory/12 py-6">
           <p className="max-w-3xl text-base leading-relaxed text-ivory/60">{content.hero.trustLine}</p>
