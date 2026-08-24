@@ -252,7 +252,7 @@ test("the global pricing page keeps four Visibility offers separate from four AI
       name === "en" ? ["$500", "$4,500", "from $10,000"] : ["$500", "$4,500", "от $10,000"],
     );
     assert.equal(content.productPaths.visibility.name, "AI Visibility");
-    assert.equal(content.productPaths.systems.name, "AI Systems");
+    assert.equal(content.productPaths.systems.name, "AI Automation");
     assert.equal(content.productPaths.visibility.items.length, 5, `${name} Visibility ladder count`);
     assert.equal(content.productPaths.systems.items.length, 4, `${name} AI Systems service count`);
     assert.deepEqual(

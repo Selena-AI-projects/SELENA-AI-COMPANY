@@ -44,7 +44,7 @@ function websiteNode(locale: StructuredLocale) {
     name: site.name,
     inLanguage: ["en", "ru"],
     publisher: { "@id": `${site.url}/#organization` },
-    about: locale === "ru" ? "AI-системы и AI-видимость" : "AI systems and AI visibility",
+    about: locale === "ru" ? "AI-автоматизация и AI-видимость" : "AI automation and AI visibility",
   };
 }
 
@@ -147,7 +147,7 @@ function aiSystemsServiceNode(locale: StructuredLocale) {
     "@type": "Service",
     "@id": `${pageUrl}#ai-systems-service`,
     url: pageUrl,
-    name: "AI Systems",
+    name: "AI Automation",
     serviceType: "Custom AI systems design and implementation",
     description: isRussian
       ? "Индивидуальные AI-системы для процессов продаж, контента, знаний, автоматизации и операций."
@@ -157,7 +157,7 @@ function aiSystemsServiceNode(locale: StructuredLocale) {
     inLanguage: locale,
     offers: {
       "@type": "OfferCatalog",
-      name: isRussian ? "Форматы AI Systems" : "AI Systems formats",
+      name: isRussian ? "Форматы AI Automation" : "AI Automation formats",
       itemListElement: [
         offerNode({ offer: systems.miniAudit, locale }),
         offerNode({ offer: systems.audit, locale }),
@@ -225,8 +225,8 @@ export function buildHomeStructuredData(locale: "en" | "ru") {
         pageUrl,
         name: isRussian ? "Selena Systems" : "Selena Systems",
         description: isRussian
-          ? "AI-системы и AI Visibility для современного бизнеса."
-          : "AI systems and AI visibility for modern businesses.",
+          ? "AI-автоматизация и AI Visibility для современного бизнеса."
+          : "AI automation and AI visibility for modern businesses.",
       }),
       aiSystemsServiceNode(locale),
       aiVisibilityServiceNode(locale),
@@ -318,7 +318,7 @@ export function buildAiSystemsStructuredData(locale: StructuredLocale = "en") {
       webPageNode({
         locale,
         pageUrl,
-        name: "AI Systems",
+        name: "AI Automation",
         description: isRussian
           ? "Индивидуальные AI-системы для процессов продаж, контента, знаний, автоматизации и операций."
           : "Custom AI systems for sales, content, knowledge, automation and operations.",
@@ -326,7 +326,7 @@ export function buildAiSystemsStructuredData(locale: StructuredLocale = "en") {
       breadcrumbNode(
         [
           { name: "Selena Systems", item: site.url },
-          { name: "AI Systems", item: pageUrl },
+          { name: "AI Automation", item: pageUrl },
         ],
         pageUrl,
       ),

@@ -24,7 +24,7 @@ export type TrackerStep = {
 
 export const homepage = {
   nav: [
-    { label: "AI Systems", href: "/ai-systems" },
+    { label: "AI Automation", href: "/ai-systems" },
     { label: "AI Visibility", href: "/visibility" },
     { label: "Pricing", href: "/pricing" },
     { label: "Lab", href: "/lab" },
@@ -38,13 +38,13 @@ export const homepage = {
     visibilityLabel: "Outward · AI Visibility",
     visibilityFlow: "Signals → evidence → action",
     visibilityNote: "How AI finds, understands and represents the business.",
-    systemsLabel: "Inward · AI Systems",
+    systemsLabel: "Inward · AI Automation",
     systemsFlow: "Workflows → rules → handover",
     systemsNote: "How the team turns manual work into a working system.",
     sharedLayer: "One Selena Systems layer · research supports both",
   },
   hero: {
-    eyebrow: "Selena Systems · AI Visibility & AI Systems",
+    eyebrow: "Selena Systems · AI Visibility & AI Automation",
     headline: "When customers ask AI, is your business in the answer?",
     subheadline:
       "ChatGPT, Gemini and Perplexity already tell people where to go and who to buy from. We measure whether your business makes it into those answers — and show what to fix. The entry is free: a check of what AI can read on your website.",
@@ -53,11 +53,11 @@ export const homepage = {
     primaryNote:
       "The free check is technical: we read the site the way AI agents read it and show what to fix. It is a separate step, not a visibility measurement — measurements start with the paid steps.",
     trustLine:
-      "One company, two directions: AI Visibility measures how AI sees your business from the outside. AI Systems puts the inside in order.",
+      "One company, two directions: AI Visibility measures how AI sees your business from the outside. AI Automation puts the inside in order.",
     systemsDoor: {
       question: "Looking for order in your processes, not a check?",
       description:
-        "That is our second direction — AI Systems: we turn a team's scattered work into clear AI-supported processes. For founders and teams.",
+        "That is our second direction — AI Automation: we turn a team's scattered work into clear AI-supported processes. For founders and teams.",
       cta: { label: "Discuss my case", href: "/en/contact" },
     },
     directions: {
@@ -79,7 +79,7 @@ export const homepage = {
         ],
       },
       systems: {
-        eyebrow: "AI Systems · build inward",
+        eyebrow: "AI Automation · build inward",
         headline: "Turn scattered work into a practical AI operating system.",
         description:
           "We map the workflow, choose the right scenario and build the rules, automations and knowledge layer your team can actually use.",
@@ -99,7 +99,7 @@ export const homepage = {
   productPaths: {
     heading: "Two products. Choose the outcome you need.",
     intro:
-      "AI Visibility looks outward at how AI finds and represents your business. AI Systems looks inward at the workflows your team needs to improve or automate.",
+      "AI Visibility looks outward at how AI finds and represents your business. AI Automation looks inward at the workflows your team needs to improve or automate.",
     visibility: {
       name: "AI Visibility",
       promise: "Measure and improve how AI sees your business.",
@@ -172,7 +172,7 @@ export const homepage = {
       secondaryCta: { label: "Explore AI Visibility", href: "/visibility" },
     },
     systems: {
-      name: "AI Systems",
+      name: "AI Automation",
       promise: "Design and build practical systems inside your business.",
       description:
         "Use an audit, a focused sprint or a broader Business OS engagement to improve sales, content, knowledge, automation and operations.",
@@ -182,7 +182,7 @@ export const homepage = {
         { price: commercialFacts.aiSystems.sprint.en, name: "AI Sprint · 4 weeks" },
         { price: commercialFacts.aiSystems.businessOs.en.replace(",000", "k"), name: "AI Business OS · 8 weeks" },
       ],
-      primaryCta: { label: "Explore AI Systems", href: "/ai-systems" },
+      primaryCta: { label: "Explore AI Automation", href: "/ai-systems" },
       secondaryCta: { label: "Book an AI Audit", href: "/en/contact" },
     },
   },
@@ -244,7 +244,7 @@ export const homepage = {
   },
   sprint: {
     eyebrow: "Main offer",
-    headline: "4-Week AI Systems Sprint",
+    headline: "4-Week AI Sprint",
     intro:
       "A focused four-week build for founders who want a working AI operating layer: mapped, designed, built, tested and handed over with clear rules.",
     deliverables: [
@@ -323,7 +323,7 @@ export const homepage = {
     ] as TrackerStep[],
   },
   packagesIntro: {
-    eyebrow: "AI Systems services",
+    eyebrow: "AI Automation services",
     headline: "Choose the right depth for the amount of manual work you want to remove.",
     intro:
       "Custom Selena Systems engagements, separate from AI Visibility subscriptions and scoped around your business workflow.",
@@ -441,8 +441,8 @@ export const homepage = {
   },
   productSwitch: {
     kicker: "Above — product 01 · AI Visibility",
-    headline: "Next — product 02: AI Systems",
-    text: "AI Visibility measures how AI sees your business from the outside. AI Systems brings order inside: processes, rules and automations your team can actually run.",
+    headline: "Next — product 02: AI Automation",
+    text: "AI Visibility measures how AI sees your business from the outside. AI Automation brings order inside: processes, rules and automations your team can actually run.",
   },
   finalCta: {
     eyebrow: "Next step",

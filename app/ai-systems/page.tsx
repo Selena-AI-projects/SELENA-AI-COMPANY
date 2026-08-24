@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { JsonLd } from "@/components/seo/JsonLd";
 
 export const metadata = buildMetadata({
-  title: "AI Systems for your business",
+  title: "AI Automation for your business",
   description:
     "Selena Systems designs and builds practical AI systems for sales, content, knowledge, automation and operations. Separate from AI Visibility.",
   path: "/ai-systems",
@@ -51,9 +51,9 @@ export default function AISystemsPage() {
     <>
       <JsonLd data={buildAiSystemsStructuredData("en")} />
       <PageHero
-        eyebrow="AI Systems"
+        eyebrow="AI Automation"
         title="Build the AI system your business actually needs."
-        intro="AI Systems is Selena Systems' custom work: we diagnose, design and implement practical workflows inside your business. It is separate from AI Visibility, which measures how AI sees your public presence."
+        intro="AI Automation is Selena Systems' custom work: we diagnose, design and implement practical workflows inside your business. It is separate from AI Visibility, which measures how AI sees your public presence."
       >
         <div className="flex flex-wrap gap-4">
           <Button href="/en/contact" size="lg">Book an AI Audit</Button>

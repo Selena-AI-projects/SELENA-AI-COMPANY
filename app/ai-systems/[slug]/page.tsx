@@ -57,8 +57,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       "A turnkey 8-week implementation of a connected AI operating layer across sales, operations, knowledge and automation, with your team trained.",
   };
   return buildMetadata({
-    title: detail ? `${detail.title} | AI Systems` : "AI Systems",
-    description: metadataDescriptions[slug] ?? "Custom AI Systems work maps your workflows, priorities and approval boundaries before a practical build begins.",
+    title: detail ? `${detail.title} | AI Automation` : "AI Automation",
+    description: metadataDescriptions[slug] ?? "Custom AI Automation work maps your workflows, priorities and approval boundaries before a practical build begins.",
     path: `/ai-systems/${slug}`,
     locale: "en_US",
   });
@@ -71,7 +71,7 @@ export default async function AISystemDetailPage({ params }: { params: Promise<{
 
   return (
     <>
-      <PageHero eyebrow="AI Systems" title={detail.title} intro={detail.intro}>
+      <PageHero eyebrow="AI Automation" title={detail.title} intro={detail.intro}>
         <div className="flex flex-wrap items-center gap-4">
           <span className="font-serif text-2xl font-semibold text-copper-deep">{detail.price}</span>
           <Button href="/en/contact" size="lg">Discuss the scope</Button>
@@ -86,7 +86,7 @@ export default async function AISystemDetailPage({ params }: { params: Promise<{
             ))}
           </ul>
           <p className="mt-10 text-sm leading-relaxed text-muted">
-            Final scope, timeline and implementation boundaries are confirmed in conversation. AI Systems is custom work, not an AI Visibility subscription.
+            Final scope, timeline and implementation boundaries are confirmed in conversation. AI Automation is custom work, not an AI Visibility subscription.
           </p>
         </Container>
       </section>

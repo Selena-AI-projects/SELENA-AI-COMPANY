@@ -502,7 +502,7 @@ export const visibilityContentRu: VisibilityContent = {
     directory: {
       heading: "Одна компания. Два разных продукта.",
       intro:
-        "AI Visibility измеряет внешнюю AI-видимость. AI Systems диагностирует и строит процессы внутри бизнеса. Бесплатная readiness-проверка относится только к AI Visibility.",
+        "AI Visibility измеряет внешнюю AI-видимость. AI Automation диагностирует и строит процессы внутри бизнеса. Бесплатная readiness-проверка относится только к AI Visibility.",
       visibility: {
         title: "AI Visibility",
         count: "1 бесплатная проверка + 4 платных варианта",
@@ -512,12 +512,12 @@ export const visibilityContentRu: VisibilityContent = {
         ctaLabel: "Сравнить варианты Visibility",
       },
       systems: {
-        title: "AI Systems",
+        title: "AI Automation",
         count: "4 формата индивидуальной работы",
         description:
           "Выбирайте это направление, если нужно диагностировать, спроектировать или собрать процессы продаж, контента, знаний, автоматизации и операций.",
         href: "#packages",
-        ctaLabel: "Посмотреть услуги AI Systems",
+        ctaLabel: "Посмотреть услуги AI Automation",
       },
     },
     portal: {

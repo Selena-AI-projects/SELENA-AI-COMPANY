@@ -30,7 +30,7 @@ export const cta = {
 
 /** Main navigation (desktop + mobile). */
 export const nav: { label: string; href: string }[] = [
-  { label: "AI Systems", href: "/ai-systems" },
+  { label: "AI Automation", href: "/ai-systems" },
   { label: "AI Visibility", href: "/ru/visibility" },
   { label: "Тарифы", href: "/ru/pricing" },
   { label: "Selena Lab", href: "/ru/lab" },

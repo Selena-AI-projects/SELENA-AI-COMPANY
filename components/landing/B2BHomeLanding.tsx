@@ -240,7 +240,7 @@ function VisibilityOverviewSection({ content }: { content: HomepageContent }) {
 
 /**
  * The visual hand-off between the two products: everything above is
- * AI Visibility on dark, everything below is AI Systems on light.
+ * AI Visibility on dark, everything below is AI Automation on light.
  * The card straddles the boundary so the switch is impossible to miss.
  */
 function ProductSwitchSection({ content }: { content: HomepageContent }) {
