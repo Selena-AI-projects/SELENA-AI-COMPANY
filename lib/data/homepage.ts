@@ -335,9 +335,9 @@ export const homepage = {
       price: commercialFacts.aiSystems.audit.en,
       description: "A focused diagnostic for founders who need clarity before building.",
       included: [
-        "Workflow review",
-        "AI opportunity map",
-        "Priority recommendations",
+        "We take apart your workflows on a call and in documents: where time and money leak",
+        "AI opportunity map: which tasks AI can realistically take over — and which it can't",
+        "Priorities: where to start, what to postpone, what not to do at all",
         "Credited in full toward a Sprint or Business OS started within 30 days",
       ],
       featured: false,
@@ -345,23 +345,35 @@ export const homepage = {
     {
       name: "AI Sprint",
       price: commercialFacts.aiSystems.sprint.en,
-      description: "The 4-week build sprint for one priority operating system layer.",
-      included: ["System design", "Working build", "Handover docs"],
+      description:
+        "In 4 weeks we take the one process that hurts most and hand over a working system.",
+      included: [
+        "Configured automations, prompts and rules — a working version, not a mockup",
+        "Step-by-step instructions for your team: who does what, in plain language",
+        "Training: we show your people how to run the system",
+        "4 weeks: audit and design → build → test → handover",
+      ],
       featured: true,
     },
     {
       name: "AI Business OS",
       price: commercialFacts.aiSystems.businessOs.en,
       description:
-        "An 8-week build of a broader operating system across sales, operations, knowledge and automation.",
-      included: ["Multi-system architecture", "Implementation roadmap", "Team operating layer"],
+        "A turnkey implementation: in 8 weeks a connected system across sales, operations, knowledge and automation runs inside your company.",
+      included: [
+        "You say what has to work — we design it and implement it inside your company",
+        "Several connected layers: sales, operations, knowledge, automation",
+        "Written instructions for every role: what to do and how, in plain language",
+        "We train your team — you are not left alone with documentation",
+        "Handover: the system runs, the team is trained, the rules are written down",
+      ],
       featured: false,
     },
   ],
   strategyCall: {
     title: "Mini-audit · 60-min Zoom + memo",
     price: commercialFacts.aiSystems.miniAudit.en,
-    text: "Not ready for the full audit? Exactly one hour on Zoom, focused on your process — and based on that conversation, a short written memo: what I saw and the first moves you can make. Credited in full toward the AI Audit within 30 days.",
+    text: "Not ready for the full audit? Before the call you send your questions and process details, so the whole hour on Zoom goes into the work itself — not into collecting context. After the call — a short written memo: what I saw and the first moves you can make. Credited in full toward the AI Audit within 30 days.",
     ctaLabel: "Book a mini-audit",
   },
   proof: {
