@@ -371,9 +371,16 @@ export const homepage = {
     },
   ],
   strategyCall: {
-    title: "Mini-audit · 60-min Zoom + memo",
+    title: "Mini-audit",
+    format: "60-min Zoom + memo",
     price: commercialFacts.aiSystems.miniAudit.en,
-    text: "Not ready for the full audit? Before the call you send your questions and process details, so the whole hour on Zoom goes into the work itself — not into collecting context. After the call — a short written memo: what I saw and the first moves you can make. Credited in full toward the AI Audit within 30 days.",
+    lead: "Not ready for the full audit?",
+    steps: [
+      "You send your questions and process details in advance",
+      "The hour on Zoom is pure analysis — not information gathering",
+      "After the call — a memo: what I saw and your first moves",
+    ],
+    note: "Credited in full toward the AI Audit within 30 days",
     ctaLabel: "Book a mini-audit",
   },
   proof: {

@@ -2,7 +2,7 @@ import { buildMetadata } from "@/lib/metadata";
 import { buildAiVisibilityStructuredData } from "@/lib/structured-data";
 import { visibilityContentRu } from "@/lib/visibility/content.ru";
 import { visibilityLanguages, visibilityRoutes } from "@/lib/visibility/routes";
-import { PageHero } from "@/components/sections/PageHero";
+import { VisibilityHero } from "@/components/visibility/VisibilityHero";
 import { MeasurementLayers } from "@/components/visibility/MeasurementLayers";
 import {
   ActionReadinessSection,
@@ -33,16 +33,14 @@ export default function RussianVisibilityPage() {
   return (
     <>
       <JsonLd data={buildAiVisibilityStructuredData("ru")} />
-      <PageHero eyebrow={content.hero.eyebrow} title={content.hero.title} intro={content.hero.intro}>
-        <div className="flex flex-wrap items-center gap-4">
-          <Button href={content.cta.primary.href} size="lg">
-            {content.cta.primary.label}
-          </Button>
-          <Button href={content.cta.secondary.href} variant="secondary" size="lg">
-            {content.cta.secondary.label}
-          </Button>
-        </div>
-      </PageHero>
+      <VisibilityHero
+        locale="ru"
+        eyebrow={content.hero.eyebrow}
+        title={content.hero.title}
+        intro={content.hero.intro}
+        primaryCta={content.cta.primary}
+        secondaryCta={content.cta.secondary}
+      />
 
       <MeasurementLayers content={content.measurementLayers} />
 

@@ -51,7 +51,7 @@
   --color-charcoal: #181614; /* dark contrast sections */
   --color-charcoal-2: #211e1b; /* dark surface, one step up */
   --color-ink: #161413; /* primary text */
-  --color-muted: #6e6258; /* secondary text (taupe) */
+  --color-muted: #5b5046; /* secondary text (taupe) — darkened for readability, ~6.5:1 on ivory */
   --color-copper: #b9825b; /* primary accent — decorative / large / non-text */
   --color-copper-deep: #8f5c34; /* interactive + emphasis text (AA: 5.03:1 on ivory) */
   --color-copper-deeper: #6e4526; /* pressed / hover-darker on copper fills */
