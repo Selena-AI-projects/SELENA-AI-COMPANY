@@ -11,7 +11,6 @@ import {
 } from "@/components/visibility/ActionReadinessSection";
 import { MeasurementBoundary } from "@/components/visibility/MeasurementBoundary";
 import { ProductPath } from "@/components/visibility/ProductPath";
-import { PricingTracks } from "@/components/visibility/PricingTracks";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -61,8 +60,6 @@ export default function RussianVisibilityPage() {
         steps={content.productPath.steps}
       />
 
-      <PricingTracks content={content.pricing} />
-
       <NotClaimedSection content={content.notClaimed} />
 
       <FAQSection items={content.faq} />
@@ -71,6 +68,9 @@ export default function RussianVisibilityPage() {
         <Container size="narrow">
           <Reveal className="text-center">
             <h2 className="text-h2 text-ivory">{content.homeTeaser.headline}</h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-ivory/75">
+              {content.cta.compareNote}
+            </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <Button href={visibilityRoutes.ru.check} size="lg" variant="onDark">
                 {content.cta.primary.label}

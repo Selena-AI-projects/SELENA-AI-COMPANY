@@ -330,5 +330,7 @@ export type VisibilityContent = {
   cta: {
     primary: { label: string; href: string };
     secondary: { label: string; href: string };
+    /** Says where the full line-by-line plan comparison lives, since this page states prices once. */
+    compareNote: string;
   };
 };
