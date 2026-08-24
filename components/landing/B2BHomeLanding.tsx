@@ -123,6 +123,23 @@ function HeroSection({ content }: { content: HomepageContent }) {
           <p className="mt-4 text-base leading-relaxed text-ivory/60">{content.hero.primaryNote}</p>
         </Reveal>
 
+        {/* The second audience gets its door in the first five seconds: one
+            honest strip instead of a tail sentence buried in the subheadline. */}
+        <Reveal delay={100} className="mt-9">
+          <div className="flex max-w-4xl flex-wrap items-center justify-between gap-x-6 gap-y-3 rounded-2xl border border-ivory/15 bg-ivory/5 px-6 py-5">
+            <p className="min-w-64 flex-1 text-base leading-relaxed text-ivory/76">
+              <span className="font-semibold text-ivory">{content.hero.systemsDoor.question}</span>{" "}
+              {content.hero.systemsDoor.description}
+            </p>
+            <a
+              href={content.hero.systemsDoor.cta.href}
+              className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-copper/60 px-6 py-3 text-base font-medium text-copper transition-colors duration-300 hover:bg-copper hover:text-charcoal"
+            >
+              {content.hero.systemsDoor.cta.label} →
+            </a>
+          </div>
+        </Reveal>
+
         {/* The whole ladder sits in the first screen: a visitor compares the
             free entry against every paid step without scrolling for it. */}
         <Reveal delay={120} className="mt-12">

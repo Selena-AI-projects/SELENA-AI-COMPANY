@@ -47,12 +47,18 @@ export const homepage = {
     eyebrow: "Selena Systems · AI Visibility & AI Systems",
     headline: "When customers ask AI, is your business in the answer?",
     subheadline:
-      "ChatGPT, Gemini and Perplexity already answer questions like “where should we eat tonight” and “who nearby does this best”. AI Visibility measures whether your business appears in those answers — starting with a free check of what machines can read on your site. AI Systems builds the internal workflows behind the growth.",
+      "ChatGPT, Gemini and Perplexity already tell people where to go and who to buy from. We measure whether your business makes it into those answers — and show what to fix. The entry is free: a check of what AI can read on your website.",
     primaryCta: { label: "Check AI readiness — free", href: "/check" },
     secondaryCta: { label: "Compare free and paid plans", href: "/pricing" },
     primaryNote: "Free entry checks website readiness only — no paid AI-provider calls.",
     trustLine:
-      "One company, two clear directions: AI Visibility measures outward, AI Systems builds inward. Selena Lab supports both with research.",
+      "One company, two directions: AI Visibility measures how AI sees your business from the outside. AI Systems puts the inside in order.",
+    systemsDoor: {
+      question: "Looking for order in your processes, not a check?",
+      description:
+        "That is our second direction — AI Systems: we turn a team's scattered work into clear AI-supported processes. For founders and teams.",
+      cta: { label: "Discuss my case", href: "/en/contact" },
+    },
     directions: {
       visibility: {
         eyebrow: "AI Visibility · measure outward",
@@ -80,9 +86,9 @@ export const homepage = {
       },
     },
     stats: [
-      { value: "Free", label: "AI Visibility Public Readiness entry" },
-      { value: "8 systems", label: "maximum paid Visibility measurement scope" },
-      { value: "7 days", label: "focused AI Systems Sprint" },
+      { value: "Free", label: "entry: a website check with instant results" },
+      { value: "8 systems", label: "the largest paid measurement" },
+      { value: "25 questions", label: "a weekly run on subscription" },
     ],
   },
   productPaths: {
