@@ -299,6 +299,7 @@ export type VisibilityContent = {
       scrollHint: string;
       comparisonLabels: {
         offer: string;
+        status: string;
         bestFor: string;
         systems: string;
         scope: string;
