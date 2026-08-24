@@ -425,6 +425,34 @@ export const visibilityContentEn: VisibilityContent = {
       ctaLabel: "Check factual local AI visibility",
       ctaHref: visibilityRoutes.en.contact,
     },
+    freeMethod: {
+      checksLabel: "checks performed",
+      pagesLabel: "pages read",
+      aiAnswersLabel: "AI answers — that is the paid measurement",
+      priceLabel: "and no card required",
+    },
+    lockedItems: [
+      {
+        title: "How AI systems see you",
+        body: "whether ChatGPT, Gemini and Perplexity name you — known only after a measurement.",
+      },
+      {
+        title: "Who occupies the answers",
+        body: "share of voice: you against your competitors, by name.",
+      },
+      {
+        title: "Where you are absent and competitors are not",
+        body: "which questions show them, and which sources the answer cites.",
+      },
+      {
+        title: "Where AI takes its data from",
+        body: "sources and the citation gap (cited without you).",
+      },
+      {
+        title: "Measurement-backed recommendations",
+        body: "what to do, tied to specific numbers.",
+      },
+    ],
     cta: {
       heading: "Want to measure the AI-answer layer?",
       body:

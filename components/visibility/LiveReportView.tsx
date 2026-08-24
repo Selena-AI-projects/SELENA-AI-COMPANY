@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import type { LiveFinding, LiveReport } from "@/lib/visibility/liveReport";
 import type {
   AgentReadinessCategoryScore,
@@ -240,6 +241,23 @@ function StandardCheckRow({ check, copy }: { check: AgentReadinessCheckResult; c
   );
 }
 
+/**
+ * A specialist-depth section, folded by default: the free report leads with
+ * the checklist and the plan, and the deep evidence stays one click away
+ * instead of stacking ten dense cards on a first-time visitor.
+ */
+function Collapsed({ summary, children }: { summary: string; children: ReactNode }) {
+  return (
+    <details className="card-premium group p-6 sm:p-8">
+      <summary className="flex cursor-pointer list-none items-center gap-2 font-serif text-xl font-semibold text-ink [&::-webkit-details-marker]:hidden">
+        <span aria-hidden="true" className="inline-block text-copper-deep transition-transform group-open:rotate-90">›</span>
+        {summary}
+      </summary>
+      <div className="mt-4">{children}</div>
+    </details>
+  );
+}
+
 export function LiveReportView({
   report,
   copy,
@@ -344,68 +362,58 @@ export function LiveReportView({
           {agentReadiness.registryVersion} · {report.readiness.scoringModelVersion} · {copy.coverageLabel}: {Math.round(report.readiness.coverage * 100)}% · {copy.providerCallsLabel}: {report.paidProviderCalls}
         </p>
         <p className="mt-2 text-xs leading-relaxed text-muted">{agentReadiness.profileEvidence}</p>
+        <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
+          <div className="rounded-2xl border border-line bg-ivory px-4 py-3">
+            <p className="font-serif text-2xl font-semibold text-ink tabular-nums">{agentReadiness.checks.length}</p>
+            <p className="text-xs text-muted">{copy.freeMethod.checksLabel}</p>
+          </div>
+          <div className="rounded-2xl border border-line bg-ivory px-4 py-3">
+            <p className="font-serif text-2xl font-semibold text-ink tabular-nums">{report.pagesChecked.length}</p>
+            <p className="text-xs text-muted">{copy.freeMethod.pagesLabel}</p>
+          </div>
+          <div className="rounded-2xl border border-line bg-ivory px-4 py-3">
+            <p className="font-serif text-2xl font-semibold text-ink tabular-nums">0</p>
+            <p className="text-xs text-muted">{copy.freeMethod.aiAnswersLabel}</p>
+          </div>
+          <div className="rounded-2xl border border-line bg-ivory px-4 py-3">
+            <p className="font-serif text-2xl font-semibold text-ink tabular-nums">$0</p>
+            <p className="text-xs text-muted">{copy.freeMethod.priceLabel}</p>
+          </div>
+        </div>
       </div>
 
+
+
+      {/* --- What works --- */}
       <section className="card-premium p-6 sm:p-8">
-        <h3 className="font-serif text-xl font-semibold text-ink">{copy.componentsHeading}</h3>
-        <p className="mt-1.5 text-sm leading-relaxed text-muted">{copy.componentsIntro}</p>
-        <div className="mt-5 grid gap-3 sm:grid-cols-2">
-          {report.readiness.components.map((item) => (
-            <article key={item.id} className="rounded-2xl border border-line bg-surface p-4">
-              <div className="flex items-start justify-between gap-3">
-                <h4 className="font-medium text-ink">{item.label}</h4>
-                {item.status === "diagnostic_only" ? (
-                  <span className="shrink-0 rounded-full border border-line bg-ivory px-2 py-0.5 text-base font-semibold tracking-wide text-muted uppercase">
-                    {copy.diagnosticOnlyLabel}
-                  </span>
-                ) : item.score !== null ? (
-                  <span className={cn("shrink-0 font-serif text-xl font-semibold", scoreColor(item.score))}>{item.score}</span>
-                ) : (
-                  <span className="text-xs text-muted">{copy.notMeasuredLabel}</span>
-                )}
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{item.note}</p>
-              {item.status === "weighted" ? (
-                <p className="mt-2 text-xs text-muted">{copy.coverageLabel}: {Math.round(item.coverage * 100)}%</p>
-              ) : null}
-            </article>
-          ))}
-        </div>
+        <h3 className="font-serif text-xl font-semibold text-ink">{copy.goodHeading}</h3>
+        <p className="mt-1.5 text-sm text-muted">{copy.goodIntro}</p>
+        {passed.length > 0 ? (
+          <ul className="mt-5 grid gap-2.5">
+            {passed.map((item) => (
+              <li key={item} className="flex items-start gap-3 text-ink/85">
+                <span aria-hidden="true" className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-good-soft text-xs font-bold text-good">
+                  ✓
+                </span>
+                <span className="leading-relaxed">{item}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-5 leading-relaxed text-muted">{copy.goodEmpty}</p>
+        )}
       </section>
 
-      <section className="card-premium p-6 sm:p-8">
-        <h3 className="font-serif text-xl font-semibold text-ink">{copy.crawlerHeading}</h3>
-        <p className="mt-1.5 text-sm leading-relaxed text-muted">{copy.crawlerIntro}</p>
-        <div className="mt-5 min-w-0 overflow-x-auto">
-          <table className="w-full min-w-[36rem] border-collapse text-left text-sm">
-            <thead>
-              <tr className="border-b border-line text-xs tracking-wide text-muted uppercase">
-                <th className="pb-3 pr-4 font-semibold">{copy.crawlerColumns.crawler}</th>
-                <th className="pb-3 pr-4 font-semibold">{copy.crawlerColumns.userAgent}</th>
-                <th className="pb-3 pr-4 font-semibold">{copy.crawlerColumns.status}</th>
-                <th className="pb-3 font-semibold">{copy.crawlerColumns.evidence}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {report.readiness.crawlerAccess.map((item) => (
-                <tr key={item.userAgent} className="border-b border-line/70 align-top last:border-0">
-                  <td className="py-3 pr-4 font-medium text-ink">{item.crawler}</td>
-                  <td className="py-3 pr-4 font-mono text-xs text-muted">{item.userAgent}</td>
-                  <td className="py-3 pr-4">
-                    <span className={cn(
-                      "rounded-full px-2.5 py-1 text-xs font-semibold",
-                      item.status === "allowed" ? "bg-good-soft text-good" : item.status === "blocked" ? "bg-bad-soft text-bad" : "bg-ivory text-muted",
-                    )}>
-                      {copy.crawlerStatusLabels[item.status]}
-                    </span>
-                  </td>
-                  <td className="py-3 font-mono text-xs leading-relaxed text-muted">{item.evidence}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+      {/* --- The one thing to fix first --- */}
+      {topBlocker ? (
+        <section className="card-premium p-6 sm:p-8">
+          <h3 className="font-serif text-xl font-semibold text-ink">{copy.fixHeading}</h3>
+          <p className="mt-1.5 text-sm text-muted">{copy.fixIntro}</p>
+          <ul className="mt-5 grid gap-4">
+            <FindingCard finding={topBlocker} copy={copy} expanded />
+          </ul>
+        </section>
+      ) : null}
 
       <section className="card-premium p-6 sm:p-8">
         <h3 className="font-serif text-xl font-semibold text-ink">{copy.standardsHeading}</h3>
@@ -452,8 +460,125 @@ export function LiveReportView({
         ) : null}
       </section>
 
+
+
+
+      {/* --- Everything else that gets in the way --- */}
       <section className="card-premium p-6 sm:p-8">
-        <h3 className="font-serif text-xl font-semibold text-ink">{copy.instructionsHeading}</h3>
+        <h3 className="font-serif text-xl font-semibold text-ink">{copy.problemsHeading}</h3>
+        <p className="mt-1.5 text-sm leading-relaxed text-muted">{copy.problemsIntro}</p>
+        {problems.length > 0 ? (
+          <ul className="mt-5 grid gap-4">
+            {problems.map((finding) => (
+              <FindingCard
+                key={finding.id}
+                finding={finding}
+                copy={copy}
+                expanded={rest.some((item) => item.id === finding.id)}
+              />
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-5 leading-relaxed text-muted">{copy.problemsEmpty}</p>
+        )}
+      </section>
+
+      {/* --- Reproducible page/block evidence, separate from paid AI measurement --- */}
+      <section className="card-premium p-6 sm:p-8">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h3 className="font-serif text-xl font-semibold text-ink">{copy.blocksHeading}</h3>
+            <p className="mt-1.5 max-w-3xl text-sm leading-relaxed text-muted">{copy.blocksIntro}</p>
+          </div>
+          <p className="text-sm text-muted">{copy.shownLabel}: {weakestBlocks.length} / {report.readiness.blocks.length}</p>
+        </div>
+        {weakestBlocks.length > 0 ? (
+          <div className="mt-5 grid gap-3">
+            {weakestBlocks.map((block) => (
+              <article key={block.blockId} className="rounded-2xl border border-line bg-surface p-4 sm:p-5">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-semibold tracking-wide text-copper-deep uppercase">{copy.blockTypeLabels[block.blockType] ?? block.blockType}</p>
+                    <p className="mt-1 font-mono text-xs break-all text-muted">{block.pageUrl} · {block.selectorOrPath}</p>
+                  </div>
+                  <p className={cn("font-serif text-2xl font-semibold", scoreColor(block.citabilityScore))}>
+                    {block.citabilityScore}<span className="text-sm text-muted">/100</span>
+                  </p>
+                </div>
+                <p className="mt-3 line-clamp-4 text-sm leading-relaxed text-ink/80">{block.textSnapshot}</p>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p className="mt-5 leading-relaxed text-muted">{copy.notMeasuredLabel}</p>
+        )}
+      </section>
+
+      <Collapsed summary={copy.componentsHeading}>
+        <div>
+        <p className="mt-1.5 text-sm leading-relaxed text-muted">{copy.componentsIntro}</p>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          {report.readiness.components.map((item) => (
+            <article key={item.id} className="rounded-2xl border border-line bg-surface p-4">
+              <div className="flex items-start justify-between gap-3">
+                <h4 className="font-medium text-ink">{item.label}</h4>
+                {item.status === "diagnostic_only" ? (
+                  <span className="shrink-0 rounded-full border border-line bg-ivory px-2 py-0.5 text-base font-semibold tracking-wide text-muted uppercase">
+                    {copy.diagnosticOnlyLabel}
+                  </span>
+                ) : item.score !== null ? (
+                  <span className={cn("shrink-0 font-serif text-xl font-semibold", scoreColor(item.score))}>{item.score}</span>
+                ) : (
+                  <span className="text-xs text-muted">{copy.notMeasuredLabel}</span>
+                )}
+              </div>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{item.note}</p>
+              {item.status === "weighted" ? (
+                <p className="mt-2 text-xs text-muted">{copy.coverageLabel}: {Math.round(item.coverage * 100)}%</p>
+              ) : null}
+            </article>
+          ))}
+        </div>
+        </div>
+      </Collapsed>
+
+      <Collapsed summary={copy.crawlerHeading}>
+        <div>
+        <p className="mt-1.5 text-sm leading-relaxed text-muted">{copy.crawlerIntro}</p>
+        <div className="mt-5 min-w-0 overflow-x-auto">
+          <table className="w-full min-w-[36rem] border-collapse text-left text-sm">
+            <thead>
+              <tr className="border-b border-line text-xs tracking-wide text-muted uppercase">
+                <th className="pb-3 pr-4 font-semibold">{copy.crawlerColumns.crawler}</th>
+                <th className="pb-3 pr-4 font-semibold">{copy.crawlerColumns.userAgent}</th>
+                <th className="pb-3 pr-4 font-semibold">{copy.crawlerColumns.status}</th>
+                <th className="pb-3 font-semibold">{copy.crawlerColumns.evidence}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {report.readiness.crawlerAccess.map((item) => (
+                <tr key={item.userAgent} className="border-b border-line/70 align-top last:border-0">
+                  <td className="py-3 pr-4 font-medium text-ink">{item.crawler}</td>
+                  <td className="py-3 pr-4 font-mono text-xs text-muted">{item.userAgent}</td>
+                  <td className="py-3 pr-4">
+                    <span className={cn(
+                      "rounded-full px-2.5 py-1 text-xs font-semibold",
+                      item.status === "allowed" ? "bg-good-soft text-good" : item.status === "blocked" ? "bg-bad-soft text-bad" : "bg-ivory text-muted",
+                    )}>
+                      {copy.crawlerStatusLabels[item.status]}
+                    </span>
+                  </td>
+                  <td className="py-3 font-mono text-xs leading-relaxed text-muted">{item.evidence}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        </div>
+      </Collapsed>
+
+      <Collapsed summary={copy.instructionsHeading}>
+        <div>
         <p className="mt-1.5 max-w-3xl leading-relaxed text-muted">{copy.instructionsIntro}</p>
         <div className="mt-6 flex flex-wrap gap-3">
           <button
@@ -519,89 +644,8 @@ export function LiveReportView({
             {copy.copyAgentPromptLabel}
           </button>
         </div>
-      </section>
-
-      {/* --- The one thing to fix first --- */}
-      {topBlocker ? (
-        <section className="card-premium p-6 sm:p-8">
-          <h3 className="font-serif text-xl font-semibold text-ink">{copy.fixHeading}</h3>
-          <p className="mt-1.5 text-sm text-muted">{copy.fixIntro}</p>
-          <ul className="mt-5 grid gap-4">
-            <FindingCard finding={topBlocker} copy={copy} expanded />
-          </ul>
-        </section>
-      ) : null}
-
-      {/* --- What works --- */}
-      <section className="card-premium p-6 sm:p-8">
-        <h3 className="font-serif text-xl font-semibold text-ink">{copy.goodHeading}</h3>
-        <p className="mt-1.5 text-sm text-muted">{copy.goodIntro}</p>
-        {passed.length > 0 ? (
-          <ul className="mt-5 grid gap-2.5">
-            {passed.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-ink/85">
-                <span aria-hidden="true" className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-good-soft text-xs font-bold text-good">
-                  ✓
-                </span>
-                <span className="leading-relaxed">{item}</span>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="mt-5 leading-relaxed text-muted">{copy.goodEmpty}</p>
-        )}
-      </section>
-
-      {/* --- Everything else that gets in the way --- */}
-      <section className="card-premium p-6 sm:p-8">
-        <h3 className="font-serif text-xl font-semibold text-ink">{copy.problemsHeading}</h3>
-        <p className="mt-1.5 text-sm leading-relaxed text-muted">{copy.problemsIntro}</p>
-        {problems.length > 0 ? (
-          <ul className="mt-5 grid gap-4">
-            {problems.map((finding) => (
-              <FindingCard
-                key={finding.id}
-                finding={finding}
-                copy={copy}
-                expanded={rest.some((item) => item.id === finding.id)}
-              />
-            ))}
-          </ul>
-        ) : (
-          <p className="mt-5 leading-relaxed text-muted">{copy.problemsEmpty}</p>
-        )}
-      </section>
-
-      {/* --- Reproducible page/block evidence, separate from paid AI measurement --- */}
-      <section className="card-premium p-6 sm:p-8">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h3 className="font-serif text-xl font-semibold text-ink">{copy.blocksHeading}</h3>
-            <p className="mt-1.5 max-w-3xl text-sm leading-relaxed text-muted">{copy.blocksIntro}</p>
-          </div>
-          <p className="text-sm text-muted">{copy.shownLabel}: {weakestBlocks.length} / {report.readiness.blocks.length}</p>
         </div>
-        {weakestBlocks.length > 0 ? (
-          <div className="mt-5 grid gap-3">
-            {weakestBlocks.map((block) => (
-              <article key={block.blockId} className="rounded-2xl border border-line bg-surface p-4 sm:p-5">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <p className="text-xs font-semibold tracking-wide text-copper-deep uppercase">{copy.blockTypeLabels[block.blockType] ?? block.blockType}</p>
-                    <p className="mt-1 font-mono text-xs break-all text-muted">{block.pageUrl} · {block.selectorOrPath}</p>
-                  </div>
-                  <p className={cn("font-serif text-2xl font-semibold", scoreColor(block.citabilityScore))}>
-                    {block.citabilityScore}<span className="text-sm text-muted">/100</span>
-                  </p>
-                </div>
-                <p className="mt-3 line-clamp-4 text-sm leading-relaxed text-ink/80">{block.textSnapshot}</p>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <p className="mt-5 leading-relaxed text-muted">{copy.notMeasuredLabel}</p>
-        )}
-      </section>
+      </Collapsed>
 
       {/* --- One immutable-baseline verification of Public Readiness only --- */}
       <section className="card-premium p-6 sm:p-8">
@@ -647,6 +691,13 @@ export function LiveReportView({
       <section className="card-premium p-6 sm:p-8">
         <h3 className="font-serif text-xl font-semibold text-ink">{copy.cta.heading}</h3>
         <p className="mt-3 leading-relaxed text-muted">{copy.cta.body}</p>
+        <div className="mt-5 grid gap-2.5">
+          {copy.lockedItems.map((item) => (
+            <div key={item.title} className="rounded-2xl border border-dashed border-copper/50 bg-ivory px-4 py-3 text-sm text-muted">
+              <b className="text-ink">{item.title}</b> — {item.body}
+            </div>
+          ))}
+        </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href={copy.cta.primary.href}
