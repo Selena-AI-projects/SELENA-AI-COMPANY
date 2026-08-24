@@ -20,7 +20,8 @@ const offers = [
   {
     name: "60-minute mini-audit",
     price: commercialFacts.aiSystems.miniAudit.en,
-    description: "One focused Zoom conversation and a short memo with the first practical moves.",
+    description:
+      "You send questions and process details in advance, the hour on Zoom goes into the work itself, and a short memo follows.",
     href: "/en/contact",
   },
   {
@@ -32,13 +33,15 @@ const offers = [
   {
     name: "4-Week AI Sprint",
     price: commercialFacts.aiSystems.sprint.en,
-    description: "Design, build, test and hand over one priority operating-system layer in four focused weeks.",
+    description:
+      "We take one priority process and hand over a working, tested system your team is trained to run — in four focused weeks.",
     href: "/ai-systems/ai-sprint",
   },
   {
     name: "AI Business OS",
     price: commercialFacts.aiSystems.businessOs.en,
-    description: "An 8-week build of a broader connected system across sales, operations, knowledge and automation.",
+    description:
+      "A turnkey 8-week implementation: connected sales, operations, knowledge and automation systems running inside your company, with your team trained.",
     href: "/ai-systems/business-os",
   },
 ] as const;

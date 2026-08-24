@@ -43,8 +43,8 @@ export const commercialFacts = {
       productLine: "ai-systems",
       name: { en: "60-minute mini-audit", ru: "Мини-аудит · 60 минут" },
       description: {
-        en: "One focused Zoom conversation and a short memo with the first practical moves.",
-        ru: "Один сфокусированный разговор в Zoom и короткая записка с первыми практическими шагами.",
+        en: "You send your questions and process details in advance, the hour on Zoom goes into the work itself, and after the call you get a short memo with the first practical moves.",
+        ru: "Вы заранее присылаете вопросы и данные о процессе, час в Zoom уходит на разбор — а после звонка вы получаете короткую записку с первыми практическими шагами.",
       },
       price: 100,
       currency: "USD",
@@ -77,8 +77,8 @@ export const commercialFacts = {
       productLine: "ai-systems",
       name: { en: "4-Week AI Sprint", ru: "4-недельный AI Sprint" },
       description: {
-        en: "Design, build, test and hand over one priority operating-system layer.",
-        ru: "Спроектировать, собрать, протестировать и передать один приоритетный рабочий контур.",
+        en: "A four-week build of one priority operating-system layer, handed over with team training and written instructions.",
+        ru: "4-недельная сборка одного приоритетного контура — с обучением команды и письменными инструкциями при передаче.",
       },
       price: 4_500,
       currency: "USD",
@@ -94,8 +94,8 @@ export const commercialFacts = {
       productLine: "ai-systems",
       name: { en: "AI Business OS", ru: "AI Business OS" },
       description: {
-        en: "A broader connected system across sales, operations, knowledge and automation.",
-        ru: "Связанная система для продаж, операций, знаний и автоматизации.",
+        en: "A turnkey eight-week implementation of connected sales, operations, knowledge and automation systems, with the team trained.",
+        ru: "Внедрение под ключ за восемь недель: связанные системы продаж, операций, знаний и автоматизации — с обучением команды.",
       },
       price: 10_000,
       minPrice: 10_000,
