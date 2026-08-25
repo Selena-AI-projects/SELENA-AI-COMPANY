@@ -1,0 +1,54 @@
+name: Visitor View response probe
+
+# Asks each Bright Data collector one question and reports the shape of what
+# came back — which field held the answer, which held the sources, whether a
+# cost was named. The adapter in the application repository builds its request
+# and reads its response from field names that have never been checked against
+# a real call; this checks them, before an order pays for answers it cannot
+# read.
+#
+# It spends money on the Bright Data account: three answers, about half a cent.
+# So it never runs on a schedule — only when someone presses "Run workflow".
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Ask each surface once
+        env:
+          BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
+        run: |
+          if [ -z "$BRIGHTDATA_API_TOKEN" ]; then
+            echo "### Токен не найден" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "Добавьте секрет \`BRIGHTDATA_API_TOKEN\` в Settings → Secrets and variables → Actions." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          npm run measure:visitor-view-probe
+
+      - name: Keep the probe as an artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visitor-view-probe
+          path: reports/visitor-view/
+          retention-days: 90
+          if-no-files-found: ignore
