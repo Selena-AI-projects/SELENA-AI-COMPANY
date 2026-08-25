@@ -22,8 +22,9 @@ import {
   BRIGHTDATA_PRICE_PER_ANSWER_USD,
   type BrightDataAsk,
   type BrightDataSurface,
-  brightDataSurfaceKeys,
   brightDataSurfaces,
+  measurableBrightDataSurfaces,
+  unreachableBrightDataSurfaces,
 } from "@/lib/visibility-log/brightdata";
 import type { MeasurementScenario } from "@/lib/visibility-log/scenarios/index";
 import { scenarios, scenarioSlugs } from "@/lib/visibility-log/scenarios/all";
@@ -118,9 +119,17 @@ export function renderMarkdown(
   lines.push(`Замер: ${measuredAt}`);
   lines.push(`Конфигурация: ${scenario.version} · основание вопросов: ${scenario.basis}`);
   lines.push(
-    `Вопросов: ${scenario.questions.length} · поверхностей: ${brightDataSurfaceKeys.length} · ответов запрошено: ${records.length}`,
+    `Вопросов: ${scenario.questions.length} · поверхностей: ${measurableBrightDataSurfaces.length} · ответов запрошено: ${records.length}`,
   );
   lines.push(`Язык: ${scenario.language} · рынок: ${scenario.market}`);
+  if (unreachableBrightDataSurfaces.length > 0) {
+    lines.push("");
+    lines.push(
+      `Не замерено: ${unreachableBrightDataSurfaces
+        .map((surface) => brightDataSurfaces[surface].label)
+        .join(", ")} — коллектор этой поверхности недоступен. Это не «бренд не назван», это «не спрашивали».`,
+    );
+  }
   lines.push("");
   lines.push("Это Visitor View — то, что видит человек на живой поверхности. Что модель");
   lines.push("отвечает из собственных знаний, здесь не измерено: это API View, другой");
@@ -136,7 +145,7 @@ export function renderMarkdown(
   lines.push("");
   lines.push("| Поверхность | Ответов | Бренд назван | Доля | Требует глаза |");
   lines.push("| --- | --- | --- | --- | --- |");
-  for (const surface of brightDataSurfaceKeys) {
+  for (const surface of measurableBrightDataSurfaces) {
     const own = answered.filter((record) => record.surface === surface);
     const named = own.filter((record) => record.mentioned).length;
     const look = own.filter((record) => record.needsHumanLook).length;
@@ -212,7 +221,7 @@ export async function runMeasurement(options: {
   measuredAt: string;
 }): Promise<{ records: SurfaceRecord[]; spentUsd: number; report: string }> {
   const { scenario, apiKey, maxCostUsd, measuredAt } = options;
-  const asks = brightDataSurfaceKeys.flatMap((surface) =>
+  const asks = measurableBrightDataSurfaces.flatMap((surface) =>
     scenario.questions.map((question) => ({ surface, question })),
   );
   const planned = asks.length * BRIGHTDATA_PRICE_PER_ANSWER_USD;

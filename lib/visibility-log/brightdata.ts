@@ -18,14 +18,28 @@
 export const BRIGHTDATA_ENDPOINT = "https://api.brightdata.com/datasets/v3/scrape";
 
 /** One collector per sold surface, with the surface URL each one takes. */
-export const brightDataSurfaces = {
+export const brightDataSurfaces: Record<
+  "chatgpt" | "gemini" | "perplexity",
+  { datasetId: string | null; url: string; label: string }
+> = {
   chatgpt: { datasetId: "gd_m7aof0k82r803d5bjm", url: "https://chatgpt.com/", label: "ChatGPT" },
-  gemini: { datasetId: "gd_mbz66armZmf9cu856y", url: "https://gemini.google.com/", label: "Gemini" },
+  // The account answers "dataset does not exist" for the id transcribed from
+  // its scraper page. Until the real one is read off the account, this surface
+  // is not measured — a run that cannot reach a surface must say so rather than
+  // fill a report with failures that look like silence.
+  gemini: { datasetId: null, url: "https://gemini.google.com/", label: "Gemini" },
   perplexity: { datasetId: "gd_m7dhdot1vw9a7gc1n", url: "https://www.perplexity.ai", label: "Perplexity" },
-} as const;
+};
 
 export type BrightDataSurface = keyof typeof brightDataSurfaces;
 export const brightDataSurfaceKeys = Object.keys(brightDataSurfaces) as BrightDataSurface[];
+/** The surfaces a run can actually reach today. */
+export const measurableBrightDataSurfaces = brightDataSurfaceKeys.filter(
+  (surface) => brightDataSurfaces[surface].datasetId !== null,
+);
+export const unreachableBrightDataSurfaces = brightDataSurfaceKeys.filter(
+  (surface) => brightDataSurfaces[surface].datasetId === null,
+);
 
 /** Bright Data bills per answer; this is what the account's pricing showed. */
 export const BRIGHTDATA_PRICE_PER_ANSWER_USD = 0.0015;
@@ -58,7 +72,18 @@ export const ANSWER_FIELDS = [
   "text",
   "content",
 ] as const;
-export const SOURCE_FIELDS = ["citations", "links_attached", "sources"] as const;
+/**
+ * Ordered by how directly each names a source the answer displayed. ChatGPT
+ * returns an empty `citations` beside a populated `search_sources`, so an empty
+ * array is not an answer about sources — the search continues past it.
+ */
+export const SOURCE_FIELDS = [
+  "citations",
+  "search_sources",
+  "references",
+  "links_attached",
+  "sources",
+] as const;
 export const REQUEST_ID_FIELDS = ["snapshot_id", "request_id", "response_id", "id"] as const;
 /** Where the provider puts a human-readable status or refusal. */
 export const STATUS_FIELDS = ["message", "error", "status", "detail"] as const;
@@ -120,7 +145,7 @@ function domainOf(url: string): string | null {
 export function readSources(record: Record<string, unknown>): { field: string; sources: BrightDataSource[] } | null {
   for (const field of SOURCE_FIELDS) {
     const value = record[field];
-    if (!Array.isArray(value)) continue;
+    if (!Array.isArray(value) || value.length === 0) continue;
     const seen = new Set<string>();
     const sources: BrightDataSource[] = [];
     for (const entry of value) {
@@ -136,7 +161,7 @@ export function readSources(record: Record<string, unknown>): { field: string; s
       seen.add(raw);
       sources.push({ url: raw, domain });
     }
-    return { field, sources };
+    if (sources.length > 0) return { field, sources };
   }
   return null;
 }
@@ -192,8 +217,11 @@ export async function askBrightData(
     error: null,
   };
 
+  const datasetId = brightDataSurfaces[surface].datasetId;
+  if (datasetId === null) return { ...base, error: "COLLECTOR_UNKNOWN" };
+
   const url = new URL(BRIGHTDATA_ENDPOINT);
-  url.searchParams.set("dataset_id", brightDataSurfaces[surface].datasetId);
+  url.searchParams.set("dataset_id", datasetId);
   url.searchParams.set("notify", "false");
 
   const controller = new AbortController();

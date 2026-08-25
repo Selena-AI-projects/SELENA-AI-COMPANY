@@ -108,7 +108,7 @@ test("a receipt is followed to the snapshot instead of being read as silence", a
 });
 
 test("a snapshot that never becomes ready is not an empty answer", async () => {
-  const ask = await askBrightData("gemini", "q", "brd-secret", {
+  const ask = await askBrightData("perplexity", "q", "brd-secret", {
     pollMs: 0,
     snapshotTimeoutMs: 0,
     fetchImpl: async (input) => {
@@ -130,4 +130,28 @@ test("the credential is stripped from anything the provider says back", async ()
   });
   assert.equal(ask.error, "PROVIDER_HTTP_401");
   assert.equal(ask.statusText, "bad token *** rejected");
+});
+
+test("an empty citations list is not an answer about sources", () => {
+  // ChatGPT returns an empty `citations` beside a populated `search_sources`.
+  // Stopping at the first array present would report a cited answer as uncited.
+  const read = readSources({
+    citations: [],
+    search_sources: [{ url: "https://korafoodhall.com/" }, { url: "https://tripadvisor.com/x" }],
+  });
+  assert.equal(read?.field, "search_sources");
+  assert.equal(read?.sources.length, 2);
+  assert.equal(readSources({ citations: [], links_attached: [] }), null);
+});
+
+test("a surface with no known collector is refused before anything is spent", async () => {
+  let called = false;
+  const ask = await askBrightData("gemini", "q", "brd-secret", {
+    fetchImpl: async () => {
+      called = true;
+      return new Response("{}");
+    },
+  });
+  assert.equal(ask.error, "COLLECTOR_UNKNOWN");
+  assert.equal(called, false);
 });

@@ -78,7 +78,7 @@ export function renderMarkdown(results: BrightDataAsk[]): string {
   for (const r of results) {
     lines.push(`## ${r.surface}`);
     lines.push("");
-    lines.push(`- Collector: ${brightDataSurfaces[r.surface].datasetId}`);
+    lines.push(`- Collector: ${brightDataSurfaces[r.surface].datasetId ?? "unknown"}`);
     lines.push(`- Result: ${r.error ?? "answer found"}`);
     if (r.keys.length > 0) lines.push(`- Keys: ${r.keys.join(", ")}`);
     if (r.statusText) lines.push(`- Provider said: ${r.statusText}`);
