@@ -1,7 +1,15 @@
 import Image from "next/image";
 import { cn } from "@/lib/cn";
 
-export function FounderPortrait({ className }: { className?: string }) {
+export function FounderPortrait({
+  className,
+  locale = "ru",
+}: {
+  className?: string;
+  locale?: "en" | "ru";
+}) {
+  const isEnglish = locale === "en";
+
   return (
     <figure
       className={cn(
@@ -11,8 +19,8 @@ export function FounderPortrait({ className }: { className?: string }) {
     >
       <div className="relative aspect-[4/5] min-h-[24rem] sm:aspect-[5/4] lg:aspect-[4/5]">
         <Image
-          src="/images/founder/selena.jpg"
-          alt="Портрет основательницы Selena Systems"
+          src="/images/founder/selena-2026-08.jpg"
+          alt={isEnglish ? "Founder of Selena Systems" : "Портрет основательницы Selena Systems"}
           fill
           sizes="(min-width: 1024px) 38vw, (min-width: 640px) 84vw, 90vw"
           className="object-cover object-[46%_42%]"
@@ -23,8 +31,9 @@ export function FounderPortrait({ className }: { className?: string }) {
         >
           <p className="font-serif text-xl font-semibold">Selena Systems</p>
           <p className="mt-1 max-w-sm text-sm leading-relaxed text-surface/78">
-            Живой founder-led подход: сначала процесс, потом AI-сценарий,
-            автоматизация и обучение команды.
+            {isEnglish
+              ? "A founder-led approach: process first, then the AI workflow, automation and team training."
+              : "Живой founder-led подход: сначала процесс, потом AI-сценарий, автоматизация и обучение команды."}
           </p>
         </div>
       </div>

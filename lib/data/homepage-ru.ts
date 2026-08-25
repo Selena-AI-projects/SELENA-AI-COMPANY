@@ -11,6 +11,7 @@ export const ruHomepage = {
     { label: "AI Visibility", href: "/ru/visibility" },
     { label: "Тарифы", href: "/ru/pricing" },
     { label: "Lab", href: "/ru/lab" },
+    { label: "Обо мне", href: "/about" },
     { label: "Проекты", href: "/ru#proof" },
   ],
   cta: { label: "Записаться на AI-аудит", href: "/contact" },

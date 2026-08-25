@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  buildAboutStructuredData,
+  buildAiAutomationOfferStructuredData,
   buildAiSystemsStructuredData,
   buildAiVisibilityStructuredData,
   buildLabArticleStructuredData,
@@ -40,6 +42,28 @@ test("AI Systems structured data exposes the four custom service offers", () => 
   assert.ok(service);
   const catalog = service.offers as { itemListElement: Array<Record<string, string>> };
   assert.deepEqual(catalog.itemListElement.map((offer) => offer.price), ["100", "500", "4500", "10000"]);
+});
+
+test("Organization structured data uses the public legal entity consistently", () => {
+  const graph = graphOf(buildAiSystemsStructuredData("en"));
+  const organization = graph.find((item) => item["@type"] === "Organization");
+  assert.equal(organization?.legalName, "Selena Systems LLC");
+  assert.equal((organization?.address as Record<string, string>).addressCountry, "US");
+});
+
+test("AI Audit detail exposes one canonical service offer", () => {
+  const graph = graphOf(buildAiAutomationOfferStructuredData("ai-audit"));
+  const service = graph.find((item) => item["@type"] === "Service");
+  const offer = service?.offers as Record<string, string>;
+  assert.equal(offer.price, "500");
+  assert.equal(offer.url, "https://www.selenasystems.com/ai-systems/ai-audit");
+});
+
+test("English About structured data identifies the canonical AboutPage", () => {
+  const graph = graphOf(buildAboutStructuredData("en"));
+  const page = graph.find((item) => item["@type"] === "AboutPage");
+  assert.equal(page?.url, "https://www.selenasystems.com/en/about");
+  assert.equal(page?.inLanguage, "en");
 });
 
 test("Public Readiness structured data contains a zero-price offer only", () => {

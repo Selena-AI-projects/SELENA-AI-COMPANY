@@ -13,6 +13,7 @@ import {
 } from "@/lib/site";
 import { homepage } from "@/lib/data/homepage";
 import { ruHomepage } from "@/lib/data/homepage-ru";
+import { commercialFacts } from "@/lib/commercial-facts";
 import { CLIENT_PORTAL_ENABLED, selenaAppRoutes } from "@/lib/visibility/routes";
 import { isEnglishPublicPath } from "@/lib/localized-routes";
 import { Container } from "@/components/ui/Container";
@@ -137,8 +138,8 @@ export function Footer() {
               : "AI-внедрение, автоматизация и обучение."}
             <span className="mt-1 block text-ivory/52">
               {isEnglish
-                ? "AI Visibility is operated by PT Izi Jiza Bali, Indonesia."
-                : "Услуги AI Visibility оказывает PT Izi Jiza Bali, Индонезия."}
+                ? `Services are provided by ${commercialFacts.seller.legalName}, ${commercialFacts.seller.country.en}.`
+                : `Услуги оказывает ${commercialFacts.seller.legalName}, ${commercialFacts.seller.country.ru}.`}
             </span>
           </p>
           <div className="flex gap-6">

@@ -28,6 +28,7 @@ export const homepage = {
     { label: "AI Visibility", href: "/visibility" },
     { label: "Pricing", href: "/pricing" },
     { label: "Lab", href: "/lab" },
+    { label: "About", href: "/en/about" },
     { label: "Proof", href: "/#proof" },
   ],
   cta: { label: "Book AI Audit", href: "/en/contact" },
