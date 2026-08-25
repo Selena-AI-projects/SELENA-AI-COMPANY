@@ -22,7 +22,14 @@ export type ProjectSlug =
   | "remhaos"
   | "villaops";
 
-export type JournalStage = "readiness" | "snapshot" | "landscape" | "expert" | "work" | "remeasure";
+export type JournalStage =
+  | "readiness"
+  | "apiView"
+  | "snapshot"
+  | "landscape"
+  | "expert"
+  | "work"
+  | "remeasure";
 
 export type ProjectMetrics = {
   /** Window the numbers describe, so a reader never has to guess the period. */
@@ -86,6 +93,10 @@ export const journalMeta = {
 
 export const stageLabels: Record<JournalStage, string> = {
   readiness: "Техническая проверка",
+  // Not a rung of the ladder: API View is the models' own knowledge, and the
+  // $49 rung sells Visitor View. Labelling this one "Замер · 3 системы" would
+  // claim a tier that has not run.
+  apiView: "Замер AI-ответов · 5 моделей",
   snapshot: "Замер · 3 системы",
   landscape: "Замер · 8 систем",
   expert: "Проверка человеком",
@@ -142,7 +153,7 @@ export const journalProjects: JournalProject[] = [
       },
       {
         date: "2026-08-25",
-        stage: "snapshot",
+        stage: "apiView",
         title: "Ноль из ста двадцати пяти",
         body:
           "Пять AI-моделей получили 25 вопросов о том, где поесть в Убуде: лучший фуд-холл, куда пойти с детьми, где провести частное мероприятие, где поужинать большой компанией. KORA Food Hall не была названа ни разу. При этом модели назвали 335 других заведений — Zest Ubud в 21 вопросе из 25, Karsa Kafe в 18, Warung Bodag Maliah в 16. Важно понимать, откуда этот ноль: сайт недавно создан, он дорабатывается, и для AI-видимости не делалось ничего. Это не провал усилий — это точка до начала работы. Замер стоил $0.23 и занял десять минут.",

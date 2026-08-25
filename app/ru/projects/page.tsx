@@ -55,9 +55,11 @@ export default function JournalIndexPage() {
         title="Семь своих проектов — и всё, что мы в них измерили."
         intro="Мы продаём измерение видимости в поиске и в AI-ответах. Поэтому первыми через него проходим сами: фиксируем точку отсчёта, показываем каждый следующий шаг лестницы и публикуем результат — включая тот, где результата пока нет."
       >
-        <p className="text-sm leading-relaxed text-muted">
-          Источник: {journalMeta.source}. Окно — {journalMeta.windowDays} дней.
-          Точка отсчёта: {formatDate(journalMeta.measuredAt)}.
+        <p className="max-w-2xl text-sm leading-relaxed text-muted">
+          Источник: {journalMeta.source}. Окно — {journalMeta.windowDays} дней, а не месяц:
+          это ровно четыре недели, поэтому в сравнении с прошлым периодом совпадают дни
+          недели. У «30 дней» они сдвигаются, и часть движения оказывается календарной,
+          а не настоящей.
         </p>
       </PageHero>
 
@@ -142,7 +144,14 @@ export default function JournalIndexPage() {
                       </div>
 
                       {metrics ? (
-                        <dl className="grid grid-cols-3 gap-4 self-start border-t border-line pt-5 lg:border-t-0 lg:border-l lg:border-line lg:pt-0 lg:pl-8">
+                        <div className="self-start border-t border-line pt-5 lg:border-t-0 lg:border-l lg:border-line lg:pt-0 lg:pl-8">
+                        <p className="text-sm font-semibold text-ink">
+                          За {journalMeta.windowDays} дней
+                          <span className="ml-2 font-normal text-muted">
+                            {formatDate(metrics.windowStart)} — {formatDate(metrics.windowEnd)}
+                          </span>
+                        </p>
+                        <dl className="mt-4 grid grid-cols-3 gap-4">
                           <div>
                             <dd className="font-serif text-[2rem] leading-none font-semibold text-ink">
                               {metrics.clicks}
@@ -169,6 +178,7 @@ export default function JournalIndexPage() {
                             <dt className="mt-2 text-sm text-muted">доля кликов</dt>
                           </div>
                         </dl>
+                        </div>
                       ) : null}
                     </div>
 
