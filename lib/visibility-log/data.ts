@@ -73,6 +73,51 @@ export type ApiViewMeasurement = {
   namedInstead: { name: string; questions: number; models: number }[];
 };
 
+/**
+ * One Visitor View measurement: what a person was shown on the sold surfaces.
+ *
+ * Coverage is stored per surface rather than as one total, because the
+ * surfaces fail independently — a complete ChatGPT sample beside a third of a
+ * Perplexity one is two different observations, and a single averaged rate
+ * would be about neither.
+ */
+export type VisitorViewSurfaceResult = {
+  surface: string;
+  answersRequested: number;
+  answersReceived: number;
+  brandMentions: number;
+};
+
+export type VisitorViewMeasurement = {
+  date: string;
+  /** Same questions, surfaces and language, or the comparison is meaningless. */
+  configVersion: string;
+  questions: number;
+  surfaces: VisitorViewSurfaceResult[];
+  costUsd: number;
+  /** What the answers pointed at, most-cited first. */
+  citedDomains: { domain: string; answers: number }[];
+  /** How many answers cited the project's own site. Often zero, and that is the finding. */
+  ownDomainAnswers: number;
+};
+
+/**
+ * Below this share of the sample a rate is not a rough version of the real
+ * one — it is a different number wearing the same sign. The page shows the
+ * counts instead.
+ */
+export const minVisitorCoverage = 0.8;
+
+export function visitorMentionRate(result: VisitorViewSurfaceResult): number | null {
+  if (result.answersRequested === 0 || result.answersReceived === 0) return null;
+  if (result.answersReceived / result.answersRequested < minVisitorCoverage) return null;
+  return result.brandMentions / result.answersReceived;
+}
+
+export function visitorCoverage(result: VisitorViewSurfaceResult): number {
+  return result.answersRequested === 0 ? 0 : result.answersReceived / result.answersRequested;
+}
+
 export type JournalProject = {
   slug: ProjectSlug;
   name: string;
@@ -82,6 +127,7 @@ export type JournalProject = {
   languages: string[];
   metrics: ProjectMetrics | null;
   apiView?: ApiViewMeasurement;
+  visitorView?: VisitorViewMeasurement;
   entries: JournalEntry[];
 };
 
