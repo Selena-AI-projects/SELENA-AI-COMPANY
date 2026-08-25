@@ -1,0 +1,61 @@
+name: Search Console report
+
+# Runs the Search Console pull without anyone opening a terminal: press
+# "Run workflow" here, or let the Monday schedule do it. The report is printed
+# on the run summary page and kept as a downloadable artifact; it is never
+# committed, because it carries live performance data for every property.
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Mondays 02:00 UTC — Search Console data for the previous week has landed.
+    - cron: "0 2 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Pull Search Console performance
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -z "$GOOGLE_SERVICE_ACCOUNT_JSON" ]; then
+            echo "### Ключ не найден" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "Добавьте секрет \`GOOGLE_SERVICE_ACCOUNT_JSON\` в Settings → Secrets and variables → Actions, затем запустите отчёт снова." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          npm run gsc:report | tee /tmp/gsc-report.txt
+
+      - name: Publish the report on the run summary
+        if: always()
+        run: |
+          if [ -f /tmp/gsc-report.txt ]; then
+            echo '```text' >> "$GITHUB_STEP_SUMMARY"
+            cat /tmp/gsc-report.txt >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Keep the report as an artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: search-console-report
+          path: reports/gsc/
+          retention-days: 90
+          if-no-files-found: ignore
