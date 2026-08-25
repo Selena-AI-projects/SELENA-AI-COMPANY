@@ -1,9 +1,9 @@
 name: Search Console report
 
 # Runs the Search Console pull without anyone opening a terminal: press
-# "Run workflow" here, or let the Monday schedule do it. The report is printed
-# on the run summary page and kept as a downloadable artifact; it is never
-# committed, because it carries live performance data for every property.
+# "Run workflow" here, or let the Monday schedule do it. The report is kept as
+# an access-controlled downloadable artifact and never printed or committed,
+# because it carries live performance data for every property.
 
 on:
   workflow_dispatch:
@@ -33,6 +33,7 @@ jobs:
       - name: Pull Search Console performance
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GSC_EXPECTED_SERVICE_ACCOUNT: ${{ vars.GSC_EXPECTED_SERVICE_ACCOUNT }}
         run: |
           if [ -z "$GOOGLE_SERVICE_ACCOUNT_JSON" ]; then
             echo "### Ключ не найден" >> "$GITHUB_STEP_SUMMARY"
@@ -40,16 +41,13 @@ jobs:
             echo "Добавьте секрет \`GOOGLE_SERVICE_ACCOUNT_JSON\` в Settings → Secrets and variables → Actions, затем запустите отчёт снова." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
-          npm run gsc:report | tee /tmp/gsc-report.txt
-
-      - name: Publish the report on the run summary
-        if: always()
-        run: |
-          if [ -f /tmp/gsc-report.txt ]; then
-            echo '```text' >> "$GITHUB_STEP_SUMMARY"
-            cat /tmp/gsc-report.txt >> "$GITHUB_STEP_SUMMARY"
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          if [ -z "$GSC_EXPECTED_SERVICE_ACCOUNT" ]; then
+            echo "### Ожидаемый аккаунт не задан" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "Добавьте переменную \`GSC_EXPECTED_SERVICE_ACCOUNT\` в Settings → Secrets and variables → Actions → Variables." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
           fi
+          npm run gsc:report
 
       - name: Keep the report as an artifact
         if: always()
