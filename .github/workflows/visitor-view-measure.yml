@@ -1,0 +1,98 @@
+name: Visitor View measurement
+
+# Asks the three sold surfaces the project's questions and reports what a person
+# would have been shown: whether the brand came back, who was named instead, and
+# which sources the answers displayed. This is the $49 tier's observation.
+#
+# It spends money on the Bright Data account — 25 questions × 3 surfaces is 75
+# answers, about $0.11 a project — so it never runs on a schedule. Choose "all"
+# to measure every project; each one runs as its own job, so a failure on one
+# does not take the others down.
+
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: "Project slug, or all"
+        required: true
+        default: korafoodhall
+        type: choice
+        options:
+          - all
+          - korafoodhall
+          - bigdragonvillas
+          - chitobistro
+          - otherbali
+          - petid
+          - remhaos
+          - selenasystems
+          - villaops
+      max_cost_usd:
+        description: "Hard spend ceiling per project, in USD"
+        required: true
+        default: "0.5"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      projects: ${{ steps.pick.outputs.projects }}
+    steps:
+      - id: pick
+        run: |
+          if [ "${{ inputs.project }}" = "all" ]; then
+            echo 'projects=["korafoodhall","bigdragonvillas","chitobistro","otherbali","petid","remhaos","selenasystems","villaops"]' >> "$GITHUB_OUTPUT"
+          else
+            echo 'projects=["${{ inputs.project }}"]' >> "$GITHUB_OUTPUT"
+          fi
+
+  measure:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      # One project's failure must not cancel the others: each is a separate
+      # measurement and a separate report.
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        project: ${{ fromJSON(needs.plan.outputs.projects) }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Ask the surfaces
+        env:
+          BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
+          MEASURE_PROJECT: ${{ matrix.project }}
+          MEASURE_MAX_COST_USD: ${{ inputs.max_cost_usd }}
+        run: |
+          if [ -z "$BRIGHTDATA_API_TOKEN" ]; then
+            echo "### Токен не найден" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "Добавьте секрет \`BRIGHTDATA_API_TOKEN\` в Settings → Secrets and variables → Actions." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          npm run measure:visitor-view
+
+      - name: Keep the measurement as an artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visitor-view-${{ matrix.project }}
+          path: reports/visitor-view/
+          retention-days: 90
+          if-no-files-found: ignore

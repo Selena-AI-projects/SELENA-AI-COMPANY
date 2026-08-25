@@ -24,6 +24,7 @@
     "remotion:stills": "npm run remotion:still:process && npm run remotion:still:library && npm run remotion:still:services",
     "gsc:report": "tsx scripts/gsc-report.ts",
     "measure:visitor-view-probe": "tsx scripts/visitor-view-probe.ts",
+    "measure:visitor-view": "tsx scripts/visitor-view-measure.ts",
     "journal:readiness": "tsx scripts/journal-readiness.ts",
     "measure:api-view": "tsx scripts/api-view-measure.ts"
   },
