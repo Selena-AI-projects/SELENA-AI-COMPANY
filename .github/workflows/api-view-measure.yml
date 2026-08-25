@@ -20,6 +20,7 @@ on:
           - korafoodhall
           - otherbali
           - petid
+          - remhaos
           - selenasystems
           - villaops
       max_cost_usd:

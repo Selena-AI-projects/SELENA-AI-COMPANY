@@ -2,6 +2,7 @@ import type { MeasurementScenario } from "./index";
 import { korafoodhallScenario } from "./korafoodhall";
 import { otherbaliScenario } from "./otherbali";
 import { petidScenario } from "./petid";
+import { remhaosScenario } from "./remhaos";
 import { selenasystemsScenario } from "./selenasystems";
 import { villaopsScenario } from "./villaops";
 
@@ -14,6 +15,7 @@ export const scenarios: Record<string, MeasurementScenario> = {
   korafoodhall: korafoodhallScenario,
   otherbali: otherbaliScenario,
   petid: petidScenario,
+  remhaos: remhaosScenario,
   selenasystems: selenasystemsScenario,
   villaops: villaopsScenario,
 };

@@ -233,7 +233,7 @@ export const journalProjects: JournalProject[] = [
     slug: "remhaos",
     name: "remhaos.com",
     url: "https://remhaos.com",
-    category: "Недвижимость и интерьеры",
+    category: "Управление ремонтом: дизайнер, архитектор и прораб в одном месте",
     markets: ["США", "Россия"],
     languages: ["английский", "русский"],
     metrics: { ...baselineWindow, clicks: 0, impressions: 0, previousClicks: null, nonBrandClicks: 0 },
