@@ -147,13 +147,22 @@ test("an empty citations list is not an answer about sources", () => {
 });
 
 test("a surface with no known collector is refused before anything is spent", async () => {
-  let called = false;
-  const ask = await askBrightData("gemini", "q", "brd-secret", {
-    fetchImpl: async () => {
-      called = true;
-      return new Response("{}");
-    },
-  });
-  assert.equal(ask.error, "COLLECTOR_UNKNOWN");
-  assert.equal(called, false);
+  // Every sold surface has its collector today, so the guard is exercised
+  // against a surface deliberately stripped of one rather than against a real
+  // gap: an id can be revoked or replaced, and the refusal must still hold.
+  const original = brightDataSurfaces.gemini.datasetId;
+  brightDataSurfaces.gemini.datasetId = null;
+  try {
+    let called = false;
+    const ask = await askBrightData("gemini", "q", "brd-secret", {
+      fetchImpl: async () => {
+        called = true;
+        return new Response("{}");
+      },
+    });
+    assert.equal(ask.error, "COLLECTOR_UNKNOWN");
+    assert.equal(called, false);
+  } finally {
+    brightDataSurfaces.gemini.datasetId = original;
+  }
 });

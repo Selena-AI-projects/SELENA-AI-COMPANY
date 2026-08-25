@@ -23,11 +23,10 @@ export const brightDataSurfaces: Record<
   { datasetId: string | null; url: string; label: string }
 > = {
   chatgpt: { datasetId: "gd_m7aof0k82r803d5bjm", url: "https://chatgpt.com/", label: "ChatGPT" },
-  // The account answers "dataset does not exist" for the id transcribed from
-  // its scraper page. Until the real one is read off the account, this surface
-  // is not measured — a run that cannot reach a surface must say so rather than
-  // fill a report with failures that look like silence.
-  gemini: { datasetId: null, url: "https://gemini.google.com/", label: "Gemini" },
+  // Read off the account's own scraper page. The id transcribed by eye before
+  // it carried a capital Z where the real one has a digit 2, which the account
+  // answered as "dataset does not exist".
+  gemini: { datasetId: "gd_mbz66arm2mf9cu856y", url: "https://gemini.google.com/", label: "Gemini" },
   perplexity: { datasetId: "gd_m7dhdot1vw9a7gc1n", url: "https://www.perplexity.ai", label: "Perplexity" },
 };
 
