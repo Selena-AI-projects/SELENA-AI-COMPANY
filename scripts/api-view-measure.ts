@@ -38,6 +38,11 @@ const scenarios: Record<string, MeasurementScenario> = {
   korafoodhall: korafoodhallScenario,
 };
 
+/** Cheap catalog model used only to read names out of answers we already paid for. */
+const EXTRACTION_MODEL = "anthropic/claude-haiku-4.5";
+
+export type NamedBusiness = { name: string; questions: number; models: number };
+
 export type AnswerRecord = {
   model: string;
   question: string;
@@ -137,11 +142,86 @@ export async function preflight(apiKey: string, fetchImpl: typeof fetch) {
   return { ok: response.ok, status: response.status, detail: (await response.text()).slice(0, 200), shape };
 }
 
+/**
+ * Pulls the business names out of the answers, so a report can say who the
+ * models name instead of the brand — the part a customer actually acts on.
+ *
+ * A model reading answers can invent a name, so every returned name must
+ * appear verbatim in the text it was read from. Anything that does not is
+ * dropped rather than published.
+ */
+export async function extractNames(
+  question: string,
+  answers: string[],
+  apiKey: string,
+  fetchImpl: typeof fetch,
+): Promise<string[]> {
+  const joined = answers.filter(Boolean).join("\n\n---\n\n").slice(0, 24_000);
+  if (!joined) return [];
+  const response = await fetchImpl(OPENROUTER_URL, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
+    body: JSON.stringify({
+      model: EXTRACTION_MODEL,
+      temperature: 0,
+      max_tokens: 700,
+      usage: { include: true },
+      messages: [
+        {
+          role: "user",
+          content:
+            `Below are AI answers to the question "${question}".\n\n` +
+            "List every named restaurant, cafe, food hall, venue or business that appears. " +
+            "Return only a JSON array of strings, exactly as each name is written. " +
+            "No commentary, no categories, no places that are streets, villages or regions.\n\n" +
+            joined,
+        },
+      ],
+    }),
+  });
+  if (!response.ok) return [];
+  const payload = (await response.json()) as { choices?: { message?: { content?: string } }[] };
+  const raw = payload.choices?.[0]?.message?.content ?? "";
+  const match = /\[[\s\S]*\]/.exec(raw);
+  if (!match) return [];
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(match[0]);
+  } catch {
+    return [];
+  }
+  if (!Array.isArray(parsed)) return [];
+  const haystack = joined.toLowerCase();
+  return parsed
+    .filter((name): name is string => typeof name === "string" && name.trim().length > 2)
+    .map((name) => name.trim())
+    // The guard against an invented name: it has to be in the text.
+    .filter((name) => haystack.includes(name.toLowerCase()));
+}
+
+export function tallyNames(
+  perQuestion: { question: string; models: string[]; names: string[] }[],
+): NamedBusiness[] {
+  const counts = new Map<string, { questions: number; models: Set<string> }>();
+  for (const entry of perQuestion) {
+    for (const name of new Set(entry.names)) {
+      const current = counts.get(name) ?? { questions: 0, models: new Set<string>() };
+      current.questions += 1;
+      for (const model of entry.models) current.models.add(model);
+      counts.set(name, current);
+    }
+  }
+  return [...counts]
+    .map(([name, value]) => ({ name, questions: value.questions, models: value.models.size }))
+    .sort((a, b) => b.questions - a.questions || a.name.localeCompare(b.name));
+}
+
 export function renderMarkdown(
   scenario: MeasurementScenario,
   records: AnswerRecord[],
   measuredAt: string,
   totalCost: number | null,
+  named: NamedBusiness[] = [],
 ): string {
   const answered = records.filter((record) => !record.error);
   const failed = records.filter((record) => record.error);
@@ -180,6 +260,21 @@ export function renderMarkdown(
   } else {
     for (const record of hitRecords) {
       lines.push(`- **${record.question}** — ${record.model}`, `  > ${record.excerpt}`);
+    }
+  }
+
+  if (named.length > 0) {
+    lines.push(
+      "",
+      "## Кого называют вместо вас",
+      "",
+      "Названия взяты из тех же ответов и проверены на дословное присутствие в тексте.",
+      "",
+      "| Заведение | В скольких вопросах | Сколько моделей знают |",
+      "| --- | --- | --- |",
+    );
+    for (const business of named.slice(0, 25)) {
+      lines.push(`| ${business.name} | ${business.questions} из ${scenario.questions.length} | ${business.models} |`);
     }
   }
 
@@ -279,11 +374,28 @@ async function main() {
 
   if (result.stoppedForBudget) console.log("Остановлено: достигнут потолок расходов.");
 
+  // Who the models name instead is the part a customer acts on, so it is read
+  // out of the answers already paid for — one cheap call per question.
+  const perQuestion: { question: string; models: string[]; names: string[] }[] = [];
+  for (const question of scenario.questions) {
+    const own = result.records.filter((record) => record.question === question && !record.error);
+    const names = await extractNames(question, own.map((record) => record.answer), apiKey, fetch);
+    perQuestion.push({ question, models: own.map((record) => record.model), names });
+  }
+  const named = tallyNames(perQuestion);
+
   await mkdir(OUTPUT_DIR, { recursive: true });
   const stamp = measuredAt.slice(0, 10);
   const base = `${OUTPUT_DIR}/${scenario.project}-${stamp}`;
-  await writeFile(`${base}.json`, `${JSON.stringify({ measuredAt, scenario, ...result }, null, 2)}\n`);
-  await writeFile(`${base}.md`, renderMarkdown(scenario, result.records, measuredAt, result.totalCost));
+  await writeFile(`${base}.json`, `${JSON.stringify({ measuredAt, scenario, named, ...result }, null, 2)}\n`);
+  await writeFile(`${base}.md`, renderMarkdown(scenario, result.records, measuredAt, result.totalCost, named));
+
+  if (named.length > 0) {
+    console.log(`\nКого называют вместо вас (топ 15 из ${named.length}):`);
+    for (const business of named.slice(0, 15)) {
+      console.log(`  ${business.questions} вопросов · ${business.models} моделей · ${business.name}`);
+    }
+  }
 
   const hits = result.records.filter((record) => record.mentioned).length;
   const failures = result.records.filter((record) => record.error);
