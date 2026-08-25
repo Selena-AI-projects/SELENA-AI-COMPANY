@@ -44,8 +44,8 @@ export function Footer() {
   // The Russian landing page keeps its own nav list, so the journal is added
   // there too — everywhere else it already arrives through the shared nav.
   const footerNav =
-    !isEnglish && !currentNav.some((item) => item.href === "/ru/journal")
-      ? [...currentNav, { href: "/ru/journal", label: "Журнал видимости" }]
+    !isEnglish && !currentNav.some((item) => item.href === "/ru/projects")
+      ? [...currentNav, { href: "/ru/projects", label: "Проекты" }]
       : currentNav;
   const currentNote = isEnglishLandingHome
     ? homepage.footerNote

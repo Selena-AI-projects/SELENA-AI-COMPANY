@@ -62,13 +62,13 @@ const routes: PublicRoute[] = [
   // The journal is Russian-first by decision; the English mirror follows later,
   // so these routes deliberately carry no hreflang alternates yet.
   {
-    path: "/ru/journal",
+    path: "/ru/projects",
     priority: 0.8,
     changeFrequency: "weekly" as const,
     ...(journalLastModified ? { lastModified: journalLastModified } : {}),
   },
   ...journalProjects.map((project) => ({
-    path: `/ru/journal/${project.slug}`,
+    path: `/ru/projects/${project.slug}`,
     priority: 0.6,
     changeFrequency: "weekly" as const,
     ...(latestEntryDate(project) ? { lastModified: latestEntryDate(project) } : {}),

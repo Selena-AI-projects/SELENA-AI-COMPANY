@@ -609,7 +609,7 @@ export function buildJournalProjectStructuredData({
         "@type": "Article",
         "@id": `${pageUrl}#article`,
         mainEntityOfPage: pageUrl,
-        headline: `${project.name} — журнал видимости`,
+        headline: `${project.name} — проект и замеры`,
         description: `Замеры видимости проекта ${project.name}: точка отсчёта, пройденные ступени и то, чего эти числа не доказывают.`,
         datePublished: publishedAt,
         dateModified: updatedAt,
