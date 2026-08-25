@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { buildMetadata } from "@/lib/metadata";
+import { site } from "@/lib/site";
+import { buildJournalProjectStructuredData } from "@/lib/structured-data";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -91,8 +94,24 @@ export default async function JournalProjectPage({
       ]
     : [];
 
+  const firstEntry = project.entries[0];
+  const lastEntry = project.entries[project.entries.length - 1];
+
   return (
     <>
+      {firstEntry && lastEntry ? (
+        <JsonLd
+          data={buildJournalProjectStructuredData({
+            locale: "ru",
+            journalUrl: `${site.url}/ru/journal`,
+            pageUrl: `${site.url}/ru/journal/${project.slug}`,
+            journalTitle: "Журнал видимости",
+            project,
+            publishedAt: firstEntry.date,
+            updatedAt: lastEntry.date,
+          })}
+        />
+      ) : null}
       <PageHero eyebrow="Журнал видимости" title={project.name} intro={project.category}>
         <div className="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-muted">
           <span>{project.markets.join(" · ")}</span>

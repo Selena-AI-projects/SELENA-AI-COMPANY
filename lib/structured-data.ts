@@ -535,6 +535,108 @@ export function buildContactStructuredData(locale: StructuredLocale) {
 }
 
 /** Structured data for Lab articles and guides with explicit dates and provenance. */
+/**
+ * Structured data for the visibility journal index.
+ *
+ * The list is the point: seven named projects, each dated, each with its own
+ * page. `Dataset` is deliberately not used — these are written entries about
+ * measurements, not a downloadable data file.
+ */
+export function buildJournalStructuredData({
+  locale,
+  pageUrl,
+  title,
+  description,
+  projects,
+}: {
+  locale: StructuredLocale;
+  pageUrl: string;
+  title: string;
+  description: string;
+  projects: { slug: string; name: string; url: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationNode(locale),
+      websiteNode(locale),
+      webPageNode({ locale, pageUrl, type: "CollectionPage", name: title, description }),
+      {
+        "@type": "ItemList",
+        "@id": `${pageUrl}#projects`,
+        numberOfItems: projects.length,
+        itemListElement: projects.map((project, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: project.name,
+          item: `${pageUrl}/${project.slug}`,
+        })),
+      },
+      breadcrumbNode([{ name: title, item: pageUrl }], pageUrl),
+    ],
+  };
+}
+
+/**
+ * Structured data for one project's journal page.
+ *
+ * `about` names the measured site so the page is understood as being about
+ * that project rather than about Selena Systems, and `spatialCoverage` carries
+ * the markets the measurement is actually scoped to.
+ */
+export function buildJournalProjectStructuredData({
+  locale,
+  journalUrl,
+  pageUrl,
+  journalTitle,
+  project,
+  publishedAt,
+  updatedAt,
+}: {
+  locale: StructuredLocale;
+  journalUrl: string;
+  pageUrl: string;
+  journalTitle: string;
+  project: { name: string; url: string; category: string; markets: string[] };
+  publishedAt: string;
+  updatedAt: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationNode(locale),
+      {
+        "@type": "Article",
+        "@id": `${pageUrl}#article`,
+        mainEntityOfPage: pageUrl,
+        headline: `${project.name} — журнал видимости`,
+        description: `Замеры видимости проекта ${project.name}: точка отсчёта, пройденные ступени и то, чего эти числа не доказывают.`,
+        datePublished: publishedAt,
+        dateModified: updatedAt,
+        inLanguage: locale,
+        author: { "@id": `${site.url}/#organization` },
+        publisher: { "@id": `${site.url}/#organization` },
+        isPartOf: { "@id": `${site.url}/#website` },
+        articleSection: journalTitle,
+        about: {
+          "@type": "WebSite",
+          name: project.name,
+          url: project.url,
+          description: project.category,
+        },
+        spatialCoverage: project.markets.map((market) => ({ "@type": "Place", name: market })),
+      },
+      breadcrumbNode(
+        [
+          { name: journalTitle, item: journalUrl },
+          { name: project.name, item: pageUrl },
+        ],
+        pageUrl,
+      ),
+    ],
+  };
+}
+
 export function buildLabArticleStructuredData({
   locale,
   pageUrl,

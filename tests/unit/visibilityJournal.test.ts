@@ -2,6 +2,10 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { commercialFacts } from "@/lib/commercial-facts";
 import {
+  buildJournalProjectStructuredData,
+  buildJournalStructuredData,
+} from "@/lib/structured-data";
+import {
   clickForms,
   clickRate,
   impressionForms,
@@ -125,4 +129,41 @@ test("the readiness report never lets rung one read like an AI measurement", () 
   // An unreachable site is reported as unreachable, never scored as a zero.
   assert.match(markdown, /Doki\.help \| нет \(HTTP 403\)/);
   assert.ok(!markdown.includes("| Doki.help | да"));
+});
+
+test("journal pages carry structured data a search engine can place", () => {
+  const index = buildJournalStructuredData({
+    locale: "ru",
+    pageUrl: "https://www.selenasystems.com/ru/journal",
+    title: "Журнал видимости",
+    description: "…",
+    projects: journalProjects,
+  });
+  const list = index["@graph"].find((node) => node["@type"] === "ItemList") as
+    | { numberOfItems: number; itemListElement: { item: string }[] }
+    | undefined;
+  assert.equal(list?.numberOfItems, journalProjects.length);
+  assert.ok(list?.itemListElement.every((entry) => entry.item.startsWith("https://")));
+
+  const project = journalProjects[0];
+  assert.ok(project);
+  const article = buildJournalProjectStructuredData({
+    locale: "ru",
+    journalUrl: "https://www.selenasystems.com/ru/journal",
+    pageUrl: `https://www.selenasystems.com/ru/journal/${project.slug}`,
+    journalTitle: "Журнал видимости",
+    project,
+    publishedAt: project.entries[0]!.date,
+    updatedAt: project.entries[project.entries.length - 1]!.date,
+  });
+  const node = article["@graph"].find((entry) => entry["@type"] === "Article") as
+    | { about: { url: string }; spatialCoverage: { name: string }[]; datePublished: string }
+    | undefined;
+  // The page is about the measured site, not about Selena Systems.
+  assert.equal(node?.about.url, project.url);
+  assert.deepEqual(
+    node?.spatialCoverage.map((place) => place.name),
+    project.markets,
+  );
+  assert.match(node?.datePublished ?? "", /^\d{4}-\d{2}-\d{2}$/);
 });
