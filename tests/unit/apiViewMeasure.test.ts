@@ -9,6 +9,7 @@ import {
   tallyNames,
 } from "../../scripts/api-view-measure";
 import { korafoodhallScenario } from "@/lib/visibility-log/scenarios/korafoodhall";
+import { scenarios, scenarioSlugs } from "@/lib/visibility-log/scenarios/all";
 
 test("a short brand name inside another word is not a match", () => {
   assert.equal(findAlias("Try Korawa Warung in Ubud.", "KORA"), null);
@@ -107,4 +108,20 @@ test("the competitor table only appears when there are names for it", () => {
   ]);
   assert.match(filled, /Кого называют вместо вас/);
   assert.match(filled, /\| Locavore \| 7 из 25 \| 5 \|/);
+});
+
+test("every registered scenario is a complete, comparable configuration", () => {
+  assert.ok(scenarioSlugs.length > 1);
+  for (const slug of scenarioSlugs) {
+    const scenario = scenarios[slug];
+    assert.ok(scenario, `${slug} is registered but missing`);
+    assert.equal(scenario.project, slug);
+    // The catalog sells 25 questions per measurement; a set of any other size
+    // is not the thing being sold.
+    assert.equal(scenario.questions.length, 25, `${slug} has ${scenario.questions.length} questions`);
+    assert.equal(new Set(scenario.questions).size, 25, `${slug} repeats a question`);
+    assert.ok(scenario.strongAliases.length > 0, `${slug} has no name to look for`);
+    assert.match(scenario.version, new RegExp(`^${slug}-`), `${slug} version does not name its project`);
+    assert.ok(["search-console", "owner-brief", "category-draft"].includes(scenario.basis));
+  }
 });
