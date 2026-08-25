@@ -1,6 +1,13 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { classify, findAlias, renderMarkdown, runMeasurement } from "../../scripts/api-view-measure";
+import {
+  classify,
+  extractNames,
+  findAlias,
+  renderMarkdown,
+  runMeasurement,
+  tallyNames,
+} from "../../scripts/api-view-measure";
 import { korafoodhallScenario } from "@/lib/visibility-log/scenarios/korafoodhall";
 
 test("a short brand name inside another word is not a match", () => {
@@ -59,4 +66,45 @@ test("the report says what it did not measure", () => {
   assert.match(markdown, /Visitor View/);
   assert.match(markdown, /Замер: 2026-08-25/);
   assert.match(markdown, /korafoodhall-api-view-2026-08-25/);
+});
+
+test("an invented business name never reaches the report", async () => {
+  const fetchImpl = (async () =>
+    new Response(
+      JSON.stringify({
+        choices: [{ message: { content: '["Locavore", "Completely Made Up Warung"]' } }],
+      }),
+      { status: 200, headers: { "content-type": "application/json" } },
+    )) as unknown as typeof fetch;
+
+  const names = await extractNames(
+    "Where should I eat in Ubud?",
+    ["Try Locavore, it is excellent."],
+    "k",
+    fetchImpl,
+  );
+  // Only the name that is actually in the answer survives.
+  assert.deepEqual(names, ["Locavore"]);
+});
+
+test("names are counted by how many questions surfaced them", () => {
+  const tally = tallyNames([
+    { question: "q1", models: ["a", "b"], names: ["Locavore", "Hujan Locale"] },
+    { question: "q2", models: ["a"], names: ["Locavore", "Locavore"] },
+    { question: "q3", models: ["c"], names: ["Hujan Locale"] },
+  ]);
+  // Equal question counts fall back to alphabetical order.
+  assert.deepEqual(tally[0], { name: "Hujan Locale", questions: 2, models: 3 });
+  assert.deepEqual(tally[1], { name: "Locavore", questions: 2, models: 2 });
+});
+
+test("the competitor table only appears when there are names for it", () => {
+  const empty = renderMarkdown(korafoodhallScenario, [], "2026-08-25T00:00:00.000Z", 0.2, []);
+  assert.ok(!empty.includes("Кого называют вместо вас"));
+
+  const filled = renderMarkdown(korafoodhallScenario, [], "2026-08-25T00:00:00.000Z", 0.2, [
+    { name: "Locavore", questions: 7, models: 5 },
+  ]);
+  assert.match(filled, /Кого называют вместо вас/);
+  assert.match(filled, /\| Locavore \| 7 из 25 \| 5 \|/);
 });
