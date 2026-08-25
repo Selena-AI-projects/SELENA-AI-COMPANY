@@ -13,6 +13,7 @@ import {
   stageLabels,
   type JournalStage,
 } from "@/lib/visibility-log/data";
+import { renderMarkdown } from "../../scripts/journal-readiness";
 
 test("every published entry is dated and named as a stage a reader can place", () => {
   assert.ok(journalProjects.length > 0);
@@ -85,4 +86,43 @@ test("counts agree with the number in front of them", () => {
   assert.equal(`15 ${pluralizeRu(15, impressionForms)}`, "15 показов");
   assert.equal(`2710 ${pluralizeRu(2_710, impressionForms)}`, "2710 показов");
   assert.equal(`21 ${pluralizeRu(21, impressionForms)}`, "21 показ");
+});
+
+test("the readiness report never lets rung one read like an AI measurement", () => {
+  const markdown = renderMarkdown(
+    [
+      {
+        slug: "korafoodhall",
+        name: "KORA Food Hall",
+        url: "https://korafoodhall.com",
+        reachable: true,
+        score: 61,
+        coverage: 0.8,
+        pagesChecked: 4,
+        topBlocker: "Нет описания в выдаче",
+        nextActions: ["Написать описание"],
+        failingFindings: [{ title: "Нет описания", severity: "high", pageUrl: "https://korafoodhall.com/" }],
+      },
+      {
+        slug: "doki",
+        name: "Doki.help",
+        url: "https://doki.help",
+        reachable: false,
+        fetchError: "HTTP 403",
+        score: null,
+        coverage: 0,
+        pagesChecked: 0,
+        topBlocker: null,
+        nextActions: [],
+        failingFindings: [],
+      },
+    ],
+    "2026-08-25T00:00:00.000Z",
+  );
+
+  assert.match(markdown, /ни одного платного запроса к AI/);
+  assert.match(markdown, /упоминают ли сайт AI-системы/);
+  // An unreachable site is reported as unreachable, never scored as a zero.
+  assert.match(markdown, /Doki\.help \| нет \(HTTP 403\)/);
+  assert.ok(!markdown.includes("| Doki.help | да"));
 });

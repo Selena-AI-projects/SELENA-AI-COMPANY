@@ -37,3 +37,4 @@ next-env.d.ts
 # Search Console pulls carry live performance data for every property —
 # keep it out of the repository and out of any pull request.
 reports/gsc/
+reports/readiness/
