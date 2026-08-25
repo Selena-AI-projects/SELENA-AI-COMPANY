@@ -1,5 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { commercialFacts, COMMERCIAL_FACTS_VERSION } from "@/lib/commercial-facts";
 import { homepage } from "@/lib/data/homepage";
 import { ruHomepage } from "@/lib/data/homepage-ru";
@@ -48,5 +50,31 @@ test("sample-report routing uses the locked AI Visibility catalog", () => {
     for (const stale of ["$9", "$4,000", "$4 000", "Visibility Sprint", "Visibility Audit"]) {
       assert.ok(!serialized.includes(stale), `${locale} still contains ${stale}`);
     }
+  }
+});
+
+/**
+ * The seller a buyer sees must be the same everywhere. The footer once named a
+ * different company than the offer and privacy pages, which is a legal claim,
+ * not a copy detail.
+ */
+test("every public page names one seller", () => {
+  const { legalName } = commercialFacts.seller;
+  const files = [
+    "components/layout/Footer.tsx",
+    "app/terms/page.tsx",
+    "app/privacy/page.tsx",
+    "app/en/terms/page.tsx",
+    "app/en/privacy/page.tsx",
+    "lib/visibility/content.ru.ts",
+    "lib/visibility/content.en.ts",
+  ];
+  for (const file of files) {
+    const source = readFileSync(join(process.cwd(), file), "utf8");
+    assert.ok(
+      source.includes(legalName) || source.includes("commercialFacts.seller") || source.includes("seller.legalName"),
+      `${file} must name ${legalName} as the seller`,
+    );
+    assert.ok(!/PT Izi Jiza/i.test(source), `${file} still names a second legal entity`);
   }
 });

@@ -11,6 +11,7 @@ import {
   enFooterNote,
   enNav,
 } from "@/lib/site";
+import { commercialFacts } from "@/lib/commercial-facts";
 import { homepage } from "@/lib/data/homepage";
 import { ruHomepage } from "@/lib/data/homepage-ru";
 import { CLIENT_PORTAL_ENABLED, selenaAppRoutes } from "@/lib/visibility/routes";
@@ -27,6 +28,11 @@ export function Footer() {
   const isRussianLandingHome = pathname === "/ru";
   const isLegacyEnglishHome = pathname === "/en";
   const isEnglish = isEnglishPublicPath(pathname);
+
+  // The seller shown in the footer must be the same entity the offer,
+  // privacy pages and structured data name — read it from the one source.
+  const seller = commercialFacts.seller;
+  const sellerCountryRu = seller.country === "United States" ? "США" : seller.country;
   const currentNav = isEnglishLandingHome
     ? homepage.nav
     : isRussianLandingHome
@@ -137,8 +143,8 @@ export function Footer() {
               : "AI-внедрение, автоматизация и обучение."}
             <span className="mt-1 block text-ivory/52">
               {isEnglish
-                ? "AI Visibility is operated by PT Izi Jiza Bali, Indonesia."
-                : "Услуги AI Visibility оказывает PT Izi Jiza Bali, Индонезия."}
+                ? `AI Visibility is operated by ${seller.legalName} (${seller.country}).`
+                : `Услуги AI Visibility оказывает ${seller.legalName} (${sellerCountryRu}).`}
             </span>
           </p>
           <div className="flex gap-6">
