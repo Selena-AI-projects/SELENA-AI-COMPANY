@@ -41,7 +41,7 @@ export const ruHomepage = {
       question: "Ищете не проверку, а порядок в процессах?",
       description:
         "Это наше второе направление — AI Automation: превращаем разрозненную работу команды в понятные AI-процессы. Для предпринимателей и команд.",
-      cta: { label: "Разобрать мою задачу", href: "/ru/contact" },
+      cta: { label: "Разобрать мою задачу", href: "/contact" },
     },
     directions: {
       visibility: {
