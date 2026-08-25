@@ -18,7 +18,7 @@ separate companies or identities.
 Selena Systems has two commercial directions and one shared intellectual layer:
 
 1. AI Visibility measures and improves AI visibility.
-2. AI Systems designs and implements custom operating systems and workflows.
+2. AI Automation designs and implements custom operating systems and workflows.
 3. Selena Lab publishes research, experiments, guides, articles and, later,
    separately purchased courses.
 
@@ -27,8 +27,8 @@ independent entitlements.
 
 ## Positioning
 
-Selena Systems helps businesses become visible to AI and build their own AI
-systems. AI Visibility keeps Visitor View and API View separate, records
+Selena Systems helps businesses become visible to AI and automate real operating
+workflows. AI Visibility keeps Visitor View and API View separate, records
 every run in an Evidence Ledger and ties recommendations back to observable
 evidence. Selena Lab is the supporting research and education engine, not a
 third competing service line.
@@ -54,13 +54,18 @@ The immutable RC6 contract keeps stable plan IDs and the internal names Visitor
 Local, Full AI Landscape, Expert Verified and Growth 90 Days. The final
 customer-facing ladder presents the same scopes as:
 
-- AI Visibility Snapshot — $49/month; one language; 100 language scenarios; three
-  Visitor View systems; one repeat; 300 planned answers.
-- AI Visibility Landscape — $79/month; up to two languages within 100 total language
-  scenarios; all eight systems; one repeat; 800 planned answers.
-- Expert Verified — $399 one-time; 20 language scenarios; all eight systems;
-  five repeats; 800 planned answers plus human semantic, citation and factual QC.
+- AI Visibility Snapshot — $49/month; up to 25 questions in one language; three
+  Visitor View systems; one weekly run; up to 300 planned answers per month.
+- AI Visibility Landscape — $79/month; up to 25 questions across up to two
+  languages; all eight systems; one weekly run; up to 800 planned answers per month.
+- Expert Verified — $399 one-time; 25 questions in each of two languages; all
+  eight systems; five repeats; 2,000 planned answers plus human semantic,
+  citation and factual QC.
 - Implementation + 90 days — $2,490; manual approval and an immutable custom scope.
+
+AI Automation has four manually approved formats: a $100 60-minute mini-audit,
+a $500 AI Audit, a $4,500 four-week AI Sprint and an eight-week AI Business OS
+starting at $10,000.
 
 Online checkout, live payments, recurring maintenance and real provider calls
 remain off until their separate owner gates and production acceptance are
@@ -75,9 +80,8 @@ above. Other Selena Systems consulting offers remain separate services.
 
 AI Visibility is a product line inside Selena Systems, not a separate
 company. The public voice is clear, practical, evidence-first and avoids hype,
-fake urgency and unverifiable claims. The temporarily approved seller for this
-product is `PT Izi Jiza Bali`, Indonesia, pending payment-provider KYC and final
-legal documents.
+fake urgency and unverifiable claims. The current public seller source of truth
+is `Selena Systems LLC`, United States, as defined in `lib/commercial-facts.ts`.
 
 ## Evidence on Hand
 

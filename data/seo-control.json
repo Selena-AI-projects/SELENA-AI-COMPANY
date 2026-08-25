@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asOf": "2026-07-18",
+  "asOf": "2026-08-25",
   "property": "https://www.selenasystems.com",
   "markets": [
     {
@@ -82,10 +82,10 @@
       "priority": "P0",
       "markets": ["en", "ru"],
       "plannedUrls": [
-        "/services/ai-systems-audit",
+        "/ai-systems/ai-audit",
         "/ru/services/ai-audit-biznesa"
       ],
-      "status": "planned"
+      "status": "live_en_ru_planned"
     },
     {
       "id": "hospitality_ai_automation",
@@ -125,10 +125,10 @@
       "priority": "P1",
       "markets": ["en", "ru"],
       "plannedUrls": [
-        "/services/ai-systems-sprint",
+        "/ai-systems/ai-sprint",
         "/ru/services/ai-systems-sprint"
       ],
-      "status": "planned"
+      "status": "live_en_ru_planned"
     }
   ],
   "cadence": {

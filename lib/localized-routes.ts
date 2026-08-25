@@ -4,8 +4,25 @@ export function isBareEnglishLabPath(pathname: string) {
   return pathname === "/lab" || pathname.startsWith("/lab/");
 }
 
+const englishOnlyPublicRoutes = [
+  "/ai-systems",
+  "/ai-training",
+  "/ai-automation",
+  "/ai-content",
+];
+
+function isEnglishOnlyPublicPath(pathname: string) {
+  return englishOnlyPublicRoutes.some(
+    (route) => pathname === route || pathname.startsWith(`${route}/`),
+  );
+}
+
 export function isEnglishPublicPath(pathname: string) {
-  return pathname === "/" || pathname.startsWith("/en") || isBareEnglishVisibilityPath(pathname) || isBareEnglishLabPath(pathname);
+  return pathname === "/" ||
+    pathname.startsWith("/en") ||
+    isBareEnglishVisibilityPath(pathname) ||
+    isBareEnglishLabPath(pathname) ||
+    isEnglishOnlyPublicPath(pathname);
 }
 
 /** Locale switch that preserves the current product, Lab section or article. */
@@ -26,14 +43,16 @@ export function alternateLocalePath(pathname: string) {
   ) return pathname.slice(3);
 
   const explicit: Record<string, string> = {
+    "/en/about": "/about",
     "/en/contact": "/contact",
     "/en/privacy": "/privacy",
     "/en/terms": "/terms",
+    "/about": "/en/about",
     "/contact": "/en/contact",
     "/privacy": "/en/privacy",
     "/terms": "/en/terms",
   };
-  // Pages with no translated counterpart (AI Systems, AI Training, About, ...)
+  // Pages with no translated counterpart (AI Systems, AI Training, ...)
   // return null so the caller can hide the switch instead of dropping the
   // visitor on the home page and losing their place.
   return explicit[pathname] ?? null;

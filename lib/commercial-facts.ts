@@ -35,7 +35,8 @@ export const commercialFacts = {
   version: COMMERCIAL_FACTS_VERSION,
   seller: {
     legalName: "Selena Systems LLC",
-    country: "United States",
+    countryCode: "US",
+    country: { en: "United States", ru: "США" },
   },
   aiSystems: {
     miniAudit: {
@@ -198,7 +199,11 @@ export const commercialFacts = {
   },
 } as const satisfies {
   version: typeof COMMERCIAL_FACTS_VERSION;
-  seller: { legalName: string; country: string };
+  seller: {
+    legalName: string;
+    countryCode: string;
+    country: LocalizedText;
+  };
   aiSystems: {
     miniAudit: FixedOffer;
     audit: FixedOffer;

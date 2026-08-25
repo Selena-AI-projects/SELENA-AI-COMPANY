@@ -8,6 +8,7 @@ import {
 } from "@/lib/commercial-facts";
 
 type StructuredLocale = "en" | "ru";
+export type AiAutomationOfferSlug = "ai-audit" | "ai-sprint" | "business-os";
 
 function organizationNode(locale: StructuredLocale) {
   const isRussian = locale === "ru";
@@ -27,8 +28,13 @@ function organizationNode(locale: StructuredLocale) {
     "@type": "Organization",
     "@id": organizationId,
     name: site.name,
+    legalName: commercialFacts.seller.legalName,
     url: site.url,
     logo: `${site.url}/icon.svg`,
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: commercialFacts.seller.countryCode,
+    },
     description: isRussian
       ? "Selena Systems проектирует и внедряет AI-системы и помогает бизнесу измерять AI-видимость."
       : "Selena Systems designs and builds AI systems and helps businesses measure AI visibility.",
@@ -106,7 +112,7 @@ function webPageNode({
   pageUrl: string;
   name: string;
   description: string;
-  type?: "WebPage" | "ContactPage" | "CollectionPage";
+  type?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
 }) {
   return {
     "@type": type,
@@ -331,6 +337,83 @@ export function buildAiSystemsStructuredData(locale: StructuredLocale = "en") {
         pageUrl,
       ),
       aiSystemsServiceNode(locale),
+    ],
+  };
+}
+
+const aiAutomationOfferBySlug = {
+  "ai-audit": commercialFacts.aiSystems.audit,
+  "ai-sprint": commercialFacts.aiSystems.sprint,
+  "business-os": commercialFacts.aiSystems.businessOs,
+} as const;
+
+/** Structured data for one canonical AI Automation commercial page. */
+export function buildAiAutomationOfferStructuredData(slug: AiAutomationOfferSlug) {
+  const offer = aiAutomationOfferBySlug[slug];
+  const pageUrl = `${site.url}/ai-systems/${slug}`;
+  const name = localizedOfferName(offer, "en");
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationNode("en"),
+      webPageNode({
+        locale: "en",
+        pageUrl,
+        name,
+        description: offer.description.en,
+      }),
+      breadcrumbNode(
+        [
+          { name: "Selena Systems", item: site.url },
+          { name: "AI Automation", item: `${site.url}/ai-systems` },
+          { name, item: pageUrl },
+        ],
+        pageUrl,
+      ),
+      {
+        "@type": "Service",
+        "@id": `${pageUrl}#service`,
+        url: pageUrl,
+        name,
+        serviceType: "Custom AI systems design and implementation",
+        description: offer.description.en,
+        provider: { "@id": `${site.url}/#organization` },
+        areaServed: "Worldwide",
+        inLanguage: "en",
+        offers: offerNode({ offer, locale: "en", url: pageUrl }),
+      },
+    ],
+  };
+}
+
+/** Structured data for the bilingual founder and company page. */
+export function buildAboutStructuredData(locale: StructuredLocale) {
+  const isRussian = locale === "ru";
+  const pageUrl = `${site.url}${isRussian ? "/about" : "/en/about"}`;
+  const name = isRussian ? "О Selena Systems" : "About Selena Systems";
+  const description = isRussian
+    ? "Как Selena Systems проектирует AI Automation и измеряет AI Visibility: процесс, доказательства и контроль человеком."
+    : "How Selena Systems designs AI Automation and measures AI Visibility with clear evidence and human control.";
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationNode(locale),
+      webPageNode({
+        locale,
+        pageUrl,
+        type: "AboutPage",
+        name,
+        description,
+      }),
+      breadcrumbNode(
+        [
+          { name: "Selena Systems", item: site.url },
+          { name, item: pageUrl },
+        ],
+        pageUrl,
+      ),
     ],
   };
 }

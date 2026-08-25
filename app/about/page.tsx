@@ -7,6 +7,8 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { FounderPortrait } from "@/components/ui/FounderPortrait";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildAboutStructuredData } from "@/lib/structured-data";
 import { cta } from "@/lib/site";
 
 export const metadata = buildMetadata({
@@ -14,6 +16,12 @@ export const metadata = buildMetadata({
   description:
     "Selena Systems помогает русскоязычному бизнесу внедрять AI: сначала процесс, потом инструмент, честные границы и без выдуманных обещаний.",
   path: "/about",
+  locale: "ru_RU",
+  languages: {
+    "x-default": "/en/about",
+    en: "/en/about",
+    ru: "/about",
+  },
 });
 
 // ВАЖНО (контракт docs/12): на этой странице только позиционирование,
@@ -30,6 +38,7 @@ const focusAreas = [
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={buildAboutStructuredData("ru")} />
       <PageHero
         eyebrow="Обо мне"
         title="Помогаю бизнесу внедрять AI спокойно и по делу"
@@ -44,7 +53,7 @@ export default function AboutPage() {
         <Container>
           <div className="grid items-start gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
             <Reveal delay={100}>
-              <FounderPortrait />
+              <FounderPortrait locale="ru" />
             </Reveal>
             <div>
               <SectionHeader
