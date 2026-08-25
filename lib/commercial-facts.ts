@@ -219,6 +219,35 @@ export const commercialFacts = {
   };
 };
 
+/**
+ * The launch promotion, as the owner set it on 2026-08-25: both measurement
+ * plans free with a code until the end of August.
+ *
+ * The code has to match SELENA_PROMO_CODES in the application, which is where
+ * it is actually honoured — this is only what the site tells people. And the
+ * end date is a fact, not a countdown: after it passes the offer stops being
+ * shown rather than being quietly extended.
+ */
+export const launchPromotion = {
+  code: "AUGUST2026",
+  endsOn: "2026-08-31",
+  headline: {
+    en: "Both measurement plans are free until 31 August",
+    ru: "Оба тарифа замера — бесплатно до 31 августа",
+  },
+  body: {
+    en: "Enter the code when you order a measurement. Nothing is charged, and no card is asked for.",
+    ru: "Введите код при заказе замера. Ничего не списывается, карта не спрашивается.",
+  },
+} as const;
+
+/** Null once the promotion has ended, so an expired offer never renders. */
+export function activePromotion(now: Date = new Date()) {
+  // End of the last day, in UTC: the offer is honoured through 31 August.
+  const endsAt = new Date(`${launchPromotion.endsOn}T23:59:59.999Z`);
+  return now.getTime() <= endsAt.getTime() ? launchPromotion : null;
+}
+
 export function amountForStructuredData(offer: FixedOffer): string {
   return String(offer.price);
 }

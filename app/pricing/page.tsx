@@ -6,6 +6,7 @@ import { visibilityLanguages } from "@/lib/visibility/routes";
 import { PageHero } from "@/components/sections/PageHero";
 import { PackagesSection } from "@/components/landing/B2BHomeLanding";
 import { PricingDirectory, PricingTracks } from "@/components/visibility/PricingTracks";
+import { PromotionBanner } from "@/components/visibility/PromotionBanner";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 
@@ -32,6 +33,7 @@ export default function PricingPage() {
         intro="AI Visibility measures how AI sees your business. AI Automation diagnoses and builds the workflows inside it. Start with the map below, then compare only the offers that match your goal."
         compact
       />
+      <PromotionBanner locale="en" />
       <PricingDirectory content={content.pricing.directory} />
       <PricingTracks content={content.pricing} showHeader={false} />
       <PackagesSection content={homepage} />
