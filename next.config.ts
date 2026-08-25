@@ -24,6 +24,17 @@ const nextConfig: NextConfig = {
         destination: "/",
         permanent: true,
       },
+      // The journal and the projects section were two names for one thing.
+      {
+        source: "/ru/journal",
+        destination: "/ru/projects",
+        permanent: true,
+      },
+      {
+        source: "/ru/journal/:slug",
+        destination: "/ru/projects/:slug",
+        permanent: true,
+      },
     ];
   },
   async headers() {

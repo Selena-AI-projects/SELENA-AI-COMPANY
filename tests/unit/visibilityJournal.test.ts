@@ -134,8 +134,8 @@ test("the readiness report never lets rung one read like an AI measurement", () 
 test("journal pages carry structured data a search engine can place", () => {
   const index = buildJournalStructuredData({
     locale: "ru",
-    pageUrl: "https://www.selenasystems.com/ru/journal",
-    title: "Журнал видимости",
+    pageUrl: "https://www.selenasystems.com/ru/projects",
+    title: "Наши проекты и замеры",
     description: "…",
     projects: journalProjects,
   });
@@ -149,9 +149,9 @@ test("journal pages carry structured data a search engine can place", () => {
   assert.ok(project);
   const article = buildJournalProjectStructuredData({
     locale: "ru",
-    journalUrl: "https://www.selenasystems.com/ru/journal",
-    pageUrl: `https://www.selenasystems.com/ru/journal/${project.slug}`,
-    journalTitle: "Журнал видимости",
+    journalUrl: "https://www.selenasystems.com/ru/projects",
+    pageUrl: `https://www.selenasystems.com/ru/projects/${project.slug}`,
+    journalTitle: "Проекты",
     project,
     publishedAt: project.entries[0]!.date,
     updatedAt: project.entries[project.entries.length - 1]!.date,

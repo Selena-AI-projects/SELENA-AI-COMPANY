@@ -18,8 +18,8 @@ import {
   stageLabels,
 } from "@/lib/visibility-log/data";
 
-const journalPath = "/ru/journal";
-const journalTitle = "Журнал видимости";
+const journalPath = "/ru/projects";
+const journalTitle = "Наши проекты и замеры";
 const journalDescription =
   "Семь собственных проектов проходят весь путь замера публично: с чего начали, что показали цифры, что мы поправили и что получилось после. С датами и без задним числом переписанных выводов.";
 
@@ -51,8 +51,8 @@ export default function JournalIndexPage() {
         })}
       />
       <PageHero
-        eyebrow="Журнал видимости"
-        title="Семь своих проектов. Весь путь замера — на виду."
+        eyebrow="Проекты"
+        title="Семь своих проектов — и всё, что мы в них измерили."
         intro="Мы продаём измерение видимости в поиске и в AI-ответах. Поэтому первыми через него проходим сами: фиксируем точку отсчёта, показываем каждый следующий шаг лестницы и публикуем результат — включая тот, где результата пока нет."
       >
         <p className="text-sm leading-relaxed text-muted">
@@ -63,7 +63,7 @@ export default function JournalIndexPage() {
 
       <section className="border-y border-line bg-surface py-20 sm:py-28">
         <Container size="narrow">
-          <h2 className="text-h2 text-ink">Как устроен журнал</h2>
+          <h2 className="text-h2 text-ink">Как мы это ведём</h2>
           <ol className="mt-10 grid gap-7">
             {rules.map((rule, index) => (
               <li key={rule} className="grid grid-cols-[2.5rem_1fr] gap-4 border-t border-line pt-5">
@@ -121,7 +121,7 @@ export default function JournalIndexPage() {
               return (
                 <li key={project.slug}>
                   <Link
-                    href={`/ru/journal/${project.slug}`}
+                    href={`/ru/projects/${project.slug}`}
                     className="group block rounded-xl border border-line bg-ivory p-7 transition-all duration-300 hover:-translate-y-px hover:border-copper-deep/50 sm:p-9"
                   >
                     <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr]">

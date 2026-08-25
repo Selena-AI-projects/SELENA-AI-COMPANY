@@ -35,16 +35,16 @@ export async function generateMetadata({
   const project = findProject(slug);
   if (!project) {
     return buildMetadata({
-      title: "Журнал видимости",
-      description: "Публичный журнал замеров видимости по проектам Selena Systems.",
-      path: "/ru/journal",
+      title: "Наши проекты и замеры",
+      description: "Открытые замеры видимости по собственным проектам Selena Systems.",
+      path: "/ru/projects",
       locale: "ru_RU",
     });
   }
   return buildMetadata({
-    title: `${project.name} — журнал видимости`,
+    title: `${project.name} — проект и замеры`,
     description: `Точка отсчёта, замеры и исправления по проекту ${project.name}: что показали цифры, что мы поменяли и что эти числа не доказывают.`,
-    path: `/ru/journal/${project.slug}`,
+    path: `/ru/projects/${project.slug}`,
     locale: "ru_RU",
   });
 }
@@ -103,16 +103,16 @@ export default async function JournalProjectPage({
         <JsonLd
           data={buildJournalProjectStructuredData({
             locale: "ru",
-            journalUrl: `${site.url}/ru/journal`,
-            pageUrl: `${site.url}/ru/journal/${project.slug}`,
-            journalTitle: "Журнал видимости",
+            journalUrl: `${site.url}/ru/projects`,
+            pageUrl: `${site.url}/ru/projects/${project.slug}`,
+            journalTitle: "Проекты",
             project,
             publishedAt: firstEntry.date,
             updatedAt: lastEntry.date,
           })}
         />
       ) : null}
-      <PageHero eyebrow="Журнал видимости" title={project.name} intro={project.category}>
+      <PageHero eyebrow="Проект" title={project.name} intro={project.category}>
         <div className="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-muted">
           <span>{project.markets.join(" · ")}</span>
           <span>Языки замера: {project.languages.join(", ")}</span>
@@ -231,7 +231,7 @@ export default async function JournalProjectPage({
               Начать с бесплатной проверки
             </Button>
             <Link
-              href="/ru/journal"
+              href="/ru/projects"
               className="inline-flex items-center gap-2 py-4 font-medium text-copper transition-colors hover:text-ivory"
             >
               Все семь проектов

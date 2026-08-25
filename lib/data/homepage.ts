@@ -45,7 +45,7 @@ export const homepage = {
     sharedLayer: "One Selena Systems layer · research supports both",
   },
   hero: {
-    eyebrow: "Selena Systems · AI Visibility & AI Automation",
+    eyebrow: "For founders and small teams",
     headline: "When customers ask AI, is your business in the answer?",
     subheadline:
       "ChatGPT, Gemini and Perplexity already tell people where to go and who to buy from. We measure whether your business makes it into those answers — and show what to fix. The entry is free: a check of what AI can read on your website.",
@@ -54,7 +54,7 @@ export const homepage = {
     primaryNote:
       "The free check is technical: we read the site the way AI agents read it and show what to fix. It is a separate step, not a visibility measurement — measurements start with the paid steps.",
     trustLine:
-      "One company, two directions: AI Visibility measures how AI sees your business from the outside. AI Automation puts the inside in order.",
+      "Outward: we measure how AI sees your business. Inward: we put the processes in order.",
     systemsDoor: {
       question: "Looking for order in your processes, not a check?",
       description:

@@ -9,11 +9,10 @@ export const ruHomepage = {
   nav: [
     { label: "AI Automation", href: "/ru#systems" },
     { label: "AI Visibility", href: "/ru/visibility" },
-    { label: "Журнал", href: "/ru/journal" },
     { label: "Тарифы", href: "/ru/pricing" },
     { label: "Lab", href: "/ru/lab" },
     { label: "Обо мне", href: "/about" },
-    { label: "Проекты", href: "/ru#proof" },
+    { label: "Проекты", href: "/ru/projects" },
   ],
   cta: { label: "Записаться на AI-аудит", href: "/contact" },
   visual: {
@@ -29,7 +28,7 @@ export const ruHomepage = {
     sharedLayer: "Один слой Selena Systems · исследования поддерживают оба направления",
   },
   hero: {
-    eyebrow: "Selena Systems · AI Visibility и AI Automation",
+    eyebrow: "Для предпринимателей и небольших команд",
     headline: "Когда клиент спрашивает AI, ваш бизнес попадает в ответ?",
     subheadline:
       "ChatGPT, Gemini и Perplexity уже советуют людям, куда пойти и у кого покупать. Мы измеряем, попадает ли ваш бизнес в эти ответы, — и показываем, что исправить. Вход бесплатный: проверка того, что AI может прочитать на вашем сайте.",
@@ -38,7 +37,7 @@ export const ruHomepage = {
     primaryNote:
       "Бесплатная проверка — техническая: читаем сайт так, как его читают AI-агенты, и показываем, что починить. Это отдельный шаг, не замер видимости — замеры начинаются с платных шагов.",
     trustLine:
-      "Одна компания, два направления: AI Visibility измеряет, как AI видит ваш бизнес снаружи. AI Automation наводит порядок внутри.",
+      "Снаружи — измеряем, как AI видит ваш бизнес. Внутри — наводим порядок в процессах.",
     systemsDoor: {
       question: "Ищете не проверку, а порядок в процессах?",
       description:

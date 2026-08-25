@@ -26,7 +26,7 @@ export function JournalTeaser() {
           {journalProjects.map((project) => (
             <li key={project.slug}>
               <Link
-                href={`/ru/journal/${project.slug}`}
+                href={`/ru/projects/${project.slug}`}
                 className="inline-flex rounded-md border border-line bg-surface px-4 py-2.5 text-base text-ink transition-colors hover:border-copper-deep/60 hover:text-copper-deep"
               >
                 {project.name}
@@ -36,10 +36,10 @@ export function JournalTeaser() {
         </ul>
 
         <Link
-          href="/ru/journal"
+          href="/ru/projects"
           className="mt-9 inline-flex items-center gap-2 font-medium text-copper-deep hover:text-copper-deeper"
         >
-          Открыть журнал видимости
+          Посмотреть все проекты
           <span aria-hidden>→</span>
         </Link>
       </Container>
