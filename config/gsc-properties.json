@@ -1,6 +1,5 @@
 {
   "schemaVersion": 1,
-  "expectedServiceAccount": "otherbali-gsc-audit@otherbali-gsc-personak.iam.gserviceaccount.com",
   "properties": {
     "sc-domain:selenasystems.com": {
       "label": "Selena Systems",

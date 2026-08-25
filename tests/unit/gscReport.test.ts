@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, rm, stat } from "node:fs/promises";
+import { mkdtemp, readFile, readdir, rm, stat } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -18,6 +18,9 @@ import {
   writeGscReport,
 } from "../../scripts/gsc-report";
 import type { GscConfig, GscRow } from "../../scripts/gsc-report";
+
+const TEST_SERVICE_ACCOUNT = "gsc-audit@example.invalid";
+const UNEXPECTED_SERVICE_ACCOUNT = "unexpected@example.invalid";
 
 test("GSC comparison uses two contiguous 28-day UTC windows", () => {
   const windows = buildDateWindows(new Date("2026-03-05T23:30:00-08:00"), 28, 3);
@@ -129,6 +132,25 @@ test("changing GSC row pagination cannot change aggregate totals", async () => {
   assert.deepEqual(await aggregateFor(1), await aggregateFor(25_000));
 });
 
+test("GSC client uses the maximum supported dimension page by default", async () => {
+  let requestBody: Record<string, unknown> | undefined;
+  const client = createGscClient({
+    fetchImpl: (async (_input: string | URL | Request, init?: RequestInit) => {
+      requestBody = JSON.parse(String(init?.body)) as Record<string, unknown>;
+      return Response.json({ rows: [] });
+    }) as typeof fetch,
+    getAccessToken: async () => "test-token",
+  });
+
+  await client.queryAllRows(
+    "sc-domain:example.com",
+    { startDate: "2026-01-01", endDate: "2026-01-28" },
+    ["query"],
+  );
+
+  assert.equal(requestBody?.rowLimit, 25_000);
+});
+
 test("GSC client retries rate limits using Retry-After", async () => {
   let attempts = 0;
   const waits: number[] = [];
@@ -224,13 +246,10 @@ test("GSC client does not retry forbidden responses or expose their body", async
   assert.equal(attempts, 1);
 });
 
-test("tracked GSC config names the expected account and portfolio properties", async () => {
+test("tracked GSC config contains portfolio properties but no account identity", async () => {
   const config = await loadGscConfig("config/gsc-properties.json");
 
-  assert.equal(
-    config.expectedServiceAccount,
-    "otherbali-gsc-audit@otherbali-gsc-personak.iam.gserviceaccount.com",
-  );
+  assert.equal("expectedServiceAccount" in config, false);
   assert.deepEqual(Object.keys(config.properties).sort(), [
     "sc-domain:arhidom.space",
     "sc-domain:doki.help",
@@ -295,7 +314,6 @@ test("GSC report uses exact aggregates and exposes visible-query coverage", asyn
   });
   const config: GscConfig = {
     schemaVersion: 1,
-    expectedServiceAccount: "audit@example.iam.gserviceaccount.com",
     properties: {
       "sc-domain:selenasystems.com": {
         label: "Selena Systems",
@@ -307,7 +325,8 @@ test("GSC report uses exact aggregates and exposes visible-query coverage", asyn
   const report = await generateGscReport({
     client,
     config,
-    serviceAccount: config.expectedServiceAccount,
+    serviceAccount: TEST_SERVICE_ACCOUNT,
+    expectedServiceAccount: TEST_SERVICE_ACCOUNT,
     now: new Date("2026-03-06T00:00:00Z"),
     windowDays: 28,
     lagDays: 3,
@@ -340,7 +359,6 @@ test("GSC report rejects an account with no readable properties", async () => {
   });
   const config: GscConfig = {
     schemaVersion: 1,
-    expectedServiceAccount: "audit@example.iam.gserviceaccount.com",
     properties: {},
   };
 
@@ -348,7 +366,8 @@ test("GSC report rejects an account with no readable properties", async () => {
     generateGscReport({
       client,
       config,
-      serviceAccount: config.expectedServiceAccount,
+      serviceAccount: TEST_SERVICE_ACCOUNT,
+      expectedServiceAccount: TEST_SERVICE_ACCOUNT,
       now: new Date("2026-03-06T00:00:00Z"),
     }),
     /no readable Search Console properties/i,
@@ -380,14 +399,14 @@ test("one forbidden property does not stop the other properties", async () => {
   });
   const config: GscConfig = {
     schemaVersion: 1,
-    expectedServiceAccount: "audit@example.iam.gserviceaccount.com",
     properties: {},
   };
 
   const report = await generateGscReport({
     client,
     config,
-    serviceAccount: config.expectedServiceAccount,
+    serviceAccount: TEST_SERVICE_ACCOUNT,
+    expectedServiceAccount: TEST_SERVICE_ACCOUNT,
     now: new Date("2026-03-06T00:00:00Z"),
   });
   const blocked = report.sites.find((site) => site.siteUrl === "sc-domain:blocked.example");
@@ -405,7 +424,7 @@ test("GSC reports use timestamped private files", async () => {
   const report = {
     schemaVersion: 2 as const,
     generatedAt: "2026-03-06T00:00:00.123Z",
-    serviceAccount: "audit@example.iam.gserviceaccount.com",
+    serviceAccount: TEST_SERVICE_ACCOUNT,
     windowDays: 28,
     windows: {
       current: { startDate: "2026-02-04", endDate: "2026-03-03" },
@@ -432,18 +451,18 @@ test("Google auth prefers an absolute credential path and verifies the account",
   let capturedOptions: Record<string, unknown> | undefined;
   const context = await createGoogleAuthContext({
     env: { GOOGLE_APPLICATION_CREDENTIALS: "/secure/gsc-key.json" },
-    expectedServiceAccount: "audit@example.iam.gserviceaccount.com",
+    expectedServiceAccount: TEST_SERVICE_ACCOUNT,
     authFactory: (options) => {
       capturedOptions = options;
       return {
-        getCredentials: async () => ({ client_email: "audit@example.iam.gserviceaccount.com" }),
+        getCredentials: async () => ({ client_email: TEST_SERVICE_ACCOUNT }),
         getAccessToken: async () => "access-token",
       };
     },
   });
 
   assert.equal(capturedOptions?.keyFilename, "/secure/gsc-key.json");
-  assert.equal(context.serviceAccount, "audit@example.iam.gserviceaccount.com");
+  assert.equal(context.serviceAccount, TEST_SERVICE_ACCOUNT);
   assert.equal(await context.getAccessToken(), "access-token");
 });
 
@@ -451,9 +470,9 @@ test("Google auth rejects account mismatch and redacts malformed inline credenti
   await assert.rejects(
     createGoogleAuthContext({
       env: { GOOGLE_APPLICATION_CREDENTIALS: "/secure/gsc-key.json" },
-      expectedServiceAccount: "expected@example.iam.gserviceaccount.com",
+      expectedServiceAccount: TEST_SERVICE_ACCOUNT,
       authFactory: () => ({
-        getCredentials: async () => ({ client_email: "wrong@example.iam.gserviceaccount.com" }),
+        getCredentials: async () => ({ client_email: UNEXPECTED_SERVICE_ACCOUNT }),
         getAccessToken: async () => "access-token",
       }),
     }),
@@ -464,7 +483,7 @@ test("Google auth rejects account mismatch and redacts malformed inline credenti
   await assert.rejects(
     createGoogleAuthContext({
       env: { GOOGLE_SERVICE_ACCOUNT_JSON: inlineSecret },
-      expectedServiceAccount: "expected@example.iam.gserviceaccount.com",
+      expectedServiceAccount: TEST_SERVICE_ACCOUNT,
       authFactory: () => {
         throw new Error("must not construct auth for invalid JSON");
       },
@@ -481,11 +500,12 @@ test("CLI list-sites reports configured and unclassified properties without writ
   const output: string[] = [];
   await runGscCli({
     args: ["--list-sites"],
-    env: { GOOGLE_APPLICATION_CREDENTIALS: "/secure/gsc-key.json" },
+    env: {
+      GOOGLE_APPLICATION_CREDENTIALS: "/secure/gsc-key.json",
+      GSC_EXPECTED_SERVICE_ACCOUNT: TEST_SERVICE_ACCOUNT,
+    },
     authFactory: () => ({
-      getCredentials: async () => ({
-        client_email: "otherbali-gsc-audit@otherbali-gsc-personak.iam.gserviceaccount.com",
-      }),
+      getCredentials: async () => ({ client_email: TEST_SERVICE_ACCOUNT }),
       getAccessToken: async () => "access-token",
     }),
     fetchImpl: (async (input: string | URL | Request) => {
@@ -504,4 +524,109 @@ test("CLI list-sites reports configured and unclassified properties without writ
   assert.match(rendered, /configured.*Selena Systems.*sc-domain:selenasystems\.com/i);
   assert.match(rendered, /unclassified.*sc-domain:unknown\.example/i);
   assert.doesNotMatch(rendered, /Отчёт сохранён|Report saved/i);
+});
+
+test("CLI requires an external expected service-account identity", async () => {
+  await assert.rejects(
+    runGscCli({
+      args: ["--list-sites"],
+      env: { GOOGLE_APPLICATION_CREDENTIALS: "/secure/gsc-key.json" },
+      authFactory: () => {
+        throw new Error("auth must not start without an approved identity");
+      },
+    }),
+    /GSC_EXPECTED_SERVICE_ACCOUNT/,
+  );
+});
+
+test("CLI keeps report contents out of stdout", async () => {
+  const root = await mkdtemp(join(tmpdir(), "gsc-cli-private-"));
+  const output: string[] = [];
+  const sensitiveQuery = "confidential growth query";
+  const sensitivePage = "https://private.example/internal-page";
+
+  try {
+    const result = await runGscCli({
+      env: {
+        GOOGLE_APPLICATION_CREDENTIALS: "/secure/gsc-key.json",
+        GSC_EXPECTED_SERVICE_ACCOUNT: TEST_SERVICE_ACCOUNT,
+        GSC_REPORT_DIR: root,
+      },
+      authFactory: () => ({
+        getCredentials: async () => ({ client_email: TEST_SERVICE_ACCOUNT }),
+        getAccessToken: async () => "access-token",
+      }),
+      fetchImpl: (async (input: string | URL | Request, init?: RequestInit) => {
+        if (String(input).endsWith("/sites")) {
+          return Response.json({
+            siteEntry: [{ siteUrl: "sc-domain:selenasystems.com", permissionLevel: "siteFullUser" }],
+          });
+        }
+        const body = JSON.parse(String(init?.body)) as { dimensions?: string[] };
+        if (!body.dimensions) {
+          return Response.json({ rows: [{ clicks: 10, impressions: 100, ctr: 0.1, position: 5 }] });
+        }
+        if (body.dimensions.length === 2) {
+          return Response.json({
+            rows: [{ keys: [sensitiveQuery, sensitivePage], clicks: 0, impressions: 50, ctr: 0, position: 8 }],
+          });
+        }
+        return Response.json({
+          rows: [{ keys: [body.dimensions[0] === "query" ? sensitiveQuery : sensitivePage], clicks: 4, impressions: 40 }],
+        });
+      }) as typeof fetch,
+      stdout: (line) => output.push(line),
+      now: new Date("2026-03-06T00:00:00Z"),
+    });
+
+    assert.equal(result.mode, "report");
+    const renderedOutput = output.join("\n");
+    assert.match(renderedOutput, /Report saved:/);
+    assert.doesNotMatch(renderedOutput, new RegExp(sensitiveQuery));
+    assert.doesNotMatch(renderedOutput, new RegExp(sensitivePage));
+    assert.match(await readFile(result.textPath, "utf8"), new RegExp(sensitiveQuery));
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("CLI fails after saving a private diagnostic when every property fails", async () => {
+  const root = await mkdtemp(join(tmpdir(), "gsc-cli-failed-"));
+  const output: string[] = [];
+
+  try {
+    await assert.rejects(
+      runGscCli({
+        env: {
+          GOOGLE_APPLICATION_CREDENTIALS: "/secure/gsc-key.json",
+          GSC_EXPECTED_SERVICE_ACCOUNT: TEST_SERVICE_ACCOUNT,
+          GSC_REPORT_DIR: root,
+        },
+        authFactory: () => ({
+          getCredentials: async () => ({ client_email: TEST_SERVICE_ACCOUNT }),
+          getAccessToken: async () => "access-token",
+        }),
+        fetchImpl: (async (input: string | URL | Request) => {
+          if (String(input).endsWith("/sites")) {
+            return Response.json({
+              siteEntry: [{ siteUrl: "sc-domain:blocked.example", permissionLevel: "siteRestrictedUser" }],
+            });
+          }
+          return Response.json({ error: { message: "private failure detail" } }, { status: 403 });
+        }) as typeof fetch,
+        stdout: (line) => output.push(line),
+        now: new Date("2026-03-06T00:00:00Z"),
+      }),
+      /All Search Console properties failed/,
+    );
+
+    assert.match(output.join("\n"), /Report saved:/);
+    assert.doesNotMatch(output.join("\n"), /private failure detail|HTTP 403/);
+    assert.deepEqual((await readdir(root)).sort(), [
+      "gsc-2026-03-06T00-00-00-000Z.json",
+      "gsc-2026-03-06T00-00-00-000Z.txt",
+    ]);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
 });

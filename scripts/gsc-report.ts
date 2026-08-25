@@ -20,7 +20,6 @@ export type GscPropertyConfig = {
 
 export type GscConfig = {
   schemaVersion: 1;
-  expectedServiceAccount: string;
   properties: Record<string, GscPropertyConfig>;
 };
 
@@ -96,8 +95,8 @@ export async function loadGscConfig(configPath: string): Promise<GscConfig> {
 
   if (!value || typeof value !== "object") throw new Error("GSC config must be an object.");
   const candidate = value as Partial<GscConfig>;
-  if (candidate.schemaVersion !== 1 || typeof candidate.expectedServiceAccount !== "string") {
-    throw new Error("GSC config has an unsupported schema or no expected service account.");
+  if (candidate.schemaVersion !== 1) {
+    throw new Error("GSC config has an unsupported schema.");
   }
   if (!candidate.properties || typeof candidate.properties !== "object") {
     throw new Error("GSC config must define properties.");
@@ -296,7 +295,7 @@ function retryDelay(response: Response, attempt: number): number {
   return 500 * 2 ** attempt;
 }
 
-export class GscApiError extends Error {
+class GscApiError extends Error {
   constructor(public readonly status: number) {
     super(`Search Console request failed with HTTP ${status}.`);
     this.name = "GscApiError";
@@ -306,7 +305,7 @@ export class GscApiError extends Error {
 export function createGscClient({
   fetchImpl = fetch,
   getAccessToken,
-  rowLimit = 250,
+  rowLimit = 25_000,
   maxRetries = 3,
   timeoutMs = 15_000,
   sleep = defaultSleep,
@@ -538,6 +537,7 @@ type GenerateReportOptions = {
   client: GscClient;
   config: GscConfig;
   serviceAccount: string;
+  expectedServiceAccount: string;
   now?: Date;
   windowDays?: number;
   lagDays?: number;
@@ -548,12 +548,13 @@ export async function generateGscReport({
   client,
   config,
   serviceAccount,
+  expectedServiceAccount,
   now = new Date(),
   windowDays = 28,
   lagDays = 3,
   concurrency = 3,
 }: GenerateReportOptions) {
-  if (serviceAccount !== config.expectedServiceAccount) {
+  if (serviceAccount !== expectedServiceAccount) {
     throw new Error("Authenticated service account does not match the configured account.");
   }
   const siteEntries = await client.listSites();
@@ -562,14 +563,15 @@ export async function generateGscReport({
   }
   const windows = buildDateWindows(now, windowDays, lagDays);
   const sites = await mapConcurrent(siteEntries, concurrency, async (siteEntry) => {
+    const property = resolvePropertyConfig(config, siteEntry.siteUrl);
     try {
-      return await auditSite(client, siteEntry, resolvePropertyConfig(config, siteEntry.siteUrl), windows);
+      return await auditSite(client, siteEntry, property, windows);
     } catch (error) {
       return {
         siteUrl: siteEntry.siteUrl,
-        label: resolvePropertyConfig(config, siteEntry.siteUrl)?.label ?? siteEntry.siteUrl,
+        label: property?.label ?? siteEntry.siteUrl,
         permission: siteEntry.permissionLevel,
-        classification: resolvePropertyConfig(config, siteEntry.siteUrl) ? "configured" as const : "unclassified" as const,
+        classification: property ? "configured" as const : "unclassified" as const,
         error: error instanceof GscApiError ? error.message : "Unexpected error while reading this property.",
         total: metricsOf(undefined),
         previousTotal: metricsOf(undefined),
@@ -704,12 +706,16 @@ export async function runGscCli({
 }: RunCliOptions = {}) {
   const configPath = argumentValue(args, "--config") ?? env.GSC_CONFIG_PATH ?? "config/gsc-properties.json";
   const config = await loadGscConfig(configPath);
+  const expectedServiceAccount = env.GSC_EXPECTED_SERVICE_ACCOUNT?.trim();
+  if (!expectedServiceAccount) {
+    throw new Error("GSC_EXPECTED_SERVICE_ACCOUNT must identify the approved service account.");
+  }
   const auth = await createGoogleAuthContext({
     env,
-    expectedServiceAccount: config.expectedServiceAccount,
+    expectedServiceAccount,
     authFactory,
   });
-  const rowLimit = positiveInteger(env.GSC_ROW_LIMIT, 250, "GSC_ROW_LIMIT");
+  const rowLimit = positiveInteger(env.GSC_ROW_LIMIT, 25_000, "GSC_ROW_LIMIT");
   const client = createGscClient({
     fetchImpl,
     getAccessToken: auth.getAccessToken,
@@ -745,6 +751,7 @@ export async function runGscCli({
     client,
     config,
     serviceAccount: auth.serviceAccount,
+    expectedServiceAccount,
     now,
     windowDays: positiveInteger(env.GSC_WINDOW_DAYS, 28, "GSC_WINDOW_DAYS"),
     lagDays: positiveInteger(env.GSC_DATA_LAG_DAYS, 3, "GSC_DATA_LAG_DAYS"),
@@ -752,8 +759,10 @@ export async function runGscCli({
   });
   const outputDir = resolve(env.GSC_REPORT_DIR ?? "reports/gsc");
   const written = await writeGscReport(report, outputDir);
-  stdout(written.text);
   stdout(`Report saved: ${written.jsonPath} and ${written.textPath}`);
+  if (report.sites.every((site) => "error" in site)) {
+    throw new Error("All Search Console properties failed. Review the saved private report.");
+  }
   return { mode: "report" as const, report, ...written };
 }
 
