@@ -168,9 +168,10 @@ export async function extractNames(
           role: "user",
           content:
             `Below are AI answers to the question "${question}".\n\n` +
-            "List every named restaurant, cafe, food hall, venue or business that appears. " +
-            "Return only a JSON array of strings, exactly as each name is written. " +
-            "No commentary, no categories, no places that are streets, villages or regions.\n\n" +
+            "List every named company, product, service, brand, tool, website or venue that appears. " +
+            "Return only a JSON array of strings, exactly as each name is written, in any language. " +
+            "No commentary, no generic categories, no places that are only streets, cities or regions. " +
+            "If nothing is named, return [].\n\n" +
             joined,
         },
       ],
