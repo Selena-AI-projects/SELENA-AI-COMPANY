@@ -1,5 +1,6 @@
 import type { MeasurementScenario } from "./index";
 import { bigdragonvillasScenario } from "./bigdragonvillas";
+import { chitobistroScenario } from "./chitobistro";
 import { korafoodhallScenario } from "./korafoodhall";
 import { otherbaliScenario } from "./otherbali";
 import { petidScenario } from "./petid";
@@ -14,6 +15,7 @@ import { villaopsScenario } from "./villaops";
  */
 export const scenarios: Record<string, MeasurementScenario> = {
   bigdragonvillas: bigdragonvillasScenario,
+  chitobistro: chitobistroScenario,
   korafoodhall: korafoodhallScenario,
   otherbali: otherbaliScenario,
   petid: petidScenario,

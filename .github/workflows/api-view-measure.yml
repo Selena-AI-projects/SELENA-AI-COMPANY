@@ -19,6 +19,7 @@ on:
         options:
           - korafoodhall
           - bigdragonvillas
+          - chitobistro
           - otherbali
           - petid
           - remhaos
