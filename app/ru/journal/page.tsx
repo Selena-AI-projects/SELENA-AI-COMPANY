@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { buildMetadata } from "@/lib/metadata";
+import { site } from "@/lib/site";
+import { buildJournalStructuredData } from "@/lib/structured-data";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -15,11 +18,15 @@ import {
   stageLabels,
 } from "@/lib/visibility-log/data";
 
+const journalPath = "/ru/journal";
+const journalTitle = "Журнал видимости";
+const journalDescription =
+  "Семь собственных проектов проходят весь путь замера публично: с чего начали, что показали цифры, что мы поправили и что получилось после. С датами и без задним числом переписанных выводов.";
+
 export const metadata = buildMetadata({
-  title: "Журнал видимости",
-  description:
-    "Семь собственных проектов проходят весь путь замера публично: с чего начали, что показали цифры, что мы поправили и что получилось после. С датами и без задним числом переписанных выводов.",
-  path: "/ru/journal",
+  title: journalTitle,
+  description: journalDescription,
+  path: journalPath,
   locale: "ru_RU",
 });
 
@@ -34,6 +41,15 @@ const rules = [
 export default function JournalIndexPage() {
   return (
     <>
+      <JsonLd
+        data={buildJournalStructuredData({
+          locale: "ru",
+          pageUrl: `${site.url}${journalPath}`,
+          title: journalTitle,
+          description: journalDescription,
+          projects: journalProjects,
+        })}
+      />
       <PageHero
         eyebrow="Журнал видимости"
         title="Семь своих проектов. Весь путь замера — на виду."

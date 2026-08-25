@@ -8,7 +8,20 @@ type PublicRoute = {
   path: string;
   priority: number;
   languages?: Record<string, string>;
+  /** Only set where a real publication date exists, never invented. */
+  lastModified?: string;
+  changeFrequency?: MetadataRoute.Sitemap[number]["changeFrequency"];
 };
+
+function latestEntryDate(project: (typeof journalProjects)[number]) {
+  return project.entries[project.entries.length - 1]?.date;
+}
+
+const journalLastModified = journalProjects
+  .map(latestEntryDate)
+  .filter((date): date is string => Boolean(date))
+  .sort()
+  .at(-1);
 
 const routes: PublicRoute[] = [
   { path: "/", priority: 1, languages: { "x-default": "/", en: "/", ru: "/ru" } },
@@ -48,10 +61,17 @@ const routes: PublicRoute[] = [
   ]),
   // The journal is Russian-first by decision; the English mirror follows later,
   // so these routes deliberately carry no hreflang alternates yet.
-  { path: "/ru/journal", priority: 0.8 },
+  {
+    path: "/ru/journal",
+    priority: 0.8,
+    changeFrequency: "weekly" as const,
+    ...(journalLastModified ? { lastModified: journalLastModified } : {}),
+  },
   ...journalProjects.map((project) => ({
     path: `/ru/journal/${project.slug}`,
     priority: 0.6,
+    changeFrequency: "weekly" as const,
+    ...(latestEntryDate(project) ? { lastModified: latestEntryDate(project) } : {}),
   })),
   { path: "/about", priority: 0.6, languages: { "x-default": "/en/about", en: "/en/about", ru: "/about" } },
   { path: "/en/about", priority: 0.6, languages: { "x-default": "/en/about", en: "/en/about", ru: "/about" } },
@@ -68,10 +88,11 @@ function absoluteUrl(path: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map(({ path, priority, languages }) => ({
+  return routes.map(({ path, priority, languages, lastModified, changeFrequency }) => ({
     url: absoluteUrl(path),
-    changeFrequency: "monthly",
+    changeFrequency: changeFrequency ?? "monthly",
     priority,
+    ...(lastModified ? { lastModified: new Date(lastModified) } : {}),
     ...(languages
       ? {
           alternates: {
