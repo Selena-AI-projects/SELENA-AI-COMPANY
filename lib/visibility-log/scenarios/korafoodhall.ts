@@ -10,13 +10,16 @@
  * 2026-08-25: "private events ubud" drew 99 impressions at position 23 with no
  * clicks, and a cluster of family and kids queries sat at 11–16.
  */
-export const korafoodhallScenario = {
+import type { MeasurementScenario } from "./index";
+
+export const korafoodhallScenario: MeasurementScenario = {
   version: "korafoodhall-api-view-2026-08-25",
   project: "korafoodhall",
   brand: "KORA Food Hall",
   site: "korafoodhall.com",
   language: "en",
   market: "Ubud, Bali",
+  basis: "search-console",
   /**
    * Aliases are matched on word boundaries. "KORA" alone is short enough to
    * collide with unrelated words, so a match on it is reported as needing a
@@ -51,6 +54,4 @@ export const korafoodhallScenario = {
     "Where can I eat late at night in Ubud?",
     "What should I not miss when eating in Ubud?",
   ],
-} as const;
-
-export type MeasurementScenario = typeof korafoodhallScenario;
+};

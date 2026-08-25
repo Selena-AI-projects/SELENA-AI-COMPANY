@@ -14,7 +14,8 @@
  */
 import { mkdir, writeFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
-import { korafoodhallScenario, type MeasurementScenario } from "@/lib/visibility-log/scenarios/korafoodhall";
+import type { MeasurementScenario } from "@/lib/visibility-log/scenarios/index";
+import { scenarios, scenarioSlugs } from "@/lib/visibility-log/scenarios/all";
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const OPENROUTER_KEY_URL = "https://openrouter.ai/api/v1/key";
@@ -33,10 +34,6 @@ const MAX_OUTPUT_TOKENS = 1200;
 const CONCURRENCY = 4;
 /** Hard stop mirroring the plan's providerBudgetCap: a loop must not outspend. */
 const DEFAULT_MAX_COST_USD = 2;
-
-const scenarios: Record<string, MeasurementScenario> = {
-  korafoodhall: korafoodhallScenario,
-};
 
 /** Cheap catalog model used only to read names out of answers we already paid for. */
 const EXTRACTION_MODEL = "anthropic/claude-haiku-4.5";
@@ -348,7 +345,7 @@ async function main() {
   if (!apiKey) throw new Error("OPENROUTER_API_KEY is required.");
   const slug = process.env.MEASURE_PROJECT?.trim() || "korafoodhall";
   const scenario = scenarios[slug];
-  if (!scenario) throw new Error(`No scenario for "${slug}". Known: ${Object.keys(scenarios).join(", ")}`);
+  if (!scenario) throw new Error(`No scenario for "${slug}". Known: ${scenarioSlugs.join(", ")}`);
 
   const check = await preflight(apiKey, fetch);
   if (!check.ok) {

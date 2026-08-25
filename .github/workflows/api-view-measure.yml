@@ -18,6 +18,10 @@ on:
         type: choice
         options:
           - korafoodhall
+          - otherbali
+          - petid
+          - selenasystems
+          - villaops
       max_cost_usd:
         description: "Hard spend ceiling for this run, in USD"
         required: true
