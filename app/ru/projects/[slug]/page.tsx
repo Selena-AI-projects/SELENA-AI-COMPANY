@@ -73,13 +73,13 @@ export default async function JournalProjectPage({
           label: `${pluralizeRu(metrics.clicks, clickForms)} из поиска`,
           note:
             metrics.previousClicks !== null
-              ? `предыдущие ${journalMeta.windowDays} дней — ${metrics.previousClicks}`
+              ? `за предыдущие ${journalMeta.windowDays} дней — ${metrics.previousClicks}`
               : "предыдущего периода для сравнения нет",
         },
         {
           value: metrics.impressions.toLocaleString("ru-RU"),
           label: `${pluralizeRu(metrics.impressions, impressionForms)} в выдаче`,
-          note: `${formatDate(metrics.windowStart)} — ${formatDate(metrics.windowEnd)}`,
+          note: "сколько раз сайт показали в результатах",
         },
         {
           value: rate === null ? "—" : `${rate}%`,
@@ -129,7 +129,12 @@ export default async function JournalProjectPage({
       {metrics ? (
         <section className="border-y border-line bg-surface py-16 sm:py-20">
           <Container>
-            <h2 className="text-h3 text-ink">Точка отсчёта</h2>
+            <h2 className="text-h3 text-ink">
+              Поиск Google за {journalMeta.windowDays} дней
+            </h2>
+            <p className="mt-2 text-muted">
+              {formatDate(metrics.windowStart)} — {formatDate(metrics.windowEnd)}
+            </p>
             <dl className="mt-9 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
               {facts.map((fact) => (
                 <div key={fact.label} className="border-t border-line pt-5">
