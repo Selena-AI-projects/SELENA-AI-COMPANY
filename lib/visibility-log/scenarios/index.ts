@@ -19,6 +19,13 @@ export type MeasurementScenario = {
   market: string;
   /** Where the question set came from, published with the result. */
   basis: "search-console" | "owner-brief" | "category-draft";
+  /**
+   * Whose business this is. A third-party measurement may be run — the answers
+   * are public and the cost is ours — but its result never reaches the public
+   * journal without that owner saying yes. Naming someone else's business as
+   * invisible is a claim about them, not about us.
+   */
+  ownership: "own" | "third-party";
   strongAliases: readonly string[];
   weakAliases: readonly string[];
   questions: readonly string[];

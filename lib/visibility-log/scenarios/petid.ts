@@ -14,6 +14,7 @@ export const petidScenario: MeasurementScenario = {
   site: "petid.care",
   language: "ru",
   market: "Россия",
+  ownership: "own",
   basis: "search-console",
   strongAliases: ["PetID.care", "petid.care", "PetID"],
   weakAliases: ["PetID", "ПетАйДи"],

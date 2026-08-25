@@ -13,6 +13,7 @@ export const villaopsScenario: MeasurementScenario = {
   site: "villaops.selenasystems.com",
   language: "en",
   market: "Бали, Индонезия",
+  ownership: "own",
   basis: "category-draft",
   strongAliases: ["VillaOps", "villaops.selenasystems.com", "Villa Ops"],
   weakAliases: [],
