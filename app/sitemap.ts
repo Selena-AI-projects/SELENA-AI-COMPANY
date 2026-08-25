@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { visibilityLanguages } from "@/lib/visibility/routes";
 import { labContent, labLanguages, labPath, labSectionIds } from "@/lib/lab/content";
+import { journalProjects } from "@/lib/visibility-log/data";
 
 type PublicRoute = {
   path: string;
@@ -45,6 +46,13 @@ const routes: PublicRoute[] = [
       languages: labLanguages(item.section, item.slug),
     },
   ]),
+  // The journal is Russian-first by decision; the English mirror follows later,
+  // so these routes deliberately carry no hreflang alternates yet.
+  { path: "/ru/journal", priority: 0.8 },
+  ...journalProjects.map((project) => ({
+    path: `/ru/journal/${project.slug}`,
+    priority: 0.6,
+  })),
   { path: "/about", priority: 0.6, languages: { "x-default": "/en/about", en: "/en/about", ru: "/about" } },
   { path: "/en/about", priority: 0.6, languages: { "x-default": "/en/about", en: "/en/about", ru: "/about" } },
   { path: "/contact", priority: 0.9, languages: { "x-default": "/en/contact", en: "/en/contact", ru: "/contact" } },

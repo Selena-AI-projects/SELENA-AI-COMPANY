@@ -41,6 +41,11 @@ export function Footer() {
         : isEnglish
           ? homepage.nav
           : nav;
+  // The journal exists in Russian only so far, so it is appended to the
+  // Russian footer rather than added to the shared nav both locales read.
+  const footerNav = isEnglish
+    ? currentNav
+    : [...currentNav, { href: "/ru/journal", label: "Журнал видимости" }];
   const currentNote = isEnglishLandingHome
     ? homepage.footerNote
     : isRussianLandingHome
@@ -83,7 +88,7 @@ export function Footer() {
               {isEnglish ? "Navigation" : "Разделы"}
             </p>
             <ul className="mt-4 space-y-2.5">
-              {currentNav.map((item) => (
+              {footerNav.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
