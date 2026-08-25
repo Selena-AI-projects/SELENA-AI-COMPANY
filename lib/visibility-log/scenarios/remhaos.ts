@@ -17,6 +17,7 @@ export const remhaosScenario: MeasurementScenario = {
   site: "remhaos.com",
   language: "ru",
   market: "Россия",
+  ownership: "own",
   basis: "owner-brief",
   strongAliases: ["remhaos.com", "RemHaos", "remhaos", "Рем Хаус", "РемХаус"],
   weakAliases: [],

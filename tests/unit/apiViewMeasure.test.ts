@@ -10,6 +10,7 @@ import {
 } from "../../scripts/api-view-measure";
 import { korafoodhallScenario } from "@/lib/visibility-log/scenarios/korafoodhall";
 import { scenarios, scenarioSlugs } from "@/lib/visibility-log/scenarios/all";
+import { journalProjects } from "@/lib/visibility-log/data";
 
 test("a short brand name inside another word is not a match", () => {
   assert.equal(findAlias("Try Korawa Warung in Ubud.", "KORA"), null);
@@ -123,5 +124,21 @@ test("every registered scenario is a complete, comparable configuration", () => 
     assert.ok(scenario.strongAliases.length > 0, `${slug} has no name to look for`);
     assert.match(scenario.version, new RegExp(`^${slug}-`), `${slug} version does not name its project`);
     assert.ok(["search-console", "owner-brief", "category-draft"].includes(scenario.basis));
+    assert.ok(["own", "third-party"].includes(scenario.ownership), `${slug} does not say whose it is`);
+  }
+});
+
+test("someone else's business never reaches the public journal by itself", () => {
+  const published = new Set<string>(journalProjects.map((project) => project.slug));
+  for (const slug of scenarioSlugs) {
+    const scenario = scenarios[slug];
+    assert.ok(scenario);
+    if (scenario.ownership !== "third-party") continue;
+    // Measuring a third party is market research. Publishing that it is
+    // invisible is a claim about them, and it waits for their yes.
+    assert.ok(
+      !published.has(slug),
+      `${slug} is someone else's business and is published without a recorded consent`,
+    );
   }
 });

@@ -19,6 +19,7 @@ export const korafoodhallScenario: MeasurementScenario = {
   site: "korafoodhall.com",
   language: "en",
   market: "Ubud, Bali",
+  ownership: "own",
   basis: "search-console",
   /**
    * Aliases are matched on word boundaries. "KORA" alone is short enough to

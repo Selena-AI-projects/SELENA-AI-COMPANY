@@ -15,6 +15,7 @@ export const selenasystemsScenario: MeasurementScenario = {
   site: "selenasystems.com",
   language: "en",
   market: "Австралия и Новая Зеландия, США",
+  ownership: "own",
   basis: "owner-brief",
   strongAliases: ["Selena Systems", "selenasystems.com", "selenasystems"],
   weakAliases: ["Selena"],

@@ -13,6 +13,7 @@ export const otherbaliScenario: MeasurementScenario = {
   site: "otherbali.com",
   language: "en",
   market: "Бали, Индонезия",
+  ownership: "own",
   basis: "search-console",
   strongAliases: ["otherbali.com", "Other Bali", "otherbali"],
   weakAliases: [],
