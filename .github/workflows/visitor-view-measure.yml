@@ -53,7 +53,11 @@ jobs:
   measure:
     needs: plan
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    # Seventy-five answers at three in flight, each waiting on a collector that
+    # takes minutes: a run that measures honestly is slow, and a ceiling that
+    # kills it at ninety minutes throws away answers already paid for. CI time
+    # is cheaper than a re-measurement of a different moment.
+    timeout-minutes: 300
     strategy:
       # One project's failure must not cancel the others: each is a separate
       # measurement and a separate report.
