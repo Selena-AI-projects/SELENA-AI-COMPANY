@@ -6,6 +6,7 @@ import { visibilityLanguages } from "@/lib/visibility/routes";
 import { PageHero } from "@/components/sections/PageHero";
 import { PackagesSection } from "@/components/landing/B2BHomeLanding";
 import { PricingDirectory, PricingTracks } from "@/components/visibility/PricingTracks";
+import { PromotionBanner } from "@/components/visibility/PromotionBanner";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 
@@ -30,6 +31,7 @@ export default function RussianPricingPage() {
         intro="AI Visibility измеряет, как AI видит ваш бизнес. AI Automation диагностирует и строит процессы внутри него. Сначала выберите направление, затем сравнивайте только подходящие предложения."
         compact
       />
+      <PromotionBanner locale="ru" />
       <PricingDirectory content={content.pricing.directory} />
       <PricingTracks content={content.pricing} showHeader={false} />
       <PackagesSection content={ruHomepage} />

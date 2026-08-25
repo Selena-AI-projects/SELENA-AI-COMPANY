@@ -2,7 +2,12 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { commercialFacts, COMMERCIAL_FACTS_VERSION } from "@/lib/commercial-facts";
+import {
+  activePromotion,
+  commercialFacts,
+  COMMERCIAL_FACTS_VERSION,
+  launchPromotion,
+} from "@/lib/commercial-facts";
 import { homepage } from "@/lib/data/homepage";
 import { ruHomepage } from "@/lib/data/homepage-ru";
 import { buildHomeStructuredData } from "@/lib/structured-data";
@@ -77,4 +82,22 @@ test("every public page names one seller", () => {
     );
     assert.ok(!/PT Izi Jiza/i.test(source), `${file} still names a second legal entity`);
   }
+});
+
+test("an expired promotion stops being offered", () => {
+  const during = activePromotion(new Date("2026-08-25T12:00:00.000Z"));
+  assert.equal(during?.code, "AUGUST2026");
+
+  // The last day is included in full.
+  assert.ok(activePromotion(new Date("2026-08-31T23:59:00.000Z")));
+  // The day after, the page shows nothing rather than a lapsed offer.
+  assert.equal(activePromotion(new Date("2026-09-01T00:00:01.000Z")), null);
+});
+
+test("the promotion the site advertises is the code the application honours", () => {
+  // The site can only state the code; SELENA_PROMO_CODES is what accepts it.
+  // Keeping the literal here means a rename has to be made in both places
+  // deliberately rather than drifting.
+  assert.equal(launchPromotion.code, "AUGUST2026");
+  assert.match(launchPromotion.endsOn, /^\d{4}-\d{2}-\d{2}$/);
 });
