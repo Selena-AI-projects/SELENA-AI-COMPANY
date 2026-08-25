@@ -40,6 +40,25 @@
       "label": "Zubilook",
       "brandTerms": ["zubilook", "zubi look"],
       "aliases": ["https://www.zubilook.com/", "https://zubilook.com/"]
+    },
+    "https://villaops.selenasystems.com/": {
+      "label": "VillaOps",
+      "brandTerms": ["villaops", "villa ops"]
+    },
+    "https://2moonspa.com/": {
+      "label": "2MoonSpa",
+      "brandTerms": ["2moonspa", "2 moon spa", "2moon spa"],
+      "aliases": ["https://www.2moonspa.com/"]
+    },
+    "sc-domain:nevapalace.ru": {
+      "label": "Neva Palace",
+      "brandTerms": ["neva palace", "nevapalace", "нева палас"],
+      "aliases": ["https://www.nevapalace.ru/", "https://nevapalace.ru/"]
+    },
+    "sc-domain:zimaleto2.ru": {
+      "label": "Зима–Лето",
+      "brandTerms": ["zima leto", "zimaleto", "zimaleto2", "зима лето", "зима лето 2"],
+      "aliases": ["https://www.zimaleto2.ru/", "https://zimaleto2.ru/"]
     }
   }
 }
