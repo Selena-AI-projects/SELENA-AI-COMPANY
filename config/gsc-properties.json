@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "expectedServiceAccount": "otherbali-gsc-audit@otherbali-gsc-personak.iam.gserviceaccount.com",
+  "properties": {
+    "sc-domain:selenasystems.com": {
+      "label": "Selena Systems",
+      "brandTerms": ["selena systems", "selenasystems"],
+      "aliases": ["https://www.selenasystems.com/", "https://selenasystems.com/"]
+    },
+    "sc-domain:otherbali.com": {
+      "label": "Other Bali",
+      "brandTerms": ["other bali", "otherbali"],
+      "aliases": ["https://www.otherbali.com/", "https://otherbali.com/"]
+    },
+    "sc-domain:korafoodhall.com": {
+      "label": "KORA Food Hall",
+      "brandTerms": ["kora food hall", "kora foodhall", "korafoodhall"],
+      "aliases": ["https://www.korafoodhall.com/", "https://korafoodhall.com/"]
+    },
+    "sc-domain:petid.care": {
+      "label": "PetID",
+      "brandTerms": ["petid", "pet id", "petid care"],
+      "aliases": ["https://www.petid.care/", "https://petid.care/"]
+    },
+    "sc-domain:remhaos.com": {
+      "label": "Remhaos",
+      "brandTerms": ["remhaos"],
+      "aliases": ["https://www.remhaos.com/", "https://remhaos.com/"]
+    },
+    "sc-domain:doki.help": {
+      "label": "Doki Help",
+      "brandTerms": ["doki help", "doki.help"],
+      "aliases": ["https://www.doki.help/", "https://doki.help/"]
+    },
+    "sc-domain:arhidom.space": {
+      "label": "Arhidom",
+      "brandTerms": ["arhidom", "arhi dom"],
+      "aliases": ["https://www.arhidom.space/", "https://arhidom.space/"]
+    },
+    "sc-domain:zubilook.com": {
+      "label": "Zubilook",
+      "brandTerms": ["zubilook", "zubi look"],
+      "aliases": ["https://www.zubilook.com/", "https://zubilook.com/"]
+    }
+  }
+}

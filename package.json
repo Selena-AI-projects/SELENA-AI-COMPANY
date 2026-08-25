@@ -22,10 +22,11 @@
     "remotion:still:service:support": "remotion still remotion/index.ts SupportServiceFrame public/media/services/support.png",
     "remotion:still:services": "npm run remotion:still:service:audit && npm run remotion:still:service:training && npm run remotion:still:service:automation && npm run remotion:still:service:content && npm run remotion:still:service:concierge && npm run remotion:still:service:knowledge && npm run remotion:still:service:packaging && npm run remotion:still:service:support",
     "remotion:stills": "npm run remotion:still:process && npm run remotion:still:library && npm run remotion:still:services",
-    "gsc:report": "node scripts/gsc-report.mjs"
+    "gsc:report": "tsx scripts/gsc-report.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.111.0",
+    "google-auth-library": "^11.0.2",
     "next": "^15.5.23",
     "react": "19.1.0",
     "react-dom": "19.1.0"
