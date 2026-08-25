@@ -254,9 +254,29 @@ async function main() {
   await writeFile(`${base}.md`, renderMarkdown(scenario, result.records, measuredAt, result.totalCost));
 
   const hits = result.records.filter((record) => record.mentioned).length;
+  const failures = result.records.filter((record) => record.error);
   console.log(`\nУпоминаний: ${hits} из ${result.records.length}`);
   console.log(`Стоимость: ${result.totalCost === null ? "не сообщена" : `$${result.totalCost.toFixed(4)}`}`);
-  console.log(`Записано в ${base}.{json,md}`);
+
+  // A run where every request failed prints the same success line as a run
+  // where the brand was simply absent. The failures have to reach the log, or
+  // a broken key reads as "no model knows you".
+  if (failures.length > 0) {
+    const byReason = new Map<string, number>();
+    for (const record of failures) {
+      const reason = record.error?.slice(0, 120) ?? "unknown";
+      byReason.set(reason, (byReason.get(reason) ?? 0) + 1);
+    }
+    console.log(`\nНеудавшихся ответов: ${failures.length} из ${result.records.length}`);
+    for (const [reason, count] of [...byReason].sort((a, b) => b[1] - a[1]).slice(0, 5)) {
+      console.log(`  ${count} × ${reason}`);
+    }
+  }
+  console.log(`\nЗаписано в ${base}.{json,md}`);
+  // Nothing measured is a failed run, not a quiet success.
+  if (failures.length === result.records.length && result.records.length > 0) {
+    throw new Error("Ни один ответ не получен — замер не состоялся.");
+  }
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
