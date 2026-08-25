@@ -96,3 +96,39 @@ jobs:
           path: reports/visitor-view/
           retention-days: 90
           if-no-files-found: ignore
+
+  # Artifacts expire and are awkward to read one at a time. This lands every
+  # report of a run in the repository as one commit, so a measurement can be
+  # read months later without a CI run to dig through. One job rather than one
+  # per project, because eight jobs pushing the same branch collide.
+  collect:
+    needs: measure
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Gather every project's report
+        uses: actions/download-artifact@v4
+        with:
+          pattern: visitor-view-*
+          path: incoming
+          merge-multiple: true
+
+      - name: Commit the reports
+        run: |
+          mkdir -p reports/visitor-view
+          if ! cp incoming/*.md reports/visitor-view/ 2>/dev/null; then
+            echo "No reports came back from this run." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          rm -rf incoming
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/visitor-view
+          git diff --cached --quiet && { echo "Nothing changed."; exit 0; }
+          git commit -m "record the Visitor View measurements of $(date -u +%Y-%m-%d)"
+          git push origin HEAD:${{ github.ref_name }}
