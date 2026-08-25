@@ -150,6 +150,77 @@ export default async function JournalProjectPage({
         </section>
       ) : null}
 
+      {project.apiView ? (
+        <section className="bg-charcoal py-20 text-ivory sm:py-28">
+          <Container>
+            <div className="max-w-3xl">
+              <p className="text-sm font-semibold tracking-[0.18em] text-copper uppercase">
+                Замер AI-ответов · {formatDate(project.apiView.date)}
+              </p>
+              <h2 className="mt-4 text-h2 text-ivory">Что AI отвечает о проекте</h2>
+              <p className="mt-5 leading-relaxed text-ivory/75">
+                {project.apiView.questions} вопросов заданы {project.apiView.models} моделям.
+                Получено {project.apiView.answersReceived} ответов из {project.apiView.answersRequested}.
+                Бренд назван {project.apiView.brandMentions} раз.
+              </p>
+            </div>
+
+            <dl className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { value: String(project.apiView.brandMentions), label: "упоминаний бренда", note: `из ${project.apiView.answersReceived} ответов` },
+                { value: String(project.apiView.questions), label: "вопросов", note: "один и тот же список при каждом замере" },
+                { value: String(project.apiView.models), label: "моделей", note: "канал API View" },
+                { value: `$${project.apiView.costUsd.toFixed(2)}`, label: "стоил замер", note: "мы публикуем и это" },
+              ].map((fact) => (
+                <div key={fact.label} className="border-t border-line-dark pt-5">
+                  <dd className="font-serif text-[2.4rem] leading-none font-semibold text-ivory">{fact.value}</dd>
+                  <dt className="mt-3 font-semibold text-ivory">{fact.label}</dt>
+                  <p className="mt-1 text-sm leading-relaxed text-ivory/60">{fact.note}</p>
+                </div>
+              ))}
+            </dl>
+
+            {project.apiView.namedInstead.length > 0 ? (
+              <div className="mt-14">
+                <h3 className="text-h3 text-ivory">Кого модели называют вместо нас</h3>
+                <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ivory/60">
+                  Названия взяты из тех же ответов и проверены на дословное присутствие в тексте.
+                  Выдуманное название в отчёте хуже, чем его отсутствие.
+                </p>
+                <div className="mt-7 overflow-x-auto">
+                  <table className="w-full min-w-[34rem] border-collapse text-left">
+                    <thead>
+                      <tr className="border-b border-line-dark text-sm text-ivory/60">
+                        <th className="py-3 pr-4 font-semibold">Заведение</th>
+                        <th className="py-3 pr-4 font-semibold">В скольких вопросах</th>
+                        <th className="py-3 font-semibold">Сколько моделей знают</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {project.apiView.namedInstead.map((business) => (
+                        <tr key={business.name} className="border-b border-line-dark/60">
+                          <td className="py-3 pr-4 text-ivory">{business.name}</td>
+                          <td className="py-3 pr-4 text-ivory/75">
+                            {business.questions} из {project.apiView!.questions}
+                          </td>
+                          <td className="py-3 text-ivory/75">{business.models}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            ) : null}
+
+            <p className="mt-12 max-w-3xl text-sm leading-relaxed text-ivory/60">
+              Канал API View — это знания самих моделей. Что ответит ChatGPT живому человеку с
+              включённым веб-поиском, здесь не проверялось: это отдельный канал Visitor View.
+              Конфигурация замера: {project.apiView.configVersion}.
+            </p>
+          </Container>
+        </section>
+      ) : null}
+
       <section className="bg-ivory py-20 sm:py-28">
         <Container>
           <h2 className="text-h2 text-ink">Где проект сейчас</h2>

@@ -48,6 +48,24 @@ export type JournalEntry = {
   doesNotProve?: string;
 };
 
+/**
+ * One published API View measurement. The full result goes on the page — the
+ * count, what it cost, and who the models named instead — because a report the
+ * reader cannot see is not proof of anything.
+ */
+export type ApiViewMeasurement = {
+  date: string;
+  /** Same questions, models and language, or the comparison is meaningless. */
+  configVersion: string;
+  questions: number;
+  models: number;
+  answersRequested: number;
+  answersReceived: number;
+  brandMentions: number;
+  costUsd: number;
+  namedInstead: { name: string; questions: number; models: number }[];
+};
+
 export type JournalProject = {
   slug: ProjectSlug;
   name: string;
@@ -56,6 +74,7 @@ export type JournalProject = {
   markets: string[];
   languages: string[];
   metrics: ProjectMetrics | null;
+  apiView?: ApiViewMeasurement;
   entries: JournalEntry[];
 };
 
@@ -85,6 +104,32 @@ export const journalProjects: JournalProject[] = [
     markets: ["Бали, Убуд"],
     languages: ["английский"],
     metrics: { ...baselineWindow, clicks: 2, impressions: 313, previousClicks: 1, nonBrandClicks: 2 },
+    apiView: {
+      date: "2026-08-25",
+      configVersion: "korafoodhall-api-view-2026-08-25",
+      questions: 25,
+      models: 5,
+      answersRequested: 125,
+      answersReceived: 125,
+      brandMentions: 0,
+      costUsd: 0.2254,
+      namedInstead: [
+        { name: "Zest Ubud", questions: 21, models: 5 },
+        { name: "Karsa Kafe", questions: 18, models: 5 },
+        { name: "Warung Bodag Maliah", questions: 16, models: 5 },
+        { name: "Sayan House", questions: 15, models: 5 },
+        { name: "Bridges Bali", questions: 14, models: 5 },
+        { name: "Warung Sopa", questions: 14, models: 5 },
+        { name: "Warung Biah Biah", questions: 13, models: 5 },
+        { name: "Moksa", questions: 12, models: 5 },
+        { name: "Warung Babi Guling Ibu Oka", questions: 12, models: 5 },
+        { name: "Bebek Bengil", questions: 11, models: 5 },
+        { name: "Locavore", questions: 11, models: 5 },
+        { name: "Mozaic", questions: 11, models: 5 },
+        { name: "Warung Pulau Kelapa", questions: 11, models: 5 },
+        { name: "Alchemy Bali", questions: 10, models: 5 },
+      ],
+    },
     entries: [
       {
         date: "2026-08-25",
@@ -94,6 +139,15 @@ export const journalProjects: JournalProject[] = [
           "За 28 дней: 2 клика при 313 показах. Google показывает сайт, но переходят к нам шесть человек из тысячи. Самая заметная упущенная возможность — запрос «private events ubud»: 99 показов, 23-я позиция, ни одного клика. Для фуд-холла частные мероприятия — самый дорогой тип заказа, а отдельной страницы под него у сайта нет. Рядом лежит группа запросов про семейные и детские рестораны Убуда на 11–16 позициях: до первой страницы им не хватает немного.",
         doesNotProve:
           "Эти числа описывают обычный поиск Google. Упоминают ли KORA ChatGPT, Gemini и Perplexity — пока неизвестно: платный замер не запускался.",
+      },
+      {
+        date: "2026-08-25",
+        stage: "snapshot",
+        title: "Ноль из ста двадцати пяти",
+        body:
+          "Пять AI-моделей получили 25 вопросов о том, где поесть в Убуде: лучший фуд-холл, куда пойти с детьми, где провести частное мероприятие, где поужинать большой компанией. KORA Food Hall не была названа ни разу. При этом модели назвали 335 других заведений — Zest Ubud в 21 вопросе из 25, Karsa Kafe в 18, Warung Bodag Maliah в 16. Важно понимать, откуда этот ноль: сайт недавно создан, он дорабатывается, и для AI-видимости не делалось ничего. Это не провал усилий — это точка до начала работы. Замер стоил $0.23 и занял десять минут.",
+        doesNotProve:
+          "Замер сделан по каналу API View — это собственные знания моделей. Что ответит ChatGPT живому человеку с включённым веб-поиском, здесь не проверялось: это отдельный канал. Список названий взят из тех же ответов и проверен на дословное присутствие, но не приведён к единому виду: «Sayan House» и «The Sayan House» — одно место, посчитанное дважды. Такие склейки делает человек на платной проверке.",
       },
     ],
   },
