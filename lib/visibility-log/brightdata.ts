@@ -30,6 +30,25 @@ export const brightDataSurfaceKeys = Object.keys(brightDataSurfaces) as BrightDa
 /** Bright Data bills per answer; this is what the account's pricing showed. */
 export const BRIGHTDATA_PRICE_PER_ANSWER_USD = 0.0015;
 
+/**
+ * The scrape call waits for the answer and, when the collector takes longer
+ * than its window, hands back a snapshot handle instead. The answer is then
+ * fetched separately — so a Visitor View measurement is a two-step exchange,
+ * not one request, and code that reads only the first reply sees a status
+ * message where it expected prose.
+ */
+export const BRIGHTDATA_PROGRESS_ENDPOINT = "https://api.brightdata.com/datasets/v3/progress";
+export const BRIGHTDATA_SNAPSHOT_ENDPOINT = "https://api.brightdata.com/datasets/v3/snapshot";
+
+/**
+ * Provider status text is worth reading and the credential must never be in
+ * what gets read. Redacting by value rather than trusting the provider not to
+ * echo it is the only version of that guarantee we control.
+ */
+export function redact(text: string, secret: string): string {
+  return secret.trim() === "" ? text : text.split(secret).join("***");
+}
+
 /** What a response might call the answer, in the order it is looked for. */
 export const ANSWER_FIELDS = [
   "answer_text_markdown",
@@ -41,6 +60,16 @@ export const ANSWER_FIELDS = [
 ] as const;
 export const SOURCE_FIELDS = ["citations", "links_attached", "sources"] as const;
 export const REQUEST_ID_FIELDS = ["snapshot_id", "request_id", "response_id", "id"] as const;
+/** Where the provider puts a human-readable status or refusal. */
+export const STATUS_FIELDS = ["message", "error", "status", "detail"] as const;
+
+export function readStatusText(record: Record<string, unknown>, secret: string): string | null {
+  for (const field of STATUS_FIELDS) {
+    const value = record[field];
+    if (typeof value === "string" && value.trim() !== "") return redact(value.slice(0, 400), secret);
+  }
+  return null;
+}
 
 /**
  * The three collectors do not take the same input: Gemini carries an `index`
@@ -123,6 +152,10 @@ export type BrightDataAsk = {
   costUsd: number | null;
   bytes: number;
   keys: string[];
+  /** The provider's own words when it said something instead of answering. */
+  statusText: string | null;
+  /** How the answer arrived: straight back, or fetched from a snapshot. */
+  delivery: "direct" | "snapshot" | null;
   error: string | null;
 };
 
@@ -131,7 +164,14 @@ export async function askBrightData(
   surface: BrightDataSurface,
   question: string,
   apiKey: string,
-  options: { fetchImpl?: typeof fetch; timeoutMs?: number; maxBytes?: number } = {},
+  options: {
+    fetchImpl?: typeof fetch;
+    timeoutMs?: number;
+    maxBytes?: number;
+    waitForSnapshot?: boolean;
+    snapshotTimeoutMs?: number;
+    pollMs?: number;
+  } = {},
 ): Promise<BrightDataAsk> {
   const fetchImpl = options.fetchImpl ?? fetch;
   const timeoutMs = options.timeoutMs ?? 180_000;
@@ -147,6 +187,8 @@ export async function askBrightData(
     costUsd: null,
     bytes: 0,
     keys: [],
+    statusText: null,
+    delivery: null,
     error: null,
   };
 
@@ -173,7 +215,11 @@ export async function askBrightData(
 
   const raw = await response.text();
   const bytes = Buffer.byteLength(raw, "utf8");
-  if (!response.ok) return { ...base, bytes, error: `PROVIDER_HTTP_${response.status}` };
+  if (!response.ok) {
+    // Redacted by value, not by trust: a refusal nobody can read costs another
+    // round trip to diagnose, and the credential is removed before it is shown.
+    return { ...base, bytes, statusText: redact(raw.slice(0, 400), apiKey), error: `PROVIDER_HTTP_${response.status}` };
+  }
   if (bytes > maxBytes) return { ...base, bytes, error: "RESPONSE_TOO_LARGE" };
 
   let parsed: unknown;
@@ -186,6 +232,27 @@ export async function askBrightData(
   const record = firstRecord(parsed);
   if (!record) return { ...base, bytes, error: "MALFORMED_RESPONSE" };
 
+  const direct = describe(record, surface, question, bytes, apiKey, "direct");
+  if (direct.answer !== null) return direct;
+
+  // No answer, but a handle to one: the collector went long and the reply is a
+  // receipt. Following it is the difference between a measurement and a row
+  // that says the surface stayed silent.
+  if (direct.requestId && options.waitForSnapshot !== false) {
+    const fetched = await fetchSnapshot(direct.requestId, apiKey, options);
+    if (fetched) return { ...fetched, surface, question, delivery: "snapshot" };
+  }
+  return direct;
+}
+
+function describe(
+  record: Record<string, unknown>,
+  surface: BrightDataSurface,
+  question: string,
+  bytes: number,
+  apiKey: string,
+  delivery: "direct" | "snapshot",
+): BrightDataAsk {
   const answer = readAnswer(record);
   const sources = readSources(record);
   return {
@@ -199,7 +266,47 @@ export async function askBrightData(
     costUsd: typeof record.cost === "number" ? record.cost : null,
     bytes,
     keys: Object.keys(record).sort(),
+    statusText: readStatusText(record, apiKey),
+    delivery: answer ? delivery : null,
     // An unreadable payload is never reported as a surface that said nothing.
     error: answer ? null : "NO_KNOWN_ANSWER_FIELD",
   };
+}
+
+/**
+ * Waits for a snapshot and reads it. Polling is bounded: an answer that never
+ * becomes ready is reported as not ready, never as an answer that was empty.
+ */
+export async function fetchSnapshot(
+  snapshotId: string,
+  apiKey: string,
+  options: { fetchImpl?: typeof fetch; snapshotTimeoutMs?: number; pollMs?: number } = {},
+): Promise<BrightDataAsk | null> {
+  const fetchImpl = options.fetchImpl ?? fetch;
+  const deadline = Date.now() + (options.snapshotTimeoutMs ?? 300_000);
+  const pollMs = options.pollMs ?? 10_000;
+  const headers = { Authorization: `Bearer ${apiKey}` };
+
+  while (Date.now() < deadline) {
+    const progress = await fetchImpl(`${BRIGHTDATA_PROGRESS_ENDPOINT}/${snapshotId}`, { headers }).catch(() => null);
+    const state = progress?.ok ? ((await progress.json().catch(() => null)) as { status?: string } | null) : null;
+    if (state?.status === "ready") break;
+    if (state?.status === "failed") return null;
+    await new Promise((resolve) => setTimeout(resolve, pollMs));
+  }
+
+  const snapshot = await fetchImpl(`${BRIGHTDATA_SNAPSHOT_ENDPOINT}/${snapshotId}?format=json`, { headers }).catch(
+    () => null,
+  );
+  if (!snapshot?.ok) return null;
+  const raw = await snapshot.text();
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    return null;
+  }
+  const record = firstRecord(parsed);
+  if (!record) return null;
+  return describe(record, "chatgpt", "", Buffer.byteLength(raw, "utf8"), apiKey, "snapshot");
 }

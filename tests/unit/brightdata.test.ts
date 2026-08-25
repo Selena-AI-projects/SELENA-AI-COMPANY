@@ -83,3 +83,51 @@ test("the credential travels in the header and nowhere else", async () => {
   // The collector is named in the query string, not the body.
   assert.ok(call.url.includes(`dataset_id=${brightDataSurfaces.perplexity.datasetId}`));
 });
+
+test("a receipt is followed to the snapshot instead of being read as silence", async () => {
+  const calls: string[] = [];
+  const ask = await askBrightData("chatgpt", "q", "brd-secret", {
+    pollMs: 0,
+    fetchImpl: async (input) => {
+      const url = String(input);
+      calls.push(url.split("brightdata.com")[1] ?? url);
+      if (url.includes("/scrape")) {
+        return new Response(JSON.stringify({ message: "Timeout, use snapshot_id", snapshot_id: "s_01" }));
+      }
+      if (url.includes("/progress/")) return new Response(JSON.stringify({ status: "ready" }));
+      return new Response(JSON.stringify([{ answer_text: "Kora Food Hall is worth a visit." }]));
+    },
+  });
+  assert.equal(ask.answer, "Kora Food Hall is worth a visit.");
+  assert.equal(ask.delivery, "snapshot");
+  // The surface and question survive the second leg — a snapshot answer must
+  // not be filed under the wrong surface.
+  assert.equal(ask.surface, "chatgpt");
+  assert.equal(ask.question, "q");
+  assert.ok(calls.some((c) => c.includes("/progress/s_01")));
+});
+
+test("a snapshot that never becomes ready is not an empty answer", async () => {
+  const ask = await askBrightData("gemini", "q", "brd-secret", {
+    pollMs: 0,
+    snapshotTimeoutMs: 0,
+    fetchImpl: async (input) => {
+      const url = String(input);
+      if (url.includes("/scrape")) return new Response(JSON.stringify({ message: "queued", snapshot_id: "s_02" }));
+      return new Response("nope", { status: 404 });
+    },
+  });
+  assert.equal(ask.answer, null);
+  assert.equal(ask.error, "NO_KNOWN_ANSWER_FIELD");
+  // The provider's own words survive, so a refusal can be read without another run.
+  assert.equal(ask.statusText, "queued");
+});
+
+test("the credential is stripped from anything the provider says back", async () => {
+  const ask = await askBrightData("chatgpt", "q", "brd-secret", {
+    waitForSnapshot: false,
+    fetchImpl: async () => new Response("bad token brd-secret rejected", { status: 401 }),
+  });
+  assert.equal(ask.error, "PROVIDER_HTTP_401");
+  assert.equal(ask.statusText, "bad token *** rejected");
+});
