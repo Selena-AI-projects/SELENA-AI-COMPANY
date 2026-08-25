@@ -118,7 +118,9 @@ test("a snapshot that never becomes ready is not an empty answer", async () => {
     },
   });
   assert.equal(ask.answer, null);
-  assert.equal(ask.error, "NO_KNOWN_ANSWER_FIELD");
+  // Distinct from an unreadable payload: this answer was produced and billed,
+  // it just did not arrive in time. Only one of the two is fixed by waiting.
+  assert.equal(ask.error, "SNAPSHOT_NOT_READY");
   // The provider's own words survive, so a refusal can be read without another run.
   assert.equal(ask.statusText, "queued");
 });

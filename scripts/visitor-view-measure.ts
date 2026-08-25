@@ -37,7 +37,12 @@ const OUTPUT_DIR = "reports/visitor-view";
  * CI job, few enough that a wrong token fails on a handful rather than on all
  * seventy-five.
  */
-const CONCURRENCY = 6;
+/**
+ * Measured, not guessed: at six in flight Perplexity delivered two answers in
+ * twenty-five — the rest were still producing when their window closed. The
+ * collector is the bottleneck, so fewer at once finishes more.
+ */
+const CONCURRENCY = 3;
 
 /** 75 answers cost about $0.11; the ceiling leaves room and still bounds a loop. */
 const DEFAULT_MAX_COST_USD = 0.5;
@@ -92,8 +97,17 @@ export function tallyDomains(records: SurfaceRecord[]): { domain: string; answer
     .sort((a, b) => b.answers - a.answers || a.domain.localeCompare(b.domain));
 }
 
-function percent(part: number, whole: number): string {
-  return whole === 0 ? "—" : `${Math.round((part / whole) * 100)}%`;
+/**
+ * A rate over a fraction of the sample is not a small version of the real rate,
+ * it is a different number wearing the same sign. Below this coverage the
+ * report shows the counts and withholds the percentage.
+ */
+const MIN_COVERAGE = 0.8;
+
+function rate(part: number, answered: number, asked: number): string {
+  if (answered === 0 || asked === 0) return "—";
+  if (answered / asked < MIN_COVERAGE) return "мало данных";
+  return `${Math.round((part / answered) * 100)}%`;
 }
 
 export function renderMarkdown(
@@ -146,12 +160,21 @@ export function renderMarkdown(
   lines.push("| Поверхность | Ответов | Бренд назван | Доля | Требует глаза |");
   lines.push("| --- | --- | --- | --- | --- |");
   for (const surface of measurableBrightDataSurfaces) {
+    const asked = records.filter((record) => record.surface === surface);
     const own = answered.filter((record) => record.surface === surface);
     const named = own.filter((record) => record.mentioned).length;
     const look = own.filter((record) => record.needsHumanLook).length;
-    lines.push(`| ${brightDataSurfaces[surface].label} | ${own.length} | ${named} | ${percent(named, own.length)} | ${look} |`);
+    lines.push(
+      `| ${brightDataSurfaces[surface].label} | ${own.length} из ${asked.length} | ${named} | ${rate(named, own.length, asked.length)} | ${look} |`,
+    );
   }
-  lines.push(`| **Всего** | **${answered.length}** | **${mentions.length}** | **${percent(mentions.length, answered.length)}** | **${flagged.length}** |`);
+  lines.push(
+    `| **Всего** | **${answered.length} из ${records.length}** | **${mentions.length}** | **${rate(mentions.length, answered.length, records.length)}** | **${flagged.length}** |`,
+  );
+  lines.push("");
+  lines.push(
+    `Доля считается только там, где вернулось не меньше ${Math.round(MIN_COVERAGE * 100)}% ответов. Ниже этого порога доля не показывается: ${100 - Math.round(MIN_COVERAGE * 100)}% недостающих ответов способны перевернуть любой процент.`,
+  );
   lines.push("");
 
   const domains = tallyDomains(answered);
