@@ -279,14 +279,13 @@ function ProblemSection({ content }: { content: HomepageContent }) {
     <section id="ai-systems" className="bg-surface py-20 sm:py-28">
       <Container size="wide">
         <Reveal>
-          <div className="mb-16 grid gap-6 border-b border-line pb-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
-            <h2 className="text-h1 text-ink">{content.productPaths.systems.name}</h2>
-            <div>
-              <p className="text-xl font-semibold leading-relaxed text-ink">
-                {content.productPaths.systems.promise}
-              </p>
-              <p className="mt-3 leading-relaxed text-muted">{content.productPaths.systems.description}</p>
-            </div>
+          {/* The hand-off card above already names the product, so this
+              section leads with what it does instead of repeating the name. */}
+          <div className="mb-16 border-b border-line pb-12">
+            <h2 className="max-w-4xl text-h1 text-ink">{content.productPaths.systems.promise}</h2>
+            <p className="mt-6 max-w-3xl text-xl leading-relaxed text-muted">
+              {content.productPaths.systems.description}
+            </p>
           </div>
         </Reveal>
 
