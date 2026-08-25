@@ -17,6 +17,7 @@ import { pathToFileURL } from "node:url";
 import { korafoodhallScenario, type MeasurementScenario } from "@/lib/visibility-log/scenarios/korafoodhall";
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
+const OPENROUTER_KEY_URL = "https://openrouter.ai/api/v1/key";
 const OUTPUT_DIR = "reports/api-view";
 
 /** The catalog's API View models. A run measures the models the plan names. */
@@ -114,6 +115,26 @@ async function askOnce(
       error: error instanceof Error ? error.message : String(error),
     };
   }
+}
+
+/**
+ * One request that proves the credential works before 125 spend it.
+ *
+ * Reports the key's shape without printing it: a value pasted with a prefix,
+ * a quote or a whole "Authorization: Bearer ..." line is the usual cause of a
+ * 401, and the length alone identifies it.
+ */
+export async function preflight(apiKey: string, fetchImpl: typeof fetch) {
+  const shape = {
+    length: apiKey.length,
+    looksLikeOpenRouterKey: /^sk-or-/.test(apiKey),
+    hasWhitespace: /\s/.test(apiKey),
+    hasQuotes: /["']/.test(apiKey),
+  };
+  const response = await fetchImpl(OPENROUTER_KEY_URL, {
+    headers: { Authorization: `Bearer ${apiKey}` },
+  });
+  return { ok: response.ok, status: response.status, detail: (await response.text()).slice(0, 200), shape };
 }
 
 export function renderMarkdown(
@@ -233,6 +254,17 @@ async function main() {
   const slug = process.env.MEASURE_PROJECT?.trim() || "korafoodhall";
   const scenario = scenarios[slug];
   if (!scenario) throw new Error(`No scenario for "${slug}". Known: ${Object.keys(scenarios).join(", ")}`);
+
+  const check = await preflight(apiKey, fetch);
+  if (!check.ok) {
+    console.error(`Ключ не принят OpenRouter: HTTP ${check.status} ${check.detail}`);
+    console.error(
+      `Форма ключа — длина ${check.shape.length}, начинается с "sk-or-": ${check.shape.looksLikeOpenRouterKey ? "да" : "нет"}` +
+        `, есть пробелы: ${check.shape.hasWhitespace ? "да" : "нет"}` +
+        `, есть кавычки: ${check.shape.hasQuotes ? "да" : "нет"}`,
+    );
+    throw new Error("Замер не запускался: ни один запрос не отправлен.");
+  }
 
   const measuredAt = new Date().toISOString();
   console.log(`${scenario.brand}: ${scenario.questions.length} вопросов × ${API_MODELS.length} моделей`);
