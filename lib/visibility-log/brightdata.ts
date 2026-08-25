@@ -269,6 +269,10 @@ export async function askBrightData(
   if (direct.requestId && options.waitForSnapshot !== false) {
     const fetched = await fetchSnapshot(direct.requestId, apiKey, options);
     if (fetched) return { ...fetched, surface, question, delivery: "snapshot" };
+    // An answer that was produced and billed but did not arrive in time is a
+    // different fact from a payload nobody could read, and only one of them is
+    // fixed by waiting longer. Reporting both as the same thing hides which.
+    return { ...direct, error: "SNAPSHOT_NOT_READY" };
   }
   return direct;
 }
@@ -311,7 +315,7 @@ export async function fetchSnapshot(
   options: { fetchImpl?: typeof fetch; snapshotTimeoutMs?: number; pollMs?: number } = {},
 ): Promise<BrightDataAsk | null> {
   const fetchImpl = options.fetchImpl ?? fetch;
-  const deadline = Date.now() + (options.snapshotTimeoutMs ?? 300_000);
+  const deadline = Date.now() + (options.snapshotTimeoutMs ?? 600_000);
   const pollMs = options.pollMs ?? 10_000;
   const headers = { Authorization: `Bearer ${apiKey}` };
 
