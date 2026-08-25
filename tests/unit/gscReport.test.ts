@@ -251,19 +251,44 @@ test("tracked GSC config contains portfolio properties but no account identity",
 
   assert.equal("expectedServiceAccount" in config, false);
   assert.deepEqual(Object.keys(config.properties).sort(), [
+    "https://2moonspa.com/",
+    "https://villaops.selenasystems.com/",
     "sc-domain:arhidom.space",
     "sc-domain:doki.help",
     "sc-domain:korafoodhall.com",
+    "sc-domain:nevapalace.ru",
     "sc-domain:otherbali.com",
     "sc-domain:petid.care",
     "sc-domain:remhaos.com",
     "sc-domain:selenasystems.com",
+    "sc-domain:zimaleto2.ru",
     "sc-domain:zubilook.com",
   ]);
   assert.deepEqual(
     resolvePropertyConfig(config, "sc-domain:selenasystems.com")?.brandTerms,
     ["selena systems", "selenasystems"],
   );
+  assert.deepEqual(resolvePropertyConfig(config, "https://villaops.selenasystems.com/")?.brandTerms, [
+    "villaops",
+    "villa ops",
+  ]);
+  assert.deepEqual(resolvePropertyConfig(config, "https://www.2moonspa.com/")?.brandTerms, [
+    "2moonspa",
+    "2 moon spa",
+    "2moon spa",
+  ]);
+  assert.deepEqual(resolvePropertyConfig(config, "sc-domain:nevapalace.ru")?.brandTerms, [
+    "neva palace",
+    "nevapalace",
+    "нева палас",
+  ]);
+  assert.deepEqual(resolvePropertyConfig(config, "sc-domain:zimaleto2.ru")?.brandTerms, [
+    "zima leto",
+    "zimaleto",
+    "zimaleto2",
+    "зима лето",
+    "зима лето 2",
+  ]);
   assert.equal(resolvePropertyConfig(config, "sc-domain:unknown.example"), undefined);
 });
 
