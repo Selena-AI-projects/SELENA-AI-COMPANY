@@ -38,3 +38,4 @@ next-env.d.ts
 # keep it out of the repository and out of any pull request.
 reports/gsc/
 reports/readiness/
+reports/api-view/
