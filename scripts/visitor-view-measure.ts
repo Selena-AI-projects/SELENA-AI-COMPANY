@@ -115,7 +115,11 @@ export function renderMarkdown(
   records: SurfaceRecord[],
   measuredAt: string,
   spentUsd: number,
+  /** What the run set out to ask, when that is more than it has asked so far. */
+  plan?: { asked: number },
 ): string {
+  const planned = plan?.asked ?? records.length;
+  const unfinished = planned > records.length;
   const answered = records.filter((record) => record.error === null);
   const failed = records.filter((record) => record.error !== null);
   const mentions = answered.filter((record) => record.mentioned);
@@ -133,8 +137,14 @@ export function renderMarkdown(
   lines.push(`Замер: ${measuredAt}`);
   lines.push(`Конфигурация: ${scenario.version} · основание вопросов: ${scenario.basis}`);
   lines.push(
-    `Вопросов: ${scenario.questions.length} · поверхностей: ${measurableBrightDataSurfaces.length} · ответов запрошено: ${records.length}`,
+    `Вопросов: ${scenario.questions.length} · поверхностей: ${measurableBrightDataSurfaces.length} · ответов запрошено: ${planned}`,
   );
+  if (unfinished) {
+    lines.push("");
+    lines.push(
+      `**Замер не закончен.** Спрошено ${records.length} из ${planned}. Всё, что уже оплачено, записано здесь; остального ещё не спрашивали.`,
+    );
+  }
   lines.push(`Язык: ${scenario.language} · рынок: ${scenario.market}`);
   if (unreachableBrightDataSurfaces.length > 0) {
     lines.push("");
@@ -164,12 +174,13 @@ export function renderMarkdown(
     const own = answered.filter((record) => record.surface === surface);
     const named = own.filter((record) => record.mentioned).length;
     const look = own.filter((record) => record.needsHumanLook).length;
+    const plannedForSurface = unfinished ? planned / measurableBrightDataSurfaces.length : asked.length;
     lines.push(
-      `| ${brightDataSurfaces[surface].label} | ${own.length} из ${asked.length} | ${named} | ${rate(named, own.length, asked.length)} | ${look} |`,
+      `| ${brightDataSurfaces[surface].label} | ${own.length} из ${Math.round(plannedForSurface)} | ${named} | ${rate(named, own.length, plannedForSurface)} | ${look} |`,
     );
   }
   lines.push(
-    `| **Всего** | **${answered.length} из ${records.length}** | **${mentions.length}** | **${rate(mentions.length, answered.length, records.length)}** | **${flagged.length}** |`,
+    `| **Всего** | **${answered.length} из ${planned}** | **${mentions.length}** | **${rate(mentions.length, answered.length, planned)}** | **${flagged.length}** |`,
   );
   lines.push("");
   lines.push(
@@ -229,10 +240,19 @@ export function renderMarkdown(
   return lines.join("\n");
 }
 
-async function inBatches<T, R>(items: T[], size: number, worker: (item: T) => Promise<R>): Promise<R[]> {
+async function inBatches<T, R>(
+  items: T[],
+  size: number,
+  worker: (item: T) => Promise<R>,
+  afterBatch?: (results: R[]) => Promise<void>,
+): Promise<R[]> {
   const results: R[] = [];
   for (let index = 0; index < items.length; index += size) {
     results.push(...(await Promise.all(items.slice(index, index + size).map(worker))));
+    // Every answer is bought separately, so what has been bought is written
+    // down before the next one is asked for. A run killed by a clock then
+    // still leaves the evidence it paid for.
+    if (afterBatch) await afterBatch(results);
   }
   return results;
 }
@@ -242,6 +262,8 @@ export async function runMeasurement(options: {
   apiKey: string;
   maxCostUsd: number;
   measuredAt: string;
+  /** Called with the report so far after each batch, so a killed run keeps it. */
+  onProgress?: (report: string, records: SurfaceRecord[]) => Promise<void>;
 }): Promise<{ records: SurfaceRecord[]; spentUsd: number; report: string }> {
   const { scenario, apiKey, maxCostUsd, measuredAt } = options;
   const asks = measurableBrightDataSurfaces.flatMap((surface) =>
@@ -255,12 +277,27 @@ export async function runMeasurement(options: {
   }
 
   let done = 0;
-  const results = await inBatches(asks, CONCURRENCY, async (ask) => {
-    const answer = await askBrightData(ask.surface, ask.question, apiKey);
-    done += 1;
-    if (done % CONCURRENCY === 0 || done === asks.length) console.log(`  ${done}/${asks.length}`);
-    return answer;
-  });
+  const results = await inBatches(
+    asks,
+    CONCURRENCY,
+    async (ask) => {
+      const answer = await askBrightData(ask.surface, ask.question, apiKey);
+      done += 1;
+      if (done % CONCURRENCY === 0 || done === asks.length) console.log(`  ${done}/${asks.length}`);
+      return answer;
+    },
+    options.onProgress
+      ? async (soFar) => {
+          const partial = soFar.map((ask) => toRecord(ask, scenario));
+          await options.onProgress?.(
+            renderMarkdown(scenario, partial, measuredAt, partial.length * BRIGHTDATA_PRICE_PER_ANSWER_USD, {
+              asked: asks.length,
+            }),
+            partial,
+          );
+        }
+      : undefined,
+  );
 
   const records = results.map((ask) => toRecord(ask, scenario));
   // The provider bills every answer it was asked for, including the ones that
@@ -288,11 +325,23 @@ async function main(): Promise<number> {
   }
 
   const measuredAt = new Date().toISOString().slice(0, 10);
-  console.log(`Visitor View: ${scenario.brand} — ${scenario.questions.length} questions × 3 surfaces`);
-  const { records, report } = await runMeasurement({ scenario, apiKey, maxCostUsd, measuredAt });
-
+  console.log(
+    `Visitor View: ${scenario.brand} — ${scenario.questions.length} questions × ${measurableBrightDataSurfaces.length} surfaces`,
+  );
   await mkdir(OUTPUT_DIR, { recursive: true });
-  await writeFile(`${OUTPUT_DIR}/${measuredAt}-${slug}.md`, `${report}\n`, "utf8");
+  const reportPath = `${OUTPUT_DIR}/${measuredAt}-${slug}.md`;
+  const { records, report } = await runMeasurement({
+    scenario,
+    apiKey,
+    maxCostUsd,
+    measuredAt,
+    // Written after every batch rather than at the end: a run stopped by a
+    // clock has still bought its answers, and the moment they measured cannot
+    // be re-created.
+    onProgress: async (partial) => writeFile(reportPath, `${partial}\n`, "utf8"),
+  });
+
+  await writeFile(reportPath, `${report}\n`, "utf8");
   console.log(`\n${report}`);
 
   const summaryPath = process.env.GITHUB_STEP_SUMMARY;
