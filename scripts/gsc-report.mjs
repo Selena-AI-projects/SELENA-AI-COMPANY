@@ -1,6 +1,8 @@
 import { createSign } from "node:crypto";
+import { readFileSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { homedir } from "node:os";
+import { join, resolve } from "node:path";
 
 /**
  * Pulls Search Console performance for every property the service account can
@@ -24,21 +26,46 @@ const outputDir = resolve(process.env.GSC_REPORT_DIR ?? "reports/gsc");
 /** Search Console lags ~2 days; asking for today returns a half-empty window. */
 const DATA_LAG_DAYS = 3;
 
+/**
+ * Three ways in, so the script runs both on a laptop that already holds the
+ * key file and in a hosted environment that can only carry secrets as
+ * variables:
+ *   node scripts/gsc-report.mjs --key ./key.json
+ *   GOOGLE_APPLICATION_CREDENTIALS=./key.json npm run gsc:report
+ *   GOOGLE_SERVICE_ACCOUNT_JSON='{...}' npm run gsc:report
+ */
 function readCredential() {
-  const raw = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
+  const flagIndex = process.argv.indexOf("--key");
+  const keyPath =
+    (flagIndex !== -1 ? process.argv[flagIndex + 1] : undefined) ?? process.env.GOOGLE_APPLICATION_CREDENTIALS;
+
+  let raw = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
+  let origin = "GOOGLE_SERVICE_ACCOUNT_JSON";
+
+  if (keyPath) {
+    const expanded = keyPath.startsWith("~") ? join(homedir(), keyPath.slice(1)) : keyPath;
+    try {
+      raw = readFileSync(resolve(expanded), "utf8");
+    } catch {
+      throw new Error(`Key file not found: ${expanded}`);
+    }
+    origin = expanded;
+  }
+
   if (!raw) {
     throw new Error(
-      "GOOGLE_SERVICE_ACCOUNT_JSON is not set. Put the service-account key in the environment settings, never in the repository.",
+      "No service-account key. Pass --key /path/to/key.json, or set GOOGLE_APPLICATION_CREDENTIALS to that path, or put the key JSON in GOOGLE_SERVICE_ACCOUNT_JSON. Never commit the key.",
     );
   }
+
   let parsed;
   try {
     parsed = JSON.parse(raw);
   } catch {
-    throw new Error("GOOGLE_SERVICE_ACCOUNT_JSON is not valid JSON — paste the whole key file, including the braces.");
+    throw new Error(`${origin} is not valid JSON — pass the whole key file, including the braces.`);
   }
   if (!parsed.client_email || !parsed.private_key) {
-    throw new Error("The key is missing client_email or private_key — it is probably not a service-account key file.");
+    throw new Error(`${origin} has no client_email or private_key — it is probably not a service-account key file.`);
   }
   return parsed;
 }
