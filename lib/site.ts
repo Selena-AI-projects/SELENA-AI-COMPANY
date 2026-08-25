@@ -32,6 +32,8 @@ export const cta = {
 export const nav: { label: string; href: string }[] = [
   { label: "AI Automation", href: "/ai-systems" },
   { label: "AI Visibility", href: "/ru/visibility" },
+  // The journal is the proof behind AI Visibility, so it sits next to it.
+  { label: "Журнал", href: "/ru/journal" },
   { label: "Тарифы", href: "/ru/pricing" },
   { label: "Selena Lab", href: "/ru/lab" },
   { label: "Обо мне", href: "/about" },

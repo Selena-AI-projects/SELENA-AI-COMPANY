@@ -9,6 +9,7 @@ export const ruHomepage = {
   nav: [
     { label: "AI Automation", href: "/ru#systems" },
     { label: "AI Visibility", href: "/ru/visibility" },
+    { label: "Журнал", href: "/ru/journal" },
     { label: "Тарифы", href: "/ru/pricing" },
     { label: "Lab", href: "/ru/lab" },
     { label: "Обо мне", href: "/about" },
