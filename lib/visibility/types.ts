@@ -295,8 +295,11 @@ export type VisibilityContent = {
     paidPlans: {
       heading: string;
       intro: string;
+      /** Shown above the comparison table on screens too narrow to hold every column. */
+      scrollHint: string;
       comparisonLabels: {
         offer: string;
+        status: string;
         bestFor: string;
         systems: string;
         scope: string;
@@ -330,5 +333,7 @@ export type VisibilityContent = {
   cta: {
     primary: { label: string; href: string };
     secondary: { label: string; href: string };
+    /** Says where the full line-by-line plan comparison lives, since this page states prices once. */
+    compareNote: string;
   };
 };
