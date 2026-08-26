@@ -93,12 +93,22 @@ export type VisitorViewMeasurement = {
   /** Same questions, surfaces and language, or the comparison is meaningless. */
   configVersion: string;
   questions: number;
-  surfaces: VisitorViewSurfaceResult[];
+  surfaceCount: number;
+  answersRequested: number;
+  answersReceived: number;
+  brandMentions: number;
   costUsd: number;
-  /** What the answers pointed at, most-cited first. */
+  /**
+   * Empty until the per-surface split is published. There is deliberately no
+   * project-level rate: ChatGPT, Gemini and Perplexity answer differently and
+   * return different amounts, so one percentage over all three would be about
+   * none of them. Counts pool honestly; rates do not.
+   */
+  surfaces: VisitorViewSurfaceResult[];
+  /** What the answers pointed at, most-cited first. Empty until published. */
   citedDomains: { domain: string; answers: number }[];
   /** How many answers cited the project's own site. Often zero, and that is the finding. */
-  ownDomainAnswers: number;
+  ownDomainAnswers: number | null;
 };
 
 /**
@@ -187,6 +197,19 @@ export const journalProjects: JournalProject[] = [
         { name: "Alchemy Bali", questions: 10, models: 5 },
       ],
     },
+    visitorView: {
+      date: "2026-08-26",
+      configVersion: "korafoodhall-api-view-2026-08-25",
+      questions: 25,
+      surfaceCount: 3,
+      answersRequested: 75,
+      answersReceived: 60,
+      brandMentions: 4,
+      costUsd: 0.1125,
+      surfaces: [],
+      citedDomains: [],
+      ownDomainAnswers: null,
+    },
     entries: [
       {
         date: "2026-08-25",
@@ -216,6 +239,19 @@ export const journalProjects: JournalProject[] = [
     markets: ["Бали, Индонезия"],
     languages: ["английский"],
     metrics: { ...baselineWindow, clicks: 29, impressions: 2710, previousClicks: 1, nonBrandClicks: 29 },
+    visitorView: {
+      date: "2026-08-26",
+      configVersion: "otherbali-api-view-2026-08-25",
+      questions: 25,
+      surfaceCount: 3,
+      answersRequested: 75,
+      answersReceived: 54,
+      brandMentions: 1,
+      costUsd: 0.1125,
+      surfaces: [],
+      citedDomains: [],
+      ownDomainAnswers: null,
+    },
     entries: [
       {
         date: "2026-08-25",
@@ -236,6 +272,19 @@ export const journalProjects: JournalProject[] = [
     markets: ["Россия"],
     languages: ["русский"],
     metrics: { ...baselineWindow, clicks: 34, impressions: 1915, previousClicks: 18, nonBrandClicks: 24 },
+    visitorView: {
+      date: "2026-08-26",
+      configVersion: "petid-api-view-2026-08-25",
+      questions: 25,
+      surfaceCount: 3,
+      answersRequested: 75,
+      answersReceived: 59,
+      brandMentions: 2,
+      costUsd: 0.1125,
+      surfaces: [],
+      citedDomains: [],
+      ownDomainAnswers: null,
+    },
     entries: [
       {
         date: "2026-08-25",
@@ -256,6 +305,19 @@ export const journalProjects: JournalProject[] = [
     markets: ["Русскоязычная аудитория", "Бали", "Австралия и Новая Зеландия", "США"],
     languages: ["русский", "английский"],
     metrics: { ...baselineWindow, clicks: 0, impressions: 0, previousClicks: null, nonBrandClicks: 0 },
+    visitorView: {
+      date: "2026-08-26",
+      configVersion: "selenasystems-api-view-2026-08-25",
+      questions: 25,
+      surfaceCount: 3,
+      answersRequested: 75,
+      answersReceived: 55,
+      brandMentions: 0,
+      costUsd: 0.1125,
+      surfaces: [],
+      citedDomains: [],
+      ownDomainAnswers: null,
+    },
     entries: [
       {
         date: "2026-08-25",
@@ -294,6 +356,19 @@ export const journalProjects: JournalProject[] = [
     markets: ["США", "Россия"],
     languages: ["английский", "русский"],
     metrics: { ...baselineWindow, clicks: 0, impressions: 0, previousClicks: null, nonBrandClicks: 0 },
+    visitorView: {
+      date: "2026-08-26",
+      configVersion: "remhaos-ru-api-view-2026-08-25",
+      questions: 25,
+      surfaceCount: 3,
+      answersRequested: 75,
+      answersReceived: 53,
+      brandMentions: 0,
+      costUsd: 0.1125,
+      surfaces: [],
+      citedDomains: [],
+      ownDomainAnswers: null,
+    },
     entries: [
       {
         date: "2026-08-25",
@@ -312,6 +387,19 @@ export const journalProjects: JournalProject[] = [
     markets: ["Индонезия, Бали"],
     languages: ["английский", "индонезийский"],
     metrics: { ...baselineWindow, clicks: 0, impressions: 0, previousClicks: null, nonBrandClicks: 0 },
+    visitorView: {
+      date: "2026-08-26",
+      configVersion: "villaops-api-view-2026-08-25",
+      questions: 25,
+      surfaceCount: 3,
+      answersRequested: 75,
+      answersReceived: 55,
+      brandMentions: 0,
+      costUsd: 0.1125,
+      surfaces: [],
+      citedDomains: [],
+      ownDomainAnswers: null,
+    },
     entries: [
       {
         date: "2026-08-25",

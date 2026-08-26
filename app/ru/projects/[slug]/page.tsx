@@ -166,13 +166,54 @@ export default async function JournalProjectPage({
               </p>
               <h2 className="mt-4 text-h2 text-ivory">Что видит человек на живой поверхности</h2>
               <p className="mt-5 leading-relaxed text-ivory/75">
-                {project.visitorView.questions} вопросов заданы {project.visitorView.surfaces.length}{" "}
-                поверхностям — ChatGPT, Gemini и Perplexity. Это то, что показывают живому человеку,
-                а не то, что модель помнит.
+                {project.visitorView.questions} вопросов заданы{" "}
+                {project.visitorView.surfaceCount} поверхностям — ChatGPT, Gemini и Perplexity. Это
+                то, что показывают живому человеку, а не то, что модель помнит.
               </p>
             </div>
 
-            <div className="mt-10 overflow-x-auto">
+            <dl className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  value: String(project.visitorView.brandMentions),
+                  label: "упоминаний бренда",
+                  note: `из ${project.visitorView.answersReceived} прочитанных ответов`,
+                },
+                {
+                  value: `${project.visitorView.answersReceived} / ${project.visitorView.answersRequested}`,
+                  label: "ответов дошло",
+                  note: "остальные не вернулись вовремя",
+                },
+                {
+                  value: String(project.visitorView.questions),
+                  label: "вопросов",
+                  note: "один и тот же список при каждом замере",
+                },
+                {
+                  value: `$${project.visitorView.costUsd.toFixed(2)}`,
+                  label: "стоил замер",
+                  note: "мы публикуем и это",
+                },
+              ].map((fact) => (
+                <div key={fact.label} className="border-t border-line-dark pt-5">
+                  <dd className="font-serif text-[2.4rem] leading-none font-semibold text-ivory">
+                    {fact.value}
+                  </dd>
+                  <dt className="mt-3 font-semibold text-ivory">{fact.label}</dt>
+                  <p className="mt-1 text-sm leading-relaxed text-ivory/60">{fact.note}</p>
+                </div>
+              ))}
+            </dl>
+
+            <p className="mt-8 max-w-3xl text-sm leading-relaxed text-ivory/60">
+              Здесь намеренно нет одной общей доли. ChatGPT, Gemini и Perplexity отвечают
+              по-разному и возвращают разное количество ответов — процент, усреднённый по всем
+              трём, не был бы правдой ни об одной из них. Счётчики складываются честно, доли — нет.
+            </p>
+
+            {project.visitorView.surfaces.length > 0 ? (
+              <>
+                <div className="mt-10 overflow-x-auto">
               <table className="w-full min-w-[38rem] border-collapse text-left">
                 <thead>
                   <tr className="border-b border-line-dark text-sm text-ivory/60">
@@ -202,12 +243,14 @@ export default async function JournalProjectPage({
               </table>
             </div>
 
-            <p className="mt-6 max-w-3xl text-sm leading-relaxed text-ivory/60">
-              Доля показывается только там, где вернулось не меньше{" "}
-              {Math.round(minVisitorCoverage * 100)}% ответов. Ниже этого порога стоит «мало данных»:
-              процент, посчитанный по неполной выборке, — это не приблизительная правда, а другое
-              число с тем же знаком.
-            </p>
+                <p className="mt-6 max-w-3xl text-sm leading-relaxed text-ivory/60">
+                  Доля показывается только там, где вернулось не меньше{" "}
+                  {Math.round(minVisitorCoverage * 100)}% ответов. Ниже этого порога стоит «мало
+                  данных»: процент, посчитанный по неполной выборке, — это не приблизительная
+                  правда, а другое число с тем же знаком.
+                </p>
+              </>
+            ) : null}
 
             {project.visitorView.citedDomains.length > 0 ? (
               <div className="mt-14">
@@ -234,14 +277,16 @@ export default async function JournalProjectPage({
                     </tbody>
                   </table>
                 </div>
-                <p className="mt-5 max-w-3xl text-sm leading-relaxed text-ivory/60">
-                  Собственный сайт проекта попал в{" "}
-                  {project.visitorView.ownDomainAnswers === 0
-                    ? "ноль ответов"
-                    : `${project.visitorView.ownDomainAnswers} ответов`}
-                  . Чаще машины опираются на подборки и каталоги — попасть в них важнее, чем
-                  дописать ещё одну страницу у себя.
-                </p>
+                {project.visitorView.ownDomainAnswers !== null ? (
+                  <p className="mt-5 max-w-3xl text-sm leading-relaxed text-ivory/60">
+                    Собственный сайт проекта попал в{" "}
+                    {project.visitorView.ownDomainAnswers === 0
+                      ? "ноль ответов"
+                      : `${project.visitorView.ownDomainAnswers} ответов`}
+                    . Чаще машины опираются на подборки и каталоги — попасть в них важнее, чем
+                    дописать ещё одну страницу у себя.
+                  </p>
+                ) : null}
               </div>
             ) : null}
 
