@@ -111,9 +111,11 @@ export default function JournalIndexPage() {
           <div className="max-w-3xl">
             <h2 className="text-h2 text-ink">Проекты</h2>
             <p className="mt-5 leading-relaxed text-muted">
-              Числа ниже — обычный поиск Google за {journalMeta.windowDays} дней. Замер в AI-ответах —
-              следующая ступень, и он появится в журнале отдельной записью с датой. У чужого проекта
-              этих чисел нет: Search Console — это доступ к сайту, и брать его ради замера незачем.
+              Числа ниже — обычный поиск Google за {journalMeta.windowDays} дней: это окно, за
+              которое Google отдаёт данные, а не срок работы. Замеры AI-ответов — отдельные
+              события: у каждого свой номер и своя дата, и они лежат внутри карточек. У чужого
+              проекта чисел из поиска нет: Search Console — это доступ к сайту, и брать его ради
+              замера незачем.
             </p>
           </div>
 
@@ -122,6 +124,9 @@ export default function JournalIndexPage() {
               const metrics = project.metrics;
               const rate = metrics ? clickRate(metrics) : null;
               const latest = project.entries[project.entries.length - 1];
+              const measurements = project.visitorViews ?? [];
+              const last = measurements[measurements.length - 1];
+              const lastMeasurement = last ? { ...last, number: measurements.length } : null;
               return (
                 <li key={project.slug}>
                   <Link
@@ -140,6 +145,14 @@ export default function JournalIndexPage() {
                         <p className="mt-1 text-sm text-muted">
                           {project.markets.join(" · ")} — {project.languages.join(", ")}
                         </p>
+                        {lastMeasurement ? (
+                          <p className="mt-3 text-sm font-semibold text-copper-deep">
+                            Замер №{lastMeasurement.number} · {formatDate(lastMeasurement.date)} —{" "}
+                            {lastMeasurement.brandMentions === 0
+                              ? "бренд не назван"
+                              : `бренд назван ${lastMeasurement.brandMentions} раз`}
+                          </p>
+                        ) : null}
                         {latest ? (
                           <p className="mt-5 border-t border-line pt-4 leading-relaxed text-ink/85">
                             <span className="font-semibold">{latest.title}.</span>{" "}

@@ -12,6 +12,7 @@ import {
   pluralizeRu,
   formatDate,
   journalLadder,
+  journalMeta,
   journalProjects,
   reachedStages,
   stageLabels,
@@ -60,8 +61,8 @@ test("the ladder quotes the one commercial registry, never its own numbers", () 
 });
 
 test("a click rate is only reported when there were impressions to divide by", () => {
-  assert.equal(clickRate({ windowStart: "", windowEnd: "", clicks: 0, impressions: 0, previousClicks: null, nonBrandClicks: 0 }), null);
-  assert.equal(clickRate({ windowStart: "", windowEnd: "", clicks: 29, impressions: 2_710, previousClicks: 1, nonBrandClicks: 29 }), 1.1);
+  assert.equal(clickRate({ windowStart: "", windowEnd: "", clicks: 0, impressions: 0, previousClicks: null, previousImpressions: null }), null);
+  assert.equal(clickRate({ windowStart: "", windowEnd: "", clicks: 29, impressions: 2_710, previousClicks: 1, previousImpressions: 620 }), 1.1);
 });
 
 test("growth is published as the earlier count, not as a percentage of one click", () => {
@@ -70,9 +71,36 @@ test("growth is published as the earlier count, not as a percentage of one click
 
   for (const project of journalProjects) {
     if (!project.metrics) continue;
-    assert.ok(project.metrics.nonBrandClicks <= project.metrics.clicks);
     assert.ok(project.metrics.clicks <= project.metrics.impressions);
+    // A brand/non-brand split can only be taken over the query rows Google
+    // shows, so it must not sit in the public layer as if it divided the total.
+    assert.ok(!("nonBrandClicks" in project.metrics), `${project.slug} still publishes a non-brand count`);
   }
+});
+
+test("a measurement is one dated event, numbered in its own series", () => {
+  for (const project of journalProjects) {
+    for (const series of [project.visitorViews ?? [], project.apiViews ?? []]) {
+      const dates = series.map((measurement) => measurement.date);
+      assert.deepEqual(dates, [...dates].sort(), `${project.slug} measurements are out of order`);
+      assert.equal(new Set(dates).size, dates.length, `${project.slug} has two measurements on one date`);
+      for (const date of dates) {
+        assert.match(date, /^\d{4}-\d{2}-\d{2}$/, `${project.slug} has an undated measurement`);
+      }
+    }
+  }
+});
+
+test("the search window is the one the confirmed baseline was taken over", () => {
+  for (const project of journalProjects) {
+    if (!project.metrics) continue;
+    assert.equal(project.metrics.windowStart, "2026-07-27", `${project.slug} reports a different window`);
+    assert.equal(project.metrics.windowEnd, "2026-08-23", `${project.slug} reports a different window`);
+  }
+  // 27 July to 23 August inclusive is 28 days, which is what the page says.
+  const start = Date.UTC(2026, 6, 27);
+  const end = Date.UTC(2026, 7, 23);
+  assert.equal((end - start) / 86_400_000 + 1, journalMeta.windowDays);
 });
 
 test("dates render in Russian, since the journal is Russian first", () => {
