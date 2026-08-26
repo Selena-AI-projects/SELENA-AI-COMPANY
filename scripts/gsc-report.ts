@@ -13,13 +13,15 @@ export type DateWindow = {
 };
 
 export type GscPropertyConfig = {
+  projectId: string;
+  canonicalSiteUrl: string;
   label: string;
   brandTerms: string[];
   aliases?: string[];
 };
 
 export type GscConfig = {
-  schemaVersion: 1;
+  schemaVersion: 2;
   properties: Record<string, GscPropertyConfig>;
 };
 
@@ -95,24 +97,49 @@ export async function loadGscConfig(configPath: string): Promise<GscConfig> {
 
   if (!value || typeof value !== "object") throw new Error("GSC config must be an object.");
   const candidate = value as Partial<GscConfig>;
-  if (candidate.schemaVersion !== 1) {
+  if (candidate.schemaVersion !== 2) {
     throw new Error("GSC config has an unsupported schema.");
   }
   if (!candidate.properties || typeof candidate.properties !== "object") {
     throw new Error("GSC config must define properties.");
   }
+  const projectIds = new Set<string>();
+  const canonicalSiteUrls = new Set<string>();
+  const configuredSiteUrls = new Set<string>();
   for (const [siteUrl, property] of Object.entries(candidate.properties)) {
     if (
       !siteUrl ||
       !property ||
+      typeof property.projectId !== "string" ||
+      property.projectId.trim().length === 0 ||
+      typeof property.canonicalSiteUrl !== "string" ||
+      property.canonicalSiteUrl.trim().length === 0 ||
       typeof property.label !== "string" ||
+      property.label.trim().length === 0 ||
       !Array.isArray(property.brandTerms) ||
       property.brandTerms.length === 0 ||
       !property.brandTerms.every((term) => typeof term === "string" && term.trim().length > 0) ||
       (property.aliases !== undefined &&
-        (!Array.isArray(property.aliases) || !property.aliases.every((alias) => typeof alias === "string")))
+        (!Array.isArray(property.aliases) ||
+          !property.aliases.every((alias) => typeof alias === "string" && alias.trim().length > 0))) ||
+      !new Set([siteUrl, ...(property.aliases ?? [])]).has(property.canonicalSiteUrl)
     ) {
       throw new Error(`GSC property config is invalid for ${siteUrl}.`);
+    }
+    if (projectIds.has(property.projectId)) {
+      throw new Error(`GSC project ID is duplicated: ${property.projectId}.`);
+    }
+    if (canonicalSiteUrls.has(property.canonicalSiteUrl)) {
+      throw new Error(`GSC canonical property is duplicated: ${property.canonicalSiteUrl}.`);
+    }
+    projectIds.add(property.projectId);
+    canonicalSiteUrls.add(property.canonicalSiteUrl);
+
+    for (const configuredSiteUrl of new Set([siteUrl, ...(property.aliases ?? [])])) {
+      if (configuredSiteUrls.has(configuredSiteUrl)) {
+        throw new Error(`GSC property or alias is duplicated: ${configuredSiteUrl}.`);
+      }
+      configuredSiteUrls.add(configuredSiteUrl);
     }
   }
   return candidate as GscConfig;
@@ -470,6 +497,8 @@ async function auditSite(
 
   return {
     siteUrl: siteEntry.siteUrl,
+    projectId: property?.projectId ?? null,
+    canonical: property?.canonicalSiteUrl === siteEntry.siteUrl,
     label: property?.label ?? siteEntry.siteUrl,
     permission: siteEntry.permissionLevel,
     classification: property ? "configured" as const : "unclassified" as const,
@@ -569,6 +598,8 @@ export async function generateGscReport({
     } catch (error) {
       return {
         siteUrl: siteEntry.siteUrl,
+        projectId: property?.projectId ?? null,
+        canonical: property?.canonicalSiteUrl === siteEntry.siteUrl,
         label: property?.label ?? siteEntry.siteUrl,
         permission: siteEntry.permissionLevel,
         classification: property ? "configured" as const : "unclassified" as const,
@@ -596,8 +627,34 @@ export async function generateGscReport({
     }
   });
 
+  const sortedSites = sites.sort((a, b) => b.total.clicks - a.total.clicks);
+  const availableSiteUrls = new Set(siteEntries.map((site) => site.siteUrl));
+  const projects = sortedSites
+    .filter((site) => site.canonical && site.projectId !== null)
+    .map((site) => ({
+      projectId: site.projectId as string,
+      label: site.label,
+      canonicalSiteUrl: site.siteUrl,
+      status: "error" in site ? "error" as const : "ok" as const,
+      ...("error" in site ? { error: site.error } : {}),
+      total: site.total,
+      previousTotal: site.previousTotal,
+      trend: site.trend,
+      queryCoverage: site.queryCoverage,
+      visibleQueryBreakdown: site.visibleQueryBreakdown,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+  const missingCanonicalProperties = Object.values(config.properties)
+    .filter((property) => !availableSiteUrls.has(property.canonicalSiteUrl))
+    .map((property) => ({
+      projectId: property.projectId,
+      label: property.label,
+      canonicalSiteUrl: property.canonicalSiteUrl,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     generatedAt: now.toISOString(),
     serviceAccount,
     windowDays,
@@ -605,8 +662,11 @@ export async function generateGscReport({
     limitations: [
       "Query rows can omit anonymized queries; aggregate totals are the source of truth.",
       "Opportunity labels are review prompts, not proof of a single ranking or CTR cause.",
+      "Project totals use only the configured canonical property; aliases remain available for diagnostics.",
     ],
-    sites: sites.sort((a, b) => b.total.clicks - a.total.clicks),
+    projects,
+    missingCanonicalProperties,
+    sites: sortedSites,
   };
 }
 
@@ -626,10 +686,34 @@ export function renderGscText(report: GscReport): string {
     "Limitations:",
     ...report.limitations.map((limitation) => `- ${limitation}`),
     "",
+    "Canonical project summary:",
   ];
 
+  if (report.projects.length === 0) {
+    lines.push("- No canonical properties were available.");
+  }
+  for (const project of report.projects) {
+    lines.push(
+      `- ${project.label} (${project.canonicalSiteUrl}): ${project.total.clicks} clicks, ` +
+        `${project.total.impressions} impressions, ${formatTrend(project.trend.clicksPercent)}`,
+    );
+    if (project.status === "error" && "error" in project) {
+      lines.push(`  Error: ${project.error}`);
+    }
+  }
+
+  if (report.missingCanonicalProperties.length > 0) {
+    lines.push("", "Canonical properties not returned by sites.list:");
+    for (const property of report.missingCanonicalProperties) {
+      lines.push(`- ${property.label} (${property.canonicalSiteUrl})`);
+    }
+  }
+
+  lines.push("", "All accessible properties:", "");
+
   for (const site of report.sites) {
-    lines.push(`${site.label} (${site.siteUrl})`);
+    const role = site.projectId === null ? "unclassified" : site.canonical ? "canonical" : "alias";
+    lines.push(`${site.label} (${site.siteUrl}) [${role}]`);
     if ("error" in site) {
       lines.push(`  Error: ${site.error}`, "");
       continue;
@@ -726,22 +810,20 @@ export async function runGscCli({
   if (args.includes("--list-sites")) {
     const sites = await client.listSites();
     if (sites.length === 0) throw new Error("The service account has no readable Search Console properties.");
-    const configuredSites = new Set<string>();
     const lines = ["Search Console properties:"];
     for (const site of sites) {
       const property = resolvePropertyConfig(config, site.siteUrl);
-      if (property) configuredSites.add(site.siteUrl);
       lines.push(
         property
-          ? `[configured] ${property.label} | ${site.siteUrl} | ${site.permissionLevel}`
+          ? `[configured][${property.canonicalSiteUrl === site.siteUrl ? "canonical" : "alias"}] ` +
+            `${property.label} | ${site.siteUrl} | ${site.permissionLevel}`
           : `[unclassified] ${site.siteUrl} | ${site.permissionLevel}`,
       );
     }
-    const missing = Object.entries(config.properties)
-      .filter(([siteUrl, property]) =>
-        !configuredSites.has(siteUrl) && !sites.some((site) => property.aliases?.includes(site.siteUrl)),
-      )
-      .map(([siteUrl]) => siteUrl);
+    const availableSiteUrls = new Set(sites.map((site) => site.siteUrl));
+    const missing = Object.values(config.properties)
+      .filter((property) => !availableSiteUrls.has(property.canonicalSiteUrl))
+      .map((property) => property.canonicalSiteUrl);
     if (missing.length > 0) lines.push("", "Configured properties not returned by sites.list:", ...missing.map((site) => `- ${site}`));
     stdout(lines.join("\n"));
     return { mode: "list-sites" as const, sites };

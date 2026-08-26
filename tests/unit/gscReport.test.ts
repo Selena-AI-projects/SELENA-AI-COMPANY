@@ -249,6 +249,7 @@ test("GSC client does not retry forbidden responses or expose their body", async
 test("tracked GSC config contains portfolio properties but no account identity", async () => {
   const config = await loadGscConfig("config/gsc-properties.json");
 
+  assert.equal(config.schemaVersion, 2);
   assert.equal("expectedServiceAccount" in config, false);
   assert.deepEqual(Object.keys(config.properties).sort(), [
     "https://2moonspa.com/",
@@ -267,6 +268,16 @@ test("tracked GSC config contains portfolio properties but no account identity",
   assert.deepEqual(
     resolvePropertyConfig(config, "sc-domain:selenasystems.com")?.brandTerms,
     ["selena systems", "selenasystems"],
+  );
+  assert.deepEqual(
+    {
+      projectId: resolvePropertyConfig(config, "https://selenasystems.com/")?.projectId,
+      canonicalSiteUrl: resolvePropertyConfig(config, "https://selenasystems.com/")?.canonicalSiteUrl,
+    },
+    {
+      projectId: "selena-systems",
+      canonicalSiteUrl: "https://www.selenasystems.com/",
+    },
   );
   assert.deepEqual(resolvePropertyConfig(config, "https://villaops.selenasystems.com/")?.brandTerms, [
     "villaops",
@@ -338,9 +349,11 @@ test("GSC report uses exact aggregates and exposes visible-query coverage", asyn
     rowLimit: 1,
   });
   const config: GscConfig = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     properties: {
       "sc-domain:selenasystems.com": {
+        projectId: "selena-systems",
+        canonicalSiteUrl: "sc-domain:selenasystems.com",
         label: "Selena Systems",
         brandTerms: ["selena systems", "selenasystems"],
       },
@@ -372,6 +385,87 @@ test("GSC report uses exact aggregates and exposes visible-query coverage", asyn
   assert.equal(report.sites[0].visibleQueryBreakdown.brand.clicks, 10);
   assert.equal(report.sites[0].visibleQueryBreakdown.nonBrand.clicks, 50);
   assert.equal(report.sites[0].opportunities[0].focus, "ranking_and_snippet");
+  assert.equal(report.sites[0].canonical, true);
+  assert.equal(report.projects.length, 1);
+  assert.equal(report.projects[0].projectId, "selena-systems");
+  assert.equal(report.projects[0].total.clicks, 100);
+  assert.deepEqual(report.missingCanonicalProperties, []);
+});
+
+test("GSC report audits aliases but counts only the canonical property per project", async () => {
+  const canonicalSiteUrl = "https://www.example.com/";
+  const aliasSiteUrl = "https://example.com/";
+  const currentStart = "2026-02-04";
+  const fetchImpl = async (input: string | URL | Request, init?: RequestInit) => {
+    const url = String(input);
+    if (url.endsWith("/sites")) {
+      return Response.json({
+        siteEntry: [
+          { siteUrl: aliasSiteUrl, permissionLevel: "siteFullUser" },
+          { siteUrl: canonicalSiteUrl, permissionLevel: "siteFullUser" },
+        ],
+      });
+    }
+    const body = JSON.parse(String(init?.body)) as { startDate: string; dimensions?: string[] };
+    if (body.dimensions) return Response.json({ rows: [] });
+    const canonical = url.includes(encodeURIComponent(canonicalSiteUrl));
+    const current = body.startDate === currentStart;
+    return Response.json({
+      rows: [{
+        clicks: canonical ? (current ? 20 : 10) : (current ? 99 : 90),
+        impressions: canonical ? (current ? 200 : 100) : (current ? 990 : 900),
+        ctr: 0.1,
+        position: 5,
+      }],
+    });
+  };
+  const client = createGscClient({
+    fetchImpl: fetchImpl as typeof fetch,
+    getAccessToken: async () => "test-token",
+  });
+  const config: GscConfig = {
+    schemaVersion: 2,
+    properties: {
+      "sc-domain:example.com": {
+        projectId: "example",
+        canonicalSiteUrl,
+        label: "Example",
+        brandTerms: ["example"],
+        aliases: [canonicalSiteUrl, aliasSiteUrl],
+      },
+      "sc-domain:missing.example": {
+        projectId: "missing-example",
+        canonicalSiteUrl: "sc-domain:missing.example",
+        label: "Missing Example",
+        brandTerms: ["missing example"],
+      },
+    },
+  };
+
+  const report = await generateGscReport({
+    client,
+    config,
+    serviceAccount: TEST_SERVICE_ACCOUNT,
+    expectedServiceAccount: TEST_SERVICE_ACCOUNT,
+    now: new Date("2026-03-06T00:00:00Z"),
+  });
+
+  assert.equal(report.sites.length, 2);
+  assert.deepEqual(
+    report.sites.map((site) => ({ siteUrl: site.siteUrl, canonical: site.canonical })),
+    [
+      { siteUrl: aliasSiteUrl, canonical: false },
+      { siteUrl: canonicalSiteUrl, canonical: true },
+    ],
+  );
+  assert.equal(report.projects.length, 1);
+  assert.equal(report.projects[0].projectId, "example");
+  assert.equal(report.projects[0].total.clicks, 20);
+  assert.deepEqual(report.missingCanonicalProperties, [{
+    projectId: "missing-example",
+    label: "Missing Example",
+    canonicalSiteUrl: "sc-domain:missing.example",
+  }]);
 });
 
 test("GSC report rejects an account with no readable properties", async () => {
@@ -383,7 +477,7 @@ test("GSC report rejects an account with no readable properties", async () => {
     getAccessToken: async () => "test-token",
   });
   const config: GscConfig = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     properties: {},
   };
 
@@ -423,7 +517,7 @@ test("one forbidden property does not stop the other properties", async () => {
     getAccessToken: async () => "test-token",
   });
   const config: GscConfig = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     properties: {},
   };
 
@@ -447,7 +541,7 @@ test("GSC reports use timestamped private files", async () => {
   const root = await mkdtemp(join(tmpdir(), "gsc-report-test-"));
   const outputDir = join(root, "reports");
   const report = {
-    schemaVersion: 2 as const,
+    schemaVersion: 3 as const,
     generatedAt: "2026-03-06T00:00:00.123Z",
     serviceAccount: TEST_SERVICE_ACCOUNT,
     windowDays: 28,
@@ -456,6 +550,8 @@ test("GSC reports use timestamped private files", async () => {
       previous: { startDate: "2026-01-07", endDate: "2026-02-03" },
     },
     limitations: ["Query rows can omit anonymized queries; aggregate totals are the source of truth."],
+    projects: [],
+    missingCanonicalProperties: [],
     sites: [],
   };
 
