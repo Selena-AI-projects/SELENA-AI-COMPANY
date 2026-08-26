@@ -38,11 +38,17 @@ const OUTPUT_DIR = "reports/visitor-view";
  * seventy-five.
  */
 /**
- * Measured, not guessed: at six in flight Perplexity delivered two answers in
- * twenty-five — the rest were still producing when their window closed. The
- * collector is the bottleneck, so fewer at once finishes more.
+ * The losses at six in flight were caused by a five-minute snapshot window, not
+ * by the number itself: answers were still producing when we stopped waiting.
+ * With ten minutes to wait, more in flight is free — and it is not only free,
+ * it is the whole cost. The run is billed by the wall clock of a machine that
+ * spends nearly all of it idle, waiting on a collector, so halving the elapsed
+ * time halves the bill for exactly the same answers.
+ *
+ * Anything lost anyway now shows up: coverage is reported per surface and a
+ * rate is withheld below four fifths of the sample.
  */
-const CONCURRENCY = 3;
+const CONCURRENCY = 10;
 
 /** 75 answers cost about $0.11; the ceiling leaves room and still bounds a loop. */
 const DEFAULT_MAX_COST_USD = 0.5;
