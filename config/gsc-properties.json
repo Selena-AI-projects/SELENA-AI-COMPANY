@@ -1,61 +1,85 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "properties": {
     "sc-domain:selenasystems.com": {
+      "projectId": "selena-systems",
+      "canonicalSiteUrl": "https://www.selenasystems.com/",
       "label": "Selena Systems",
       "brandTerms": ["selena systems", "selenasystems"],
       "aliases": ["https://www.selenasystems.com/", "https://selenasystems.com/"]
     },
     "sc-domain:otherbali.com": {
+      "projectId": "other-bali",
+      "canonicalSiteUrl": "https://www.otherbali.com/",
       "label": "Other Bali",
       "brandTerms": ["other bali", "otherbali"],
       "aliases": ["https://www.otherbali.com/", "https://otherbali.com/"]
     },
     "sc-domain:korafoodhall.com": {
+      "projectId": "kora-food-hall",
+      "canonicalSiteUrl": "https://korafoodhall.com/",
       "label": "KORA Food Hall",
-      "brandTerms": ["kora food hall", "kora foodhall", "korafoodhall"],
+      "brandTerms": ["kora", "kora food hall", "kora foodhall", "korafoodhall"],
       "aliases": ["https://www.korafoodhall.com/", "https://korafoodhall.com/"]
     },
     "sc-domain:petid.care": {
+      "projectId": "petid",
+      "canonicalSiteUrl": "https://www.petid.care/",
       "label": "PetID",
       "brandTerms": ["petid", "pet id", "petid care"],
       "aliases": ["https://www.petid.care/", "https://petid.care/"]
     },
     "sc-domain:remhaos.com": {
+      "projectId": "remhaos",
+      "canonicalSiteUrl": "https://remhaos.com/",
       "label": "Remhaos",
       "brandTerms": ["remhaos"],
       "aliases": ["https://www.remhaos.com/", "https://remhaos.com/"]
     },
     "sc-domain:doki.help": {
+      "projectId": "doki-help",
+      "canonicalSiteUrl": "sc-domain:doki.help",
       "label": "Doki Help",
-      "brandTerms": ["doki help", "doki.help"],
+      "brandTerms": ["doki", "doki help", "doki.help"],
       "aliases": ["https://www.doki.help/", "https://doki.help/"]
     },
     "sc-domain:arhidom.space": {
+      "projectId": "arhidom",
+      "canonicalSiteUrl": "https://arhidom.space/",
       "label": "Arhidom",
       "brandTerms": ["arhidom", "arhi dom"],
       "aliases": ["https://www.arhidom.space/", "https://arhidom.space/"]
     },
     "sc-domain:zubilook.com": {
+      "projectId": "zubilook",
+      "canonicalSiteUrl": "sc-domain:zubilook.com",
       "label": "Zubilook",
       "brandTerms": ["zubilook", "zubi look"],
       "aliases": ["https://www.zubilook.com/", "https://zubilook.com/"]
     },
     "https://villaops.selenasystems.com/": {
+      "projectId": "villaops",
+      "canonicalSiteUrl": "https://villaops.selenasystems.com/",
       "label": "VillaOps",
       "brandTerms": ["villaops", "villa ops"]
     },
     "https://2moonspa.com/": {
+      "projectId": "2moonspa",
+      "canonicalSiteUrl": "https://2moonspa.com/",
       "label": "2MoonSpa",
       "brandTerms": ["2moonspa", "2 moon spa", "2moon spa"],
       "aliases": ["https://www.2moonspa.com/"]
     },
     "sc-domain:nevapalace.ru": {
+      "projectId": "neva-palace",
+      "canonicalSiteUrl": "sc-domain:nevapalace.ru",
       "label": "Neva Palace",
-      "brandTerms": ["neva palace", "nevapalace", "нева палас"],
+      "brandTerms": ["neva palace", "neva place", "nevapalace", "нева палас"],
       "aliases": ["https://www.nevapalace.ru/", "https://nevapalace.ru/"]
     },
     "sc-domain:zimaleto2.ru": {
+      "projectId": "zima-leto",
+      "canonicalSiteUrl": "sc-domain:zimaleto2.ru",
       "label": "Зима–Лето",
       "brandTerms": ["zima leto", "zimaleto", "zimaleto2", "зима лето", "зима лето 2"],
       "aliases": ["https://www.zimaleto2.ru/", "https://zimaleto2.ru/"]
