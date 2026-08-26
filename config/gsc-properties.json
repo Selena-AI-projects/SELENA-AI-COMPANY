@@ -19,7 +19,7 @@
       "projectId": "kora-food-hall",
       "canonicalSiteUrl": "https://korafoodhall.com/",
       "label": "KORA Food Hall",
-      "brandTerms": ["kora food hall", "kora foodhall", "korafoodhall"],
+      "brandTerms": ["kora", "kora food hall", "kora foodhall", "korafoodhall"],
       "aliases": ["https://www.korafoodhall.com/", "https://korafoodhall.com/"]
     },
     "sc-domain:petid.care": {
@@ -40,7 +40,7 @@
       "projectId": "doki-help",
       "canonicalSiteUrl": "sc-domain:doki.help",
       "label": "Doki Help",
-      "brandTerms": ["doki help", "doki.help"],
+      "brandTerms": ["doki", "doki help", "doki.help"],
       "aliases": ["https://www.doki.help/", "https://doki.help/"]
     },
     "sc-domain:arhidom.space": {
@@ -74,7 +74,7 @@
       "projectId": "neva-palace",
       "canonicalSiteUrl": "sc-domain:nevapalace.ru",
       "label": "Neva Palace",
-      "brandTerms": ["neva palace", "nevapalace", "нева палас"],
+      "brandTerms": ["neva palace", "neva place", "nevapalace", "нева палас"],
       "aliases": ["https://www.nevapalace.ru/", "https://nevapalace.ru/"]
     },
     "sc-domain:zimaleto2.ru": {

@@ -288,8 +288,21 @@ test("tracked GSC config contains portfolio properties but no account identity",
     "2 moon spa",
     "2moon spa",
   ]);
+  assert.equal(
+    classifyQuery("kora bali", resolvePropertyConfig(config, "https://korafoodhall.com/")?.brandTerms),
+    "brand",
+  );
+  assert.equal(
+    classifyQuery("working today doki", resolvePropertyConfig(config, "sc-domain:doki.help")?.brandTerms),
+    "brand",
+  );
+  assert.equal(
+    classifyQuery("neva place", resolvePropertyConfig(config, "sc-domain:nevapalace.ru")?.brandTerms),
+    "brand",
+  );
   assert.deepEqual(resolvePropertyConfig(config, "sc-domain:nevapalace.ru")?.brandTerms, [
     "neva palace",
+    "neva place",
     "nevapalace",
     "нева палас",
   ]);
