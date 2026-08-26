@@ -5,10 +5,10 @@ import type { MeasurementScenario } from "./index";
  *
  * Measuring it is ordinary market research: the questions are what a traveller
  * asks, and the answers are what any model would give anyone. Publishing the
- * result is a different act. A line saying a named business is invisible to AI
- * is a claim about that business, and it does not go on our site until its
- * owner has seen it and agreed. Until then this scenario stays out of the
- * journal data and lives only in the run report.
+ * result is a different act — a line saying a named business is invisible to AI
+ * is a claim about that business — so it waited for the owner's yes. That yes
+ * is recorded below and is what puts this project in the public journal; the
+ * record, not the memory of a conversation, is what the journal checks.
  */
 export const bigdragonvillasScenario: MeasurementScenario = {
   version: "bigdragonvillas-api-view-2026-08-25",
@@ -18,6 +18,15 @@ export const bigdragonvillasScenario: MeasurementScenario = {
   language: "en",
   market: "Убуд, Бали",
   ownership: "third-party",
+  consent: {
+    grantedBy: "Big Dragon Villas Ubud",
+    recordedBy: "Selena Systems",
+    recordedOn: "2026-08-26",
+    scope:
+      "Публикация результата замера AI-видимости — числа, названные вместо них заведения и источники — в журнале Selena Systems.",
+    source:
+      "Разрешение передано владельцем Selena Systems со слов Big Dragon Villas в ходе совместной работы над их видимостью. Письменного подтверждения от Big Dragon Villas в деле нет.",
+  },
   basis: "category-draft",
   strongAliases: ["Big Dragon Villas", "bigdragonvillasubud.com", "Big Dragon Villas Ubud"],
   weakAliases: ["Big Dragon"],

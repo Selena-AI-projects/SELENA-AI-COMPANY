@@ -128,17 +128,43 @@ test("every registered scenario is a complete, comparable configuration", () => 
   }
 });
 
-test("someone else's business never reaches the public journal by itself", () => {
-  const published = new Set<string>(journalProjects.map((project) => project.slug));
+test("someone else's business reaches the public journal only on a recorded yes", () => {
+  const published = new Map<string, (typeof journalProjects)[number]>(
+    journalProjects.map((project) => [project.slug, project]),
+  );
   for (const slug of scenarioSlugs) {
     const scenario = scenarios[slug];
     assert.ok(scenario);
     if (scenario.ownership !== "third-party") continue;
+    const project = published.get(slug);
+    if (!project) continue;
     // Measuring a third party is market research. Publishing that it is
     // invisible is a claim about them, and it waits for their yes.
     assert.ok(
-      !published.has(slug),
+      scenario.consent,
       `${slug} is someone else's business and is published without a recorded consent`,
     );
+    // The reader has to be able to see it too, or the record protects no one.
+    assert.ok(
+      project.publishedByPermission,
+      `${slug} is published as if it were ours, with no line saying whose it is`,
+    );
+  }
+});
+
+test("a consent record says who agreed, to what, and how we know", () => {
+  for (const slug of scenarioSlugs) {
+    const scenario = scenarios[slug];
+    assert.ok(scenario);
+    const { consent } = scenario;
+    if (!consent) continue;
+    assert.equal(scenario.ownership, "third-party", `${slug} records consent for our own business`);
+    assert.ok(consent.grantedBy.length > 0, `${slug} consent names nobody`);
+    assert.ok(consent.recordedBy.length > 0, `${slug} consent was recorded by nobody`);
+    assert.match(consent.recordedOn, /^\d{4}-\d{2}-\d{2}$/, `${slug} consent is undated`);
+    assert.ok(consent.scope.length > 0, `${slug} consent permits nothing in particular`);
+    // Without a trail, "they agreed" is indistinguishable from no permission
+    // on the day someone asks.
+    assert.ok(consent.source.length > 0, `${slug} consent has no provenance`);
   }
 });

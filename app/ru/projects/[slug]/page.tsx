@@ -115,6 +115,20 @@ export default async function JournalProjectPage({
         />
       ) : null}
       <PageHero eyebrow="Проект" title={project.name} intro={project.category}>
+        {project.publishedByPermission ? (
+          <div className="mb-8 max-w-2xl rounded-xl border border-line bg-surface p-6">
+            <p className="text-sm font-semibold tracking-[0.16em] text-copper-deep uppercase">
+              Не наш проект
+            </p>
+            <p className="mt-3 leading-relaxed text-ink/85">
+              {project.publishedByPermission.note}
+            </p>
+            <p className="mt-3 text-sm text-muted">
+              Разрешение записано {formatDate(project.publishedByPermission.recordedOn)} —{" "}
+              {project.publishedByPermission.owner}.
+            </p>
+          </div>
+        ) : null}
         <div className="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-muted">
           <span>{project.markets.join(" · ")}</span>
           <span>Языки замера: {project.languages.join(", ")}</span>
@@ -455,7 +469,7 @@ export default async function JournalProjectPage({
               href="/ru/projects"
               className="inline-flex items-center gap-2 py-4 font-medium text-copper transition-colors hover:text-ivory"
             >
-              Все семь проектов
+              Все проекты журнала
               <span aria-hidden>→</span>
             </Link>
           </div>
