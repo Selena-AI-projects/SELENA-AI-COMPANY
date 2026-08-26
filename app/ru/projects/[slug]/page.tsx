@@ -81,17 +81,15 @@ export default async function JournalProjectPage({
         {
           value: metrics.impressions.toLocaleString("ru-RU"),
           label: `${pluralizeRu(metrics.impressions, impressionForms)} в выдаче`,
-          note: "сколько раз сайт показали в результатах",
+          note:
+            metrics.previousImpressions !== null
+              ? `за предыдущие ${journalMeta.windowDays} дней — ${metrics.previousImpressions.toLocaleString("ru-RU")}`
+              : "сколько раз сайт показали в результатах",
         },
         {
           value: rate === null ? "—" : `${rate}%`,
           label: "доля кликов",
           note: rate === null ? "показов нет, считать не из чего" : "сколько показов стали переходом",
-        },
-        {
-          value: String(metrics.nonBrandClicks),
-          label: `небрендовых ${pluralizeRu(metrics.nonBrandClicks, clickForms)}`,
-          note: "искали задачу, а не сайт по имени",
         },
       ]
     : [];
@@ -151,7 +149,11 @@ export default async function JournalProjectPage({
             <p className="mt-2 text-muted">
               {formatDate(metrics.windowStart)} — {formatDate(metrics.windowEnd)}
             </p>
-            <dl className="mt-9 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            <p className="mt-4 max-w-2xl leading-relaxed text-ink/85">
+              Это окно, за которое Google отдаёт данные, а не срок нашей работы. Замеры
+              AI-ответов ниже — отдельные события: один день, одна дата, свой номер.
+            </p>
+            <dl className="mt-9 grid gap-10 sm:grid-cols-3">
               {facts.map((fact) => (
                 <div key={fact.label} className="border-t border-line pt-5">
                   <dd className="font-serif text-[2.4rem] leading-none font-semibold text-ink">
@@ -171,17 +173,17 @@ export default async function JournalProjectPage({
         </section>
       ) : null}
 
-      {project.visitorView ? (
-        <section className="bg-charcoal py-20 text-ivory sm:py-28">
+      {(project.visitorViews ?? []).map((visitorView, index) => (
+        <section key={visitorView.date} className="bg-charcoal py-20 text-ivory sm:py-28">
           <Container>
             <div className="max-w-3xl">
               <p className="text-sm font-semibold tracking-[0.18em] text-copper uppercase">
-                Замер Visitor View · {formatDate(project.visitorView.date)}
+                Замер №{index + 1} · Visitor View · {formatDate(visitorView.date)}
               </p>
               <h2 className="mt-4 text-h2 text-ivory">Что видит человек на живой поверхности</h2>
               <p className="mt-5 leading-relaxed text-ivory/75">
-                {project.visitorView.questions} вопросов заданы{" "}
-                {project.visitorView.surfaceCount} поверхностям — ChatGPT, Gemini и Perplexity. Это
+                {visitorView.questions} вопросов заданы{" "}
+                {visitorView.surfaceCount} поверхностям — ChatGPT, Gemini и Perplexity. Это
                 то, что показывают живому человеку, а не то, что модель помнит.
               </p>
             </div>
@@ -189,22 +191,22 @@ export default async function JournalProjectPage({
             <dl className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 {
-                  value: String(project.visitorView.brandMentions),
+                  value: String(visitorView.brandMentions),
                   label: "упоминаний бренда",
-                  note: `из ${project.visitorView.answersReceived} прочитанных ответов`,
+                  note: `из ${visitorView.answersReceived} прочитанных ответов`,
                 },
                 {
-                  value: `${project.visitorView.answersReceived} / ${project.visitorView.answersRequested}`,
+                  value: `${visitorView.answersReceived} / ${visitorView.answersRequested}`,
                   label: "ответов дошло",
                   note: "остальные не вернулись вовремя",
                 },
                 {
-                  value: String(project.visitorView.questions),
+                  value: String(visitorView.questions),
                   label: "вопросов",
                   note: "один и тот же список при каждом замере",
                 },
                 {
-                  value: `$${project.visitorView.costUsd.toFixed(2)}`,
+                  value: `$${visitorView.costUsd.toFixed(2)}`,
                   label: "стоил замер",
                   note: "мы публикуем и это",
                 },
@@ -225,7 +227,7 @@ export default async function JournalProjectPage({
               трём, не был бы правдой ни об одной из них. Счётчики складываются честно, доли — нет.
             </p>
 
-            {project.visitorView.surfaces.length > 0 ? (
+            {visitorView.surfaces.length > 0 ? (
               <>
                 <div className="mt-10 overflow-x-auto">
               <table className="w-full min-w-[38rem] border-collapse text-left">
@@ -238,7 +240,7 @@ export default async function JournalProjectPage({
                   </tr>
                 </thead>
                 <tbody>
-                  {project.visitorView.surfaces.map((surface) => {
+                  {visitorView.surfaces.map((surface) => {
                     const rate = visitorMentionRate(surface);
                     return (
                       <tr key={surface.surface} className="border-b border-line-dark/60">
@@ -266,7 +268,7 @@ export default async function JournalProjectPage({
               </>
             ) : null}
 
-            {project.visitorView.citedDomains.length > 0 ? (
+            {visitorView.citedDomains.length > 0 ? (
               <div className="mt-14">
                 <h3 className="text-h3 text-ivory">На что ссылались ответы</h3>
                 <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ivory/60">
@@ -282,7 +284,7 @@ export default async function JournalProjectPage({
                       </tr>
                     </thead>
                     <tbody>
-                      {project.visitorView.citedDomains.slice(0, 12).map((domain) => (
+                      {visitorView.citedDomains.slice(0, 12).map((domain) => (
                         <tr key={domain.domain} className="border-b border-line-dark/60">
                           <td className="py-3 pr-4 text-ivory">{domain.domain}</td>
                           <td className="py-3 text-ivory/75">{domain.answers}</td>
@@ -291,12 +293,12 @@ export default async function JournalProjectPage({
                     </tbody>
                   </table>
                 </div>
-                {project.visitorView.ownDomainAnswers !== null ? (
+                {visitorView.ownDomainAnswers !== null ? (
                   <p className="mt-5 max-w-3xl text-sm leading-relaxed text-ivory/60">
                     Собственный сайт проекта попал в{" "}
-                    {project.visitorView.ownDomainAnswers === 0
+                    {visitorView.ownDomainAnswers === 0
                       ? "ноль ответов"
-                      : `${project.visitorView.ownDomainAnswers} ответов`}
+                      : `${visitorView.ownDomainAnswers} ответов`}
                     . Чаще машины опираются на подборки и каталоги — попасть в них важнее, чем
                     дописать ещё одну страницу у себя.
                   </p>
@@ -305,36 +307,36 @@ export default async function JournalProjectPage({
             ) : null}
 
             <p className="mt-12 max-w-3xl text-sm leading-relaxed text-ivory/60">
-              Стоимость замера: ${project.visitorView.costUsd.toFixed(2)}. Конфигурация:{" "}
-              {project.visitorView.configVersion}. Один замер — это один момент: поверхности
+              Стоимость замера: ${visitorView.costUsd.toFixed(2)}. Конфигурация:{" "}
+              {visitorView.configVersion}. Один замер — это один момент: поверхности
               отвечают иначе завтра, и число упоминаний не говорит, сколько людей задали эти
               вопросы.
             </p>
           </Container>
         </section>
-      ) : null}
+      ))}
 
-      {project.apiView ? (
-        <section className="bg-charcoal py-20 text-ivory sm:py-28">
+      {(project.apiViews ?? []).map((apiView, index) => (
+        <section key={apiView.date} className="bg-charcoal py-20 text-ivory sm:py-28">
           <Container>
             <div className="max-w-3xl">
               <p className="text-sm font-semibold tracking-[0.18em] text-copper uppercase">
-                Замер AI-ответов · {formatDate(project.apiView.date)}
+                Замер №{index + 1} · AI-ответы · {formatDate(apiView.date)}
               </p>
               <h2 className="mt-4 text-h2 text-ivory">Что AI отвечает о проекте</h2>
               <p className="mt-5 leading-relaxed text-ivory/75">
-                {project.apiView.questions} вопросов заданы {project.apiView.models} моделям.
-                Получено {project.apiView.answersReceived} ответов из {project.apiView.answersRequested}.
-                Бренд назван {project.apiView.brandMentions} раз.
+                {apiView.questions} вопросов заданы {apiView.models} моделям.
+                Получено {apiView.answersReceived} ответов из {apiView.answersRequested}.
+                Бренд назван {apiView.brandMentions} раз.
               </p>
             </div>
 
             <dl className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                { value: String(project.apiView.brandMentions), label: "упоминаний бренда", note: `из ${project.apiView.answersReceived} ответов` },
-                { value: String(project.apiView.questions), label: "вопросов", note: "один и тот же список при каждом замере" },
-                { value: String(project.apiView.models), label: "моделей", note: "канал API View" },
-                { value: `$${project.apiView.costUsd.toFixed(2)}`, label: "стоил замер", note: "мы публикуем и это" },
+                { value: String(apiView.brandMentions), label: "упоминаний бренда", note: `из ${apiView.answersReceived} ответов` },
+                { value: String(apiView.questions), label: "вопросов", note: "один и тот же список при каждом замере" },
+                { value: String(apiView.models), label: "моделей", note: "канал API View" },
+                { value: `$${apiView.costUsd.toFixed(2)}`, label: "стоил замер", note: "мы публикуем и это" },
               ].map((fact) => (
                 <div key={fact.label} className="border-t border-line-dark pt-5">
                   <dd className="font-serif text-[2.4rem] leading-none font-semibold text-ivory">{fact.value}</dd>
@@ -344,7 +346,7 @@ export default async function JournalProjectPage({
               ))}
             </dl>
 
-            {project.apiView.namedInstead.length > 0 ? (
+            {apiView.namedInstead.length > 0 ? (
               <div className="mt-14">
                 <h3 className="text-h3 text-ivory">Кого модели называют вместо нас</h3>
                 <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ivory/60">
@@ -361,11 +363,11 @@ export default async function JournalProjectPage({
                       </tr>
                     </thead>
                     <tbody>
-                      {project.apiView.namedInstead.map((business) => (
+                      {apiView.namedInstead.map((business) => (
                         <tr key={business.name} className="border-b border-line-dark/60">
                           <td className="py-3 pr-4 text-ivory">{business.name}</td>
                           <td className="py-3 pr-4 text-ivory/75">
-                            {business.questions} из {project.apiView!.questions}
+                            {business.questions} из {apiView.questions}
                           </td>
                           <td className="py-3 text-ivory/75">{business.models}</td>
                         </tr>
@@ -379,11 +381,11 @@ export default async function JournalProjectPage({
             <p className="mt-12 max-w-3xl text-sm leading-relaxed text-ivory/60">
               Канал API View — это знания самих моделей. Что ответит ChatGPT живому человеку с
               включённым веб-поиском, здесь не проверялось: это отдельный канал Visitor View.
-              Конфигурация замера: {project.apiView.configVersion}.
+              Конфигурация замера: {apiView.configVersion}.
             </p>
           </Container>
         </section>
-      ) : null}
+      ))}
 
       <section className="bg-ivory py-20 sm:py-28">
         <Container>

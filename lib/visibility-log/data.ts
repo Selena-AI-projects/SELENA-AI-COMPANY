@@ -44,8 +44,18 @@ export type ProjectMetrics = {
    * 1 → 2 clicks is "+100%", which reads like a result and is not one.
    */
   previousClicks: number | null;
-  nonBrandClicks: number;
+  /** Impressions in that same previous window, on the same terms. */
+  previousImpressions: number | null;
 };
+
+/*
+ * There is deliberately no non-brand click count here. Google hides part of
+ * the query list, so a brand/non-brand split can only be computed over the
+ * rows it does show — which makes it a share of a sample, not of the total.
+ * Printing it beside the total clicks invited exactly the subtraction it
+ * cannot support, so it is not published until the split can be stated on the
+ * same terms as the number next to it.
+ */
 
 export type JournalEntry = {
   date: string;
@@ -62,6 +72,7 @@ export type JournalEntry = {
  * reader cannot see is not proof of anything.
  */
 export type ApiViewMeasurement = {
+  /** The one day it ran. A measurement is an event, not a period. */
   date: string;
   /** Same questions, models and language, or the comparison is meaningless. */
   configVersion: string;
@@ -90,6 +101,7 @@ export type VisitorViewSurfaceResult = {
 };
 
 export type VisitorViewMeasurement = {
+  /** The one day it ran. A measurement is an event, not a period. */
   date: string;
   /** Same questions, surfaces and language, or the comparison is meaningless. */
   configVersion: string;
@@ -143,13 +155,19 @@ export type JournalProject = {
    * that says whose it is also states the permission that put it here.
    */
   publishedByPermission?: { owner: string; recordedOn: string; note: string };
-  apiView?: ApiViewMeasurement;
-  visitorView?: VisitorViewMeasurement;
+  /**
+   * Measurements in the order they were run, oldest first. A list rather than
+   * a single record because the number is what a reader needs: "замер №1" says
+   * this is one day's reading and the start of a series, where a bare date
+   * beside a 28-day search window reads as a month of work.
+   */
+  apiViews?: ApiViewMeasurement[];
+  visitorViews?: VisitorViewMeasurement[];
   entries: JournalEntry[];
 };
 
 export const journalMeta = {
-  measuredAt: "2026-08-25",
+  measuredAt: "2026-08-26",
   source: "Google Search Console",
   windowDays: 28,
 } as const;
@@ -167,7 +185,13 @@ export const stageLabels: Record<JournalStage, string> = {
   remeasure: "Повторный замер",
 };
 
-const baselineWindow = { windowStart: "2026-07-26", windowEnd: "2026-08-22" };
+/*
+ * The confirmed baseline of 26 August (docs/visibility-log/BASELINE-2026-08-26.md):
+ * one canonical Search Console property per project, two windows of exactly 28
+ * days each. The 25 August snapshot it replaced was collected over 29 days from
+ * the first 250 query rows, so its totals were both short and mislabelled.
+ */
+const baselineWindow = { windowStart: "2026-07-27", windowEnd: "2026-08-23" };
 
 export const journalProjects: JournalProject[] = [
   {
@@ -177,46 +201,50 @@ export const journalProjects: JournalProject[] = [
     category: "Фуд-холл, гости и туристы",
     markets: ["Бали, Убуд"],
     languages: ["английский"],
-    metrics: { ...baselineWindow, clicks: 2, impressions: 313, previousClicks: 1, nonBrandClicks: 2 },
-    apiView: {
-      date: "2026-08-25",
-      configVersion: "korafoodhall-api-view-2026-08-25",
-      questions: 25,
-      models: 5,
-      answersRequested: 125,
-      answersReceived: 125,
-      brandMentions: 0,
-      costUsd: 0.2254,
-      namedInstead: [
-        { name: "Zest Ubud", questions: 21, models: 5 },
-        { name: "Karsa Kafe", questions: 18, models: 5 },
-        { name: "Warung Bodag Maliah", questions: 16, models: 5 },
-        { name: "Sayan House", questions: 15, models: 5 },
-        { name: "Bridges Bali", questions: 14, models: 5 },
-        { name: "Warung Sopa", questions: 14, models: 5 },
-        { name: "Warung Biah Biah", questions: 13, models: 5 },
-        { name: "Moksa", questions: 12, models: 5 },
-        { name: "Warung Babi Guling Ibu Oka", questions: 12, models: 5 },
-        { name: "Bebek Bengil", questions: 11, models: 5 },
-        { name: "Locavore", questions: 11, models: 5 },
-        { name: "Mozaic", questions: 11, models: 5 },
-        { name: "Warung Pulau Kelapa", questions: 11, models: 5 },
-        { name: "Alchemy Bali", questions: 10, models: 5 },
-      ],
-    },
-    visitorView: {
-      date: "2026-08-26",
-      configVersion: "korafoodhall-api-view-2026-08-25",
-      questions: 25,
-      surfaceCount: 3,
-      answersRequested: 75,
-      answersReceived: 60,
-      brandMentions: 4,
-      costUsd: 0.1125,
-      surfaces: [],
-      citedDomains: [],
-      ownDomainAnswers: null,
-    },
+    metrics: { ...baselineWindow, clicks: 11, impressions: 926, previousClicks: 17, previousImpressions: 869 },
+    apiViews: [
+      {
+        date: "2026-08-25",
+        configVersion: "korafoodhall-api-view-2026-08-25",
+        questions: 25,
+        models: 5,
+        answersRequested: 125,
+        answersReceived: 125,
+        brandMentions: 0,
+        costUsd: 0.2254,
+        namedInstead: [
+          { name: "Zest Ubud", questions: 21, models: 5 },
+          { name: "Karsa Kafe", questions: 18, models: 5 },
+          { name: "Warung Bodag Maliah", questions: 16, models: 5 },
+          { name: "Sayan House", questions: 15, models: 5 },
+          { name: "Bridges Bali", questions: 14, models: 5 },
+          { name: "Warung Sopa", questions: 14, models: 5 },
+          { name: "Warung Biah Biah", questions: 13, models: 5 },
+          { name: "Moksa", questions: 12, models: 5 },
+          { name: "Warung Babi Guling Ibu Oka", questions: 12, models: 5 },
+          { name: "Bebek Bengil", questions: 11, models: 5 },
+          { name: "Locavore", questions: 11, models: 5 },
+          { name: "Mozaic", questions: 11, models: 5 },
+          { name: "Warung Pulau Kelapa", questions: 11, models: 5 },
+          { name: "Alchemy Bali", questions: 10, models: 5 },
+        ],
+      },
+    ],
+    visitorViews: [
+      {
+        date: "2026-08-26",
+        configVersion: "korafoodhall-api-view-2026-08-25",
+        questions: 25,
+        surfaceCount: 3,
+        answersRequested: 75,
+        answersReceived: 60,
+        brandMentions: 4,
+        costUsd: 0.1125,
+        surfaces: [],
+        citedDomains: [],
+        ownDomainAnswers: null,
+      },
+    ],
     entries: [
       {
         date: "2026-08-25",
@@ -236,6 +264,15 @@ export const journalProjects: JournalProject[] = [
         doesNotProve:
           "Замер сделан по каналу API View — это собственные знания моделей. Что ответит ChatGPT живому человеку с включённым веб-поиском, здесь не проверялось: это отдельный канал. Список названий взят из тех же ответов и проверен на дословное присутствие, но не приведён к единому виду: «Sayan House» и «The Sayan House» — одно место, посчитанное дважды. Такие склейки делает человек на платной проверке.",
       },
+      {
+        date: "2026-08-26",
+        stage: "readiness",
+        title: "Первый сбор Search Console был неверным — вот исправленные числа",
+        body:
+          "Числа, опубликованные 25 августа, собирала первая версия скрипта: окно она называла 28-дневным, а на деле брала 29 дней, и общую сумму складывала из первых 250 строк запросов вместо всех. Пересобрали по одной канонической property, два окна ровно по 28 дней. За 27 июля — 23 августа: 11 кликов при 926 показах. Месяцем раньше — 17 кликов при 869 показах: показов стало больше, а переходов меньше. Вчерашняя запись со старыми числами остаётся на странице, журнал не переписывается задним числом.",
+        doesNotProve:
+          "Разница между 17 и 11 кликами — это разница между двумя окнами, а не следствие чего-то, что мы сделали. Причину эти числа не показывают.",
+      },
     ],
   },
   {
@@ -245,20 +282,22 @@ export const journalProjects: JournalProject[] = [
     category: "Travel-медиа и гиды",
     markets: ["Бали, Индонезия"],
     languages: ["английский"],
-    metrics: { ...baselineWindow, clicks: 29, impressions: 2710, previousClicks: 1, nonBrandClicks: 29 },
-    visitorView: {
-      date: "2026-08-26",
-      configVersion: "otherbali-api-view-2026-08-25",
-      questions: 25,
-      surfaceCount: 3,
-      answersRequested: 75,
-      answersReceived: 54,
-      brandMentions: 1,
-      costUsd: 0.1125,
-      surfaces: [],
-      citedDomains: [],
-      ownDomainAnswers: null,
-    },
+    metrics: { ...baselineWindow, clicks: 141, impressions: 43_399, previousClicks: 12, previousImpressions: 620 },
+    visitorViews: [
+      {
+        date: "2026-08-26",
+        configVersion: "otherbali-api-view-2026-08-25",
+        questions: 25,
+        surfaceCount: 3,
+        answersRequested: 75,
+        answersReceived: 54,
+        brandMentions: 1,
+        costUsd: 0.1125,
+        surfaces: [],
+        citedDomains: [],
+        ownDomainAnswers: null,
+      },
+    ],
     entries: [
       {
         date: "2026-08-25",
@@ -269,6 +308,15 @@ export const journalProjects: JournalProject[] = [
         doesNotProve:
           "Рост показывает движение обычного поиска и не говорит ничего о том, цитируют ли сайт AI-ассистенты.",
       },
+      {
+        date: "2026-08-26",
+        stage: "readiness",
+        title: "Исправленный сбор: 141 клик при 43 399 показах",
+        body:
+          "Первая версия скрипта читала только первые 250 строк запросов и считала окно в 29 дней вместо 28, поэтому вчерашние 29 кликов и 2 710 показов были неполной суммой. Пересобрали по канонической property: за 27 июля — 23 августа 141 клик при 43 399 показах, в предыдущем окне — 12 кликов при 620 показах. Переходит трое человек из тысячи. Показов теперь много, и именно поэтому доля кликов стала главной проблемой проекта.",
+        doesNotProve:
+          "Что вызвало такой скачок показов, эти числа не объясняют. И они по-прежнему ничего не говорят о том, цитируют ли сайт AI-ассистенты.",
+      },
     ],
   },
   {
@@ -278,20 +326,22 @@ export const journalProjects: JournalProject[] = [
     category: "Сервисная инфраструктура для животных",
     markets: ["Россия"],
     languages: ["русский"],
-    metrics: { ...baselineWindow, clicks: 34, impressions: 1915, previousClicks: 18, nonBrandClicks: 24 },
-    visitorView: {
-      date: "2026-08-26",
-      configVersion: "petid-api-view-2026-08-25",
-      questions: 25,
-      surfaceCount: 3,
-      answersRequested: 75,
-      answersReceived: 59,
-      brandMentions: 2,
-      costUsd: 0.1125,
-      surfaces: [],
-      citedDomains: [],
-      ownDomainAnswers: null,
-    },
+    metrics: { ...baselineWindow, clicks: 115, impressions: 5_623, previousClicks: 97, previousImpressions: 7_317 },
+    visitorViews: [
+      {
+        date: "2026-08-26",
+        configVersion: "petid-api-view-2026-08-25",
+        questions: 25,
+        surfaceCount: 3,
+        answersRequested: 75,
+        answersReceived: 59,
+        brandMentions: 2,
+        costUsd: 0.1125,
+        surfaces: [],
+        citedDomains: [],
+        ownDomainAnswers: null,
+      },
+    ],
     entries: [
       {
         date: "2026-08-25",
@@ -299,6 +349,15 @@ export const journalProjects: JournalProject[] = [
         title: "Самый живой проект и та же болезнь",
         body:
           "За 28 дней: 34 клика при 1 915 показах, рост к предыдущему периоду 89%. Небрендовых кликов 24 — то есть спрос не только на имя. Сайт выходит по русским запросам о ветеринарных услугах в разных городах. Доля кликов 1,8% — лучше остальных, но всё ещё вдвое ниже нормальной для тех позиций, которые он занимает.",
+        doesNotProve:
+          "Рынок и язык здесь русские, поэтому эти числа нельзя складывать с балийскими проектами: это разные конфигурации.",
+      },
+      {
+        date: "2026-08-26",
+        stage: "readiness",
+        title: "Исправленный сбор: переходов больше, показов меньше",
+        body:
+          "Пересобрали по канонической property, два окна ровно по 28 дней. За 27 июля — 23 августа: 115 кликов при 5 623 показах. В предыдущем окне было 97 кликов при 7 317 показах — то есть Google показывает сайт реже, а переходят чаще. Вчерашние 34 клика были неполной суммой первой версии скрипта.",
         doesNotProve:
           "Рынок и язык здесь русские, поэтому эти числа нельзя складывать с балийскими проектами: это разные конфигурации.",
       },
@@ -311,20 +370,22 @@ export const journalProjects: JournalProject[] = [
     category: "Сам продукт",
     markets: ["Русскоязычная аудитория", "Бали", "Австралия и Новая Зеландия", "США"],
     languages: ["русский", "английский"],
-    metrics: { ...baselineWindow, clicks: 0, impressions: 0, previousClicks: null, nonBrandClicks: 0 },
-    visitorView: {
-      date: "2026-08-26",
-      configVersion: "selenasystems-api-view-2026-08-25",
-      questions: 25,
-      surfaceCount: 3,
-      answersRequested: 75,
-      answersReceived: 55,
-      brandMentions: 0,
-      costUsd: 0.1125,
-      surfaces: [],
-      citedDomains: [],
-      ownDomainAnswers: null,
-    },
+    metrics: { ...baselineWindow, clicks: 0, impressions: 0, previousClicks: 0, previousImpressions: 0 },
+    visitorViews: [
+      {
+        date: "2026-08-26",
+        configVersion: "selenasystems-api-view-2026-08-25",
+        questions: 25,
+        surfaceCount: 3,
+        answersRequested: 75,
+        answersReceived: 55,
+        brandMentions: 0,
+        costUsd: 0.1125,
+        surfaces: [],
+        citedDomains: [],
+        ownDomainAnswers: null,
+      },
+    ],
     entries: [
       {
         date: "2026-08-25",
@@ -344,7 +405,7 @@ export const journalProjects: JournalProject[] = [
     category: "Документы и поддержка",
     markets: ["Индонезия"],
     languages: ["индонезийский", "английский"],
-    metrics: { ...baselineWindow, clicks: 0, impressions: 15, previousClicks: null, nonBrandClicks: 0 },
+    metrics: { ...baselineWindow, clicks: 0, impressions: 44, previousClicks: 4, previousImpressions: 29 },
     entries: [
       {
         date: "2026-08-25",
@@ -352,6 +413,15 @@ export const journalProjects: JournalProject[] = [
         title: "День ноль",
         body:
           "15 показов, ни одного клика. Данных слишком мало для выводов — это честная стартовая точка, а не диагноз. Проект будет мериться на индонезийском и английском; какой язык окажется основным, покажут первые накопленные запросы.",
+      },
+      {
+        date: "2026-08-26",
+        stage: "readiness",
+        title: "Исправленный сбор: 44 показа и ноль кликов",
+        body:
+          "За 27 июля — 23 августа: 44 показа, ни одного клика. В предыдущем окне — 29 показов и 4 клика. Вчерашние 15 показов были неполной суммой первой версии скрипта.",
+        doesNotProve:
+          "Четыре клика против нуля на таком объёме — это шум, а не тенденция.",
       },
     ],
   },
@@ -362,20 +432,22 @@ export const journalProjects: JournalProject[] = [
     category: "Управление ремонтом: дизайнер, архитектор и прораб в одном месте",
     markets: ["США", "Россия"],
     languages: ["английский", "русский"],
-    metrics: { ...baselineWindow, clicks: 0, impressions: 0, previousClicks: null, nonBrandClicks: 0 },
-    visitorView: {
-      date: "2026-08-26",
-      configVersion: "remhaos-ru-api-view-2026-08-25",
-      questions: 25,
-      surfaceCount: 3,
-      answersRequested: 75,
-      answersReceived: 53,
-      brandMentions: 0,
-      costUsd: 0.1125,
-      surfaces: [],
-      citedDomains: [],
-      ownDomainAnswers: null,
-    },
+    metrics: { ...baselineWindow, clicks: 0, impressions: 0, previousClicks: 0, previousImpressions: 0 },
+    visitorViews: [
+      {
+        date: "2026-08-26",
+        configVersion: "remhaos-ru-api-view-2026-08-25",
+        questions: 25,
+        surfaceCount: 3,
+        answersRequested: 75,
+        answersReceived: 53,
+        brandMentions: 0,
+        costUsd: 0.1125,
+        surfaces: [],
+        citedDomains: [],
+        ownDomainAnswers: null,
+      },
+    ],
     entries: [
       {
         date: "2026-08-25",
@@ -393,20 +465,22 @@ export const journalProjects: JournalProject[] = [
     category: "Операции для вилл и гостевого сервиса",
     markets: ["Индонезия, Бали"],
     languages: ["английский", "индонезийский"],
-    metrics: { ...baselineWindow, clicks: 0, impressions: 0, previousClicks: null, nonBrandClicks: 0 },
-    visitorView: {
-      date: "2026-08-26",
-      configVersion: "villaops-api-view-2026-08-25",
-      questions: 25,
-      surfaceCount: 3,
-      answersRequested: 75,
-      answersReceived: 55,
-      brandMentions: 0,
-      costUsd: 0.1125,
-      surfaces: [],
-      citedDomains: [],
-      ownDomainAnswers: null,
-    },
+    metrics: { ...baselineWindow, clicks: 0, impressions: 0, previousClicks: 1, previousImpressions: 1 },
+    visitorViews: [
+      {
+        date: "2026-08-26",
+        configVersion: "villaops-api-view-2026-08-25",
+        questions: 25,
+        surfaceCount: 3,
+        answersRequested: 75,
+        answersReceived: 55,
+        brandMentions: 0,
+        costUsd: 0.1125,
+        surfaces: [],
+        citedDomains: [],
+        ownDomainAnswers: null,
+      },
+    ],
     entries: [
       {
         date: "2026-08-25",
@@ -433,19 +507,21 @@ export const journalProjects: JournalProject[] = [
     // Not our Search Console property, so there is no click and impression
     // window to show. Everything published here comes from the measurements.
     metrics: null,
-    visitorView: {
-      date: "2026-08-26",
-      configVersion: "bigdragonvillas-api-view-2026-08-25",
-      questions: 25,
-      surfaceCount: 3,
-      answersRequested: 75,
-      answersReceived: 61,
-      brandMentions: 0,
-      costUsd: 0.1125,
-      surfaces: [],
-      citedDomains: [],
-      ownDomainAnswers: null,
-    },
+    visitorViews: [
+      {
+        date: "2026-08-26",
+        configVersion: "bigdragonvillas-api-view-2026-08-25",
+        questions: 25,
+        surfaceCount: 3,
+        answersRequested: 75,
+        answersReceived: 61,
+        brandMentions: 0,
+        costUsd: 0.1125,
+        surfaces: [],
+        citedDomains: [],
+        ownDomainAnswers: null,
+      },
+    ],
     entries: [
       {
         date: "2026-08-25",
