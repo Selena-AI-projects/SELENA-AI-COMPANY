@@ -18,8 +18,10 @@ import {
   journalLadder,
   journalMeta,
   journalProjects,
+  minVisitorCoverage,
   reachedStages,
   stageLabels,
+  visitorMentionRate,
 } from "@/lib/visibility-log/data";
 
 export function generateStaticParams() {
@@ -150,6 +152,104 @@ export default async function JournalProjectPage({
               Источник — {journalMeta.source}, окно {journalMeta.windowDays} дней. Это обычный поиск
               Google. Как проект выглядит в ответах ChatGPT, Gemini и Perplexity, покажет платный
               замер, и он появится здесь отдельной записью.
+            </p>
+          </Container>
+        </section>
+      ) : null}
+
+      {project.visitorView ? (
+        <section className="bg-charcoal py-20 text-ivory sm:py-28">
+          <Container>
+            <div className="max-w-3xl">
+              <p className="text-sm font-semibold tracking-[0.18em] text-copper uppercase">
+                Замер Visitor View · {formatDate(project.visitorView.date)}
+              </p>
+              <h2 className="mt-4 text-h2 text-ivory">Что видит человек на живой поверхности</h2>
+              <p className="mt-5 leading-relaxed text-ivory/75">
+                {project.visitorView.questions} вопросов заданы {project.visitorView.surfaces.length}{" "}
+                поверхностям — ChatGPT, Gemini и Perplexity. Это то, что показывают живому человеку,
+                а не то, что модель помнит.
+              </p>
+            </div>
+
+            <div className="mt-10 overflow-x-auto">
+              <table className="w-full min-w-[38rem] border-collapse text-left">
+                <thead>
+                  <tr className="border-b border-line-dark text-sm text-ivory/60">
+                    <th className="py-3 pr-4 font-semibold">Поверхность</th>
+                    <th className="py-3 pr-4 font-semibold">Ответов получено</th>
+                    <th className="py-3 pr-4 font-semibold">Бренд назван</th>
+                    <th className="py-3 font-semibold">Доля</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {project.visitorView.surfaces.map((surface) => {
+                    const rate = visitorMentionRate(surface);
+                    return (
+                      <tr key={surface.surface} className="border-b border-line-dark/60">
+                        <td className="py-3 pr-4 text-ivory">{surface.surface}</td>
+                        <td className="py-3 pr-4 text-ivory/75">
+                          {surface.answersReceived} из {surface.answersRequested}
+                        </td>
+                        <td className="py-3 pr-4 text-ivory/75">{surface.brandMentions}</td>
+                        <td className="py-3 text-ivory/75">
+                          {rate === null ? "мало данных" : `${Math.round(rate * 100)}%`}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
+            <p className="mt-6 max-w-3xl text-sm leading-relaxed text-ivory/60">
+              Доля показывается только там, где вернулось не меньше{" "}
+              {Math.round(minVisitorCoverage * 100)}% ответов. Ниже этого порога стоит «мало данных»:
+              процент, посчитанный по неполной выборке, — это не приблизительная правда, а другое
+              число с тем же знаком.
+            </p>
+
+            {project.visitorView.citedDomains.length > 0 ? (
+              <div className="mt-14">
+                <h3 className="text-h3 text-ivory">На что ссылались ответы</h3>
+                <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ivory/60">
+                  Только ссылки, которые поверхность реально показала рядом с ответом. Домены,
+                  выведенные из текста, сюда не попадают — это разные вещи, и смешивать их нельзя.
+                </p>
+                <div className="mt-7 overflow-x-auto">
+                  <table className="w-full min-w-[30rem] border-collapse text-left">
+                    <thead>
+                      <tr className="border-b border-line-dark text-sm text-ivory/60">
+                        <th className="py-3 pr-4 font-semibold">Домен</th>
+                        <th className="py-3 font-semibold">В скольких ответах</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {project.visitorView.citedDomains.slice(0, 12).map((domain) => (
+                        <tr key={domain.domain} className="border-b border-line-dark/60">
+                          <td className="py-3 pr-4 text-ivory">{domain.domain}</td>
+                          <td className="py-3 text-ivory/75">{domain.answers}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="mt-5 max-w-3xl text-sm leading-relaxed text-ivory/60">
+                  Собственный сайт проекта попал в{" "}
+                  {project.visitorView.ownDomainAnswers === 0
+                    ? "ноль ответов"
+                    : `${project.visitorView.ownDomainAnswers} ответов`}
+                  . Чаще машины опираются на подборки и каталоги — попасть в них важнее, чем
+                  дописать ещё одну страницу у себя.
+                </p>
+              </div>
+            ) : null}
+
+            <p className="mt-12 max-w-3xl text-sm leading-relaxed text-ivory/60">
+              Стоимость замера: ${project.visitorView.costUsd.toFixed(2)}. Конфигурация:{" "}
+              {project.visitorView.configVersion}. Один замер — это один момент: поверхности
+              отвечают иначе завтра, и число упоминаний не говорит, сколько людей задали эти
+              вопросы.
             </p>
           </Container>
         </section>
