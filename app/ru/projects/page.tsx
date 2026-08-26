@@ -21,7 +21,7 @@ import {
 const journalPath = "/ru/projects";
 const journalTitle = "Наши проекты и замеры";
 const journalDescription =
-  "Семь собственных проектов проходят весь путь замера публично: с чего начали, что показали цифры, что мы поправили и что получилось после. С датами и без задним числом переписанных выводов.";
+  "Собственные проекты проходят весь путь замера публично: с чего начали, что показали цифры, что мы поправили и что получилось после. С датами и без задним числом переписанных выводов. Один проект в журнале не наш — он опубликован с разрешения владельца.";
 
 export const metadata = buildMetadata({
   title: journalTitle,
@@ -36,6 +36,7 @@ const rules = [
   "Сравниваем только одинаковые замеры: тот же список вопросов, те же системы, тот же язык. Иначе сравнивать нечего.",
   "Публикуем общие числа по проекту. Сам список запросов остаётся закрытым — в нём попадаются чужие бренды.",
   "Ноль — это тоже результат. У трёх проектов на старте ноль показов, и он остаётся на странице.",
+  "Чужой бизнес попадает в журнал только с записанного разрешения владельца. Сказать, что заведение не называют в AI-ответах, — это утверждение о нём, а не о нас.",
 ];
 
 export default function JournalIndexPage() {
@@ -52,8 +53,8 @@ export default function JournalIndexPage() {
       />
       <PageHero
         eyebrow="Проекты"
-        title="Семь своих проектов — и всё, что мы в них измерили."
-        intro="Мы продаём измерение видимости в поиске и в AI-ответах. Поэтому первыми через него проходим сами: фиксируем точку отсчёта, показываем каждый следующий шаг лестницы и публикуем результат — включая тот, где результата пока нет."
+        title="Наши проекты — и один чужой, с его разрешения."
+        intro="Мы продаём измерение видимости в поиске и в AI-ответах. Поэтому первыми через него проходим сами: фиксируем точку отсчёта, показываем каждый следующий шаг лестницы и публикуем результат — включая тот, где результата пока нет. Один проект в списке не наш: мы помогаем ему с видимостью, и он разрешил показать свой замер."
       >
         <p className="max-w-2xl text-sm leading-relaxed text-muted">
           Источник: {journalMeta.source}. Окно — {journalMeta.windowDays} дней, а не месяц:
@@ -111,7 +112,8 @@ export default function JournalIndexPage() {
             <h2 className="text-h2 text-ink">Проекты</h2>
             <p className="mt-5 leading-relaxed text-muted">
               Числа ниже — обычный поиск Google за {journalMeta.windowDays} дней. Замер в AI-ответах —
-              следующая ступень, и он появится в журнале отдельной записью с датой.
+              следующая ступень, и он появится в журнале отдельной записью с датой. У чужого проекта
+              этих чисел нет: Search Console — это доступ к сайту, и брать его ради замера незачем.
             </p>
           </div>
 
@@ -129,6 +131,11 @@ export default function JournalIndexPage() {
                     <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr]">
                       <div>
                         <h3 className="font-serif text-2xl font-semibold text-ink">{project.name}</h3>
+                        {project.publishedByPermission ? (
+                          <p className="mt-2 inline-flex rounded-full border border-line bg-surface px-3 py-1 text-xs font-semibold tracking-wide text-copper-deep uppercase">
+                            Не наш проект · опубликовано с разрешения
+                          </p>
+                        ) : null}
                         <p className="mt-2 text-sm text-muted">{project.category}</p>
                         <p className="mt-1 text-sm text-muted">
                           {project.markets.join(" · ")} — {project.languages.join(", ")}

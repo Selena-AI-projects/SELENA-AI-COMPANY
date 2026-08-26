@@ -20,7 +20,8 @@ export type ProjectSlug =
   | "selenasystems"
   | "doki"
   | "remhaos"
-  | "villaops";
+  | "villaops"
+  | "bigdragonvillas";
 
 export type JournalStage =
   | "readiness"
@@ -136,6 +137,12 @@ export type JournalProject = {
   markets: string[];
   languages: string[];
   metrics: ProjectMetrics | null;
+  /**
+   * Present only when the business is not ours. A reader must not take a
+   * third party's measurement for a client result of ours, and the same line
+   * that says whose it is also states the permission that put it here.
+   */
+  publishedByPermission?: { owner: string; recordedOn: string; note: string };
   apiView?: ApiViewMeasurement;
   visitorView?: VisitorViewMeasurement;
   entries: JournalEntry[];
@@ -407,6 +414,47 @@ export const journalProjects: JournalProject[] = [
         title: "День ноль",
         body:
           "Ноль показов. Проект обслуживает виллы на Бали, замер пойдёт на английском и индонезийском.",
+      },
+    ],
+  },
+  {
+    slug: "bigdragonvillas",
+    name: "Big Dragon Villas Ubud",
+    url: "https://bigdragonvillasubud.com",
+    category: "Виллы и размещение, гости и туристы",
+    markets: ["Бали, Убуд"],
+    languages: ["английский"],
+    publishedByPermission: {
+      owner: "Big Dragon Villas Ubud",
+      recordedOn: "2026-08-26",
+      note:
+        "Это не наш проект. Мы помогаем им разобраться с видимостью, и они разрешили опубликовать результат замера. Без такого разрешения строчка о чужом бизнесе на сайте не появляется.",
+    },
+    // Not our Search Console property, so there is no click and impression
+    // window to show. Everything published here comes from the measurements.
+    metrics: null,
+    visitorView: {
+      date: "2026-08-26",
+      configVersion: "bigdragonvillas-api-view-2026-08-25",
+      questions: 25,
+      surfaceCount: 3,
+      answersRequested: 75,
+      answersReceived: 61,
+      brandMentions: 0,
+      costUsd: 0.1125,
+      surfaces: [],
+      citedDomains: [],
+      ownDomainAnswers: null,
+    },
+    entries: [
+      {
+        date: "2026-08-25",
+        stage: "apiView",
+        title: "Ноль из ста двадцати пяти — и полный список тех, кого назвали",
+        body:
+          "Пять AI-моделей получили 25 вопросов о том, где остановиться в Убуде: вилла с бассейном, с видом на рисовые террасы, с детьми, на месяц, для йоги, для небольшой свадьбы. Big Dragon Villas не назвали ни разу. Вместо них чаще всего называют Kamandalu Ubud — в 21 вопросе из 25, Puri Garden Hotel & Hostel в 19, Capella Ubud в 18, Four Seasons Sayan в 17, The Kayon Resort в 16, Alaya Resort Ubud в 13. Отдельно стоит заметить Airbnb (18 вопросов) и Booking.com (16): почти на треть вопросов модель отвечает не отелем, а площадкой бронирования — то есть отправляет гостя туда, где вилла платит комиссию.",
+        doesNotProve:
+          "Замер сделан по каналу API View — это собственные знания моделей, без веб-поиска. Названия взяты из тех же ответов и проверены на дословное присутствие, но не сведены к единому виду: «Kayon» и «The Kayon Resort» могли посчитаться дважды. Здесь названы шесть самых частых имён, а не весь список — полная выкладка лежит во внутреннем отчёте замера.",
       },
     ],
   },

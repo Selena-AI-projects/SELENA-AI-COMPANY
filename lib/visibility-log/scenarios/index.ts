@@ -10,6 +10,27 @@
  * others are written from the project's category alone and are marked as such
  * until the owner confirms them.
  */
+/**
+ * A third party's permission to publish their result.
+ *
+ * `source` says how we know, in the words of whoever told us, because "they
+ * agreed" with no trail is the same as no permission the day someone asks.
+ * None of these fields is inferred: an absent consent is an absent record, and
+ * the journal treats it as a no.
+ */
+export type PublicationConsent = {
+  /** The business that gave it. */
+  grantedBy: string;
+  /** Who on our side wrote it down. */
+  recordedBy: string;
+  /** ISO date the record was made. */
+  recordedOn: string;
+  /** What may be published under it, in plain words. */
+  scope: string;
+  /** How the permission reached us, and what evidence exists for it. */
+  source: string;
+};
+
 export type MeasurementScenario = {
   version: string;
   project: string;
@@ -26,6 +47,13 @@ export type MeasurementScenario = {
    * invisible is a claim about them, not about us.
    */
   ownership: "own" | "third-party";
+  /**
+   * The recorded yes, present only when a third party has given one. It is
+   * kept here, beside the questions it permits, rather than in the publishing
+   * layer: the permission is a property of the measurement, and a set edited
+   * later must be re-agreed rather than inherit an older consent.
+   */
+  consent?: PublicationConsent;
   strongAliases: readonly string[];
   weakAliases: readonly string[];
   questions: readonly string[];
