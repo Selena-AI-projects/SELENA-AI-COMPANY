@@ -22,17 +22,34 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "cabobali.com",
+            "villabalimanagement.com",
+            "gravitybali.com",
+            "balisuperhost.com",
+            "balitecture.com",
+            "balimmo-management.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "cabobali.com",
+            "balisuperhost.com",
+            "nagisa-bali.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -51,24 +68,34 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "villabalimanagement.com",
+            "cabobali.com",
+            "sevabali.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "villabalimanagement.com",
         "cabobali.com",
-        "sevabali.com"
+        "sevabali.com",
+        "villabalimanagement.com"
       ]
     },
     {
@@ -77,26 +104,40 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "baliestatemanager.com",
+            "villabalimanagement.com",
+            "cabobali.com",
+            "balitecture.com",
+            "bali-villa-management.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "bali-sands.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "cabobali.com",
         "bali-sands.com",
         "bali-villa-management.com",
         "baliestatemanager.com",
         "balitecture.com",
+        "cabobali.com",
         "villabalimanagement.com"
       ]
     },
@@ -106,27 +147,45 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "oss.go.id",
+            "dubaialternatives.com",
+            "airbnb.com",
+            "baliprov.go.id",
+            "emerhub.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "bali-property-real-estate.com",
+            "dda-realestate.com",
+            "expatindo.org",
+            "prestigepropertybali.com",
+            "balipropertyrules.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "oss.go.id",
         "airbnb.com",
         "bali-property-real-estate.com",
         "balipropertyrules.com",
         "baliprov.go.id",
-        "dda-realestate.com"
+        "dda-realestate.com",
+        "dubaialternatives.com"
       ]
     },
     {
@@ -135,27 +194,45 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balimanagement.villas",
+            "baliwebdesign.co.id",
+            "becikapp.com",
+            "hotelogix.com",
+            "premierpropertybali.com",
+            "beds24.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "rentalautopilot.com",
+            "lodgify.com",
+            "hotelogix.com",
+            "houseofreservations.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "hotelogix.com",
         "balimanagement.villas",
-        "balivilla.management",
         "baliwebdesign.co.id",
         "becikapp.com",
-        "beds24.com"
+        "beds24.com",
+        "houseofreservations.com"
       ]
     },
     {
@@ -164,17 +241,30 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "smoothstay.io",
+            "rental-network.com",
+            "rankonestays.com",
+            "guestpath-labs.framer.website",
+            "minut.com",
+            "alejandroagazzi.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -183,8 +273,8 @@
         "guestpath-labs.framer.website",
         "minut.com",
         "rankonestays.com",
-        "realtevoos.com",
-        "rental-network.com"
+        "rental-network.com",
+        "smoothstay.io"
       ]
     },
     {
@@ -193,17 +283,33 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "villabalimanagement.com",
+            "housekeepingbali.id",
+            "balitecture.com",
+            "greatbalivillas.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "thebaliagent.com",
+            "housekeepingbali.id",
+            "villa-management-bali.com",
+            "bali-cleaning.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -222,27 +328,42 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "oss.go.id",
+            "indonesia.travel"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "geriabaliproperty.com",
+            "kingswoodbalivillas.com",
+            "villa-finder.com",
+            "balipropertyrules.com",
+            "balivillarealty.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "oss.go.id",
-        "indonesia.travel",
         "balipropertyrules.com",
         "balivillarealty.com",
         "geriabaliproperty.com",
-        "kingswoodbalivillas.com"
+        "indonesia.travel",
+        "kingswoodbalivillas.com",
+        "oss.go.id"
       ]
     },
     {
@@ -251,23 +372,40 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "bali-villa-management.com",
+            "baliestatemanager.com",
+            "villa-management-bali.com",
+            "becikapp.com",
+            "balirealestateco.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "theluxurysignature.com",
+            "boutiquevillas-bali.com",
+            "balimanagement.villas",
+            "balivillaescapes.com.au"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "baliestatemanager.com",
         "bali-villa-management.com",
+        "baliestatemanager.com",
         "balimanagement.villas",
         "balirealestateco.com",
         "balivillaescapes.com.au",
@@ -280,17 +418,25 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "airbnb.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -304,17 +450,41 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balisuperhost.com",
+            "villabalimanagement.com",
+            "tropicallygroup.com",
+            "purahomesgroup.com",
+            "cabobali.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "cabobali.com",
+            "balitecture.com",
+            "balisuperhost.com",
+            "nagisa-bali.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "nfgroup-indonesia.com",
+            "orivista.com",
+            "balimanagement.villas",
+            "balisuperhost.com",
+            "mymandalika.com",
+            "southlombokvillamanagement.com"
+          ]
         }
       ],
       "namedInstead": [],
@@ -323,8 +493,8 @@
         "cabobali.com",
         "balimanagement.villas",
         "balitecture.com",
-        "ensun.io",
-        "mymandalika.com"
+        "mymandalika.com",
+        "nagisa-bali.com"
       ]
     },
     {
@@ -333,17 +503,29 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "vacasa.com",
+            "smoobu.com",
+            "partner.expediagroup.com",
+            "hostfully.com",
+            "evolve.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -361,17 +543,27 @@
         {
           "systemId": "ChatGPT",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "roomnexa.com",
+            "conduit.ai",
+            "powerpro.id"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -387,17 +579,30 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "staymaker.app",
+            "connectyourpms.com",
+            "vacasa.com",
+            "hostfully.com",
+            "minut.com",
+            "rentalduel.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -416,17 +621,30 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "baliestatemanager.com",
+            "tropicallygroup.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "usahaexpat.com",
+            "balisuperhost.com",
+            "balirealty.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -444,17 +662,23 @@
         {
           "systemId": "ChatGPT",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -466,17 +690,30 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "stayful.co.uk",
+            "hostrexa.com",
+            "join.globalvacationrentals.com",
+            "nowistay.com",
+            "rentresponsibly.org",
+            "vacasa.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -495,17 +732,30 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "safetyculture.com",
+            "webstaurantstore.com",
+            "mitti.com",
+            "vrma.org",
+            "siteminder.com",
+            "health.mo.gov"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -524,27 +774,45 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "assets.airbnb.com",
+            "disnakeresdm.baliprov.go.id",
+            "pajak.go.id",
+            "konsultanpajakbali.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balimanagement.villas",
+            "wonderfulbalivillas.com",
+            "lumaravillas.com",
+            "payotproperty.com",
+            "bukitvista.com",
+            "baliaccountants.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "pajak.go.id",
         "assets.airbnb.com",
         "baliaccountants.com",
         "balimanagement.villas",
         "bukitvista.com",
-        "disnakeresdm.baliprov.go.id"
+        "disnakeresdm.baliprov.go.id",
+        "konsultanpajakbali.com"
       ]
     },
     {
@@ -553,26 +821,44 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "villabalimanagement.com",
+            "balisuperhost.com",
+            "balitecture.com",
+            "islandvillamanagement.com",
+            "balivipvilla.com",
+            "aleyconcierge.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "kiniluxury.com",
+            "villabalimanagement.com",
+            "ministryofvillas.com",
+            "natanhospitality.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "villabalimanagement.com",
-        "balivipvilla.com",
         "aleyconcierge.com",
         "balisuperhost.com",
         "balitecture.com",
+        "balivipvilla.com",
         "islandvillamanagement.com"
       ]
     },
@@ -582,17 +868,27 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "mitti.com",
+            "gravitybali.com",
+            "caterer.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -608,17 +904,35 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "airbnb.co.id",
+            "samta.cloud",
+            "moobihotel.id",
+            "planethms.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "rumah123.com",
+            "eviivo.com",
+            "sendsquared.com",
+            "kozystay.com",
+            "balipropertyrules.com",
+            "expatica.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -637,17 +951,28 @@
         {
           "systemId": "ChatGPT",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "villasa.co",
+            "geriabaliproperty.com",
+            "villa-management-bali.com",
+            "gravitybali.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -664,17 +989,23 @@
         {
           "systemId": "ChatGPT",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -686,17 +1017,32 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "airbnb.com",
+            "outkeepr.com",
+            "hostaway.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "guesty.com",
+            "rentresponsibly.org",
+            "rentalready.com",
+            "oikospropertyventures.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],

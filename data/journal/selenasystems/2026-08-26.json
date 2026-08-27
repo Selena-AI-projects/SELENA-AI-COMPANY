@@ -22,27 +22,44 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "help-lb.openai.com",
+            "openai.com",
+            "help.openai.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "getcourtyard.ai",
+            "useomnia.com",
+            "knwn.app",
+            "searchscore.io",
+            "genrank.io",
+            "markty.ai"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "openai.com",
         "genrank.io",
         "getcourtyard.ai",
         "help-lb.openai.com",
         "help.openai.com",
-        "knwn.app"
+        "knwn.app",
+        "markty.ai"
       ]
     },
     {
@@ -51,17 +68,35 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "tracemetry.com",
+            "citelyzer.com",
+            "getgeoscan.ai",
+            "brandcitation.com",
+            "lemniscategrowth.com",
+            "ranqo.ai"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "whito.co.uk",
+            "quora.com",
+            "uxcontinuum.com",
+            "rewnue.ai"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -80,17 +115,35 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "slatehq.com",
+            "getmentionedbyai.com",
+            "techradar.com",
+            "nightwatch.io",
+            "mentionhq.com",
+            "sophyx.io"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "vismore.ai",
+            "dageno.ai",
+            "mentions.so",
+            "siftly.ai"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -99,8 +152,8 @@
         "getmentionedbyai.com",
         "mentionhq.com",
         "mentions.so",
-        "mentionsapi.com",
-        "nightwatch.io"
+        "nightwatch.io",
+        "siftly.ai"
       ]
     },
     {
@@ -109,17 +162,35 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "semrush.com",
+            "stridec.com",
+            "businessmcp.com",
+            "yext.com",
+            "cituna.com",
+            "citepoint.ai"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "maxaeo.ai",
+            "peec.ai",
+            "reddit.com",
+            "semrush.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -138,27 +209,47 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "hubspot.com",
+            "magnet.co",
+            "pedowitzgroup.com",
+            "askedabout.com",
+            "salesforce.com",
+            "aisearchvisibility.ai"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "semrush.com",
+            "tryprofound.com",
+            "cxl.com",
+            "ahrefs.com",
+            "coursera.org",
+            "searchatlas.com"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "ahrefs.com",
-        "aioseo.com",
         "aisearchvisibility.ai",
         "askedabout.com",
-        "blog.marketmuse.com",
-        "coursera.org"
+        "coursera.org",
+        "cxl.com",
+        "hubspot.com"
       ]
     },
     {
@@ -167,17 +258,28 @@
         {
           "systemId": "ChatGPT",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "margen.net",
+            "reddit.com",
+            "applaire.com",
+            "blog.hubspot.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -194,23 +296,35 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "perplexity.ai"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "powerdigitalmarketing.com",
+            "lengow.com",
+            "seo.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "perplexity.ai",
         "lengow.com",
+        "perplexity.ai",
         "powerdigitalmarketing.com",
         "seo.com"
       ]
@@ -221,27 +335,54 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "otterly.ai",
+            "trylyra.ai",
+            "featured.com",
+            "pagelens.ai",
+            "trionia.com",
+            "spyglasses.io"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "optimly.ai",
+            "waikay.io",
+            "hubspot.com",
+            "rankprompt.com",
+            "vectorgap.ai",
+            "amplitude.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ahrefs.com",
+            "rankprompt.com",
+            "optimly.ai",
+            "influenceai.ai",
+            "fratzkemedia.com",
+            "thehyperminds.com"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "optimly.ai",
         "rankprompt.com",
-        "waikay.io",
         "ahrefs.com",
         "amplitude.com",
-        "baarely.com"
+        "featured.com",
+        "fratzkemedia.com"
       ]
     },
     {
@@ -250,27 +391,47 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "blog.hubspot.com",
+            "ahrefs.com",
+            "businessinsider.com",
+            "yext.com",
+            "semrush.com",
+            "rankscale.ai"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aurametrics.io",
+            "tryanalyze.ai",
+            "muckrack.com",
+            "ahrefs.com",
+            "reddit.com",
+            "rhemicai.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "ahrefs.com",
         "aurametrics.io",
-        "axios.com",
         "blog.hubspot.com",
         "businessinsider.com",
-        "citations.io"
+        "muckrack.com",
+        "rankscale.ai"
       ]
     },
     {
@@ -279,24 +440,39 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "developers.google.com",
+            "businessinsider.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "coresearchmarketing.com",
+            "sangfroidwebdesign.com",
+            "squarespace.com",
+            "seooptimizers.com",
+            "reddit.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "developers.google.com",
         "businessinsider.com",
         "coresearchmarketing.com",
+        "developers.google.com",
         "reddit.com",
         "sangfroidwebdesign.com",
         "seooptimizers.com"
@@ -308,26 +484,44 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "developers.google.com",
+            "help.openai.com",
+            "developers.google.cn",
+            "github.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "pixeledeggs.com",
+            "waltandgordon.com",
+            "the-escape.co.uk",
+            "reddit.com",
+            "dbeta.co.uk",
+            "developers.google.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "developers.google.com",
-        "developers.google.cn",
-        "help.openai.com",
         "dbeta.co.uk",
+        "developers.google.cn",
         "github.com",
+        "help.openai.com",
         "pixeledeggs.com"
       ]
     },
@@ -337,27 +531,47 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "accessnewswire.com",
+            "localvisibilityai.com",
+            "getnamed.ai",
+            "foundclearly.com",
+            "srtagency.com",
+            "marketdisruptorsagency.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "optimus-consulting.co.uk",
+            "reddit.com",
+            "seostrategy.co.uk",
+            "ambitiouspr.co.uk",
+            "wsiworld.com",
+            "thehyperminds.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "accessnewswire.com",
-        "aisearchengineers.com",
         "ambitiouspr.co.uk",
-        "evolvebusiness.com",
         "foundclearly.com",
-        "getnamed.ai"
+        "getnamed.ai",
+        "localvisibilityai.com",
+        "marketdisruptorsagency.com"
       ]
     },
     {
@@ -366,17 +580,28 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "visiblie.com",
+            "quora.com",
+            "semrush.com",
+            "reddit.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -393,17 +618,31 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "support.google.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "visiblie.com",
+            "loamly.ai",
+            "trackmybusiness.ai",
+            "support.google.com",
+            "beamtrace.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -421,17 +660,28 @@
         {
           "systemId": "ChatGPT",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "beamtrace.com",
+            "layer3labs.io",
+            "reddit.com",
+            "visiblie.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -448,27 +698,47 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "signalandnoisegeo.com",
+            "topgeoagencies.com",
+            "thedigitalelevator.com",
+            "sightivo.com",
+            "exponentmarketing.com",
+            "rocketgeo.ai"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ekamoira.com",
+            "gtm8020.com",
+            "reddit.com",
+            "exposureninja.com",
+            "contensifyhq.com",
+            "tryprofound.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "exponentmarketing.com",
-        "rocketgeo.ai",
-        "animalz.co",
-        "beomniscient.com",
         "contensifyhq.com",
-        "directiveconsulting.com"
+        "ekamoira.com",
+        "exponentmarketing.com",
+        "exposureninja.com",
+        "gtm8020.com",
+        "reddit.com"
       ]
     },
     {
@@ -477,27 +747,43 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "spyglasses.io",
+            "promptvisible.ai",
+            "soar.sh",
+            "ai-visibility.co",
+            "trackaimentions.com",
+            "broadcastwell.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "get-ryze.ai",
+            "honeyb.ai"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "ai-visibility.co",
-        "audit.filter.agency",
         "broadcastwell.com",
         "get-ryze.ai",
         "honeyb.ai",
-        "promptvisible.ai"
+        "promptvisible.ai",
+        "soar.sh"
       ]
     },
     {
@@ -506,27 +792,44 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "developers.google.com",
+            "perplexity.ai",
+            "searchmention.com",
+            "support.google.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "troagency.com",
+            "ayzeo.com",
+            "aisearch.similarweb.com",
+            "beamtrace.com",
+            "kime.ai"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "perplexity.ai",
         "aisearch.similarweb.com",
         "ayzeo.com",
         "beamtrace.com",
         "developers.google.com",
-        "kime.ai"
+        "kime.ai",
+        "perplexity.ai"
       ]
     },
     {
@@ -535,17 +838,35 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "isvisible.ai",
+            "checkgeoscore.com",
+            "frase.io",
+            "audit.searchless.ai",
+            "developers.google.com",
+            "support.google.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "loamly.ai",
+            "forzeo.com",
+            "sitespeak.ai",
+            "hubspot.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -564,17 +885,33 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "arxiv.org",
+            "searchengineland.com",
+            "papers.ssrn.com",
+            "citegap.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "solv-interactiv.com",
+            "wsismartmarketing.com",
+            "nuwaybizsolutions.com",
+            "reddit.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -593,27 +930,45 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ameus.ai",
+            "numedia.ai",
+            "searchdock.io",
+            "dinerdashboard.com",
+            "chowly.com",
+            "fuelonline.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "b3designers.co.uk",
+            "malou.io",
+            "negodiuk.ai",
+            "momos.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "ameus.ai",
-        "axios.com",
         "b3designers.co.uk",
         "chowly.com",
-        "cloro.dev",
-        "delphiumlabs.com"
+        "dinerdashboard.com",
+        "fuelonline.com",
+        "malou.io"
       ]
     },
     {
@@ -622,17 +977,26 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "help.openai.com",
+            "openai.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -647,27 +1011,50 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ansvisor.com",
+            "citationworks.com",
+            "theguardian.com",
+            "aivisibilitybarometer.com",
+            "hubspot.com",
+            "aeomantis.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "usegrowthos.com",
+            "zapier.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "zscaler.com",
+            "purevisibility.com",
+            "frase.io",
+            "position.digital",
+            "semrush.com",
+            "oreateai.com"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "aeomantis.com",
-        "aivisibility.io",
         "aivisibilitybarometer.com",
         "ansvisor.com",
         "citationworks.com",
-        "frase.io"
+        "frase.io",
+        "hubspot.com"
       ]
     },
     {
@@ -676,17 +1063,28 @@
         {
           "systemId": "ChatGPT",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "vismore.ai",
+            "blog.hubspot.com",
+            "triplewhale.com",
+            "flatlineagency.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -703,17 +1101,36 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "answerenginesoptimization.ai",
+            "firstpagesage.com",
+            "aeothis.com",
+            "rankworks.com",
+            "tryprofound.com",
+            "llmpulse.ai"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "20northmarketing.com",
+            "tryprofound.com",
+            "elsner.com",
+            "semai.ai",
+            "primeavenuegroup.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -721,9 +1138,9 @@
         "tryprofound.com",
         "20northmarketing.com",
         "aeothis.com",
-        "ahrefs.com",
-        "airops.com",
-        "answerenginesoptimization.ai"
+        "answerenginesoptimization.ai",
+        "elsner.com",
+        "firstpagesage.com"
       ]
     }
   ]

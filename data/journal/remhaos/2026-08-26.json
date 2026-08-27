@@ -22,17 +22,23 @@
         {
           "systemId": "ChatGPT",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -44,17 +50,33 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "softwareadvice.com",
+            "pro.houzz.com",
+            "augmentedtrades.com",
+            "deelo.ai",
+            "capterra.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "cian.ru",
+            "m2.ru",
+            "lifehacker.ru"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -73,17 +95,28 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "deelo.ai",
+            "yours-tim.com",
+            "plutio.com",
+            "blueprintstudio.io"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -100,24 +133,35 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "digitalcitizen.life",
+            "dropbox.com",
+            "drive.google.com",
+            "microsoft.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "dropbox.com",
         "digitalcitizen.life",
         "drive.google.com",
+        "dropbox.com",
         "microsoft.com"
       ]
     },
@@ -127,17 +171,34 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "base.garant.ru",
+            "rbi.standard.ds.do",
+            "normativ.kontur.ru"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "manigorstroy.ru",
+            "blog.isakovadesign.ru",
+            "medium.com",
+            "loft-design-msk.ru",
+            "d-e-s-i-g-n.ru",
+            "roomble.com"
+          ]
         }
       ],
       "namedInstead": [],
@@ -145,9 +206,9 @@
         "base.garant.ru",
         "blog.isakovadesign.ru",
         "d-e-s-i-g-n.ru",
-        "emailmatrix.ru",
-        "habr.com",
-        "loft-design-msk.ru"
+        "loft-design-msk.ru",
+        "manigorstroy.ru",
+        "medium.com"
       ]
     },
     {
@@ -156,17 +217,27 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "inmyroom.ru",
+            "realty.rbc.ru",
+            "nncube.ru"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -182,27 +253,40 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "homecostbrief.com",
+            "remion.ru",
+            "basicdecor.ru",
+            "singlefamily.fanniemae.com",
+            "constract.io",
+            "joinhomeowners.org"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "app-renohub.com",
         "basicdecor.ru",
         "constract.io",
-        "expertremonta.kz",
         "homecostbrief.com",
-        "joinhomeowners.org"
+        "joinhomeowners.org",
+        "remion.ru",
+        "singlefamily.fanniemae.com"
       ]
     },
     {
@@ -211,27 +295,40 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "blog.designfiles.co",
+            "mydomastudio.com",
+            "studiodesigner.com",
+            "programa.design",
+            "designfiles.co",
+            "houzz.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "mydomastudio.com",
         "blog.designfiles.co",
+        "designfiles.co",
+        "houzz.com",
+        "mydomastudio.com",
         "programa.design",
-        "studiodesigner.com",
-        "deelo.ai",
-        "designfiles.co"
+        "studiodesigner.com"
       ]
     },
     {
@@ -240,24 +337,35 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "protect.gost.ru",
+            "base.garant.ru",
+            "sudact.ru",
+            "consultant.ru"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "protect.gost.ru",
         "base.garant.ru",
         "consultant.ru",
+        "protect.gost.ru",
         "sudact.ru"
       ]
     },
@@ -267,17 +375,27 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "remontflow.pro",
+            "novosibdom.ru",
+            "eremont.ru"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -293,17 +411,27 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "buildertrend.com",
+            "worksection.com",
+            "fieldservicesoftware.io"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -319,17 +447,28 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "plitka-pol.ru",
+            "base.garant.ru",
+            "kovalchuk-interior.com",
+            "realty.rbc.ru"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -346,25 +485,36 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "fullstaxx.com",
+            "honeybook.com",
+            "pro.houzz.com",
+            "agiled.app"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "pro.houzz.com",
         "agiled.app",
         "fullstaxx.com",
-        "honeybook.com"
+        "honeybook.com",
+        "pro.houzz.com"
       ]
     },
     {
@@ -373,27 +523,44 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "101-app.com",
+            "kvartum.com",
+            "getgantt.ru"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "sky.pro",
+            "101-app.com",
+            "proficont.ru",
+            "parketspektr.ru",
+            "vse-o-stroitelstve.ru",
+            "flatica.ru"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "101-app.com",
-        "parketspektr.ru",
-        "sky.pro",
         "flatica.ru",
         "getgantt.ru",
-        "kvartum.com"
+        "kvartum.com",
+        "parketspektr.ru",
+        "proficont.ru"
       ]
     },
     {
@@ -402,23 +569,32 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "help.autodesk.com",
+            "help.solidworks.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "help.solidworks.com",
-        "help.autodesk.com"
+        "help.autodesk.com",
+        "help.solidworks.com"
       ]
     },
     {
@@ -427,27 +603,42 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "minstroyrf.gov.ru"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "lesstroy.net",
+            "woodnn.ru",
+            "yorkstrizhka.ru",
+            "realnoevremya.ru",
+            "pstroit.ru",
+            "inmyroom.ru"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "minstroyrf.gov.ru",
-        "forum.domik.ua",
         "inmyroom.ru",
         "lesstroy.net",
-        "openbusiness.ru",
-        "pstroit.ru"
+        "minstroyrf.gov.ru",
+        "pstroit.ru",
+        "realnoevremya.ru",
+        "woodnn.ru"
       ]
     },
     {
@@ -456,27 +647,45 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "fieldwire.com",
+            "procore.com",
+            "buildertrend.com",
+            "buildern.com",
+            "rakenapp.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "vr-arsoft.com",
+            "digital-build.ru",
+            "sgnl.pro",
+            "planradar.com",
+            "planado.ru"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "fieldwire.com",
-        "procore.com",
         "buildern.com",
         "buildertrend.com",
         "digital-build.ru",
-        "planado.ru"
+        "fieldwire.com",
+        "planado.ru",
+        "planradar.com"
       ]
     },
     {
@@ -485,17 +694,23 @@
         {
           "systemId": "ChatGPT",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -507,17 +722,30 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "xn----gtbtgjp4b.xn--p1ai",
+            "anatolichblog.ru",
+            "remontflow.pro",
+            "crmrem.ru",
+            "teletype.in",
+            "eto-razvod.ru"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -536,27 +764,44 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "grupoperera.com",
+            "hogarapunto.com",
+            "javiergaspar.com",
+            "badajozreformas.es",
+            "homeserve.es",
+            "fix-remont.ru"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "remont.sberuslugi.ru",
+            "domeo-remont.ru",
+            "m2.ru"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "hogarapunto.com",
-        "javiergaspar.com",
-        "remont.sberuslugi.ru",
         "badajozreformas.es",
         "domeo-remont.ru",
-        "fix-remont.ru"
+        "fix-remont.ru",
+        "grupoperera.com",
+        "hogarapunto.com",
+        "homeserve.es"
       ]
     },
     {
@@ -565,27 +810,40 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "creativeprojectmanagement.org",
+            "smartsheet.com",
+            "amwmedia.co.uk",
+            "hivedesk.com",
+            "pci.us",
+            "clickup.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "smartsheet.com",
         "amwmedia.co.uk",
         "clickup.com",
         "creativeprojectmanagement.org",
         "hivedesk.com",
-        "pci.us"
+        "pci.us",
+        "smartsheet.com"
       ]
     },
     {
@@ -594,17 +852,25 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "base.garant.ru"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -618,17 +884,23 @@
         {
           "systemId": "ChatGPT",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -640,17 +912,30 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "pmi.org",
+            "climbtheladder.com",
+            "transit.dot.gov",
+            "ingenious.build",
+            "mastt.com",
+            "blog.constructiononline.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -660,7 +945,7 @@
         "ingenious.build",
         "mastt.com",
         "pmi.org",
-        "rolloutiq.com"
+        "transit.dot.gov"
       ]
     },
     {
@@ -669,17 +954,37 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "remion.ru",
+            "cian.ru",
+            "rskrf.ru",
+            "novosibdom.ru",
+            "04.rospotrebnadzor.ru",
+            "anatolichblog.ru"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "novostroiki-vs-vtorichka.ru",
+            "expertremonta.kz",
+            "rudesignshop.ru",
+            "design-50.ru",
+            "remstroy-group.ru",
+            "kd-group.ru"
+          ]
         }
       ],
       "namedInstead": [],
@@ -687,9 +992,9 @@
         "04.rospotrebnadzor.ru",
         "anatolichblog.ru",
         "cian.ru",
-        "delaicomfort.ru",
         "design-50.ru",
-        "expertremonta.kz"
+        "expertremonta.kz",
+        "kd-group.ru"
       ]
     }
   ]
