@@ -20,6 +20,7 @@ import {
 } from "@/lib/visibility-log/data";
 import {
   type MeasurementDetail,
+  parseDetail,
   systemLabel,
   systemTotals,
 } from "@/lib/visibility-log/measurement-detail";
@@ -119,6 +120,30 @@ test("a cell that never got an answer is not a zero", () => {
     { systemId: "ChatGPT", channel: "VISITOR", answered: 2, mentioned: 1 },
     { systemId: "Perplexity", channel: "VISITOR", answered: 1, mentioned: 0 },
   ]);
+});
+
+test("a broken detail file stops the build instead of disappearing", () => {
+  const good = JSON.stringify({
+    date: "2026-08-26",
+    configVersion: "test-2026-08-26",
+    systems: [{ systemId: "ChatGPT", channel: "VISITOR" }],
+    questions: [
+      { text: "Вопрос", cells: [{ systemId: "ChatGPT", answered: true, mentioned: true }], namedInstead: [], citedDomains: [] },
+    ],
+  });
+  assert.equal(parseDetail("t.json", good).date, "2026-08-26");
+
+  // Skipping a bad file would publish a page that quietly omits a
+  // measurement, and a missing measurement reads as one that found nothing.
+  const broken: [string, string][] = [
+    ["no date", good.replace('"2026-08-26"', '"вчера"')],
+    ["no version", good.replace('"test-2026-08-26"', '""')],
+    ["no systems", good.replace(/"systems":\[[^\]]*\]/, '"systems":[]')],
+    ["a system with no cell", good.replace('"ChatGPT", "answered"', '"Gemini", "answered"').replace('{"systemId":"ChatGPT","answered":true,"mentioned":true}', '{"systemId":"Gemini","answered":true,"mentioned":true}')],
+  ];
+  for (const [why, raw] of broken) {
+    assert.throws(() => parseDetail("t.json", raw), `${why} was accepted`);
+  }
 });
 
 test("a model id is shown under the name people know it by", () => {
