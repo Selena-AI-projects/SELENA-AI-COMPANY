@@ -32,7 +32,7 @@ export const ruHomepage = {
     headline: "Когда клиент спрашивает AI, ваш бизнес попадает в ответ?",
     subheadline:
       "ChatGPT, Gemini и Perplexity уже советуют людям, куда пойти и у кого покупать. Мы измеряем, попадает ли ваш бизнес в эти ответы, — и показываем, что исправить. Вход бесплатный: проверка того, что AI может прочитать на вашем сайте.",
-    primaryCta: { label: "Проверить AI-готовность — бесплатно", href: "/ru/check" },
+    primaryCta: { label: "Проверить готовность сайта для AI — бесплатно", href: "/ru/check" },
     secondaryCta: { label: "Сравнить бесплатный и платные тарифы", href: "/ru/pricing" },
     primaryNote:
       "Бесплатная проверка — техническая: читаем сайт так, как его читают AI-агенты, и показываем, что починить. Это отдельный шаг, не замер видимости — замеры начинаются с платных шагов.",
@@ -152,7 +152,7 @@ export const ruHomepage = {
           cta: { label: "Подробнее о тарифе", href: "/ru/pricing" },
         },
       ],
-      primaryCta: { label: "Проверить AI-готовность — бесплатно", href: "/ru/check" },
+      primaryCta: { label: "Проверить готовность сайта для AI — бесплатно", href: "/ru/check" },
       secondaryCta: { label: "Открыть AI Visibility", href: "/ru/visibility" },
     },
     systems: {
