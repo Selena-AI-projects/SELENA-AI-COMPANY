@@ -100,7 +100,7 @@ export function Header() {
     };
 
     const onResize = () => {
-      if (window.innerWidth >= 1024) setOpen(false);
+      if (window.innerWidth >= 1400) setOpen(false);
     };
 
     document.addEventListener("keydown", onKeyDown);
@@ -123,7 +123,11 @@ export function Header() {
           darkHero ? "text-ivory" : "text-ink",
         )}
       >
-        <Container size="wide">
+        {/* The bar is not the text column and does not share its ceiling: a
+            row of eight labels, a CTA and the language switch needs more than
+            80rem to stand on one line, and below the width where it fits, the
+            menu button takes over. */}
+        <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 min-[1400px]:max-w-[92rem]">
         <div className="flex h-16 items-center justify-between sm:h-[4.5rem]">
           {/* Wordmark */}
           <Link
@@ -136,7 +140,7 @@ export function Header() {
 
           {/* Desktop nav */}
           <nav
-            className="hidden items-center gap-5 xl:gap-7 lg:flex"
+            className="hidden items-center gap-5 min-[1400px]:flex min-[1560px]:gap-7"
             aria-label={isEnglish ? "Main navigation" : "Основная навигация"}
           >
             {currentNav.map((item) => (
@@ -144,7 +148,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "inline-flex min-h-11 items-center text-base font-medium transition-colors hover:text-copper-deep",
+                  "inline-flex min-h-11 items-center whitespace-nowrap text-base font-medium transition-colors hover:text-copper-deep",
                   pathname === item.href
                     ? "text-copper-deep"
                     : darkHero
@@ -167,7 +171,7 @@ export function Header() {
                 {isEnglish ? "Client login" : "Кабинет"}
               </Link>
             )}
-            <Button href={currentCta.href} className="ml-2">
+            <Button href={currentCta.href} className="ml-2 whitespace-nowrap">
               {currentCta.label}
             </Button>
             {languageHref && (
@@ -189,7 +193,7 @@ export function Header() {
             ref={toggleRef}
             type="button"
             className={cn(
-              "relative z-50 -mr-2 flex h-11 w-11 items-center justify-center rounded-full lg:hidden",
+              "relative z-50 -mr-2 flex h-11 w-11 items-center justify-center rounded-full min-[1400px]:hidden",
               darkHero ? "text-ivory" : "text-ink",
             )}
             aria-expanded={open}
@@ -227,7 +231,7 @@ export function Header() {
             </span>
           </button>
         </div>
-        </Container>
+        </div>
       </header>
 
       {/* Mobile menu overlay — kept OUT of <header>: the header's
@@ -237,7 +241,7 @@ export function Header() {
         id="mobile-menu"
         ref={menuRef}
         className={cn(
-          "fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-ivory transition-[opacity,visibility] duration-300 sm:top-[4.5rem] lg:hidden",
+          "fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-ivory transition-[opacity,visibility] duration-300 sm:top-[4.5rem] min-[1400px]:hidden",
           open ? "visible opacity-100" : "invisible opacity-0",
         )}
       >
