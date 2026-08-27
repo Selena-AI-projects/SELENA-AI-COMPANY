@@ -1,0 +1,736 @@
+{
+  "date": "2026-08-26",
+  "configVersion": "otherbali-api-view-2026-08-25",
+  "systems": [
+    {
+      "systemId": "ChatGPT",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Gemini",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Perplexity",
+      "channel": "VISITOR"
+    }
+  ],
+  "questions": [
+    {
+      "text": "What is the best guide to Bali for first-time visitors?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "lonelyplanet.com",
+        "indonesia.travel",
+        "girleatworld.net",
+        "kelanabykayla.com",
+        "kulturekween.com",
+        "londonerinsydney.com"
+      ]
+    },
+    {
+      "text": "Where can I find honest restaurant reviews for Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "reddit.com",
+        "balieats.com",
+        "balirestaurantguide.com",
+        "dineandwinebali.com",
+        "myfavsmap.com",
+        "suppersocial.co"
+      ]
+    },
+    {
+      "text": "Which website lists the best places to eat in Canggu?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "wanderlog.com",
+        "willflyforfood.net",
+        "baliuntold.com",
+        "midnightblueelephant.com",
+        "balicopter.com",
+        "bucketlistbombshells.com"
+      ]
+    },
+    {
+      "text": "Where should I look for things to do in Uluwatu?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balifrontier.com",
+        "balimalayali.com",
+        "destinationbali.id",
+        "getyourguide.com",
+        "joujoutravels.com",
+        "kelanabykayla.com"
+      ]
+    },
+    {
+      "text": "What are the best pilates and yoga studios in Uluwatu?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "beautyguidebali.com",
+        "amipilatesbarre.com",
+        "classpass.com",
+        "laislabali.com",
+        "melalibingin.com",
+        "sejatiuluwatu.com"
+      ]
+    },
+    {
+      "text": "Where can I find a list of beach clubs in Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "nowbali.co.id",
+        "bali.com",
+        "belaroundtheworld.com",
+        "elsky-bali.com",
+        "indonesia.travel",
+        "stokedtotravel.com"
+      ]
+    },
+    {
+      "text": "Which blogs cover new restaurant openings in Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "thehoneycombers.com",
+        "nowbali.co.id",
+        "whatsnewindonesia.com"
+      ]
+    },
+    {
+      "text": "How do I find good cafes in Seminyak?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "baliholidaysecrets.com",
+        "thehoneycombers.com",
+        "tripadvisor.com",
+        "belaroundtheworld.com",
+        "brewatlas.co",
+        "cinchy.life"
+      ]
+    },
+    {
+      "text": "What is the best website for Bali travel tips?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "bali.com",
+        "baliholidaysecrets.com",
+        "gobaligo.id",
+        "google.com",
+        "lonelyplanet.com",
+        "searchspot.ai"
+      ]
+    },
+    {
+      "text": "Where can I read about hidden places in Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "indonesia.travel",
+        "22places.com",
+        "adventuresnsunsets.com",
+        "anomadspassport.com",
+        "baliislandvacation.id",
+        "balivillahub.com"
+      ]
+    },
+    {
+      "text": "Which guide covers wellness and fitness in Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "sharniquinn.com",
+        "bali.com",
+        "books.apple.com",
+        "tripswithasoul.com"
+      ]
+    },
+    {
+      "text": "Where do I find recommendations for Ubud restaurants?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "chasinglenscapes.com",
+        "lifetravelandasia.com",
+        "thebaliguideline.com",
+        "thehoneycombers.com",
+        "theurbanlist.com",
+        "tripadvisor.com"
+      ]
+    },
+    {
+      "text": "What websites review Bali hotels honestly?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "reddit.com",
+        "agoda.com",
+        "gotrexo.com",
+        "tripadvisor.com"
+      ]
+    },
+    {
+      "text": "Where can I find a Bali itinerary for one week?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "alexandleahontour.org",
+        "bhataravillasanur.com",
+        "booking.com",
+        "casalivingbali.com",
+        "destinedforbali.com",
+        "dmcquote.com"
+      ]
+    },
+    {
+      "text": "Which sites help expats find services in Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "localexpatsbali.com",
+        "expat.com",
+        "balirelocation.com",
+        "expat.or.id",
+        "expatease.id",
+        "getmyhome.app"
+      ]
+    },
+    {
+      "text": "Where can I find out about Bali surf spots for beginners?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balioceansurf.com",
+        "hotels.com",
+        "izzibali.com",
+        "mokumsurfclub.com",
+        "perfectwavetravel.com",
+        "reddit.com"
+      ]
+    },
+    {
+      "text": "What is a good source for Bali nightlife recommendations?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "bali.com",
+        "baliholidaysecrets.com",
+        "sandbeds.com",
+        "thebalipulse.com",
+        "thebeatbali.com",
+        "thehoneycombers.com"
+      ]
+    },
+    {
+      "text": "Where can I find family-friendly things to do in Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "indonesia.travel",
+        "bali.com",
+        "canggu.holidayinnresorts.com",
+        "littlepassportcrew.com",
+        "travelmadmum.com"
+      ]
+    },
+    {
+      "text": "Which website covers Bali beaches with practical detail?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "baliuntold.com",
+        "almostlanding-bali.com",
+        "bali.com",
+        "balibeachsanur.com",
+        "balidave.com",
+        "baliforum.ru"
+      ]
+    },
+    {
+      "text": "Where do people find recommendations for Bali day trips?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "reddit.com",
+        "getyourguide.com",
+        "karolinagenova.com",
+        "klook.com",
+        "liveselfhappy.com",
+        "tripadvisor.com"
+      ]
+    },
+    {
+      "text": "What is the best resource for moving to Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "baliexpatcommunity.com",
+        "bali.com",
+        "balitecturerealty.com",
+        "balivillarealty.com",
+        "expat.com",
+        "expatden.com"
+      ]
+    },
+    {
+      "text": "Where can I find reviews of coworking spaces in Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "reddit.com",
+        "coworker.com",
+        "coworkintel.com",
+        "indojunkie.com",
+        "wanderlog.com"
+      ]
+    },
+    {
+      "text": "Which guides cover Bali off the tourist track?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "books.google.com",
+        "lonelyplanet.com",
+        "22places.com",
+        "finnsbeachclub.com",
+        "jonglezpublishing.com",
+        "neverendingvoyage.com"
+      ]
+    },
+    {
+      "text": "Where can I find seasonal advice about visiting Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "lonelyplanet.com",
+        "bali.com",
+        "indonesia.travel",
+        "indonesiavoa.vfsevisa.id",
+        "kuoni.co.uk",
+        "neptunescubadiving.com"
+      ]
+    },
+    {
+      "text": "What should I read before a first trip to Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "indonesia.travel",
+        "baliholidaysecrets.com",
+        "blueskytraveler.com",
+        "girleatworld.net",
+        "reddit.com",
+        "smartraveller.gov.au"
+      ]
+    }
+  ]
+}
