@@ -131,3 +131,25 @@ test("no Russian page hard-codes a link to an English page", () => {
     }
   }
 });
+
+/**
+ * The five Visibility tiers are one product; "Разберём вашу задачу" is the
+ * brief for another one. Every paid tier on both home pages pointed at it, so
+ * a visitor who clicked $49 landed in the AI Automation funnel.
+ */
+test("a measurement tier never opens the brief for a different service", () => {
+  for (const [locale, content] of [
+    ["ru", ruHomepage],
+    ["en", homepage],
+  ] as const) {
+    const tiers = content.productPaths.visibility.items;
+    assert.ok(tiers.length > 0, `${locale} has no Visibility tiers`);
+    for (const tier of tiers) {
+      if (!tier.cta) continue;
+      assert.ok(
+        !pathOf(tier.cta.href).includes("contact"),
+        `${locale}: «${tier.name}» sends the visitor to ${tier.cta.href}`,
+      );
+    }
+  }
+});
