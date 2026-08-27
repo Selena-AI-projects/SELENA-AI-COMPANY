@@ -1,5 +1,6 @@
 import {
   type MeasurementDetail,
+  citedDomains,
   isApiChannel,
   systemLabel,
   systemTotals,
@@ -43,11 +44,19 @@ function cellState(mentioned: boolean | null, answered: boolean): keyof typeof m
 export function MeasurementGrid({
   detail,
   number,
+  ownDomain,
 }: {
   detail: MeasurementDetail;
   number: number;
+  /** The project's own site, so the list can say whether it is in there. */
+  ownDomain?: string;
 }) {
   const totals = systemTotals(detail);
+  const sources = citedDomains(detail);
+  const ownAnswers = ownDomain
+    ? (sources.find((source) => source.domain === ownDomain)?.answers ?? 0)
+    : null;
+  const topAnswers = sources[0]?.answers ?? 0;
   const columns = `minmax(13rem, 1fr) repeat(${detail.systems.length}, 2.75rem)`;
   const minWidth = `${13 + detail.systems.length * 2.75}rem`;
 
@@ -181,6 +190,53 @@ export function MeasurementGrid({
           </div>
         </div>
       </div>
+
+      {sources.length > 0 ? (
+        <div className="mt-16">
+          <h3 className="text-h3 text-ivory">Откуда AI берёт ответы</h3>
+          <p className="mt-4 max-w-3xl leading-relaxed text-ivory/75">
+            Модель не придумывает рекомендацию — она пересказывает то, что уже
+            написано на нескольких страницах. Вот эти страницы. Всего{" "}
+            {sources.length} сайтов; показаны те, на которые сослались чаще всего.
+          </p>
+          {ownDomain ? (
+            <p className="mt-4 max-w-3xl leading-relaxed text-ivory">
+              Ваш сайт <span className="font-semibold">{ownDomain}</span> —{" "}
+              {ownAnswers === 0 ? (
+                <span className="font-semibold text-copper">ни одного ответа</span>
+              ) : (
+                <span className="font-semibold text-copper">
+                  {ownAnswers} {ownAnswers === 1 ? "ответ" : "ответов"}
+                </span>
+              )}
+              . Чтобы вас называли, надо попасть туда, куда смотрят машины.
+            </p>
+          ) : null}
+          <ul className="mt-8 space-y-2.5">
+            {sources.slice(0, 12).map((source) => {
+              const own = source.domain === ownDomain;
+              return (
+                <li key={source.domain} className="grid grid-cols-[1fr_auto] items-center gap-4">
+                  <span className="grid grid-cols-[minmax(9rem,14rem)_1fr] items-center gap-4">
+                    <span className={own ? "font-semibold text-copper" : "text-ivory/90"}>
+                      {source.domain}
+                    </span>
+                    <span aria-hidden className="hidden h-1.5 rounded-full bg-ivory/10 sm:block">
+                      <span
+                        className={`block h-full rounded-full ${own ? "bg-copper" : "bg-ivory/35"}`}
+                        style={{ width: `${Math.round((source.answers / topAnswers) * 100)}%` }}
+                      />
+                    </span>
+                  </span>
+                  <span className="text-sm tabular-nums text-ivory/60">
+                    {source.answers}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ) : null}
     </div>
   );
 }

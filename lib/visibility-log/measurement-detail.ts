@@ -149,6 +149,29 @@ function readDetails(): Partial<Record<ProjectSlug, MeasurementDetail[]>> {
   return byProject;
 }
 
+/**
+ * Which sites the answers stood on, most cited first.
+ *
+ * The most useful number in a measurement is rarely the brand's own count. It
+ * is this list: a model does not invent a recommendation, it repeats what a
+ * handful of pages already say, and those pages are where a business that
+ * wants to be named has to appear. Counted per answer, so a page cited twice
+ * in one answer counts once.
+ */
+export function citedDomains(detail: MeasurementDetail): { domain: string; answers: number }[] {
+  const counts = new Map<string, number>();
+  for (const question of detail.questions) {
+    // Cells carry them per system; older measurements only have the roll-up.
+    const perCell = question.cells.flatMap((cell) => cell.citedDomains ?? []);
+    for (const domain of perCell.length > 0 ? perCell : question.citedDomains) {
+      counts.set(domain, (counts.get(domain) ?? 0) + 1);
+    }
+  }
+  return [...counts.entries()]
+    .map(([domain, answers]) => ({ domain, answers }))
+    .sort((left, right) => right.answers - left.answers || left.domain.localeCompare(right.domain));
+}
+
 export const measurementDetails = readDetails();
 
 export function detailsFor(slug: ProjectSlug): MeasurementDetail[] {

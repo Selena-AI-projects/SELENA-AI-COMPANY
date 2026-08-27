@@ -356,7 +356,11 @@ export default async function JournalProjectPage({
       {details.map((detail, index) => (
         <section key={detail.date} className="border-y border-line-dark bg-charcoal py-20 text-ivory sm:py-28">
           <Container>
-            <MeasurementGrid detail={detail} number={index + 1} />
+            <MeasurementGrid
+              detail={detail}
+              number={index + 1}
+              ownDomain={project.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+            />
           </Container>
         </section>
       ))}
