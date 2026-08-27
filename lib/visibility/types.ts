@@ -295,8 +295,6 @@ export type VisibilityContent = {
     paidPlans: {
       heading: string;
       intro: string;
-      /** Shown above the comparison table on screens too narrow to hold every column. */
-      scrollHint: string;
       comparisonLabels: {
         offer: string;
         status: string;

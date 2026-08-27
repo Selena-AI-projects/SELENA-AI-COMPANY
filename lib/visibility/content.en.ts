@@ -488,10 +488,9 @@ export const visibilityContentEn: VisibilityContent = {
       ctaLabel: "Check for free",
     },
     paidPlans: {
-      heading: "One free entry and four paid options, compared line by line",
+      heading: "One free entry and four paid options",
       intro:
-        "One row, one question. Read across a row and the options compare themselves.",
-      scrollHint: "The table scrolls sideways — the row names stay in place.",
+        "Each step up adds systems, measurement scope and depth of checking. Compare exactly what changes.",
       comparisonLabels: {
         offer: "Offer",
         status: "Status",
