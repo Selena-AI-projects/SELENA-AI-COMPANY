@@ -37,7 +37,7 @@ export default function PricingPage() {
       <PricingDirectory content={content.pricing.directory} />
       <PricingTracks content={content.pricing} showHeader={false} />
       <PackagesSection content={homepage} />
-      <FAQSection items={content.faq} withHeader={false} />
+      <FAQSection items={content.faq} headline="Frequently asked questions" />
       </div>
     </>
   );
