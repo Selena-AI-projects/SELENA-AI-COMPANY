@@ -22,27 +22,50 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "theurbanlist.com",
+            "revasi.net",
+            "balisim.com",
+            "northboundbali.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "swisstraveler.net",
+            "thenomadicflower.com",
+            "lifetravelandasia.com",
+            "alamubudjewelryworkshop.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "thehoneycombers.com",
+            "lifetravelandasia.com",
+            "joujoutravels.com",
+            "midnightblueelephant.com",
+            "museumofwander.com",
+            "baliuntold.com"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "alamubudjewelryworkshop.com",
         "lifetravelandasia.com",
-        "thenomadicflower.com",
+        "alamubudjewelryworkshop.com",
         "balisim.com",
         "baliuntold.com",
-        "biglittletravels.com"
+        "joujoutravels.com",
+        "midnightblueelephant.com"
       ]
     },
     {
@@ -51,27 +74,46 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": true
+          "mentioned": true,
+          "namedInstead": [],
+          "citedDomains": [
+            "korafoodhall.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balibelin.com",
+            "tamandukuh.com",
+            "chasinglenscapes.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "tripadvisor.com",
+            "thehoneycombers.com",
+            "midnightblueelephant.com",
+            "willflyforfood.net",
+            "ubudhood.com",
+            "museumofwander.com"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "balibelin.com",
-        "korafoodhall.com",
         "chasinglenscapes.com",
-        "lifetravelandasia.com",
+        "korafoodhall.com",
         "midnightblueelephant.com",
-        "museumofwander.com"
+        "museumofwander.com",
+        "tamandukuh.com"
       ]
     },
     {
@@ -80,17 +122,31 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "tripadvisor.com",
+            "thehoneycombers.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "pesona-lounge-ubud.squarespace.com",
+            "onemoreplacetogo.com",
+            "thetravellingtrowberrys.com",
+            "knowmadsbali.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -98,8 +154,8 @@
         "knowmadsbali.com",
         "onemoreplacetogo.com",
         "pesona-lounge-ubud.squarespace.com",
-        "thetravellingtrowberrys.com",
         "thehoneycombers.com",
+        "thetravellingtrowberrys.com",
         "tripadvisor.com"
       ]
     },
@@ -109,17 +165,27 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ramukitchen.com",
+            "littlestepsasia.com",
+            "knowmadsbali.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
