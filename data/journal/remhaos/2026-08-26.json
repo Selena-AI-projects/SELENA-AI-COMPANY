@@ -1,0 +1,696 @@
+{
+  "date": "2026-08-26",
+  "configVersion": "remhaos-ru-api-view-2026-08-25",
+  "systems": [
+    {
+      "systemId": "ChatGPT",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Gemini",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Perplexity",
+      "channel": "VISITOR"
+    }
+  ],
+  "questions": [
+    {
+      "text": "Как контролировать ремонт квартиры, если я не строитель?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": []
+    },
+    {
+      "text": "Какие программы помогают вести ремонт?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "augmentedtrades.com",
+        "capterra.com",
+        "cian.ru",
+        "deelo.ai",
+        "lifehacker.ru",
+        "m2.ru"
+      ]
+    },
+    {
+      "text": "Как дизайнеру интерьера вести несколько проектов одновременно?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "blueprintstudio.io",
+        "deelo.ai",
+        "plutio.com",
+        "yours-tim.com"
+      ]
+    },
+    {
+      "text": "Где хранить все документы и чертежи по ремонту в одном месте?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "dropbox.com",
+        "digitalcitizen.life",
+        "drive.google.com",
+        "microsoft.com"
+      ]
+    },
+    {
+      "text": "Как согласовывать изменения между дизайнером и прорабом?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "base.garant.ru",
+        "blog.isakovadesign.ru",
+        "d-e-s-i-g-n.ru",
+        "emailmatrix.ru",
+        "habr.com",
+        "loft-design-msk.ru"
+      ]
+    },
+    {
+      "text": "Что делать, если дизайнер и строители говорят разное?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "inmyroom.ru",
+        "nncube.ru",
+        "realty.rbc.ru"
+      ]
+    },
+    {
+      "text": "Как отслеживать смету по ремонту, чтобы она не росла незаметно?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "app-renohub.com",
+        "basicdecor.ru",
+        "constract.io",
+        "expertremonta.kz",
+        "homecostbrief.com",
+        "joinhomeowners.org"
+      ]
+    },
+    {
+      "text": "Какие сервисы есть для дизайн-студий интерьера?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "mydomastudio.com",
+        "blog.designfiles.co",
+        "programa.design",
+        "studiodesigner.com",
+        "deelo.ai",
+        "designfiles.co"
+      ]
+    },
+    {
+      "text": "Как вести технический надзор за ремонтом удалённо?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "protect.gost.ru",
+        "base.garant.ru",
+        "consultant.ru",
+        "sudact.ru"
+      ]
+    },
+    {
+      "text": "Как контролировать ремонт, если я живу в другом городе?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "eremont.ru",
+        "novosibdom.ru",
+        "remontflow.pro"
+      ]
+    },
+    {
+      "text": "Чем заменить таблицы Excel при управлении ремонтом?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "buildertrend.com",
+        "fieldservicesoftware.io",
+        "worksection.com"
+      ]
+    },
+    {
+      "text": "Как организовать работу архитектора, дизайнера и прораба на одном объекте?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "base.garant.ru",
+        "kovalchuk-interior.com",
+        "plitka-pol.ru",
+        "realty.rbc.ru"
+      ]
+    },
+    {
+      "text": "Какие CRM подходят для студии дизайна интерьера?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "pro.houzz.com",
+        "agiled.app",
+        "fullstaxx.com",
+        "honeybook.com"
+      ]
+    },
+    {
+      "text": "Как вести график работ по ремонту?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "101-app.com",
+        "parketspektr.ru",
+        "sky.pro",
+        "flatica.ru",
+        "getgantt.ru",
+        "kvartum.com"
+      ]
+    },
+    {
+      "text": "Где вести спецификацию материалов по проекту?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "help.solidworks.com",
+        "help.autodesk.com"
+      ]
+    },
+    {
+      "text": "Как принимать работы у строительной бригады?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "minstroyrf.gov.ru",
+        "forum.domik.ua",
+        "inmyroom.ru",
+        "lesstroy.net",
+        "openbusiness.ru",
+        "pstroit.ru"
+      ]
+    },
+    {
+      "text": "Какие приложения помогают следить за ходом стройки?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "fieldwire.com",
+        "procore.com",
+        "buildern.com",
+        "buildertrend.com",
+        "digital-build.ru",
+        "planado.ru"
+      ]
+    },
+    {
+      "text": "Как не потерять изменения в проекте ремонта?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": []
+    },
+    {
+      "text": "Как показывать клиенту прогресс ремонта?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "anatolichblog.ru",
+        "crmrem.ru",
+        "eto-razvod.ru",
+        "remontflow.pro",
+        "teletype.in",
+        "xn----gtbtgjp4b.xn--p1ai"
+      ]
+    },
+    {
+      "text": "Какие есть сервисы управления ремонтом под ключ?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "hogarapunto.com",
+        "javiergaspar.com",
+        "remont.sberuslugi.ru",
+        "badajozreformas.es",
+        "domeo-remont.ru",
+        "fix-remont.ru"
+      ]
+    },
+    {
+      "text": "Как маленькой дизайн-студии выстроить процессы?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "smartsheet.com",
+        "amwmedia.co.uk",
+        "clickup.com",
+        "creativeprojectmanagement.org",
+        "hivedesk.com",
+        "pci.us"
+      ]
+    },
+    {
+      "text": "Как считать закупку материалов на объект?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "base.garant.ru"
+      ]
+    },
+    {
+      "text": "Что использовать вместо переписки в мессенджерах при ремонте?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": []
+    },
+    {
+      "text": "Как вести несколько объектов ремонта одновременно?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "blog.constructiononline.com",
+        "climbtheladder.com",
+        "ingenious.build",
+        "mastt.com",
+        "pmi.org",
+        "rolloutiq.com"
+      ]
+    },
+    {
+      "text": "Как контролировать сроки ремонта?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "04.rospotrebnadzor.ru",
+        "anatolichblog.ru",
+        "cian.ru",
+        "delaicomfort.ru",
+        "design-50.ru",
+        "expertremonta.kz"
+      ]
+    }
+  ]
+}
