@@ -65,7 +65,7 @@ export function PackageCards() {
                 <div className="mt-auto border-t border-line pt-4">
                   <Link
                     href={p.href}
-                    className="group/link inline-flex items-center gap-2 text-sm font-semibold text-copper-deep transition-colors hover:text-copper"
+                    className="group/link inline-flex items-center gap-2 text-sm font-semibold text-link transition-colors hover:text-link-dark"
                   >
                     <span
                       className="transition-transform duration-300 group-hover/link:translate-x-1"

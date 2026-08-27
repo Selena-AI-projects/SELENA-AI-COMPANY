@@ -159,7 +159,7 @@ function HeroSection({ content }: { content: HomepageContent }) {
             </Button>
             <a
               href={content.hero.secondaryCta.href}
-              className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-ivory/25 px-8 py-4 text-base font-medium text-ivory/85 transition-colors duration-300 hover:border-copper hover:text-copper"
+              className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-ivory/25 px-8 py-4 text-base font-medium text-ivory/85 transition-colors duration-300 hover:border-copper hover:text-link-dark"
             >
               {content.hero.secondaryCta.label}
             </a>
@@ -185,7 +185,7 @@ function HeroSection({ content }: { content: HomepageContent }) {
             </p>
             <a
               href={content.hero.systemsDoor.cta.href}
-              className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-copper/60 px-6 py-3 text-base font-medium text-copper transition-colors duration-300 hover:bg-copper hover:text-charcoal"
+              className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-copper/60 px-6 py-3 text-base font-medium text-link-dark transition-colors duration-300 hover:bg-copper hover:text-charcoal"
             >
               {content.hero.systemsDoor.cta.label} →
             </a>
@@ -227,7 +227,7 @@ function VisibilityOverviewSection({ content }: { content: HomepageContent }) {
           </Button>
           <a
             href={plan.secondaryCta.href}
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-ivory/25 px-8 py-4 text-base font-medium text-ivory/85 transition-colors duration-300 hover:border-copper hover:text-copper sm:w-auto"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-ivory/25 px-8 py-4 text-base font-medium text-ivory/85 transition-colors duration-300 hover:border-copper hover:text-link-dark sm:w-auto"
           >
             {plan.secondaryCta.label}
           </a>
@@ -531,7 +531,7 @@ export function PackagesSection({ content }: { content: HomepageContent }) {
               </p>
               <a
                 href={content.cta.href}
-                className="inline-flex min-h-11 items-center gap-2 whitespace-nowrap rounded-full border border-ink/25 px-5 py-2.5 text-sm font-medium text-ink/80 transition-colors duration-300 hover:border-copper-deep hover:text-copper-deep"
+                className="inline-flex min-h-11 items-center gap-2 whitespace-nowrap rounded-full border border-ink/25 px-5 py-2.5 text-sm font-medium text-ink/80 transition-colors duration-300 hover:border-copper-deep hover:text-link-deep"
               >
                 {content.strategyCall.ctaLabel}
               </a>
@@ -618,7 +618,7 @@ function ProofSection({ content }: { content: HomepageContent }) {
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-baseline gap-2 transition-colors hover:text-copper-deep focus-visible:text-copper-deep"
+                      className="inline-flex items-baseline gap-2 transition-colors hover:text-link-deep focus-visible:text-link"
                     >
                       {project.name}
                       <span

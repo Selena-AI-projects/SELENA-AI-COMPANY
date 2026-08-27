@@ -103,7 +103,7 @@ export function LabSectionPage({ locale, sectionId }: { locale: LabLocale; secti
   return (
     <>
       <PageHero eyebrow={content.sectionEyebrow} title={section.title} intro={section.description}>
-        <Link href={labPath(locale)} className="inline-flex min-h-11 items-center font-medium text-copper-deep underline decoration-copper/40 underline-offset-4">
+        <Link href={labPath(locale)} className="inline-flex min-h-11 items-center font-medium text-link underline decoration-link/45 underline-offset-4">
           ← {content.backLabel}
         </Link>
       </PageHero>
@@ -132,7 +132,7 @@ export function LabArticlePage({ locale, item }: { locale: LabLocale; item: LabI
     <>
       <PageHero eyebrow={`${content.eyebrow} · ${item.label}`} title={item.title} intro={item.summary}>
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted">
-          <Link href={labPath(locale, item.section)} className="inline-flex min-h-11 items-center font-medium text-copper-deep underline decoration-copper/40 underline-offset-4">
+          <Link href={labPath(locale, item.section)} className="inline-flex min-h-11 items-center font-medium text-link underline decoration-link/45 underline-offset-4">
             ← {content.backLabel}
           </Link>
           <span>{item.readingTime}</span>
@@ -167,7 +167,7 @@ export function LabArticlePage({ locale, item }: { locale: LabLocale; item: LabI
               <ul className="mt-5 space-y-3">
                 {item.sources.map((source) => (
                   <li key={source.href}>
-                    <a href={source.href} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center text-copper-deep underline decoration-copper/40 underline-offset-4 hover:decoration-copper-deep">
+                    <a href={source.href} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center text-link underline decoration-link/45 underline-offset-4 hover:decoration-link-deep">
                       {source.publisher}: {source.title} <span className="ml-2" aria-hidden>↗</span>
                     </a>
                   </li>

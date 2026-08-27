@@ -336,7 +336,7 @@ export function AIMapBriefForm() {
             Я согласна/согласен на обработку данных для ответа по заявке —{" "}
             <Link
               href="/privacy"
-              className="font-medium text-copper-deep underline decoration-copper/40 underline-offset-2 hover:decoration-copper"
+              className="font-medium text-link underline decoration-link/45 underline-offset-2 hover:decoration-link"
             >
               как обрабатываются данные
             </Link>

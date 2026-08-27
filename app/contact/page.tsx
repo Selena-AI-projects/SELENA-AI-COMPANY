@@ -93,7 +93,7 @@ export default function ContactPage() {
                           <li key={channel.key}>
                             <a
                               href={channel.href}
-                              className="text-sm font-medium text-copper-deep underline decoration-copper/40 underline-offset-2 transition-colors hover:text-ink hover:decoration-copper"
+                              className="text-sm font-medium text-link underline decoration-link/45 underline-offset-2 transition-colors hover:text-ink hover:decoration-link"
                             >
                               {channel.label}: {channel.value}
                             </a>

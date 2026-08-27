@@ -229,7 +229,7 @@ export default function JournalIndexPage() {
             </Button>
             <Link
               href="/ru/methodology"
-              className="inline-flex items-center gap-2 py-4 font-medium text-copper transition-colors hover:text-ivory"
+              className="inline-flex items-center gap-2 py-4 font-medium text-link-dark transition-colors hover:text-ivory"
             >
               Как считается каждая цифра
               <span aria-hidden>→</span>
