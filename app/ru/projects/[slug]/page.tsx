@@ -188,7 +188,7 @@ export default async function JournalProjectPage({
               </p>
             </div>
 
-            <dl className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="mt-10 grid gap-8 sm:grid-cols-3">
               {[
                 {
                   value: String(visitorView.brandMentions),
@@ -204,11 +204,6 @@ export default async function JournalProjectPage({
                   value: String(visitorView.questions),
                   label: "вопросов",
                   note: "один и тот же список при каждом замере",
-                },
-                {
-                  value: `$${visitorView.costUsd.toFixed(2)}`,
-                  label: "стоил замер",
-                  note: "мы публикуем и это",
                 },
               ].map((fact) => (
                 <div key={fact.label} className="border-t border-line-dark pt-5">
@@ -307,8 +302,7 @@ export default async function JournalProjectPage({
             ) : null}
 
             <p className="mt-12 max-w-3xl text-sm leading-relaxed text-ivory/60">
-              Стоимость замера: ${visitorView.costUsd.toFixed(2)}. Конфигурация:{" "}
-              {visitorView.configVersion}. Один замер — это один момент: поверхности
+              Конфигурация замера: {visitorView.configVersion}. Один замер — это один момент: поверхности
               отвечают иначе завтра, и число упоминаний не говорит, сколько людей задали эти
               вопросы.
             </p>
@@ -331,12 +325,11 @@ export default async function JournalProjectPage({
               </p>
             </div>
 
-            <dl className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="mt-10 grid gap-8 sm:grid-cols-3">
               {[
                 { value: String(apiView.brandMentions), label: "упоминаний бренда", note: `из ${apiView.answersReceived} ответов` },
                 { value: String(apiView.questions), label: "вопросов", note: "один и тот же список при каждом замере" },
                 { value: String(apiView.models), label: "моделей", note: "канал API View" },
-                { value: `$${apiView.costUsd.toFixed(2)}`, label: "стоил замер", note: "мы публикуем и это" },
               ].map((fact) => (
                 <div key={fact.label} className="border-t border-line-dark pt-5">
                   <dd className="font-serif text-[2.4rem] leading-none font-semibold text-ivory">{fact.value}</dd>

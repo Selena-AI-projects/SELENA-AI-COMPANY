@@ -68,8 +68,13 @@ export type JournalEntry = {
 
 /**
  * One published API View measurement. The full result goes on the page — the
- * count, what it cost, and who the models named instead — because a report the
- * reader cannot see is not proof of anything.
+ * counts and who the models named instead — because a report the reader cannot
+ * see is not proof of anything.
+ *
+ * What a measurement cost us is deliberately not here. It is a real number and
+ * it stays in the run record, but on a public page beside a price it stops
+ * being evidence and starts being an argument about margin, which is not what
+ * the journal is for.
  */
 export type ApiViewMeasurement = {
   /** The one day it ran. A measurement is an event, not a period. */
@@ -81,7 +86,6 @@ export type ApiViewMeasurement = {
   answersRequested: number;
   answersReceived: number;
   brandMentions: number;
-  costUsd: number;
   namedInstead: { name: string; questions: number; models: number }[];
 };
 
@@ -110,7 +114,6 @@ export type VisitorViewMeasurement = {
   answersRequested: number;
   answersReceived: number;
   brandMentions: number;
-  costUsd: number;
   /**
    * Empty until the per-surface split is published. There is deliberately no
    * project-level rate: ChatGPT, Gemini and Perplexity answer differently and
@@ -211,7 +214,6 @@ export const journalProjects: JournalProject[] = [
         answersRequested: 125,
         answersReceived: 125,
         brandMentions: 0,
-        costUsd: 0.2254,
         namedInstead: [
           { name: "Zest Ubud", questions: 21, models: 5 },
           { name: "Karsa Kafe", questions: 18, models: 5 },
@@ -239,7 +241,6 @@ export const journalProjects: JournalProject[] = [
         answersRequested: 75,
         answersReceived: 60,
         brandMentions: 4,
-        costUsd: 0.1125,
         surfaces: [],
         citedDomains: [],
         ownDomainAnswers: null,
@@ -260,7 +261,7 @@ export const journalProjects: JournalProject[] = [
         stage: "apiView",
         title: "Ноль из ста двадцати пяти",
         body:
-          "Пять AI-моделей получили 25 вопросов о том, где поесть в Убуде: лучший фуд-холл, куда пойти с детьми, где провести частное мероприятие, где поужинать большой компанией. KORA Food Hall не была названа ни разу. При этом модели назвали 335 других заведений — Zest Ubud в 21 вопросе из 25, Karsa Kafe в 18, Warung Bodag Maliah в 16. Важно понимать, откуда этот ноль: сайт недавно создан, он дорабатывается, и для AI-видимости не делалось ничего. Это не провал усилий — это точка до начала работы. Замер стоил $0.23 и занял десять минут.",
+          "Пять AI-моделей получили 25 вопросов о том, где поесть в Убуде: лучший фуд-холл, куда пойти с детьми, где провести частное мероприятие, где поужинать большой компанией. KORA Food Hall не была названа ни разу. При этом модели назвали 335 других заведений — Zest Ubud в 21 вопросе из 25, Karsa Kafe в 18, Warung Bodag Maliah в 16. Важно понимать, откуда этот ноль: сайт недавно создан, он дорабатывается, и для AI-видимости не делалось ничего. Это не провал усилий — это точка до начала работы.",
         doesNotProve:
           "Замер сделан по каналу API View — это собственные знания моделей. Что ответит ChatGPT живому человеку с включённым веб-поиском, здесь не проверялось: это отдельный канал. Список названий взят из тех же ответов и проверен на дословное присутствие, но не приведён к единому виду: «Sayan House» и «The Sayan House» — одно место, посчитанное дважды. Такие склейки делает человек на платной проверке.",
       },
@@ -292,7 +293,6 @@ export const journalProjects: JournalProject[] = [
         answersRequested: 75,
         answersReceived: 54,
         brandMentions: 1,
-        costUsd: 0.1125,
         surfaces: [],
         citedDomains: [],
         ownDomainAnswers: null,
@@ -336,7 +336,6 @@ export const journalProjects: JournalProject[] = [
         answersRequested: 75,
         answersReceived: 59,
         brandMentions: 2,
-        costUsd: 0.1125,
         surfaces: [],
         citedDomains: [],
         ownDomainAnswers: null,
@@ -380,7 +379,6 @@ export const journalProjects: JournalProject[] = [
         answersRequested: 75,
         answersReceived: 55,
         brandMentions: 0,
-        costUsd: 0.1125,
         surfaces: [],
         citedDomains: [],
         ownDomainAnswers: null,
@@ -442,7 +440,6 @@ export const journalProjects: JournalProject[] = [
         answersRequested: 75,
         answersReceived: 53,
         brandMentions: 0,
-        costUsd: 0.1125,
         surfaces: [],
         citedDomains: [],
         ownDomainAnswers: null,
@@ -475,7 +472,6 @@ export const journalProjects: JournalProject[] = [
         answersRequested: 75,
         answersReceived: 55,
         brandMentions: 0,
-        costUsd: 0.1125,
         surfaces: [],
         citedDomains: [],
         ownDomainAnswers: null,
@@ -516,7 +512,6 @@ export const journalProjects: JournalProject[] = [
         answersRequested: 75,
         answersReceived: 61,
         brandMentions: 0,
-        costUsd: 0.1125,
         surfaces: [],
         citedDomains: [],
         ownDomainAnswers: null,
