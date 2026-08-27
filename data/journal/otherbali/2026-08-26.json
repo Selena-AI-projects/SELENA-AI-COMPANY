@@ -22,27 +22,43 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "lonelyplanet.com",
+            "shop.lonelyplanet.com",
+            "indonesia.travel"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "kelanabykayla.com",
+            "racheloffduty.com",
+            "girleatworld.net",
+            "kulturekween.com",
+            "londonerinsydney.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "lonelyplanet.com",
-        "indonesia.travel",
         "girleatworld.net",
+        "indonesia.travel",
         "kelanabykayla.com",
         "kulturekween.com",
-        "londonerinsydney.com"
+        "londonerinsydney.com",
+        "lonelyplanet.com"
       ]
     },
     {
@@ -51,17 +67,35 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "reddit.com",
+            "tripadvisor.com",
+            "suppersocial.co",
+            "travell.cc",
+            "myfavsmap.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "reddit.com",
+            "balieats.com",
+            "dineandwinebali.com",
+            "balirestaurantguide.com",
+            "thewalkingcritic.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -80,25 +114,46 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "wanderlog.com",
+            "baliuntold.com",
+            "theurbanlist.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "willflyforfood.net",
+            "midnightblueelephant.com",
+            "bucketlistbombshells.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "thehoneycombers.com",
+            "wanderlog.com",
+            "balicopter.com",
+            "willflyforfood.net",
+            "baliuntold.com",
+            "midnightblueelephant.com"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "wanderlog.com",
-        "willflyforfood.net",
         "baliuntold.com",
         "midnightblueelephant.com",
+        "wanderlog.com",
+        "willflyforfood.net",
         "balicopter.com",
         "bucketlistbombshells.com"
       ]
@@ -109,27 +164,45 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "visitbali.com",
+            "tripadvisor.com.sg",
+            "tripadvisor.com",
+            "balifrontier.com",
+            "uk.hotels.com",
+            "destinationbali.id"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "joujoutravels.com",
+            "kelanabykayla.com",
+            "themanduls.com",
+            "getyourguide.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "balifrontier.com",
-        "balimalayali.com",
         "destinationbali.id",
         "getyourguide.com",
         "joujoutravels.com",
-        "kelanabykayla.com"
+        "kelanabykayla.com",
+        "themanduls.com"
       ]
     },
     {
@@ -138,17 +211,35 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "sejatiuluwatu.com",
+            "beautyguidebali.com",
+            "thetenlist.com",
+            "tripadvisor.com.au",
+            "laislabali.com",
+            "melalibingin.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "amipilatesbarre.com",
+            "beautyguidebali.com",
+            "studio-fondue.com",
+            "classpass.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -167,17 +258,34 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "bali.com",
+            "elsky-bali.com",
+            "nowbali.co.id",
+            "indonesia.travel"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "travelswithmissy.com",
+            "belaroundtheworld.com",
+            "thehoneycombers.com",
+            "nowbali.co.id",
+            "stokedtotravel.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -196,23 +304,36 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "thehoneycombers.com",
+            "nowbali.co.id"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "thehoneycombers.com",
+            "nowbali.co.id",
+            "whatsnewindonesia.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "thehoneycombers.com",
         "nowbali.co.id",
+        "thehoneycombers.com",
         "whatsnewindonesia.com"
       ]
     },
@@ -222,27 +343,51 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "thehoneycombers.com",
+            "whatsnewindonesia.com",
+            "theurbanlist.com",
+            "pickyourtrail.com",
+            "brewatlas.co"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "kelanabykayla.com",
+            "klook.com",
+            "thehoneycombers.com",
+            "baliholidaysecrets.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "thehoneycombers.com",
+            "cinchy.life",
+            "tripadvisor.com",
+            "finnsbeachclub.com",
+            "baliholidaysecrets.com",
+            "eatandtreats.blogspot.com"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "baliholidaysecrets.com",
         "thehoneycombers.com",
-        "tripadvisor.com",
-        "belaroundtheworld.com",
+        "baliholidaysecrets.com",
         "brewatlas.co",
-        "cinchy.life"
+        "cinchy.life",
+        "eatandtreats.blogspot.com",
+        "finnsbeachclub.com"
       ]
     },
     {
@@ -251,17 +396,34 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "visitingbali.com",
+            "lonelyplanet.com",
+            "bali.com",
+            "gobaligo.id",
+            "thebaliguideline.com",
+            "baliholidaysecrets.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "bali.com",
+            "searchspot.ai",
+            "google.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -280,17 +442,37 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "qantas.com",
+            "indonesia.travel",
+            "madefrombali.com",
+            "lonelyplanet.com",
+            "thebalibible.com",
+            "baliislandvacation.id"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "anomadspassport.com",
+            "indonesia.travel",
+            "thebrokebackpacker.com",
+            "adventuresnsunsets.com",
+            "remoteandafloat.com",
+            "22places.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -300,7 +482,7 @@
         "adventuresnsunsets.com",
         "anomadspassport.com",
         "baliislandvacation.id",
-        "balivillahub.com"
+        "lonelyplanet.com"
       ]
     },
     {
@@ -309,17 +491,30 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "sharniquinn.com",
+            "books.apple.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "sharniquinn.com",
+            "bali.com",
+            "tripswithasoul.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -336,17 +531,31 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "tripadvisor.com",
+            "theurbanlist.com",
+            "thehoneycombers.com",
+            "thebaliguideline.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "lifetravelandasia.com",
+            "chasinglenscapes.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -365,24 +574,35 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "tripadvisor.com",
+            "agoda.com",
+            "reddit.com",
+            "gotrexo.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "reddit.com",
         "agoda.com",
         "gotrexo.com",
+        "reddit.com",
         "tripadvisor.com"
       ]
     },
@@ -392,17 +612,35 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "lonelyplanet.com",
+            "booking.com",
+            "earthtrekkers.com",
+            "casalivingbali.com",
+            "destinedforbali.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "sbexcursion.com",
+            "alexandleahontour.org",
+            "bhataravillasanur.com",
+            "dmcquote.com",
+            "travelguidestip.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -421,27 +659,46 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "localexpatsbali.com",
+            "expat.com",
+            "expat.or.id",
+            "internations.org",
+            "play.google.com",
+            "we-who-market.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "sunriseschoolbali.com",
+            "balirelocation.com",
+            "expatease.id",
+            "localexpatsbali.com",
+            "expat.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "localexpatsbali.com",
         "expat.com",
+        "localexpatsbali.com",
         "balirelocation.com",
         "expat.or.id",
         "expatease.id",
-        "getmyhome.app"
+        "internations.org"
       ]
     },
     {
@@ -450,17 +707,34 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "visitbali.com",
+            "hotels.com",
+            "izzibali.com",
+            "balioceansurf.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "mokumsurfclub.com",
+            "sonohotelsresortsasia.com",
+            "travelynne.ca",
+            "perfectwavetravel.com",
+            "reddit.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -479,17 +753,31 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "thebeatbali.com",
+            "thebalipulse.com",
+            "thehoneycombers.com",
+            "sandbeds.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "bali.com",
+            "baliholidaysecrets.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -508,24 +796,37 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "indonesia.travel",
+            "bali.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "canggu.holidayinnresorts.com",
+            "littlepassportcrew.com",
+            "travelmadmum.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "indonesia.travel",
         "bali.com",
         "canggu.holidayinnresorts.com",
+        "indonesia.travel",
         "littlepassportcrew.com",
         "travelmadmum.com"
       ]
@@ -536,27 +837,48 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "baliuntold.com",
+            "destinedforbali.com",
+            "visitbali.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "villa-bali.com",
+            "bali.com",
+            "travelguidestip.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "thehoneycombers.com",
+            "baliuntold.com",
+            "balibeachsanur.com",
+            "tripadvisor.com",
+            "balidave.com",
+            "ohana-agency.com"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "baliuntold.com",
-        "almostlanding-bali.com",
         "bali.com",
         "balibeachsanur.com",
         "balidave.com",
-        "baliforum.ru"
+        "destinedforbali.com",
+        "ohana-agency.com"
       ]
     },
     {
@@ -565,26 +887,42 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "reddit.com",
+            "tripadvisor.com",
+            "getyourguide.com",
+            "klook.com",
+            "viator.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "karolinagenova.com",
+            "liveselfhappy.com",
+            "withlocals.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "reddit.com",
         "getyourguide.com",
         "karolinagenova.com",
         "klook.com",
         "liveselfhappy.com",
+        "reddit.com",
         "tripadvisor.com"
       ]
     },
@@ -594,23 +932,41 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "expatden.com",
+            "baliexpatcommunity.com",
+            "kanwilbali.imigrasi.go.id",
+            "expat.com",
+            "ngurahrai.imigrasi.go.id"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "bali.com",
+            "sunriseschoolbali.com",
+            "balivillarealty.com",
+            "sadararesort.com",
+            "balitecturerealty.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "baliexpatcommunity.com",
         "bali.com",
+        "baliexpatcommunity.com",
         "balitecturerealty.com",
         "balivillarealty.com",
         "expat.com",
@@ -623,17 +979,31 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "reddit.com",
+            "wanderlog.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "coworker.com",
+            "coworkintel.com",
+            "reddit.com",
+            "indojunkie.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -651,24 +1021,43 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "simonandschuster.com",
+            "shop.roughguides.com",
+            "books.google.com",
+            "publishing.hardiegrant.com",
+            "lonelyplanet.com",
+            "jonglezpublishing.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "lonelyplanet.com",
+            "22places.com",
+            "neverendingvoyage.com",
+            "finnsbeachclub.com",
+            "tierradellagarto.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "books.google.com",
         "lonelyplanet.com",
         "22places.com",
+        "books.google.com",
         "finnsbeachclub.com",
         "jonglezpublishing.com",
         "neverendingvoyage.com"
@@ -680,26 +1069,40 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "indonesia.travel",
+            "lonelyplanet.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "indonesiavoa.vfsevisa.id",
+            "neptunescubadiving.com",
+            "bali.com",
+            "kuoni.co.uk"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "lonelyplanet.com",
         "bali.com",
         "indonesia.travel",
         "indonesiavoa.vfsevisa.id",
         "kuoni.co.uk",
+        "lonelyplanet.com",
         "neptunescubadiving.com"
       ]
     },
@@ -709,25 +1112,39 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "indonesia.travel",
+            "smartraveller.gov.au"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "blueskytraveler.com",
+            "baliholidaysecrets.com",
+            "girleatworld.net",
+            "reddit.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "indonesia.travel",
         "baliholidaysecrets.com",
         "blueskytraveler.com",
         "girleatworld.net",
+        "indonesia.travel",
         "reddit.com",
         "smartraveller.gov.au"
       ]
