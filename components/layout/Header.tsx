@@ -144,11 +144,11 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "inline-flex min-h-11 items-center text-base font-medium transition-colors hover:text-link-deep",
+                  "inline-flex min-h-11 items-center text-base font-medium transition-colors hover:text-copper-deep",
                   pathname === item.href
-                    ? "text-link"
+                    ? "text-copper-deep"
                     : darkHero
-                      ? "text-ivory/76 hover:text-link-dark"
+                      ? "text-ivory/76 hover:text-copper"
                       : "text-ink/80",
                 )}
                 aria-current={pathname === item.href ? "page" : undefined}
@@ -160,8 +160,8 @@ export function Header() {
               <Link
                 href={selenaAppRoutes.login}
                 className={cn(
-                  "inline-flex min-h-11 items-center whitespace-nowrap text-base font-medium transition-colors hover:text-link-deep",
-                  darkHero ? "text-ivory/76 hover:text-link-dark" : "text-ink/80",
+                  "inline-flex min-h-11 items-center whitespace-nowrap text-base font-medium transition-colors hover:text-copper-deep",
+                  darkHero ? "text-ivory/76 hover:text-copper" : "text-ink/80",
                 )}
               >
                 {isEnglish ? "Client login" : "Кабинет"}
@@ -174,7 +174,7 @@ export function Header() {
               <Link
                 href={languageHref}
                 className={cn(
-                  "inline-flex min-h-11 items-center rounded-full border px-3 py-2 text-xs font-semibold transition-colors hover:border-copper hover:text-link-deep",
+                  "inline-flex min-h-11 items-center rounded-full border px-3 py-2 text-xs font-semibold transition-colors hover:border-copper hover:text-copper-deep",
                   darkHero ? "border-ivory/16 text-ivory/70" : "border-line text-ink/70",
                 )}
                 hrefLang={isEnglish ? "ru" : "en"}

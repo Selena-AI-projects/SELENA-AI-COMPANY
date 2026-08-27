@@ -41,7 +41,7 @@ export function BusinessGoalPaths() {
                 <Button
                   href={hrefByService[item.recommendedService] ?? "/ai-systems"}
                   variant="ghost"
-                  className="mt-auto justify-start px-0 pt-6 text-copper-deep"
+                  className="mt-auto justify-start px-0 pt-6 text-link"
                 >
                   {item.cta} →
                 </Button>

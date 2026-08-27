@@ -93,7 +93,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-ivory/75 transition-colors hover:text-link-dark underline decoration-link/40 underline-offset-4"
+                    className="text-ivory/75 transition-colors hover:text-copper"
                   >
                     {item.label}
                   </Link>
@@ -129,7 +129,7 @@ export function Footer() {
                   <li key={channel.key}>
                     <a
                       href={channel.href}
-                      className="text-sm text-ivory/65 transition-colors hover:text-link-dark underline decoration-link/40 underline-offset-4"
+                      className="text-sm text-ivory/65 transition-colors hover:text-copper"
                     >
                       {channel.label}: {channel.value}
                     </a>
