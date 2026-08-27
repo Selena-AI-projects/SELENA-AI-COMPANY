@@ -78,6 +78,21 @@ test("growth is published as the earlier count, not as a percentage of one click
   }
 });
 
+test("what a measurement cost us stays out of the public layer", () => {
+  // A real number, and it stays in the run record. Beside a price on a public
+  // page it stops being evidence and becomes an argument about margin.
+  const source = require("node:fs").readFileSync("lib/visibility-log/data.ts", "utf8");
+  assert.ok(!source.includes("costUsd"), "the public journal is publishing what a measurement cost");
+
+  for (const project of journalProjects) {
+    for (const series of [project.visitorViews ?? [], project.apiViews ?? []]) {
+      for (const measurement of series) {
+        assert.ok(!("costUsd" in measurement), `${project.slug} carries a cost on a published measurement`);
+      }
+    }
+  }
+});
+
 test("a measurement is one dated event, numbered in its own series", () => {
   for (const project of journalProjects) {
     for (const series of [project.visitorViews ?? [], project.apiViews ?? []]) {
