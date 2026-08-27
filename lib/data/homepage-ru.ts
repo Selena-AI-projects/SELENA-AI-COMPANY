@@ -7,7 +7,7 @@ import { commercialFacts } from "@/lib/commercial-facts";
 
 export const ruHomepage = {
   nav: [
-    { label: "AI Automation", href: "/ru#systems" },
+    { label: "AI Automation", href: "/ru#ai-systems" },
     { label: "AI Visibility", href: "/ru/visibility" },
     { label: "Тарифы", href: "/ru/pricing" },
     { label: "Lab", href: "/ru/lab" },

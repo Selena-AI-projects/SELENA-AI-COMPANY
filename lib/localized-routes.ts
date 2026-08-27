@@ -4,12 +4,13 @@ export function isBareEnglishLabPath(pathname: string) {
   return pathname === "/lab" || pathname.startsWith("/lab/");
 }
 
-const englishOnlyPublicRoutes = [
-  "/ai-systems",
-  "/ai-training",
-  "/ai-automation",
-  "/ai-content",
-];
+/**
+ * English pages that sit outside `/en`. Only AI Systems is one: the service
+ * pages beside it are written in Russian and the middleware serves them as
+ * Russian documents, so listing them here dressed a Russian page in the
+ * English menu.
+ */
+const englishOnlyPublicRoutes = ["/ai-systems"];
 
 function isEnglishOnlyPublicPath(pathname: string) {
   return englishOnlyPublicRoutes.some(

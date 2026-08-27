@@ -37,9 +37,16 @@ export const cta = {
   contact: { label: "Связаться", href: "/contact" },
 } as const;
 
-/** Main navigation (desktop + mobile). */
+/**
+ * Main navigation (desktop + mobile).
+ *
+ * This is the Russian menu, so every destination is a Russian page. AI
+ * Automation is sold on the Russian home page rather than on a page of its
+ * own; `/ai-systems` is the English twin of that block and belongs to the
+ * English menu.
+ */
 export const nav: { label: string; href: string }[] = [
-  { label: "AI Automation", href: "/ai-systems" },
+  { label: "AI Automation", href: "/ru#ai-systems" },
   { label: "AI Visibility", href: "/ru/visibility" },
   { label: "Тарифы", href: "/ru/pricing" },
   { label: "Selena Lab", href: "/ru/lab" },
