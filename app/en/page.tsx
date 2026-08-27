@@ -658,7 +658,7 @@ export default function EnglishPage() {
                 <Link
                   href="/ru"
                   hrefLang="ru"
-                  className="inline-flex rounded-full border border-line-dark px-6 py-3 font-medium text-ivory/78 transition-colors hover:border-copper hover:text-copper"
+                  className="inline-flex rounded-full border border-line-dark px-6 py-3 font-medium text-ivory/78 transition-colors hover:border-copper hover:text-link-dark"
                 >
                   Russian version
                 </Link>

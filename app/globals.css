@@ -57,6 +57,13 @@
   --color-copper-deeper: #6e4526; /* pressed / hover-darker on copper fills */
   --color-sage: #9aa48c; /* secondary accent */
   --color-line: #e6ddd1; /* warm hairline borders */
+  /* Links are deliberately not copper. Copper marks eyebrows, numbers and
+     badges all over the page, so a link painted in it is one accent among
+     many and reads as decoration. Deep burgundy is the one colour on this
+     palette that means only one thing. (AAA: 7.3:1 on ivory.) */
+  --color-link: #8c2f39;
+  --color-link-dark: #e0808c; /* the same role on dark sections — 6.7:1 on charcoal */
+  --color-link-deep: #6d1f28; /* hover and pressed */
   --color-good: #2e7d4f; /* pass / healthy — AA on ivory */
   --color-good-soft: #e9f2ea; /* pass background */
   --color-warn: #9a5f14; /* important / attention — AA on ivory */

@@ -28,7 +28,7 @@ export function JournalTeaser() {
             <li key={project.slug}>
               <Link
                 href={`/ru/projects/${project.slug}`}
-                className="inline-flex rounded-md border border-line bg-surface px-4 py-2.5 text-base text-ink transition-colors hover:border-copper-deep/60 hover:text-copper-deep"
+                className="inline-flex rounded-md border border-line bg-surface px-4 py-2.5 text-base text-ink transition-colors hover:border-copper-deep/60 hover:text-link-deep"
               >
                 {project.name}
               </Link>
@@ -38,7 +38,7 @@ export function JournalTeaser() {
 
         <Link
           href="/ru/projects"
-          className="mt-9 inline-flex items-center gap-2 font-medium text-copper-deep hover:text-copper-deeper"
+          className="mt-9 inline-flex items-center gap-2 font-medium text-link hover:text-link-deep"
         >
           Посмотреть все проекты
           <span aria-hidden>→</span>

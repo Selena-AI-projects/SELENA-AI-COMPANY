@@ -265,7 +265,7 @@ function PlanComparisonTable({
                         "flex min-h-11 w-full items-center justify-center rounded-md border px-3 text-center text-sm font-semibold leading-tight transition-colors duration-300",
                         plan.featured === true
                           ? "border-copper-deep bg-copper-deep text-surface hover:bg-copper-deeper"
-                          : "border-ink/25 text-ink hover:border-copper-deep hover:text-copper-deep",
+                          : "border-ink/25 text-ink hover:border-copper-deep hover:text-link-deep",
                       )}
                     >
                       {plan.ctaLabel}

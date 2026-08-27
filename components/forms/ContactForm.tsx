@@ -353,7 +353,7 @@ export function ContactForm() {
             Согласен(на) на обработку персональных данных для ответа на заявку —{" "}
             <Link
               href="/privacy"
-              className="font-medium text-copper-deep underline decoration-copper/40 underline-offset-2 hover:decoration-copper"
+              className="font-medium text-link underline decoration-link/45 underline-offset-2 hover:decoration-link"
             >
               как обрабатываются данные
             </Link>

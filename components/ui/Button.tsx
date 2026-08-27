@@ -30,8 +30,8 @@ export function Button({
         variant === "primary" &&
           "bg-copper-deep text-surface shadow-[0_10px_24px_-12px_rgba(143,92,52,0.7)] hover:bg-copper-deeper hover:shadow-[0_14px_30px_-12px_rgba(110,69,38,0.75)] hover:-translate-y-px",
         variant === "secondary" &&
-          "border border-line bg-surface text-ink hover:border-copper-deep/60 hover:text-copper-deep",
-        variant === "ghost" && "text-ink hover:text-copper-deep",
+          "border border-line bg-surface text-ink hover:border-copper-deep/60 hover:text-link-deep",
+        variant === "ghost" && "text-ink hover:text-link-deep",
         variant === "onDark" &&
           "bg-ivory text-ink hover:bg-surface hover:-translate-y-px shadow-[0_10px_24px_-12px_rgba(0,0,0,0.5)]",
         className,

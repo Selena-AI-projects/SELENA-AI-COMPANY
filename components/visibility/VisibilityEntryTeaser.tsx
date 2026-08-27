@@ -70,7 +70,7 @@ export function ProductDirections({ content }: { content: HomepageContent }) {
                     {dark ? (
                       <a
                         href={direction.secondaryCta.href}
-                        className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-ivory/20 px-6 py-3 text-base font-medium text-ivory transition-colors duration-300 hover:border-copper hover:text-copper sm:w-auto"
+                        className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-ivory/20 px-6 py-3 text-base font-medium text-ivory transition-colors duration-300 hover:border-copper hover:text-link-dark sm:w-auto"
                       >
                         {direction.secondaryCta.label}
                       </a>

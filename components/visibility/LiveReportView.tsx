@@ -452,7 +452,7 @@ export function LiveReportView({
           <div className="mt-6">
             <Link
               href={copy.localAi.ctaHref}
-              className="inline-flex items-center justify-center rounded-full border border-copper bg-surface px-6 py-3 text-base font-medium text-copper-deep transition-colors hover:bg-copper hover:text-surface"
+              className="inline-flex items-center justify-center rounded-full border border-copper bg-surface px-6 py-3 text-base font-medium text-link transition-colors hover:bg-copper hover:text-surface"
             >
               {copy.localAi.ctaLabel}
             </Link>
@@ -707,7 +707,7 @@ export function LiveReportView({
           </Link>
           <Link
             href={copy.cta.secondary.href}
-            className="inline-flex items-center justify-center rounded-full border border-line bg-surface px-6 py-3 text-base font-medium text-ink transition-all duration-300 hover:border-copper-deep/60 hover:text-copper-deep"
+            className="inline-flex items-center justify-center rounded-full border border-line bg-surface px-6 py-3 text-base font-medium text-ink transition-all duration-300 hover:border-copper-deep/60 hover:text-link-deep"
           >
             {copy.cta.secondary.label}
           </Link>

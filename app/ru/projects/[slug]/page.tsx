@@ -175,7 +175,7 @@ export default async function JournalProjectPage({
           <span>Языки замера: {project.languages.join(", ")}</span>
           <a
             href={project.url}
-            className="font-medium text-copper-deep underline-offset-4 hover:underline"
+            className="font-medium text-link underline-offset-4 hover:underline"
             rel="noopener"
           >
             {project.url.replace(/^https?:\/\//, "")}
@@ -521,7 +521,7 @@ export default async function JournalProjectPage({
             </Button>
             <Link
               href="/ru/projects"
-              className="inline-flex items-center gap-2 py-4 font-medium text-copper transition-colors hover:text-ivory"
+              className="inline-flex items-center gap-2 py-4 font-medium text-link-dark transition-colors hover:text-ivory"
             >
               Все проекты журнала
               <span aria-hidden>→</span>

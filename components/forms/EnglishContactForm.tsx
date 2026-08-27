@@ -253,7 +253,7 @@ export function EnglishContactForm() {
             I agree that my data may be processed to answer this request. Details:{" "}
             <Link
               href="/en/privacy"
-              className="font-medium text-copper-deep underline decoration-copper/40 underline-offset-2 hover:decoration-copper"
+              className="font-medium text-link underline decoration-link/45 underline-offset-2 hover:decoration-link"
             >
               privacy policy
             </Link>
