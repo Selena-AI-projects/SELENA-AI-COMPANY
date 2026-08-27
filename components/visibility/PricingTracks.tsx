@@ -93,15 +93,20 @@ export function PricingTracks({
           <p className="mt-4 leading-relaxed text-muted">{content.paidPlans.intro}</p>
         </Reveal>
 
-        {/* The hero ladders already sell each step one card at a time. This
-            page exists to compare, so the same five offers become one table
-            the eye can read across a single criterion at a time. */}
-        <Reveal className="mt-10">
+        {/* Same five offers, two shapes. A five-column table only compares when
+            all five columns are on screen at once; narrower than that it is a
+            sideways scroll where the price of the plan you are reading about
+            has already left the viewport, so below that width each offer is
+            its own card carrying the same rows top to bottom. */}
+        <Reveal className="mt-10 xl:hidden">
+          <PlanCardList plans={plans} labels={content.paidPlans.comparisonLabels} />
+        </Reveal>
+
+        <Reveal className="mt-10 hidden xl:block">
           <PlanComparisonTable
             plans={plans}
             labels={content.paidPlans.comparisonLabels}
             caption={content.paidPlans.heading}
-            scrollHint={content.paidPlans.scrollHint}
           />
         </Reveal>
 
@@ -135,6 +140,104 @@ type ComparedPlan = { plan: PricingPlan; trackTitle: string; boundary?: string }
 type ComparisonLabels = VisibilityContent["pricing"]["paidPlans"]["comparisonLabels"];
 
 /**
+ * The three rows that separate one offer from the next, in ladder order.
+ * Declared once so the card and the table can never drift apart.
+ */
+const SPEC_ROWS: {
+  label: (labels: ComparisonLabels) => string;
+  value: (plan: PricingPlan) => string;
+}[] = [
+  { label: (labels) => labels.systems, value: (plan) => plan.systemsLabel },
+  { label: (labels) => labels.scope, value: (plan) => plan.volumeLabel },
+  { label: (labels) => labels.difference, value: (plan) => plan.progressionLabel },
+];
+
+const featureListClass = (index: number) =>
+  cn("py-2 leading-snug text-ink/85", index > 0 && "border-t border-line/70");
+
+/**
+ * The card shape of the comparison, for every screen narrower than the table.
+ * The free entry leads at full width because it is where a visitor starts;
+ * the four paid offers follow in ladder order, two across once there is room.
+ */
+function PlanCardList({ plans, labels }: { plans: ComparedPlan[]; labels: ComparisonLabels }) {
+  const [entry, ...paid] = plans;
+
+  return (
+    <div className="grid gap-5">
+      <PlanCard entry={entry} labels={labels} />
+      <div className="grid gap-5 md:grid-cols-2">
+        {paid.map((plan) => (
+          <PlanCard key={plan.plan.name} entry={plan} labels={labels} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function PlanCard({ entry, labels }: { entry: ComparedPlan; labels: ComparisonLabels }) {
+  const { plan, trackTitle, boundary } = entry;
+  // Marked the same way as its table column: a tint and a rule, never a
+  // recoloured price and never a claim about how many people chose it.
+  const featured = plan.featured === true;
+
+  return (
+    <article
+      className={cn(
+        "flex h-full flex-col border bg-surface p-5 sm:p-7",
+        featured ? "border-copper-deep bg-copper/[0.06]" : "border-line",
+      )}
+    >
+      <p className="text-sm text-muted">{trackTitle}</p>
+      <h4 className="mt-2 font-sans text-lg font-semibold leading-snug text-ink">{plan.name}</h4>
+      <p className="mt-3 font-serif text-4xl font-semibold leading-none tabular-nums text-ink">
+        {plan.price}
+      </p>
+      <p className="mt-3 text-sm leading-snug text-copper-deep">{plan.statusLabel}</p>
+
+      <p className="mt-6 text-lg font-semibold leading-snug text-ink">{plan.description}</p>
+      {boundary ? <p className="mt-2 text-sm leading-relaxed text-muted">{boundary}</p> : null}
+
+      <dl className="mt-6 border-t border-line">
+        {SPEC_ROWS.map((spec) => (
+          <div key={spec.label(labels)} className="border-b border-line py-3">
+            <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-copper-deep">
+              {spec.label(labels)}
+            </dt>
+            <dd className="mt-1 leading-snug text-ink/85">{spec.value(plan)}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <p className="mt-6 text-xs font-semibold uppercase tracking-[0.12em] text-copper-deep">
+        {labels.included}
+      </p>
+      <ul className="mt-1">
+        {plan.features.map((feature, index) => (
+          <li key={feature} className={featureListClass(index)}>
+            {feature}
+          </li>
+        ))}
+      </ul>
+
+      {plan.href && plan.ctaLabel ? (
+        <a href={plan.href} className={cn("mt-7", planCtaClass(featured))}>
+          {plan.ctaLabel}
+        </a>
+      ) : null}
+    </article>
+  );
+}
+
+const planCtaClass = (featured: boolean) =>
+  cn(
+    "flex min-h-12 w-full items-center justify-center rounded-md border px-4 py-2 text-center font-semibold leading-tight transition-colors duration-300",
+    featured
+      ? "border-copper-deep bg-copper-deep text-surface hover:bg-copper-deeper"
+      : "border-ink/25 text-ink hover:border-copper-deep hover:text-link-deep",
+  );
+
+/**
  * One table instead of five sales cards. Columns are the offers, rows are the
  * questions a buyer compares on. Everything that is not a row label is set in
  * ink so no cell competes with another for attention; the recommended column
@@ -144,12 +247,10 @@ function PlanComparisonTable({
   plans,
   labels,
   caption,
-  scrollHint,
 }: {
   plans: ComparedPlan[];
   labels: ComparisonLabels;
   caption: string;
-  scrollHint: string;
 }) {
   const rows: { label: string; render: (entry: ComparedPlan) => React.ReactNode }[] = [
     { label: labels.status, render: ({ plan }) => plan.statusLabel },
@@ -162,18 +263,16 @@ function PlanComparisonTable({
         </>
       ),
     },
-    { label: labels.systems, render: ({ plan }) => plan.systemsLabel },
-    { label: labels.scope, render: ({ plan }) => plan.volumeLabel },
-    { label: labels.difference, render: ({ plan }) => plan.progressionLabel },
+    ...SPEC_ROWS.map((spec) => ({
+      label: spec.label(labels),
+      render: ({ plan }: ComparedPlan) => spec.value(plan),
+    })),
     {
       label: labels.included,
       render: ({ plan }) => (
         <ul>
           {plan.features.map((feature, index) => (
-            <li
-              key={feature}
-              className={cn("py-2", index > 0 && "border-t border-line/70")}
-            >
+            <li key={feature} className={featureListClass(index)}>
               {feature}
             </li>
           ))}
@@ -186,97 +285,86 @@ function PlanComparisonTable({
     cn("border-l border-line px-4 py-3.5 align-top lg:px-5", plan.featured === true && "bg-copper/[0.06]");
 
   return (
-    <div>
-      <p className="mb-3 text-sm text-muted lg:hidden">{scrollHint}</p>
-      <div className="overflow-x-auto rounded-[1rem] border border-line bg-ivory">
-        <table className="w-full min-w-[64rem] table-fixed border-collapse text-left">
-          <caption className="sr-only">{caption}</caption>
-          <colgroup>
-            <col className="w-36 lg:w-52" />
-            {plans.map(({ plan }) => (
-              <col key={plan.name} />
-            ))}
-          </colgroup>
-          <thead>
-            <tr className="bg-ivory">
+    <div className="overflow-x-auto rounded-[1rem] border border-line bg-ivory">
+      <table className="w-full min-w-[68rem] table-fixed border-collapse text-left">
+        <caption className="sr-only">{caption}</caption>
+        <colgroup>
+          <col className="w-52" />
+          {plans.map(({ plan }) => (
+            <col key={plan.name} />
+          ))}
+        </colgroup>
+        <thead>
+          <tr className="bg-ivory">
+            <th
+              scope="col"
+              className="sticky left-0 z-10 bg-ivory px-4 py-5 align-bottom text-xs font-semibold uppercase tracking-[0.14em] text-copper-deep lg:px-5"
+            >
+              {labels.offer}
+            </th>
+            {plans.map(({ plan, trackTitle }) => (
               <th
+                key={plan.name}
                 scope="col"
-                className="sticky left-0 z-10 bg-ivory px-4 py-5 align-bottom text-xs font-semibold uppercase tracking-[0.14em] text-copper-deep lg:px-5"
+                id={planAnchor(plan.name)}
+                className={cn(
+                  columnClass(plan),
+                  "scroll-mt-24 py-5 align-bottom",
+                  plan.featured === true && "border-t-2 border-t-copper-deep",
+                )}
               >
-                {labels.offer}
+                <p className="flex min-h-[3.2rem] items-start text-sm leading-snug text-muted">
+                  {trackTitle}
+                </p>
+                <p className="mt-2 flex min-h-[3.5rem] items-start text-lg font-semibold leading-snug text-ink">
+                  {plan.name}
+                </p>
+                <p className="mt-3 font-serif text-[2rem] font-semibold leading-none tabular-nums text-ink">
+                  {plan.price}
+                </p>
               </th>
-              {plans.map(({ plan, trackTitle }) => (
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => {
+            const rowBg = index % 2 === 0 ? "bg-surface" : "bg-ivory";
+            return (
+              <tr key={row.label} className={cn("border-t border-line", rowBg)}>
                 <th
-                  key={plan.name}
-                  scope="col"
-                  id={planAnchor(plan.name)}
+                  scope="row"
                   className={cn(
-                    columnClass(plan),
-                    "scroll-mt-24 py-5 align-bottom",
-                    plan.featured === true && "border-t-2 border-t-copper-deep",
+                    "sticky left-0 z-10 px-4 py-3.5 align-top text-xs font-semibold uppercase tracking-[0.12em] text-copper-deep lg:px-5",
+                    rowBg,
                   )}
                 >
-                  <p className="flex min-h-[2.2rem] items-start text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">
-                    {trackTitle}
-                  </p>
-                  <p className="mt-2 flex min-h-[2.75rem] items-start text-base font-semibold leading-snug text-ink">
-                    {plan.name}
-                  </p>
-                  <p className="mt-3 font-serif text-[2rem] font-semibold leading-none tabular-nums text-ink">
-                    {plan.price}
-                  </p>
+                  {row.label}
                 </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row, index) => {
-              const rowBg = index % 2 === 0 ? "bg-surface" : "bg-ivory";
-              return (
-                <tr key={row.label} className={cn("border-t border-line", rowBg)}>
-                  <th
-                    scope="row"
-                    className={cn(
-                      "sticky left-0 z-10 px-4 py-3.5 align-top text-xs font-semibold uppercase tracking-[0.12em] text-copper-deep lg:px-5",
-                      rowBg,
-                    )}
+                {plans.map((entry) => (
+                  <td
+                    key={entry.plan.name}
+                    className={cn(columnClass(entry.plan), "leading-snug text-ink/85")}
                   >
-                    {row.label}
-                  </th>
-                  {plans.map((entry) => (
-                    <td
-                      key={entry.plan.name}
-                      className={cn(columnClass(entry.plan), "text-[15px] leading-snug text-ink/85")}
-                    >
-                      {row.render(entry)}
-                    </td>
-                  ))}
-                </tr>
-              );
-            })}
-            <tr className="border-t border-line bg-surface">
-              <th scope="row" className="sticky left-0 z-10 bg-surface px-4 py-4 lg:px-5" aria-hidden />
-              {plans.map(({ plan }) => (
-                <td key={plan.name} className={cn(columnClass(plan), "py-4")}>
-                  {plan.href && plan.ctaLabel ? (
-                    <a
-                      href={plan.href}
-                      className={cn(
-                        "flex min-h-11 w-full items-center justify-center rounded-md border px-3 text-center text-sm font-semibold leading-tight transition-colors duration-300",
-                        plan.featured === true
-                          ? "border-copper-deep bg-copper-deep text-surface hover:bg-copper-deeper"
-                          : "border-ink/25 text-ink hover:border-copper-deep hover:text-link-deep",
-                      )}
-                    >
-                      {plan.ctaLabel}
-                    </a>
-                  ) : null}
-                </td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                    {row.render(entry)}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
+          <tr className="border-t border-line bg-surface">
+            <th scope="row" className="sticky left-0 z-10 bg-surface px-4 py-4 lg:px-5" aria-hidden />
+            {plans.map(({ plan }) => (
+              <td key={plan.name} className={cn(columnClass(plan), "py-4")}>
+                {plan.href && plan.ctaLabel ? (
+                  <a href={plan.href} className={planCtaClass(plan.featured === true)}>
+                    {plan.ctaLabel}
+                  </a>
+                ) : null}
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }

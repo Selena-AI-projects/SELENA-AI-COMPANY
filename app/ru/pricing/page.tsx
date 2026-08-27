@@ -35,7 +35,7 @@ export default function RussianPricingPage() {
       <PricingDirectory content={content.pricing.directory} />
       <PricingTracks content={content.pricing} showHeader={false} />
       <PackagesSection content={ruHomepage} />
-      <FAQSection items={content.faq} withHeader={false} />
+      <FAQSection items={content.faq} />
     </>
   );
 }
