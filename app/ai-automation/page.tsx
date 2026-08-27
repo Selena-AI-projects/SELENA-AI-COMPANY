@@ -85,7 +85,7 @@ export default function AiAutomationPage() {
           <Button href={cta.primary.href} size="lg">
             Хочу автоматизацию
           </Button>
-          <Button href="/ai-systems" size="lg" variant="secondary">
+          <Button href="/ru#ai-systems" size="lg" variant="secondary">
             Все услуги
           </Button>
         </div>

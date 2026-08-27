@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   nav,
+  serviceNav,
   footerNote,
   cta,
   contactChannels,
@@ -16,6 +17,7 @@ import { homepage } from "@/lib/data/homepage";
 import { ruHomepage } from "@/lib/data/homepage-ru";
 import { CLIENT_PORTAL_ENABLED, selenaAppRoutes } from "@/lib/visibility/routes";
 import { isEnglishPublicPath } from "@/lib/localized-routes";
+import { cn } from "@/lib/cn";
 import { Container } from "@/components/ui/Container";
 import { BrandWordmark } from "@/components/ui/BrandWordmark";
 
@@ -73,10 +75,21 @@ export function Footer() {
         { href: "/terms", label: "Условия" },
       ];
 
+  // The AI Automation service pages are Russian-only and have no English
+  // counterpart to list.
+  const showServices = !isEnglish;
+
   return (
     <footer className="bg-charcoal text-ivory">
       <Container>
-        <div className="grid gap-12 py-16 sm:py-20 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div
+          className={cn(
+            "grid gap-12 py-16 sm:py-20",
+            showServices
+              ? "md:grid-cols-2 lg:grid-cols-[1.25fr_0.9fr_0.9fr_1.05fr]"
+              : "md:grid-cols-[1.4fr_1fr_1fr]",
+          )}
+        >
           {/* Brand column */}
           <div>
             <BrandWordmark tone="light" size="lg" />
@@ -101,6 +114,26 @@ export function Footer() {
               ))}
             </ul>
           </nav>
+
+          {showServices && (
+            <nav aria-label="Услуги в подвале">
+              <p className="text-base font-semibold uppercase tracking-[0.22em] text-ivory/60">
+                Услуги
+              </p>
+              <ul className="mt-4 space-y-2.5">
+                {serviceNav.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="text-ivory/75 transition-colors hover:text-copper"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
 
           {/* Next step */}
           <div>
