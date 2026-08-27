@@ -1,0 +1,734 @@
+{
+  "date": "2026-08-26",
+  "configVersion": "korafoodhall-api-view-2026-08-25",
+  "systems": [
+    {
+      "systemId": "ChatGPT",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Gemini",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Perplexity",
+      "channel": "VISITOR"
+    }
+  ],
+  "questions": [
+    {
+      "text": "Where should I eat in Ubud, Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balisim.com",
+        "baliuntold.com",
+        "lifetravelandasia.com",
+        "biglittletravels.com",
+        "brandswitch.id",
+        "joujoutravels.com"
+      ]
+    },
+    {
+      "text": "What is the best food hall in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": true
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "korafoodhall.com",
+        "lifetravelandasia.com",
+        "midnightblueelephant.com",
+        "museumofwander.com",
+        "naturalbornfeeder.com",
+        "tamandukuh.com"
+      ]
+    },
+    {
+      "text": "Which restaurants in Ubud are good for families?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "knowmadsbali.com",
+        "onemoreplacetogo.com",
+        "pesona-lounge-ubud.squarespace.com",
+        "ramukitchen.com",
+        "thehoneycombers.com",
+        "thetravellingtrowberrys.com"
+      ]
+    },
+    {
+      "text": "Where can I eat with kids in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "onemoreplacetogo.com",
+        "thehoneycombers.com",
+        "balibuddies.com",
+        "balifamilyvillas.com",
+        "baligasm.com",
+        "creators.yahoo.com"
+      ]
+    },
+    {
+      "text": "Where should I go for dinner in Ubud, Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balisim.com",
+        "baliuntold.com",
+        "biglittletravels.com",
+        "fringinto.com",
+        "thehoneycombers.com",
+        "villa-bali.com"
+      ]
+    },
+    {
+      "text": "Where can I host a private event in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "tanahgajahubud.com",
+        "anantara.com",
+        "bestbeachclubsbali.com",
+        "comohotels.com",
+        "elitehavens.com",
+        "hyatt.com"
+      ]
+    },
+    {
+      "text": "What are the private event venues in Ubud, Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "tanahgajahubud.com",
+        "anantara.com",
+        "elitehavens.com",
+        "hyatt.com",
+        "impianaubud.com",
+        "ritzcarlton.com"
+      ]
+    },
+    {
+      "text": "Where can I have a birthday party in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balifamilyvillas.com",
+        "jungleclububud.com",
+        "theshivanna.com"
+      ]
+    },
+    {
+      "text": "Where can a large group have dinner together in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "copperubud.com",
+        "donnaubud.com",
+        "honeyandsmoke.co",
+        "locavorenxt.com",
+        "pesonaloungeubud.com",
+        "warungpondokmadu.com"
+      ]
+    },
+    {
+      "text": "What is the best casual dining in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "thehoneycombers.com",
+        "alamubudjewelryworkshop.com",
+        "bestubudrestaurant.com",
+        "biglittletravels.com",
+        "lastcallbali.com",
+        "lifetravelandasia.com"
+      ]
+    },
+    {
+      "text": "Is there a food court in Ubud, Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": true
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "korafoodhall.com",
+        "balibelin.com",
+        "tripadvisor.com.sg"
+      ]
+    },
+    {
+      "text": "Where can I eat near the centre of Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "baliuntold.com",
+        "joujoutravels.com",
+        "thehoneycombers.com",
+        "adventuresnsunsets.com",
+        "balibuddies.com",
+        "balisim.com"
+      ]
+    },
+    {
+      "text": "What are the affordable restaurants in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "baliholidaysecrets.com",
+        "benable.com",
+        "en.wikivoyage.org",
+        "finnsbeachclub.com",
+        "lastcallbali.com",
+        "remoteandafloat.com"
+      ]
+    },
+    {
+      "text": "Are there restaurants in Ubud with a playground?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balifamilyvillas.com",
+        "cheekymonkeycafebali.com",
+        "elitehavens.com",
+        "onemoreplacetogo.com",
+        "ramukitchen.com",
+        "tripadvisor.com"
+      ]
+    },
+    {
+      "text": "Where can a group with different diets eat together in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "bridgesandballoons.com",
+        "finnsbeachclub.com",
+        "flourishbali.com",
+        "happycow.net",
+        "nishiv.com",
+        "pesonaloungeubud.com"
+      ]
+    },
+    {
+      "text": "Where in Ubud can vegetarians and meat eaters eat in the same place?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "flockbali.com",
+        "bridgesandballoons.com",
+        "finnsbeachclub.com",
+        "magdamagdas.com",
+        "pesonaloungeubud.com"
+      ]
+    },
+    {
+      "text": "Where is the best brunch in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "slowerworld.com",
+        "wheregoesrose.com",
+        "baliuntold.com",
+        "en.tripadvisor.com.hk",
+        "finnsbeachclub.com",
+        "kelanabykayla.com"
+      ]
+    },
+    {
+      "text": "Which restaurants in Ubud have live music?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balibohemia.com",
+        "cp-lounge.com",
+        "elyskitchenubud.com",
+        "herblibraryubud.com",
+        "kemangiubudresto.com",
+        "nandinibali.com"
+      ]
+    },
+    {
+      "text": "Where do expats eat in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "joujoutravels.com",
+        "midnightblueelephant.com",
+        "balisim.com",
+        "baliuntold.com",
+        "biglittletravels.com",
+        "brandswitch.id"
+      ]
+    },
+    {
+      "text": "What is the best food hall in Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": true
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ohana-agency.com",
+        "wanderlog.com",
+        "travelguidestip.com",
+        "ausindobaligroup.com",
+        "kiligbali.com",
+        "korafoodhall.com"
+      ]
+    },
+    {
+      "text": "Where can I organise a corporate event in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "marriott.com",
+        "hyatt.com",
+        "anantara.com",
+        "basundari.com",
+        "comohotels.com",
+        "fivelementsbali.com"
+      ]
+    },
+    {
+      "text": "Where can I hold a wedding reception in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "abisenaubud.com",
+        "bisma-eight.com",
+        "inivie.com",
+        "luximawedding.com",
+        "marriott.com",
+        "mayaresorts.com"
+      ]
+    },
+    {
+      "text": "What are the new restaurants in Ubud worth trying?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "nowbali.co.id",
+        "revasi.net"
+      ]
+    },
+    {
+      "text": "Where can I eat late at night in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "tripadvisor.com",
+        "baliready.com",
+        "gofood.co.id",
+        "tripadvisor.co.uk",
+        "donnaubud.com",
+        "en.tripadvisor.com.hk"
+      ]
+    },
+    {
+      "text": "What should I not miss when eating in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "inspiritubud.com",
+        "lastcallbali.com",
+        "northboundbali.com",
+        "royalcaribbean.com",
+        "thebaliguideline.com",
+        "ubudhood.com"
+      ]
+    }
+  ]
+}
