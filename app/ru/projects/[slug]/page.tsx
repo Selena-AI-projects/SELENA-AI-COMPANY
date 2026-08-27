@@ -18,6 +18,7 @@ import {
   impressionForms,
   pluralizeRu,
   journalLadder,
+  type JournalBlock,
   journalMeta,
   journalProjects,
   minVisitorCoverage,
@@ -51,6 +52,39 @@ export async function generateMetadata({
     path: `/ru/projects/${project.slug}`,
     locale: "ru_RU",
   });
+}
+
+/**
+ * An entry as blocks. A list stays a list: where a sentence enumerates the
+ * models asked or the businesses named instead, the reader should find the
+ * names without having to read the sentence around them.
+ */
+function JournalBlocks({ blocks, muted = false }: { blocks: JournalBlock[]; muted?: boolean }) {
+  return (
+    <>
+      {blocks.map((block, index) =>
+        block.kind === "text" ? (
+          <p key={index}>{block.text}</p>
+        ) : (
+          <div key={index}>
+            {block.title ? (
+              <p className={muted ? "font-semibold text-ink/70" : "font-semibold text-ink"}>
+                {block.title}
+              </p>
+            ) : null}
+            <ul className={`${block.title ? "mt-2" : ""} space-y-1.5`}>
+              {block.items.map((item) => (
+                <li key={item} className="grid grid-cols-[0.6rem_1fr] gap-3">
+                  <span aria-hidden className="mt-[0.85em] h-px w-2 bg-copper-deep" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ),
+      )}
+    </>
+  );
 }
 
 export default async function JournalProjectPage({
@@ -452,13 +486,17 @@ export default async function JournalProjectPage({
                   <span className="text-sm text-muted">{stageLabels[entry.stage]}</span>
                 </div>
                 <h3 className="mt-4 font-serif text-2xl font-semibold text-ink">{entry.title}</h3>
-                <p className="mt-5 text-lg leading-relaxed text-ink/85">{entry.body}</p>
+                <div className="mt-5 space-y-5 text-lg leading-relaxed text-ink/85">
+                  <JournalBlocks blocks={entry.body} />
+                </div>
                 {entry.doesNotProve ? (
                   <div className="mt-7 border-l-2 border-copper-deep/50 pl-5">
                     <p className="text-sm font-semibold tracking-[0.14em] text-muted uppercase">
                       Чего это не доказывает
                     </p>
-                    <p className="mt-2 leading-relaxed text-muted">{entry.doesNotProve}</p>
+                    <div className="mt-2 space-y-3 leading-relaxed text-muted">
+                      <JournalBlocks blocks={entry.doesNotProve} muted />
+                    </div>
                   </div>
                 ) : null}
               </li>
