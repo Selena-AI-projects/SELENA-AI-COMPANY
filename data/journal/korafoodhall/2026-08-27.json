@@ -1,0 +1,133 @@
+{
+  "date": "2026-08-27",
+  "configVersion": "korafoodhall-api-view-2026-08-25",
+  "systems": [
+    {
+      "systemId": "ChatGPT",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Gemini",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Perplexity",
+      "channel": "VISITOR"
+    }
+  ],
+  "questions": [
+    {
+      "text": "Where should I eat in Ubud, Bali?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "alamubudjewelryworkshop.com",
+        "lifetravelandasia.com",
+        "thenomadicflower.com",
+        "balisim.com",
+        "baliuntold.com",
+        "biglittletravels.com"
+      ]
+    },
+    {
+      "text": "What is the best food hall in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": true
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balibelin.com",
+        "korafoodhall.com",
+        "chasinglenscapes.com",
+        "lifetravelandasia.com",
+        "midnightblueelephant.com",
+        "museumofwander.com"
+      ]
+    },
+    {
+      "text": "Which restaurants in Ubud are good for families?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "knowmadsbali.com",
+        "onemoreplacetogo.com",
+        "pesona-lounge-ubud.squarespace.com",
+        "thetravellingtrowberrys.com",
+        "thehoneycombers.com",
+        "tripadvisor.com"
+      ]
+    },
+    {
+      "text": "Where can I eat with kids in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": false,
+          "mentioned": null
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "knowmadsbali.com",
+        "littlestepsasia.com",
+        "ramukitchen.com"
+      ]
+    }
+  ]
+}
