@@ -29,11 +29,11 @@ export const site = {
  * is the moment they stop believing the rest of the page.
  */
 export const cta = {
-  primary: { label: "Проверить AI-готовность — бесплатно", href: "/ru/check" },
+  primary: { label: "Проверить готовность сайта для AI — бесплатно", href: "/ru/check" },
   secondary: { label: "Обсудить AI-систему", href: "/contact" },
   calculator: { label: "Посчитать рутину", href: "/#calculator" },
-  brief: { label: "Проверить AI-готовность", href: "/ru/check" },
-  short: { label: "Проверить AI-готовность", href: "/ru/check" },
+  brief: { label: "Проверить готовность сайта", href: "/ru/check" },
+  short: { label: "Проверить готовность сайта", href: "/ru/check" },
   contact: { label: "Связаться", href: "/contact" },
 } as const;
 

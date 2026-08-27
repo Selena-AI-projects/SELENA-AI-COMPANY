@@ -645,7 +645,7 @@ export const visibilityContentRu: VisibilityContent = {
     },
   ],
   cta: {
-    primary: { label: "Проверить AI-готовность — бесплатно", href: visibilityRoutes.ru.check },
+    primary: { label: "Проверить готовность сайта для AI — бесплатно", href: visibilityRoutes.ru.check },
     secondary: { label: "Посмотреть тарифы", href: visibilityRoutes.ru.pricing },
     compareNote:
       "Цены — в начале страницы. Построчное сравнение всех пяти вариантов и услуг AI Automation — на странице тарифов.",
