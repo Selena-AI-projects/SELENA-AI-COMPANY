@@ -48,6 +48,9 @@ export function MeasurementGrid({
 }) {
   const totals = systemTotals(detail);
   const visitorCount = detail.systems.filter((system) => system.channel === "VISITOR").length;
+  // A channel with no systems gets no header: colSpan={0} is not "no columns",
+  // it is a cell the browser stretches over the whole row.
+  const apiCount = detail.systems.length - visitorCount;
 
   return (
     <div>
@@ -88,12 +91,16 @@ export function MeasurementGrid({
               <th scope="col" className="sticky left-0 z-10 bg-charcoal py-3 pr-4 font-semibold">
                 Вопрос
               </th>
-              <th scope="colgroup" colSpan={visitorCount} className="border-b border-line-dark px-2 py-3 text-center font-semibold tracking-[0.14em]">
-                Что видит человек
-              </th>
-              <th scope="colgroup" colSpan={detail.systems.length - visitorCount} className="border-b border-line-dark px-2 py-3 text-center font-semibold tracking-[0.14em]">
-                Что модель знает сама
-              </th>
+              {visitorCount > 0 ? (
+                <th scope="colgroup" colSpan={visitorCount} className="border-b border-line-dark px-2 py-3 text-center font-semibold tracking-[0.14em]">
+                  Что видит человек
+                </th>
+              ) : null}
+              {apiCount > 0 ? (
+                <th scope="colgroup" colSpan={apiCount} className="border-b border-line-dark px-2 py-3 text-center font-semibold tracking-[0.14em]">
+                  Что модель знает сама
+                </th>
+              ) : null}
             </tr>
             <tr className="border-b border-line-dark text-sm text-ivory/75">
               <th scope="col" className="sticky left-0 z-10 bg-charcoal py-3 pr-4 font-semibold">

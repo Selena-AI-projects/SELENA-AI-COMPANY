@@ -97,6 +97,11 @@ export default async function JournalProjectPage({
     : [];
 
   const details = detailsFor(project.slug);
+  // Where a measurement published its detail, the grid carries the totals and
+  // the summary beside it is a second copy of the same numbers, typed by hand.
+  // Two counts of one measurement on one page is one count too many.
+  const detailDates = new Set(details.map((detail) => detail.date));
+  const summaries = (project.visitorViews ?? []).filter((view) => !detailDates.has(view.date));
 
   const firstEntry = project.entries[0];
   const lastEntry = project.entries[project.entries.length - 1];
@@ -177,7 +182,7 @@ export default async function JournalProjectPage({
         </section>
       ) : null}
 
-      {(project.visitorViews ?? []).map((visitorView, index) => (
+      {summaries.map((visitorView, index) => (
         <section key={visitorView.date} className="bg-charcoal py-20 text-ivory sm:py-28">
           <Container>
             <div className="max-w-3xl">
