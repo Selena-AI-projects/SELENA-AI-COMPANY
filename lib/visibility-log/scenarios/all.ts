@@ -1,6 +1,9 @@
 import type { MeasurementScenario } from "./index";
+import { avlibaliScenario } from "./avlibali";
 import { bigdragonvillasScenario } from "./bigdragonvillas";
 import { chitobistroScenario } from "./chitobistro";
+import { cubebaliScenario } from "./cubebali";
+import { eskqbarScenario } from "./eskqbar";
 import { korafoodhallScenario } from "./korafoodhall";
 import { otherbaliScenario } from "./otherbali";
 import { petidScenario } from "./petid";
@@ -14,8 +17,11 @@ import { villaopsScenario } from "./villaops";
  * costs little and misleads a lot.
  */
 export const scenarios: Record<string, MeasurementScenario> = {
+  avlibali: avlibaliScenario,
   bigdragonvillas: bigdragonvillasScenario,
   chitobistro: chitobistroScenario,
+  cubebali: cubebaliScenario,
+  eskqbar: eskqbarScenario,
   korafoodhall: korafoodhallScenario,
   otherbali: otherbaliScenario,
   petid: petidScenario,

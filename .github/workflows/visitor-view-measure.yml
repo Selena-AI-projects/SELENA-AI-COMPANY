@@ -20,8 +20,11 @@ on:
         options:
           - all
           - korafoodhall
+          - avlibali
           - bigdragonvillas
           - chitobistro
+          - cubebali
+          - eskqbar
           - otherbali
           - petid
           - remhaos
@@ -45,7 +48,7 @@ jobs:
       - id: pick
         run: |
           if [ "${{ inputs.project }}" = "all" ]; then
-            echo 'projects=["korafoodhall","bigdragonvillas","chitobistro","otherbali","petid","remhaos","selenasystems","villaops"]' >> "$GITHUB_OUTPUT"
+            echo 'projects=["korafoodhall","avlibali","bigdragonvillas","chitobistro","cubebali","eskqbar","otherbali","petid","remhaos","selenasystems","villaops"]' >> "$GITHUB_OUTPUT"
           else
             echo 'projects=["${{ inputs.project }}"]' >> "$GITHUB_OUTPUT"
           fi
