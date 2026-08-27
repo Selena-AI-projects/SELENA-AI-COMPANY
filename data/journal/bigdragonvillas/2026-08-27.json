@@ -52,10 +52,10 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "simplyindonesia.com",
-            "roughguides.com",
+            "abisenaubud.com",
             "dianatravels.net",
-            "visitbali.com"
+            "visitbali.com",
+            "simplyindonesia.com"
           ]
         },
         {
@@ -72,10 +72,10 @@
           "namedInstead": [],
           "citedDomains": [
             "travelswithingrid.com",
+            "thegoodobserverblog.co.uk",
             "themanduls.com",
-            "22places.com",
-            "baliuntold.com",
-            "thegoodobserverblog.co.uk"
+            "global-gallivanting.com",
+            "baliuntold.com"
           ]
         },
         {
@@ -92,17 +92,17 @@
           "namedInstead": [],
           "citedDomains": [
             "wanderwithjo.com",
-            "themanduls.com",
-            "biglittletravels.com",
-            "getlostinbali.com",
             "baligasm.com",
-            "almostlanding-bali.com"
+            "biglittletravels.com",
+            "themanduls.com",
+            "almostlanding-bali.com",
+            "getlostinbali.com"
           ]
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -117,7 +117,7 @@
       "namedInstead": [],
       "citedDomains": [
         "themanduls.com",
-        "22places.com",
+        "abisenaubud.com",
         "almostlanding-bali.com",
         "baligasm.com",
         "baliuntold.com",
@@ -141,15 +141,15 @@
           "namedInstead": [],
           "citedDomains": [
             "travjoy.com",
-            "luxgetaway.com",
             "waddat.com",
-            "villasforkings.com"
+            "luxgetaway.com",
+            "thehoneycombers.com"
           ]
         },
         {
           "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -160,7 +160,9 @@
           "namedInstead": [],
           "citedDomains": [
             "theluxurytravelexpert.com",
-            "baliuntold.com"
+            "inivie.com",
+            "thebaliguideline.com",
+            "traveloka.com"
           ]
         },
         {
@@ -172,41 +174,34 @@
         },
         {
           "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
-          "citedDomains": [
-            "expedia.com.au",
-            "travelocity.com",
-            "tripadvisor.com.au",
-            "expedia.com",
-            "tripadvisor.co.uk",
-            "tripadvisor.in"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
           "citedDomains": []
         },
         {
           "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
           "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "baliuntold.com",
-        "expedia.com",
-        "expedia.com.au",
+        "inivie.com",
         "luxgetaway.com",
+        "thebaliguideline.com",
+        "thehoneycombers.com",
         "theluxurytravelexpert.com",
-        "travelocity.com"
+        "traveloka.com"
       ]
     },
     {
@@ -221,847 +216,10 @@
         },
         {
           "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "villabeltza.com",
-            "thehoneycombers.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "elitehavens.com",
-            "booking.com",
-            "mayaresorts.com",
-            "cozycozy.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
           "answered": false,
           "mentioned": null,
           "namedInstead": [],
           "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "booking.com",
-        "cozycozy.com",
-        "elitehavens.com",
-        "mayaresorts.com",
-        "thehoneycombers.com",
-        "villabeltza.com"
-      ]
-    },
-    {
-      "text": "What are good family villas in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "balifamilyvillas.com",
-            "villa-bali.com",
-            "thehoneycombers.com",
-            "littlestepsasia.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "littlepassportcrew.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "balifamilyvillas.com",
-        "littlepassportcrew.com",
-        "littlestepsasia.com",
-        "thehoneycombers.com",
-        "villa-bali.com"
-      ]
-    },
-    {
-      "text": "Where should a group stay in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "simplyindonesia.com",
-            "dianatravels.net",
-            "abisenaubud.com",
-            "roughguides.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "almostlanding-bali.com",
-            "themanduls.com",
-            "thegoodobserverblog.co.uk",
-            "22places.com",
-            "casapohonubud.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "thehoneycombers.com",
-            "biglittletravels.com",
-            "baligasm.com",
-            "wanderwithjo.com",
-            "misstourist.com",
-            "almostlanding-bali.com"
-          ]
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "almostlanding-bali.com",
-        "22places.com",
-        "abisenaubud.com",
-        "baligasm.com",
-        "biglittletravels.com",
-        "casapohonubud.com"
-      ]
-    },
-    {
-      "text": "What are the best value villas in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "waddat.com",
-            "agoda.com",
-            "tripadvisor.com.sg"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "adventureinyou.com",
-            "ubudvillasrental.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "expedia.com",
-            "ubudvillasrental.com",
-            "tripadvisor.com.au",
-            "waddat.com",
-            "tripadvisor.com",
-            "tripadvisor.co.uk"
-          ]
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "ubudvillasrental.com",
-        "waddat.com",
-        "adventureinyou.com",
-        "agoda.com",
-        "expedia.com",
-        "tripadvisor.co.uk"
-      ]
-    },
-    {
-      "text": "Where can I stay in Ubud with rice field views?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "letstravel360.com",
-            "topofhotel.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "biglittletravels.com",
-            "anantara.com",
-            "thehotelguru.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "trip101.com",
-            "visualtravelspots.com",
-            "viaresorts.com",
-            "letstravel360.com",
-            "trip.com",
-            "staysinbali.com"
-          ]
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "letstravel360.com",
-        "anantara.com",
-        "biglittletravels.com",
-        "staysinbali.com",
-        "thehotelguru.com",
-        "topofhotel.com"
-      ]
-    },
-    {
-      "text": "Which villas in Ubud come with a private chef?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "baliluxuryvillas.com",
-            "baliluxevillas.com",
-            "rumah-hujan.com",
-            "airbnb.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "baliluxuryvillas.com",
-            "alamandabali.com",
-            "villa-mia-ubud.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "baliluxuryvillas.com",
-        "airbnb.com",
-        "alamandabali.com",
-        "baliluxevillas.com",
-        "rumah-hujan.com",
-        "villa-mia-ubud.com"
-      ]
-    },
-    {
-      "text": "Where should a couple stay in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "abisenaubud.com",
-            "ubudbreaks.com",
-            "roughguides.com",
-            "dianatravels.net",
-            "sofia-hotels.net",
-            "simplyindonesia.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "travelswithingrid.com",
-            "themanduls.com",
-            "biglittletravels.com",
-            "awalkintheworld.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "thehoneycombers.com",
-            "localgrapher.com",
-            "tripadvisor.com",
-            "tripadvisor.co.nz",
-            "tripadvisor.com.au",
-            "en.tripadvisor.com.hk"
-          ]
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "abisenaubud.com",
-        "awalkintheworld.com",
-        "biglittletravels.com",
-        "dianatravels.net",
-        "en.tripadvisor.com.hk",
-        "localgrapher.com"
-      ]
-    },
-    {
-      "text": "What are the quiet places to stay in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "roughguides.com",
-            "simplyindonesia.com",
-            "abisenaubud.com",
-            "ubudbreaks.com",
-            "theprotravel.com",
-            "dianatravels.net"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "baliuntold.com",
-            "biglittletravels.com",
-            "ulamanbali.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "abisenaubud.com",
-        "baliuntold.com",
-        "biglittletravels.com",
-        "dianatravels.net",
-        "roughguides.com",
-        "simplyindonesia.com"
-      ]
-    },
-    {
-      "text": "Where can I stay in Ubud for a month?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "bali-home-immo.com",
-            "hubuddha.com",
-            "airbnb.com",
-            "balivillahub.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "nawasaktiresort.com",
-            "marcwiner.com",
-            "global-gallivanting.com",
-            "ubudproperty.com",
-            "esim.holafly.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "vrbo.com",
-            "airbnb.com",
-            "expedia.com",
-            "esim.holafly.com",
-            "baliuntold.com",
-            "alovelyplanet.com"
-          ]
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "airbnb.com",
-        "esim.holafly.com",
-        "alovelyplanet.com",
-        "bali-home-immo.com",
-        "baliuntold.com",
-        "balivillahub.com"
-      ]
-    },
-    {
-      "text": "Which villas in Ubud are good for a honeymoon?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "balitouristic.com",
-            "viceroybali.com",
-            "casapohonubud.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "viceroybali.com",
-            "balihoneymoon.com",
-            "villa-finder.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "inivie.com",
-            "tripadvisor.com",
-            "tripadvisor.com.au",
-            "tripadvisor.co.uk",
-            "pandubalitour.com",
-            "en.tripadvisor.com.hk"
-          ]
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "viceroybali.com",
-        "balihoneymoon.com",
-        "balitouristic.com",
-        "casapohonubud.com",
-        "en.tripadvisor.com.hk",
-        "inivie.com"
-      ]
-    },
-    {
-      "text": "Where can I find villas near the centre of Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "booking.com",
-            "sanctuaryvillas.co",
-            "villalatengubud.com",
-            "monkeyforestvillas.com"
-          ]
         },
         {
           "systemId": "deepseek/deepseek-v3.2",
@@ -1076,8 +234,7 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "thewhitevillas.com",
-            "hubuddha.com",
+            "banyantree.com",
             "booking.com"
           ]
         },
@@ -1112,12 +269,8 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "booking.com",
-        "hubuddha.com",
-        "monkeyforestvillas.com",
-        "sanctuaryvillas.co",
-        "thewhitevillas.com",
-        "villalatengubud.com"
+        "banyantree.com",
+        "booking.com"
       ]
     }
   ]
