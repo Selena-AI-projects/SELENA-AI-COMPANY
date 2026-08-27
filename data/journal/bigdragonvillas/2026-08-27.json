@@ -1,0 +1,728 @@
+{
+  "date": "2026-08-27",
+  "configVersion": "bigdragonvillas-api-view-2026-08-25",
+  "systems": [
+    {
+      "systemId": "ChatGPT",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Gemini",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Perplexity",
+      "channel": "VISITOR"
+    }
+  ],
+  "questions": [
+    {
+      "text": "Where should I stay in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "almostlanding-bali.com",
+        "global-gallivanting.com",
+        "themanduls.com",
+        "22places.com",
+        "abisenaubud.com",
+        "baligasm.com"
+      ]
+    },
+    {
+      "text": "What are the best villas in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "travjoy.com",
+        "tripadvisor.com",
+        "waddat.com",
+        "balibuddies.com",
+        "escapeworthy.com",
+        "expedia.com"
+      ]
+    },
+    {
+      "text": "Where can I find a villa with a private pool in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "bisma-eight.com",
+        "booking.com",
+        "thehoneycombers.com",
+        "thesamaya.com",
+        "tripadvisor.com",
+        "villabeltza.com"
+      ]
+    },
+    {
+      "text": "What are good family villas in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "littlepassportcrew.com",
+        "balifamilyvillas.com",
+        "booking.com",
+        "cozycozy.com",
+        "thehoneycombers.com"
+      ]
+    },
+    {
+      "text": "Where should a group stay in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "almostlanding-bali.com",
+        "awalkintheworld.com",
+        "22places.com",
+        "abisenaubud.com",
+        "baligasm.com",
+        "baliuntold.com"
+      ]
+    },
+    {
+      "text": "What are the best value villas in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "travjoy.com",
+        "agoda.com",
+        "booking.com",
+        "tripadvisor.com",
+        "ubudvillasrental.com",
+        "waddat.com"
+      ]
+    },
+    {
+      "text": "Where can I stay in Ubud with rice field views?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "topofhotel.com",
+        "hotelierschoice.com",
+        "letstravel360.com",
+        "plataran.com",
+        "thericejoglo.com",
+        "tripadvisor.com"
+      ]
+    },
+    {
+      "text": "Which villas in Ubud come with a private chef?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "alamandabali.com",
+        "baliluxuryvillas.com",
+        "airbnb.co.in",
+        "airbnb.com",
+        "baliluxevillas.com",
+        "kamandaluresort.com"
+      ]
+    },
+    {
+      "text": "Where should a couple stay in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "biglittletravels.com",
+        "tripadvisor.com",
+        "balihoneymoon.com",
+        "tripadvisor.com.au",
+        "abisenaubud.com",
+        "booking.com"
+      ]
+    },
+    {
+      "text": "What are the quiet places to stay in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "abisenaubud.com",
+        "travelswithingrid.com",
+        "balimalayali.com",
+        "dianatravels.net",
+        "expedia.com",
+        "listingal.com"
+      ]
+    },
+    {
+      "text": "Where can I stay in Ubud for a month?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "airbnb.com",
+        "awalkintheworld.com",
+        "baliuntold.com",
+        "esim.holafly.com",
+        "hubuddha.com",
+        "solarpropertybali.com"
+      ]
+    },
+    {
+      "text": "Which villas in Ubud are good for a honeymoon?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balihoneymoon.com",
+        "inivie.com",
+        "nyuhbalivillas.com",
+        "samsaraubud.com",
+        "viceroybali.com",
+        "youtube.com"
+      ]
+    },
+    {
+      "text": "Where can I find villas near the centre of Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "booking.com",
+        "thewhitevillas.com"
+      ]
+    },
+    {
+      "text": "What accommodation in Ubud suits digital nomads?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "abisenaubud.com",
+        "balihotels.com",
+        "esim.holafly.com",
+        "finnsbeachclub.com",
+        "lastcallbali.com",
+        "nomadterminal.com"
+      ]
+    },
+    {
+      "text": "Where should I stay in Ubud with kids?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "littlepassportcrew.com",
+        "bali-nanny.com",
+        "expedia.com",
+        "hotels.com",
+        "ubud.kidsfriendlyhotels.net"
+      ]
+    },
+    {
+      "text": "What are the best boutique stays in Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "thehoneycombers.com",
+        "tripadvisor.com",
+        "baliuntold.com",
+        "boutiquehotel.me",
+        "travjoy.com"
+      ]
+    },
+    {
+      "text": "Which villas in Ubud allow long stays?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "hubuddha.com",
+        "bali-home-immo.com",
+        "airbnb.com",
+        "balilongtermrentals.com",
+        "bookingvillabali.com",
+        "houseofreservations.com"
+      ]
+    },
+    {
+      "text": "Where can I book a villa in Ubud directly with the owner?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "bookubud.com",
+        "bukavilla.com",
+        "sanctuaryvillas.co",
+        "airbnb.com",
+        "tannarivillas.com",
+        "villalatengubud.com"
+      ]
+    },
+    {
+      "text": "Where should a first-time visitor to Bali stay?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "visitbali.com",
+        "30sundays.club",
+        "asiatravellab.com",
+        "baliholidaysecrets.com",
+        "hotelinfo.com",
+        "myblueterra.com"
+      ]
+    },
+    {
+      "text": "Where can I stay in Ubud on a budget?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "hostelworld.com",
+        "booking.com",
+        "awalkintheworld.com"
+      ]
+    },
+    {
+      "text": "Which villas in Ubud have the best reviews?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "booking.com",
+        "thehoneycombers.com"
+      ]
+    },
+    {
+      "text": "Where in Ubud can I host a small wedding?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "abisenaubud.com",
+        "hyatt.com",
+        "kayumanisubud.com",
+        "tanahgajahubud.com",
+        "umatirthaubud.com"
+      ]
+    },
+    {
+      "text": "What are the peaceful retreats near Ubud?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "soulshinebali.com",
+        "goddessretreats.com",
+        "tripswithasoul.com",
+        "bookyogaretreats.com",
+        "fivelementsbali.com"
+      ]
+    },
+    {
+      "text": "Where do people stay when they come to Ubud for yoga?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "global-gallivanting.com",
+        "awalkintheworld.com",
+        "abisenaubud.com",
+        "balibro.com",
+        "dianatravels.net",
+        "lifetravelandasia.com"
+      ]
+    },
+    {
+      "text": "Which villa in Ubud should I book for a week?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "thehoneycombers.com",
+        "villa-finder.com",
+        "theluxurybali.com",
+        "villabuddy.com",
+        "waddat.com"
+      ]
+    }
+  ]
+}
