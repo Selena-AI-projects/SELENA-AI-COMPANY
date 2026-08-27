@@ -14,6 +14,8 @@
  * Written by the measurement run, not by hand. Until a run has published its
  * detail, a project simply has none and the page shows the summary alone.
  */
+import fs from "node:fs";
+import path from "node:path";
 import type { ProjectSlug } from "./data";
 
 export type MeasurementChannel = "VISITOR" | "API";
@@ -84,11 +86,51 @@ export function systemTotals(detail: MeasurementDetail): SystemTotals[] {
 }
 
 /**
- * Published details, newest last, one entry per measurement. Empty until a run
- * writes the first one — an empty table would be a claim that nothing was
- * found, and nothing was asked.
+ * Details come from `data/journal/<slug>/<date>.json`, written by the
+ * measurement run and never by hand. Reading them from disk rather than from a
+ * TypeScript literal is what lets a job publish one: a machine can add a file,
+ * and a person can read the diff before it goes out.
  */
-export const measurementDetails: Partial<Record<ProjectSlug, MeasurementDetail[]>> = {};
+const journalRoot = path.join(process.cwd(), "data", "journal");
+
+export function parseDetail(file: string, raw: string): MeasurementDetail {
+  const value = JSON.parse(raw) as MeasurementDetail;
+  // A malformed file is thrown rather than skipped. Skipping would publish a
+  // page that quietly omits a measurement, which reads as a measurement that
+  // found nothing.
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value.date)) throw new Error(`${file}: no date`);
+  if (!value.configVersion) throw new Error(`${file}: no configuration version`);
+  if (!Array.isArray(value.systems) || value.systems.length === 0)
+    throw new Error(`${file}: no systems`);
+  if (!Array.isArray(value.questions) || value.questions.length === 0)
+    throw new Error(`${file}: no questions`);
+  for (const question of value.questions) {
+    if (!question.text) throw new Error(`${file}: a question has no text`);
+    for (const system of value.systems) {
+      if (!question.cells.some((cell) => cell.systemId === system.systemId))
+        throw new Error(`${file}: "${question.text}" has no cell for ${system.systemId}`);
+    }
+  }
+  return value;
+}
+
+function readDetails(): Partial<Record<ProjectSlug, MeasurementDetail[]>> {
+  if (!fs.existsSync(journalRoot)) return {};
+  const byProject: Partial<Record<ProjectSlug, MeasurementDetail[]>> = {};
+  for (const slug of fs.readdirSync(journalRoot)) {
+    const dir = path.join(journalRoot, slug);
+    if (!fs.statSync(dir).isDirectory()) continue;
+    const details = fs
+      .readdirSync(dir)
+      .filter((file) => file.endsWith(".json"))
+      .sort()
+      .map((file) => parseDetail(`${slug}/${file}`, fs.readFileSync(path.join(dir, file), "utf8")));
+    if (details.length > 0) byProject[slug as ProjectSlug] = details;
+  }
+  return byProject;
+}
+
+export const measurementDetails = readDetails();
 
 export function detailsFor(slug: ProjectSlug): MeasurementDetail[] {
   return measurementDetails[slug] ?? [];
