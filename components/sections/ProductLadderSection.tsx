@@ -66,7 +66,7 @@ export function ProductLadderSection() {
               <Button
                 href={hrefs[item.level] ?? "/check"}
                 variant="ghost"
-                className="mt-auto justify-start px-0 text-copper-deep"
+                className="mt-auto justify-start px-0 text-link"
               >
                 {item.cta} →
               </Button>

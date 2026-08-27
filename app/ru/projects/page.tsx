@@ -6,12 +6,14 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { detailsFor, systemTotals } from "@/lib/visibility-log/measurement-detail";
 import {
   clickForms,
   clickRate,
   formatDate,
   impressionForms,
   pluralizeRu,
+  timeForms,
   journalLadder,
   journalMeta,
   journalProjects,
@@ -124,9 +126,25 @@ export default function JournalIndexPage() {
               const metrics = project.metrics;
               const rate = metrics ? clickRate(metrics) : null;
               const latest = project.entries[project.entries.length - 1];
-              const measurements = project.visitorViews ?? [];
-              const last = measurements[measurements.length - 1];
-              const lastMeasurement = last ? { ...last, number: measurements.length } : null;
+              // The detail is what the project page shows, so the card has to
+              // read it too: the summary beside it was typed from a run log and
+              // disagreed with the database by one mention.
+              const details = detailsFor(project.slug);
+              const summaries = project.visitorViews ?? [];
+              const lastDetail = details[details.length - 1];
+              const lastSummary = summaries[summaries.length - 1];
+              const lastMeasurement = lastDetail
+                ? {
+                    number: details.length,
+                    date: lastDetail.date,
+                    brandMentions: systemTotals(lastDetail).reduce(
+                      (total, system) => total + system.mentioned,
+                      0,
+                    ),
+                  }
+                : lastSummary
+                  ? { number: summaries.length, date: lastSummary.date, brandMentions: lastSummary.brandMentions }
+                  : null;
               return (
                 <li key={project.slug}>
                   <Link
@@ -150,7 +168,7 @@ export default function JournalIndexPage() {
                             Замер №{lastMeasurement.number} · {formatDate(lastMeasurement.date)} —{" "}
                             {lastMeasurement.brandMentions === 0
                               ? "бренд не назван"
-                              : `бренд назван ${lastMeasurement.brandMentions} раз`}
+                              : `бренд назван ${lastMeasurement.brandMentions} ${pluralizeRu(lastMeasurement.brandMentions, timeForms)}`}
                           </p>
                         ) : null}
                         {latest ? (
@@ -202,7 +220,7 @@ export default function JournalIndexPage() {
                       ) : null}
                     </div>
 
-                    <span className="mt-6 inline-flex items-center gap-2 font-medium text-copper-deep">
+                    <span className="mt-6 inline-flex items-center gap-2 font-medium text-link">
                       Открыть журнал проекта
                       <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
                         →

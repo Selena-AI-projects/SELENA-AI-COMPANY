@@ -769,6 +769,7 @@ export function pluralizeRu(count: number, forms: [string, string, string]): str
 
 export const clickForms: [string, string, string] = ["клик", "клика", "кликов"];
 export const impressionForms: [string, string, string] = ["показ", "показа", "показов"];
+export const timeForms: [string, string, string] = ["раз", "раза", "раз"];
 
 export function formatDate(iso: string): string {
   const months = [
