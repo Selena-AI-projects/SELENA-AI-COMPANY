@@ -95,7 +95,7 @@ export default function AiContentPage() {
           <Button href={cta.primary.href} size="lg">
             Собрать контент-систему
           </Button>
-          <Button href="/ai-systems" size="lg" variant="secondary">
+          <Button href="/ru#ai-systems" size="lg" variant="secondary">
             Все услуги
           </Button>
         </div>

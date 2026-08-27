@@ -3,6 +3,8 @@
  * Single source of truth for links and labels used across the site.
  */
 
+import { services } from "@/lib/data/services";
+
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
   "https://www.selenasystems.com";
@@ -31,15 +33,21 @@ export const site = {
 export const cta = {
   primary: { label: "Проверить готовность сайта для AI — бесплатно", href: "/ru/check" },
   secondary: { label: "Обсудить AI-систему", href: "/contact" },
-  calculator: { label: "Посчитать рутину", href: "/#calculator" },
   brief: { label: "Проверить готовность сайта", href: "/ru/check" },
   short: { label: "Проверить готовность сайта", href: "/ru/check" },
   contact: { label: "Связаться", href: "/contact" },
 } as const;
 
-/** Main navigation (desktop + mobile). */
+/**
+ * Main navigation (desktop + mobile).
+ *
+ * This is the Russian menu, so every destination is a Russian page. AI
+ * Automation is sold on the Russian home page rather than on a page of its
+ * own; `/ai-systems` is the English twin of that block and belongs to the
+ * English menu.
+ */
 export const nav: { label: string; href: string }[] = [
-  { label: "AI Automation", href: "/ai-systems" },
+  { label: "AI Automation", href: "/ru#ai-systems" },
   { label: "AI Visibility", href: "/ru/visibility" },
   { label: "Тарифы", href: "/ru/pricing" },
   { label: "Selena Lab", href: "/ru/lab" },
@@ -47,6 +55,22 @@ export const nav: { label: string; href: string }[] = [
   { label: "Обо мне", href: "/about" },
   { label: "Контакты", href: "/contact" },
 ];
+
+/**
+ * The service pages that have a page of their own.
+ *
+ * They are children of AI Automation rather than top-level sections, so they
+ * live in the footer: the header row is already at the width it can hold. Read
+ * from the service catalogue so a service that gains its own page appears here
+ * without being retyped — before this, all three were in the sitemap with no
+ * link on the site leading to them.
+ */
+export const serviceNav: { label: string; href: string }[] = services
+  .filter((service) => service.href.startsWith("/ai-"))
+  .map((service) => ({ label: service.name, href: service.href }))
+  .filter(
+    (item, index, all) => all.findIndex((other) => other.href === item.href) === index,
+  );
 
 export const enCta = {
   primary: { label: "Get an AI map", href: "/en#contact" },

@@ -7,7 +7,7 @@ import { commercialFacts } from "@/lib/commercial-facts";
 
 export const ruHomepage = {
   nav: [
-    { label: "AI Automation", href: "/ru#systems" },
+    { label: "AI Automation", href: "/ru#ai-systems" },
     { label: "AI Visibility", href: "/ru/visibility" },
     { label: "Тарифы", href: "/ru/pricing" },
     { label: "Lab", href: "/ru/lab" },
@@ -112,7 +112,7 @@ export const ruHomepage = {
             "Упоминания, позиции, citations, конкуренты",
             "Dashboard и CSV каждый месяц",
           ],
-          cta: { label: "Заказать замер", href: "/contact" },
+          cta: { label: "Начать с проверки", href: "/ru/check" },
         },
         {
           price: commercialFacts.aiVisibility.landscape.ru.replace("/месяц", "/мес"),
@@ -124,7 +124,7 @@ export const ruHomepage = {
             "Пользовательские и API-ответы отдельно",
             "Evidence Ledger в PDF, XLSX и CSV",
           ],
-          cta: { label: "Заказать замер", href: "/contact" },
+          cta: { label: "Начать с проверки", href: "/ru/check" },
         },
         {
           price: commercialFacts.aiVisibility.expertVerified.ru.replace(" разово", ""),
@@ -136,7 +136,7 @@ export const ruHomepage = {
             "Ручной QC упоминаний и citations",
             "5–10 утверждённых приоритетов и план действий",
           ],
-          cta: { label: "Заказать замер", href: "/contact" },
+          cta: { label: "Начать с проверки", href: "/ru/check" },
         },
         {
           price: commercialFacts.aiVisibility.implementation90Days.ru,
@@ -149,7 +149,7 @@ export const ruHomepage = {
             "До 10 часов внедрения",
             "90 дней мониторинга и повторный замер в том же scope",
           ],
-          cta: { label: "Заказать замер", href: "/contact" },
+          cta: { label: "Начать с проверки", href: "/ru/check" },
         },
       ],
       primaryCta: { label: "Проверить готовность сайта для AI — бесплатно", href: "/ru/check" },
