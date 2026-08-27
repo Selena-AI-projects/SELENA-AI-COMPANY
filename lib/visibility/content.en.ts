@@ -646,7 +646,7 @@ export const visibilityContentEn: VisibilityContent = {
     },
   ],
   cta: {
-    primary: { label: "Run a Free Visibility Check", href: visibilityRoutes.en.check },
+    primary: { label: "Check your AI readiness — free", href: visibilityRoutes.en.check },
     secondary: { label: "See plans", href: visibilityRoutes.en.pricing },
     compareNote:
       "Prices are at the top of this page. The line-by-line comparison of all five options, alongside the AI Automation services, lives on the pricing page.",

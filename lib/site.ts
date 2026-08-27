@@ -18,13 +18,22 @@ export const site = {
   locale: "ru_RU",
 } as const;
 
-/** Primary and secondary conversion labels (reused everywhere). */
+/**
+ * Primary and secondary conversion labels (reused everywhere).
+ *
+ * The free check reads a site and says whether machines can fetch and
+ * understand it. It never asks an AI system anything — there is no code path
+ * from it to a paid provider. So the button says "готовность", not
+ * "видимость": the second is what the $49 tier measures, and promising it on
+ * a free button means the visitor learns the difference after clicking, which
+ * is the moment they stop believing the rest of the page.
+ */
 export const cta = {
-  primary: { label: "Проверить AI-видимость бесплатно", href: "/ru/check" },
+  primary: { label: "Проверить AI-готовность — бесплатно", href: "/ru/check" },
   secondary: { label: "Обсудить AI-систему", href: "/contact" },
   calculator: { label: "Посчитать рутину", href: "/#calculator" },
-  brief: { label: "Проверить AI-видимость", href: "/ru/check" },
-  short: { label: "Проверить AI-видимость", href: "/ru/check" },
+  brief: { label: "Проверить AI-готовность", href: "/ru/check" },
+  short: { label: "Проверить AI-готовность", href: "/ru/check" },
   contact: { label: "Связаться", href: "/contact" },
 } as const;
 
