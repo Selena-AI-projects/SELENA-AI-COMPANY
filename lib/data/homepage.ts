@@ -129,7 +129,7 @@ export const homepage = {
             "Mentions, positions, citations, competitors",
             "Dashboard and CSV every month",
           ],
-          cta: { label: "See plan details", href: "/pricing" },
+          cta: { label: "Order a measurement", href: "/en/contact" },
         },
         {
           price: commercialFacts.aiVisibility.landscape.en.replace("/month", "/mo"),
@@ -141,7 +141,7 @@ export const homepage = {
             "Consumer and API answers reported apart",
             "Evidence Ledger in PDF, XLSX and CSV",
           ],
-          cta: { label: "See plan details", href: "/pricing" },
+          cta: { label: "Order a measurement", href: "/en/contact" },
         },
         {
           price: commercialFacts.aiVisibility.expertVerified.en.replace(" one-time", ""),
@@ -153,7 +153,7 @@ export const homepage = {
             "Analyst QC of mentions and citations",
             "5–10 approved priorities and action plan",
           ],
-          cta: { label: "See plan details", href: "/pricing" },
+          cta: { label: "Order a measurement", href: "/en/contact" },
         },
         {
           price: commercialFacts.aiVisibility.implementation90Days.en,
@@ -166,7 +166,7 @@ export const homepage = {
             "Up to 10 implementation hours",
             "90-day monitoring and a locked-scope remeasure",
           ],
-          cta: { label: "See plan details", href: "/pricing" },
+          cta: { label: "Order a measurement", href: "/en/contact" },
         },
       ],
       primaryCta: { label: "Check AI readiness — free", href: "/check" },
