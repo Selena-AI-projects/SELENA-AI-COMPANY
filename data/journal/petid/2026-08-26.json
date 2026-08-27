@@ -22,27 +22,47 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "practo.com",
+            "lybrate.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "tierarzt-onlineverzeichnis.de",
+            "tierarzt-saalfeld.de",
+            "tierarztpraxis-saalfeld.de"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "2gis.ru",
+            "vetsy.ru",
+            "vet-kliniki.ru",
+            "veterinarnye-kliniki.com",
+            "petid.care",
+            "vetclinichub.ru"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "2gis.ru",
         "lybrate.com",
-        "orgpage.ru",
         "petid.care",
-        "petshealth.ru",
-        "practo.com"
+        "practo.com",
+        "tierarzt-onlineverzeichnis.de",
+        "tierarzt-saalfeld.de"
       ]
     },
     {
@@ -51,27 +71,42 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aspca.org"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "journal.sovcombank.ru",
+            "pets.mail.ru",
+            "kp.ru",
+            "dogsy.ru",
+            "petstory.ru",
+            "t-j.ru"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "aspca.org",
         "dogsy.ru",
-        "goodhands.vet",
         "journal.sovcombank.ru",
         "kp.ru",
-        "pedigree.ru"
+        "pets.mail.ru",
+        "petstory.ru"
       ]
     },
     {
@@ -80,17 +115,34 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "consultant.ru",
+            "normativ.kontur.ru",
+            "meganorm.ru"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "travel.yandex.ru",
+            "petstory.ru",
+            "m.vk.ru",
+            "pet-passport.com",
+            "solomonvet.ru",
+            "intent.press"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -109,17 +161,26 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aaha.org",
+            "ebusiness.avma.org"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -134,17 +195,36 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "mchip.org",
+            "aaha.org",
+            "vcahospitals.com",
+            "humaneworld.org",
+            "petmicrochiplookup.org"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "spbvet.ru",
+            "vetket.ru",
+            "foundanimals.org",
+            "gomeovet.ru",
+            "aaha.org",
+            "animal-id.net"
+          ]
         }
       ],
       "namedInstead": [],
@@ -163,17 +243,23 @@
         {
           "systemId": "ChatGPT",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -185,26 +271,42 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "support.lost.petcolove.org",
+            "pawboost.com",
+            "homeagain.com",
+            "animals.santaclaracounty.gov",
+            "petcolove.org"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "pet911.ru",
+            "petrieve.org",
+            "petsee.ru"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
+        "animals.santaclaracounty.gov",
         "homeagain.com",
+        "pawboost.com",
         "pet911.ru",
         "petcolove.org",
-        "animals.santaclaracounty.gov",
-        "pawboost.com",
         "petrieve.org"
       ]
     },
@@ -214,17 +316,32 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "food.ec.europa.eu",
+            "eur-lex.europa.eu"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "pdp.dog",
+            "immigrantinvest.com",
+            "zoolux.clinic",
+            "zooset.ru",
+            "fsvps.gov.ru"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -243,27 +360,43 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aaha.org",
+            "tica.org"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "hillspet.ru",
+            "whiskas.ru",
+            "vetclinika.moscow",
+            "murkosha.ru",
+            "kostochkaspb.ru",
+            "mirjivotnihvet.ru"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "t-j.ru",
         "aaha.org",
-        "ai-xvost.ru",
         "hillspet.ru",
         "kostochkaspb.ru",
-        "mirjivotnihvet.ru"
+        "mirjivotnihvet.ru",
+        "murkosha.ru",
+        "tica.org"
       ]
     },
     {
@@ -272,17 +405,30 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "apps.apple.com",
+            "play.google.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "play.google.com",
+            "apps.apple.com",
+            "mypetlogger.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -298,17 +444,26 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "akc.org",
+            "ebusiness.avma.org"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -323,17 +478,32 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aaha.org",
+            "petmicrochiplookup.org"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "animal-id.net",
+            "animal-id.ru",
+            "cbdzoe.pl",
+            "animalface.ru",
+            "petbase.vet"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -352,17 +522,31 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "play.google.com",
+            "intercom.help",
+            "apps.apple.com",
+            "support.animal-id.net"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "petslike.ua",
+            "play.google.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -380,17 +564,25 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aaha.org"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -404,27 +596,47 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "rover.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "rover.com",
+            "pawshake.be",
+            "petbacker.com",
+            "trustedhousesitters.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "xn--80adfdu2adb1adhe4a1b.xn--p1ai",
+            "rambler.ru",
+            "travel.yandex.ru",
+            "uslugi.yandex.ru",
+            "smart-dogs.ru",
+            "journal.sovcombank.ru"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "rover.com",
-        "t-j.ru",
-        "belanta.vet",
-        "centr-sobak.ru",
         "journal.sovcombank.ru",
-        "pawshake.be"
+        "pawshake.be",
+        "petbacker.com",
+        "rambler.ru",
+        "smart-dogs.ru"
       ]
     },
     {
@@ -433,25 +645,36 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "vetpomosch.ru",
+            "vetclinika.moscow",
+            "lifevet.ru",
+            "vetgalaxy.ru"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "vetpomosch.ru",
         "lifevet.ru",
         "vetclinika.moscow",
-        "vetgalaxy.ru"
+        "vetgalaxy.ru",
+        "vetpomosch.ru"
       ]
     },
     {
@@ -460,23 +683,36 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aphis.usda.gov",
+            "direct.aphis.usda.gov"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aeroport-parking.ru",
+            "aviasales.ru",
+            "ru.trip.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "aphis.usda.gov",
         "aeroport-parking.ru",
+        "aphis.usda.gov",
         "aviasales.ru",
         "direct.aphis.usda.gov",
         "ru.trip.com"
@@ -488,27 +724,45 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "play.google.com",
+            "rustore.ru",
+            "t-j.ru",
+            "rb.ru",
+            "inresearch.ru",
+            "apps.apple.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "rb.ru",
+            "agima.ru",
+            "t-j.ru",
+            "vk.ru"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "apps.apple.com",
-        "rustore.ru",
-        "play.google.com",
         "rb.ru",
         "t-j.ru",
-        "agima.ru"
+        "agima.ru",
+        "apps.apple.com",
+        "inresearch.ru",
+        "play.google.com"
       ]
     },
     {
@@ -517,27 +771,47 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "asi.org.ru",
+            "fourpawsusa.org",
+            "vettorg.net",
+            "tvmf.org",
+            "zoovet.ru",
+            "vetandlife.ru"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "asi.org.ru",
+            "yulna.ru",
+            "clublemurr.ru",
+            "petwishotel.ru",
+            "aviasales.ru",
+            "blog.yell.ru"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "asi.org.ru",
-        "clublemurr.ru",
         "aviasales.ru",
         "blog.yell.ru",
-        "doctorvet.ru",
-        "ecoclub.pet"
+        "clublemurr.ru",
+        "fourpawsusa.org",
+        "petwishotel.ru"
       ]
     },
     {
@@ -546,17 +820,33 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "petso.io",
+            "petnoter.com",
+            "vetrecord.app",
+            "play.google.com",
+            "apps.apple.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "buddypaws.ru",
+            "play.google.com",
+            "mos.ru"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
@@ -575,17 +865,35 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "vethelpdirect.com",
+            "dogtime.com",
+            "akc.org",
+            "chewy.com"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "hvost.news",
+            "novochag.ru",
+            "hillspet.ru",
+            "vetandlife.ru",
+            "barberpet.com.ua",
+            "gruming-top.ru"
+          ]
         }
       ],
       "namedInstead": [],
@@ -604,27 +912,46 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aaha.org",
+            "xn--90aivcdt6dxbc.xn--p1ai",
+            "lostdogsillinois.org",
+            "nyc.gov",
+            "animal-id.net"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "t-j.ru",
+            "pechatniki-pets.ru",
+            "rkf.org.ru",
+            "bfba.ru",
+            "sberegaem-vmeste.ru",
+            "pets.mail.ru"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "aaha.org",
         "animal-id.net",
-        "animalfond.ru",
         "bfba.ru",
         "lostdogsillinois.org",
-        "moslenta.ru"
+        "nyc.gov",
+        "pechatniki-pets.ru"
       ]
     },
     {
@@ -633,27 +960,50 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "animalservices.delaware.gov",
+            "rg.ru",
+            "delcode.delaware.gov",
+            "stateofdelaware.docupet.com",
+            "vetrf.ru"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "t-j.ru",
+            "realty.yandex.ru",
+            "m.vk.com"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "nfreg.ru",
+            "icmos.ru",
+            "reliableprotection.ru",
+            "t-j.ru",
+            "realty.yandex.ru",
+            "gosuslugisovet.ru"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "animalservices.delaware.gov",
         "realty.yandex.ru",
         "t-j.ru",
-        "blog.domclick.ru",
+        "animalservices.delaware.gov",
         "delcode.delaware.gov",
-        "gosuslugisovet.ru"
+        "gosuslugisovet.ru",
+        "icmos.ru"
       ]
     },
     {
@@ -662,24 +1012,37 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aaha.org",
+            "petlink.net",
+            "mchip.org"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "vetlab.ru",
+            "russiapet.net"
+          ]
         },
         {
           "systemId": "Perplexity",
           "answered": false,
-          "mentioned": null
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "aaha.org",
-        "petlink.net",
         "mchip.org",
+        "petlink.net",
         "russiapet.net",
         "vetlab.ru"
       ]
@@ -690,27 +1053,42 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aphis.usda.gov"
+          ]
         },
         {
           "systemId": "Gemini",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": true,
-          "mentioned": false
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "fsvps.gov.ru",
+            "woman.rambler.ru",
+            "astons.com",
+            "habr.com",
+            "t-j.ru",
+            "vc.ru"
+          ]
         }
       ],
       "namedInstead": [],
       "citedDomains": [
         "aphis.usda.gov",
-        "t-j.ru",
         "astons.com",
-        "blagozoo.ru",
         "fsvps.gov.ru",
-        "habr.com"
+        "habr.com",
+        "t-j.ru",
+        "vc.ru"
       ]
     }
   ]
