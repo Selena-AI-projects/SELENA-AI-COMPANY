@@ -1,32 +1,33 @@
 import {
   type MeasurementDetail,
+  isApiChannel,
   systemLabel,
   systemTotals,
 } from "@/lib/visibility-log/measurement-detail";
 import { formatDate } from "@/lib/visibility-log/data";
 
 /**
- * The whole measurement in one look: every question against every system.
+ * The whole measurement in one look, and every answer one click below it.
  *
- * Cells carry marks rather than numbers. Each question is asked of each system
- * once, so the answer is not a quantity — and two hundred digits are a wall
- * nobody reads, while two hundred marks are a picture. The shapes differ, not
- * only the colours, so the table survives a colourblind reader and a bad
- * screen: a filled dot, a hollow ring, and a dash are three different objects.
+ * The question is written once. An earlier version drew the grid and then
+ * repeated all twenty-five questions underneath to carry the detail, which
+ * made the page twice as long and said the same thing twice; the row now
+ * opens in place instead.
+ *
+ * Marks rather than numbers: each question is asked of each system once, so
+ * the answer is not a quantity, and two hundred digits are a wall nobody
+ * reads. The three states differ in shape as well as colour, so the table
+ * survives a colourblind reader and a bad screen.
  */
 
 const marks = {
   named: {
     label: "назвали",
-    node: (
-      <span className="inline-block size-2.5 rounded-full bg-copper ring-2 ring-copper/35" />
-    ),
+    node: <span className="inline-block size-2.5 rounded-full bg-copper ring-2 ring-copper/35" />,
   },
   missed: {
     label: "не назвали",
-    node: (
-      <span className="inline-block size-2.5 rounded-full border border-ivory/45" />
-    ),
+    node: <span className="inline-block size-2.5 rounded-full border border-ivory/45" />,
   },
   silent: {
     label: "ответа не было",
@@ -47,24 +48,21 @@ export function MeasurementGrid({
   number: number;
 }) {
   const totals = systemTotals(detail);
-  const visitorCount = detail.systems.filter((system) => system.channel === "VISITOR").length;
-  // A channel with no systems gets no header: colSpan={0} is not "no columns",
-  // it is a cell the browser stretches over the whole row.
-  const apiCount = detail.systems.length - visitorCount;
+  const columns = `minmax(13rem, 1fr) repeat(${detail.systems.length}, 2.75rem)`;
+  const minWidth = `${13 + detail.systems.length * 2.75}rem`;
 
   return (
     <div>
       <p className="text-sm font-semibold tracking-[0.18em] text-copper uppercase">
         Замер №{number} · {formatDate(detail.date)}
       </p>
-      <h2 className="mt-4 text-h2 text-ivory">
-        Каждый вопрос, каждая система
-      </h2>
+      <h2 className="mt-4 text-h2 text-ivory">Каждый вопрос, каждая система</h2>
       <p className="mt-5 max-w-3xl leading-relaxed text-ivory/75">
-        Слева — {detail.questions.length} вопросов, которые мы задали. Сверху —{" "}
-        {detail.systems.length} систем, которым задавали. Каждый вопрос задан
-        каждой системе один раз, поэтому в клетке не число, а ответ: назвали или
-        нет.
+        {detail.questions.length} вопросов, {detail.systems.length} систем, каждый
+        вопрос задан каждой системе один раз.{" "}
+        <strong className="font-semibold text-ivory">Откройте строку</strong> — под
+        ней будет видно по каждой системе: назвали вас или нет, кого назвали
+        вместо и на какие источники сослались.
       </p>
 
       <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm text-ivory/75">
@@ -76,147 +74,112 @@ export function MeasurementGrid({
         ))}
       </ul>
       <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ivory/55">
-        Прочерк — это не ноль. Он значит, что ответ не вернулся и спросить было
-        не о чем: молчание поставщика мы не записываем как молчание AI.
+        Прочерк — это не ноль. Он значит, что ответ не вернулся: молчание
+        поставщика мы не записываем как молчание AI.
       </p>
 
       <div className="mt-9 overflow-x-auto">
-        <table className="w-full min-w-[44rem] border-collapse text-left">
-          <caption className="sr-only">
-            Результат замера №{number}: {detail.questions.length} вопросов против{" "}
-            {detail.systems.length} AI-систем
-          </caption>
-          <thead>
-            <tr className="text-xs text-ivory/60 uppercase">
-              <th scope="col" className="sticky left-0 z-10 bg-charcoal py-3 pr-4 font-semibold">
-                Вопрос
-              </th>
-              {visitorCount > 0 ? (
-                <th scope="colgroup" colSpan={visitorCount} className="border-b border-line-dark px-2 py-3 text-center font-semibold tracking-[0.14em]">
-                  Что видит человек
-                </th>
-              ) : null}
-              {apiCount > 0 ? (
-                <th scope="colgroup" colSpan={apiCount} className="border-b border-line-dark px-2 py-3 text-center font-semibold tracking-[0.14em]">
-                  Что модель знает сама
-                </th>
-              ) : null}
-            </tr>
-            <tr className="border-b border-line-dark text-sm text-ivory/75">
-              <th scope="col" className="sticky left-0 z-10 bg-charcoal py-3 pr-4 font-semibold">
-                <span className="sr-only">Текст вопроса</span>
-              </th>
-              {detail.systems.map((system, index) => (
-                <th
-                  key={system.systemId}
-                  scope="col"
-                  className={`px-2 py-3 text-center font-semibold whitespace-nowrap ${
-                    index === visitorCount ? "border-l border-line-dark" : ""
-                  }`}
-                >
-                  {systemLabel(system.systemId)}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {detail.questions.map((question) => (
-              <tr key={question.text} className="border-b border-line-dark/50">
-                <th
-                  scope="row"
-                  className="sticky left-0 z-10 max-w-[18rem] bg-charcoal py-3 pr-4 text-sm font-normal text-ivory/90"
-                >
+        <div style={{ minWidth }}>
+          <div
+            className="grid items-end gap-x-1 border-b border-line-dark pb-3 text-xs text-ivory/60 uppercase"
+            style={{ gridTemplateColumns: columns }}
+          >
+            <span className="font-semibold">Вопрос</span>
+            {detail.systems.map((system) => (
+              <span
+                key={system.systemId}
+                className="[writing-mode:vertical-rl] rotate-180 justify-self-center font-semibold whitespace-nowrap"
+              >
+                {systemLabel(system.systemId)}
+              </span>
+            ))}
+          </div>
+
+          {detail.questions.map((question, index) => (
+            <details key={question.text} className="group border-b border-line-dark/50">
+              <summary
+                className="grid cursor-pointer list-none items-center gap-x-1 py-3.5 transition-colors hover:bg-ivory/5"
+                style={{ gridTemplateColumns: columns }}
+              >
+                <span className="pr-3 text-sm text-ivory/90 group-open:text-ivory">
+                  <span className="mr-2 text-ivory/40 tabular-nums">{index + 1}</span>
                   {question.text}
-                </th>
-                {detail.systems.map((system, index) => {
-                  const cell = question.cells.find(
-                    (candidate) => candidate.systemId === system.systemId,
-                  );
+                </span>
+                {detail.systems.map((system) => {
+                  const cell = question.cells.find((c) => c.systemId === system.systemId);
                   const state = cellState(cell?.mentioned ?? null, cell?.answered ?? false);
                   return (
-                    <td
-                      key={system.systemId}
-                      className={`px-2 py-3 text-center ${
-                        index === visitorCount ? "border-l border-line-dark" : ""
-                      }`}
-                    >
-                      <span className="flex justify-center" title={`${systemLabel(system.systemId)}: ${marks[state].label}`}>
-                        {marks[state].node}
-                        <span className="sr-only">
-                          {systemLabel(system.systemId)} — {marks[state].label}
-                        </span>
+                    <span key={system.systemId} className="flex justify-center">
+                      {marks[state].node}
+                      <span className="sr-only">
+                        {systemLabel(system.systemId)} — {marks[state].label}
                       </span>
-                    </td>
+                    </span>
                   );
                 })}
-              </tr>
-            ))}
-          </tbody>
-          <tfoot>
-            <tr className="border-t-2 border-line-dark text-sm">
-              <th scope="row" className="sticky left-0 z-10 bg-charcoal py-4 pr-4 text-left font-semibold text-ivory">
-                Назвали
-              </th>
-              {totals.map((total, index) => (
-                <td
-                  key={total.systemId}
-                  className={`px-2 py-4 text-center font-semibold whitespace-nowrap ${
-                    index === visitorCount ? "border-l border-line-dark" : ""
-                  } ${total.mentioned > 0 ? "text-copper" : "text-ivory/60"}`}
-                >
-                  {total.answered === 0 ? "—" : `${total.mentioned} из ${total.answered}`}
-                </td>
-              ))}
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-
-      <h3 className="mt-14 text-h3 text-ivory">Кого назвали вместо вас</h3>
-      <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ivory/60">
-        По каждому вопросу отдельно. Это и есть разговор: не «вас плохо видно», а
-        «на этом вопросе вы проигрываете вот этому месту».
-      </p>
-      <div className="mt-7 divide-y divide-line-dark/50 border-y border-line-dark/50">
-        {detail.questions.map((question) => {
-          const named = question.cells
-            .filter((cell) => cell.mentioned === true)
-            .map((cell) => systemLabel(cell.systemId));
-          return (
-            <details key={question.text} className="group py-4">
-              <summary className="flex cursor-pointer list-none items-baseline justify-between gap-6 text-ivory/90">
-                <span>{question.text}</span>
-                <span className="shrink-0 text-sm whitespace-nowrap text-ivory/60 group-open:text-copper">
-                  {named.length === 0 ? "не назвали" : `назвали: ${named.length}`}
-                </span>
               </summary>
-              <dl className="mt-4 grid gap-4 text-sm sm:grid-cols-3">
-                <div>
-                  <dt className="font-semibold text-ivory/60">Назвали вас</dt>
-                  <dd className="mt-1 text-ivory/85">
-                    {named.length === 0 ? "никто" : named.join(", ")}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-ivory/60">Вместо вас</dt>
-                  <dd className="mt-1 text-ivory/85">
-                    {question.namedInstead.length === 0
-                      ? "никого не назвали"
-                      : question.namedInstead.join(", ")}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-ivory/60">Ссылались на</dt>
-                  <dd className="mt-1 text-ivory/85">
-                    {question.citedDomains.length === 0
-                      ? "ссылок не показали"
-                      : question.citedDomains.join(", ")}
-                  </dd>
-                </div>
-              </dl>
+
+              <div className="grid gap-px bg-line-dark/40 pb-4">
+                {detail.systems.map((system) => {
+                  const cell = question.cells.find((c) => c.systemId === system.systemId);
+                  const state = cellState(cell?.mentioned ?? null, cell?.answered ?? false);
+                  const instead = cell?.namedInstead ?? [];
+                  const sources = cell?.citedDomains ?? [];
+                  const isApi = isApiChannel(detail, system.systemId);
+                  return (
+                    <div
+                      key={system.systemId}
+                      className="grid gap-x-6 gap-y-1 bg-charcoal px-3 py-3 text-sm sm:grid-cols-[9rem_1fr]"
+                    >
+                      <p className="flex items-center gap-2.5 font-semibold text-ivory">
+                        <span className="flex w-4 justify-center">{marks[state].node}</span>
+                        {systemLabel(system.systemId)}
+                      </p>
+                      <div className="text-ivory/75">
+                        <p>{marks[state].label}</p>
+                        {state !== "silent" ? (
+                          <>
+                            {instead.length > 0 ? (
+                              <p className="mt-1">
+                                <span className="text-ivory/50">Вместо вас: </span>
+                                {instead.join(", ")}
+                              </p>
+                            ) : null}
+                            <p className="mt-1">
+                              <span className="text-ivory/50">Источники: </span>
+                              {sources.length > 0
+                                ? sources.join(", ")
+                                : isApi
+                                  ? "их нет — это ответ из памяти модели, без веб-поиска"
+                                  : "ответ не показал ни одной ссылки"}
+                            </p>
+                          </>
+                        ) : null}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </details>
-          );
-        })}
+          ))}
+
+          <div
+            className="grid gap-x-1 border-t-2 border-line-dark py-4 text-sm"
+            style={{ gridTemplateColumns: columns }}
+          >
+            <span className="font-semibold text-ivory">Назвали</span>
+            {totals.map((total) => (
+              <span
+                key={total.systemId}
+                className={`justify-self-center text-center text-xs font-semibold tabular-nums ${
+                  total.mentioned > 0 ? "text-copper" : "text-ivory/60"
+                }`}
+              >
+                {total.answered === 0 ? "—" : `${total.mentioned}/${total.answered}`}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
