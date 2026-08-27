@@ -1,0 +1,730 @@
+{
+  "date": "2026-08-26",
+  "configVersion": "selenasystems-api-view-2026-08-25",
+  "systems": [
+    {
+      "systemId": "ChatGPT",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Gemini",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Perplexity",
+      "channel": "VISITOR"
+    }
+  ],
+  "questions": [
+    {
+      "text": "How do I find out whether ChatGPT mentions my business?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "openai.com",
+        "genrank.io",
+        "getcourtyard.ai",
+        "help-lb.openai.com",
+        "help.openai.com",
+        "knwn.app"
+      ]
+    },
+    {
+      "text": "How can I check if AI assistants recommend my company?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "brandcitation.com",
+        "citelyzer.com",
+        "getgeoscan.ai",
+        "lemniscategrowth.com",
+        "quora.com",
+        "ranqo.ai"
+      ]
+    },
+    {
+      "text": "What tools track brand mentions in AI answers?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "dageno.ai",
+        "getmentionedbyai.com",
+        "mentionhq.com",
+        "mentions.so",
+        "mentionsapi.com",
+        "nightwatch.io"
+      ]
+    },
+    {
+      "text": "How do I measure AI visibility for a small business?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "semrush.com",
+        "businessmcp.com",
+        "citepoint.ai",
+        "cituna.com",
+        "maxaeo.ai",
+        "peec.ai"
+      ]
+    },
+    {
+      "text": "What is answer engine optimisation?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ahrefs.com",
+        "aioseo.com",
+        "aisearchvisibility.ai",
+        "askedabout.com",
+        "blog.marketmuse.com",
+        "coursera.org"
+      ]
+    },
+    {
+      "text": "Who helps businesses show up in ChatGPT answers?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "applaire.com",
+        "blog.hubspot.com",
+        "margen.net",
+        "reddit.com"
+      ]
+    },
+    {
+      "text": "How do I get my business recommended by Perplexity?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "perplexity.ai",
+        "lengow.com",
+        "powerdigitalmarketing.com",
+        "seo.com"
+      ]
+    },
+    {
+      "text": "Is there a service that audits how AI describes my brand?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "optimly.ai",
+        "rankprompt.com",
+        "waikay.io",
+        "ahrefs.com",
+        "amplitude.com",
+        "baarely.com"
+      ]
+    },
+    {
+      "text": "How do I know if my competitors appear in AI answers and I do not?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ahrefs.com",
+        "aurametrics.io",
+        "axios.com",
+        "blog.hubspot.com",
+        "businessinsider.com",
+        "citations.io"
+      ]
+    },
+    {
+      "text": "What should a small business do about AI search?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "developers.google.com",
+        "businessinsider.com",
+        "coresearchmarketing.com",
+        "reddit.com",
+        "sangfroidwebdesign.com",
+        "seooptimizers.com"
+      ]
+    },
+    {
+      "text": "How do I prepare my website so AI systems can read it?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "developers.google.com",
+        "developers.google.cn",
+        "help.openai.com",
+        "dbeta.co.uk",
+        "github.com",
+        "pixeledeggs.com"
+      ]
+    },
+    {
+      "text": "Who offers AI visibility audits for service businesses?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "accessnewswire.com",
+        "aisearchengineers.com",
+        "ambitiouspr.co.uk",
+        "evolvebusiness.com",
+        "foundclearly.com",
+        "getnamed.ai"
+      ]
+    },
+    {
+      "text": "What is the difference between SEO and AI visibility?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "quora.com",
+        "reddit.com",
+        "semrush.com",
+        "visiblie.com"
+      ]
+    },
+    {
+      "text": "How do I track whether Gemini recommends my business?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "support.google.com",
+        "beamtrace.com",
+        "loamly.ai",
+        "trackmybusiness.ai",
+        "visiblie.com"
+      ]
+    },
+    {
+      "text": "Can I measure how often AI mentions my brand each month?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "beamtrace.com",
+        "layer3labs.io",
+        "reddit.com",
+        "visiblie.com"
+      ]
+    },
+    {
+      "text": "What agencies specialise in AI search visibility?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "exponentmarketing.com",
+        "rocketgeo.ai",
+        "animalz.co",
+        "beomniscient.com",
+        "contensifyhq.com",
+        "directiveconsulting.com"
+      ]
+    },
+    {
+      "text": "How much does an AI visibility report cost?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ai-visibility.co",
+        "audit.filter.agency",
+        "broadcastwell.com",
+        "get-ryze.ai",
+        "honeyb.ai",
+        "promptvisible.ai"
+      ]
+    },
+    {
+      "text": "How do I find out which sources AI cites about my industry?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "perplexity.ai",
+        "aisearch.similarweb.com",
+        "ayzeo.com",
+        "beamtrace.com",
+        "developers.google.com",
+        "kime.ai"
+      ]
+    },
+    {
+      "text": "Is there a free check for how AI sees my website?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "audit.searchless.ai",
+        "checkgeoscore.com",
+        "developers.google.com",
+        "forzeo.com",
+        "frase.io",
+        "hubspot.com"
+      ]
+    },
+    {
+      "text": "What does it mean when AI does not mention my business at all?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "arxiv.org",
+        "citegap.com",
+        "nuwaybizsolutions.com",
+        "papers.ssrn.com",
+        "reddit.com",
+        "searchengineland.com"
+      ]
+    },
+    {
+      "text": "Who can help a restaurant get into AI recommendations?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ameus.ai",
+        "axios.com",
+        "b3designers.co.uk",
+        "chowly.com",
+        "cloro.dev",
+        "delphiumlabs.com"
+      ]
+    },
+    {
+      "text": "How do I improve how ChatGPT describes my company?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "help.openai.com",
+        "openai.com"
+      ]
+    },
+    {
+      "text": "What is AI visibility monitoring?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aeomantis.com",
+        "aivisibility.io",
+        "aivisibilitybarometer.com",
+        "ansvisor.com",
+        "citationworks.com",
+        "frase.io"
+      ]
+    },
+    {
+      "text": "How do I audit my brand's presence across AI assistants?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "blog.hubspot.com",
+        "flatlineagency.com",
+        "triplewhale.com",
+        "vismore.ai"
+      ]
+    },
+    {
+      "text": "Which companies help with AI answer optimisation?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "tryprofound.com",
+        "20northmarketing.com",
+        "aeothis.com",
+        "ahrefs.com",
+        "airops.com",
+        "answerenginesoptimization.ai"
+      ]
+    }
+  ]
+}

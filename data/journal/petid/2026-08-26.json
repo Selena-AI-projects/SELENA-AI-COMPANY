@@ -1,0 +1,717 @@
+{
+  "date": "2026-08-26",
+  "configVersion": "petid-api-view-2026-08-25",
+  "systems": [
+    {
+      "systemId": "ChatGPT",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Gemini",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Perplexity",
+      "channel": "VISITOR"
+    }
+  ],
+  "questions": [
+    {
+      "text": "Как найти хорошую ветклинику рядом?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "2gis.ru",
+        "lybrate.com",
+        "orgpage.ru",
+        "petid.care",
+        "petshealth.ru",
+        "practo.com"
+      ]
+    },
+    {
+      "text": "Что делать, если потерялась собака?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aspca.org",
+        "dogsy.ru",
+        "goodhands.vet",
+        "journal.sovcombank.ru",
+        "kp.ru",
+        "pedigree.ru"
+      ]
+    },
+    {
+      "text": "Как оформить ветеринарный паспорт для собаки?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "consultant.ru",
+        "intent.press",
+        "m.vk.ru",
+        "meganorm.ru",
+        "normativ.kontur.ru",
+        "pet-passport.com"
+      ]
+    },
+    {
+      "text": "Зачем чипировать питомца и как это делают?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aaha.org",
+        "ebusiness.avma.org"
+      ]
+    },
+    {
+      "text": "Как проверить, чипирован ли найденный кот?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aaha.org",
+        "animal-id.net",
+        "foundanimals.org",
+        "gomeovet.ru",
+        "humaneworld.org",
+        "mchip.org"
+      ]
+    },
+    {
+      "text": "Где хранить документы и прививки питомца?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": []
+    },
+    {
+      "text": "Какие сервисы помогают найти потерявшегося питомца?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "homeagain.com",
+        "pet911.ru",
+        "petcolove.org",
+        "animals.santaclaracounty.gov",
+        "pawboost.com",
+        "petrieve.org"
+      ]
+    },
+    {
+      "text": "Как вывезти собаку за границу: какие документы нужны?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "eur-lex.europa.eu",
+        "food.ec.europa.eu",
+        "fsvps.gov.ru",
+        "immigrantinvest.com",
+        "pdp.dog",
+        "zoolux.clinic"
+      ]
+    },
+    {
+      "text": "Как выбрать ветеринара для кошки?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "t-j.ru",
+        "aaha.org",
+        "ai-xvost.ru",
+        "hillspet.ru",
+        "kostochkaspb.ru",
+        "mirjivotnihvet.ru"
+      ]
+    },
+    {
+      "text": "Есть ли приложения для учёта прививок питомца?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "apps.apple.com",
+        "play.google.com",
+        "mypetlogger.com"
+      ]
+    },
+    {
+      "text": "Что нужно сделать сразу после того, как завели щенка?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "akc.org",
+        "ebusiness.avma.org"
+      ]
+    },
+    {
+      "text": "Как узнать владельца по номеру чипа?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aaha.org",
+        "animal-id.net",
+        "animal-id.ru",
+        "animalface.ru",
+        "cbdzoe.pl",
+        "petbase.vet"
+      ]
+    },
+    {
+      "text": "Какие бывают электронные паспорта для животных?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "play.google.com",
+        "apps.apple.com",
+        "intercom.help",
+        "petslike.ua",
+        "support.animal-id.net"
+      ]
+    },
+    {
+      "text": "Где посмотреть график прививок для собаки?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aaha.org"
+      ]
+    },
+    {
+      "text": "Как найти передержку для собаки?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "rover.com",
+        "t-j.ru",
+        "belanta.vet",
+        "centr-sobak.ru",
+        "journal.sovcombank.ru",
+        "pawshake.be"
+      ]
+    },
+    {
+      "text": "Что делать, если питомец заболел ночью?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "vetpomosch.ru",
+        "lifevet.ru",
+        "vetclinika.moscow",
+        "vetgalaxy.ru"
+      ]
+    },
+    {
+      "text": "Как оформить документы для перевозки кошки самолётом?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aphis.usda.gov",
+        "aeroport-parking.ru",
+        "aviasales.ru",
+        "direct.aphis.usda.gov",
+        "ru.trip.com"
+      ]
+    },
+    {
+      "text": "Какие сервисы для владельцев животных есть в России?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "apps.apple.com",
+        "rustore.ru",
+        "play.google.com",
+        "rb.ru",
+        "t-j.ru",
+        "agima.ru"
+      ]
+    },
+    {
+      "text": "Как выбрать зоогостиницу?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "asi.org.ru",
+        "clublemurr.ru",
+        "aviasales.ru",
+        "blog.yell.ru",
+        "doctorvet.ru",
+        "ecoclub.pet"
+      ]
+    },
+    {
+      "text": "Где вести медицинскую карту питомца онлайн?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "play.google.com",
+        "apps.apple.com",
+        "buddypaws.ru",
+        "mos.ru",
+        "petnoter.com",
+        "petso.io"
+      ]
+    },
+    {
+      "text": "Как найти грумера для собаки?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "akc.org",
+        "barberpet.com.ua",
+        "chewy.com",
+        "dogtime.com",
+        "gruming-top.ru",
+        "hillspet.ru"
+      ]
+    },
+    {
+      "text": "Что делать, если нашёл чужого питомца на улице?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aaha.org",
+        "animal-id.net",
+        "animalfond.ru",
+        "bfba.ru",
+        "lostdogsillinois.org",
+        "moslenta.ru"
+      ]
+    },
+    {
+      "text": "Как поставить питомца на учёт?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "animalservices.delaware.gov",
+        "realty.yandex.ru",
+        "t-j.ru",
+        "blog.domclick.ru",
+        "delcode.delaware.gov",
+        "gosuslugisovet.ru"
+      ]
+    },
+    {
+      "text": "Какие есть базы данных чипированных животных?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aaha.org",
+        "petlink.net",
+        "mchip.org",
+        "russiapet.net",
+        "vetlab.ru"
+      ]
+    },
+    {
+      "text": "Как подготовить питомца к переезду в другую страну?",
+      "cells": [
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aphis.usda.gov",
+        "t-j.ru",
+        "astons.com",
+        "blagozoo.ru",
+        "fsvps.gov.ru",
+        "habr.com"
+      ]
+    }
+  ]
+}
