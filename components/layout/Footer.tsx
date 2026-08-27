@@ -45,7 +45,7 @@ export function Footer() {
   // there too — everywhere else it already arrives through the shared nav.
   const footerNav =
     !isEnglish && !currentNav.some((item) => item.href === "/ru/projects")
-      ? [...currentNav, { href: "/ru/projects", label: "Проекты" }]
+      ? [...currentNav, { href: "/ru/projects", label: "Журнал замеров" }]
       : currentNav;
   const currentNote = isEnglishLandingHome
     ? homepage.footerNote

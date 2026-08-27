@@ -19,7 +19,7 @@ import {
 } from "@/lib/visibility-log/data";
 
 const journalPath = "/ru/projects";
-const journalTitle = "Наши проекты и замеры";
+const journalTitle = "Журнал замеров";
 const journalDescription =
   "Собственные проекты проходят весь путь замера публично: с чего начали, что показали цифры, что мы поправили и что получилось после. С датами и без задним числом переписанных выводов. Один проект в журнале не наш — он опубликован с разрешения владельца.";
 
@@ -52,8 +52,8 @@ export default function JournalIndexPage() {
         })}
       />
       <PageHero
-        eyebrow="Проекты"
-        title="Наши проекты — и один чужой, с его разрешения."
+        eyebrow="Журнал замеров"
+        title="Мы измеряем себя первыми — и показываем результат целиком."
         intro="Мы продаём измерение видимости в поиске и в AI-ответах. Поэтому первыми через него проходим сами: фиксируем точку отсчёта, показываем каждый следующий шаг лестницы и публикуем результат — включая тот, где результата пока нет. Один проект в списке не наш: мы помогаем ему с видимостью, и он разрешил показать свой замер."
       >
         <p className="max-w-2xl text-sm leading-relaxed text-muted">
@@ -109,7 +109,7 @@ export default function JournalIndexPage() {
       <section className="border-t border-line bg-surface py-20 sm:py-28">
         <Container>
           <div className="max-w-3xl">
-            <h2 className="text-h2 text-ink">Проекты</h2>
+            <h2 className="text-h2 text-ink">Что мы измерили</h2>
             <p className="mt-5 leading-relaxed text-muted">
               Числа ниже — обычный поиск Google за {journalMeta.windowDays} дней: это окно, за
               которое Google отдаёт данные, а не срок работы. Замеры AI-ответов — отдельные

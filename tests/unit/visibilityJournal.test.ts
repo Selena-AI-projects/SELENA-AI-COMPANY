@@ -18,6 +18,11 @@ import {
   stageLabels,
   type JournalStage,
 } from "@/lib/visibility-log/data";
+import {
+  type MeasurementDetail,
+  systemLabel,
+  systemTotals,
+} from "@/lib/visibility-log/measurement-detail";
 import { renderMarkdown } from "../../scripts/journal-readiness";
 
 test("every published entry is dated and named as a stage a reader can place", () => {
@@ -76,6 +81,51 @@ test("growth is published as the earlier count, not as a percentage of one click
     // shows, so it must not sit in the public layer as if it divided the total.
     assert.ok(!("nonBrandClicks" in project.metrics), `${project.slug} still publishes a non-brand count`);
   }
+});
+
+test("a cell that never got an answer is not a zero", () => {
+  const detail: MeasurementDetail = {
+    date: "2026-08-26",
+    configVersion: "test-2026-08-26",
+    systems: [
+      { systemId: "ChatGPT", channel: "VISITOR" },
+      { systemId: "Perplexity", channel: "VISITOR" },
+    ],
+    questions: [
+      {
+        text: "Где лучший фуд-холл?",
+        cells: [
+          { systemId: "ChatGPT", answered: true, mentioned: true },
+          { systemId: "Perplexity", answered: false, mentioned: null },
+        ],
+        namedInstead: ["Zest Ubud"],
+        citedDomains: ["tripadvisor.com"],
+      },
+      {
+        text: "Куда пойти с детьми?",
+        cells: [
+          { systemId: "ChatGPT", answered: true, mentioned: false },
+          { systemId: "Perplexity", answered: true, mentioned: false },
+        ],
+        namedInstead: [],
+        citedDomains: [],
+      },
+    ],
+  };
+
+  // Perplexity answered once of two. The denominator is what came back, never
+  // what was asked, or provider silence would read as the brand being absent.
+  assert.deepEqual(systemTotals(detail), [
+    { systemId: "ChatGPT", channel: "VISITOR", answered: 2, mentioned: 1 },
+    { systemId: "Perplexity", channel: "VISITOR", answered: 1, mentioned: 0 },
+  ]);
+});
+
+test("a model id is shown under the name people know it by", () => {
+  assert.equal(systemLabel("x-ai/grok-4.5"), "Grok");
+  assert.equal(systemLabel("deepseek/deepseek-v3.2"), "DeepSeek");
+  // An id nobody mapped is printed as it is rather than guessed at.
+  assert.equal(systemLabel("ChatGPT"), "ChatGPT");
 });
 
 test("what a measurement cost us stays out of the public layer", () => {

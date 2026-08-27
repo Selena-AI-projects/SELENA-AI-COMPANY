@@ -5,6 +5,8 @@ import { buildMetadata } from "@/lib/metadata";
 import { site } from "@/lib/site";
 import { buildJournalProjectStructuredData } from "@/lib/structured-data";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { MeasurementGrid } from "@/components/visibility/MeasurementGrid";
+import { detailsFor } from "@/lib/visibility-log/measurement-detail";
 import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -37,7 +39,7 @@ export async function generateMetadata({
   const project = findProject(slug);
   if (!project) {
     return buildMetadata({
-      title: "Наши проекты и замеры",
+      title: "Журнал замеров",
       description: "Открытые замеры видимости по собственным проектам Selena Systems.",
       path: "/ru/projects",
       locale: "ru_RU",
@@ -94,6 +96,8 @@ export default async function JournalProjectPage({
       ]
     : [];
 
+  const details = detailsFor(project.slug);
+
   const firstEntry = project.entries[0];
   const lastEntry = project.entries[project.entries.length - 1];
 
@@ -105,14 +109,14 @@ export default async function JournalProjectPage({
             locale: "ru",
             journalUrl: `${site.url}/ru/projects`,
             pageUrl: `${site.url}/ru/projects/${project.slug}`,
-            journalTitle: "Проекты",
+            journalTitle: "Журнал замеров",
             project,
             publishedAt: firstEntry.date,
             updatedAt: lastEntry.date,
           })}
         />
       ) : null}
-      <PageHero eyebrow="Проект" title={project.name} intro={project.category}>
+      <PageHero eyebrow="Журнал замеров" title={project.name} intro={project.category}>
         {project.publishedByPermission ? (
           <div className="mb-8 max-w-2xl rounded-xl border border-line bg-surface p-6">
             <p className="text-sm font-semibold tracking-[0.16em] text-copper-deep uppercase">
@@ -306,6 +310,14 @@ export default async function JournalProjectPage({
               отвечают иначе завтра, и число упоминаний не говорит, сколько людей задали эти
               вопросы.
             </p>
+          </Container>
+        </section>
+      ))}
+
+      {details.map((detail, index) => (
+        <section key={detail.date} className="border-y border-line-dark bg-charcoal py-20 text-ivory sm:py-28">
+          <Container>
+            <MeasurementGrid detail={detail} number={index + 1} />
           </Container>
         </section>
       ))}
