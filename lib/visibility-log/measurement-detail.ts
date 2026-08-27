@@ -26,14 +26,24 @@ export type MeasurementCell = {
   answered: boolean;
   /** Null when nothing came back: UNKNOWN, not false. */
   mentioned: boolean | null;
+  /**
+   * Who this system named on this question while the brand was not there, and
+   * what this answer pointed at. Per cell rather than per question because
+   * "who beat us" is a different answer on every surface, and a name pooled
+   * across eight systems tells you about none of them.
+   *
+   * Optional: measurements published before the cell carried them keep the
+   * roll-up on the question instead.
+   */
+  namedInstead?: string[];
+  citedDomains?: string[];
 };
 
 export type MeasurementQuestion = {
   text: string;
   cells: MeasurementCell[];
-  /** Businesses named on this question while the brand was not. */
+  /** Roll-up across systems, kept for measurements published before the split. */
   namedInstead: string[];
-  /** Domains the answers to this question pointed at, most cited first. */
   citedDomains: string[];
 };
 
@@ -62,6 +72,15 @@ const systemLabels: Record<string, string> = {
 
 export function systemLabel(systemId: string): string {
   return systemLabels[systemId] ?? systemId;
+}
+
+/**
+ * An API View system answers from what it remembers and shows no sources at
+ * all — that is the channel, not a gap in the reading. Saying which of the two
+ * it is keeps "no sources" from reading as "we lost them".
+ */
+export function isApiChannel(detail: MeasurementDetail, systemId: string): boolean {
+  return detail.systems.find((system) => system.systemId === systemId)?.channel === "API";
 }
 
 export type SystemTotals = {
