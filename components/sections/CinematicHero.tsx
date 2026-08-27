@@ -9,6 +9,9 @@ import { Badge } from "@/components/ui/Badge";
  * cards. The hero must communicate the core promise at a glance:
  * messy business inputs become an AI map, automation and playbook.
  */
+/** The calculator sits on this same landing, a few sections down. */
+const calculatorCta = { label: "Посчитать рутину", href: "#calculator" };
+
 export function CinematicHero() {
   return (
     <section className="bg-warm-canvas relative overflow-hidden pt-28 sm:pt-36">
@@ -46,8 +49,8 @@ export function CinematicHero() {
               <Button href={cta.primary.href} size="lg">
                 {cta.primary.label}
               </Button>
-              <Button href={cta.calculator.href} size="lg" variant="secondary">
-                {cta.calculator.label}
+              <Button href={calculatorCta.href} size="lg" variant="secondary">
+                {calculatorCta.label}
               </Button>
             </div>
 

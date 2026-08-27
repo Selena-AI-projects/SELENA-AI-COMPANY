@@ -31,7 +31,6 @@ export const site = {
 export const cta = {
   primary: { label: "Проверить готовность сайта для AI — бесплатно", href: "/ru/check" },
   secondary: { label: "Обсудить AI-систему", href: "/contact" },
-  calculator: { label: "Посчитать рутину", href: "/#calculator" },
   brief: { label: "Проверить готовность сайта", href: "/ru/check" },
   short: { label: "Проверить готовность сайта", href: "/ru/check" },
   contact: { label: "Связаться", href: "/contact" },
