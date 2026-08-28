@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ section: 
   const metadataTitles: Record<string, string> = {
     "prepare-site-for-ai-systems": "Как подготовить сайт к AI",
     "read-ai-visibility-report-evidence": "Читать AI Visibility Report",
+    "two-agent-code-review": "Проверка кода, написанного ИИ",
   };
   return buildMetadata({
     title: `${metadataTitles[item.slug] ?? item.title} — Selena Lab`,

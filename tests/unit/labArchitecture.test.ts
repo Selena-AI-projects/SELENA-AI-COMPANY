@@ -41,6 +41,33 @@ test("the three owner-selected foundation topics are published in both languages
   }
 });
 
+test("a published experiment carries its reproduction steps and its limits", () => {
+  for (const locale of ["en", "ru"] as const) {
+    const entry = getLabItem(locale, "experiments", "two-agent-code-review");
+    assert.ok(entry, `missing ${locale} experiments/two-agent-code-review`);
+
+    // The section promises reproducibility, so an entry without steps a reader
+    // can follow does not belong in it.
+    const steps = entry.blocks.flatMap((block) => block.steps ?? []);
+    assert.ok(steps.length >= 3, `${locale} experiment must publish reproduction steps`);
+
+    // n = 1 is the honest denominator here; dropping it would turn one incident
+    // into an implied pattern.
+    assert.match(JSON.stringify(entry.blocks), /n = 1/);
+
+    assert.ok((entry.related?.length ?? 0) >= 3, `${locale} experiment must link onward into the Lab`);
+  }
+
+  const en = getLabItem("en", "experiments", "two-agent-code-review")!;
+  const ru = getLabItem("ru", "experiments", "two-agent-code-review")!;
+  assert.equal(en.blocks.length, ru.blocks.length, "both locales must tell the same story");
+  assert.equal(en.publishedAt, ru.publishedAt);
+
+  const urls = sitemap().map((entry) => String(entry.url));
+  assert.ok(urls.includes("https://www.selenasystems.com/lab/experiments/two-agent-code-review"));
+  assert.ok(urls.includes("https://www.selenasystems.com/ru/lab/experiments/two-agent-code-review"));
+});
+
 test("Lab courses disclose that nothing is for sale and reserve the shared learning workspace", () => {
   for (const locale of ["en", "ru"] as const) {
     assert.equal(getLabItems(locale, "courses").length, 0);
