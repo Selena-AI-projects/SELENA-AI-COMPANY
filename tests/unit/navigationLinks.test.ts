@@ -73,13 +73,21 @@ test("every English menu and CTA opens an English page", () => {
 
 /** `/ru/projects/[slug]` matches the literal directory or a dynamic one. */
 function routeExists(path: string): boolean {
-  let dir = join(process.cwd(), "app");
+  return localeGroups.some((group) => servedFrom(join(process.cwd(), "app", group), path));
+}
+
+/** One language's route tree. A group name never appears in an address. */
+const localeGroups = ["(en)", "(ru)"];
+
+function servedFrom(root: string, path: string): boolean {
+  let dir = root;
   for (const segment of path.split("/").filter(Boolean)) {
     const literal = join(dir, segment);
     if (existsSync(literal)) {
       dir = literal;
       continue;
     }
+    if (!existsSync(dir)) return false;
     const dynamic = readdirSync(dir, { withFileTypes: true }).find(
       (entry) => entry.isDirectory() && entry.name.startsWith("["),
     );
@@ -109,11 +117,7 @@ function russianPageFiles(): string[] {
       else if (entry.name === "page.tsx") found.push(full);
     }
   };
-  walk(join(app, "ru"));
-  for (const path of russianPathsOutsideRu) {
-    const file = join(app, path.slice(1), "page.tsx");
-    if (existsSync(file)) found.push(file);
-  }
+  walk(join(app, "(ru)"));
   return found;
 }
 
@@ -152,4 +156,33 @@ test("a measurement tier never opens the brief for a different service", () => {
       );
     }
   }
+});
+
+/**
+ * Two root layouts, one per language, and neither may read the request.
+ *
+ * The site had one root layout that took the language from a header the
+ * middleware sets. That single call made every page dynamic, and Next streams
+ * a dynamic page's title, canonical and hreflang into the body — where a
+ * crawler that does not run JavaScript never counts them. The language now
+ * comes from which group the route lives in, which is a build-time fact.
+ */
+test("each locale group declares its own language without reading the request", () => {
+  for (const [group, lang] of [
+    ["(en)", "en"],
+    ["(ru)", "ru"],
+  ] as const) {
+    const layout = join(process.cwd(), "app", group, "layout.tsx");
+    assert.ok(existsSync(layout), `${group} has no root layout`);
+    const source = readFileSync(layout, "utf8");
+    assert.match(source, new RegExp(`<html lang="${lang}"`), `${group} declares the wrong language`);
+    assert.ok(
+      !source.includes("next/headers"),
+      `${group} reads the request, which moves every page's metadata out of <head>`,
+    );
+  }
+  assert.ok(
+    !existsSync(join(process.cwd(), "app", "layout.tsx")),
+    "a third root layout would take both groups back to one language",
+  );
 });

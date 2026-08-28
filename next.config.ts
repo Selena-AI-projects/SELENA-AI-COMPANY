@@ -17,6 +17,9 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // An unmatched address belongs to neither locale group and so has no root
+  // layout; this lets one be declared for it.
+  experimental: { globalNotFound: true },
   async redirects() {
     return [
       {

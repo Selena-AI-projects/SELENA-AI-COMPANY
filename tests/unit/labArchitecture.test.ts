@@ -1,4 +1,5 @@
 import { test } from "node:test";
+import { appFile } from "./appRoutePath";
 import assert from "node:assert/strict";
 import { homepage } from "@/lib/data/homepage";
 import { ruHomepage } from "@/lib/data/homepage-ru";
@@ -48,7 +49,7 @@ test("Lab courses disclose that nothing is for sale and reserve the shared learn
   }
   assert.ok(!sitemap().some((entry) => /\/lab\/courses$/.test(String(entry.url))));
   for (const route of ["app/lab/[section]/page.tsx", "app/ru/lab/[section]/page.tsx"]) {
-    const source = readFileSync(join(process.cwd(), route), "utf8");
+    const source = readFileSync(appFile(route), "utf8");
     assert.match(source, /section\.id === "courses"[\s\S]*index: false[\s\S]*follow: true/);
   }
 });
