@@ -71,6 +71,8 @@ export type SurfaceRecord = {
    */
   payloadKeys: string[];
   statusText: string | null;
+  /** Seconds the collector was waited on. A give-up and a refusal look alike without it. */
+  waitedSeconds: number;
 };
 
 export function toRecord(ask: BrightDataAsk, scenario: MeasurementScenario): SurfaceRecord {
@@ -87,6 +89,7 @@ export function toRecord(ask: BrightDataAsk, scenario: MeasurementScenario): Sur
       error: ask.error ?? "NO_ANSWER",
       payloadKeys: ask.keys,
       statusText: ask.statusText,
+      waitedSeconds: Math.round(ask.waitedMs / 1000),
     };
   }
   const verdict = classify(ask.answer, scenario);
@@ -102,6 +105,7 @@ export function toRecord(ask: BrightDataAsk, scenario: MeasurementScenario): Sur
     error: null,
     payloadKeys: ask.keys,
     statusText: ask.statusText,
+    waitedSeconds: Math.round(ask.waitedMs / 1000),
   };
 }
 
@@ -244,11 +248,12 @@ export function renderMarkdown(
   if (failed.length > 0) {
     lines.push("## Что не вернулось");
     lines.push("");
-    const byReason = new Map<string, { count: number; keys: Set<string>; status: Set<string> }>();
+    const byReason = new Map<string, { count: number; keys: Set<string>; status: Set<string>; waited: number }>();
     for (const record of failed) {
       const reason = record.error ?? "";
-      const entry = byReason.get(reason) ?? { count: 0, keys: new Set<string>(), status: new Set<string>() };
+      const entry = byReason.get(reason) ?? { count: 0, keys: new Set<string>(), status: new Set<string>(), waited: 0 };
       entry.count += 1;
+      entry.waited = Math.max(entry.waited, record.waitedSeconds);
       for (const key of record.payloadKeys) entry.keys.add(key);
       if (record.statusText) entry.status.add(record.statusText.slice(0, 160));
       byReason.set(reason, entry);
@@ -261,6 +266,9 @@ export function renderMarkdown(
         lines.push(`  - поля в ответе: ${[...entry.keys].sort().map((key) => `\`${key}\``).join(", ")}`);
       }
       for (const status of entry.status) lines.push(`  - провайдер сообщил: ${status}`);
+      // Whether the wait was too short or the answer never existed is the
+      // difference between raising a timeout and looking somewhere else.
+      if (entry.waited > 0) lines.push(`  - ждали до ${entry.waited} с`);
     }
     lines.push("");
   }
