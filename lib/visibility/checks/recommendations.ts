@@ -20,6 +20,41 @@ export interface Recommendation {
 type RuleId = string;
 
 const EN: Record<RuleId, Recommendation> = {
+  "identity.author_named": {
+    severity: "important",
+    title: "Nothing on the page says who wrote it",
+    action:
+      "Name a person as the author in the page markup and show the same name on the page, linked to a profile that describes them.",
+    doesNotProve: "An author's name makes a claim attributable; it does not make the claim authoritative.",
+  },
+  "identity.dated": {
+    severity: "important",
+    title: "The page publishes no date",
+    action:
+      "Publish datePublished and dateModified in the page markup, and show the same dates to the reader.",
+    doesNotProve: "A date proves when the page changed, not that the content is correct or current.",
+  },
+  "identity.same_as": {
+    severity: "important",
+    title: "The business points at no profile of its own anywhere else",
+    action:
+      "Add sameAs to the organization markup, listing the profiles that are really yours, and link them from the page as well.",
+    doesNotProve: "Linked profiles let a model connect the name to you; they do not make it mention you.",
+  },
+  "offer.comparison_readable": {
+    severity: "important",
+    title: "The comparison is not built as a table",
+    action:
+      "Rebuild the comparison as a real table with header cells, and give every mark a text equivalent instead of an icon alone.",
+    doesNotProve: "A readable table makes the comparison parsable; it does not make it persuasive.",
+  },
+  "access.cacheable": {
+    severity: "later",
+    title: "The page forbids caching",
+    action:
+      "Drop no-store from the cache-control header on public pages, or replace it with a short max-age, so a repeated fetch is not a full round trip.",
+    doesNotProve: "Caching affects speed and crawl cost; it does not affect whether a page is understood.",
+  },
   "access.fetchable": {
     severity: "critical",
     title: "The page could not be fetched cleanly",
@@ -234,6 +269,41 @@ const EN: Record<RuleId, Recommendation> = {
 };
 
 const RU: Record<RuleId, Recommendation> = {
+  "identity.author_named": {
+    severity: "important",
+    title: "На странице не сказано, кто её написал",
+    action:
+      "Укажите человека автором в разметке страницы и покажите то же имя в тексте со ссылкой на страницу, где о нём написано.",
+    doesNotProve: "Имя автора делает утверждение приписываемым, но не делает его авторитетным.",
+  },
+  "identity.dated": {
+    severity: "important",
+    title: "Страница не публикует дату",
+    action:
+      "Добавьте datePublished и dateModified в разметку и покажите те же даты читателю.",
+    doesNotProve: "Дата говорит, когда страница менялась, но не о том, что содержание верное или актуальное.",
+  },
+  "identity.same_as": {
+    severity: "important",
+    title: "Бизнес нигде не ссылается на свои профили",
+    action:
+      "Добавьте sameAs в разметку организации, перечислив профили, которые действительно ваши, и поставьте на них ссылки со страницы.",
+    doesNotProve: "Связанные профили позволяют модели привязать имя к вам, но не заставляют её вас называть.",
+  },
+  "offer.comparison_readable": {
+    severity: "important",
+    title: "Сравнение свёрстано не таблицей",
+    action:
+      "Соберите сравнение настоящей таблицей с заголовочными ячейками и дайте каждой отметке текстовый эквивалент, а не только значок.",
+    doesNotProve: "Читаемая таблица делает сравнение разбираемым, но не делает его убедительным.",
+  },
+  "access.cacheable": {
+    severity: "later",
+    title: "Страница запрещает кэширование",
+    action:
+      "Уберите no-store из заголовка cache-control на публичных страницах или замените его коротким max-age, чтобы повторный запрос не шёл до сервера целиком.",
+    doesNotProve: "Кэш влияет на скорость и стоимость обхода, но не на то, понята ли страница.",
+  },
   "access.fetchable": {
     severity: "critical",
     title: "Страницу не удалось корректно загрузить",
@@ -457,6 +527,11 @@ export function getRecommendation(ruleId: string, locale: VisibilityLocale): Rec
  * "OK: No canonical URL is declared" — the opposite of the truth.
  */
 const PASSED_EN: Record<RuleId, string> = {
+  "identity.author_named": "The page names its author",
+  "identity.dated": "The page publishes a date",
+  "identity.same_as": "The business links to its own profiles elsewhere",
+  "offer.comparison_readable": "The comparison is a readable table",
+  "access.cacheable": "The page can be cached",
   "access.fetchable": "The page loads cleanly",
   "access.noindex": "Indexing is not blocked",
   "access.canonical": "A canonical URL is declared",
@@ -485,6 +560,11 @@ const PASSED_EN: Record<RuleId, string> = {
 };
 
 const PASSED_RU: Record<RuleId, string> = {
+  "identity.author_named": "Страница называет автора",
+  "identity.dated": "Страница публикует дату",
+  "identity.same_as": "Бизнес ссылается на свои профили",
+  "offer.comparison_readable": "Сравнение собрано читаемой таблицей",
+  "access.cacheable": "Страницу можно кэшировать",
   "access.fetchable": "Страница загружается корректно",
   "access.noindex": "Индексация не заблокирована",
   "access.canonical": "Canonical URL объявлен",
