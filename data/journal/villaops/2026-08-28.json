@@ -1,0 +1,1977 @@
+{
+  "date": "2026-08-28",
+  "configVersion": "villaops-api-view-2026-08-25",
+  "systems": [
+    {
+      "systemId": "anthropic/claude-haiku-4.5",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "ChatGPT",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "deepseek/deepseek-v3.2",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Gemini",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "mistralai/mistral-small-2603",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Perplexity",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "qwen/qwen3.5-9b",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "x-ai/grok-4.5",
+      "channel": "VISITOR"
+    }
+  ],
+  "questions": [
+    {
+      "text": "Who manages villa rentals in Bali?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balisuperhost.com",
+            "tropicallygroup.com",
+            "villabalimanagement.com",
+            "balitecture.com",
+            "balimmo-management.com",
+            "apexbali.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balivillarealty.com",
+            "orivista.com",
+            "cabobali.com",
+            "balisuperhost.com",
+            "balitecture.com",
+            "villa-finder.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balitecture.com",
+            "baliluxuryvillas.com",
+            "cabobali.com",
+            "balisuperhost.com",
+            "villabalimanagement.com",
+            "bukitvista.com"
+          ]
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balisuperhost.com",
+        "balitecture.com",
+        "cabobali.com",
+        "villabalimanagement.com",
+        "apexbali.com",
+        "baliluxuryvillas.com"
+      ]
+    },
+    {
+      "text": "How do I find a property manager for my villa in Bali?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "villabalimanagement.com",
+            "cabobali.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "cabobali.com",
+        "villabalimanagement.com"
+      ]
+    },
+    {
+      "text": "What does villa management in Bali cost?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "baliestatemanager.com",
+            "villabalimanagement.com",
+            "cabobali.com",
+            "bali-sands.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "bali-sands.com",
+            "balitecture.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "bali-sands.com",
+        "baliestatemanager.com",
+        "balitecture.com",
+        "cabobali.com",
+        "villabalimanagement.com"
+      ]
+    },
+    {
+      "text": "How do I run a villa rental business in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "bda-bali.com",
+            "anteyac.com",
+            "domabali.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balisuperhost.com",
+            "prestigepropertybali.com",
+            "magnumestate.com",
+            "balipropertyrules.com",
+            "thebalihomes.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "anteyac.com",
+        "balipropertyrules.com",
+        "balisuperhost.com",
+        "bda-bali.com",
+        "domabali.com",
+        "magnumestate.com"
+      ]
+    },
+    {
+      "text": "What software do villa owners in Bali use to manage bookings?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "guesty.com",
+            "lodgify.com",
+            "balimanagement.villas",
+            "web.bookandlink.com",
+            "omnihotelier.com",
+            "balisuperhost.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "hotelogix.com",
+            "lodgify.com",
+            "rentalautopilot.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "lodgify.com",
+        "balimanagement.villas",
+        "balisuperhost.com",
+        "guesty.com",
+        "hotelogix.com",
+        "omnihotelier.com"
+      ]
+    },
+    {
+      "text": "How do I handle guest communication for a villa rental?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "smoothstay.io",
+            "rental-network.com",
+            "resources.tellusapp.com",
+            "hostpal.co",
+            "alejandroagazzi.com",
+            "hostaway.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "alejandroagazzi.com",
+        "hostaway.com",
+        "hostpal.co",
+        "rental-network.com",
+        "resources.tellusapp.com",
+        "smoothstay.io"
+      ]
+    },
+    {
+      "text": "Who takes care of housekeeping and maintenance for Bali villas?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "villabalimanagement.com",
+            "gravitybali.com",
+            "greatbalivillas.com",
+            "bali-villa-management.com",
+            "housekeepingbali.id",
+            "rosesandstars.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "villa-management-bali.com",
+            "housekeepingbali.id"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "housekeepingbali.id",
+        "bali-villa-management.com",
+        "gravitybali.com",
+        "greatbalivillas.com",
+        "rosesandstars.com",
+        "villa-management-bali.com"
+      ]
+    },
+    {
+      "text": "How do I set up operations for a new villa in Bali?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balipropertyrules.com",
+            "kingswoodbalivillas.com",
+            "villasa.co",
+            "geriabaliproperty.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balipropertyrules.com",
+        "geriabaliproperty.com",
+        "kingswoodbalivillas.com",
+        "villasa.co"
+      ]
+    },
+    {
+      "text": "What is the best way to manage staff at a Bali villa?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "bali-villa-management.com",
+            "balimanagement.villas",
+            "baliestatemanager.com",
+            "balivillahub.com",
+            "baliluxuryconcierge.com",
+            "bali-villa-sale.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balimanagement.villas",
+            "villa-management-bali.com",
+            "villasa.co"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balimanagement.villas",
+        "bali-villa-management.com",
+        "bali-villa-sale.com",
+        "baliestatemanager.com",
+        "baliluxuryconcierge.com",
+        "balivillahub.com"
+      ]
+    },
+    {
+      "text": "How do I automate guest check-in for a villa?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "hostfully.com",
+            "ciaobooking.zendesk.com",
+            "airbnb.com",
+            "docs.bookingcenter.com",
+            "support.chekin.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "airbnb.com",
+        "ciaobooking.zendesk.com",
+        "docs.bookingcenter.com",
+        "hostfully.com",
+        "support.chekin.com"
+      ]
+    },
+    {
+      "text": "Which companies offer villa operations services in Indonesia?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balisuperhost.com",
+            "balivillamanagement.com",
+            "gravitybali.com",
+            "cabobali.com",
+            "intaranvillamanagement.co.id",
+            "balivillamanager.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "stayopsindo.com",
+            "cabobali.com",
+            "balisuperhost.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balisuperhost.com",
+        "cabobali.com",
+        "balivillamanagement.com",
+        "balivillamanager.com",
+        "gravitybali.com",
+        "intaranvillamanagement.co.id"
+      ]
+    },
+    {
+      "text": "How do I keep a villa fully booked in low season?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "airbnb.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "airbnb.com"
+      ]
+    },
+    {
+      "text": "What systems do boutique hotels in Bali use for operations?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "hospara.com",
+            "h-studio.id",
+            "fullguest.com",
+            "cloudbeds.com",
+            "insights.ehotelier.com",
+            "hotel-online.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "frontdesko.app",
+            "hotelogix.com",
+            "kovena.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "cloudbeds.com",
+        "frontdesko.app",
+        "fullguest.com",
+        "h-studio.id",
+        "hospara.com",
+        "hotel-online.com"
+      ]
+    },
+    {
+      "text": "How do I manage multiple villas at once?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "staymaker.app",
+            "vacasa.com",
+            "connectyourpms.com",
+            "outkeepr.com",
+            "hostfully.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "connectyourpms.com",
+        "hostfully.com",
+        "outkeepr.com",
+        "staymaker.app",
+        "vacasa.com"
+      ]
+    },
+    {
+      "text": "Who helps foreign owners run property in Bali?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "solarpropertybali.com",
+            "baliestatemanager.com",
+            "balisuperhost.com",
+            "bantuliving.com",
+            "businessinsider.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "celerity.click",
+            "balisuperhost.com",
+            "balitecture.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balisuperhost.com",
+        "baliestatemanager.com",
+        "balitecture.com",
+        "bantuliving.com",
+        "businessinsider.com",
+        "celerity.click"
+      ]
+    },
+    {
+      "text": "What should be in a villa operations manual?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "en.wikipedia.org",
+            "rosegalera.com",
+            "safetyculture.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "en.wikipedia.org",
+        "rosegalera.com",
+        "safetyculture.com"
+      ]
+    },
+    {
+      "text": "How do I handle guest complaints at a villa rental?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "rentalautopilot.com",
+            "airbnb.com",
+            "airbnb.com.br"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "airbnb.com",
+        "airbnb.com.br",
+        "rentalautopilot.com"
+      ]
+    },
+    {
+      "text": "What are the standard operating procedures for villa housekeeping?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "safetyculture.com",
+            "workprocedures.com",
+            "nscpolteksby.ac.id",
+            "thesuccessmanual.in",
+            "weareplanet.com",
+            "luxops.fr"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "luxops.fr",
+        "nscpolteksby.ac.id",
+        "safetyculture.com",
+        "thesuccessmanual.in",
+        "weareplanet.com",
+        "workprocedures.com"
+      ]
+    },
+    {
+      "text": "How do I track expenses for a villa rental in Bali?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "sevabali.com",
+            "domabali.com",
+            "property-plaza.id",
+            "balipajak.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "wonderfulbalivillas.com",
+            "balimanagement.villas"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balimanagement.villas",
+        "balipajak.com",
+        "domabali.com",
+        "property-plaza.id",
+        "sevabali.com",
+        "wonderfulbalivillas.com"
+      ]
+    },
+    {
+      "text": "Who provides concierge services for villa guests in Bali?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "baliluxeconcierge.com",
+            "villa-bali.com",
+            "aleyconcierge.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "villabalimanagement.com",
+            "ministryofvillas.com",
+            "baliluxeconcierge.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "baliluxeconcierge.com",
+        "aleyconcierge.com",
+        "ministryofvillas.com",
+        "villa-bali.com",
+        "villabalimanagement.com"
+      ]
+    },
+    {
+      "text": "How do I onboard new staff at a villa?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "mitti.com",
+            "safetyculture.com",
+            "miratag.com",
+            "onboarding.team"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "miratag.com",
+        "mitti.com",
+        "onboarding.team",
+        "safetyculture.com"
+      ]
+    },
+    {
+      "text": "What tools help with short-term rental operations in Indonesia?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "guesty.com",
+            "hostaway.com",
+            "airbnb.co.id",
+            "semeru.online",
+            "cbn.id",
+            "help.guesty.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balipropertyrules.com",
+            "eviivo.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "airbnb.co.id",
+        "balipropertyrules.com",
+        "cbn.id",
+        "eviivo.com",
+        "guesty.com",
+        "help.guesty.com"
+      ]
+    },
+    {
+      "text": "How do villa managers in Bali handle maintenance requests?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "becikapp.com",
+            "serenevillamanagementbali.com",
+            "villabalimanagement.com",
+            "bali-villa-management.com",
+            "baliestatemanager.com",
+            "orivista.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "villa-management-bali.com",
+            "paradysehomes.com",
+            "balitecture.com",
+            "geriabaliproperty.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "bali-villa-management.com",
+        "baliestatemanager.com",
+        "balitecture.com",
+        "becikapp.com",
+        "geriabaliproperty.com",
+        "orivista.com"
+      ]
+    },
+    {
+      "text": "What does a villa operations company actually do?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "jamesnightingall.com",
+            "balitecture.com",
+            "gravitybali.com",
+            "maneri.it",
+            "penultimaservices.com",
+            "villamanagement-spain.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ziprecruiter.com",
+            "gravitybali.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "gravitybali.com",
+        "balitecture.com",
+        "jamesnightingall.com",
+        "maneri.it",
+        "penultimaservices.com",
+        "villamanagement-spain.com"
+      ]
+    },
+    {
+      "text": "How can AI help run a villa rental business?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "airbnb.com",
+            "hospitable.com",
+            "help.hospitable.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "truvi.com",
+            "rentalready.com",
+            "business-reporter.co.uk",
+            "guesty.com",
+            "oikospropertyventures.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "airbnb.com",
+        "business-reporter.co.uk",
+        "guesty.com",
+        "help.hospitable.com",
+        "hospitable.com",
+        "oikospropertyventures.com"
+      ]
+    }
+  ]
+}
