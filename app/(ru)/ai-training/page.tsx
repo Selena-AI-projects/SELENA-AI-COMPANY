@@ -1,4 +1,7 @@
 import { buildMetadata } from "@/lib/metadata";
+import { buildServicePageStructuredData } from "@/lib/structured-data";
+import { getService } from "@/lib/data/services";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { cta } from "@/lib/site";
 import { faq } from "@/lib/data/faq";
 import { PageHero } from "@/components/sections/PageHero";
@@ -74,8 +77,11 @@ const trainingSteps = [
 const trainingFaq = [faq[0], faq[3], faq[6], faq[7]];
 
 export default function AiTrainingPage() {
+  const service = getService("training")!;
+
   return (
     <>
+      <JsonLd data={buildServicePageStructuredData(service)} />
       <PageHero
         eyebrow="Обучение"
         title="AI-обучение на ваших реальных задачах"

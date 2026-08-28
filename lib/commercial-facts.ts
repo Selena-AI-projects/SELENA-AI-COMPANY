@@ -36,6 +36,9 @@ export const commercialFacts = {
   seller: {
     legalName: "Selena Systems LLC",
     countryCode: "US",
+    // The state is on the pricing disclosure and the legal pages, so it can be
+    // in the markup too: an address of "US" alone joins no knowledge graph.
+    regionCode: "WY",
     country: { en: "United States", ru: "США" },
   },
   aiSystems: {
@@ -202,6 +205,7 @@ export const commercialFacts = {
   seller: {
     legalName: string;
     countryCode: string;
+    regionCode: string;
     country: LocalizedText;
   };
   aiSystems: {

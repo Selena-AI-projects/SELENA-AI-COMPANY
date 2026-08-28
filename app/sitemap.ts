@@ -47,15 +47,20 @@ const routes: PublicRoute[] = [
     { path: labPath("en", section), priority: 0.65, languages: labLanguages(section) },
     { path: labPath("ru", section), priority: 0.65, languages: labLanguages(section) },
   ]),
+  // Lab items carry the date they were written and the date they changed, so
+  // they can say when they changed. Pages without such a date stay silent
+  // rather than publish the build's date as if it were an edit.
   ...labContent.en.items.flatMap((item) => [
     {
       path: labPath("en", item.section, item.slug),
       priority: 0.7,
+      lastModified: item.updatedAt,
       languages: labLanguages(item.section, item.slug),
     },
     {
       path: labPath("ru", item.section, item.slug),
       priority: 0.7,
+      lastModified: item.updatedAt,
       languages: labLanguages(item.section, item.slug),
     },
   ]),

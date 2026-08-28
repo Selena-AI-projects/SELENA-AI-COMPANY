@@ -1,4 +1,5 @@
 import { test } from "node:test";
+import { appFile } from "./appRoutePath";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -75,7 +76,7 @@ test("every public page names one seller", () => {
     "lib/visibility/content.en.ts",
   ];
   for (const file of files) {
-    const source = readFileSync(join(process.cwd(), file), "utf8");
+    const source = readFileSync(appFile(file), "utf8");
     assert.ok(
       source.includes(legalName) || source.includes("commercialFacts.seller") || source.includes("seller.legalName"),
       `${file} must name ${legalName} as the seller`,

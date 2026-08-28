@@ -1,5 +1,5 @@
 import { buildMetadata } from "@/lib/metadata";
-import { buildAiSystemsStructuredData, buildAiVisibilityStructuredData } from "@/lib/structured-data";
+import { buildPricingStructuredData } from "@/lib/structured-data";
 import { homepage } from "@/lib/data/homepage";
 import { visibilityContentEn } from "@/lib/visibility/content.en";
 import { visibilityLanguages } from "@/lib/visibility/routes";
@@ -24,8 +24,7 @@ export const metadata = buildMetadata({
 export default function PricingPage() {
   return (
     <>
-      <JsonLd data={buildAiVisibilityStructuredData("en")} />
-      <JsonLd data={buildAiSystemsStructuredData("en")} />
+      <JsonLd data={buildPricingStructuredData("en")} />
       <div lang="en">
       <PageHero
         eyebrow="Selena Systems pricing"

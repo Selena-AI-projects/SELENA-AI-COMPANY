@@ -387,7 +387,7 @@ export const homepage = {
   proof: {
     eyebrow: "Proof of operating range",
     headline: "Systems thinking across hospitality, care, service and online operations.",
-    founderLine: "Founded and led by Selena — Founder & AI Systems Architect. Every system here is designed and built hands-on, not outsourced.",
+    founderLine: "Founded and led by Selena Nigmatullaeva — Founder & AI Systems Architect. Every system here is designed and built hands-on, not outsourced.",
     projects: [
       {
         name: "KORA Food Hall",

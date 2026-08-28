@@ -21,6 +21,21 @@ export const site = {
 } as const;
 
 /**
+ * The person behind the work.
+ *
+ * A consultancy that sells expert judgement was signing it "Selena" and
+ * nothing else: no surname on any page, no Person in the markup. An assistant
+ * attributes a statement to a person far more readily than to an unfamiliar
+ * company name, and every methodological position on this site — that llms.txt
+ * weighs nothing, that a dash is not a zero — belonged to nobody.
+ */
+export const founder = {
+  name: { en: "Selena Nigmatullaeva", ru: "Селена Нигматуллаева" },
+  role: { en: "Founder & AI Systems Architect", ru: "Основатель и AI Systems Architect" },
+  image: "/images/founder/selena-2026-08.jpg",
+} as const;
+
+/**
  * Primary and secondary conversion labels (reused everywhere).
  *
  * The free check reads a site and says whether machines can fetch and

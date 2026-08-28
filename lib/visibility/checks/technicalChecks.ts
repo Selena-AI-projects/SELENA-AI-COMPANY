@@ -1,9 +1,13 @@
 import {
+  comparisonSignals,
+  declaresSameAs,
   extractHtmlSignals,
   hasAboutLink,
   hasContactPath,
   hasOrgLikeJsonLd,
   findServicePageLink,
+  namesAnAuthor,
+  publishesADate,
   type HtmlSignals,
 } from "./htmlSignals";
 
@@ -54,6 +58,10 @@ export function runTechnicalChecks(page: PageFetchForChecks, discovery: Discover
       "identity.jsonld_valid",
       "identity.jsonld_entity_present",
       "identity.brand_name_consistent",
+      "identity.author_named",
+      "identity.dated",
+      "identity.same_as",
+      "offer.comparison_readable",
       "offer.title_present",
       "offer.single_h1",
       "conversion.contact_path_present",
@@ -83,6 +91,17 @@ export function runTechnicalChecks(page: PageFetchForChecks, discovery: Discover
       dimension: "conversion",
       state: "not_measured",
       evidence: { reason: "no_html_available" },
+    });
+    const cacheControlWithoutHtml = page.headers["cache-control"] ?? null;
+    results.push({
+      ruleId: "access.cacheable",
+      dimension: "access",
+      state: cacheControlWithoutHtml
+        ? /no-store/i.test(cacheControlWithoutHtml)
+          ? "warn"
+          : "pass"
+        : "not_measured",
+      evidence: { cacheControl: cacheControlWithoutHtml },
     });
     return results;
   }
@@ -177,6 +196,54 @@ export function runTechnicalChecks(page: PageFetchForChecks, discovery: Discover
     dimension: "conversion",
     state: hasAboutLink(signals) ? "pass" : "warn",
     evidence: { hasAboutLink: hasAboutLink(signals) },
+  });
+
+  const authorNamed = namesAnAuthor(signals);
+  results.push({
+    ruleId: "identity.author_named",
+    dimension: "identity",
+    state: authorNamed ? "pass" : "warn",
+    evidence: { authorNamed },
+  });
+
+  const dated = publishesADate(signals);
+  results.push({
+    ruleId: "identity.dated",
+    dimension: "identity",
+    state: dated ? "pass" : "warn",
+    evidence: { dated },
+  });
+
+  const sameAs = declaresSameAs(signals);
+  results.push({
+    ruleId: "identity.same_as",
+    dimension: "identity",
+    // Only meaningful where the page describes an entity at all: a page with
+    // no organization node is not withholding its profiles, it has none to
+    // withhold.
+    state: !orgLikePresent ? "not_measured" : sameAs.length > 0 ? "pass" : "warn",
+    evidence: { sameAs, entityPresent: orgLikePresent },
+  });
+
+  const comparison = comparisonSignals(page.html, signals);
+  results.push({
+    ruleId: "offer.comparison_readable",
+    dimension: "offer",
+    state: !comparison.looksLikeComparison
+      ? "not_measured"
+      : comparison.hasTable
+        ? "pass"
+        : "warn",
+    evidence: comparison,
+  });
+
+  const cacheControl = page.headers["cache-control"] ?? null;
+  const uncacheable = cacheControl ? /no-store/i.test(cacheControl) : false;
+  results.push({
+    ruleId: "access.cacheable",
+    dimension: "access",
+    state: uncacheable ? "warn" : "pass",
+    evidence: { cacheControl },
   });
 
   return results;

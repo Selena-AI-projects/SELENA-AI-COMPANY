@@ -1,4 +1,5 @@
 import { test } from "node:test";
+import { appFile } from "./appRoutePath";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -360,7 +361,7 @@ test("forbidden marketing phrases are absent from promotional copy", () => {
 /** Master Correction — legacy report/sample surfaces are retired and absent from the sitemap. */
 test("legacy report surfaces are retired and absent from the sitemap", () => {
   for (const path of ["app/report/sample/page.tsx", "app/ru/report/sample/page.tsx"]) {
-    const source = readFileSync(join(process.cwd(), path), "utf8");
+    const source = readFileSync(appFile(path), "utf8");
     assert.match(source, /notFound\(\)/, `${path} must be a retired tombstone`);
   }
   const sitemap = readFileSync(join(process.cwd(), "app/sitemap.ts"), "utf8");
@@ -369,7 +370,7 @@ test("legacy report surfaces are retired and absent from the sitemap", () => {
 
 /** Strips comments so source assertions test executable code, not prose about it. */
 function executableSource(relativePath: string): string {
-  return readFileSync(join(process.cwd(), relativePath), "utf8")
+  return readFileSync(appFile(relativePath), "utf8")
     .replace(/\/\*[\s\S]*?\*\//g, "")
     .replace(/^\s*\/\/.*$/gm, "");
 }
@@ -499,7 +500,7 @@ test("every visibility route declares unique title metadata", () => {
   ];
   const titles = new Set<string>();
   for (const route of routes) {
-    const source = readFileSync(join(process.cwd(), route), "utf8");
+    const source = readFileSync(appFile(route), "utf8");
     const match = source.match(/title:\s*"([^"]+)"/);
     assert.ok(match, `${route} must declare a title`);
     const title = match![1];
@@ -510,7 +511,7 @@ test("every visibility route declares unique title metadata", () => {
 
 /** Master Correction — old AI Map is no longer a second public product entry. */
 test("legacy /ru/ai-map route remains as a canonical redirect tombstone", () => {
-  const path = join(process.cwd(), "app/ru/ai-map/page.tsx");
+  const path = appFile("app/ru/ai-map/page.tsx");
   const source = readFileSync(path, "utf8");
   assert.match(source, /(?:redirect|permanentRedirect)\(/, "/ru/ai-map must redirect to the canonical product path");
   assert.ok(!readFileSync(join(process.cwd(), "app/sitemap.ts"), "utf8").includes('path: "/ru/ai-map"'));

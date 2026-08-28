@@ -8,6 +8,8 @@ import {
   htmlToVisibleText,
   type HtmlSignals,
 } from "../checks/htmlSignals";
+import { runCrossPageChecks } from "../checks/crossPageChecks";
+import { decideBySpecificGroup, parseRobots } from "../checks/robotsRules";
 import { runTechnicalChecks, type CheckResult, type CheckState } from "../checks/technicalChecks";
 import type { DiscoveryResult, DiscoveredPage } from "../crawler/discover";
 import type { PrimaryAction } from "../measurement";
@@ -269,44 +271,6 @@ function extractBlocks(pageUrl: string, html: string): ReadinessBlock[] {
   });
 }
 
-type RobotsRule = { directive: "allow" | "disallow"; path: string; source: string };
-type RobotsGroup = { agents: string[]; rules: RobotsRule[] };
-
-function parseRobots(body: string): RobotsGroup[] {
-  const groups: RobotsGroup[] = [];
-  let current: RobotsGroup | null = null;
-  let hasRules = false;
-  for (const rawLine of body.split(/\r?\n/)) {
-    const source = rawLine.split("#", 1)[0]?.trim() ?? "";
-    if (!source) continue;
-    const separator = source.indexOf(":");
-    if (separator < 0) continue;
-    const key = source.slice(0, separator).trim().toLowerCase();
-    const value = source.slice(separator + 1).trim();
-    if (key === "user-agent") {
-      if (!current || hasRules) {
-        current = { agents: [], rules: [] };
-        groups.push(current);
-        hasRules = false;
-      }
-      current.agents.push(value.toLowerCase());
-      continue;
-    }
-    if ((key === "allow" || key === "disallow") && current) {
-      current.rules.push({ directive: key, path: value, source });
-      hasRules = true;
-    }
-  }
-  return groups;
-}
-
-function ruleMatchesRoot(path: string): boolean {
-  if (!path) return false;
-  const withoutEnd = path.replace(/\$$/, "");
-  const prefix = withoutEnd.split("*", 1)[0] ?? withoutEnd;
-  return "/".startsWith(prefix || "/");
-}
-
 function evaluateCrawlerAccess(crawl: DiscoveryResult): CrawlerAccessResult[] {
   if (crawl.robots.status === "unavailable") {
     return CRAWLERS.map((item) => ({
@@ -329,18 +293,13 @@ function evaluateCrawlerAccess(crawl: DiscoveryResult): CrawlerAccessResult[] {
 
   const groups = parseRobots(crawl.robots.body);
   return CRAWLERS.map((item) => {
-    const agent = item.userAgent.toLowerCase();
-    const exact = groups.filter((group) => group.agents.some((value) => value !== "*" && agent.includes(value)));
-    const applicable = exact.length > 0 ? exact : groups.filter((group) => group.agents.includes("*"));
-    const matchingRules = applicable.flatMap((group) => group.rules).filter((rule) => ruleMatchesRoot(rule.path));
-    const selected = matchingRules.sort((a, b) => b.path.length - a.path.length || (a.directive === "allow" ? -1 : 1))[0];
-    const blocked = selected?.directive === "disallow";
+    const verdict = decideBySpecificGroup(groups, item.userAgent);
     return {
       ...item,
-      status: blocked ? ("blocked" as const) : ("allowed" as const),
+      status: verdict.blocked ? ("blocked" as const) : ("allowed" as const),
       sourceUrl: crawl.robots.url,
-      matchedRule: selected?.source ?? null,
-      evidence: selected?.source ?? "No matching Disallow rule for the site root.",
+      matchedRule: verdict.matchedRule,
+      evidence: verdict.matchedRule ?? "No matching Disallow rule for the site root.",
     };
   });
 }
@@ -433,6 +392,23 @@ export function buildPublicReadinessAudit(options: {
   const homepage = analyzed.find((item) => item.page.role === "homepage") ?? analyzed[0];
   const allChecks = analyzed.flatMap((item) =>
     item.checks.map((check) => ({ ...check, pageUrl: item.page.fetch.finalUrl })),
+  );
+
+  // Contradictions between pages, a robots.txt two crawlers read differently
+  // and a page hidden in one language only — none of which any single page
+  // can show. They report and stay out of the score.
+  allChecks.push(
+    ...runCrossPageChecks({
+      baseUrl: crawl.baseUrl,
+      pages: analyzed.map(({ page, signals }) => ({
+        url: page.fetch.finalUrl,
+        signals,
+        headers: page.fetch.headers,
+      })),
+      robotsBody: crawl.robots.status === "available" ? crawl.robots.body : null,
+      sitemapBody: crawl.sitemap.status === "available" ? crawl.sitemap.body : null,
+      crawlers: CRAWLERS,
+    }),
   );
 
   const technicalRuleIds = new Set([

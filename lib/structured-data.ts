@@ -1,4 +1,5 @@
-import { contact, contactLinks, site } from "@/lib/site";
+import { contact, contactLinks, founder, site } from "@/lib/site";
+import type { Service } from "@/lib/data/services";
 import {
   amountForStructuredData,
   commercialFacts,
@@ -34,7 +35,9 @@ function organizationNode(locale: StructuredLocale) {
     address: {
       "@type": "PostalAddress",
       addressCountry: commercialFacts.seller.countryCode,
+      addressRegion: commercialFacts.seller.regionCode,
     },
+    founder: { "@id": `${site.url}/#founder` },
     description: isRussian
       ? "Selena Systems проектирует и внедряет AI-системы и помогает бизнесу измерять AI-видимость."
       : "Selena Systems designs and builds AI systems and helps businesses measure AI visibility.",
@@ -87,17 +90,39 @@ function offerNode({
           unitText: offer.billingPeriod,
         };
 
+  // `price` is the price, not a starting point. An offer sold "from $10,000"
+  // states its floor in the specification and leaves `price` unset, so a
+  // reader is not told a number the seller never promised.
+  const startsFrom = "qualifier" in offer && offer.qualifier === "from";
+
   return {
     "@type": "Offer",
     "@id": `${offerUrl}#offer-${offer.id}`,
     name: localizedOfferName(offer, locale),
-    price,
+    ...(startsFrom ? {} : { price }),
     priceCurrency: offer.currency,
     url: offerUrl,
     availability: schemaAvailability(offer.availability),
     description: offer.description[locale],
     priceSpecification,
     ...(category ? { category } : {}),
+  };
+}
+
+/**
+ * The founder as an entity of her own, so a statement can be attributed to a
+ * person rather than to a company name. No biography and no profile links
+ * here: they are not on the site, and this file publishes what the site says.
+ */
+function personNode(locale: StructuredLocale) {
+  return {
+    "@type": "Person",
+    "@id": `${site.url}/#founder`,
+    name: founder.name[locale],
+    jobTitle: founder.role[locale],
+    image: `${site.url}${founder.image}`,
+    worksFor: { "@id": `${site.url}/#organization` },
+    url: `${site.url}${locale === "ru" ? "/about" : "/en/about"}`,
   };
 }
 
@@ -168,7 +193,7 @@ function aiSystemsServiceNode(locale: StructuredLocale) {
         offerNode({ offer: systems.miniAudit, locale }),
         offerNode({ offer: systems.audit, locale }),
         offerNode({ offer: systems.sprint, locale }),
-        offerNode({ offer: systems.businessOs, locale, category: "From" }),
+        offerNode({ offer: systems.businessOs, locale }),
       ],
     },
   };
@@ -270,6 +295,65 @@ export function buildAiVisibilityStructuredData(locale: StructuredLocale) {
   };
 }
 
+/**
+ * The pricing page describes itself.
+ *
+ * It used to publish the graphs of the two product pages instead — a WebPage
+ * node claiming to be /visibility, a second claiming to be /ai-systems, and no
+ * node for the page a reader was actually on. Both service nodes stay, because
+ * both catalogues are sold here and their offers carry the prices; what is
+ * added is the page itself, and the Russian side gains the AI Automation
+ * offers it was not publishing at all.
+ */
+export function buildPricingStructuredData(locale: StructuredLocale) {
+  const isRussian = locale === "ru";
+  const pageUrl = isRussian ? `${site.url}/ru/pricing` : `${site.url}/pricing`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationNode(locale),
+      websiteNode(locale),
+      webPageNode({
+        locale,
+        pageUrl,
+        name: isRussian ? "Цены — AI Visibility и AI Automation" : "Pricing — AI Visibility and AI Automation",
+        description: isRussian
+          ? "Бесплатная проверка готовности, четыре платных варианта AI Visibility и четыре формата AI Automation."
+          : "The free readiness check, four paid AI Visibility options and four AI Automation formats.",
+      }),
+      breadcrumbNode(
+        [
+          { name: "Selena Systems", item: site.url },
+          { name: isRussian ? "Цены" : "Pricing", item: pageUrl },
+        ],
+        pageUrl,
+      ),
+      aiVisibilityServiceNode(locale),
+      aiSystemsServiceNode(locale),
+    ],
+  };
+}
+
+/**
+ * The questions a page already answers, in machine-readable form.
+ *
+ * Google stopped showing FAQ rich results for most sites in 2023, so this is
+ * not for the search result — it is for the assistant that needs a whole,
+ * quotable answer rather than a paragraph it has to cut down.
+ */
+export function buildFaqStructuredData(items: readonly { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+}
+
 /** Structured data for the free technical Public Readiness entry point. */
 export function buildPublicReadinessStructuredData(locale: StructuredLocale) {
   const isRussian = locale === "ru";
@@ -279,6 +363,7 @@ export function buildPublicReadinessStructuredData(locale: StructuredLocale) {
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
       webPageNode({
         locale,
         pageUrl,
@@ -321,6 +406,7 @@ export function buildAiSystemsStructuredData(locale: StructuredLocale = "en") {
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
       webPageNode({
         locale,
         pageUrl,
@@ -357,6 +443,7 @@ export function buildAiAutomationOfferStructuredData(slug: AiAutomationOfferSlug
     "@context": "https://schema.org",
     "@graph": [
       organizationNode("en"),
+      websiteNode("en"),
       webPageNode({
         locale: "en",
         pageUrl,
@@ -387,6 +474,51 @@ export function buildAiAutomationOfferStructuredData(slug: AiAutomationOfferSlug
   };
 }
 
+/**
+ * One of the three Russian service pages.
+ *
+ * They carried no structured data at all, and search sends people straight to
+ * them. There is no `offers` node because these pages name no price: a price
+ * in the markup that a reader cannot see on the page is a claim they cannot
+ * check.
+ */
+export function buildServicePageStructuredData(service: Service) {
+  const pageUrl = `${site.url}${service.href}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationNode("ru"),
+      websiteNode("ru"),
+      webPageNode({
+        locale: "ru",
+        pageUrl,
+        name: service.name,
+        description: service.promise,
+      }),
+      breadcrumbNode(
+        [
+          { name: "Selena Systems", item: `${site.url}/ru` },
+          { name: "AI Automation", item: `${site.url}/ru#ai-systems` },
+          { name: service.name, item: pageUrl },
+        ],
+        pageUrl,
+      ),
+      {
+        "@type": "Service",
+        "@id": `${pageUrl}#service`,
+        url: pageUrl,
+        name: service.name,
+        serviceType: service.cardTitle,
+        description: service.promise,
+        provider: { "@id": `${site.url}/#organization` },
+        areaServed: "Worldwide",
+        inLanguage: "ru",
+      },
+    ],
+  };
+}
+
 /** Structured data for the bilingual founder and company page. */
 export function buildAboutStructuredData(locale: StructuredLocale) {
   const isRussian = locale === "ru";
@@ -400,6 +532,7 @@ export function buildAboutStructuredData(locale: StructuredLocale) {
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
       webPageNode({
         locale,
         pageUrl,
@@ -414,6 +547,7 @@ export function buildAboutStructuredData(locale: StructuredLocale) {
         ],
         pageUrl,
       ),
+      personNode(locale),
     ],
   };
 }
@@ -427,6 +561,7 @@ export function buildLabStructuredData(locale: StructuredLocale) {
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
       webPageNode({
         locale,
         pageUrl,
@@ -465,6 +600,7 @@ export function buildLabSectionStructuredData({
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
       webPageNode({ locale, pageUrl, type: "CollectionPage", name: title, description }),
       breadcrumbNode(
         [
@@ -486,6 +622,7 @@ export function buildMethodologyStructuredData(locale: StructuredLocale) {
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
       webPageNode({
         locale,
         pageUrl,
@@ -514,6 +651,7 @@ export function buildContactStructuredData(locale: StructuredLocale) {
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
       webPageNode({
         locale,
         pageUrl,
@@ -614,7 +752,7 @@ export function buildJournalProjectStructuredData({
         datePublished: publishedAt,
         dateModified: updatedAt,
         inLanguage: locale,
-        author: { "@id": `${site.url}/#organization` },
+        author: { "@id": `${site.url}/#founder` },
         publisher: { "@id": `${site.url}/#organization` },
         isPartOf: { "@id": `${site.url}/#website` },
         articleSection: journalTitle,
@@ -656,6 +794,8 @@ export function buildLabArticleStructuredData({
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
+      personNode(locale),
       {
         "@type": "Article",
         "@id": `${pageUrl}/#article`,
@@ -665,7 +805,7 @@ export function buildLabArticleStructuredData({
         ...(publishedAt ? { datePublished: publishedAt } : {}),
         dateModified: updatedAt,
         inLanguage: locale,
-        author: { "@id": `${site.url}/#organization` },
+        author: { "@id": `${site.url}/#founder` },
         publisher: { "@id": `${site.url}/#organization` },
         isPartOf: { "@id": `${site.url}/#website` },
         articleSection: "Selena Lab",

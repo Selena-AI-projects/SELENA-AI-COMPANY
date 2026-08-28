@@ -165,3 +165,78 @@ export function hasOrgLikeJsonLd(signals: HtmlSignals): boolean {
   for (const block of signals.jsonLdBlocks) collectTypes(block, types);
   return [...types].some((t) => ORG_JSONLD_TYPES.has(t));
 }
+
+/** Every node of every JSON-LD block, `@graph` included, flattened once. */
+function collectNodes(node: unknown, out: Record<string, unknown>[]): void {
+  if (Array.isArray(node)) {
+    for (const item of node) collectNodes(item, out);
+    return;
+  }
+  if (!node || typeof node !== "object") return;
+  const record = node as Record<string, unknown>;
+  out.push(record);
+  for (const value of Object.values(record)) {
+    if (value && typeof value === "object") collectNodes(value, out);
+  }
+}
+
+export function jsonLdNodes(signals: HtmlSignals): Record<string, unknown>[] {
+  const nodes: Record<string, unknown>[] = [];
+  for (const block of signals.jsonLdBlocks) collectNodes(block, nodes);
+  return nodes;
+}
+
+function hasText(value: unknown): boolean {
+  if (typeof value === "string") return value.trim().length > 0;
+  if (Array.isArray(value)) return value.some(hasText);
+  if (value && typeof value === "object") {
+    const record = value as Record<string, unknown>;
+    // An author given as `{ "@id": ... }` names an entity the page still has
+    // to describe; a bare reference is not a name.
+    return hasText(record.name);
+  }
+  return false;
+}
+
+/** A named author, as a person or an organization the page actually names. */
+export function namesAnAuthor(signals: HtmlSignals): boolean {
+  return jsonLdNodes(signals).some((node) => hasText(node.author) || hasText(node.creator));
+}
+
+/** A publication or revision date the page publishes in machine-readable form. */
+export function publishesADate(signals: HtmlSignals): boolean {
+  return jsonLdNodes(signals).some(
+    (node) => hasText(node.datePublished) || hasText(node.dateModified) || hasText(node.uploadDate),
+  );
+}
+
+/**
+ * Whether the entity points at itself somewhere else.
+ *
+ * `sameAs` is how a model confirms that the name on this page and the profile
+ * it has seen elsewhere are the same organization. Without it a brand exists
+ * only inside its own domain.
+ */
+export function declaresSameAs(signals: HtmlSignals): string[] {
+  const found: string[] = [];
+  for (const node of jsonLdNodes(signals)) {
+    const value = node.sameAs;
+    if (typeof value === "string" && value.trim()) found.push(value.trim());
+    if (Array.isArray(value)) {
+      for (const item of value) if (typeof item === "string" && item.trim()) found.push(item.trim());
+    }
+  }
+  return [...new Set(found)];
+}
+
+/** A page that compares things, and whether a machine can read the comparison. */
+export function comparisonSignals(html: string, signals: HtmlSignals): {
+  looksLikeComparison: boolean;
+  hasTable: boolean;
+} {
+  const heading = `${signals.title ?? ""} ${signals.headings.map((item) => item.text).join(" ")}`;
+  return {
+    looksLikeComparison: /\bvs\.?\b|\bversus\b|сравнени|сравнить|comparison|compare\b/i.test(heading),
+    hasTable: /<table[\s>]/i.test(html),
+  };
+}
