@@ -20,6 +20,30 @@ export interface Recommendation {
 type RuleId = string;
 
 const EN: Record<RuleId, Recommendation> = {
+  "identity.facts_agree": {
+    severity: "important",
+    title: "Two pages state different facts about the same business",
+    action:
+      "Choose one source of truth for the phone, address, price range and menu facts, publish it in the structured data of every page, and correct the pages that say something else.",
+    doesNotProve:
+      "Pages that agree remove a contradiction a model would otherwise resolve on its own; they do not make the facts themselves correct.",
+  },
+  "access.robots_unambiguous": {
+    severity: "important",
+    title: "robots.txt says different things to different crawlers",
+    action:
+      "Give each crawler exactly one group in robots.txt: merge the duplicate User-agent blocks and remove the rules a wildcard group already contradicts, so every reader reaches the same verdict.",
+    doesNotProve:
+      "One clear verdict tells you who is allowed in; it does not mean the crawlers that are allowed in will come.",
+  },
+  "access.noindex_covers_locales": {
+    severity: "important",
+    title: "A page is hidden in one language and open in another",
+    action:
+      "Decide whether this page should be indexed at all, then apply the same directive to every language version of it, including the addresses the sitemap offers for crawling.",
+    doesNotProve:
+      "Matching directives make the intent readable; they do not decide which of the two versions was right.",
+  },
   "identity.author_named": {
     severity: "important",
     title: "Nothing on the page says who wrote it",
@@ -269,6 +293,30 @@ const EN: Record<RuleId, Recommendation> = {
 };
 
 const RU: Record<RuleId, Recommendation> = {
+  "identity.facts_agree": {
+    severity: "important",
+    title: "Две страницы сообщают разные факты об одном бизнесе",
+    action:
+      "Выберите один источник правды для телефона, адреса, диапазона цен и состава предложения, опубликуйте его в структурированных данных каждой страницы и исправьте страницы, которые говорят другое.",
+    doesNotProve:
+      "Согласованные страницы убирают противоречие, которое модель иначе разрешает сама; они не делают сами факты верными.",
+  },
+  "access.robots_unambiguous": {
+    severity: "important",
+    title: "robots.txt отвечает разным краулерам по-разному",
+    action:
+      "Оставьте каждому краулеру ровно одну группу в robots.txt: объедините повторяющиеся блоки User-agent и уберите правила, которым уже противоречит группа со звёздочкой, чтобы любой читатель приходил к одному выводу.",
+    doesNotProve:
+      "Однозначный ответ показывает, кого пускают; он не означает, что допущенные краулеры придут.",
+  },
+  "access.noindex_covers_locales": {
+    severity: "important",
+    title: "Страница закрыта на одном языке и открыта на другом",
+    action:
+      "Решите, должна ли эта страница индексироваться вообще, и примените одну и ту же директиву ко всем её языковым версиям, включая адреса, которые sitemap отдаёт на обход.",
+    doesNotProve:
+      "Совпадающие директивы делают намерение читаемым; они не решают, какая из двух версий была права.",
+  },
   "identity.author_named": {
     severity: "important",
     title: "На странице не сказано, кто её написал",
@@ -527,6 +575,9 @@ export function getRecommendation(ruleId: string, locale: VisibilityLocale): Rec
  * "OK: No canonical URL is declared" — the opposite of the truth.
  */
 const PASSED_EN: Record<RuleId, string> = {
+  "identity.facts_agree": "Pages state the same facts about the business",
+  "access.robots_unambiguous": "robots.txt reads the same to every crawler",
+  "access.noindex_covers_locales": "Indexing directives match across languages",
   "identity.author_named": "The page names its author",
   "identity.dated": "The page publishes a date",
   "identity.same_as": "The business links to its own profiles elsewhere",
@@ -560,6 +611,9 @@ const PASSED_EN: Record<RuleId, string> = {
 };
 
 const PASSED_RU: Record<RuleId, string> = {
+  "identity.facts_agree": "Страницы сообщают одни и те же факты о бизнесе",
+  "access.robots_unambiguous": "robots.txt читается одинаково всеми краулерами",
+  "access.noindex_covers_locales": "Директивы индексации совпадают на всех языках",
   "identity.author_named": "Страница называет автора",
   "identity.dated": "Страница публикует дату",
   "identity.same_as": "Бизнес ссылается на свои профили",

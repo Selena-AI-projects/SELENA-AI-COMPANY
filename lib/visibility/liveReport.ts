@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { isFeatureEnabled } from "@/lib/diagnostics/flags";
 import { discoverAndCrawl } from "./crawler/discover";
+import { CROSS_PAGE_RULE_IDS } from "./checks/crossPageChecks";
 import { extractHtmlSignals } from "./checks/htmlSignals";
 import { detectActionReadiness, type ReadinessEvidence } from "./checks/actionReadiness";
 import {
@@ -123,6 +124,9 @@ function describeEvidence(evidence: Record<string, unknown>, locale: VisibilityL
         textSnapshot: "фрагмент текста",
         score: "оценка",
         visibleCharacters: "видимых символов",
+        fact: "факт",
+        disagreeingCrawlers: "краулеров с расхождением",
+        hiddenPages: "страниц закрыто от индексации",
       }
     : {};
   for (const [key, value] of Object.entries(evidence)) {
@@ -313,9 +317,20 @@ export async function runLiveCheck(options: {
         }),
       )
       .filter((f): f is LiveFinding => f !== null);
-    const passed = layerChecks
-      .filter((c) => c.state === "pass")
-      .map((c) => getPassedTitle(c.ruleId, locale) ?? c.ruleId);
+    // The cross-page rules read the whole crawl rather than one page, so their
+    // passes are not in `layerChecks` — and a check that quietly never appears
+    // is a check the owner has no reason to believe we ran.
+    const passed = [
+      ...layerChecks.filter((c) => c.state === "pass").map((c) => c.ruleId),
+      ...readinessAudit.checks
+        .filter(
+          (c) =>
+            CROSS_PAGE_RULE_IDS.has(c.ruleId) &&
+            c.state === "pass" &&
+            DIMENSION_TO_LAYER[c.dimension] === id,
+        )
+        .map((c) => c.ruleId),
+    ].map((ruleId) => getPassedTitle(ruleId, locale) ?? ruleId);
 
     // Without the page itself, almost every check in these two layers is
     // `not_measured`. Scoring the handful that survive would put a number

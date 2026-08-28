@@ -560,3 +560,78 @@ test("every primary action the form offers is understood by the readiness detect
     }
   });
 });
+
+/**
+ * A site whose pages disagree with each other and whose robots.txt reads
+ * differently depending on who is reading it. Neither is visible from any
+ * single page, so this is the one place the whole path can be checked.
+ */
+function contradictorySite() {
+  const page = (title: string, phone: string) =>
+    `<html lang="en"><head><title>${title}</title>
+      <script type="application/ld+json">{"@type":"LocalBusiness","name":"Example Spa","telephone":"${phone}"}</script>
+    </head><body><h1>${title}</h1><a href="/contact">Contact</a></body></html>`;
+  return http.createServer((req, res) => {
+    const url = req.url ?? "/";
+    if (url === "/robots.txt") {
+      res.writeHead(200, { "Content-Type": "text/plain" });
+      // The wildcard group closes the site, the named one opens it: a crawler
+      // that resolves the most specific group comes in, a simpler one does not.
+      res.end("User-agent: *\nDisallow: /\n\nUser-agent: ClaudeBot\nAllow: /\n");
+      return;
+    }
+    if (url === "/contact") {
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.end(page("Contact", "+62 811 000 0002"));
+      return;
+    }
+    if (url !== "/") {
+      res.writeHead(404);
+      res.end();
+      return;
+    }
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.end(page("Example Spa", "+62 811 000 0001"));
+  });
+}
+
+test("a contradiction between two pages reaches the report with something to do about it", async () => {
+  await withServer(contradictorySite(), async (baseUrl) => {
+    const report = await runLiveCheck({
+      url: baseUrl,
+      primaryAction: "whatsapp",
+      locale: "ru",
+      unsafeAllowPrivateHostsForTesting: true,
+    });
+
+    const contradiction = report.findings.find((finding) => finding.ruleId === "identity.facts_agree");
+    assert.ok(contradiction, "the two phone numbers must be reported");
+    assert.ok(contradiction.action.length > 20, "the finding must say what to do");
+    assert.ok(contradiction.detail.includes("telephone"), "the finding must name the fact that disagrees");
+
+    const robots = report.findings.find((finding) => finding.ruleId === "access.robots_unambiguous");
+    assert.ok(robots, "a robots.txt two readers disagree about must be reported");
+    assert.match(robots.detail, /ClaudeBot/);
+  });
+});
+
+test("a site whose pages agree is told so, not left to guess", async () => {
+  await withServer(goodSite(), async (baseUrl) => {
+    const report = await runLiveCheck({
+      url: baseUrl,
+      primaryAction: "whatsapp",
+      locale: "en",
+      unsafeAllowPrivateHostsForTesting: true,
+    });
+
+    const discoverability = report.layers.find((layer) => layer.id === "discoverability")!;
+    assert.ok(
+      discoverability.passed.includes(getPassedTitle("access.robots_unambiguous", "en")!),
+      "a robots.txt everyone reads the same way must appear among what passed",
+    );
+    assert.ok(
+      !report.findings.some((finding) => finding.ruleId === "identity.facts_agree"),
+      "a site that contradicts nothing must not be told it does",
+    );
+  });
+});
