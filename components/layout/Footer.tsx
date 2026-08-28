@@ -187,9 +187,20 @@ export function Footer() {
           </p>
           <div className="flex gap-6">
             {CLIENT_PORTAL_ENABLED && (
-              <Link href={selenaAppRoutes.login} className="transition-colors hover:text-ivory/80">
-                {isEnglish ? "Client portal" : "Кабинет"}
-              </Link>
+              <>
+                <Link href={selenaAppRoutes.login} className="transition-colors hover:text-ivory/80">
+                  {isEnglish ? "Client portal" : "Кабинет"}
+                </Link>
+                {/*
+                  A sign-in link on its own is a locked door: someone who has
+                  never been here has nowhere to go from it. The app decides
+                  whether the registration page opens; the link is what makes it
+                  reachable at all.
+                */}
+                <Link href={selenaAppRoutes.register} className="transition-colors hover:text-ivory/80">
+                  {isEnglish ? "Create an account" : "Создать кабинет"}
+                </Link>
+              </>
             )}
             {legalLinks.map((link) => (
               <Link key={link.href} href={link.href} className="transition-colors hover:text-ivory/80">
