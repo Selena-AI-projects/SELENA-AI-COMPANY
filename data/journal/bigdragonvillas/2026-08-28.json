@@ -1,0 +1,237 @@
+{
+  "date": "2026-08-28",
+  "configVersion": "bigdragonvillas-api-view-2026-08-25",
+  "systems": [
+    {
+      "systemId": "anthropic/claude-haiku-4.5",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "ChatGPT",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "deepseek/deepseek-v3.2",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Gemini",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "mistralai/mistral-small-2603",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Perplexity",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "qwen/qwen3.5-9b",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "x-ai/grok-4.5",
+      "channel": "VISITOR"
+    }
+  ],
+  "questions": [
+    {
+      "text": "Where should I stay in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": []
+    },
+    {
+      "text": "Where can I find a villa with a private pool in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "hanginggardensofbali.com",
+            "bisma-eight.com",
+            "booking.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "bisma-eight.com",
+        "booking.com",
+        "hanginggardensofbali.com"
+      ]
+    },
+    {
+      "text": "What are good family villas in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": []
+    }
+  ]
+}
