@@ -1,4 +1,5 @@
 import { contact, contactLinks, site } from "@/lib/site";
+import type { Service } from "@/lib/data/services";
 import {
   amountForStructuredData,
   commercialFacts,
@@ -34,6 +35,7 @@ function organizationNode(locale: StructuredLocale) {
     address: {
       "@type": "PostalAddress",
       addressCountry: commercialFacts.seller.countryCode,
+      addressRegion: commercialFacts.seller.regionCode,
     },
     description: isRussian
       ? "Selena Systems проектирует и внедряет AI-системы и помогает бизнесу измерять AI-видимость."
@@ -87,11 +89,16 @@ function offerNode({
           unitText: offer.billingPeriod,
         };
 
+  // `price` is the price, not a starting point. An offer sold "from $10,000"
+  // states its floor in the specification and leaves `price` unset, so a
+  // reader is not told a number the seller never promised.
+  const startsFrom = "qualifier" in offer && offer.qualifier === "from";
+
   return {
     "@type": "Offer",
     "@id": `${offerUrl}#offer-${offer.id}`,
     name: localizedOfferName(offer, locale),
-    price,
+    ...(startsFrom ? {} : { price }),
     priceCurrency: offer.currency,
     url: offerUrl,
     availability: schemaAvailability(offer.availability),
@@ -168,7 +175,7 @@ function aiSystemsServiceNode(locale: StructuredLocale) {
         offerNode({ offer: systems.miniAudit, locale }),
         offerNode({ offer: systems.audit, locale }),
         offerNode({ offer: systems.sprint, locale }),
-        offerNode({ offer: systems.businessOs, locale, category: "From" }),
+        offerNode({ offer: systems.businessOs, locale }),
       ],
     },
   };
@@ -310,6 +317,25 @@ export function buildPricingStructuredData(locale: StructuredLocale) {
   };
 }
 
+/**
+ * The questions a page already answers, in machine-readable form.
+ *
+ * Google stopped showing FAQ rich results for most sites in 2023, so this is
+ * not for the search result — it is for the assistant that needs a whole,
+ * quotable answer rather than a paragraph it has to cut down.
+ */
+export function buildFaqStructuredData(items: readonly { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+}
+
 /** Structured data for the free technical Public Readiness entry point. */
 export function buildPublicReadinessStructuredData(locale: StructuredLocale) {
   const isRussian = locale === "ru";
@@ -422,6 +448,51 @@ export function buildAiAutomationOfferStructuredData(slug: AiAutomationOfferSlug
         areaServed: "Worldwide",
         inLanguage: "en",
         offers: offerNode({ offer, locale: "en", url: pageUrl }),
+      },
+    ],
+  };
+}
+
+/**
+ * One of the three Russian service pages.
+ *
+ * They carried no structured data at all, and search sends people straight to
+ * them. There is no `offers` node because these pages name no price: a price
+ * in the markup that a reader cannot see on the page is a claim they cannot
+ * check.
+ */
+export function buildServicePageStructuredData(service: Service) {
+  const pageUrl = `${site.url}${service.href}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationNode("ru"),
+      websiteNode("ru"),
+      webPageNode({
+        locale: "ru",
+        pageUrl,
+        name: service.name,
+        description: service.promise,
+      }),
+      breadcrumbNode(
+        [
+          { name: "Selena Systems", item: `${site.url}/ru` },
+          { name: "AI Automation", item: `${site.url}/ru#ai-systems` },
+          { name: service.name, item: pageUrl },
+        ],
+        pageUrl,
+      ),
+      {
+        "@type": "Service",
+        "@id": `${pageUrl}#service`,
+        url: pageUrl,
+        name: service.name,
+        serviceType: service.cardTitle,
+        description: service.promise,
+        provider: { "@id": `${site.url}/#organization` },
+        areaServed: "Worldwide",
+        inLanguage: "ru",
       },
     ],
   };

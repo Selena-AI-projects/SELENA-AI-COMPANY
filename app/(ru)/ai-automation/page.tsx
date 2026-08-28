@@ -1,4 +1,7 @@
 import { buildMetadata } from "@/lib/metadata";
+import { buildServicePageStructuredData } from "@/lib/structured-data";
+import { getService } from "@/lib/data/services";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { cta } from "@/lib/site";
 import { faq } from "@/lib/data/faq";
 import { PageHero } from "@/components/sections/PageHero";
@@ -74,8 +77,11 @@ const workSteps = [
 const automationFaq = [faq[1], faq[2], faq[3], faq[6]];
 
 export default function AiAutomationPage() {
+  const service = getService("automation")!;
+
   return (
     <>
+      <JsonLd data={buildServicePageStructuredData(service)} />
       <PageHero
         eyebrow="Автоматизация"
         title="AI-автоматизация без сложного кода"

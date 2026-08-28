@@ -41,15 +41,27 @@ test("AI Systems structured data exposes the four custom service offers", () => 
   const graph = graphOf(buildAiSystemsStructuredData("en"));
   const service = graph.find((item) => item["@type"] === "Service");
   assert.ok(service);
-  const catalog = service.offers as { itemListElement: Array<Record<string, string>> };
-  assert.deepEqual(catalog.itemListElement.map((offer) => offer.price), ["100", "500", "4500", "10000"]);
+  const catalog = service.offers as {
+    itemListElement: Array<Record<string, string | Record<string, string>>>;
+  };
+  assert.deepEqual(catalog.itemListElement.map((offer) => offer.price), ["100", "500", "4500", undefined]);
+
+  // Business OS is sold "from $10,000": the floor belongs in the specification,
+  // and `price` stays unset so the number is not read as the final one.
+  const businessOs = catalog.itemListElement[3];
+  const specification = businessOs.priceSpecification as Record<string, string>;
+  assert.equal(specification.minPrice, "10000");
+  assert.equal(specification.priceCurrency, "USD");
 });
 
 test("Organization structured data uses the public legal entity consistently", () => {
   const graph = graphOf(buildAiSystemsStructuredData("en"));
   const organization = graph.find((item) => item["@type"] === "Organization");
   assert.equal(organization?.legalName, "Selena Systems LLC");
-  assert.equal((organization?.address as Record<string, string>).addressCountry, "US");
+  const address = organization?.address as Record<string, string>;
+  assert.equal(address.addressCountry, "US");
+  // The legal pages name the state; the markup has to name the same one.
+  assert.equal(address.addressRegion, "WY");
 });
 
 test("AI Audit detail exposes one canonical service offer", () => {

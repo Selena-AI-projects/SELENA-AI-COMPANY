@@ -3,6 +3,8 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildFaqStructuredData } from "@/lib/structured-data";
 
 /**
  * Premium FAQ accordion (contract §Section components).
@@ -22,6 +24,9 @@ export function FAQSection({
 }) {
   return (
     <section className="bg-ivory py-20 sm:py-28">
+      {/* The answers are written and visible; this is the same text, in the
+          form an assistant can lift whole. */}
+      <JsonLd data={buildFaqStructuredData(items)} />
       <Container size="narrow">
         {withHeader ? (
           <SectionHeader eyebrow="FAQ" headline={headline} />
