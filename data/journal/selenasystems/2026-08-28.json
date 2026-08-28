@@ -1,0 +1,2064 @@
+{
+  "date": "2026-08-28",
+  "configVersion": "selenasystems-api-view-2026-08-25",
+  "systems": [
+    {
+      "systemId": "anthropic/claude-haiku-4.5",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "ChatGPT",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "deepseek/deepseek-v3.2",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Gemini",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "mistralai/mistral-small-2603",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "Perplexity",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "qwen/qwen3.5-9b",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "x-ai/grok-4.5",
+      "channel": "VISITOR"
+    }
+  ],
+  "questions": [
+    {
+      "text": "How do I find out whether ChatGPT mentions my business?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ahrefs.com",
+            "citlyze.com",
+            "help.openai.com",
+            "help-lb.openai.com",
+            "openai.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "knwn.app",
+            "searchscore.io",
+            "genrank.io",
+            "getcourtyard.ai",
+            "useomnia.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ahrefs.com",
+        "citlyze.com",
+        "genrank.io",
+        "getcourtyard.ai",
+        "help-lb.openai.com",
+        "help.openai.com"
+      ]
+    },
+    {
+      "text": "How can I check if AI assistants recommend my company?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "searchengineland.com",
+            "ahrefs.com",
+            "backlinko.com",
+            "pingmybrand.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "adacity.ai",
+            "amionai.com",
+            "rewnue.ai",
+            "venbit.ai"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "adacity.ai",
+        "ahrefs.com",
+        "amionai.com",
+        "backlinko.com",
+        "pingmybrand.com",
+        "rewnue.ai"
+      ]
+    },
+    {
+      "text": "What tools track brand mentions in AI answers?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ahrefs.com",
+            "slatehq.com",
+            "sophyx.io",
+            "jetfuel.agency",
+            "promptwatch.com",
+            "techradar.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "vismore.ai",
+            "beamtrace.com",
+            "dageno.ai",
+            "siftly.ai"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ahrefs.com",
+        "beamtrace.com",
+        "dageno.ai",
+        "jetfuel.agency",
+        "promptwatch.com",
+        "siftly.ai"
+      ]
+    },
+    {
+      "text": "How do I measure AI visibility for a small business?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "semrush.com",
+            "pagelens.ai",
+            "thebusinessrover.com",
+            "cituna.com",
+            "hirez.design"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "maxaeo.ai",
+            "entrepreneur.com",
+            "reddit.com",
+            "peec.ai",
+            "semrush.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "semrush.com",
+        "cituna.com",
+        "entrepreneur.com",
+        "hirez.design",
+        "maxaeo.ai",
+        "pagelens.ai"
+      ]
+    },
+    {
+      "text": "What is answer engine optimisation?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aisearchvisibility.ai",
+            "docs.writeworks.ai",
+            "contently.com",
+            "theguardian.com",
+            "conductor.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aisearchvisibility.ai",
+        "conductor.com",
+        "contently.com",
+        "docs.writeworks.ai",
+        "theguardian.com"
+      ]
+    },
+    {
+      "text": "Who helps businesses show up in ChatGPT answers?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "answerenginesoptimization.ai",
+            "help.openai.com",
+            "visiscan.app",
+            "emarketed.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "wedigital.je",
+            "reddit.com",
+            "margen.net"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "answerenginesoptimization.ai",
+        "emarketed.com",
+        "help.openai.com",
+        "margen.net",
+        "reddit.com",
+        "visiscan.app"
+      ]
+    },
+    {
+      "text": "How do I get my business recommended by Perplexity?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "bratton.ai",
+            "askedabout.com",
+            "mint-up.com",
+            "strategyc.io",
+            "scope.online"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "powerdigitalmarketing.com",
+            "lengow.com",
+            "seo.com",
+            "reddit.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "askedabout.com",
+        "bratton.ai",
+        "lengow.com",
+        "mint-up.com",
+        "powerdigitalmarketing.com",
+        "reddit.com"
+      ]
+    },
+    {
+      "text": "Is there a service that audits how AI describes my brand?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ahrefs.com",
+            "factsentry.ai",
+            "mirrbyjack.com",
+            "gumshoe.ai",
+            "brandgeo.co",
+            "spyglasses.io"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "vectorgap.ai",
+            "waikay.io",
+            "hubspot.com",
+            "rankprompt.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ahrefs.com",
+        "brandgeo.co",
+        "factsentry.ai",
+        "gumshoe.ai",
+        "hubspot.com",
+        "mirrbyjack.com"
+      ]
+    },
+    {
+      "text": "How do I know if my competitors appear in AI answers and I do not?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "yext.com",
+            "semrush.com",
+            "ahrefs.com",
+            "developers.google.com",
+            "optimus-consulting.co.uk",
+            "rankscope.ai"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aurametrics.io",
+            "semrush.com",
+            "searchenginejournal.com",
+            "reddit.com",
+            "rhemicai.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "semrush.com",
+        "ahrefs.com",
+        "aurametrics.io",
+        "developers.google.com",
+        "optimus-consulting.co.uk",
+        "rankscope.ai"
+      ]
+    },
+    {
+      "text": "What should a small business do about AI search?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "developers.google.com",
+            "support.google.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "veriqostudio.com",
+            "reddit.com",
+            "squarespace.com",
+            "coresearchmarketing.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "coresearchmarketing.com",
+        "developers.google.com",
+        "reddit.com",
+        "squarespace.com",
+        "support.google.com",
+        "veriqostudio.com"
+      ]
+    },
+    {
+      "text": "How do I prepare my website so AI systems can read it?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aibootstrapper.com",
+            "developer.chrome.com",
+            "intellectualclouds.com",
+            "vercel.com",
+            "searchengineland.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "pixeledeggs.com",
+            "moos-up.com",
+            "oynk.co.uk",
+            "waltandgordon.com",
+            "ligermarketing.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aibootstrapper.com",
+        "developer.chrome.com",
+        "intellectualclouds.com",
+        "ligermarketing.com",
+        "moos-up.com",
+        "oynk.co.uk"
+      ]
+    },
+    {
+      "text": "Who offers AI visibility audits for service businesses?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "geoagencies.com",
+            "getbrightsignal.com",
+            "fivesixten.ai",
+            "foundclearly.com",
+            "sladeinsights.com",
+            "gogeometric.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "insites.com",
+            "webfx.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "fivesixten.ai",
+        "foundclearly.com",
+        "geoagencies.com",
+        "getbrightsignal.com",
+        "gogeometric.com",
+        "insites.com"
+      ]
+    },
+    {
+      "text": "What is the difference between SEO and AI visibility?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "developers.google.com",
+            "arxiv.org",
+            "datadab.com",
+            "p.atoshin.com",
+            "citegap.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "neptuneweb.com",
+            "visiblie.com",
+            "semrush.com",
+            "reddit.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "arxiv.org",
+        "citegap.com",
+        "datadab.com",
+        "developers.google.com",
+        "neptuneweb.com",
+        "p.atoshin.com"
+      ]
+    },
+    {
+      "text": "How do I track whether Gemini recommends my business?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "mentioned-on.com",
+            "support.google.com",
+            "business.google.com",
+            "scoutrival.com",
+            "blog.google"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "promptrush.ai",
+            "loamly.ai",
+            "beamtrace.com",
+            "trackmybusiness.ai",
+            "flento.io",
+            "reddit.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "beamtrace.com",
+        "blog.google",
+        "business.google.com",
+        "flento.io",
+        "loamly.ai",
+        "mentioned-on.com"
+      ]
+    },
+    {
+      "text": "Can I measure how often AI mentions my brand each month?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "semrush.com",
+            "ahrefs.com",
+            "mtsoln.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "vismore.ai",
+            "layer3labs.io",
+            "visiblie.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ahrefs.com",
+        "layer3labs.io",
+        "mtsoln.com",
+        "semrush.com",
+        "visiblie.com",
+        "vismore.ai"
+      ]
+    },
+    {
+      "text": "What agencies specialise in AI search visibility?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "search.agency",
+            "rocketgeo.ai",
+            "algomizer.com",
+            "bevisibleagency.com",
+            "showupwithai.com",
+            "geoq.ai"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "gtm8020.com",
+            "exposureninja.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "algomizer.com",
+        "bevisibleagency.com",
+        "exposureninja.com",
+        "geoq.ai",
+        "gtm8020.com",
+        "rocketgeo.ai"
+      ]
+    },
+    {
+      "text": "How much does an AI visibility report cost?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "promptvisible.ai",
+            "avisible.co",
+            "sparkletechnologies.com",
+            "trackaimentions.com",
+            "tilio.co.uk",
+            "avantevisibility.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "get-ryze.ai",
+            "searchable.com",
+            "serpstrategists.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "avantevisibility.com",
+        "avisible.co",
+        "get-ryze.ai",
+        "promptvisible.ai",
+        "searchable.com",
+        "serpstrategists.com"
+      ]
+    },
+    {
+      "text": "How do I find out which sources AI cites about my industry?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "help.openai.com",
+            "cite.watch",
+            "tryprofound.com",
+            "openai.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "otterly.ai",
+            "ayzeo.com",
+            "aisearch.similarweb.com",
+            "llmpulse.ai"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aisearch.similarweb.com",
+        "ayzeo.com",
+        "cite.watch",
+        "help.openai.com",
+        "llmpulse.ai",
+        "openai.com"
+      ]
+    },
+    {
+      "text": "Is there a free check for how AI sees my website?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "isvisible.ai",
+            "rankbits.com",
+            "mentionowl.com",
+            "search.google.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "amivisibleonai.com",
+            "sitespeak.ai",
+            "loamly.ai",
+            "hubspot.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "amivisibleonai.com",
+        "hubspot.com",
+        "isvisible.ai",
+        "loamly.ai",
+        "mentionowl.com",
+        "rankbits.com"
+      ]
+    },
+    {
+      "text": "What does it mean when AI does not mention my business at all?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "support.google.com",
+            "yext.com",
+            "searchengineland.com",
+            "blog.hubspot.com",
+            "semrush.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "wsismartmarketing.com",
+            "gemmetric.ai",
+            "managednerds.com",
+            "daffodil-marketing.com",
+            "windgrove.ai"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "blog.hubspot.com",
+        "daffodil-marketing.com",
+        "gemmetric.ai",
+        "managednerds.com",
+        "searchengineland.com",
+        "semrush.com"
+      ]
+    },
+    {
+      "text": "Who can help a restaurant get into AI recommendations?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ameus.ai",
+            "delphiumlabs.com",
+            "restorank.co",
+            "opentable.com",
+            "cloro.dev",
+            "dinesignal.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "b3designers.co.uk",
+            "malou.io"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ameus.ai",
+        "b3designers.co.uk",
+        "cloro.dev",
+        "delphiumlabs.com",
+        "dinesignal.com",
+        "malou.io"
+      ]
+    },
+    {
+      "text": "How do I improve how ChatGPT describes my company?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "morrismclane.com",
+            "help.openai.com",
+            "openai.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "goblinkly.com",
+            "medialister.com",
+            "geneo.app",
+            "wpseoai.com",
+            "llmrefs.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "geneo.app",
+        "goblinkly.com",
+        "help.openai.com",
+        "llmrefs.com",
+        "medialister.com",
+        "morrismclane.com"
+      ]
+    },
+    {
+      "text": "What is AI visibility monitoring?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ansvisor.com",
+            "semanticrisk.io",
+            "askylabs.com",
+            "surfacedby.com",
+            "citationworks.com",
+            "hubspot.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "onclusive.com",
+            "reddit.com",
+            "zapier.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "purevisibility.com",
+            "zscaler.com",
+            "frase.io",
+            "semrush.com",
+            "oreateai.com",
+            "levo.ai"
+          ]
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ansvisor.com",
+        "askylabs.com",
+        "citationworks.com",
+        "frase.io",
+        "hubspot.com",
+        "levo.ai"
+      ]
+    },
+    {
+      "text": "How do I audit my brand's presence across AI assistants?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "help.openai.com",
+            "ahrefs.com",
+            "shadow.inc",
+            "rankscope.ai",
+            "support.google.com",
+            "auditae.app"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "llmpulse.ai",
+            "triplewhale.com",
+            "medium.com",
+            "waikay.io"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ahrefs.com",
+        "auditae.app",
+        "help.openai.com",
+        "llmpulse.ai",
+        "medium.com",
+        "rankscope.ai"
+      ]
+    },
+    {
+      "text": "Which companies help with AI answer optimisation?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "vezadigital.com",
+            "firstpagesage.com",
+            "gaper.io",
+            "devcommx.com",
+            "buzztheory.com",
+            "selleris.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "hubspot.com",
+            "tryprofound.com",
+            "semai.ai",
+            "firstpagesage.com",
+            "eyeonannapolis.net"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "firstpagesage.com",
+        "buzztheory.com",
+        "devcommx.com",
+        "eyeonannapolis.net",
+        "gaper.io",
+        "hubspot.com"
+      ]
+    }
+  ]
+}
