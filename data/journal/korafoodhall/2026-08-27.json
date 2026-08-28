@@ -3,7 +3,15 @@
   "configVersion": "korafoodhall-api-view-2026-08-25",
   "systems": [
     {
+      "systemId": "anthropic/claude-haiku-4.5",
+      "channel": "VISITOR"
+    },
+    {
       "systemId": "ChatGPT",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "deepseek/deepseek-v3.2",
       "channel": "VISITOR"
     },
     {
@@ -11,7 +19,19 @@
       "channel": "VISITOR"
     },
     {
+      "systemId": "mistralai/mistral-small-2603",
+      "channel": "VISITOR"
+    },
+    {
       "systemId": "Perplexity",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "qwen/qwen3.5-9b",
+      "channel": "VISITOR"
+    },
+    {
+      "systemId": "x-ai/grok-4.5",
       "channel": "VISITOR"
     }
   ],
@@ -20,6 +40,13 @@
       "text": "Where should I eat in Ubud, Bali?",
       "cells": [
         {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
           "systemId": "ChatGPT",
           "answered": true,
           "mentioned": false,
@@ -27,9 +54,15 @@
           "citedDomains": [
             "theurbanlist.com",
             "revasi.net",
-            "balisim.com",
-            "northboundbali.com"
+            "balisim.com"
           ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Gemini",
@@ -37,11 +70,17 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "swisstraveler.net",
-            "thenomadicflower.com",
             "lifetravelandasia.com",
-            "alamubudjewelryworkshop.com"
+            "balisim.com",
+            "baliuntold.com"
           ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
@@ -56,29 +95,59 @@
             "museumofwander.com",
             "baliuntold.com"
           ]
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "lifetravelandasia.com",
-        "alamubudjewelryworkshop.com",
         "balisim.com",
         "baliuntold.com",
+        "lifetravelandasia.com",
         "joujoutravels.com",
-        "midnightblueelephant.com"
+        "midnightblueelephant.com",
+        "museumofwander.com"
       ]
     },
     {
       "text": "What is the best food hall in Ubud?",
       "cells": [
         {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
           "systemId": "ChatGPT",
           "answered": true,
           "mentioned": true,
           "namedInstead": [],
           "citedDomains": [
-            "korafoodhall.com"
+            "tripadvisor.com",
+            "korafoodhall.com",
+            "bali.live"
           ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Gemini",
@@ -86,10 +155,16 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "balibelin.com",
-            "tamandukuh.com",
-            "chasinglenscapes.com"
+            "thewonderspace.com",
+            "balibelin.com"
           ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
@@ -104,30 +179,60 @@
             "ubudhood.com",
             "museumofwander.com"
           ]
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
+        "tripadvisor.com",
+        "bali.live",
         "balibelin.com",
-        "chasinglenscapes.com",
         "korafoodhall.com",
         "midnightblueelephant.com",
-        "museumofwander.com",
-        "tamandukuh.com"
+        "museumofwander.com"
       ]
     },
     {
       "text": "Which restaurants in Ubud are good for families?",
       "cells": [
         {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
           "systemId": "ChatGPT",
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "tripadvisor.com",
-            "thehoneycombers.com"
+            "knowmadsbali.com",
+            "thehoneycombers.com",
+            "restaurantguru.com",
+            "tripadvisor.com"
           ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Gemini",
@@ -135,16 +240,35 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "pesona-lounge-ubud.squarespace.com",
-            "onemoreplacetogo.com",
-            "thetravellingtrowberrys.com",
-            "knowmadsbali.com"
+            "knowmadsbali.com",
+            "onemoreplacetogo.com"
           ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "Perplexity",
           "answered": false,
           "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         }
@@ -153,9 +277,8 @@
       "citedDomains": [
         "knowmadsbali.com",
         "onemoreplacetogo.com",
-        "pesona-lounge-ubud.squarespace.com",
+        "restaurantguru.com",
         "thehoneycombers.com",
-        "thetravellingtrowberrys.com",
         "tripadvisor.com"
       ]
     },
@@ -163,20 +286,130 @@
       "text": "Where can I eat with kids in Ubud?",
       "cells": [
         {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
           "systemId": "ChatGPT",
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "ramukitchen.com",
-            "littlestepsasia.com",
-            "knowmadsbali.com"
+            "thehoneycombers.com",
+            "restaurantguru.com"
           ]
         },
         {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
           "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ramukitchen.com",
+            "onemoreplacetogo.com",
+            "knowmadsbali.com",
+            "thehoneycombers.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "thehoneycombers.com",
+            "balibuddies.com",
+            "onemoreplacetogo.com",
+            "worldoftravelswithkids.com",
+            "ramukitchen.com",
+            "baligasm.com"
+          ]
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
           "answered": false,
           "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "thehoneycombers.com",
+        "onemoreplacetogo.com",
+        "ramukitchen.com",
+        "balibuddies.com",
+        "baligasm.com",
+        "knowmadsbali.com"
+      ]
+    },
+    {
+      "text": "Where should I go for dinner in Ubud, Bali?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "tripadvisor.com",
+            "thehoneycombers.com",
+            "revasi.net",
+            "theurbanlist.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balisim.com",
+            "lifetravelandasia.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -186,13 +419,1625 @@
           "mentioned": null,
           "namedInstead": [],
           "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
+        "balisim.com",
+        "lifetravelandasia.com",
+        "revasi.net",
+        "thehoneycombers.com",
+        "theurbanlist.com",
+        "tripadvisor.com"
+      ]
+    },
+    {
+      "text": "Where can I host a private event in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "tanahgajahubud.com",
+            "manaubud.com",
+            "ubudeventspace.com",
+            "umatirthaubud.com",
+            "kclububud.com",
+            "ritzcarlton.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balieventspaces.com",
+            "jungleclububud.com",
+            "kamandaluresort.com",
+            "comohotels.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balieventspaces.com",
+        "comohotels.com",
+        "jungleclububud.com",
+        "kamandaluresort.com",
+        "kclububud.com",
+        "manaubud.com"
+      ]
+    },
+    {
+      "text": "What are the private event venues in Ubud, Bali?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "tanahgajahubud.com",
+            "ritzcarlton.com",
+            "realweddings.com.au",
+            "ubudwedding.com",
+            "marriott.com",
+            "manaubud.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "thegarciaubud.com",
+            "anantara.com",
+            "sanggralokaubud.com",
+            "jungleclububud.com",
+            "elitehavens.com",
+            "impianaubud.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "anantara.com",
+        "elitehavens.com",
+        "impianaubud.com",
+        "jungleclububud.com",
+        "manaubud.com",
+        "marriott.com"
+      ]
+    },
+    {
+      "text": "Where can I have a birthday party in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "folkubud.com",
+            "restaurantguru.com",
+            "tripadvisor.com",
+            "ubudeventspace.com",
+            "citrusberryubud.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "cretyaubud.com",
+            "balicopter.com",
+            "rapuanciliubud.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balicopter.com",
+        "citrusberryubud.com",
+        "cretyaubud.com",
+        "folkubud.com",
+        "rapuanciliubud.com",
+        "restaurantguru.com"
+      ]
+    },
+    {
+      "text": "Where can a large group have dinner together in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "copperubud.com",
+            "thewonderspace.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "hugebali.com",
+            "honeyandsmoke.co",
+            "donnaubud.com",
+            "revasi.net",
+            "mamasanbali.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "copperubud.com",
+        "donnaubud.com",
+        "honeyandsmoke.co",
+        "hugebali.com",
+        "mamasanbali.com",
+        "revasi.net"
+      ]
+    },
+    {
+      "text": "What is the best casual dining in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "theurbanlist.com",
+            "thehoneycombers.com",
+            "balisim.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balisim.com",
+            "lifetravelandasia.com",
+            "joujoutravels.com",
+            "sevenpaintingsubud.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balisim.com",
+        "joujoutravels.com",
+        "lifetravelandasia.com",
+        "sevenpaintingsubud.com",
+        "thehoneycombers.com",
+        "theurbanlist.com"
+      ]
+    },
+    {
+      "text": "Is there a food court in Ubud, Bali?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": true,
+          "namedInstead": [],
+          "citedDomains": [
+            "bali.live",
+            "tripadvisor.com.br",
+            "tripadvisor.com",
+            "korafoodhall.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "getyourguide.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "bali.live",
+        "getyourguide.com",
+        "korafoodhall.com",
+        "tripadvisor.com",
+        "tripadvisor.com.br"
+      ]
+    },
+    {
+      "text": "Where can I eat near the centre of Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balisim.com",
+            "tripadvisor.com",
+            "ubudcenter.com",
+            "thehoneycombers.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "balisim.com",
+            "joujoutravels.com",
+            "baliuntold.com",
+            "alamubudjewelryworkshop.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "balisim.com",
+        "alamubudjewelryworkshop.com",
+        "baliuntold.com",
+        "joujoutravels.com",
+        "thehoneycombers.com",
+        "tripadvisor.com"
+      ]
+    },
+    {
+      "text": "What are the affordable restaurants in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "tripadvisor.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "remoteandafloat.com",
+            "finnsbeachclub.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "finnsbeachclub.com",
+        "remoteandafloat.com",
+        "tripadvisor.com"
+      ]
+    },
+    {
+      "text": "Are there restaurants in Ubud with a playground?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "littlestepsasia.com",
+            "tripadvisor.com",
+            "onemoreplacetogo.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "onemoreplacetogo.com",
+            "balifamilyhangout.com",
+            "balifamilyvillas.com",
+            "knowmadsbali.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "onemoreplacetogo.com",
+        "balifamilyhangout.com",
+        "balifamilyvillas.com",
         "knowmadsbali.com",
         "littlestepsasia.com",
-        "ramukitchen.com"
+        "tripadvisor.com"
+      ]
+    },
+    {
+      "text": "Where can a group with different diets eat together in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "flourishbali.com",
+            "heartspacebali.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ayungriver.com",
+            "pesonaloungeubud.com",
+            "maddysavenue.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ayungriver.com",
+        "flourishbali.com",
+        "heartspacebali.com",
+        "maddysavenue.com",
+        "pesonaloungeubud.com"
+      ]
+    },
+    {
+      "text": "Where in Ubud can vegetarians and meat eaters eat in the same place?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "herblibraryubud.com",
+            "flockbali.com",
+            "tripadvisor.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "northboundbali.com",
+            "bridgesandballoons.com",
+            "pesonaloungeubud.com",
+            "plantbaseddennis.nl"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "bridgesandballoons.com",
+        "flockbali.com",
+        "herblibraryubud.com",
+        "northboundbali.com",
+        "pesonaloungeubud.com",
+        "plantbaseddennis.nl"
+      ]
+    },
+    {
+      "text": "Where is the best brunch in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "wheregoesrose.com",
+            "bestofbali.net",
+            "weareglobaltravellers.com",
+            "slowerworld.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "thehoneycombers.com",
+            "baliuntold.com",
+            "nibble.id",
+            "wheregoesrose.com",
+            "finnsbeachclub.com",
+            "slowerworld.com"
+          ]
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "slowerworld.com",
+        "wheregoesrose.com",
+        "baliuntold.com",
+        "bestofbali.net",
+        "finnsbeachclub.com",
+        "nibble.id"
+      ]
+    },
+    {
+      "text": "Which restaurants in Ubud have live music?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "pesonaloungeubud.com",
+            "restaurantguru.com",
+            "herblibraryubud.com",
+            "elyskitchenubud.com",
+            "nandinibali.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "tebasari.com",
+            "baliholidaysecrets.com",
+            "nomasubud.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "baliholidaysecrets.com",
+        "elyskitchenubud.com",
+        "herblibraryubud.com",
+        "nandinibali.com",
+        "nomasubud.com",
+        "pesonaloungeubud.com"
+      ]
+    },
+    {
+      "text": "Where do expats eat in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "expatslist.org",
+            "ubudhood.com",
+            "northboundbali.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "thenomadicflower.com",
+            "midnightblueelephant.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "thehoneycombers.com",
+            "midnightblueelephant.com",
+            "lifetravelandasia.com",
+            "finnsbeachclub.com",
+            "freespiritfood.net",
+            "museumofwander.com"
+          ]
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "midnightblueelephant.com",
+        "expatslist.org",
+        "finnsbeachclub.com",
+        "freespiritfood.net",
+        "lifetravelandasia.com",
+        "museumofwander.com"
+      ]
+    },
+    {
+      "text": "What is the best food hall in Bali?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": true,
+          "namedInstead": [],
+          "citedDomains": [
+            "visitbali.com",
+            "korafoodhall.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "travelnata.com",
+            "travelguidestip.com",
+            "kiligbali.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "mybali.one",
+            "finnsbeachclub.com",
+            "thehoneycombers.com",
+            "wanderlog.com",
+            "youtube.com",
+            "ohana-agency.com"
+          ]
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "finnsbeachclub.com",
+        "kiligbali.com",
+        "korafoodhall.com",
+        "mybali.one",
+        "ohana-agency.com",
+        "thehoneycombers.com"
+      ]
+    },
+    {
+      "text": "Where can I organise a corporate event in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "marriott.com",
+            "visesaubud.com",
+            "hyatt.com",
+            "ritzcarlton.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "thegarciaubud.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "hyatt.com",
+            "comohotels.com",
+            "mayaresorts.com",
+            "marriott.com",
+            "travelweekly.com",
+            "tanahgajahubud.com"
+          ]
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "hyatt.com",
+        "marriott.com",
+        "comohotels.com",
+        "mayaresorts.com",
+        "ritzcarlton.com",
+        "tanahgajahubud.com"
+      ]
+    },
+    {
+      "text": "Where can I hold a wedding reception in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "realweddings.com.au",
+            "tripadvisor.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "equipoiseresort.com",
+            "travel-bash.com",
+            "abisenaubud.com",
+            "luximawedding.com",
+            "bisma-eight.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "abisenaubud.com",
+        "bisma-eight.com",
+        "equipoiseresort.com",
+        "luximawedding.com",
+        "realweddings.com.au",
+        "travel-bash.com"
+      ]
+    },
+    {
+      "text": "What are the new restaurants in Ubud worth trying?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "nowbali.co.id"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "nowbali.co.id",
+            "theurbanlist.com",
+            "revasi.net",
+            "alamubudjewelryworkshop.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "nowbali.co.id",
+        "alamubudjewelryworkshop.com",
+        "revasi.net",
+        "theurbanlist.com"
+      ]
+    },
+    {
+      "text": "Where can I eat late at night in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "skazkabali.com",
+            "warungpondokmadu.com",
+            "baliready.com",
+            "restaurantguru.com",
+            "tripadvisor.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "izzibali.com",
+            "spicebali.com",
+            "donnaubud.com",
+            "casalunabali.com",
+            "baliholidaysecrets.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "baliholidaysecrets.com",
+        "baliready.com",
+        "casalunabali.com",
+        "donnaubud.com",
+        "izzibali.com",
+        "restaurantguru.com"
+      ]
+    },
+    {
+      "text": "What should I not miss when eating in Ubud?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "indonesia.travel",
+            "tasteatlas.com",
+            "outboundlynx.com",
+            "simplyindonesia.com",
+            "visitbali.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "baliuntold.com",
+            "reddit.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "baliuntold.com",
+        "indonesia.travel",
+        "outboundlynx.com",
+        "reddit.com",
+        "simplyindonesia.com",
+        "tasteatlas.com"
       ]
     }
   ]
