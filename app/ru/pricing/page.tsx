@@ -1,5 +1,5 @@
 import { buildMetadata } from "@/lib/metadata";
-import { buildAiVisibilityStructuredData } from "@/lib/structured-data";
+import { buildPricingStructuredData } from "@/lib/structured-data";
 import { ruHomepage } from "@/lib/data/homepage-ru";
 import { visibilityContentRu } from "@/lib/visibility/content.ru";
 import { visibilityLanguages } from "@/lib/visibility/routes";
@@ -24,7 +24,7 @@ export const metadata = buildMetadata({
 export default function RussianPricingPage() {
   return (
     <>
-      <JsonLd data={buildAiVisibilityStructuredData("ru")} />
+      <JsonLd data={buildPricingStructuredData("ru")} />
       <PageHero
         eyebrow="Цены Selena Systems"
         title="Два продукта — без смешения."

@@ -6,6 +6,7 @@ import {
   buildAiSystemsStructuredData,
   buildAiVisibilityStructuredData,
   buildLabArticleStructuredData,
+  buildPricingStructuredData,
   buildPublicReadinessStructuredData,
 } from "@/lib/structured-data";
 
@@ -85,4 +86,25 @@ test("Lab article structured data records modification date and breadcrumb", () 
   const breadcrumb = graph.find((item) => item["@type"] === "BreadcrumbList");
   assert.equal(article?.dateModified, "2026-08-16");
   assert.equal((breadcrumb?.itemListElement as Array<Record<string, string>>).length, 2);
+});
+
+/**
+ * The pricing page published the graphs of the two product pages and no node
+ * for itself: a reader on /pricing was told they were on /visibility.
+ */
+test("each pricing page describes itself and publishes every offer it sells", () => {
+  for (const [locale, expected] of [
+    ["en", "https://www.selenasystems.com/pricing"],
+    ["ru", "https://www.selenasystems.com/ru/pricing"],
+  ] as const) {
+    const graph = graphOf(buildPricingStructuredData(locale));
+    const page = graph.find((item) => item["@type"] === "WebPage");
+    assert.ok(page, `${locale} pricing has no page node`);
+    assert.equal(page.url, expected, `${locale} pricing describes another page`);
+
+    // Both catalogues are sold here, so both must be readable here: five
+    // Visibility offers and four AI Automation ones.
+    const offers = JSON.stringify(graph).match(/"@type":"Offer"/g) ?? [];
+    assert.equal(offers.length, 9, `${locale} pricing publishes ${offers.length} of 9 offers`);
+  }
 });

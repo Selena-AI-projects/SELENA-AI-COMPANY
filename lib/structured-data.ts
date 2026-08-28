@@ -270,6 +270,46 @@ export function buildAiVisibilityStructuredData(locale: StructuredLocale) {
   };
 }
 
+/**
+ * The pricing page describes itself.
+ *
+ * It used to publish the graphs of the two product pages instead — a WebPage
+ * node claiming to be /visibility, a second claiming to be /ai-systems, and no
+ * node for the page a reader was actually on. Both service nodes stay, because
+ * both catalogues are sold here and their offers carry the prices; what is
+ * added is the page itself, and the Russian side gains the AI Automation
+ * offers it was not publishing at all.
+ */
+export function buildPricingStructuredData(locale: StructuredLocale) {
+  const isRussian = locale === "ru";
+  const pageUrl = isRussian ? `${site.url}/ru/pricing` : `${site.url}/pricing`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationNode(locale),
+      websiteNode(locale),
+      webPageNode({
+        locale,
+        pageUrl,
+        name: isRussian ? "Цены — AI Visibility и AI Automation" : "Pricing — AI Visibility and AI Automation",
+        description: isRussian
+          ? "Бесплатная проверка готовности, четыре платных варианта AI Visibility и четыре формата AI Automation."
+          : "The free readiness check, four paid AI Visibility options and four AI Automation formats.",
+      }),
+      breadcrumbNode(
+        [
+          { name: "Selena Systems", item: site.url },
+          { name: isRussian ? "Цены" : "Pricing", item: pageUrl },
+        ],
+        pageUrl,
+      ),
+      aiVisibilityServiceNode(locale),
+      aiSystemsServiceNode(locale),
+    ],
+  };
+}
+
 /** Structured data for the free technical Public Readiness entry point. */
 export function buildPublicReadinessStructuredData(locale: StructuredLocale) {
   const isRussian = locale === "ru";
