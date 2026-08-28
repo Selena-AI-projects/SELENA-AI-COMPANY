@@ -27,6 +27,16 @@ export type LabContentBlock = {
   steps?: string[];
   table?: LabTable;
   code?: LabCode;
+  figure?: LabFigure;
+};
+
+export type LabDiagramId = "two-agent-review-before-after" | "two-agent-review-cycle";
+
+/** Drawn inline as SVG, so the labels stay real text. */
+export type LabFigure = {
+  diagram: LabDiagramId;
+  alt: string;
+  caption: string;
 };
 
 export type LabRelatedLink = {
@@ -334,6 +344,11 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
               "Experiment notes in this Lab are published only when the setup, the inputs and the observed outcome can be reproduced. This one can. It is a single observation rather than a study: n = 1.",
               "The hypothesis was that if two independent agents read the same source instead of reading each other's summaries, review quality improves and the owner stops acting as a message bus between chats.",
             ],
+            figure: {
+              diagram: "two-agent-review-before-after",
+              alt: "Two-panel diagram. Before: the owner sits between ChatGPT Work, Codex and Claude Code, copying reports from one chat to another by hand. After: all three read the same GitHub repository directly, and the owner only decides what is irreversible.",
+              caption: "Before and after. Reports used to travel between tools by hand; now the task, the code and the machine checks live in GitHub and each tool reads them itself.",
+            },
           },
           {
             heading: "Setup",
@@ -350,6 +365,11 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
                 ["Claude Code", "Independent audit and security review, running as a GitHub Action", "Subscription OAuth token, no API key"],
                 ["GitHub", "Shared source: task, code, diff, machine checks", "—"],
               ],
+            },
+            figure: {
+              diagram: "two-agent-review-cycle",
+              alt: "Flow of a single task: the owner states the intent, the project holds documents and data, Codex and Claude Cowork review the plan independently, an approved specification is produced, Codex writes code in a branch, then GitHub CI, Codex and Claude Code review the same commit; errors loop back with a concrete fix; the owner only merges, spends and publishes.",
+              caption: "The review happens twice: first the plan, before a line of code exists, then the code itself — with both reviewers looking at the same commit.",
             },
           },
           {
@@ -679,6 +699,11 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
               "Записи опытов публикуются здесь только тогда, когда установку, входные данные и наблюдаемый результат можно воспроизвести. Этот — можно. Это одно наблюдение, а не исследование: n = 1.",
               "Гипотеза была такая: если два независимых агента читают один и тот же источник, а не пересказы друг друга, качество проверки растёт, а владелец перестаёт быть шиной между чатами.",
             ],
+            figure: {
+              diagram: "two-agent-review-before-after",
+              alt: "Схема из двух частей. Было: владелец стоит между ChatGPT Work, Codex и Claude Code и вручную переносит отчёты из одного чата в другой. Стало: все трое читают один и тот же репозиторий GitHub напрямую, а владелец решает только то, что необратимо.",
+              caption: "До и после. Раньше отчёты между инструментами переносил человек; теперь задача, код и машинные проверки лежат в GitHub, и каждый инструмент читает их сам.",
+            },
           },
           {
             heading: "Установка",
@@ -695,6 +720,11 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
                 ["Claude Code", "Независимый аудит и security, запускается как GitHub Action", "OAuth-токен подписки, без API-ключа"],
                 ["GitHub", "Общий источник: задача, код, diff, машинные проверки", "—"],
               ],
+            },
+            figure: {
+              diagram: "two-agent-review-cycle",
+              alt: "Путь одной задачи: владелец формулирует замысел, проект хранит документы и данные, Codex и Claude Cowork независимо проверяют замысел, появляется утверждённое ТЗ, Codex пишет код в отдельной ветке, затем GitHub CI, Codex и Claude Code проверяют один и тот же коммит; ошибки возвращаются с конкретной правкой; владелец только мержит, тратит и публикует.",
+              caption: "Проверка происходит дважды: сначала замысел, до первой строки кода, потом сам код — и оба проверяющих смотрят один и тот же коммит.",
             },
           },
           {

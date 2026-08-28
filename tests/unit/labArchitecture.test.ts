@@ -56,6 +56,15 @@ test("a published experiment carries its reproduction steps and its limits", () 
     assert.match(JSON.stringify(entry.blocks), /n = 1/);
 
     assert.ok((entry.related?.length ?? 0) >= 3, `${locale} experiment must link onward into the Lab`);
+
+    // A diagram carries meaning the prose does not repeat, so it needs a
+    // description for anyone who cannot see it.
+    const figures = entry.blocks.flatMap((block) => (block.figure ? [block.figure] : []));
+    assert.equal(figures.length, 2, `${locale} experiment must keep both diagrams`);
+    for (const figure of figures) {
+      assert.ok(figure.alt.length > 80, `${locale} figure ${figure.diagram} needs a real description`);
+      assert.ok(figure.caption.length > 0);
+    }
   }
 
   const en = getLabItem("en", "experiments", "two-agent-code-review")!;

@@ -4,6 +4,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
+import { LabDiagram } from "@/components/lab/LabDiagram";
 
 function ItemLink({ item, locale }: { item: LabItem; locale: LabLocale }) {
   return (
@@ -152,6 +153,9 @@ export function LabArticlePage({ locale, item }: { locale: LabLocale; item: LabI
                 <div className="mt-6 space-y-5 text-[1.04rem] leading-8 text-ink/78">
                   {block.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                 </div>
+                {block.figure ? (
+                  <LabDiagram id={block.figure.diagram} alt={block.figure.alt} caption={block.figure.caption} />
+                ) : null}
                 {block.table ? (
                   <figure className="mt-7">
                     {/* Wide tables scroll inside their own box so the page body never does. */}
