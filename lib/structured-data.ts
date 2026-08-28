@@ -1,4 +1,4 @@
-import { contact, contactLinks, site } from "@/lib/site";
+import { contact, contactLinks, founder, site } from "@/lib/site";
 import type { Service } from "@/lib/data/services";
 import {
   amountForStructuredData,
@@ -37,6 +37,7 @@ function organizationNode(locale: StructuredLocale) {
       addressCountry: commercialFacts.seller.countryCode,
       addressRegion: commercialFacts.seller.regionCode,
     },
+    founder: { "@id": `${site.url}/#founder` },
     description: isRussian
       ? "Selena Systems проектирует и внедряет AI-системы и помогает бизнесу измерять AI-видимость."
       : "Selena Systems designs and builds AI systems and helps businesses measure AI visibility.",
@@ -105,6 +106,23 @@ function offerNode({
     description: offer.description[locale],
     priceSpecification,
     ...(category ? { category } : {}),
+  };
+}
+
+/**
+ * The founder as an entity of her own, so a statement can be attributed to a
+ * person rather than to a company name. No biography and no profile links
+ * here: they are not on the site, and this file publishes what the site says.
+ */
+function personNode(locale: StructuredLocale) {
+  return {
+    "@type": "Person",
+    "@id": `${site.url}/#founder`,
+    name: founder.name[locale],
+    jobTitle: founder.role[locale],
+    image: `${site.url}${founder.image}`,
+    worksFor: { "@id": `${site.url}/#organization` },
+    url: `${site.url}${locale === "ru" ? "/about" : "/en/about"}`,
   };
 }
 
@@ -345,6 +363,7 @@ export function buildPublicReadinessStructuredData(locale: StructuredLocale) {
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
       webPageNode({
         locale,
         pageUrl,
@@ -387,6 +406,7 @@ export function buildAiSystemsStructuredData(locale: StructuredLocale = "en") {
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
       webPageNode({
         locale,
         pageUrl,
@@ -423,6 +443,7 @@ export function buildAiAutomationOfferStructuredData(slug: AiAutomationOfferSlug
     "@context": "https://schema.org",
     "@graph": [
       organizationNode("en"),
+      websiteNode("en"),
       webPageNode({
         locale: "en",
         pageUrl,
@@ -511,6 +532,7 @@ export function buildAboutStructuredData(locale: StructuredLocale) {
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
       webPageNode({
         locale,
         pageUrl,
@@ -525,6 +547,7 @@ export function buildAboutStructuredData(locale: StructuredLocale) {
         ],
         pageUrl,
       ),
+      personNode(locale),
     ],
   };
 }
@@ -538,6 +561,7 @@ export function buildLabStructuredData(locale: StructuredLocale) {
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
       webPageNode({
         locale,
         pageUrl,
@@ -576,6 +600,7 @@ export function buildLabSectionStructuredData({
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
       webPageNode({ locale, pageUrl, type: "CollectionPage", name: title, description }),
       breadcrumbNode(
         [
@@ -597,6 +622,7 @@ export function buildMethodologyStructuredData(locale: StructuredLocale) {
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
       webPageNode({
         locale,
         pageUrl,
@@ -625,6 +651,7 @@ export function buildContactStructuredData(locale: StructuredLocale) {
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
       webPageNode({
         locale,
         pageUrl,
@@ -725,7 +752,7 @@ export function buildJournalProjectStructuredData({
         datePublished: publishedAt,
         dateModified: updatedAt,
         inLanguage: locale,
-        author: { "@id": `${site.url}/#organization` },
+        author: { "@id": `${site.url}/#founder` },
         publisher: { "@id": `${site.url}/#organization` },
         isPartOf: { "@id": `${site.url}/#website` },
         articleSection: journalTitle,
@@ -767,6 +794,8 @@ export function buildLabArticleStructuredData({
     "@context": "https://schema.org",
     "@graph": [
       organizationNode(locale),
+      websiteNode(locale),
+      personNode(locale),
       {
         "@type": "Article",
         "@id": `${pageUrl}/#article`,
@@ -776,7 +805,7 @@ export function buildLabArticleStructuredData({
         ...(publishedAt ? { datePublished: publishedAt } : {}),
         dateModified: updatedAt,
         inLanguage: locale,
-        author: { "@id": `${site.url}/#organization` },
+        author: { "@id": `${site.url}/#founder` },
         publisher: { "@id": `${site.url}/#organization` },
         isPartOf: { "@id": `${site.url}/#website` },
         articleSection: "Selena Lab",
