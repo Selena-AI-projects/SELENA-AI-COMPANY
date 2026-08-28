@@ -62,11 +62,20 @@ export function redact(text: string, secret: string): string {
   return secret.trim() === "" ? text : text.split(secret).join("***");
 }
 
-/** What a response might call the answer, in the order it is looked for. */
+/**
+ * What a response might call the answer, in the order it is looked for.
+ *
+ * A collector does not use one name. Perplexity returned answers this list did
+ * not include while the same account, the same day, read them fine through a
+ * longer list — 22 of 25 answers were paid for and thrown away as unreadable.
+ * A name costs nothing to look for and a missing one costs a measurement.
+ */
 export const ANSWER_FIELDS = [
   "answer_text_markdown",
   "answer_text",
   "answer",
+  "response_raw",
+  "response",
   "response_text",
   "text",
   "content",

@@ -63,6 +63,14 @@ export type SurfaceRecord = {
   sourceDomains: string[];
   requestId: string | null;
   error: string | null;
+  /**
+   * What the payload actually contained, kept only so a failure can be
+   * diagnosed without paying for the same answers again. This list was already
+   * discarded once, and the only way left to learn why Perplexity came back
+   * unreadable was to buy another measurement.
+   */
+  payloadKeys: string[];
+  statusText: string | null;
 };
 
 export function toRecord(ask: BrightDataAsk, scenario: MeasurementScenario): SurfaceRecord {
@@ -77,6 +85,8 @@ export function toRecord(ask: BrightDataAsk, scenario: MeasurementScenario): Sur
       sourceDomains: [],
       requestId: ask.requestId,
       error: ask.error ?? "NO_ANSWER",
+      payloadKeys: ask.keys,
+      statusText: ask.statusText,
     };
   }
   const verdict = classify(ask.answer, scenario);
@@ -90,6 +100,8 @@ export function toRecord(ask: BrightDataAsk, scenario: MeasurementScenario): Sur
     sourceDomains: [...new Set(ask.sources.map((source) => source.domain))],
     requestId: ask.requestId,
     error: null,
+    payloadKeys: ask.keys,
+    statusText: ask.statusText,
   };
 }
 
@@ -232,9 +244,24 @@ export function renderMarkdown(
   if (failed.length > 0) {
     lines.push("## Что не вернулось");
     lines.push("");
-    const byReason = new Map<string, number>();
-    for (const record of failed) byReason.set(record.error ?? "", (byReason.get(record.error ?? "") ?? 0) + 1);
-    for (const [reason, count] of [...byReason].sort((a, b) => b[1] - a[1])) lines.push(`- \`${reason}\` — ${count}`);
+    const byReason = new Map<string, { count: number; keys: Set<string>; status: Set<string> }>();
+    for (const record of failed) {
+      const reason = record.error ?? "";
+      const entry = byReason.get(reason) ?? { count: 0, keys: new Set<string>(), status: new Set<string>() };
+      entry.count += 1;
+      for (const key of record.payloadKeys) entry.keys.add(key);
+      if (record.statusText) entry.status.add(record.statusText.slice(0, 160));
+      byReason.set(reason, entry);
+    }
+    for (const [reason, entry] of [...byReason].sort((a, b) => b[1].count - a[1].count)) {
+      lines.push(`- \`${reason}\` — ${entry.count}`);
+      // The field names the collector did use. Without them the next step is
+      // another paid run; with them it is one line in ANSWER_FIELDS.
+      if (entry.keys.size > 0) {
+        lines.push(`  - поля в ответе: ${[...entry.keys].sort().map((key) => `\`${key}\``).join(", ")}`);
+      }
+      for (const status of entry.status) lines.push(`  - провайдер сообщил: ${status}`);
+    }
     lines.push("");
   }
 
