@@ -50,6 +50,20 @@ export const BRIGHTDATA_PRICE_PER_ANSWER_USD = 0.0015;
  * not one request, and code that reads only the first reply sees a status
  * message where it expected prose.
  */
+/**
+ * How long each collector is waited on before its answer is abandoned.
+ *
+ * The job is already submitted and already billed by the time we are waiting,
+ * so giving up early does not save money — it throws away an answer that was
+ * paid for. Perplexity ran past ten minutes on every one of the twenty answers
+ * it lost; ChatGPT and Gemini come back in seconds.
+ */
+export const SNAPSHOT_PATIENCE_MS: Record<"chatgpt" | "gemini" | "perplexity", number> = {
+  chatgpt: 600_000,
+  gemini: 600_000,
+  perplexity: 1_500_000,
+};
+
 export const BRIGHTDATA_PROGRESS_ENDPOINT = "https://api.brightdata.com/datasets/v3/progress";
 export const BRIGHTDATA_SNAPSHOT_ENDPOINT = "https://api.brightdata.com/datasets/v3/snapshot";
 
@@ -189,6 +203,8 @@ export type BrightDataAsk = {
   statusText: string | null;
   /** How the answer arrived: straight back, or fetched from a snapshot. */
   delivery: "direct" | "snapshot" | null;
+  /** How long the collector was waited on before it answered or was given up on. */
+  waitedMs: number;
   error: string | null;
 };
 
@@ -222,6 +238,7 @@ export async function askBrightData(
     keys: [],
     statusText: null,
     delivery: null,
+    waitedMs: 0,
     error: null,
   };
 
@@ -275,12 +292,15 @@ export async function askBrightData(
   // receipt. Following it is the difference between a measurement and a row
   // that says the surface stayed silent.
   if (direct.requestId && options.waitForSnapshot !== false) {
-    const fetched = await fetchSnapshot(direct.requestId, apiKey, options);
-    if (fetched) return { ...fetched, surface, question, delivery: "snapshot" };
+    const waited = await fetchSnapshot(direct.requestId, apiKey, {
+      ...options,
+      snapshotTimeoutMs: options.snapshotTimeoutMs ?? SNAPSHOT_PATIENCE_MS[surface],
+    });
+    if (waited.ask) return { ...waited.ask, surface, question, delivery: "snapshot", waitedMs: waited.waitedMs };
     // An answer that was produced and billed but did not arrive in time is a
     // different fact from a payload nobody could read, and only one of them is
     // fixed by waiting longer. Reporting both as the same thing hides which.
-    return { ...direct, error: "SNAPSHOT_NOT_READY" };
+    return { ...direct, error: "SNAPSHOT_NOT_READY", waitedMs: waited.waitedMs };
   }
   return direct;
 }
@@ -308,6 +328,7 @@ function describe(
     keys: Object.keys(record).sort(),
     statusText: readStatusText(record, apiKey),
     delivery: answer ? delivery : null,
+    waitedMs: 0,
     // An unreadable payload is never reported as a surface that said nothing.
     error: answer ? null : "NO_KNOWN_ANSWER_FIELD",
   };
@@ -317,36 +338,67 @@ function describe(
  * Waits for a snapshot and reads it. Polling is bounded: an answer that never
  * becomes ready is reported as not ready, never as an answer that was empty.
  */
+/**
+ * A body that is a receipt for work still running, not an answer.
+ *
+ * The snapshot endpoint answers a request for an unfinished job with a note
+ * saying so. Read as a record it has no field any answer would have, so it was
+ * reported as a payload nobody could read — and twenty answers ESKQ had already
+ * paid for were written off as unreadable rather than waited for.
+ */
+export function snapshotStillWorking(record: Record<string, unknown>): boolean {
+  const status = typeof record.status === "string" ? record.status : "";
+  const message = typeof record.message === "string" ? record.message : "";
+  return /not ready|running|building|pending|in progress|collecting/i.test(`${status} ${message}`);
+}
+
+/**
+ * Waits for one submitted job and returns its answer, or nothing and how long
+ * it waited. The progress endpoint is asked first, but it is not trusted to be
+ * the only word: the snapshot itself is read on every turn, because a job can
+ * hold its answer before progress admits it is ready.
+ */
 export async function fetchSnapshot(
   snapshotId: string,
   apiKey: string,
   options: { fetchImpl?: typeof fetch; snapshotTimeoutMs?: number; pollMs?: number } = {},
-): Promise<BrightDataAsk | null> {
+): Promise<{ ask: BrightDataAsk | null; waitedMs: number }> {
   const fetchImpl = options.fetchImpl ?? fetch;
-  const deadline = Date.now() + (options.snapshotTimeoutMs ?? 600_000);
+  const startedAt = Date.now();
+  const deadline = startedAt + (options.snapshotTimeoutMs ?? 600_000);
   const pollMs = options.pollMs ?? 10_000;
   const headers = { Authorization: `Bearer ${apiKey}` };
+  const waited = () => Date.now() - startedAt;
 
-  while (Date.now() < deadline) {
+  for (;;) {
     const progress = await fetchImpl(`${BRIGHTDATA_PROGRESS_ENDPOINT}/${snapshotId}`, { headers }).catch(() => null);
     const state = progress?.ok ? ((await progress.json().catch(() => null)) as { status?: string } | null) : null;
-    if (state?.status === "ready") break;
-    if (state?.status === "failed") return null;
+    if (state?.status === "failed") return { ask: null, waitedMs: waited() };
+
+    const snapshot = await fetchImpl(`${BRIGHTDATA_SNAPSHOT_ENDPOINT}/${snapshotId}?format=json`, { headers }).catch(
+      () => null,
+    );
+    if (snapshot?.ok) {
+      const raw = await snapshot.text();
+      let parsed: unknown = null;
+      try {
+        parsed = JSON.parse(raw);
+      } catch {
+        parsed = null;
+      }
+      const record = parsed === null ? null : firstRecord(parsed);
+      if (record && !snapshotStillWorking(record)) {
+        const described = describe(record, "chatgpt", "", Buffer.byteLength(raw, "utf8"), apiKey, "snapshot");
+        // Only an answer ends the wait. A record with no answer and no note
+        // about being unfinished is genuinely unreadable, and saying so early
+        // is better than saying it after another twenty minutes of nothing.
+        if (described.answer !== null || described.keys.length > 2) {
+          return { ask: described, waitedMs: waited() };
+        }
+      }
+    }
+
+    if (Date.now() >= deadline) return { ask: null, waitedMs: waited() };
     await new Promise((resolve) => setTimeout(resolve, pollMs));
   }
-
-  const snapshot = await fetchImpl(`${BRIGHTDATA_SNAPSHOT_ENDPOINT}/${snapshotId}?format=json`, { headers }).catch(
-    () => null,
-  );
-  if (!snapshot?.ok) return null;
-  const raw = await snapshot.text();
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(raw);
-  } catch {
-    return null;
-  }
-  const record = firstRecord(parsed);
-  if (!record) return null;
-  return describe(record, "chatgpt", "", Buffer.byteLength(raw, "utf8"), apiKey, "snapshot");
 }
