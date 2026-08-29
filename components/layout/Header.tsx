@@ -266,13 +266,24 @@ export function Header() {
               </Link>
             ))}
             {CLIENT_PORTAL_ENABLED && (
-              <Link
-                href={selenaAppRoutes.login}
-                onClick={() => setOpen(false)}
-                className="border-b border-line py-4 font-serif text-2xl font-medium text-copper-deep"
-              >
-                {isEnglish ? "Client login" : "Кабинет клиента"}
-              </Link>
+              <>
+                <Link
+                  href={selenaAppRoutes.login}
+                  onClick={() => setOpen(false)}
+                  className="border-b border-line py-4 font-serif text-2xl font-medium text-copper-deep"
+                >
+                  {isEnglish ? "Client login" : "Кабинет клиента"}
+                </Link>
+                {/* The desktop row is already full at its widest breakpoint;
+                    this list is not, so registration is named here in full. */}
+                <Link
+                  href={selenaAppRoutes.register}
+                  onClick={() => setOpen(false)}
+                  className="border-b border-line py-4 font-serif text-2xl font-medium text-copper-deep"
+                >
+                  {isEnglish ? "Create an account" : "Регистрация"}
+                </Link>
+              </>
             )}
             <Button href={currentCta.href} size="lg" className="mt-8 w-full">
               {currentCta.label}
