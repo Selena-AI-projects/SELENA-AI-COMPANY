@@ -56,6 +56,8 @@ export type LabItem = {
   blocks: LabContentBlock[];
   sources: LabSource[];
   related?: LabRelatedLink[];
+  /** 1200x630 card for link previews; rendered from scripts/og/. */
+  socialImage?: { url: string; alt: string };
 };
 
 type LabSection = {
@@ -460,6 +462,10 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
             publisher: "Blue Whale Software",
           },
         ],
+        socialImage: {
+          url: "/media/lab/two-agent-review-en.png",
+          alt: "Before and after: the owner as a bus between three chats, then GitHub as the shared source all three read themselves.",
+        },
         related: [
           { title: "What is AI Visibility?", href: "/lab/articles/what-is-ai-visibility" },
           { title: "Verify the evidence behind an AI Visibility report", href: "/lab/guides/read-ai-visibility-report-evidence" },
@@ -815,6 +821,10 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
             publisher: "Blue Whale Software",
           },
         ],
+        socialImage: {
+          url: "/media/lab/two-agent-review-ru.png",
+          alt: "До и после: владелец как шина между тремя чатами, затем GitHub как общий источник, который все трое читают сами.",
+        },
         related: [
           { title: "Что такое AI Visibility", href: "/ru/lab/articles/what-is-ai-visibility" },
           { title: "Как проверить доказательства в отчёте AI Visibility", href: "/ru/lab/guides/read-ai-visibility-report-evidence" },

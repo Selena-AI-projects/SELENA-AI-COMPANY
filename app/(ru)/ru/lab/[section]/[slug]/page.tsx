@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ section: 
     path: labPath("ru", item.section, item.slug),
     locale: "ru_RU",
     languages: labLanguages(item.section, item.slug),
+    image: item.socialImage,
   });
 }
 
