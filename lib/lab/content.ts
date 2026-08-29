@@ -7,14 +7,45 @@ export type LabSource = {
   publisher: string;
 };
 
+export type LabTable = {
+  caption: string;
+  headers: string[];
+  rows: string[][];
+};
+
+/** A verbatim excerpt from a file, shown so the reader can check it themselves. */
+export type LabCode = {
+  caption: string;
+  content: string;
+};
+
 export type LabContentBlock = {
   heading: string;
   paragraphs: string[];
   points?: string[];
+  /** Ordered where the order is the point — reproduction steps, not a list of facts. */
+  steps?: string[];
+  table?: LabTable;
+  code?: LabCode;
+  figure?: LabFigure;
+};
+
+export type LabDiagramId = "two-agent-review-before-after" | "two-agent-review-cycle";
+
+/** Drawn inline as SVG, so the labels stay real text. */
+export type LabFigure = {
+  diagram: LabDiagramId;
+  alt: string;
+  caption: string;
+};
+
+export type LabRelatedLink = {
+  title: string;
+  href: string;
 };
 
 export type LabItem = {
-  section: Extract<LabSectionId, "guides" | "articles">;
+  section: Extract<LabSectionId, "guides" | "articles" | "experiments">;
   slug: string;
   title: string;
   summary: string;
@@ -24,6 +55,9 @@ export type LabItem = {
   updatedAt: string;
   blocks: LabContentBlock[];
   sources: LabSource[];
+  related?: LabRelatedLink[];
+  /** 1200x630 card for link previews; rendered from scripts/og/. */
+  socialImage?: { url: string; alt: string };
 };
 
 type LabSection = {
@@ -43,6 +77,7 @@ type LabLocaleContent = {
   sectionEyebrow: string;
   backLabel: string;
   sourcesLabel: string;
+  relatedLabel: string;
   updatedLabel: string;
   checkCta: { title: string; text: string; label: string; href: string };
   systemsCta: { title: string; text: string; label: string; href: string };
@@ -91,6 +126,7 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
     sectionEyebrow: "Selena Lab library",
     backLabel: "Back to Selena Lab",
     sourcesLabel: "Primary references",
+    relatedLabel: "Related reading",
     updatedLabel: "Updated",
     checkCta: {
       title: "Check the public readiness of your website",
@@ -292,6 +328,150 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
         ],
         sources: [officialSources.googleStructuredData],
       },
+      {
+        section: "experiments",
+        slug: "two-agent-code-review",
+        title: "Reviewing AI-written code: what two agents got wrong",
+        summary:
+          "A reproducible note on reviewing AI-written code with two independent agents. Two confident explanations of a failing check were both wrong; reading the workflow file settled it.",
+        label: "Experiment",
+        readingTime: "6 min",
+        publishedAt: "2026-08-29",
+        updatedAt: "2026-08-29",
+        blocks: [
+          {
+            heading: "What we were testing",
+            paragraphs: [
+              "Reviewing AI-written code is the part of the workflow that decides whether the rest of it is worth anything. This note records one test of a two-agent review setup, including the part that failed: two agents produced confident, plausible and wrong explanations of the same problem before anyone opened the file that settled it.",
+              "Experiment notes in this Lab are published only when the setup, the inputs and the observed outcome can be reproduced. This one can. It is a single observation rather than a study: n = 1.",
+              "The hypothesis was that if two independent agents read the same source instead of reading each other's summaries, review quality improves and the owner stops acting as a message bus between chats.",
+            ],
+            figure: {
+              diagram: "two-agent-review-before-after",
+              alt: "Two-panel diagram. Before: the owner sits between ChatGPT Work, Codex and Claude Code, copying reports from one chat to another by hand. After: all three read the same GitHub repository directly, and the owner only decides what is irreversible.",
+              caption: "Before and after. Reports used to travel between tools by hand; now the task, the code and the machine checks live in GitHub and each tool reads them itself.",
+            },
+          },
+          {
+            heading: "Setup",
+            paragraphs: [
+              "Claude Code runs from a workflow file using the published GitHub Action, and is triggered by writing @claude in a comment on a pull request or an issue. It is not fully automatic, but from that point on it reads the pull request, the diff and the CI results itself rather than receiving a pasted summary.",
+              "The repository is a fork. It inherited the upstream project's workflows, including a Contributor License Agreement check.",
+            ],
+            table: {
+              caption: "The four components and what each one was responsible for.",
+              headers: ["Component", "Role", "Auth"],
+              rows: [
+                ["Project workspace", "Holds documents, data and the specification", "Subscription"],
+                ["Codex", "Writes code and migrations; reviews its own diff", "Subscription"],
+                ["Claude Code", "Independent audit and security review, running as a GitHub Action", "Subscription OAuth token, no API key"],
+                ["GitHub", "Shared source: task, code, diff, machine checks", "—"],
+              ],
+            },
+            figure: {
+              diagram: "two-agent-review-cycle",
+              alt: "Flow of a single task: the owner states the intent, the project holds documents and data, Codex and Claude Cowork review the plan independently, an approved specification is produced, Codex writes code in a branch, then GitHub CI, Codex and Claude Code review the same commit; errors loop back with a concrete fix; the owner only merges, spends and publishes.",
+              caption: "The review happens twice: first the plan, before a line of code exists, then the code itself — with both reviewers looking at the same commit.",
+            },
+          },
+          {
+            heading: "Inputs",
+            paragraphs: [
+              "The whole experiment ran against four artifacts, each of which is still in place and can be inspected again.",
+            ],
+            points: [
+              "One pull request, open since 26 August 2026.",
+              "One consistently failing status check: Verify CLA signature.",
+              "The repository's commit history.",
+              "The CLA workflow file and the contributors file it reads.",
+            ],
+          },
+          {
+            heading: "Two confident explanations, both wrong",
+            paragraphs: [
+              "The first agent reported that the red check was cosmetic, that it always fails for agent-authored commits, and that it could be merged past. Plausible: a previous pull request had indeed been merged with the same red mark.",
+              "Asked to verify that, the second agent examined the commit history, observed that owner commits and agent commits carried different author addresses, and concluded that the check compares the commit author against the CLA signatory — fixable with one line of git configuration. Also plausible. Also wrong.",
+              "Neither agent had opened the workflow file. Both were reasoning about what a check of that name would probably do.",
+            ],
+          },
+          {
+            heading: "What the file actually said",
+            paragraphs: [
+              "The check does not read commit authors at all. It takes the GitHub login of the pull request author and looks for it in the contributors file.",
+              "That file is the signature registry of the upstream project the repository was forked from. It lists ten logins belonging to that project's contributors. The current repository owner's login is not among them, and adding it would mean signing another company's legal agreement.",
+              "So the check will stay red permanently. It is not fixed by a signature. It is fixed by correcting the inherited workflow — whose own header comment states that repository owners and collaborators are exempt, while its script exempts only bot accounts.",
+            ],
+            code: {
+              caption: "The line that settled it, from the CLA workflow.",
+              content: "AUTHOR: ${{ github.event.pull_request.user.login }}",
+            },
+          },
+          {
+            heading: "Result",
+            paragraphs: [
+              "The hypothesis held in a narrow sense and failed in a broader one.",
+              "It held in that the process which produced the correct answer was reading the source. It failed as a claim about agents: adding a second agent did not produce the correct answer. Two agents produced two confident wrong answers, and the correct one came from opening the file.",
+              "The practical rule we took from this is not \"use two agents\". It is that an explanation is not evidence, however fluent it sounds, and that both reviewers must be pointed at the same artifact — the same commit, the same file — or their agreement means nothing.",
+            ],
+          },
+          {
+            heading: "Limits",
+            paragraphs: [
+              "This is one incident, and it should be read as one.",
+            ],
+            points: [
+              "n = 1. It shows that this failure mode exists, not how often it occurs.",
+              "Not a controlled comparison. The two agents received different prompts and had different access. Nothing here compares model quality.",
+              "Not evidence that agents are unreliable in general. It is evidence that reasoning about a file without reading it is unreliable — which is equally true of people.",
+              "The always-red check is a contributing cause. A status that is permanently red stops being read. That failure is organisational, not technical.",
+            ],
+          },
+          {
+            heading: "What remains unknown",
+            paragraphs: [
+              "Two questions this experiment raises and does not answer.",
+            ],
+            points: [
+              "Whether a second agent adds accuracy when both are explicitly required to cite the source lines they relied on. Not tested here.",
+              "How often plausible-but-unsourced explanations survive a two-agent review when nobody opens the underlying file.",
+            ],
+          },
+          {
+            heading: "How to reproduce",
+            paragraphs: [
+              "Any repository forked from a project that carries its own CLA workflow will reproduce this.",
+            ],
+            steps: [
+              "Fork a repository that carries its own CLA workflow.",
+              "Open a pull request from an account not listed in the upstream contributors file.",
+              "Ask an agent why the check fails, without giving it the workflow file.",
+              "Ask a second agent to verify the first, again without the file.",
+              "Read the workflow directory yourself and compare all three answers.",
+            ],
+          },
+        ],
+        sources: [
+          {
+            title: "claude-code-action",
+            href: "https://github.com/anthropics/claude-code-action",
+            publisher: "Anthropic",
+          },
+          {
+            title: "Elmo Contributor License Agreement",
+            href: "https://github.com/elmohq/elmo/blob/main/CLA.md",
+            publisher: "Blue Whale Software",
+          },
+        ],
+        socialImage: {
+          url: "/media/lab/two-agent-review-en.png",
+          alt: "Before and after: the owner as a bus between three chats, then GitHub as the shared source all three read themselves.",
+        },
+        related: [
+          { title: "What is AI Visibility?", href: "/lab/articles/what-is-ai-visibility" },
+          { title: "Verify the evidence behind an AI Visibility report", href: "/lab/guides/read-ai-visibility-report-evidence" },
+          { title: "Prepare a website for AI systems", href: "/lab/guides/prepare-site-for-ai-systems" },
+        ],
+      },
     ],
   },
   ru: {
@@ -305,6 +485,7 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
     sectionEyebrow: "Библиотека Selena Lab",
     backLabel: "Вернуться в Selena Lab",
     sourcesLabel: "Первичные источники",
+    relatedLabel: "Смежное",
     updatedLabel: "Обновлено",
     checkCta: {
       title: "Проверьте Public Readiness сайта",
@@ -505,6 +686,150 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
           },
         ],
         sources: [officialSources.googleStructuredData],
+      },
+      {
+        section: "experiments",
+        slug: "two-agent-code-review",
+        title: "Проверка кода, написанного ИИ: как два агента ошиблись",
+        summary:
+          "Воспроизводимая запись опыта: проверку кода вели два независимых агента. Оба уверенно объяснили красную проверку — и оба ошиблись. Вопрос закрыл сам файл workflow.",
+        label: "Опыт",
+        readingTime: "6 мин",
+        publishedAt: "2026-08-29",
+        updatedAt: "2026-08-29",
+        blocks: [
+          {
+            heading: "Что проверяли",
+            paragraphs: [
+              "Проверка кода, написанного ИИ, — то место, от которого зависит, стоит ли чего-нибудь весь остальной процесс. Ниже запись одного опыта с двумя независимыми проверяющими, включая ту часть, что не сработала: два агента подряд выдали уверенные, правдоподобные и неверные объяснения одной и той же проблемы — до того, как кто-то открыл файл, который закрыл вопрос.",
+              "Записи опытов публикуются здесь только тогда, когда установку, входные данные и наблюдаемый результат можно воспроизвести. Этот — можно. Это одно наблюдение, а не исследование: n = 1.",
+              "Гипотеза была такая: если два независимых агента читают один и тот же источник, а не пересказы друг друга, качество проверки растёт, а владелец перестаёт быть шиной между чатами.",
+            ],
+            figure: {
+              diagram: "two-agent-review-before-after",
+              alt: "Схема из двух частей. Было: владелец стоит между ChatGPT Work, Codex и Claude Code и вручную переносит отчёты из одного чата в другой. Стало: все трое читают один и тот же репозиторий GitHub напрямую, а владелец решает только то, что необратимо.",
+              caption: "До и после. Раньше отчёты между инструментами переносил человек; теперь задача, код и машинные проверки лежат в GitHub, и каждый инструмент читает их сам.",
+            },
+          },
+          {
+            heading: "Установка",
+            paragraphs: [
+              "Claude Code поднимается из файла workflow через опубликованный GitHub Action и срабатывает от @claude в комментарии к pull request или задаче. То есть вызывается вручную, но дальше читает сам PR, diff и результаты CI, а не присланный пересказ.",
+              "Репозиторий — форк. Вместе с ним достались чужие workflow, включая проверку Contributor License Agreement.",
+            ],
+            table: {
+              caption: "Четыре компонента и зона ответственности каждого.",
+              headers: ["Компонент", "Роль", "Оплата"],
+              rows: [
+                ["Рабочее пространство проекта", "Документы, данные, ТЗ", "Подписка"],
+                ["Codex", "Пишет код и миграции, проверяет собственный diff", "Подписка"],
+                ["Claude Code", "Независимый аудит и security, запускается как GitHub Action", "OAuth-токен подписки, без API-ключа"],
+                ["GitHub", "Общий источник: задача, код, diff, машинные проверки", "—"],
+              ],
+            },
+            figure: {
+              diagram: "two-agent-review-cycle",
+              alt: "Путь одной задачи: владелец формулирует замысел, проект хранит документы и данные, Codex и Claude Cowork независимо проверяют замысел, появляется утверждённое ТЗ, Codex пишет код в отдельной ветке, затем GitHub CI, Codex и Claude Code проверяют один и тот же коммит; ошибки возвращаются с конкретной правкой; владелец только мержит, тратит и публикует.",
+              caption: "Проверка происходит дважды: сначала замысел, до первой строки кода, потом сам код — и оба проверяющих смотрят один и тот же коммит.",
+            },
+          },
+          {
+            heading: "Входные данные",
+            paragraphs: [
+              "Весь опыт шёл на четырёх артефактах — все они на месте, и каждый можно открыть заново.",
+            ],
+            points: [
+              "Один pull request, открыт с 26 августа 2026.",
+              "Одна стабильно падающая проверка: Verify CLA signature.",
+              "История коммитов репозитория.",
+              "Файл workflow с проверкой CLA и файл со списком подписантов, который он читает.",
+            ],
+          },
+          {
+            heading: "Два уверенных объяснения, оба неверные",
+            paragraphs: [
+              "Первый агент сообщил: красная отметка косметическая, у агентских коммитов она падает всегда, можно мержить мимо. Правдоподобно — предыдущий pull request действительно был влит с той же красной отметкой.",
+              "На перепроверку второй агент посмотрел историю коммитов, увидел, что коммиты владельца и коммиты агентов идут с разных адресов, и заключил: проверка сверяет автора коммита с подписантом соглашения, лечится одной строкой конфигурации git. Тоже правдоподобно. Тоже неверно.",
+              "Ни один из них не открыл файл workflow. Оба рассуждали о том, что проверка с таким названием, вероятно, делает.",
+            ],
+          },
+          {
+            heading: "Что сказал сам файл",
+            paragraphs: [
+              "Проверка не читает авторов коммитов вообще. Она берёт GitHub-логин автора pull request и ищет его в файле подписантов.",
+              "Этот файл — реестр подписей проекта, от которого форкнут репозиторий. В нём десять логинов участников того проекта. Логина текущего владельца там нет, а вписать его означало бы подписать юридическое соглашение чужой компании.",
+              "Значит, проверка останется красной навсегда. Она чинится не подписью, а правкой унаследованного workflow — в шапке которого написано, что владелец репозитория и коллабораторы освобождены от проверки, тогда как скрипт освобождает только ботов.",
+            ],
+            code: {
+              caption: "Строка, которая закрыла вопрос, — из workflow проверки CLA.",
+              content: "AUTHOR: ${{ github.event.pull_request.user.login }}",
+            },
+          },
+          {
+            heading: "Результат",
+            paragraphs: [
+              "Гипотеза подтвердилась в узком смысле и провалилась в широком.",
+              "Подтвердилась в том, что верный ответ дало чтение источника. Провалилась как утверждение об агентах: второй агент верного ответа не дал. Два агента выдали два уверенных неверных ответа, а верный появился, когда открыли файл.",
+              "Практическое правило отсюда не «используйте двух агентов». Оно такое: объяснение — не доказательство, каким бы гладким оно ни было, и оба проверяющих должны смотреть в один и тот же артефакт — тот же коммит, тот же файл, — иначе их согласие ничего не значит.",
+            ],
+          },
+          {
+            heading: "Границы",
+            paragraphs: [
+              "Это один случай, и читать его нужно как один случай.",
+            ],
+            points: [
+              "n = 1. Он показывает, что такой отказ возможен, а не насколько часто он случается.",
+              "Это не контролируемое сравнение. Агенты получили разные запросы и разный доступ. Качество моделей здесь не сравнивается.",
+              "Это не доказательство ненадёжности агентов вообще. Это доказательство ненадёжности рассуждения о файле без чтения файла — что одинаково верно и для людей.",
+              "Вечно красная проверка — сопутствующая причина. Статус, который всегда красный, перестают читать. Этот отказ организационный, а не технический.",
+            ],
+          },
+          {
+            heading: "Что осталось неизвестным",
+            paragraphs: [
+              "Два вопроса, которые этот опыт поднимает и не закрывает.",
+            ],
+            points: [
+              "Добавляет ли второй проверяющий точности, если от обоих требовать ссылки на конкретные строки источника. Здесь это не проверялось.",
+              "Как часто правдоподобные объяснения без источника переживают проверку двумя агентами, если никто не открывает исходный файл.",
+            ],
+          },
+          {
+            heading: "Как воспроизвести",
+            paragraphs: [
+              "Это воспроизводится на любом репозитории, форкнутом от проекта с собственной проверкой CLA.",
+            ],
+            steps: [
+              "Форкните репозиторий, в котором есть собственная проверка CLA.",
+              "Откройте pull request с аккаунта, которого нет в списке подписантов исходного проекта.",
+              "Спросите агента, почему проверка падает, не давая ему файл workflow.",
+              "Попросите второго агента перепроверить первого — тоже без файла.",
+              "Откройте каталог workflow сами и сравните все три ответа.",
+            ],
+          },
+        ],
+        sources: [
+          {
+            title: "claude-code-action",
+            href: "https://github.com/anthropics/claude-code-action",
+            publisher: "Anthropic",
+          },
+          {
+            title: "Elmo Contributor License Agreement",
+            href: "https://github.com/elmohq/elmo/blob/main/CLA.md",
+            publisher: "Blue Whale Software",
+          },
+        ],
+        socialImage: {
+          url: "/media/lab/two-agent-review-ru.png",
+          alt: "До и после: владелец как шина между тремя чатами, затем GitHub как общий источник, который все трое читают сами.",
+        },
+        related: [
+          { title: "Что такое AI Visibility", href: "/ru/lab/articles/what-is-ai-visibility" },
+          { title: "Как проверить доказательства в отчёте AI Visibility", href: "/ru/lab/guides/read-ai-visibility-report-evidence" },
+          { title: "Как подготовить сайт к работе ИИ-систем", href: "/ru/lab/guides/prepare-site-for-ai-systems" },
+        ],
       },
     ],
   },

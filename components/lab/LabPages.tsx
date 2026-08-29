@@ -4,6 +4,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
+import { LabDiagram } from "@/components/lab/LabDiagram";
 
 function ItemLink({ item, locale }: { item: LabItem; locale: LabLocale }) {
   return (
@@ -152,10 +153,52 @@ export function LabArticlePage({ locale, item }: { locale: LabLocale; item: LabI
                 <div className="mt-6 space-y-5 text-[1.04rem] leading-8 text-ink/78">
                   {block.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                 </div>
+                {block.figure ? (
+                  <LabDiagram id={block.figure.diagram} alt={block.figure.alt} caption={block.figure.caption} />
+                ) : null}
+                {block.table ? (
+                  <figure className="mt-7">
+                    {/* Wide tables scroll inside their own box so the page body never does. */}
+                    <div className="overflow-x-auto rounded-lg border border-line">
+                      <table className="w-full min-w-[34rem] border-collapse text-left text-[0.97rem] leading-6">
+                        <thead>
+                          <tr className="border-b border-line bg-ink/[0.03]">
+                            {block.table.headers.map((header) => (
+                              <th key={header} scope="col" className="px-4 py-3 font-semibold text-ink">{header}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {block.table.rows.map((row) => (
+                            <tr key={row.join("|")} className="border-b border-line/60 last:border-b-0">
+                              {row.map((cell, cellIndex) => (
+                                <td key={cell} className={cellIndex === 0 ? "px-4 py-3 font-medium text-ink" : "px-4 py-3 text-ink/78"}>{cell}</td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <figcaption className="mt-3 text-sm text-muted">{block.table.caption}</figcaption>
+                  </figure>
+                ) : null}
+                {block.code ? (
+                  <figure className="mt-7">
+                    <pre className="overflow-x-auto rounded-lg border border-line bg-ink/[0.04] px-4 py-4 text-[0.92rem] leading-6 text-ink">
+                      <code>{block.code.content}</code>
+                    </pre>
+                    <figcaption className="mt-3 text-sm text-muted">{block.code.caption}</figcaption>
+                  </figure>
+                ) : null}
                 {block.points ? (
                   <ul className="mt-7 space-y-3 border-l-2 border-copper pl-6 text-[1.02rem] leading-7 text-ink/78">
                     {block.points.map((point) => <li key={point}>{point}</li>)}
                   </ul>
+                ) : null}
+                {block.steps ? (
+                  <ol className="mt-7 list-decimal space-y-3 pl-6 text-[1.02rem] leading-7 marker:font-semibold marker:text-copper-deep text-ink/78">
+                    {block.steps.map((step) => <li key={step} className="pl-1">{step}</li>)}
+                  </ol>
                 ) : null}
               </section>
             ))}
@@ -170,6 +213,21 @@ export function LabArticlePage({ locale, item }: { locale: LabLocale; item: LabI
                     <a href={source.href} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center text-link underline decoration-link/45 underline-offset-4 hover:decoration-link-deep">
                       {source.publisher}: {source.title} <span className="ml-2" aria-hidden>↗</span>
                     </a>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          ) : null}
+
+          {item.related?.length ? (
+            <aside className="mt-12 border-t border-line pt-8" aria-labelledby="lab-related">
+              <h2 id="lab-related" className="font-serif text-2xl font-semibold text-ink">{content.relatedLabel}</h2>
+              <ul className="mt-5 space-y-3">
+                {item.related.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="inline-flex min-h-11 items-center text-link underline decoration-link/45 underline-offset-4 hover:decoration-link-deep">
+                      {link.title} <span className="ml-2" aria-hidden>→</span>
+                    </Link>
                   </li>
                 ))}
               </ul>

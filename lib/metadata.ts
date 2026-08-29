@@ -11,21 +11,26 @@ export function buildMetadata({
   path = "/",
   locale = site.locale,
   languages,
+  image,
 }: {
   title: string;
   description: string;
   path?: string;
   locale?: string;
   languages?: Record<string, string>;
+  /** Page-specific social card. Falls back to the site-wide visual. */
+  image?: { url: string; alt: string };
 }): Metadata {
   const url = `${site.url}${path === "/" ? "" : path}`;
   const fullTitle = path === "/" ? `${site.name} — ${title}` : `${title} — ${site.name}`;
-  const socialImage = {
-    url: "/media/selena-systems-process-visual.png",
-    width: 1600,
-    height: 1100,
-    alt: `${site.name} AI systems workflow`,
-  };
+  const socialImage = image
+    ? { url: image.url, width: 1200, height: 630, alt: image.alt }
+    : {
+        url: "/media/selena-systems-process-visual.png",
+        width: 1600,
+        height: 1100,
+        alt: `${site.name} AI systems workflow`,
+      };
 
   return {
     title: { absolute: fullTitle },

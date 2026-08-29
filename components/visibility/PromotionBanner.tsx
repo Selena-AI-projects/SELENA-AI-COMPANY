@@ -33,7 +33,7 @@ export function PromotionBanner({ locale }: { locale: "en" | "ru" }) {
                 href={selenaAppRoutes.register}
                 className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-copper px-5 py-2.5 text-base font-medium text-surface transition-all duration-300 hover:-translate-y-px hover:bg-copper-deep"
               >
-                {locale === "ru" ? "Завести кабинет" : "Create an account"}
+                {locale === "ru" ? "Создать кабинет" : "Create an account"}
               </a>
             )}
           </div>

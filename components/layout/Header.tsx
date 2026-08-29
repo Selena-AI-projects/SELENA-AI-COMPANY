@@ -281,7 +281,7 @@ export function Header() {
                   onClick={() => setOpen(false)}
                   className="border-b border-line py-4 font-serif text-2xl font-medium text-copper-deep"
                 >
-                  {isEnglish ? "Create an account" : "Регистрация"}
+                  {isEnglish ? "Create an account" : "Создать кабинет"}
                 </Link>
               </>
             )}

@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ section: 
   const metadataTitles: Record<string, string> = {
     "prepare-site-for-ai-systems": "Prepare your site for AI",
     "read-ai-visibility-report-evidence": "Read an AI Visibility report",
+    "two-agent-code-review": "Reviewing AI-written code",
   };
   return buildMetadata({
     title: `${metadataTitles[item.slug] ?? item.title} — Selena Lab`,
@@ -24,6 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ section: 
     path: labPath("en", item.section, item.slug),
     locale: "en_US",
     languages: labLanguages(item.section, item.slug),
+    image: item.socialImage,
   });
 }
 
