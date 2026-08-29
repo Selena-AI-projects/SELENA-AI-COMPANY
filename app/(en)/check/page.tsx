@@ -3,6 +3,7 @@ import { buildPublicReadinessStructuredData } from "@/lib/structured-data";
 import { visibilityContentEn } from "@/lib/visibility/content.en";
 import { visibilityLanguages } from "@/lib/visibility/routes";
 import { PageHero } from "@/components/sections/PageHero";
+import { PromotionBanner } from "@/components/visibility/PromotionBanner";
 import { VisibilityCheckForm } from "@/components/visibility/VisibilityCheckForm";
 import { MeasurementBoundary } from "@/components/visibility/MeasurementBoundary";
 import { Container } from "@/components/ui/Container";
@@ -30,6 +31,8 @@ export default function CheckPage() {
         title={content.checkForm.title}
         intro={content.checkForm.intro}
       />
+
+      <PromotionBanner locale="en" />
 
       <section className="bg-ivory pb-20 sm:pb-28">
         <Container size="narrow">

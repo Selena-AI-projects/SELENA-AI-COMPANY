@@ -3,6 +3,7 @@ import { buildPublicReadinessStructuredData } from "@/lib/structured-data";
 import { visibilityContentRu } from "@/lib/visibility/content.ru";
 import { visibilityLanguages } from "@/lib/visibility/routes";
 import { PageHero } from "@/components/sections/PageHero";
+import { PromotionBanner } from "@/components/visibility/PromotionBanner";
 import { VisibilityCheckForm } from "@/components/visibility/VisibilityCheckForm";
 import { MeasurementBoundary } from "@/components/visibility/MeasurementBoundary";
 import { Container } from "@/components/ui/Container";
@@ -29,6 +30,8 @@ export default function RussianCheckPage() {
         title={content.checkForm.title}
         intro={content.checkForm.intro}
       />
+
+      <PromotionBanner locale="ru" />
 
       <section className="bg-ivory pb-20 sm:pb-28">
         <Container size="narrow">
