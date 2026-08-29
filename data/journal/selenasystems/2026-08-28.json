@@ -1,6 +1,6 @@
 {
-  "date": "2026-08-27",
-  "configVersion": "korafoodhall-api-view-2026-08-25",
+  "date": "2026-08-28",
+  "configVersion": "selenasystems-api-view-2026-08-25",
   "systems": [
     {
       "systemId": "anthropic/claude-haiku-4.5",
@@ -37,7 +37,7 @@
   ],
   "questions": [
     {
-      "text": "Where should I eat in Ubud, Bali?",
+      "text": "How do I find out whether ChatGPT mentions my business?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -52,9 +52,11 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "theurbanlist.com",
-            "revasi.net",
-            "balisim.com"
+            "ahrefs.com",
+            "citlyze.com",
+            "help.openai.com",
+            "help-lb.openai.com",
+            "openai.com"
           ]
         },
         {
@@ -70,178 +72,11 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "lifetravelandasia.com",
-            "balisim.com",
-            "baliuntold.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "thehoneycombers.com",
-            "lifetravelandasia.com",
-            "joujoutravels.com",
-            "midnightblueelephant.com",
-            "museumofwander.com",
-            "baliuntold.com"
-          ]
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "balisim.com",
-        "baliuntold.com",
-        "lifetravelandasia.com",
-        "joujoutravels.com",
-        "midnightblueelephant.com",
-        "museumofwander.com"
-      ]
-    },
-    {
-      "text": "What is the best food hall in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": true,
-          "namedInstead": [],
-          "citedDomains": [
-            "tripadvisor.com",
-            "korafoodhall.com",
-            "bali.live"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "thewonderspace.com",
-            "balibelin.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "tripadvisor.com",
-            "thehoneycombers.com",
-            "midnightblueelephant.com",
-            "willflyforfood.net",
-            "ubudhood.com",
-            "museumofwander.com"
-          ]
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "tripadvisor.com",
-        "bali.live",
-        "balibelin.com",
-        "korafoodhall.com",
-        "midnightblueelephant.com",
-        "museumofwander.com"
-      ]
-    },
-    {
-      "text": "Which restaurants in Ubud are good for families?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "knowmadsbali.com",
-            "thehoneycombers.com",
-            "restaurantguru.com",
-            "tripadvisor.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "knowmadsbali.com",
-            "onemoreplacetogo.com"
+            "knwn.app",
+            "searchscore.io",
+            "genrank.io",
+            "getcourtyard.ai",
+            "useomnia.com"
           ]
         },
         {
@@ -275,15 +110,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "knowmadsbali.com",
-        "onemoreplacetogo.com",
-        "restaurantguru.com",
-        "thehoneycombers.com",
-        "tripadvisor.com"
+        "ahrefs.com",
+        "citlyze.com",
+        "genrank.io",
+        "getcourtyard.ai",
+        "help-lb.openai.com",
+        "help.openai.com"
       ]
     },
     {
-      "text": "Where can I eat with kids in Ubud?",
+      "text": "How can I check if AI assistants recommend my company?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -298,8 +134,10 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "thehoneycombers.com",
-            "restaurantguru.com"
+            "searchengineland.com",
+            "ahrefs.com",
+            "backlinko.com",
+            "pingmybrand.com"
           ]
         },
         {
@@ -315,95 +153,10 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "ramukitchen.com",
-            "onemoreplacetogo.com",
-            "knowmadsbali.com",
-            "thehoneycombers.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "thehoneycombers.com",
-            "balibuddies.com",
-            "onemoreplacetogo.com",
-            "worldoftravelswithkids.com",
-            "ramukitchen.com",
-            "baligasm.com"
-          ]
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "thehoneycombers.com",
-        "onemoreplacetogo.com",
-        "ramukitchen.com",
-        "balibuddies.com",
-        "baligasm.com",
-        "knowmadsbali.com"
-      ]
-    },
-    {
-      "text": "Where should I go for dinner in Ubud, Bali?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "tripadvisor.com",
-            "thehoneycombers.com",
-            "revasi.net",
-            "theurbanlist.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "balisim.com",
-            "lifetravelandasia.com"
+            "adacity.ai",
+            "amionai.com",
+            "rewnue.ai",
+            "venbit.ai"
           ]
         },
         {
@@ -422,8 +175,8 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -437,16 +190,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "balisim.com",
-        "lifetravelandasia.com",
-        "revasi.net",
-        "thehoneycombers.com",
-        "theurbanlist.com",
-        "tripadvisor.com"
+        "adacity.ai",
+        "ahrefs.com",
+        "amionai.com",
+        "backlinko.com",
+        "pingmybrand.com",
+        "rewnue.ai"
       ]
     },
     {
-      "text": "Where can I host a private event in Ubud?",
+      "text": "What tools track brand mentions in AI answers?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -461,12 +214,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "tanahgajahubud.com",
-            "manaubud.com",
-            "ubudeventspace.com",
-            "umatirthaubud.com",
-            "kclububud.com",
-            "ritzcarlton.com"
+            "ahrefs.com",
+            "slatehq.com",
+            "sophyx.io",
+            "jetfuel.agency",
+            "promptwatch.com",
+            "techradar.com"
           ]
         },
         {
@@ -482,10 +235,10 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "balieventspaces.com",
-            "jungleclububud.com",
-            "kamandaluresort.com",
-            "comohotels.com"
+            "vismore.ai",
+            "beamtrace.com",
+            "dageno.ai",
+            "siftly.ai"
           ]
         },
         {
@@ -519,16 +272,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "balieventspaces.com",
-        "comohotels.com",
-        "jungleclububud.com",
-        "kamandaluresort.com",
-        "kclububud.com",
-        "manaubud.com"
+        "ahrefs.com",
+        "beamtrace.com",
+        "dageno.ai",
+        "jetfuel.agency",
+        "promptwatch.com",
+        "siftly.ai"
       ]
     },
     {
-      "text": "What are the private event venues in Ubud, Bali?",
+      "text": "How do I measure AI visibility for a small business?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -543,12 +296,11 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "tanahgajahubud.com",
-            "ritzcarlton.com",
-            "realweddings.com.au",
-            "ubudwedding.com",
-            "marriott.com",
-            "manaubud.com"
+            "semrush.com",
+            "pagelens.ai",
+            "thebusinessrover.com",
+            "cituna.com",
+            "hirez.design"
           ]
         },
         {
@@ -564,12 +316,165 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "thegarciaubud.com",
-            "anantara.com",
-            "sanggralokaubud.com",
-            "jungleclububud.com",
-            "elitehavens.com",
-            "impianaubud.com"
+            "maxaeo.ai",
+            "entrepreneur.com",
+            "reddit.com",
+            "peec.ai",
+            "semrush.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "semrush.com",
+        "cituna.com",
+        "entrepreneur.com",
+        "hirez.design",
+        "maxaeo.ai",
+        "pagelens.ai"
+      ]
+    },
+    {
+      "text": "What is answer engine optimisation?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aisearchvisibility.ai",
+            "docs.writeworks.ai",
+            "contently.com",
+            "theguardian.com",
+            "conductor.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aisearchvisibility.ai",
+        "conductor.com",
+        "contently.com",
+        "docs.writeworks.ai",
+        "theguardian.com"
+      ]
+    },
+    {
+      "text": "Who helps businesses show up in ChatGPT answers?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "answerenginesoptimization.ai",
+            "help.openai.com",
+            "visiscan.app",
+            "emarketed.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "wedigital.je",
+            "reddit.com",
+            "margen.net"
           ]
         },
         {
@@ -603,16 +508,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "anantara.com",
-        "elitehavens.com",
-        "impianaubud.com",
-        "jungleclububud.com",
-        "manaubud.com",
-        "marriott.com"
+        "answerenginesoptimization.ai",
+        "emarketed.com",
+        "help.openai.com",
+        "margen.net",
+        "reddit.com",
+        "visiscan.app"
       ]
     },
     {
-      "text": "Where can I have a birthday party in Ubud?",
+      "text": "How do I get my business recommended by Perplexity?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -627,11 +532,11 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "folkubud.com",
-            "restaurantguru.com",
-            "tripadvisor.com",
-            "ubudeventspace.com",
-            "citrusberryubud.com"
+            "bratton.ai",
+            "askedabout.com",
+            "mint-up.com",
+            "strategyc.io",
+            "scope.online"
           ]
         },
         {
@@ -647,1357 +552,9 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "cretyaubud.com",
-            "balicopter.com",
-            "rapuanciliubud.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "balicopter.com",
-        "citrusberryubud.com",
-        "cretyaubud.com",
-        "folkubud.com",
-        "rapuanciliubud.com",
-        "restaurantguru.com"
-      ]
-    },
-    {
-      "text": "Where can a large group have dinner together in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "copperubud.com",
-            "thewonderspace.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "hugebali.com",
-            "honeyandsmoke.co",
-            "donnaubud.com",
-            "revasi.net",
-            "mamasanbali.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "copperubud.com",
-        "donnaubud.com",
-        "honeyandsmoke.co",
-        "hugebali.com",
-        "mamasanbali.com",
-        "revasi.net"
-      ]
-    },
-    {
-      "text": "What is the best casual dining in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "theurbanlist.com",
-            "thehoneycombers.com",
-            "balisim.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "balisim.com",
-            "lifetravelandasia.com",
-            "joujoutravels.com",
-            "sevenpaintingsubud.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "balisim.com",
-        "joujoutravels.com",
-        "lifetravelandasia.com",
-        "sevenpaintingsubud.com",
-        "thehoneycombers.com",
-        "theurbanlist.com"
-      ]
-    },
-    {
-      "text": "Is there a food court in Ubud, Bali?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": true,
-          "namedInstead": [],
-          "citedDomains": [
-            "bali.live",
-            "tripadvisor.com.br",
-            "tripadvisor.com",
-            "korafoodhall.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "getyourguide.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "bali.live",
-        "getyourguide.com",
-        "korafoodhall.com",
-        "tripadvisor.com",
-        "tripadvisor.com.br"
-      ]
-    },
-    {
-      "text": "Where can I eat near the centre of Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "balisim.com",
-            "tripadvisor.com",
-            "ubudcenter.com",
-            "thehoneycombers.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "balisim.com",
-            "joujoutravels.com",
-            "baliuntold.com",
-            "alamubudjewelryworkshop.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "balisim.com",
-        "alamubudjewelryworkshop.com",
-        "baliuntold.com",
-        "joujoutravels.com",
-        "thehoneycombers.com",
-        "tripadvisor.com"
-      ]
-    },
-    {
-      "text": "What are the affordable restaurants in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "tripadvisor.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "remoteandafloat.com",
-            "finnsbeachclub.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "finnsbeachclub.com",
-        "remoteandafloat.com",
-        "tripadvisor.com"
-      ]
-    },
-    {
-      "text": "Are there restaurants in Ubud with a playground?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "littlestepsasia.com",
-            "tripadvisor.com",
-            "onemoreplacetogo.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "onemoreplacetogo.com",
-            "balifamilyhangout.com",
-            "balifamilyvillas.com",
-            "knowmadsbali.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "onemoreplacetogo.com",
-        "balifamilyhangout.com",
-        "balifamilyvillas.com",
-        "knowmadsbali.com",
-        "littlestepsasia.com",
-        "tripadvisor.com"
-      ]
-    },
-    {
-      "text": "Where can a group with different diets eat together in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "flourishbali.com",
-            "heartspacebali.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "ayungriver.com",
-            "pesonaloungeubud.com",
-            "maddysavenue.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "ayungriver.com",
-        "flourishbali.com",
-        "heartspacebali.com",
-        "maddysavenue.com",
-        "pesonaloungeubud.com"
-      ]
-    },
-    {
-      "text": "Where in Ubud can vegetarians and meat eaters eat in the same place?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "herblibraryubud.com",
-            "flockbali.com",
-            "tripadvisor.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "northboundbali.com",
-            "bridgesandballoons.com",
-            "pesonaloungeubud.com",
-            "plantbaseddennis.nl"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "bridgesandballoons.com",
-        "flockbali.com",
-        "herblibraryubud.com",
-        "northboundbali.com",
-        "pesonaloungeubud.com",
-        "plantbaseddennis.nl"
-      ]
-    },
-    {
-      "text": "Where is the best brunch in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "wheregoesrose.com",
-            "bestofbali.net",
-            "weareglobaltravellers.com",
-            "slowerworld.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "thehoneycombers.com",
-            "baliuntold.com",
-            "nibble.id",
-            "wheregoesrose.com",
-            "finnsbeachclub.com",
-            "slowerworld.com"
-          ]
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "slowerworld.com",
-        "wheregoesrose.com",
-        "baliuntold.com",
-        "bestofbali.net",
-        "finnsbeachclub.com",
-        "nibble.id"
-      ]
-    },
-    {
-      "text": "Which restaurants in Ubud have live music?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "pesonaloungeubud.com",
-            "restaurantguru.com",
-            "herblibraryubud.com",
-            "elyskitchenubud.com",
-            "nandinibali.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "tebasari.com",
-            "baliholidaysecrets.com",
-            "nomasubud.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "baliholidaysecrets.com",
-        "elyskitchenubud.com",
-        "herblibraryubud.com",
-        "nandinibali.com",
-        "nomasubud.com",
-        "pesonaloungeubud.com"
-      ]
-    },
-    {
-      "text": "Where do expats eat in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "expatslist.org",
-            "ubudhood.com",
-            "northboundbali.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "thenomadicflower.com",
-            "midnightblueelephant.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "thehoneycombers.com",
-            "midnightblueelephant.com",
-            "lifetravelandasia.com",
-            "finnsbeachclub.com",
-            "freespiritfood.net",
-            "museumofwander.com"
-          ]
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "midnightblueelephant.com",
-        "expatslist.org",
-        "finnsbeachclub.com",
-        "freespiritfood.net",
-        "lifetravelandasia.com",
-        "museumofwander.com"
-      ]
-    },
-    {
-      "text": "What is the best food hall in Bali?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": true,
-          "namedInstead": [],
-          "citedDomains": [
-            "visitbali.com",
-            "korafoodhall.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "travelnata.com",
-            "travelguidestip.com",
-            "kiligbali.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "mybali.one",
-            "finnsbeachclub.com",
-            "thehoneycombers.com",
-            "wanderlog.com",
-            "youtube.com",
-            "ohana-agency.com"
-          ]
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "finnsbeachclub.com",
-        "kiligbali.com",
-        "korafoodhall.com",
-        "mybali.one",
-        "ohana-agency.com",
-        "thehoneycombers.com"
-      ]
-    },
-    {
-      "text": "Where can I organise a corporate event in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "marriott.com",
-            "visesaubud.com",
-            "hyatt.com",
-            "ritzcarlton.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "thegarciaubud.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "hyatt.com",
-            "comohotels.com",
-            "mayaresorts.com",
-            "marriott.com",
-            "travelweekly.com",
-            "tanahgajahubud.com"
-          ]
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "hyatt.com",
-        "marriott.com",
-        "comohotels.com",
-        "mayaresorts.com",
-        "ritzcarlton.com",
-        "tanahgajahubud.com"
-      ]
-    },
-    {
-      "text": "Where can I hold a wedding reception in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "realweddings.com.au",
-            "tripadvisor.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "equipoiseresort.com",
-            "travel-bash.com",
-            "abisenaubud.com",
-            "luximawedding.com",
-            "bisma-eight.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "abisenaubud.com",
-        "bisma-eight.com",
-        "equipoiseresort.com",
-        "luximawedding.com",
-        "realweddings.com.au",
-        "travel-bash.com"
-      ]
-    },
-    {
-      "text": "What are the new restaurants in Ubud worth trying?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "nowbali.co.id"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "nowbali.co.id",
-            "theurbanlist.com",
-            "revasi.net",
-            "alamubudjewelryworkshop.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "nowbali.co.id",
-        "alamubudjewelryworkshop.com",
-        "revasi.net",
-        "theurbanlist.com"
-      ]
-    },
-    {
-      "text": "Where can I eat late at night in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "skazkabali.com",
-            "warungpondokmadu.com",
-            "baliready.com",
-            "restaurantguru.com",
-            "tripadvisor.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "izzibali.com",
-            "spicebali.com",
-            "donnaubud.com",
-            "casalunabali.com",
-            "baliholidaysecrets.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "baliholidaysecrets.com",
-        "baliready.com",
-        "casalunabali.com",
-        "donnaubud.com",
-        "izzibali.com",
-        "restaurantguru.com"
-      ]
-    },
-    {
-      "text": "What should I not miss when eating in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "indonesia.travel",
-            "tasteatlas.com",
-            "outboundlynx.com",
-            "simplyindonesia.com",
-            "visitbali.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "baliuntold.com",
+            "powerdigitalmarketing.com",
+            "lengow.com",
+            "seo.com",
             "reddit.com"
           ]
         },
@@ -2032,12 +589,1475 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "baliuntold.com",
-        "indonesia.travel",
-        "outboundlynx.com",
+        "askedabout.com",
+        "bratton.ai",
+        "lengow.com",
+        "mint-up.com",
+        "powerdigitalmarketing.com",
+        "reddit.com"
+      ]
+    },
+    {
+      "text": "Is there a service that audits how AI describes my brand?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ahrefs.com",
+            "factsentry.ai",
+            "mirrbyjack.com",
+            "gumshoe.ai",
+            "brandgeo.co",
+            "spyglasses.io"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "vectorgap.ai",
+            "waikay.io",
+            "hubspot.com",
+            "rankprompt.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ahrefs.com",
+        "brandgeo.co",
+        "factsentry.ai",
+        "gumshoe.ai",
+        "hubspot.com",
+        "mirrbyjack.com"
+      ]
+    },
+    {
+      "text": "How do I know if my competitors appear in AI answers and I do not?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "yext.com",
+            "semrush.com",
+            "ahrefs.com",
+            "developers.google.com",
+            "optimus-consulting.co.uk",
+            "rankscope.ai"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aurametrics.io",
+            "semrush.com",
+            "searchenginejournal.com",
+            "reddit.com",
+            "rhemicai.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "semrush.com",
+        "ahrefs.com",
+        "aurametrics.io",
+        "developers.google.com",
+        "optimus-consulting.co.uk",
+        "rankscope.ai"
+      ]
+    },
+    {
+      "text": "What should a small business do about AI search?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "developers.google.com",
+            "support.google.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "veriqostudio.com",
+            "reddit.com",
+            "squarespace.com",
+            "coresearchmarketing.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "coresearchmarketing.com",
+        "developers.google.com",
         "reddit.com",
-        "simplyindonesia.com",
-        "tasteatlas.com"
+        "squarespace.com",
+        "support.google.com",
+        "veriqostudio.com"
+      ]
+    },
+    {
+      "text": "How do I prepare my website so AI systems can read it?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "aibootstrapper.com",
+            "developer.chrome.com",
+            "intellectualclouds.com",
+            "vercel.com",
+            "searchengineland.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "pixeledeggs.com",
+            "moos-up.com",
+            "oynk.co.uk",
+            "waltandgordon.com",
+            "ligermarketing.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aibootstrapper.com",
+        "developer.chrome.com",
+        "intellectualclouds.com",
+        "ligermarketing.com",
+        "moos-up.com",
+        "oynk.co.uk"
+      ]
+    },
+    {
+      "text": "Who offers AI visibility audits for service businesses?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "geoagencies.com",
+            "getbrightsignal.com",
+            "fivesixten.ai",
+            "foundclearly.com",
+            "sladeinsights.com",
+            "gogeometric.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "insites.com",
+            "webfx.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "fivesixten.ai",
+        "foundclearly.com",
+        "geoagencies.com",
+        "getbrightsignal.com",
+        "gogeometric.com",
+        "insites.com"
+      ]
+    },
+    {
+      "text": "What is the difference between SEO and AI visibility?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "developers.google.com",
+            "arxiv.org",
+            "datadab.com",
+            "p.atoshin.com",
+            "citegap.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "neptuneweb.com",
+            "visiblie.com",
+            "semrush.com",
+            "reddit.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "arxiv.org",
+        "citegap.com",
+        "datadab.com",
+        "developers.google.com",
+        "neptuneweb.com",
+        "p.atoshin.com"
+      ]
+    },
+    {
+      "text": "How do I track whether Gemini recommends my business?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "mentioned-on.com",
+            "support.google.com",
+            "business.google.com",
+            "scoutrival.com",
+            "blog.google"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "promptrush.ai",
+            "loamly.ai",
+            "beamtrace.com",
+            "trackmybusiness.ai",
+            "flento.io",
+            "reddit.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "beamtrace.com",
+        "blog.google",
+        "business.google.com",
+        "flento.io",
+        "loamly.ai",
+        "mentioned-on.com"
+      ]
+    },
+    {
+      "text": "Can I measure how often AI mentions my brand each month?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "semrush.com",
+            "ahrefs.com",
+            "mtsoln.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "vismore.ai",
+            "layer3labs.io",
+            "visiblie.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ahrefs.com",
+        "layer3labs.io",
+        "mtsoln.com",
+        "semrush.com",
+        "visiblie.com",
+        "vismore.ai"
+      ]
+    },
+    {
+      "text": "What agencies specialise in AI search visibility?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "search.agency",
+            "rocketgeo.ai",
+            "algomizer.com",
+            "bevisibleagency.com",
+            "showupwithai.com",
+            "geoq.ai"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "gtm8020.com",
+            "exposureninja.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "algomizer.com",
+        "bevisibleagency.com",
+        "exposureninja.com",
+        "geoq.ai",
+        "gtm8020.com",
+        "rocketgeo.ai"
+      ]
+    },
+    {
+      "text": "How much does an AI visibility report cost?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "promptvisible.ai",
+            "avisible.co",
+            "sparkletechnologies.com",
+            "trackaimentions.com",
+            "tilio.co.uk",
+            "avantevisibility.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "get-ryze.ai",
+            "searchable.com",
+            "serpstrategists.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "avantevisibility.com",
+        "avisible.co",
+        "get-ryze.ai",
+        "promptvisible.ai",
+        "searchable.com",
+        "serpstrategists.com"
+      ]
+    },
+    {
+      "text": "How do I find out which sources AI cites about my industry?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "help.openai.com",
+            "cite.watch",
+            "tryprofound.com",
+            "openai.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "otterly.ai",
+            "ayzeo.com",
+            "aisearch.similarweb.com",
+            "llmpulse.ai"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "aisearch.similarweb.com",
+        "ayzeo.com",
+        "cite.watch",
+        "help.openai.com",
+        "llmpulse.ai",
+        "openai.com"
+      ]
+    },
+    {
+      "text": "Is there a free check for how AI sees my website?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "isvisible.ai",
+            "rankbits.com",
+            "mentionowl.com",
+            "search.google.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "amivisibleonai.com",
+            "sitespeak.ai",
+            "loamly.ai",
+            "hubspot.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "amivisibleonai.com",
+        "hubspot.com",
+        "isvisible.ai",
+        "loamly.ai",
+        "mentionowl.com",
+        "rankbits.com"
+      ]
+    },
+    {
+      "text": "What does it mean when AI does not mention my business at all?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "support.google.com",
+            "yext.com",
+            "searchengineland.com",
+            "blog.hubspot.com",
+            "semrush.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "wsismartmarketing.com",
+            "gemmetric.ai",
+            "managednerds.com",
+            "daffodil-marketing.com",
+            "windgrove.ai"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "blog.hubspot.com",
+        "daffodil-marketing.com",
+        "gemmetric.ai",
+        "managednerds.com",
+        "searchengineland.com",
+        "semrush.com"
+      ]
+    },
+    {
+      "text": "Who can help a restaurant get into AI recommendations?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ameus.ai",
+            "delphiumlabs.com",
+            "restorank.co",
+            "opentable.com",
+            "cloro.dev",
+            "dinesignal.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "b3designers.co.uk",
+            "malou.io"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ameus.ai",
+        "b3designers.co.uk",
+        "cloro.dev",
+        "delphiumlabs.com",
+        "dinesignal.com",
+        "malou.io"
+      ]
+    },
+    {
+      "text": "How do I improve how ChatGPT describes my company?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "morrismclane.com",
+            "help.openai.com",
+            "openai.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "goblinkly.com",
+            "medialister.com",
+            "geneo.app",
+            "wpseoai.com",
+            "llmrefs.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "geneo.app",
+        "goblinkly.com",
+        "help.openai.com",
+        "llmrefs.com",
+        "medialister.com",
+        "morrismclane.com"
+      ]
+    },
+    {
+      "text": "What is AI visibility monitoring?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "ansvisor.com",
+            "semanticrisk.io",
+            "askylabs.com",
+            "surfacedby.com",
+            "citationworks.com",
+            "hubspot.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "onclusive.com",
+            "reddit.com",
+            "zapier.com"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "purevisibility.com",
+            "zscaler.com",
+            "frase.io",
+            "semrush.com",
+            "oreateai.com",
+            "levo.ai"
+          ]
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ansvisor.com",
+        "askylabs.com",
+        "citationworks.com",
+        "frase.io",
+        "hubspot.com",
+        "levo.ai"
+      ]
+    },
+    {
+      "text": "How do I audit my brand's presence across AI assistants?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "help.openai.com",
+            "ahrefs.com",
+            "shadow.inc",
+            "rankscope.ai",
+            "support.google.com",
+            "auditae.app"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "llmpulse.ai",
+            "triplewhale.com",
+            "medium.com",
+            "waikay.io"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "ahrefs.com",
+        "auditae.app",
+        "help.openai.com",
+        "llmpulse.ai",
+        "medium.com",
+        "rankscope.ai"
+      ]
+    },
+    {
+      "text": "Which companies help with AI answer optimisation?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "vezadigital.com",
+            "firstpagesage.com",
+            "gaper.io",
+            "devcommx.com",
+            "buzztheory.com",
+            "selleris.com"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "hubspot.com",
+            "tryprofound.com",
+            "semai.ai",
+            "firstpagesage.com",
+            "eyeonannapolis.net"
+          ]
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": [
+        "firstpagesage.com",
+        "buzztheory.com",
+        "devcommx.com",
+        "eyeonannapolis.net",
+        "gaper.io",
+        "hubspot.com"
       ]
     }
   ]

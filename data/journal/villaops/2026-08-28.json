@@ -1,6 +1,6 @@
 {
-  "date": "2026-08-27",
-  "configVersion": "korafoodhall-api-view-2026-08-25",
+  "date": "2026-08-28",
+  "configVersion": "villaops-api-view-2026-08-25",
   "systems": [
     {
       "systemId": "anthropic/claude-haiku-4.5",
@@ -37,7 +37,7 @@
   ],
   "questions": [
     {
-      "text": "Where should I eat in Ubud, Bali?",
+      "text": "Who manages villa rentals in Bali?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -52,9 +52,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "theurbanlist.com",
-            "revasi.net",
-            "balisim.com"
+            "balisuperhost.com",
+            "tropicallygroup.com",
+            "villabalimanagement.com",
+            "balitecture.com",
+            "balimmo-management.com",
+            "apexbali.com"
           ]
         },
         {
@@ -70,9 +73,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "lifetravelandasia.com",
-            "balisim.com",
-            "baliuntold.com"
+            "balivillarealty.com",
+            "orivista.com",
+            "cabobali.com",
+            "balisuperhost.com",
+            "balitecture.com",
+            "villa-finder.com"
           ]
         },
         {
@@ -88,18 +94,18 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "thehoneycombers.com",
-            "lifetravelandasia.com",
-            "joujoutravels.com",
-            "midnightblueelephant.com",
-            "museumofwander.com",
-            "baliuntold.com"
+            "balitecture.com",
+            "baliluxuryvillas.com",
+            "cabobali.com",
+            "balisuperhost.com",
+            "villabalimanagement.com",
+            "bukitvista.com"
           ]
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -113,16 +119,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "balisim.com",
-        "baliuntold.com",
-        "lifetravelandasia.com",
-        "joujoutravels.com",
-        "midnightblueelephant.com",
-        "museumofwander.com"
+        "balisuperhost.com",
+        "balitecture.com",
+        "cabobali.com",
+        "villabalimanagement.com",
+        "apexbali.com",
+        "baliluxuryvillas.com"
       ]
     },
     {
-      "text": "What is the best food hall in Ubud?",
+      "text": "How do I find a property manager for my villa in Bali?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -134,12 +140,11 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "tripadvisor.com",
-            "korafoodhall.com",
-            "bali.live"
+            "villabalimanagement.com",
+            "cabobali.com"
           ]
         },
         {
@@ -154,10 +159,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "thewonderspace.com",
-            "balibelin.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -168,17 +170,10 @@
         },
         {
           "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
-          "citedDomains": [
-            "tripadvisor.com",
-            "thehoneycombers.com",
-            "midnightblueelephant.com",
-            "willflyforfood.net",
-            "ubudhood.com",
-            "museumofwander.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "qwen/qwen3.5-9b",
@@ -197,16 +192,12 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "tripadvisor.com",
-        "bali.live",
-        "balibelin.com",
-        "korafoodhall.com",
-        "midnightblueelephant.com",
-        "museumofwander.com"
+        "cabobali.com",
+        "villabalimanagement.com"
       ]
     },
     {
-      "text": "Which restaurants in Ubud are good for families?",
+      "text": "What does villa management in Bali cost?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -221,10 +212,10 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "knowmadsbali.com",
-            "thehoneycombers.com",
-            "restaurantguru.com",
-            "tripadvisor.com"
+            "baliestatemanager.com",
+            "villabalimanagement.com",
+            "cabobali.com",
+            "bali-sands.com"
           ]
         },
         {
@@ -240,8 +231,8 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "knowmadsbali.com",
-            "onemoreplacetogo.com"
+            "bali-sands.com",
+            "balitecture.com"
           ]
         },
         {
@@ -275,15 +266,15 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "knowmadsbali.com",
-        "onemoreplacetogo.com",
-        "restaurantguru.com",
-        "thehoneycombers.com",
-        "tripadvisor.com"
+        "bali-sands.com",
+        "baliestatemanager.com",
+        "balitecture.com",
+        "cabobali.com",
+        "villabalimanagement.com"
       ]
     },
     {
-      "text": "Where can I eat with kids in Ubud?",
+      "text": "How do I run a villa rental business in Ubud?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -298,8 +289,9 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "thehoneycombers.com",
-            "restaurantguru.com"
+            "bda-bali.com",
+            "anteyac.com",
+            "domabali.com"
           ]
         },
         {
@@ -315,10 +307,11 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "ramukitchen.com",
-            "onemoreplacetogo.com",
-            "knowmadsbali.com",
-            "thehoneycombers.com"
+            "balisuperhost.com",
+            "prestigepropertybali.com",
+            "magnumestate.com",
+            "balipropertyrules.com",
+            "thebalihomes.com"
           ]
         },
         {
@@ -330,17 +323,10 @@
         },
         {
           "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
-          "citedDomains": [
-            "thehoneycombers.com",
-            "balibuddies.com",
-            "onemoreplacetogo.com",
-            "worldoftravelswithkids.com",
-            "ramukitchen.com",
-            "baligasm.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "qwen/qwen3.5-9b",
@@ -359,16 +345,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "thehoneycombers.com",
-        "onemoreplacetogo.com",
-        "ramukitchen.com",
-        "balibuddies.com",
-        "baligasm.com",
-        "knowmadsbali.com"
+        "anteyac.com",
+        "balipropertyrules.com",
+        "balisuperhost.com",
+        "bda-bali.com",
+        "domabali.com",
+        "magnumestate.com"
       ]
     },
     {
-      "text": "Where should I go for dinner in Ubud, Bali?",
+      "text": "What software do villa owners in Bali use to manage bookings?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -383,10 +369,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "tripadvisor.com",
-            "thehoneycombers.com",
-            "revasi.net",
-            "theurbanlist.com"
+            "guesty.com",
+            "lodgify.com",
+            "balimanagement.villas",
+            "web.bookandlink.com",
+            "omnihotelier.com",
+            "balisuperhost.com"
           ]
         },
         {
@@ -402,8 +390,9 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "balisim.com",
-            "lifetravelandasia.com"
+            "hotelogix.com",
+            "lodgify.com",
+            "rentalautopilot.com"
           ]
         },
         {
@@ -437,16 +426,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "balisim.com",
-        "lifetravelandasia.com",
-        "revasi.net",
-        "thehoneycombers.com",
-        "theurbanlist.com",
-        "tripadvisor.com"
+        "lodgify.com",
+        "balimanagement.villas",
+        "balisuperhost.com",
+        "guesty.com",
+        "hotelogix.com",
+        "omnihotelier.com"
       ]
     },
     {
-      "text": "Where can I host a private event in Ubud?",
+      "text": "How do I handle guest communication for a villa rental?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -461,12 +450,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "tanahgajahubud.com",
-            "manaubud.com",
-            "ubudeventspace.com",
-            "umatirthaubud.com",
-            "kclububud.com",
-            "ritzcarlton.com"
+            "smoothstay.io",
+            "rental-network.com",
+            "resources.tellusapp.com",
+            "hostpal.co",
+            "alejandroagazzi.com",
+            "hostaway.com"
           ]
         },
         {
@@ -481,12 +470,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "balieventspaces.com",
-            "jungleclububud.com",
-            "kamandaluresort.com",
-            "comohotels.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -504,8 +488,8 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -519,16 +503,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "balieventspaces.com",
-        "comohotels.com",
-        "jungleclububud.com",
-        "kamandaluresort.com",
-        "kclububud.com",
-        "manaubud.com"
+        "alejandroagazzi.com",
+        "hostaway.com",
+        "hostpal.co",
+        "rental-network.com",
+        "resources.tellusapp.com",
+        "smoothstay.io"
       ]
     },
     {
-      "text": "What are the private event venues in Ubud, Bali?",
+      "text": "Who takes care of housekeeping and maintenance for Bali villas?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -543,12 +527,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "tanahgajahubud.com",
-            "ritzcarlton.com",
-            "realweddings.com.au",
-            "ubudwedding.com",
-            "marriott.com",
-            "manaubud.com"
+            "villabalimanagement.com",
+            "gravitybali.com",
+            "greatbalivillas.com",
+            "bali-villa-management.com",
+            "housekeepingbali.id",
+            "rosesandstars.com"
           ]
         },
         {
@@ -564,12 +548,8 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "thegarciaubud.com",
-            "anantara.com",
-            "sanggralokaubud.com",
-            "jungleclububud.com",
-            "elitehavens.com",
-            "impianaubud.com"
+            "villa-management-bali.com",
+            "housekeepingbali.id"
           ]
         },
         {
@@ -588,8 +568,8 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -603,16 +583,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "anantara.com",
-        "elitehavens.com",
-        "impianaubud.com",
-        "jungleclububud.com",
-        "manaubud.com",
-        "marriott.com"
+        "housekeepingbali.id",
+        "bali-villa-management.com",
+        "gravitybali.com",
+        "greatbalivillas.com",
+        "rosesandstars.com",
+        "villa-management-bali.com"
       ]
     },
     {
-      "text": "Where can I have a birthday party in Ubud?",
+      "text": "How do I set up operations for a new villa in Bali?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -623,16 +603,10 @@
         },
         {
           "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
-          "citedDomains": [
-            "folkubud.com",
-            "restaurantguru.com",
-            "tripadvisor.com",
-            "ubudeventspace.com",
-            "citrusberryubud.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "deepseek/deepseek-v3.2",
@@ -647,9 +621,10 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "cretyaubud.com",
-            "balicopter.com",
-            "rapuanciliubud.com"
+            "balipropertyrules.com",
+            "kingswoodbalivillas.com",
+            "villasa.co",
+            "geriabaliproperty.com"
           ]
         },
         {
@@ -683,16 +658,14 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "balicopter.com",
-        "citrusberryubud.com",
-        "cretyaubud.com",
-        "folkubud.com",
-        "rapuanciliubud.com",
-        "restaurantguru.com"
+        "balipropertyrules.com",
+        "geriabaliproperty.com",
+        "kingswoodbalivillas.com",
+        "villasa.co"
       ]
     },
     {
-      "text": "Where can a large group have dinner together in Ubud?",
+      "text": "What is the best way to manage staff at a Bali villa?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -707,8 +680,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "copperubud.com",
-            "thewonderspace.com"
+            "bali-villa-management.com",
+            "balimanagement.villas",
+            "baliestatemanager.com",
+            "balivillahub.com",
+            "baliluxuryconcierge.com",
+            "bali-villa-sale.com"
           ]
         },
         {
@@ -724,11 +701,9 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "hugebali.com",
-            "honeyandsmoke.co",
-            "donnaubud.com",
-            "revasi.net",
-            "mamasanbali.com"
+            "balimanagement.villas",
+            "villa-management-bali.com",
+            "villasa.co"
           ]
         },
         {
@@ -762,16 +737,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "copperubud.com",
-        "donnaubud.com",
-        "honeyandsmoke.co",
-        "hugebali.com",
-        "mamasanbali.com",
-        "revasi.net"
+        "balimanagement.villas",
+        "bali-villa-management.com",
+        "bali-villa-sale.com",
+        "baliestatemanager.com",
+        "baliluxuryconcierge.com",
+        "balivillahub.com"
       ]
     },
     {
-      "text": "What is the best casual dining in Ubud?",
+      "text": "How do I automate guest check-in for a villa?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -786,9 +761,11 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "theurbanlist.com",
-            "thehoneycombers.com",
-            "balisim.com"
+            "hostfully.com",
+            "ciaobooking.zendesk.com",
+            "airbnb.com",
+            "docs.bookingcenter.com",
+            "support.chekin.com"
           ]
         },
         {
@@ -803,12 +780,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "balisim.com",
-            "lifetravelandasia.com",
-            "joujoutravels.com",
-            "sevenpaintingsubud.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -826,8 +798,8 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -841,16 +813,15 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "balisim.com",
-        "joujoutravels.com",
-        "lifetravelandasia.com",
-        "sevenpaintingsubud.com",
-        "thehoneycombers.com",
-        "theurbanlist.com"
+        "airbnb.com",
+        "ciaobooking.zendesk.com",
+        "docs.bookingcenter.com",
+        "hostfully.com",
+        "support.chekin.com"
       ]
     },
     {
-      "text": "Is there a food court in Ubud, Bali?",
+      "text": "Which companies offer villa operations services in Indonesia?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -862,13 +833,15 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "bali.live",
-            "tripadvisor.com.br",
-            "tripadvisor.com",
-            "korafoodhall.com"
+            "balisuperhost.com",
+            "balivillamanagement.com",
+            "gravitybali.com",
+            "cabobali.com",
+            "intaranvillamanagement.co.id",
+            "balivillamanager.com"
           ]
         },
         {
@@ -884,7 +857,9 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "getyourguide.com"
+            "stayopsindo.com",
+            "cabobali.com",
+            "balisuperhost.com"
           ]
         },
         {
@@ -918,15 +893,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "bali.live",
-        "getyourguide.com",
-        "korafoodhall.com",
-        "tripadvisor.com",
-        "tripadvisor.com.br"
+        "balisuperhost.com",
+        "cabobali.com",
+        "balivillamanagement.com",
+        "balivillamanager.com",
+        "gravitybali.com",
+        "intaranvillamanagement.co.id"
       ]
     },
     {
-      "text": "Where can I eat near the centre of Ubud?",
+      "text": "How do I keep a villa fully booked in low season?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -941,10 +917,7 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "balisim.com",
-            "tripadvisor.com",
-            "ubudcenter.com",
-            "thehoneycombers.com"
+            "airbnb.com"
           ]
         },
         {
@@ -959,12 +932,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "balisim.com",
-            "joujoutravels.com",
-            "baliuntold.com",
-            "alamubudjewelryworkshop.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -997,16 +965,11 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "balisim.com",
-        "alamubudjewelryworkshop.com",
-        "baliuntold.com",
-        "joujoutravels.com",
-        "thehoneycombers.com",
-        "tripadvisor.com"
+        "airbnb.com"
       ]
     },
     {
-      "text": "What are the affordable restaurants in Ubud?",
+      "text": "What systems do boutique hotels in Bali use for operations?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1021,7 +984,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "tripadvisor.com"
+            "hospara.com",
+            "h-studio.id",
+            "fullguest.com",
+            "cloudbeds.com",
+            "insights.ehotelier.com",
+            "hotel-online.com"
           ]
         },
         {
@@ -1037,8 +1005,9 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "remoteandafloat.com",
-            "finnsbeachclub.com"
+            "frontdesko.app",
+            "hotelogix.com",
+            "kovena.com"
           ]
         },
         {
@@ -1057,8 +1026,8 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -1072,13 +1041,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "finnsbeachclub.com",
-        "remoteandafloat.com",
-        "tripadvisor.com"
+        "cloudbeds.com",
+        "frontdesko.app",
+        "fullguest.com",
+        "h-studio.id",
+        "hospara.com",
+        "hotel-online.com"
       ]
     },
     {
-      "text": "Are there restaurants in Ubud with a playground?",
+      "text": "How do I manage multiple villas at once?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1093,9 +1065,11 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "littlestepsasia.com",
-            "tripadvisor.com",
-            "onemoreplacetogo.com"
+            "staymaker.app",
+            "vacasa.com",
+            "connectyourpms.com",
+            "outkeepr.com",
+            "hostfully.com"
           ]
         },
         {
@@ -1110,12 +1084,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "onemoreplacetogo.com",
-            "balifamilyhangout.com",
-            "balifamilyvillas.com",
-            "knowmadsbali.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -1133,8 +1102,8 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -1148,16 +1117,15 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "onemoreplacetogo.com",
-        "balifamilyhangout.com",
-        "balifamilyvillas.com",
-        "knowmadsbali.com",
-        "littlestepsasia.com",
-        "tripadvisor.com"
+        "connectyourpms.com",
+        "hostfully.com",
+        "outkeepr.com",
+        "staymaker.app",
+        "vacasa.com"
       ]
     },
     {
-      "text": "Where can a group with different diets eat together in Ubud?",
+      "text": "Who helps foreign owners run property in Bali?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1172,14 +1140,17 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "flourishbali.com",
-            "heartspacebali.com"
+            "solarpropertybali.com",
+            "baliestatemanager.com",
+            "balisuperhost.com",
+            "bantuliving.com",
+            "businessinsider.com"
           ]
         },
         {
           "systemId": "deepseek/deepseek-v3.2",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -1189,9 +1160,9 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "ayungriver.com",
-            "pesonaloungeubud.com",
-            "maddysavenue.com"
+            "celerity.click",
+            "balisuperhost.com",
+            "balitecture.com"
           ]
         },
         {
@@ -1210,30 +1181,31 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
         {
           "systemId": "x-ai/grok-4.5",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "ayungriver.com",
-        "flourishbali.com",
-        "heartspacebali.com",
-        "maddysavenue.com",
-        "pesonaloungeubud.com"
+        "balisuperhost.com",
+        "baliestatemanager.com",
+        "balitecture.com",
+        "bantuliving.com",
+        "businessinsider.com",
+        "celerity.click"
       ]
     },
     {
-      "text": "Where in Ubud can vegetarians and meat eaters eat in the same place?",
+      "text": "What should be in a villa operations manual?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1248,9 +1220,9 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "herblibraryubud.com",
-            "flockbali.com",
-            "tripadvisor.com"
+            "en.wikipedia.org",
+            "rosegalera.com",
+            "safetyculture.com"
           ]
         },
         {
@@ -1265,12 +1237,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "northboundbali.com",
-            "bridgesandballoons.com",
-            "pesonaloungeubud.com",
-            "plantbaseddennis.nl"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -1288,8 +1255,8 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -1303,16 +1270,13 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "bridgesandballoons.com",
-        "flockbali.com",
-        "herblibraryubud.com",
-        "northboundbali.com",
-        "pesonaloungeubud.com",
-        "plantbaseddennis.nl"
+        "en.wikipedia.org",
+        "rosegalera.com",
+        "safetyculture.com"
       ]
     },
     {
-      "text": "Where is the best brunch in Ubud?",
+      "text": "How do I handle guest complaints at a villa rental?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1326,7 +1290,11 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": []
+          "citedDomains": [
+            "rentalautopilot.com",
+            "airbnb.com",
+            "airbnb.com.br"
+          ]
         },
         {
           "systemId": "deepseek/deepseek-v3.2",
@@ -1340,12 +1308,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "wheregoesrose.com",
-            "bestofbali.net",
-            "weareglobaltravellers.com",
-            "slowerworld.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -1356,22 +1319,15 @@
         },
         {
           "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
-          "citedDomains": [
-            "thehoneycombers.com",
-            "baliuntold.com",
-            "nibble.id",
-            "wheregoesrose.com",
-            "finnsbeachclub.com",
-            "slowerworld.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -1385,16 +1341,13 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "slowerworld.com",
-        "wheregoesrose.com",
-        "baliuntold.com",
-        "bestofbali.net",
-        "finnsbeachclub.com",
-        "nibble.id"
+        "airbnb.com",
+        "airbnb.com.br",
+        "rentalautopilot.com"
       ]
     },
     {
-      "text": "Which restaurants in Ubud have live music?",
+      "text": "What are the standard operating procedures for villa housekeeping?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1409,11 +1362,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "pesonaloungeubud.com",
-            "restaurantguru.com",
-            "herblibraryubud.com",
-            "elyskitchenubud.com",
-            "nandinibali.com"
+            "safetyculture.com",
+            "workprocedures.com",
+            "nscpolteksby.ac.id",
+            "thesuccessmanual.in",
+            "weareplanet.com",
+            "luxops.fr"
           ]
         },
         {
@@ -1428,11 +1382,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "tebasari.com",
-            "baliholidaysecrets.com",
-            "nomasubud.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -1450,8 +1400,8 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -1465,16 +1415,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "baliholidaysecrets.com",
-        "elyskitchenubud.com",
-        "herblibraryubud.com",
-        "nandinibali.com",
-        "nomasubud.com",
-        "pesonaloungeubud.com"
+        "luxops.fr",
+        "nscpolteksby.ac.id",
+        "safetyculture.com",
+        "thesuccessmanual.in",
+        "weareplanet.com",
+        "workprocedures.com"
       ]
     },
     {
-      "text": "Where do expats eat in Ubud?",
+      "text": "How do I track expenses for a villa rental in Bali?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1489,9 +1439,10 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "expatslist.org",
-            "ubudhood.com",
-            "northboundbali.com"
+            "sevabali.com",
+            "domabali.com",
+            "property-plaza.id",
+            "balipajak.com"
           ]
         },
         {
@@ -1507,8 +1458,8 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "thenomadicflower.com",
-            "midnightblueelephant.com"
+            "wonderfulbalivillas.com",
+            "balimanagement.villas"
           ]
         },
         {
@@ -1520,17 +1471,10 @@
         },
         {
           "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
-          "citedDomains": [
-            "thehoneycombers.com",
-            "midnightblueelephant.com",
-            "lifetravelandasia.com",
-            "finnsbeachclub.com",
-            "freespiritfood.net",
-            "museumofwander.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "qwen/qwen3.5-9b",
@@ -1549,16 +1493,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "midnightblueelephant.com",
-        "expatslist.org",
-        "finnsbeachclub.com",
-        "freespiritfood.net",
-        "lifetravelandasia.com",
-        "museumofwander.com"
+        "balimanagement.villas",
+        "balipajak.com",
+        "domabali.com",
+        "property-plaza.id",
+        "sevabali.com",
+        "wonderfulbalivillas.com"
       ]
     },
     {
-      "text": "What is the best food hall in Bali?",
+      "text": "Who provides concierge services for villa guests in Bali?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1570,11 +1514,12 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "visitbali.com",
-            "korafoodhall.com"
+            "baliluxeconcierge.com",
+            "villa-bali.com",
+            "aleyconcierge.com"
           ]
         },
         {
@@ -1590,9 +1535,9 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "travelnata.com",
-            "travelguidestip.com",
-            "kiligbali.com"
+            "villabalimanagement.com",
+            "ministryofvillas.com",
+            "baliluxeconcierge.com"
           ]
         },
         {
@@ -1604,22 +1549,15 @@
         },
         {
           "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
-          "citedDomains": [
-            "mybali.one",
-            "finnsbeachclub.com",
-            "thehoneycombers.com",
-            "wanderlog.com",
-            "youtube.com",
-            "ohana-agency.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -1633,16 +1571,15 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "finnsbeachclub.com",
-        "kiligbali.com",
-        "korafoodhall.com",
-        "mybali.one",
-        "ohana-agency.com",
-        "thehoneycombers.com"
+        "baliluxeconcierge.com",
+        "aleyconcierge.com",
+        "ministryofvillas.com",
+        "villa-bali.com",
+        "villabalimanagement.com"
       ]
     },
     {
-      "text": "Where can I organise a corporate event in Ubud?",
+      "text": "How do I onboard new staff at a villa?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1657,10 +1594,10 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "marriott.com",
-            "visesaubud.com",
-            "hyatt.com",
-            "ritzcarlton.com"
+            "mitti.com",
+            "safetyculture.com",
+            "miratag.com",
+            "onboarding.team"
           ]
         },
         {
@@ -1675,9 +1612,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "thegarciaubud.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -1688,17 +1623,10 @@
         },
         {
           "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
-          "citedDomains": [
-            "hyatt.com",
-            "comohotels.com",
-            "mayaresorts.com",
-            "marriott.com",
-            "travelweekly.com",
-            "tanahgajahubud.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "qwen/qwen3.5-9b",
@@ -1717,16 +1645,14 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "hyatt.com",
-        "marriott.com",
-        "comohotels.com",
-        "mayaresorts.com",
-        "ritzcarlton.com",
-        "tanahgajahubud.com"
+        "miratag.com",
+        "mitti.com",
+        "onboarding.team",
+        "safetyculture.com"
       ]
     },
     {
-      "text": "Where can I hold a wedding reception in Ubud?",
+      "text": "What tools help with short-term rental operations in Indonesia?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1741,8 +1667,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "realweddings.com.au",
-            "tripadvisor.com"
+            "guesty.com",
+            "hostaway.com",
+            "airbnb.co.id",
+            "semeru.online",
+            "cbn.id",
+            "help.guesty.com"
           ]
         },
         {
@@ -1758,11 +1688,8 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "equipoiseresort.com",
-            "travel-bash.com",
-            "abisenaubud.com",
-            "luximawedding.com",
-            "bisma-eight.com"
+            "balipropertyrules.com",
+            "eviivo.com"
           ]
         },
         {
@@ -1781,8 +1708,8 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -1796,16 +1723,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "abisenaubud.com",
-        "bisma-eight.com",
-        "equipoiseresort.com",
-        "luximawedding.com",
-        "realweddings.com.au",
-        "travel-bash.com"
+        "airbnb.co.id",
+        "balipropertyrules.com",
+        "cbn.id",
+        "eviivo.com",
+        "guesty.com",
+        "help.guesty.com"
       ]
     },
     {
-      "text": "What are the new restaurants in Ubud worth trying?",
+      "text": "How do villa managers in Bali handle maintenance requests?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1820,7 +1747,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "nowbali.co.id"
+            "becikapp.com",
+            "serenevillamanagementbali.com",
+            "villabalimanagement.com",
+            "bali-villa-management.com",
+            "baliestatemanager.com",
+            "orivista.com"
           ]
         },
         {
@@ -1836,10 +1768,10 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "nowbali.co.id",
-            "theurbanlist.com",
-            "revasi.net",
-            "alamubudjewelryworkshop.com"
+            "villa-management-bali.com",
+            "paradysehomes.com",
+            "balitecture.com",
+            "geriabaliproperty.com"
           ]
         },
         {
@@ -1858,8 +1790,8 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -1873,14 +1805,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "nowbali.co.id",
-        "alamubudjewelryworkshop.com",
-        "revasi.net",
-        "theurbanlist.com"
+        "bali-villa-management.com",
+        "baliestatemanager.com",
+        "balitecture.com",
+        "becikapp.com",
+        "geriabaliproperty.com",
+        "orivista.com"
       ]
     },
     {
-      "text": "Where can I eat late at night in Ubud?",
+      "text": "What does a villa operations company actually do?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1895,11 +1829,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "skazkabali.com",
-            "warungpondokmadu.com",
-            "baliready.com",
-            "restaurantguru.com",
-            "tripadvisor.com"
+            "jamesnightingall.com",
+            "balitecture.com",
+            "gravitybali.com",
+            "maneri.it",
+            "penultimaservices.com",
+            "villamanagement-spain.com"
           ]
         },
         {
@@ -1915,11 +1850,8 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "izzibali.com",
-            "spicebali.com",
-            "donnaubud.com",
-            "casalunabali.com",
-            "baliholidaysecrets.com"
+            "ziprecruiter.com",
+            "gravitybali.com"
           ]
         },
         {
@@ -1953,16 +1885,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "baliholidaysecrets.com",
-        "baliready.com",
-        "casalunabali.com",
-        "donnaubud.com",
-        "izzibali.com",
-        "restaurantguru.com"
+        "gravitybali.com",
+        "balitecture.com",
+        "jamesnightingall.com",
+        "maneri.it",
+        "penultimaservices.com",
+        "villamanagement-spain.com"
       ]
     },
     {
-      "text": "What should I not miss when eating in Ubud?",
+      "text": "How can AI help run a villa rental business?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1977,11 +1909,9 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "indonesia.travel",
-            "tasteatlas.com",
-            "outboundlynx.com",
-            "simplyindonesia.com",
-            "visitbali.com"
+            "airbnb.com",
+            "hospitable.com",
+            "help.hospitable.com"
           ]
         },
         {
@@ -1997,8 +1927,11 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "baliuntold.com",
-            "reddit.com"
+            "truvi.com",
+            "rentalready.com",
+            "business-reporter.co.uk",
+            "guesty.com",
+            "oikospropertyventures.com"
           ]
         },
         {
@@ -2017,8 +1950,8 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -2032,12 +1965,12 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "baliuntold.com",
-        "indonesia.travel",
-        "outboundlynx.com",
-        "reddit.com",
-        "simplyindonesia.com",
-        "tasteatlas.com"
+        "airbnb.com",
+        "business-reporter.co.uk",
+        "guesty.com",
+        "help.hospitable.com",
+        "hospitable.com",
+        "oikospropertyventures.com"
       ]
     }
   ]

@@ -1,6 +1,6 @@
 {
-  "date": "2026-08-27",
-  "configVersion": "korafoodhall-api-view-2026-08-25",
+  "date": "2026-08-28",
+  "configVersion": "remhaos-ru-api-view-2026-08-25",
   "systems": [
     {
       "systemId": "anthropic/claude-haiku-4.5",
@@ -37,7 +37,7 @@
   ],
   "questions": [
     {
-      "text": "Where should I eat in Ubud, Bali?",
+      "text": "Как контролировать ремонт квартиры, если я не строитель?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -52,9 +52,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "theurbanlist.com",
-            "revasi.net",
-            "balisim.com"
+            "protect.gost.ru",
+            "rags.ru",
+            "only-remontkvartir.ru",
+            "anatolichblog.ru",
+            "ivd.ru",
+            "legalacts.ru"
           ]
         },
         {
@@ -69,11 +72,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "lifetravelandasia.com",
-            "balisim.com",
-            "baliuntold.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -84,17 +83,10 @@
         },
         {
           "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
-          "citedDomains": [
-            "thehoneycombers.com",
-            "lifetravelandasia.com",
-            "joujoutravels.com",
-            "midnightblueelephant.com",
-            "museumofwander.com",
-            "baliuntold.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "qwen/qwen3.5-9b",
@@ -113,16 +105,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "balisim.com",
-        "baliuntold.com",
-        "lifetravelandasia.com",
-        "joujoutravels.com",
-        "midnightblueelephant.com",
-        "museumofwander.com"
+        "anatolichblog.ru",
+        "ivd.ru",
+        "legalacts.ru",
+        "only-remontkvartir.ru",
+        "protect.gost.ru",
+        "rags.ru"
       ]
     },
     {
-      "text": "What is the best food hall in Ubud?",
+      "text": "Какие программы помогают вести ремонт?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -134,12 +126,14 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "tripadvisor.com",
-            "korafoodhall.com",
-            "bali.live"
+            "companies.rbc.ru",
+            "sostav.ru",
+            "smpro.tech",
+            "blog.room-gpt.ru",
+            "stadia.pro"
           ]
         },
         {
@@ -155,8 +149,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "thewonderspace.com",
-            "balibelin.com"
+            "a2is.ru",
+            "m2.ru",
+            "t-j.ru",
+            "sostav.ru",
+            "ivd.ru",
+            "lifehacker.ru"
           ]
         },
         {
@@ -168,17 +166,10 @@
         },
         {
           "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
-          "citedDomains": [
-            "tripadvisor.com",
-            "thehoneycombers.com",
-            "midnightblueelephant.com",
-            "willflyforfood.net",
-            "ubudhood.com",
-            "museumofwander.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "qwen/qwen3.5-9b",
@@ -197,16 +188,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "tripadvisor.com",
-        "bali.live",
-        "balibelin.com",
-        "korafoodhall.com",
-        "midnightblueelephant.com",
-        "museumofwander.com"
+        "sostav.ru",
+        "a2is.ru",
+        "blog.room-gpt.ru",
+        "companies.rbc.ru",
+        "ivd.ru",
+        "lifehacker.ru"
       ]
     },
     {
-      "text": "Which restaurants in Ubud are good for families?",
+      "text": "Как дизайнеру интерьера вести несколько проектов одновременно?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -221,10 +212,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "knowmadsbali.com",
-            "thehoneycombers.com",
-            "restaurantguru.com",
-            "tripadvisor.com"
+            "yours-tim.com",
+            "programa.design",
+            "chiquenest.com",
+            "elitedesignassistants.com",
+            "deelo.ai",
+            "orchidvirtualsupport.com"
           ]
         },
         {
@@ -240,8 +233,9 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "knowmadsbali.com",
-            "onemoreplacetogo.com"
+            "superfitout.com",
+            "archscaleguild.com",
+            "serenitycrm.io"
           ]
         },
         {
@@ -275,15 +269,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "knowmadsbali.com",
-        "onemoreplacetogo.com",
-        "restaurantguru.com",
-        "thehoneycombers.com",
-        "tripadvisor.com"
+        "archscaleguild.com",
+        "chiquenest.com",
+        "deelo.ai",
+        "elitedesignassistants.com",
+        "orchidvirtualsupport.com",
+        "programa.design"
       ]
     },
     {
-      "text": "Where can I eat with kids in Ubud?",
+      "text": "Где хранить все документы и чертежи по ремонту в одном месте?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -298,8 +293,10 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "thehoneycombers.com",
-            "restaurantguru.com"
+            "support.google.com",
+            "meltplan.com",
+            "dropbox.com",
+            "developers.google.com"
           ]
         },
         {
@@ -314,12 +311,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "ramukitchen.com",
-            "onemoreplacetogo.com",
-            "knowmadsbali.com",
-            "thehoneycombers.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -330,22 +322,15 @@
         },
         {
           "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
-          "citedDomains": [
-            "thehoneycombers.com",
-            "balibuddies.com",
-            "onemoreplacetogo.com",
-            "worldoftravelswithkids.com",
-            "ramukitchen.com",
-            "baligasm.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -359,16 +344,14 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "thehoneycombers.com",
-        "onemoreplacetogo.com",
-        "ramukitchen.com",
-        "balibuddies.com",
-        "baligasm.com",
-        "knowmadsbali.com"
+        "developers.google.com",
+        "dropbox.com",
+        "meltplan.com",
+        "support.google.com"
       ]
     },
     {
-      "text": "Where should I go for dinner in Ubud, Bali?",
+      "text": "Как согласовывать изменения между дизайнером и прорабом?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -383,10 +366,10 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "tripadvisor.com",
-            "thehoneycombers.com",
-            "revasi.net",
-            "theurbanlist.com"
+            "base.garant.ru",
+            "xn--1-xtbgmf.xn--p1ai",
+            "meganorm.ru",
+            "base.safework.ru"
           ]
         },
         {
@@ -401,10 +384,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "balisim.com",
-            "lifetravelandasia.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -422,8 +402,8 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -437,16 +417,14 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "balisim.com",
-        "lifetravelandasia.com",
-        "revasi.net",
-        "thehoneycombers.com",
-        "theurbanlist.com",
-        "tripadvisor.com"
+        "base.garant.ru",
+        "base.safework.ru",
+        "meganorm.ru",
+        "xn--1-xtbgmf.xn--p1ai"
       ]
     },
     {
-      "text": "Where can I host a private event in Ubud?",
+      "text": "Что делать, если дизайнер и строители говорят разное?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -461,12 +439,9 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "tanahgajahubud.com",
-            "manaubud.com",
-            "ubudeventspace.com",
-            "umatirthaubud.com",
-            "kclububud.com",
-            "ritzcarlton.com"
+            "normativ.kontur.ru",
+            "base.garant.ru",
+            "meganorm.ru"
           ]
         },
         {
@@ -481,12 +456,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "balieventspaces.com",
-            "jungleclububud.com",
-            "kamandaluresort.com",
-            "comohotels.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -504,8 +474,8 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -519,16 +489,13 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "balieventspaces.com",
-        "comohotels.com",
-        "jungleclububud.com",
-        "kamandaluresort.com",
-        "kclububud.com",
-        "manaubud.com"
+        "base.garant.ru",
+        "meganorm.ru",
+        "normativ.kontur.ru"
       ]
     },
     {
-      "text": "What are the private event venues in Ubud, Bali?",
+      "text": "Как отслеживать смету по ремонту, чтобы она не росла незаметно?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -543,12 +510,10 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "tanahgajahubud.com",
-            "ritzcarlton.com",
-            "realweddings.com.au",
-            "ubudwedding.com",
-            "marriott.com",
-            "manaubud.com"
+            "constract.io",
+            "remion.ru",
+            "usta.ru",
+            "teletype.in"
           ]
         },
         {
@@ -563,14 +528,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "thegarciaubud.com",
-            "anantara.com",
-            "sanggralokaubud.com",
-            "jungleclububud.com",
-            "elitehavens.com",
-            "impianaubud.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -588,8 +546,8 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -603,16 +561,14 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "anantara.com",
-        "elitehavens.com",
-        "impianaubud.com",
-        "jungleclububud.com",
-        "manaubud.com",
-        "marriott.com"
+        "constract.io",
+        "remion.ru",
+        "teletype.in",
+        "usta.ru"
       ]
     },
     {
-      "text": "Where can I have a birthday party in Ubud?",
+      "text": "Какие сервисы есть для дизайн-студий интерьера?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -627,11 +583,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "folkubud.com",
-            "restaurantguru.com",
-            "tripadvisor.com",
-            "ubudeventspace.com",
-            "citrusberryubud.com"
+            "pro.houzz.co.uk",
+            "studiodesigner.com",
+            "mydomastudio.com",
+            "programa.design",
+            "customer-portals.com",
+            "deelo.ai"
           ]
         },
         {
@@ -646,11 +603,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "cretyaubud.com",
-            "balicopter.com",
-            "rapuanciliubud.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -683,16 +636,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "balicopter.com",
-        "citrusberryubud.com",
-        "cretyaubud.com",
-        "folkubud.com",
-        "rapuanciliubud.com",
-        "restaurantguru.com"
+        "customer-portals.com",
+        "deelo.ai",
+        "mydomastudio.com",
+        "pro.houzz.co.uk",
+        "programa.design",
+        "studiodesigner.com"
       ]
     },
     {
-      "text": "Where can a large group have dinner together in Ubud?",
+      "text": "Как вести технический надзор за ремонтом удалённо?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -707,8 +660,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "copperubud.com",
-            "thewonderspace.com"
+            "rg.ru",
+            "consultant.ru",
+            "proverka.buildingclub.ru",
+            "blog.isakovadesign.ru",
+            "sudact.ru",
+            "base.garant.ru"
           ]
         },
         {
@@ -723,13 +680,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "hugebali.com",
-            "honeyandsmoke.co",
-            "donnaubud.com",
-            "revasi.net",
-            "mamasanbali.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -762,16 +713,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "copperubud.com",
-        "donnaubud.com",
-        "honeyandsmoke.co",
-        "hugebali.com",
-        "mamasanbali.com",
-        "revasi.net"
+        "base.garant.ru",
+        "blog.isakovadesign.ru",
+        "consultant.ru",
+        "proverka.buildingclub.ru",
+        "rg.ru",
+        "sudact.ru"
       ]
     },
     {
-      "text": "What is the best casual dining in Ubud?",
+      "text": "Как контролировать ремонт, если я живу в другом городе?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -786,9 +737,11 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "theurbanlist.com",
-            "thehoneycombers.com",
-            "balisim.com"
+            "remontflow.pro",
+            "inmyroom.ru",
+            "eremont.ru",
+            "anatolichblog.ru",
+            "novosibdom.ru"
           ]
         },
         {
@@ -803,12 +756,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "balisim.com",
-            "lifetravelandasia.com",
-            "joujoutravels.com",
-            "sevenpaintingsubud.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -826,8 +774,8 @@
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -841,16 +789,15 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "balisim.com",
-        "joujoutravels.com",
-        "lifetravelandasia.com",
-        "sevenpaintingsubud.com",
-        "thehoneycombers.com",
-        "theurbanlist.com"
+        "anatolichblog.ru",
+        "eremont.ru",
+        "inmyroom.ru",
+        "novosibdom.ru",
+        "remontflow.pro"
       ]
     },
     {
-      "text": "Is there a food court in Ubud, Bali?",
+      "text": "Чем заменить таблицы Excel при управлении ремонтом?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -862,13 +809,13 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "bali.live",
-            "tripadvisor.com.br",
-            "tripadvisor.com",
-            "korafoodhall.com"
+            "resmeta.ru",
+            "getgantt.ru",
+            "smetrum.ru",
+            "buildcontrol.app"
           ]
         },
         {
@@ -883,9 +830,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "getyourguide.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -918,15 +863,14 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "bali.live",
-        "getyourguide.com",
-        "korafoodhall.com",
-        "tripadvisor.com",
-        "tripadvisor.com.br"
+        "buildcontrol.app",
+        "getgantt.ru",
+        "resmeta.ru",
+        "smetrum.ru"
       ]
     },
     {
-      "text": "Where can I eat near the centre of Ubud?",
+      "text": "Как организовать работу архитектора, дизайнера и прораба на одном объекте?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -941,10 +885,11 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "balisim.com",
-            "tripadvisor.com",
-            "ubudcenter.com",
-            "thehoneycombers.com"
+            "aia.org",
+            "chop.raic.ca",
+            "mdpi.com",
+            "agc.org",
+            "studiomatrx.org"
           ]
         },
         {
@@ -959,12 +904,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "balisim.com",
-            "joujoutravels.com",
-            "baliuntold.com",
-            "alamubudjewelryworkshop.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -997,16 +937,15 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "balisim.com",
-        "alamubudjewelryworkshop.com",
-        "baliuntold.com",
-        "joujoutravels.com",
-        "thehoneycombers.com",
-        "tripadvisor.com"
+        "agc.org",
+        "aia.org",
+        "chop.raic.ca",
+        "mdpi.com",
+        "studiomatrx.org"
       ]
     },
     {
-      "text": "What are the affordable restaurants in Ubud?",
+      "text": "Какие CRM подходят для студии дизайна интерьера?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1021,7 +960,10 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "tripadvisor.com"
+            "pro.houzz.com",
+            "agiled.app",
+            "fullstaxx.com",
+            "knowlix.ai"
           ]
         },
         {
@@ -1036,10 +978,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "remoteandafloat.com",
-            "finnsbeachclub.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -1072,13 +1011,14 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "finnsbeachclub.com",
-        "remoteandafloat.com",
-        "tripadvisor.com"
+        "agiled.app",
+        "fullstaxx.com",
+        "knowlix.ai",
+        "pro.houzz.com"
       ]
     },
     {
-      "text": "Are there restaurants in Ubud with a playground?",
+      "text": "Как вести график работ по ремонту?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1093,9 +1033,10 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "littlestepsasia.com",
-            "tripadvisor.com",
-            "onemoreplacetogo.com"
+            "anatolichblog.ru",
+            "usta.ru",
+            "kvartum.com",
+            "xn--h1alcedd.xn--d1aqf.xn--p1ai"
           ]
         },
         {
@@ -1110,12 +1051,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "onemoreplacetogo.com",
-            "balifamilyhangout.com",
-            "balifamilyvillas.com",
-            "knowmadsbali.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -1126,15 +1062,22 @@
         },
         {
           "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
-          "citedDomains": []
+          "citedDomains": [
+            "sky.pro",
+            "101-app.com",
+            "proficont.ru",
+            "parketspektr.ru",
+            "vse-o-stroitelstve.ru",
+            "flatica.ru"
+          ]
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -1148,16 +1091,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "onemoreplacetogo.com",
-        "balifamilyhangout.com",
-        "balifamilyvillas.com",
-        "knowmadsbali.com",
-        "littlestepsasia.com",
-        "tripadvisor.com"
+        "101-app.com",
+        "anatolichblog.ru",
+        "flatica.ru",
+        "kvartum.com",
+        "parketspektr.ru",
+        "proficont.ru"
       ]
     },
     {
-      "text": "Where can a group with different diets eat together in Ubud?",
+      "text": "Где вести спецификацию материалов по проекту?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1172,14 +1115,15 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "flourishbali.com",
-            "heartspacebali.com"
+            "simplysub.com",
+            "bim.natspec.org",
+            "aia.org"
           ]
         },
         {
           "systemId": "deepseek/deepseek-v3.2",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -1188,11 +1132,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "ayungriver.com",
-            "pesonaloungeubud.com",
-            "maddysavenue.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -1217,23 +1157,21 @@
         },
         {
           "systemId": "x-ai/grok-4.5",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         }
       ],
       "namedInstead": [],
       "citedDomains": [
-        "ayungriver.com",
-        "flourishbali.com",
-        "heartspacebali.com",
-        "maddysavenue.com",
-        "pesonaloungeubud.com"
+        "aia.org",
+        "bim.natspec.org",
+        "simplysub.com"
       ]
     },
     {
-      "text": "Where in Ubud can vegetarians and meat eaters eat in the same place?",
+      "text": "Как принимать работы у строительной бригады?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1244,14 +1182,73 @@
         },
         {
           "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "herblibraryubud.com",
-            "flockbali.com",
-            "tripadvisor.com"
-          ]
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": []
+    },
+    {
+      "text": "Какие приложения помогают следить за ходом стройки?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
         },
         {
           "systemId": "deepseek/deepseek-v3.2",
@@ -1266,10 +1263,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "northboundbali.com",
-            "bridgesandballoons.com",
-            "pesonaloungeubud.com",
-            "plantbaseddennis.nl"
+            "digital-build.ru",
+            "targpatrol.ru",
+            "planradar.com",
+            "vr-arsoft.com",
+            "worksection.com",
+            "101-app.com"
           ]
         },
         {
@@ -1303,16 +1302,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "bridgesandballoons.com",
-        "flockbali.com",
-        "herblibraryubud.com",
-        "northboundbali.com",
-        "pesonaloungeubud.com",
-        "plantbaseddennis.nl"
+        "101-app.com",
+        "digital-build.ru",
+        "planradar.com",
+        "targpatrol.ru",
+        "vr-arsoft.com",
+        "worksection.com"
       ]
     },
     {
-      "text": "Where is the best brunch in Ubud?",
+      "text": "Как не потерять изменения в проекте ремонта?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1323,8 +1322,8 @@
         },
         {
           "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -1340,11 +1339,144 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": []
+    },
+    {
+      "text": "Как показывать клиенту прогресс ремонта?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": []
+    },
+    {
+      "text": "Какие есть сервисы управления ремонтом под ключ?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
           "citedDomains": [
-            "wheregoesrose.com",
-            "bestofbali.net",
-            "weareglobaltravellers.com",
-            "slowerworld.com"
+            "pointform.ru",
+            "proverkadoma.ru",
+            "stroyasno.ru",
+            "remont.io",
+            "domeoremont.ru",
+            "remont.sberuslugi.ru"
+          ]
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": [
+            "hubex.ru",
+            "soware.ru",
+            "crmindex.ru",
+            "a2is.ru"
           ]
         },
         {
@@ -1356,17 +1488,10 @@
         },
         {
           "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
-          "citedDomains": [
-            "thehoneycombers.com",
-            "baliuntold.com",
-            "nibble.id",
-            "wheregoesrose.com",
-            "finnsbeachclub.com",
-            "slowerworld.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "qwen/qwen3.5-9b",
@@ -1385,16 +1510,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "slowerworld.com",
-        "wheregoesrose.com",
-        "baliuntold.com",
-        "bestofbali.net",
-        "finnsbeachclub.com",
-        "nibble.id"
+        "a2is.ru",
+        "crmindex.ru",
+        "domeoremont.ru",
+        "hubex.ru",
+        "pointform.ru",
+        "proverkadoma.ru"
       ]
     },
     {
-      "text": "Which restaurants in Ubud have live music?",
+      "text": "Как маленькой дизайн-студии выстроить процессы?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1409,11 +1534,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "pesonaloungeubud.com",
-            "restaurantguru.com",
-            "herblibraryubud.com",
-            "elyskitchenubud.com",
-            "nandinibali.com"
+            "orsane.app",
+            "canva.com",
+            "creativeprojectmanagement.org",
+            "designhub.solutions",
+            "clickup.com",
+            "productive.io"
           ]
         },
         {
@@ -1428,11 +1554,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "tebasari.com",
-            "baliholidaysecrets.com",
-            "nomasubud.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -1465,16 +1587,79 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "baliholidaysecrets.com",
-        "elyskitchenubud.com",
-        "herblibraryubud.com",
-        "nandinibali.com",
-        "nomasubud.com",
-        "pesonaloungeubud.com"
+        "canva.com",
+        "clickup.com",
+        "creativeprojectmanagement.org",
+        "designhub.solutions",
+        "orsane.app",
+        "productive.io"
       ]
     },
     {
-      "text": "Where do expats eat in Ubud?",
+      "text": "Как считать закупку материалов на объект?",
+      "cells": [
+        {
+          "systemId": "anthropic/claude-haiku-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "ChatGPT",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "deepseek/deepseek-v3.2",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Gemini",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "mistralai/mistral-small-2603",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "Perplexity",
+          "answered": false,
+          "mentioned": null,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "qwen/qwen3.5-9b",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        },
+        {
+          "systemId": "x-ai/grok-4.5",
+          "answered": true,
+          "mentioned": false,
+          "namedInstead": [],
+          "citedDomains": []
+        }
+      ],
+      "namedInstead": [],
+      "citedDomains": []
+    },
+    {
+      "text": "Что использовать вместо переписки в мессенджерах при ремонте?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1489,9 +1674,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "expatslist.org",
-            "ubudhood.com",
-            "northboundbali.com"
+            "profium.io",
+            "stadia.pro",
+            "kvartum.com",
+            "trello.com",
+            "notion.com",
+            "strovision.ru"
           ]
         },
         {
@@ -1506,10 +1694,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "thenomadicflower.com",
-            "midnightblueelephant.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -1520,17 +1705,10 @@
         },
         {
           "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
-          "citedDomains": [
-            "thehoneycombers.com",
-            "midnightblueelephant.com",
-            "lifetravelandasia.com",
-            "finnsbeachclub.com",
-            "freespiritfood.net",
-            "museumofwander.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "qwen/qwen3.5-9b",
@@ -1549,16 +1727,16 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "midnightblueelephant.com",
-        "expatslist.org",
-        "finnsbeachclub.com",
-        "freespiritfood.net",
-        "lifetravelandasia.com",
-        "museumofwander.com"
+        "kvartum.com",
+        "notion.com",
+        "profium.io",
+        "stadia.pro",
+        "strovision.ru",
+        "trello.com"
       ]
     },
     {
-      "text": "What is the best food hall in Bali?",
+      "text": "Как вести несколько объектов ремонта одновременно?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1570,12 +1748,9 @@
         {
           "systemId": "ChatGPT",
           "answered": true,
-          "mentioned": true,
+          "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "visitbali.com",
-            "korafoodhall.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "deepseek/deepseek-v3.2",
@@ -1589,11 +1764,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "travelnata.com",
-            "travelguidestip.com",
-            "kiligbali.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -1604,22 +1775,15 @@
         },
         {
           "systemId": "Perplexity",
-          "answered": true,
-          "mentioned": false,
+          "answered": false,
+          "mentioned": null,
           "namedInstead": [],
-          "citedDomains": [
-            "mybali.one",
-            "finnsbeachclub.com",
-            "thehoneycombers.com",
-            "wanderlog.com",
-            "youtube.com",
-            "ohana-agency.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
+          "answered": true,
+          "mentioned": false,
           "namedInstead": [],
           "citedDomains": []
         },
@@ -1632,17 +1796,10 @@
         }
       ],
       "namedInstead": [],
-      "citedDomains": [
-        "finnsbeachclub.com",
-        "kiligbali.com",
-        "korafoodhall.com",
-        "mybali.one",
-        "ohana-agency.com",
-        "thehoneycombers.com"
-      ]
+      "citedDomains": []
     },
     {
-      "text": "Where can I organise a corporate event in Ubud?",
+      "text": "Как контролировать сроки ремонта?",
       "cells": [
         {
           "systemId": "anthropic/claude-haiku-4.5",
@@ -1657,10 +1814,11 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "marriott.com",
-            "visesaubud.com",
-            "hyatt.com",
-            "ritzcarlton.com"
+            "anatolichblog.ru",
+            "vse-o-stroitelstve.ru",
+            "support.microsoft.com",
+            "asana.com",
+            "expertremonta.kz"
           ]
         },
         {
@@ -1675,9 +1833,7 @@
           "answered": true,
           "mentioned": false,
           "namedInstead": [],
-          "citedDomains": [
-            "thegarciaubud.com"
-          ]
+          "citedDomains": []
         },
         {
           "systemId": "mistralai/mistral-small-2603",
@@ -1692,12 +1848,12 @@
           "mentioned": false,
           "namedInstead": [],
           "citedDomains": [
-            "hyatt.com",
-            "comohotels.com",
-            "mayaresorts.com",
-            "marriott.com",
-            "travelweekly.com",
-            "tanahgajahubud.com"
+            "novostroiki-vs-vtorichka.ru",
+            "expertremonta.kz",
+            "remstroy-group.ru",
+            "rudesignshop.ru",
+            "news.occochi.ru",
+            "kd-group.ru"
           ]
         },
         {
@@ -1717,327 +1873,12 @@
       ],
       "namedInstead": [],
       "citedDomains": [
-        "hyatt.com",
-        "marriott.com",
-        "comohotels.com",
-        "mayaresorts.com",
-        "ritzcarlton.com",
-        "tanahgajahubud.com"
-      ]
-    },
-    {
-      "text": "Where can I hold a wedding reception in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "realweddings.com.au",
-            "tripadvisor.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "equipoiseresort.com",
-            "travel-bash.com",
-            "abisenaubud.com",
-            "luximawedding.com",
-            "bisma-eight.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "abisenaubud.com",
-        "bisma-eight.com",
-        "equipoiseresort.com",
-        "luximawedding.com",
-        "realweddings.com.au",
-        "travel-bash.com"
-      ]
-    },
-    {
-      "text": "What are the new restaurants in Ubud worth trying?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "nowbali.co.id"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "nowbali.co.id",
-            "theurbanlist.com",
-            "revasi.net",
-            "alamubudjewelryworkshop.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "nowbali.co.id",
-        "alamubudjewelryworkshop.com",
-        "revasi.net",
-        "theurbanlist.com"
-      ]
-    },
-    {
-      "text": "Where can I eat late at night in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "skazkabali.com",
-            "warungpondokmadu.com",
-            "baliready.com",
-            "restaurantguru.com",
-            "tripadvisor.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "izzibali.com",
-            "spicebali.com",
-            "donnaubud.com",
-            "casalunabali.com",
-            "baliholidaysecrets.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "baliholidaysecrets.com",
-        "baliready.com",
-        "casalunabali.com",
-        "donnaubud.com",
-        "izzibali.com",
-        "restaurantguru.com"
-      ]
-    },
-    {
-      "text": "What should I not miss when eating in Ubud?",
-      "cells": [
-        {
-          "systemId": "anthropic/claude-haiku-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "ChatGPT",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "indonesia.travel",
-            "tasteatlas.com",
-            "outboundlynx.com",
-            "simplyindonesia.com",
-            "visitbali.com"
-          ]
-        },
-        {
-          "systemId": "deepseek/deepseek-v3.2",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Gemini",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": [
-            "baliuntold.com",
-            "reddit.com"
-          ]
-        },
-        {
-          "systemId": "mistralai/mistral-small-2603",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "Perplexity",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "qwen/qwen3.5-9b",
-          "answered": false,
-          "mentioned": null,
-          "namedInstead": [],
-          "citedDomains": []
-        },
-        {
-          "systemId": "x-ai/grok-4.5",
-          "answered": true,
-          "mentioned": false,
-          "namedInstead": [],
-          "citedDomains": []
-        }
-      ],
-      "namedInstead": [],
-      "citedDomains": [
-        "baliuntold.com",
-        "indonesia.travel",
-        "outboundlynx.com",
-        "reddit.com",
-        "simplyindonesia.com",
-        "tasteatlas.com"
+        "expertremonta.kz",
+        "anatolichblog.ru",
+        "asana.com",
+        "kd-group.ru",
+        "news.occochi.ru",
+        "novostroiki-vs-vtorichka.ru"
       ]
     }
   ]
