@@ -35,6 +35,7 @@ export const commercialFacts = {
   version: COMMERCIAL_FACTS_VERSION,
   seller: {
     legalName: "Selena Systems LLC",
+    footerLine: "Selena Systems LLC, a Wyoming limited liability company",
     countryCode: "US",
     // The state is on the pricing disclosure and the legal pages, so it can be
     // in the markup too: an address of "US" alone joins no knowledge graph.
@@ -204,6 +205,7 @@ export const commercialFacts = {
   version: typeof COMMERCIAL_FACTS_VERSION;
   seller: {
     legalName: string;
+    footerLine: string;
     countryCode: string;
     regionCode: string;
     country: LocalizedText;

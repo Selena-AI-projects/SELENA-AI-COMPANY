@@ -131,17 +131,29 @@ function toEmailHref(value: string | null) {
   return value.includes("@") ? `mailto:${value}` : null;
 }
 
+function toPhoneHref(value: string | null) {
+  if (!value) return null;
+  const phone = value.replace(/[^\d+]/g, "");
+  return phone ? `tel:${phone}` : null;
+}
+
 const defaultPublicContact = {
-  whatsapp: "+7 921 933-11-13",
+  email: "support@selenasystems.com",
+  telegram: "@kora_selena",
+  phone: "+1 307-888-0205",
 } as const;
 
-/** Public contact channels. Set these with NEXT_PUBLIC_CONTACT_* env vars. */
+/** Confirmed public contact facts. WhatsApp is optional and environment-backed. */
 export const contact = {
-  telegram: cleanPublicEnv(process.env.NEXT_PUBLIC_CONTACT_TELEGRAM),
-  whatsapp:
-    cleanPublicEnv(process.env.NEXT_PUBLIC_CONTACT_WHATSAPP) ??
-    defaultPublicContact.whatsapp,
-  email: cleanPublicEnv(process.env.NEXT_PUBLIC_CONTACT_EMAIL),
+  email: defaultPublicContact.email,
+  telegram: defaultPublicContact.telegram,
+  phone: defaultPublicContact.phone,
+  whatsapp: cleanPublicEnv(process.env.NEXT_PUBLIC_CONTACT_WHATSAPP),
+} as const;
+
+export const contactAvailability = {
+  ru: "GMT+8, Бали · отвечаю в течение рабочего дня",
+  en: "GMT+8, Bali · replies within one business day",
 } as const;
 
 /** Public communities are destinations for discussion, not direct contact channels. */
@@ -153,6 +165,7 @@ export const contactLinks = {
   telegram: toTelegramHref(contact.telegram),
   whatsapp: toWhatsappHref(contact.whatsapp),
   email: toEmailHref(contact.email),
+  phone: toPhoneHref(contact.phone),
 } as const;
 
 export function createWhatsappHref(message?: string) {
@@ -165,30 +178,36 @@ export function createWhatsappHref(message?: string) {
 }
 
 export type ContactChannel = {
-  key: "telegram" | "whatsapp" | "email";
-  label: string;
+  key: "telegram" | "whatsapp" | "email" | "phone";
+  label: { en: string; ru: string };
   value: string;
   href: string;
 };
 
 export const contactChannels = [
   {
+    key: "email",
+    label: { en: "Email", ru: "Почта" },
+    value: contact.email,
+    href: contactLinks.email,
+  },
+  {
     key: "telegram",
-    label: "Telegram",
+    label: { en: "Telegram", ru: "Telegram" },
     value: contact.telegram,
     href: contactLinks.telegram,
   },
   {
-    key: "whatsapp",
-    label: "WhatsApp",
-    value: contact.whatsapp,
-    href: contactLinks.whatsapp,
+    key: "phone",
+    label: { en: "Phone", ru: "Телефон" },
+    value: contact.phone,
+    href: contactLinks.phone,
   },
   {
-    key: "email",
-    label: "Email",
-    value: contact.email,
-    href: contactLinks.email,
+    key: "whatsapp",
+    label: { en: "WhatsApp", ru: "WhatsApp" },
+    value: contact.whatsapp,
+    href: contactLinks.whatsapp,
   },
 ].filter((channel): channel is ContactChannel => Boolean(channel.value && channel.href));
 

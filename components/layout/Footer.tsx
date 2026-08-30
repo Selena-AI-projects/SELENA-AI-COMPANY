@@ -173,7 +173,7 @@ export function Footer() {
                       href={channel.href}
                       className="text-sm text-ivory/65 transition-colors hover:text-copper"
                     >
-                      {channel.label}: {channel.value}
+                      {isEnglish ? channel.label.en : channel.label.ru}: {channel.value}
                     </a>
                   </li>
                 ))}
@@ -189,9 +189,7 @@ export function Footer() {
               ? "AI implementation, automation and training."
               : "AI-внедрение, автоматизация и обучение."}
             <span className="mt-1 block text-ivory/52">
-              {isEnglish
-                ? `Services are provided by ${seller.legalName}, ${seller.country.en}.`
-                : `Услуги оказывает ${seller.legalName}, ${seller.country.ru}.`}
+              {seller.footerLine}
             </span>
           </p>
           <div className="flex flex-wrap gap-x-6 gap-y-3">
