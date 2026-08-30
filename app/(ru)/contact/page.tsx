@@ -1,5 +1,7 @@
 import { buildMetadata } from "@/lib/metadata";
-import { contactChannels } from "@/lib/site";
+import Link from "next/link";
+import { contactAvailability, contactChannels } from "@/lib/site";
+import { commercialFacts } from "@/lib/commercial-facts";
 import { faq } from "@/lib/data/faq";
 import { PageHero } from "@/components/sections/PageHero";
 import { FAQSection } from "@/components/sections/FAQSection";
@@ -84,30 +86,38 @@ export default function ContactPage() {
                   ))}
                 </ol>
 
-                <div className="card-premium mt-8 p-5">
-                  {contactChannels.length > 0 ? (
-                    <>
-                      <p className="text-sm font-semibold text-ink">Прямые контакты</p>
-                      <ul className="mt-3 space-y-2">
-                        {contactChannels.map((channel) => (
-                          <li key={channel.key}>
-                            <a
-                              href={channel.href}
-                              className="text-sm font-medium text-link underline decoration-link/45 underline-offset-2 transition-colors hover:text-ink hover:decoration-link"
-                            >
-                              {channel.label}: {channel.value}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  ) : (
-                    <p className="text-sm leading-relaxed text-muted">
-                      Пока удобнее всего — форма брифа. Прямые каналы появятся
-                      здесь после добавления контактов в настройки сайта.
+                <address className="card-premium mt-8 p-5 not-italic">
+                  <p className="text-sm font-semibold text-ink">Selena Systems</p>
+                  <p className="mt-1 text-sm text-muted">
+                    {commercialFacts.seller.legalName}
+                  </p>
+                  <ul className="mt-4 space-y-2.5">
+                    {contactChannels.map((channel) => (
+                      <li key={channel.key}>
+                        <a
+                          href={channel.href}
+                          className="text-sm font-medium text-link underline decoration-link/45 underline-offset-2 transition-colors hover:text-ink hover:decoration-link"
+                        >
+                          {channel.label.ru}: {channel.value}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-4 border-t border-line pt-4">
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
+                      Часовой пояс
                     </p>
-                  )}
-                </div>
+                    <p className="mt-1 text-sm leading-relaxed text-ink/80">
+                      {contactAvailability.ru}
+                    </p>
+                  </div>
+                  <Link
+                    href="/about"
+                    className="mt-4 inline-flex min-h-11 items-center text-sm font-medium text-link underline decoration-link/45 underline-offset-2 transition-colors hover:text-ink"
+                  >
+                    Обо мне и подходе →
+                  </Link>
+                </address>
               </aside>
             </Reveal>
           </div>

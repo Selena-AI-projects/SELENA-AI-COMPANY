@@ -44,9 +44,14 @@ export default function AboutPage() {
         title="Помогаю бизнесу внедрять AI спокойно и по делу"
         intro="Selena Systems — это практическое внедрение AI для предпринимателей, экспертов и небольших команд: диагностика, автоматизация, обучение и сопровождение. Без хайпа и обещаний магии."
       >
-        <Button href={cta.primary.href} size="lg">
-          {cta.primary.label}
-        </Button>
+        <div className="flex flex-wrap gap-4">
+          <Button href={cta.primary.href} size="lg">
+            {cta.primary.label}
+          </Button>
+          <Button href={cta.contact.href} variant="secondary" size="lg">
+            {cta.contact.label}
+          </Button>
+        </div>
       </PageHero>
 
       <section className="py-20 sm:py-28">

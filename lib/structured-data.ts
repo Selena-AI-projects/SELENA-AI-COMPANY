@@ -1,4 +1,4 @@
-import { contact, contactLinks, founder, site } from "@/lib/site";
+import { contact, founder, site } from "@/lib/site";
 import type { Service } from "@/lib/data/services";
 import {
   amountForStructuredData,
@@ -13,15 +13,16 @@ export type AiAutomationOfferSlug = "ai-audit" | "ai-sprint" | "business-os";
 
 function organizationNode(locale: StructuredLocale) {
   const isRussian = locale === "ru";
-  const phone = getInternationalPhone(contact.whatsapp);
+  const phone = getInternationalPhone(contact.phone);
   const organizationId = `${site.url}/#organization`;
   const contactPoint = phone
     ? {
         "@type": "ContactPoint",
         telephone: phone,
+        email: contact.email,
         contactType: "sales",
         availableLanguage: ["English", "Russian"],
-        ...(contactLinks.whatsapp ? { url: contactLinks.whatsapp } : {}),
+        url: `${site.url}${isRussian ? "/contact" : "/en/contact"}`,
       }
     : undefined;
 

@@ -86,7 +86,7 @@ export default function EnglishContactPage() {
                             href={channel.href}
                             className="text-sm font-medium text-link underline decoration-link/45 underline-offset-2 transition-colors hover:text-ink hover:decoration-link"
                           >
-                            {channel.label}: {channel.value}
+                            {channel.label.en}: {channel.value}
                           </a>
                         </li>
                       ))}
