@@ -12,6 +12,8 @@ export function buildMetadata({
   locale = site.locale,
   languages,
   image,
+  article,
+  keywords,
 }: {
   title: string;
   description: string;
@@ -20,6 +22,12 @@ export function buildMetadata({
   languages?: Record<string, string>;
   /** Page-specific social card. Falls back to the site-wide visual. */
   image?: { url: string; alt: string };
+  article?: {
+    publishedTime: string;
+    modifiedTime: string;
+    authors: string[];
+  };
+  keywords?: string[];
 }): Metadata {
   const url = `${site.url}${path === "/" ? "" : path}`;
   const fullTitle = path === "/" ? `${site.name} — ${title}` : `${title} — ${site.name}`;
@@ -35,15 +43,23 @@ export function buildMetadata({
   return {
     title: { absolute: fullTitle },
     description,
+    keywords,
     alternates: { canonical: url, languages },
     openGraph: {
-      type: "website",
+      type: article ? "article" : "website",
       locale,
       siteName: site.name,
       title: fullTitle,
       description,
       url,
       images: [socialImage],
+      ...(article
+        ? {
+            publishedTime: article.publishedTime,
+            modifiedTime: article.modifiedTime,
+            authors: article.authors,
+          }
+        : {}),
     },
     twitter: {
       card: "summary_large_image",

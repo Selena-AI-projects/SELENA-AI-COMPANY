@@ -3,6 +3,7 @@ import { site } from "@/lib/site";
 import { visibilityLanguages } from "@/lib/visibility/routes";
 import { labContent, labLanguages, labPath, labSectionIds } from "@/lib/lab/content";
 import { journalProjects } from "@/lib/visibility-log/data";
+import { aiCodeCrossReviewArticle } from "@/lib/school/ai-code-cross-review";
 
 type PublicRoute = {
   path: string;
@@ -43,6 +44,15 @@ const routes: PublicRoute[] = [
   { path: "/ru/pricing", priority: 0.7, languages: visibilityLanguages("pricing") },
   { path: "/lab", priority: 0.75, languages: labLanguages() },
   { path: "/ru/lab", priority: 0.75, languages: labLanguages() },
+  // The blog and tools catalog are Russian-only. Do not publish hreflang until real
+  // English counterpart exists.
+  { path: "/ru/blog", priority: 0.75 },
+  { path: "/ru/tools", priority: 0.75 },
+  {
+    path: aiCodeCrossReviewArticle.path,
+    priority: 0.75,
+    lastModified: aiCodeCrossReviewArticle.updatedAt,
+  },
   ...labSectionIds.filter((section) => section !== "courses").flatMap((section) => [
     { path: labPath("en", section), priority: 0.65, languages: labLanguages(section) },
     { path: labPath("ru", section), priority: 0.65, languages: labLanguages(section) },

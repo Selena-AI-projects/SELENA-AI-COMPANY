@@ -144,6 +144,11 @@ export const contact = {
   email: cleanPublicEnv(process.env.NEXT_PUBLIC_CONTACT_EMAIL),
 } as const;
 
+/** Public communities are destinations for discussion, not direct contact channels. */
+export const communityLinks = {
+  baliAiHorecaTelegram: "https://t.me/bali_ai_horeca",
+} as const;
+
 export const contactLinks = {
   telegram: toTelegramHref(contact.telegram),
   whatsapp: toWhatsappHref(contact.whatsapp),

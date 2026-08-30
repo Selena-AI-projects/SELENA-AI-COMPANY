@@ -45,10 +45,19 @@ export function Footer() {
           : nav;
   // The Russian landing page keeps its own nav list, so the journal is added
   // there too — everywhere else it already arrives through the shared nav.
-  const footerNav =
+  const footerNavBase =
     !isEnglish && !currentNav.some((item) => item.href === "/ru/projects")
       ? [...currentNav, { href: "/ru/projects", label: "Журнал замеров" }]
       : currentNav;
+  const footerNav = isEnglish
+    ? footerNavBase
+    : [
+        ...footerNavBase,
+        ...[
+          { href: "/ru/blog", label: "Блог" },
+          { href: "/ru/tools", label: "Инструменты" },
+        ].filter((next) => !footerNavBase.some((item) => item.href === next.href)),
+      ];
   const currentNote = isEnglishLandingHome
     ? homepage.footerNote
     : isRussianLandingHome
@@ -185,7 +194,7 @@ export function Footer() {
                 : `Услуги оказывает ${seller.legalName}, ${seller.country.ru}.`}
             </span>
           </p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-x-6 gap-y-3">
             {CLIENT_PORTAL_ENABLED && (
               <>
                 <Link href={selenaAppRoutes.login} className="transition-colors hover:text-ivory/80">

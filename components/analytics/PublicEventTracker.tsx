@@ -21,6 +21,15 @@ function routeForHref(href: string) {
   }
 }
 
+function telegramCampaignProperties() {
+  const params = new URLSearchParams(window.location.search);
+  return Object.fromEntries(
+    ["utm_source", "utm_medium", "utm_campaign", "utm_content"]
+      .map((key) => [key, params.get(key)?.slice(0, 96)] as const)
+      .filter((entry): entry is readonly [string, string] => Boolean(entry[1])),
+  );
+}
+
 /**
  * Provider-neutral public funnel instrumentation.
  *
@@ -38,6 +47,18 @@ export function PublicEventTracker() {
         locale,
         page: pathname === "/en" ? "/" : pathname,
         product_context: "selena_systems",
+      });
+    }
+
+    if (pathname === "/ru/blog/kak-proveryat-ai-kod") {
+      const campaign = telegramCampaignProperties();
+      if (Object.keys(campaign).length > 0) {
+        window.sessionStorage.setItem("selena:last_campaign", JSON.stringify(campaign));
+      }
+      trackPublicEvent("hero_view", {
+        locale: "ru",
+        page: "ai_code_cross_review",
+        ...campaign,
       });
     }
 

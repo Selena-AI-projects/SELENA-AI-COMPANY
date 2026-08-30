@@ -3,7 +3,6 @@ import { labContent, labPath, type LabItem, type LabLocale, type LabSectionId } 
 import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { Reveal } from "@/components/ui/Reveal";
 import { LabDiagram } from "@/components/lab/LabDiagram";
 
 function ItemLink({ item, locale }: { item: LabItem; locale: LabLocale }) {
@@ -47,6 +46,28 @@ function LabNextSteps({ locale }: { locale: LabLocale }) {
 
 export function LabLandingPage({ locale }: { locale: LabLocale }) {
   const content = labContent[locale];
+  const researchLinks = locale === "ru"
+    ? [
+        ...content.sections
+          .filter((section) => ["research", "guides", "experiments"].includes(section.id))
+          .map((section) => ({ ...section, href: labPath(locale, section.id) })),
+        {
+          id: "tools",
+          title: "Инструменты",
+          description: "Доступные технические проверки Selena Systems с ясным назначением, источниками данных и границами результата.",
+          href: "/ru/tools",
+        },
+        {
+          id: "cases",
+          title: "Кейсы",
+          description: "Проверяемые проекты и журналы измерений с датами, evidence и честным статусом каждого результата.",
+          href: "/ru/projects",
+        },
+      ]
+    : content.sections
+        .filter((section) => section.id !== "courses")
+        .map((section) => ({ ...section, href: labPath(locale, section.id) }));
+
   return (
     <>
       <PageHero eyebrow={content.eyebrow} title={content.title} intro={content.intro}>
@@ -58,21 +79,34 @@ export function LabLandingPage({ locale }: { locale: LabLocale }) {
 
       <section className="bg-ivory py-20 sm:py-24">
         <Container size="wide">
-          <Reveal>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper-deep">{content.browseLabel}</p>
-          </Reveal>
+          {locale === "ru" ? (
+            <div className="mb-14 grid gap-px overflow-hidden border border-line bg-line md:grid-cols-2">
+              <a href="#research-tools" className="group block h-full bg-surface p-7 transition-colors hover:bg-ivory sm:p-9">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-copper-deep">Лаборатория</p>
+                <h2 className="mt-6 font-serif text-3xl font-semibold text-ink group-hover:text-copper-deep">Исследования и инструменты</h2>
+                <p className="mt-3 max-w-xl leading-relaxed text-muted">Эксперименты, методики, работающие инструменты и проверяемые кейсы Selena Systems.</p>
+              </a>
+              <Link href="/ru/blog" className="group block h-full bg-surface p-7 transition-colors hover:bg-ivory sm:p-9">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-copper-deep">Блог</p>
+                <h2 className="mt-6 font-serif text-3xl font-semibold text-ink group-hover:text-copper-deep">Опыт, статьи и обновления</h2>
+                <p className="mt-3 max-w-xl leading-relaxed text-muted">Личный опыт, разборы AI-инструментов, новости AI Visibility и практические выводы.</p>
+              </Link>
+            </div>
+          ) : null}
+          <p id="research-tools" className="scroll-mt-28 text-xs font-semibold uppercase tracking-[0.22em] text-copper-deep">
+            {locale === "ru" ? "Исследования и инструменты" : content.browseLabel}
+          </p>
           <div className="mt-8 grid gap-px overflow-hidden border border-line bg-line md:grid-cols-2 xl:grid-cols-5">
-            {content.sections.map((section, index) => (
-              <Reveal key={section.id} delay={index * 55}>
-                <Link
-                  href={labPath(locale, section.id)}
-                  className="group block h-full bg-surface p-6 transition-colors hover:bg-ivory sm:p-7"
-                >
-                  <p className="text-xs font-semibold tracking-[0.2em] text-copper-deep">0{index + 1}</p>
-                  <h2 className="mt-8 font-serif text-2xl font-semibold text-ink group-hover:text-copper-deep">{section.title}</h2>
-                  <p className="mt-3 text-sm leading-relaxed text-muted">{section.description}</p>
-                </Link>
-              </Reveal>
+            {researchLinks.map((section, index) => (
+              <Link
+                key={section.id}
+                href={section.href}
+                className="group block h-full bg-surface p-6 transition-colors hover:bg-ivory sm:p-7"
+              >
+                <p className="text-xs font-semibold tracking-[0.2em] text-copper-deep">0{index + 1}</p>
+                <h2 className="mt-8 font-serif text-2xl font-semibold text-ink group-hover:text-copper-deep">{section.title}</h2>
+                <p className="mt-3 text-sm leading-relaxed text-muted">{section.description}</p>
+              </Link>
             ))}
           </div>
         </Container>
@@ -80,12 +114,12 @@ export function LabLandingPage({ locale }: { locale: LabLocale }) {
 
       <section className="bg-surface py-20 sm:py-24">
         <Container>
-          <Reveal>
+          <div>
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper-deep">{content.featuredLabel}</p>
             <h2 className="mt-5 text-h2 text-ink">
               {locale === "ru" ? "Три материала для правильного старта" : "Three foundations for a sound start"}
             </h2>
-          </Reveal>
+          </div>
           <div className="mt-10">
             {content.items.map((item) => <ItemLink key={`${item.section}:${item.slug}`} item={item} locale={locale} />)}
           </div>

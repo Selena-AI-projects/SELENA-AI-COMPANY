@@ -17,6 +17,7 @@ export const EVENT_NAMES = [
   "form_submit_success",
   "form_submit_error",
   "whatsapp_click",
+  "telegram_discussion_click",
   "readiness_start",
   "readiness_complete",
   "visibility_landing_viewed",
@@ -56,6 +57,7 @@ export const PUBLIC_EVENT_NAMES = [
   "form_submit_success",
   "form_submit_error",
   "whatsapp_click",
+  "telegram_discussion_click",
   "readiness_start",
   "readiness_complete",
 ] as const satisfies readonly EventName[];

@@ -17,6 +17,7 @@ test("public analytics dictionary contains the approved no-PII event names", () 
     "form_submit_success",
     "form_submit_error",
     "whatsapp_click",
+    "telegram_discussion_click",
     "readiness_start",
     "readiness_complete",
   ]);
