@@ -16,12 +16,18 @@ import sitemap from "@/app/sitemap";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
-test("Selena Lab has the five approved public sections and no separate Blog or Academy", () => {
+test("Selena Lab keeps its existing routes but publicly links the laboratory and blog structure", () => {
   assert.deepEqual(labSectionIds, ["research", "guides", "experiments", "articles", "courses"]);
   for (const locale of ["en", "ru"] as const) {
     assert.deepEqual(labContent[locale].sections.map((section) => section.id), labSectionIds);
-    assert.ok(!/\bAcademy\b|\/blog\b/i.test(JSON.stringify(labContent[locale])));
   }
+
+  const landing = readFileSync(join(process.cwd(), "components/lab/LabPages.tsx"), "utf8");
+  assert.match(landing, /Исследования и инструменты/);
+  assert.match(landing, /href="\/ru\/blog"/);
+  assert.match(landing, /href: "\/ru\/tools"/);
+  assert.match(landing, /href: "\/ru\/projects"/);
+  assert.ok(!landing.includes('href="/ru/school"'));
 });
 
 test("the three owner-selected foundation topics are published in both languages", () => {
@@ -84,6 +90,8 @@ test("Lab courses disclose that nothing is for sale and reserve the shared learn
     assert.match(labContent[locale].coursesBoundary, locale === "en" ? /No course is currently offered for sale/ : /ни один курс не выставлен на продажу/i);
   }
   assert.ok(!sitemap().some((entry) => /\/lab\/courses$/.test(String(entry.url))));
+  const landing = readFileSync(join(process.cwd(), "components/lab/LabPages.tsx"), "utf8");
+  assert.match(landing, /section\.id !== "courses"/);
   for (const route of ["app/lab/[section]/page.tsx", "app/ru/lab/[section]/page.tsx"]) {
     const source = readFileSync(appFile(route), "utf8");
     assert.match(source, /section\.id === "courses"[\s\S]*index: false[\s\S]*follow: true/);

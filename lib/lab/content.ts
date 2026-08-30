@@ -117,7 +117,7 @@ const officialSources = {
 export const labContent: Record<LabLocale, LabLocaleContent> = {
   en: {
     eyebrow: "Selena Lab",
-    title: "Research, practical guides, experiments and courses for building with AI.",
+    title: "Research, practical guides, experiments and articles for building with AI.",
     intro:
       "Selena Lab is the research and education layer of Selena Systems. We publish methods, evidence boundaries and practical work that support AI Visibility and our custom AI Systems practice.",
     supportingLine: "Research → useful content → trust → better decisions.",
@@ -476,9 +476,9 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
   },
   ru: {
     eyebrow: "Selena Lab",
-    title: "Исследования, практические руководства, эксперименты и курсы о создании AI-систем.",
+    title: "Исследования, инструменты и практический опыт создания AI-систем.",
     intro:
-      "Selena Lab — исследовательский и образовательный слой Selena Systems. Здесь мы публикуем методы, границы доказательности и практические материалы для AI Visibility и индивидуальных AI Systems.",
+      "Selena Lab объединяет исследовательскую лабораторию и блог Selena Systems. Здесь публикуются методы, эксперименты, инструменты, проверяемые кейсы и практический опыт работы с AI Visibility и AI Systems.",
     supportingLine: "Research → полезный контент → доверие → лучшие решения.",
     browseLabel: "Разделы Lab",
     featuredLabel: "С чего начать",

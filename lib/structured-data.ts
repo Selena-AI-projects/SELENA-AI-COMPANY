@@ -568,8 +568,8 @@ export function buildLabStructuredData(locale: StructuredLocale) {
         type: "CollectionPage",
         name: "Selena Lab",
         description: isRussian
-          ? "Исследования, руководства, эксперименты, статьи и курсы о создании AI-систем."
-          : "Research, guides, experiments, articles and courses for building with AI.",
+          ? "Исследования, методики, эксперименты, инструменты, проверяемые кейсы и блог о создании AI-систем."
+          : "Research, guides, experiments, tools and articles for building with AI.",
       }),
       breadcrumbNode(
         [
@@ -818,6 +818,87 @@ export function buildLabArticleStructuredData({
           { "@type": "ListItem", position: 2, name: title, item: pageUrl },
         ],
       },
+    ],
+  };
+}
+
+export function buildAiCodeCrossReviewStructuredData({
+  pageUrl,
+  title,
+  description,
+  imageUrl,
+  publishedAt,
+  updatedAt,
+  steps,
+  tags,
+}: {
+  pageUrl: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  publishedAt: string;
+  updatedAt: string;
+  steps: readonly string[];
+  tags: readonly string[];
+}) {
+  const blogUrl = `${site.url}/ru/blog`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationNode("ru"),
+      websiteNode("ru"),
+      personNode("ru"),
+      {
+        "@type": "Article",
+        "@id": `${pageUrl}#article`,
+        url: pageUrl,
+        mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
+        headline: title,
+        description,
+        image: {
+          "@type": "ImageObject",
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+        },
+        author: { "@id": `${site.url}/#founder` },
+        publisher: { "@id": `${site.url}/#organization` },
+        datePublished: publishedAt,
+        dateModified: updatedAt,
+        inLanguage: "ru",
+        articleSection: "Блог · Личный опыт",
+        keywords: tags.join(", "),
+        isPartOf: { "@id": `${site.url}/#website` },
+      },
+      {
+        "@type": "HowTo",
+        "@id": `${pageUrl}#workflow`,
+        url: pageUrl,
+        name: "Как организовать перекрёстную проверку AI-кода",
+        description:
+          "Пошаговый workflow: от постановки задачи и реализации Codex до независимой проверки Claude Code и owner-gate.",
+        image: imageUrl,
+        inLanguage: "ru",
+        author: { "@id": `${site.url}/#founder` },
+        publisher: { "@id": `${site.url}/#organization` },
+        mainEntityOfPage: pageUrl,
+        step: steps.map((text, index) => ({
+          "@type": "HowToStep",
+          position: index + 1,
+          name: `Шаг ${index + 1}`,
+          text,
+          url: `${pageUrl}#workflow-step-${index + 1}`,
+        })),
+      },
+      breadcrumbNode(
+        [
+          { name: "Selena Systems", item: `${site.url}/ru` },
+          { name: "Блог", item: blogUrl },
+          { name: title, item: pageUrl },
+        ],
+        pageUrl,
+      ),
     ],
   };
 }
