@@ -585,7 +585,7 @@ export const visibilityContentRu: VisibilityContent = {
             statusLabel: "По заявке · проверяет аналитик",
             description: "Тем, кому нужен baseline, проверенный человеком.",
             systemsLabel: "8 систем: ChatGPT, Gemini, Perplexity, Claude, DeepSeek, Qwen, Mistral, Grok",
-            volumeLabel: "25 вопросов × 2 языка × 8 систем × 5 повторов = 2000 ответов",
+            volumeLabel: "20 сценариев × 8 систем × 5 повторов = 800 ответов",
             progressionLabel: "Пять повторов и ручная проверка аналитиком.",
             features: [
               "Глубокий разбор топ-10 приоритетов",

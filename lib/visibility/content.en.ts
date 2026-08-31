@@ -586,7 +586,7 @@ export const visibilityContentEn: VisibilityContent = {
             statusLabel: "On request · analyst reviewed",
             description: "For those who need a baseline verified by a human.",
             systemsLabel: "8 systems: ChatGPT, Gemini, Perplexity, Claude, DeepSeek, Qwen, Mistral, Grok",
-            volumeLabel: "25 questions × 2 languages × 8 systems × 5 repeats = 2000 answers",
+            volumeLabel: "20 scenarios × 8 systems × 5 repeats = 800 answers",
             progressionLabel: "Five repeats and manual analyst review.",
             features: [
               "Deep review of the top 10 priorities",
