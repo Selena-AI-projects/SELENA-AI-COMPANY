@@ -58,8 +58,8 @@ customer-facing ladder presents the same scopes as:
   Visitor View systems; one weekly run; up to 300 planned answers per month.
 - AI Visibility Landscape — $79/month; up to 25 questions across up to two
   languages; all eight systems; one weekly run; up to 800 planned answers per month.
-- Expert Verified — $399 one-time; 25 questions in each of two languages; all
-  eight systems; five repeats; 2,000 planned answers plus human semantic,
+- Expert Verified — $399 one-time; 20 scenarios across two languages; all
+  eight systems; five repeats; 800 planned answers plus human semantic,
   citation and factual QC.
 - Implementation + 90 days — $2,490; manual approval and an immutable custom scope.
 

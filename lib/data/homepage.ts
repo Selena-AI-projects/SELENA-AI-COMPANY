@@ -149,7 +149,7 @@ export const homepage = {
           summary: "A human analyst reviews every mention, citation and factual error.",
           systems: ["ChatGPT", "Gemini", "Perplexity", "Claude", "DeepSeek", "Qwen", "Mistral", "Grok"],
           includes: [
-            "25 questions × 2 languages × 8 systems × 5 repeats = 2000 answers",
+            "20 scenarios × 8 systems × 5 repeats = 800 answers",
             "Analyst QC of mentions and citations",
             "5–10 approved priorities and action plan",
           ],
