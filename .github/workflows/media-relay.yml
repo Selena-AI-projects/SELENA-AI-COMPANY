@@ -6,6 +6,11 @@ name: media-relay
 # CDNs directly, so this runner acts as the relay.
 on:
   workflow_dispatch: {}
+  push:
+    branches:
+      - "claude/universe-systems-cinematic-redesign-8jcb4f"
+    paths:
+      - "scripts/media-relay-manifest.json"
 
 permissions:
   contents: write
