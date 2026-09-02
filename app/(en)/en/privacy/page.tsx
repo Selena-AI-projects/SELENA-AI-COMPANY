@@ -3,6 +3,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
 import { site } from "@/lib/site";
 import { buildLegalPageStructuredData } from "@/lib/structured-data";
+import { effectiveDateLine } from "@/lib/data/legal";
 
 const title = "Privacy Policy";
 const description =
@@ -87,7 +88,7 @@ export default function EnglishPrivacyPage() {
               used in the original request.
             </p>
             <p className="border-t border-line pt-6 text-sm">
-              Last updated: 15 August 2026.
+              {effectiveDateLine("privacy", "en")}
             </p>
           </div>
         </article>
