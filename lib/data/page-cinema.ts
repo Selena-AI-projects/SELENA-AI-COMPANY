@@ -85,7 +85,7 @@ const paths = {
   labBlueprint: "/media/cinematic/pages/lab-blueprint.webp",
   twoAgents: "/media/cinematic/pages/two-agents.webp",
   loupe: "/media/cinematic/pages/loupe.webp",
-  contactHero: { video: "/media/cinematic/pages/contact-loop.mp4", poster: "/media/cinematic/pages/contact-desk.webp" },
+  contactHero: { video: "/media/cinematic/pages/contact-loop.mp4", poster: "/media/cinematic/pages/contact-table.webp" },
   aboutHero: { video: "/media/cinematic/pages/about-loop.mp4", poster: "/media/cinematic/pages/about-studio.webp" },
   projects: {
     korafoodhall: "/media/cinematic/projects/kora.webp",
@@ -103,7 +103,7 @@ const en: PageCinema = {
   contact: {
     hero: {
       ...paths.contactHero,
-      alt: "A blank folded letter on a dark desk beside a brass fountain pen under warm lamp light",
+      alt: "Two empty chairs at a small round table under one brass lamp, two cups waiting",
     },
   },
   about: {
@@ -225,7 +225,7 @@ const ru: PageCinema = {
   contact: {
     hero: {
       ...paths.contactHero,
-      alt: "Чистый сложенный лист на тёмном столе рядом с латунной перьевой ручкой под тёплым светом лампы",
+      alt: "Два пустых стула у маленького круглого стола под одной латунной лампой, две чашки ждут",
     },
   },
   about: {
