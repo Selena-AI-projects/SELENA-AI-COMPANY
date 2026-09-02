@@ -107,24 +107,24 @@ const en: PageCinema = {
       doki: { image: paths.projects.doki, alt: "A blank document under a brass clip with a pen and a stamp" },
       remhaos: { image: paths.projects.remhaos, alt: "Fabric and stone samples with a brass ruler and a rolled plan" },
       villaops: { image: paths.projects.villaops, alt: "A villa with a pool at dusk" },
-      bigdragonvillas: { image: paths.projects.bigdragonvillas, alt: "A Balinese jungle villa at dusk, warm light on a still pool" },
+      bigdragonvillas: { image: paths.projects.bigdragonvillas, alt: "A Balinese pavilion among palms at dusk, its warm light reflected in a still pond under a crescent moon" },
     },
   },
   lab: {
     hero: {
       ...paths.labHero,
-      alt: "A row of brass-mounted lenses and a prism on an optical bench, one warm beam passing through",
+      alt: "A brass projector lens on an optical bench casting one dusty blue beam onto a tilted square plate",
     },
     sections: {
-      guides: { image: paths.labGuides, alt: "A folded map with faint contour lines and a brass compass under a warm lamp" },
-      experiments: { image: paths.labExperiments, alt: "Two identical brass instruments side by side under one warm beam of light" },
-      articles: { image: paths.labArticles, alt: "A brass fountain pen across an open blank notebook, a cup of tea beside it" },
+      guides: { image: paths.labGuides, alt: "A folded sheet with one hand-drawn outline and a brass compass beside a copper lamp" },
+      experiments: { image: paths.labExperiments, alt: "Two brass balance scales side by side, each weighing one glass sphere" },
+      articles: { image: paths.labArticles, alt: "Two stacks of blank cards on a blue desk, a brass ring on one and a fountain pen on the other" },
     },
     articles: {
       "what-is-ai-visibility": { image: paths.lens, alt: "A lens standing in darkness, its glass filled with one warm circle of light" },
-      "prepare-site-for-ai-systems": { image: paths.labBlueprint, alt: "A blank blueprint sheet on a drafting table with brass weights and a set square" },
+      "prepare-site-for-ai-systems": { image: paths.labBlueprint, alt: "A large unrolled drafting sheet with faint grid lines, held flat by a brass plate and a small brass weight" },
       "read-ai-visibility-report-evidence": { image: paths.loupe, alt: "A brass loupe standing in a beam of light in a dark room" },
-      "two-agent-code-review": { image: paths.labExperiments, alt: "Two identical brass instruments side by side under one warm beam of light" },
+      "two-agent-code-review": { image: paths.labExperiments, alt: "Two brass balance scales side by side, each weighing one glass sphere" },
     },
   },
   visibility: {
@@ -212,24 +212,24 @@ const ru: PageCinema = {
       doki: { image: paths.projects.doki, alt: "Чистый документ под латунным зажимом, рядом ручка и печать" },
       remhaos: { image: paths.projects.remhaos, alt: "Образцы ткани и камня, латунная линейка и рулон плана" },
       villaops: { image: paths.projects.villaops, alt: "Вилла с бассейном в сумерках" },
-      bigdragonvillas: { image: paths.projects.bigdragonvillas, alt: "Балийская вилла в джунглях в сумерках, тёплый свет на глади бассейна" },
+      bigdragonvillas: { image: paths.projects.bigdragonvillas, alt: "Балийский павильон среди пальм в сумерках, тёплый свет отражается в неподвижном пруду под молодой луной" },
     },
   },
   lab: {
     hero: {
       ...paths.labHero,
-      alt: "Ряд линз в латунных оправах и призма на оптической скамье, сквозь них проходит один тёплый луч",
+      alt: "Латунный объектив на оптической скамье бросает один пыльный синий луч на наклонённую квадратную пластину",
     },
     sections: {
-      guides: { image: paths.labGuides, alt: "Сложенная карта с едва заметными линиями и латунный компас под тёплой лампой" },
-      experiments: { image: paths.labExperiments, alt: "Два одинаковых латунных прибора рядом под одним тёплым лучом света" },
-      articles: { image: paths.labArticles, alt: "Латунная перьевая ручка на раскрытом пустом блокноте, рядом чашка чая" },
+      guides: { image: paths.labGuides, alt: "Сложенный лист с одним нарисованным от руки контуром и латунный компас рядом с медной лампой" },
+      experiments: { image: paths.labExperiments, alt: "Двое латунных весов рядом, на каждых — по одному стеклянному шару" },
+      articles: { image: paths.labArticles, alt: "Две стопки чистых карточек на синем столе: на одной латунное кольцо, на другой перьевая ручка" },
     },
     articles: {
       "what-is-ai-visibility": { image: paths.lens, alt: "Линза в темноте, в стекле которой стоит один тёплый круг света" },
-      "prepare-site-for-ai-systems": { image: paths.labBlueprint, alt: "Чистый лист чертежа на кульмане с латунными грузиками и угольником" },
+      "prepare-site-for-ai-systems": { image: paths.labBlueprint, alt: "Большой развёрнутый чертёжный лист с едва заметной сеткой, прижатый латунной пластиной и маленьким латунным грузиком" },
       "read-ai-visibility-report-evidence": { image: paths.loupe, alt: "Латунная лупа стоит в луче света в тёмной комнате" },
-      "two-agent-code-review": { image: paths.labExperiments, alt: "Два одинаковых латунных прибора рядом под одним тёплым лучом света" },
+      "two-agent-code-review": { image: paths.labExperiments, alt: "Двое латунных весов рядом, на каждых — по одному стеклянному шару" },
     },
   },
   visibility: {

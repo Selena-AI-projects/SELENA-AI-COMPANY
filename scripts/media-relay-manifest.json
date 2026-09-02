@@ -1,16 +1,10 @@
 [
-  { "file": "public/media/cinematic/pages/journal-a.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_045245_b9fec9c3-93d8-4081-9fe6-1f4cb5775e06.png" },
-  { "file": "public/media/cinematic/pages/journal-b.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_045245_602bff51-8496-4f91-9b69-af40b67881fc.png" },
-  { "file": "public/media/cinematic/pages/lab-bench-a.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_045245_f1952fd9-0c3b-4db4-9f5f-c23da8025095.png" },
-  { "file": "public/media/cinematic/pages/lab-bench-b.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_045245_ba2c0db1-b480-4ea5-b76f-aeead09308e2.png" },
-  { "file": "public/media/cinematic/projects/bigdragonvillas-a.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_045245_9e8905e4-0738-4b91-9260-c62a7d49f79e.png" },
-  { "file": "public/media/cinematic/projects/bigdragonvillas-b.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_045245_260e18e8-3e98-4983-9cff-e71117b9d121.png" },
-  { "file": "public/media/cinematic/pages/lab-guides-a.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_045245_96506c2d-cf66-418d-88c9-0068f23219a1.png" },
-  { "file": "public/media/cinematic/pages/lab-guides-b.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_045245_b692ec08-2051-4e27-8615-68d4b4e9b439.png" },
-  { "file": "public/media/cinematic/pages/lab-experiments-a.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_045245_e6291ba1-1e89-4548-9581-3f4883b63a53.png" },
-  { "file": "public/media/cinematic/pages/lab-experiments-b.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_045246_f4bd6750-1f39-49a8-b7fc-012f5852a56c.png" },
-  { "file": "public/media/cinematic/pages/lab-articles-a.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_045245_1491fa30-4dd4-4911-b7c3-efaaa21bb226.png" },
-  { "file": "public/media/cinematic/pages/lab-articles-b.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_045245_f63e1edf-c4c3-45ae-87bd-913de2a7bb37.png" },
-  { "file": "public/media/cinematic/pages/lab-blueprint-a.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_045249_b6dbca53-d484-4655-8c08-53991a393802.png" },
-  { "file": "public/media/cinematic/pages/lab-blueprint-b.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_045249_fb22011e-2a8f-4139-9356-a68a167e70cc.png" }
+  { "file": "public/media/cinematic/pages/journal-loop.mp4", "mode": "video", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053536_f195b270-d6a5-4858-9d3c-48bddeb0d0e5.mp4" },
+  { "file": "public/media/cinematic/pages/journal-loop.webm", "mode": "videowebm", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053536_f195b270-d6a5-4858-9d3c-48bddeb0d0e5.mp4" },
+  { "file": "preview/journal-mid.jpg", "mode": "midframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053536_f195b270-d6a5-4858-9d3c-48bddeb0d0e5.mp4" },
+  { "file": "preview/journal-end.jpg", "mode": "endframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053536_f195b270-d6a5-4858-9d3c-48bddeb0d0e5.mp4" },
+  { "file": "public/media/cinematic/pages/lab-loop.mp4", "mode": "video", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053540_01936d6e-15df-4ded-980c-6f4495608415.mp4" },
+  { "file": "public/media/cinematic/pages/lab-loop.webm", "mode": "videowebm", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053540_01936d6e-15df-4ded-980c-6f4495608415.mp4" },
+  { "file": "preview/lab-mid.jpg", "mode": "midframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053540_01936d6e-15df-4ded-980c-6f4495608415.mp4" },
+  { "file": "preview/lab-end.jpg", "mode": "endframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053540_01936d6e-15df-4ded-980c-6f4495608415.mp4" }
 ]
