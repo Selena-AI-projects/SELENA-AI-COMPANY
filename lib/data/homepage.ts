@@ -447,6 +447,68 @@ export const homepage = {
       },
     ] as ProofProject[],
   },
+  // Cinematic media layer: every asset explains a real part of the product.
+  // Images and clips are generated art direction (no fake dashboards, no
+  // fake data, nothing readable in frame) — the copy stays the proof.
+  cinema: {
+    hero: {
+      video: "/media/cinematic/hero-loop.mp4",
+      poster: "/media/cinematic/hero-poster.webp",
+      alt: "A warm beam of light finds one lit storefront in a dark miniature city",
+    },
+    measurement: {
+      eyebrow: "How a measurement works",
+      headline: "From a customer's question to a report you can act on.",
+      intro:
+        "Four steps behind every paid measurement: real questions, live systems, saved answers, a prioritized report.",
+      honestyNote:
+        "Every number in the report comes with its measurement window — and a note on what it does not prove.",
+      controls: { prev: "Previous step", next: "Next step", goTo: "Go to step" },
+      slides: [
+        {
+          title: "A customer asks AI",
+          text: "People already ask ChatGPT, Gemini and Perplexity where to go and who to buy from. Your business is either in that answer or it is not.",
+          image: "/media/cinematic/slide-ask.webp",
+          alt: "A person asks their phone a question at night, the screen glowing warmly",
+        },
+        {
+          title: "We ask the same systems",
+          text: "Up to 25 of your customers' real questions go to each system in your plan — the same wording every time, with no manual tuning.",
+          image: "/media/cinematic/slide-surfaces.webp",
+          video: "/media/cinematic/prisms-loop.mp4",
+          alt: "One beam of light passing through three glass prisms, each refracting it differently",
+        },
+        {
+          title: "Answers become evidence",
+          text: "Every answer is saved: mentions, positions, citations and competitors, recorded next to the measurement window. Nothing is averaged or guessed.",
+          image: "/media/cinematic/slide-evidence.webp",
+          alt: "A stack of printed pages under a magnifying loupe in warm lamp light",
+        },
+        {
+          title: "A report with priorities",
+          text: "You see what AI finds, what it misses and what to fix first. Fixes and monitoring follow the same evidence.",
+          image: "/media/cinematic/slide-report.webp",
+          alt: "Hands holding an open printed report at a warm desk",
+        },
+      ],
+    },
+    visibilityBand: {
+      image: "/media/cinematic/visibility-lens.webp",
+      alt: "A lens standing in darkness, its glass filled with one warm circle of light",
+      caption:
+        "The measurement looks at your business the way AI systems do — from the outside, through what is public.",
+    },
+    automationBand: {
+      video: "/media/cinematic/automation-loop.mp4",
+      poster: "/media/cinematic/automation-poster.webp",
+      alt: "Tangled dark threads passing through a brass comb and emerging as parallel copper threads",
+      caption: "Inward: scattered manual work becomes one working system.",
+    },
+    ctaBand: {
+      image: "/media/cinematic/cta-dawn.webp",
+      alt: "A calm ordered desk by a large window at dawn, warm light entering a cool room",
+    },
+  },
   productSwitch: {
     kicker: "Above — product 01 · AI Visibility",
     headline: "Next — product 02: AI Automation",

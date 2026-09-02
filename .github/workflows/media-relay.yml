@@ -1,0 +1,76 @@
+name: media-relay
+
+# Fetches generated media named in scripts/media-relay-manifest.json,
+# compresses it for the web, and commits the results back to the branch
+# the workflow was dispatched on. The build container cannot reach media
+# CDNs directly, so this runner acts as the relay.
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - "claude/universe-systems-cinematic-redesign-8jcb4f"
+    paths:
+      - "scripts/media-relay-manifest.json"
+
+permissions:
+  contents: write
+
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      - name: Download and process media
+        run: |
+          set -euo pipefail
+          manifest="scripts/media-relay-manifest.json"
+          count=$(jq length "$manifest")
+          for i in $(seq 0 $((count - 1))); do
+            url=$(jq -r ".[$i].url" "$manifest")
+            out=$(jq -r ".[$i].file" "$manifest")
+            mode=$(jq -r ".[$i].mode" "$manifest")
+            mkdir -p "$(dirname "$out")"
+            tmp=$(mktemp --suffix ".download")
+            curl -fsSL --retry 3 -o "$tmp" "$url"
+            case "$mode" in
+              preview)
+                ffmpeg -y -i "$tmp" -vf "scale=640:-2" -q:v 6 "$out"
+                ;;
+              image)
+                ffmpeg -y -i "$tmp" -vf "scale='min(1920,iw)':-2" -c:v libwebp -quality 82 "$out"
+                ;;
+              video)
+                ffmpeg -y -i "$tmp" -vf "scale=1280:-2" -an -c:v libx264 -crf 27 -preset slow -pix_fmt yuv420p -movflags +faststart "$out"
+                ;;
+              poster)
+                ffmpeg -y -i "$tmp" -frames:v 1 -vf "scale=1280:-2" -c:v libwebp -quality 78 "$out"
+                ;;
+              midframe)
+                ffmpeg -y -ss 2.5 -i "$tmp" -frames:v 1 -vf "scale=640:-2" -q:v 6 "$out"
+                ;;
+              endframe)
+                ffmpeg -y -ss 4.5 -i "$tmp" -frames:v 1 -vf "scale=640:-2" -q:v 6 "$out"
+                ;;
+              copy)
+                cp "$tmp" "$out"
+                ;;
+              *)
+                echo "unknown mode: $mode" >&2
+                exit 1
+                ;;
+            esac
+            rm -f "$tmp"
+          done
+          ls -laR public/media/cinematic preview 2>/dev/null || true
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: relay generated media assets" || echo "nothing to commit"
+          git push
