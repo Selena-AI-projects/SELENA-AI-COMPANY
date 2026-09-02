@@ -10,6 +10,9 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { buildContactStructuredData } from "@/lib/structured-data";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { pageCinema } from "@/lib/data/page-cinema";
+
+const cinema = pageCinema("ru").contact;
 
 export const metadata = buildMetadata({
   title: "Связаться с Selena Systems",
@@ -52,6 +55,10 @@ export default function ContactPage() {
         eyebrow="Связаться"
         title="Разберём вашу задачу"
         intro="Опишите задачу простыми словами. Не нужно заранее знать, какой инструмент вам нужен — сначала разберём процесс."
+        media={{
+          video: { src: cinema.hero.video, poster: cinema.hero.poster },
+          alt: cinema.hero.alt,
+        }}
       />
 
       <section className="pb-20 sm:pb-28">

@@ -52,6 +52,13 @@ type PageCinema = {
     hero: Loop;
     boundary: Frame;
   };
+  contact: {
+    hero: Loop;
+  };
+  about: {
+    hero: Loop;
+    method: Frame;
+  };
 };
 
 const paths = {
@@ -78,6 +85,8 @@ const paths = {
   labBlueprint: "/media/cinematic/pages/lab-blueprint.webp",
   twoAgents: "/media/cinematic/pages/two-agents.webp",
   loupe: "/media/cinematic/pages/loupe.webp",
+  contactHero: { video: "/media/cinematic/pages/contact-loop.mp4", poster: "/media/cinematic/pages/contact-table.webp" },
+  aboutHero: { video: "/media/cinematic/pages/about-loop.mp4", poster: "/media/cinematic/pages/about-studio.webp" },
   projects: {
     korafoodhall: "/media/cinematic/projects/kora.webp",
     otherbali: "/media/cinematic/projects/otherbali.webp",
@@ -91,6 +100,23 @@ const paths = {
 };
 
 const en: PageCinema = {
+  contact: {
+    hero: {
+      ...paths.contactHero,
+      alt: "Two empty chairs at a small round table under one brass lamp, two cups waiting",
+    },
+  },
+  about: {
+    hero: {
+      ...paths.aboutHero,
+      alt: "A desk by a wide window at dusk: one lamp lit, an open blank notebook and a cup, town lights far below",
+    },
+    method: {
+      image: paths.gears,
+      alt: "Brass gears meshing on a dark bench under warm copper light",
+      caption: "Process first, then the AI layer: every part is there because the one before it needs it.",
+    },
+  },
   pricingDirectory: {
     visibility: { image: paths.lens, alt: "A lens standing in darkness, its glass filled with one warm circle of light" },
     systems: { image: paths.gears, alt: "A row of polished brass gears meshing on a dark workbench in warm light" },
@@ -196,6 +222,23 @@ const en: PageCinema = {
 };
 
 const ru: PageCinema = {
+  contact: {
+    hero: {
+      ...paths.contactHero,
+      alt: "Два пустых стула у маленького круглого стола под одной латунной лампой, две чашки ждут",
+    },
+  },
+  about: {
+    hero: {
+      ...paths.aboutHero,
+      alt: "Стол у широкого окна в сумерках: горит одна лампа, раскрытый пустой блокнот и чашка, далеко внизу огни города",
+    },
+    method: {
+      image: paths.gears,
+      alt: "Латунные шестерни в зацеплении на тёмной скамье под тёплым медным светом",
+      caption: "Сначала процесс, потом инструмент: каждая деталь стоит на месте, потому что её требует предыдущая.",
+    },
+  },
   pricingDirectory: {
     visibility: { image: paths.lens, alt: "Линза в темноте, в стекле которой стоит один тёплый круг света" },
     systems: { image: paths.gears, alt: "Ряд полированных латунных шестерёнок сцеплен на тёмном верстаке в тёплом свете" },
