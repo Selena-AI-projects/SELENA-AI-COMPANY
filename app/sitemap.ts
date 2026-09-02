@@ -93,12 +93,13 @@ const routes: PublicRoute[] = [
   { path: "/en/about", priority: 0.6, languages: { "x-default": "/en/about", en: "/en/about", ru: "/about" } },
   { path: "/contact", priority: 0.9, languages: { "x-default": "/en/contact", en: "/en/contact", ru: "/contact" } },
   { path: "/en/contact", priority: 0.9, languages: { "x-default": "/en/contact", en: "/en/contact", ru: "/contact" } },
-  // The legal pages now state when their current text took effect, so they can
-  // say it here too. The date is the document's, not the build's.
-  { path: "/en/privacy", priority: 0.2, lastModified: legalDocuments.privacy.effectiveDate, languages: { "x-default": "/en/privacy", en: "/en/privacy", ru: "/privacy" } },
-  { path: "/en/terms", priority: 0.2, lastModified: legalDocuments.terms.effectiveDate, languages: { "x-default": "/en/terms", en: "/en/terms", ru: "/terms" } },
-  { path: "/privacy", priority: 0.2, lastModified: legalDocuments.privacy.effectiveDate, languages: { "x-default": "/en/privacy", en: "/en/privacy", ru: "/privacy" } },
-  { path: "/terms", priority: 0.2, lastModified: legalDocuments.terms.effectiveDate, languages: { "x-default": "/en/terms", en: "/en/terms", ru: "/terms" } },
+  // The legal pages state the day their current revision goes live, so they can
+  // say it here too. Hand-written in the commit that changes the document —
+  // never the build clock, and never inferred from a commit date.
+  { path: "/en/privacy", priority: 0.2, lastModified: legalDocuments.privacy.revisionPublished, languages: { "x-default": "/en/privacy", en: "/en/privacy", ru: "/privacy" } },
+  { path: "/en/terms", priority: 0.2, lastModified: legalDocuments.terms.revisionPublished, languages: { "x-default": "/en/terms", en: "/en/terms", ru: "/terms" } },
+  { path: "/privacy", priority: 0.2, lastModified: legalDocuments.privacy.revisionPublished, languages: { "x-default": "/en/privacy", en: "/en/privacy", ru: "/privacy" } },
+  { path: "/terms", priority: 0.2, lastModified: legalDocuments.terms.revisionPublished, languages: { "x-default": "/en/terms", en: "/en/terms", ru: "/terms" } },
 ];
 
 function absoluteUrl(path: string) {

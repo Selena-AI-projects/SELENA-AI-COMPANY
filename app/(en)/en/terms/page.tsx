@@ -3,7 +3,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
 import { site } from "@/lib/site";
 import { buildLegalPageStructuredData } from "@/lib/structured-data";
-import { effectiveDateLine } from "@/lib/data/legal";
+import { revisionLine } from "@/lib/data/legal";
 
 const title = "Terms of Use and Site Rules";
 const description =
@@ -72,7 +72,7 @@ export default function EnglishTermsPage() {
               appropriate review, testing and clear human responsibility.
             </p>
             <p className="border-t border-line pt-6 text-sm">
-              {effectiveDateLine("terms", "en")} Separate payment, refund and commercial
+              {revisionLine("terms", "en")} Separate payment, refund and commercial
               terms will be published and legally reviewed before live online
               payments are enabled.
             </p>

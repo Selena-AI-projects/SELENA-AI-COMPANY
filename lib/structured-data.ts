@@ -678,8 +678,8 @@ export function buildContactStructuredData(locale: StructuredLocale) {
  * Structured data for the privacy and terms pages.
  *
  * These are the two pages an assistant reads to answer "who operates this and
- * what are the rules". The dates come from `legalDocuments` — the day each
- * document's own text was last published, not the build date.
+ * what are the rules". The date comes from `legalDocuments` — the day the
+ * current revision goes live, written by hand, never the build date.
  */
 export function buildLegalPageStructuredData({
   locale,
@@ -704,8 +704,9 @@ export function buildLegalPageStructuredData({
       {
         ...webPageNode({ locale, pageUrl, name, description }),
         about: { "@id": `${site.url}/#organization` },
-        datePublished: legalDocuments[kind].effectiveDate,
-        dateModified: legalDocuments[kind].effectiveDate,
+        // Only what the site can check. `datePublished` would claim a first
+        // publication date for the document, and no such date was ever recorded.
+        dateModified: legalDocuments[kind].revisionPublished,
         ...(kind === "privacy"
           ? { significantLink: localizedContactUrl(locale) }
           : {}),

@@ -4,7 +4,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
 import { site } from "@/lib/site";
 import { buildLegalPageStructuredData } from "@/lib/structured-data";
-import { effectiveDateLine } from "@/lib/data/legal";
+import { revisionLine } from "@/lib/data/legal";
 
 const title = "Политика конфиденциальности";
 const description =
@@ -88,7 +88,7 @@ export default function PrivacyPage() {
               </div>
             ))}
             <p className="border-t border-line pt-6 text-sm leading-relaxed text-muted">
-              {effectiveDateLine("privacy", "ru")} Платёжные положения будут
+              {revisionLine("privacy", "ru")} Платёжные положения будут
               добавлены и проверены юристом до включения реальных онлайн-платежей.
             </p>
           </div>

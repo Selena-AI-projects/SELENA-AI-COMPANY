@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import sitemap from "@/app/sitemap";
-import { effectiveDateLine, formatEffectiveDate, legalDocuments } from "@/lib/data/legal";
+import {
+  formatLegalDate,
+  isRealCalendarDate,
+  legalDocuments,
+  revisionLine,
+} from "@/lib/data/legal";
 import { buildLegalPageStructuredData } from "@/lib/structured-data";
 
 const LEGAL_URLS = {
@@ -10,34 +15,42 @@ const LEGAL_URLS = {
 } as const;
 
 /**
- * The dates were hand-written into four pages and had drifted six days behind
- * the text they described. One source now feeds the visible line, the markup
- * and the sitemap, so they cannot disagree again.
+ * `Date.parse("2026-02-30")` returns 2 March, so the obvious assertion passes
+ * on a date that does not exist: the page would print "30 февраля" while the
+ * sitemap published 2 March. The validator builds the date from its parts and
+ * reads them back, which is the only way to catch it.
  */
-test("every legal date is a real ISO date from the single source", () => {
-  for (const [kind, doc] of Object.entries(legalDocuments)) {
-    assert.match(doc.effectiveDate, /^\d{4}-\d{2}-\d{2}$/, `${kind} date is not ISO`);
-    assert.ok(
-      !Number.isNaN(Date.parse(doc.effectiveDate)),
-      `${kind} date is not a real calendar date`,
-    );
+test("a date that does not exist is rejected, not silently rolled forward", () => {
+  for (const bad of ["2026-02-30", "2026-02-29", "2026-04-31", "2026-13-01", "2026-8-21", "not-a-date"]) {
+    assert.equal(isRealCalendarDate(bad), false, `${bad} was accepted`);
+    assert.throws(() => formatLegalDate(bad, "ru"), /not a real calendar date/, bad);
+  }
+  for (const good of ["2026-08-21", "2026-09-02", "2028-02-29"]) {
+    assert.equal(isRealCalendarDate(good), true, `${good} was rejected`);
   }
 });
 
-test("the visible line names the date in the page's own language", () => {
-  assert.equal(formatEffectiveDate("2026-08-21", "ru"), "21 августа 2026");
-  assert.equal(formatEffectiveDate("2026-08-21", "en"), "21 August 2026");
-
-  const ru = effectiveDateLine("privacy", "ru");
-  const en = effectiveDateLine("privacy", "en");
-  assert.ok(ru.includes(formatEffectiveDate(legalDocuments.privacy.effectiveDate, "ru")), ru);
-  assert.ok(en.includes(formatEffectiveDate(legalDocuments.privacy.effectiveDate, "en")), en);
-  // The line says what the date means; a bare date reads as "last touched".
-  assert.ok(/Действует с/.test(ru), ru);
-  assert.ok(/In effect since/.test(en), en);
+test("every published legal date is a real calendar date", () => {
+  for (const [kind, doc] of Object.entries(legalDocuments)) {
+    assert.equal(isRealCalendarDate(doc.revisionPublished), true, `${kind}: ${doc.revisionPublished}`);
+  }
 });
 
-test("the markup publishes the document's date, never the build's", () => {
+test("the visible line names the date in the page's own language and says what it means", () => {
+  assert.equal(formatLegalDate("2026-09-02", "ru"), "2 сентября 2026");
+  assert.equal(formatLegalDate("2026-09-02", "en"), "2 September 2026");
+
+  const ru = revisionLine("privacy", "ru");
+  const en = revisionLine("privacy", "en");
+  assert.ok(ru.includes(formatLegalDate(legalDocuments.privacy.revisionPublished, "ru")), ru);
+  assert.ok(en.includes(formatLegalDate(legalDocuments.privacy.revisionPublished, "en")), en);
+  // The claim is about this revision, not about a first publication the site
+  // has never recorded.
+  assert.ok(/Эта редакция опубликована и действует с/.test(ru), ru);
+  assert.ok(/This revision is published and in effect from/.test(en), en);
+});
+
+test("the markup publishes only the date the site can check", () => {
   for (const kind of ["privacy", "terms"] as const) {
     for (const locale of ["en", "ru"] as const) {
       const graph = buildLegalPageStructuredData({
@@ -50,8 +63,9 @@ test("the markup publishes the document's date, never the build's", () => {
 
       const page = graph.find((node) => node["@type"] === "WebPage");
       assert.ok(page, `${locale} ${kind} has no WebPage node`);
-      assert.equal(page.dateModified, legalDocuments[kind].effectiveDate);
-      assert.equal(page.datePublished, legalDocuments[kind].effectiveDate);
+      assert.equal(page.dateModified, legalDocuments[kind].revisionPublished);
+      // No first-publication date was ever recorded, so none is claimed.
+      assert.equal(page.datePublished, undefined, `${locale} ${kind} invents a datePublished`);
     }
   }
 });
@@ -66,7 +80,7 @@ test("the sitemap carries the same date for all four legal URLs", () => {
       assert.ok(entry.lastModified, `${url} publishes no lastmod`);
       assert.equal(
         new Date(entry.lastModified as Date).toISOString().slice(0, 10),
-        legalDocuments[kind as keyof typeof legalDocuments].effectiveDate,
+        legalDocuments[kind as keyof typeof legalDocuments].revisionPublished,
         `${url} publishes a date the document does not claim`,
       );
     }
