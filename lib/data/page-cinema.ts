@@ -109,7 +109,7 @@ const en: PageCinema = {
   about: {
     hero: {
       ...paths.aboutHero,
-      alt: "A calm workshop desk at dusk with brass tools laid in a neat row under one warm lamp",
+      alt: "A desk by a wide window at dusk: one lamp lit, an open blank notebook and a cup, town lights far below",
     },
     method: {
       image: paths.gears,
@@ -231,7 +231,7 @@ const ru: PageCinema = {
   about: {
     hero: {
       ...paths.aboutHero,
-      alt: "Спокойный рабочий стол в сумерках: латунные инструменты выложены в ряд под одной тёплой лампой",
+      alt: "Стол у широкого окна в сумерках: горит одна лампа, раскрытый пустой блокнот и чашка, далеко внизу огни города",
     },
     method: {
       image: paths.gears,
