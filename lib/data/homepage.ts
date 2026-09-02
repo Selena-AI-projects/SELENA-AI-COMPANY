@@ -460,7 +460,7 @@ export const homepage = {
       eyebrow: "How a measurement works",
       headline: "From a customer's question to a report you can act on.",
       intro:
-        "Four steps, the same on every plan: real questions, live systems, saved answers, a prioritized report.",
+        "Four steps behind every paid measurement: real questions, live systems, saved answers, a prioritized report.",
       honestyNote:
         "Every number in the report comes with its measurement window — and a note on what it does not prove.",
       controls: { prev: "Previous step", next: "Next step", goTo: "Go to step" },
@@ -473,7 +473,7 @@ export const homepage = {
         },
         {
           title: "We ask the same systems",
-          text: "Up to 25 of your customers' real questions, sent to each system on a schedule — the same way every time, with no manual tuning.",
+          text: "Up to 25 of your customers' real questions go to each system in your plan — the same wording every time, with no manual tuning.",
           image: "/media/cinematic/slide-surfaces.webp",
           video: "/media/cinematic/prisms-loop.mp4",
           alt: "One beam of light passing through three glass prisms, each refracting it differently",
