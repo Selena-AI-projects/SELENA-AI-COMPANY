@@ -1,8 +1,11 @@
 import { homepage, type HomepageContent } from "@/lib/data/homepage";
 import { Button } from "@/components/ui/Button";
+import { CinemaFrame } from "@/components/ui/CinemaFrame";
+import { CinemaLoop } from "@/components/ui/CinemaLoop";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { LabEntryTeaser } from "@/components/lab/LabEntryTeaser";
+import { MeasurementFilmstrip } from "@/components/sections/MeasurementFilmstrip";
 import type { VisibilityLocale } from "@/lib/visibility/types";
 import { cn } from "@/lib/cn";
 
@@ -132,6 +135,20 @@ export function VisibilityLadder({ content }: { content: HomepageContent }) {
 function HeroSection({ content }: { content: HomepageContent }) {
   return (
     <section className="relative overflow-hidden bg-charcoal pt-28 text-ivory sm:pt-32 lg:pt-36">
+      {/* Cinematic backdrop: the beam finding one storefront in a dark city —
+          the product promise as a picture. It lives only behind the first
+          screen and fades to flat charcoal before the ladder, and every
+          overlay below exists for one reason: the copy stays readable. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[46rem]" aria-hidden>
+        <CinemaLoop
+          video={content.cinema.hero.video}
+          poster={content.cinema.hero.poster}
+          priority
+          className="opacity-60"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-charcoal/70 to-charcoal" />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/75 via-charcoal/30 to-transparent" />
+      </div>
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.08]"
         style={{
@@ -246,6 +263,15 @@ function VisibilityOverviewSection({ content }: { content: HomepageContent }) {
             ))}
           </ul>
         </Reveal>
+
+        <Reveal delay={140} className="mt-14">
+          <CinemaFrame
+            tone="dark"
+            image={content.cinema.visibilityBand.image}
+            alt={content.cinema.visibilityBand.alt}
+            caption={content.cinema.visibilityBand.caption}
+          />
+        </Reveal>
       </Container>
     </section>
   );
@@ -328,6 +354,18 @@ function SolutionSection({ content }: { content: HomepageContent }) {
             eyebrow={content.solution.eyebrow}
             headline={content.solution.headline}
             intro={content.solution.intro}
+          />
+        </Reveal>
+
+        <Reveal delay={80} className="mt-12">
+          <CinemaFrame
+            tone="light"
+            video={{
+              src: content.cinema.automationBand.video,
+              poster: content.cinema.automationBand.poster,
+            }}
+            alt={content.cinema.automationBand.alt}
+            caption={content.cinema.automationBand.caption}
           />
         </Reveal>
 
@@ -667,6 +705,14 @@ function FinalCtaSection({ content }: { content: HomepageContent }) {
     <section className="border-t border-line bg-ivory py-20 sm:py-28">
       <Container>
         <Reveal>
+          <CinemaFrame
+            tone="light"
+            image={content.cinema.ctaBand.image}
+            alt={content.cinema.ctaBand.alt}
+            className="mb-14"
+          />
+        </Reveal>
+        <Reveal delay={80}>
           <div className="mx-auto max-w-4xl text-center">
             <Eyebrow>{content.finalCta.eyebrow}</Eyebrow>
             <h2 className="mt-5 text-h1 text-ink">{content.finalCta.headline}</h2>
@@ -694,6 +740,7 @@ export function B2BHomeLanding({
     <>
       <HeroSection content={content} />
       <VisibilityOverviewSection content={content} />
+      <MeasurementFilmstrip content={content.cinema.measurement} />
       <ProductSwitchSection content={content} />
       <ProblemSection content={content} />
       <SolutionSection content={content} />
