@@ -44,10 +44,6 @@ export function PageHero({
         compact ? "pb-10 pt-28 sm:pb-12 sm:pt-32" : "pb-16 pt-32 sm:pb-20 sm:pt-40",
       )}
     >
-      <div
-        className="grid-texture pointer-events-none absolute -top-16 -right-40 hidden h-[34rem] w-[34rem] lg:block"
-        aria-hidden
-      />
       <Container className={cn("relative", media && "grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center")}>
         {media ? (
           <div

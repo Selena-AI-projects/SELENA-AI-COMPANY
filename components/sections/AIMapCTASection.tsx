@@ -7,10 +7,6 @@ import { Reveal } from "@/components/ui/Reveal";
 export function AIMapCTASection() {
   return (
     <section className="relative overflow-hidden bg-charcoal py-20 text-ivory sm:py-28">
-      <div
-        className="grid-texture pointer-events-none absolute -right-36 top-0 h-[34rem] w-[34rem] opacity-30 invert"
-        aria-hidden
-      />
       <Container>
         <div className="relative grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>

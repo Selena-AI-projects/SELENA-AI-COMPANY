@@ -24,10 +24,6 @@ const hrefs: Record<string, string> = {
 export function ProductLadderSection() {
   return (
     <section className="relative overflow-hidden bg-surface py-20 sm:py-28">
-      <div
-        className="grid-texture pointer-events-none absolute -bottom-40 -left-36 h-[32rem] w-[32rem] opacity-45"
-        aria-hidden
-      />
       <Container>
         <SectionHeader
           eyebrow="Продуктовая лестница"

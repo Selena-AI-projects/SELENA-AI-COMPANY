@@ -55,9 +55,6 @@ export function LeadMagnetTiles() {
 
           <Reveal delay={120}>
             <div className="relative overflow-hidden rounded-[1.25rem] border border-line bg-ivory p-4 shadow-[0_24px_70px_-46px_rgba(24,22,20,0.45)] sm:p-6">
-              <div className="absolute inset-0 opacity-60" aria-hidden>
-                <div className="grid-texture h-full w-full" />
-              </div>
               <div className="relative grid gap-4 md:grid-cols-[1.05fr_0.95fr]">
                 <div className="rounded-[1rem] bg-charcoal p-5 text-ivory sm:p-6">
                   <div className="flex items-start justify-between gap-4">

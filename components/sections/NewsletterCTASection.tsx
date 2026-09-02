@@ -26,9 +26,6 @@ export function NewsletterCTASection() {
 
           <Reveal delay={120}>
             <div className="relative overflow-hidden border-y border-line-dark py-5">
-              <div className="absolute inset-0 opacity-20" aria-hidden>
-                <div className="grid-texture h-full w-full" />
-              </div>
               <div className="relative rounded-[1.25rem] border border-line-dark bg-charcoal-2/90 p-5 shadow-[0_22px_80px_-48px_rgba(0,0,0,0.9)] sm:p-8">
                 <div className="flex flex-wrap items-start justify-between gap-4 border-b border-line-dark pb-5">
                   <div>

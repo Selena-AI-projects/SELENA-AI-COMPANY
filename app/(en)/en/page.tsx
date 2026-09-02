@@ -230,10 +230,6 @@ export default function EnglishPage() {
   return (
     <div lang="en">
       <section className="bg-warm-canvas relative overflow-hidden pt-28 sm:pt-36">
-        <div
-          className="grid-texture pointer-events-none absolute -right-32 top-10 hidden h-[42rem] w-[42rem] lg:block"
-          aria-hidden
-        />
         <Container size="wide" className="relative">
           <div className="grid items-center gap-12 pb-20 sm:pb-28 lg:grid-cols-[0.88fr_1.12fr]">
             <Reveal>

@@ -15,10 +15,6 @@ const calculatorCta = { label: "Посчитать рутину", href: "#calcul
 export function CinematicHero() {
   return (
     <section className="bg-warm-canvas relative overflow-hidden pt-28 sm:pt-36">
-      <div
-        className="grid-texture pointer-events-none absolute -right-36 top-8 hidden h-[42rem] w-[42rem] lg:block"
-        aria-hidden
-      />
 
       <Container size="wide" className="relative">
         <div className="grid items-center gap-12 pb-16 sm:pb-24 lg:grid-cols-[0.88fr_1.12fr] lg:gap-12">
@@ -42,55 +38,6 @@ export function CinematicHero() {
               собираю AI-сценарии, автоматизации и правила работы без сложного кода.
             </p>
 
-            <div
-              className="animate-drift-in mt-9 flex flex-wrap items-center gap-4"
-              style={{ animationDelay: "0.45s" }}
-            >
-              <Button href={cta.primary.href} size="lg">
-                {cta.primary.label}
-              </Button>
-              <Button href={calculatorCta.href} size="lg" variant="secondary">
-                {calculatorCta.label}
-              </Button>
-            </div>
-
-            <div
-              className="animate-drift-in mt-8 hidden max-w-xl grid-cols-3 gap-3 border-y border-line py-4 sm:grid"
-              style={{ animationDelay: "0.6s" }}
-            >
-              {[
-                ["01", "AI-карта"],
-                ["02", "Автоматизация"],
-                ["03", "Playbook"],
-              ].map(([n, label]) => (
-                <div key={n}>
-                  <p className="font-serif text-2xl font-semibold leading-none text-copper-deep">
-                    {n}
-                  </p>
-                  <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-                    {label}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <p
-              className="animate-drift-in mt-7 flex items-center gap-3 text-sm font-medium text-ink/70"
-              style={{ animationDelay: "0.75s" }}
-            >
-              <span className="inline-block h-px w-8 bg-copper" aria-hidden />
-              Сначала процесс. Потом инструмент, автоматизация или человек.
-            </p>
-          </div>
-
-          <div
-            className="animate-drift-in relative lg:mt-20 lg:self-start"
-            style={{ animationDelay: "0.25s" }}
-          >
-            <div
-              className="grid-texture pointer-events-none absolute -inset-10 opacity-55"
-              aria-hidden
-            />
             <div className="relative overflow-hidden rounded-[1.25rem] border border-line bg-surface shadow-[0_34px_90px_-58px_rgba(24,22,20,0.58)]">
               <Image
                 src="/media/selena-systems-process-visual.png"

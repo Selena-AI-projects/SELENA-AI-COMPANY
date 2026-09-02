@@ -48,15 +48,6 @@ export function VisibilityHero({
           <div className="absolute inset-0 bg-gradient-to-r from-charcoal/65 via-charcoal/20 to-transparent" />
         </div>
       ) : null}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.08]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(247,242,234,0.6) 1px, transparent 1px), linear-gradient(to bottom, rgba(247,242,234,0.6) 1px, transparent 1px)",
-          backgroundSize: "4rem 4rem",
-        }}
-        aria-hidden
-      />
       <Container size="wide" className="relative">
         <Reveal className="max-w-4xl">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-copper">{eyebrow}</p>
