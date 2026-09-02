@@ -375,6 +375,8 @@ export const ruHomepage = {
       {
         name: "KORA Food Hall",
         url: "https://korafoodhall.com",
+        image: "/media/cinematic/projects/kora.webp",
+        imageAlt: "Вечер в фуд-холле: тёплые лампы над прилавками",
         category: "Операции в ресторанном бизнесе",
         text: "Операционная модель food hall: арендаторы, меню, коммуникация с гостями и локальные процессы.",
         layers: ["AI-продажи", "AI-операции", "AI-контент"],
@@ -386,6 +388,8 @@ export const ruHomepage = {
       {
         name: "PetID.care",
         url: "https://petid.care",
+        image: "/media/cinematic/projects/petid.webp",
+        imageAlt: "Кот выглядывает из-за стола с блокнотом и маленьким жетоном питомца",
         category: "Сервисная инфраструктура",
         text: "Профили питомцев, клиентская поддержка и сценарии помощи, организованные вокруг данных и доверия.",
         layers: ["AI-база знаний", "AI-операции"],
@@ -395,6 +399,8 @@ export const ruHomepage = {
       {
         name: "Doki.help",
         url: "https://doki.help",
+        image: "/media/cinematic/projects/doki.webp",
+        imageAlt: "Раскрытый чистый документ с латунным зажимом, перьевой ручкой и печатью",
         category: "Документы и поддержка",
         text: "Документные процессы, intake и понятные пользовательские сценарии для сложных запросов.",
         layers: ["AI-база знаний", "AI-автоматизация"],
@@ -404,6 +410,8 @@ export const ruHomepage = {
       {
         name: "remhaos.com",
         url: "https://remhaos.com",
+        image: "/media/cinematic/projects/remhaos.webp",
+        imageAlt: "Образцы для интерьера на столе дизайнера: ткань, камень, латунь",
         category: "Недвижимость и интерьеры",
         text: "AI-пресейл для дизайнеров интерьера: бриф, паспорт проекта, оценка рисков, цены и предложение.",
         layers: ["AI-продажи", "AI-автоматизация"],
@@ -413,6 +421,8 @@ export const ruHomepage = {
       {
         name: "otherbali.com",
         url: "https://otherbali.com",
+        image: "/media/cinematic/projects/otherbali.webp",
+        imageAlt: "Рисовые террасы Бали на рассвете, из тумана поднимается вулкан",
         category: "Travel-медиа и гиды",
         text: "Гид и медиаплатформа о Бали: места, гайды и рекомендации, собранные так, чтобы гости и резиденты быстро находили нужный ответ.",
         layers: ["AI-контент", "AI-база знаний"],
@@ -422,6 +432,8 @@ export const ruHomepage = {
       {
         name: "VillaOps",
         url: "https://villaops.selenasystems.com",
+        image: "/media/cinematic/projects/villaops.webp",
+        imageAlt: "Частная вилла на Бали в сумерках, бассейн отражает освещённые комнаты",
         category: "Операции для вилл и гостевого сервиса",
         text: "Операционная система для управления виллами и гостевым обслуживанием — ежедневные процессы, собранные в одну понятную модель.",
         layers: ["AI-операции", "AI-автоматизация"],
@@ -503,11 +515,6 @@ export const ruHomepage = {
       image: "/media/cinematic/packages-cases.webp",
       alt: "Три деревянных кейса с латунными углами по возрастанию размера на тёмном камне",
       caption: "Три глубины одной работы: аудит, один собранный процесс или связанная операционная система.",
-    },
-    proofBand: {
-      image: "/media/cinematic/proof-city.webp",
-      alt: "Миниатюрный ночной город, где несколько зданий светятся тёплым светом окон",
-      caption: "Системы ниже сначала работают в собственных проектах основателя.",
     },
     ctaBand: {
       image: "/media/cinematic/cta-dawn.webp",
