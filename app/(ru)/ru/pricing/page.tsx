@@ -9,8 +9,10 @@ import { PricingDirectory, PricingTracks } from "@/components/visibility/Pricing
 import { PromotionBanner } from "@/components/visibility/PromotionBanner";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { pageCinema } from "@/lib/data/page-cinema";
 
 const content = visibilityContentRu;
+const cinema = pageCinema("ru").pricing;
 
 export const metadata = buildMetadata({
   title: "Цены — AI Visibility и AI Automation",
@@ -30,6 +32,10 @@ export default function RussianPricingPage() {
         title="Два продукта — без смешения."
         intro="AI Visibility измеряет, как AI видит ваш бизнес. AI Automation диагностирует и строит процессы внутри него. Сначала выберите направление, затем сравнивайте только подходящие предложения."
         compact
+        media={{
+          video: { src: cinema.hero.video, poster: cinema.hero.poster },
+          alt: cinema.hero.alt,
+        }}
       />
       <PromotionBanner locale="ru" />
       <PricingDirectory content={content.pricing.directory} />

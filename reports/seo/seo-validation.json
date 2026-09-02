@@ -1,7 +1,7 @@
 {
   "baseUrl": "http://127.0.0.1:3100",
   "sitemapUrl": "http://127.0.0.1:3100/sitemap.xml",
-  "checkedAt": "2026-08-17T08:20:54.589Z",
+  "checkedAt": "2026-09-02T04:24:55.854Z",
   "urls": [
     {
       "url": "http://127.0.0.1:3100/",
@@ -77,9 +77,9 @@
       "finalUrl": "http://127.0.0.1:3100/ai-systems",
       "contentType": "text/html; charset=utf-8",
       "lang": "en",
-      "title": "AI Systems for your business — Selena Systems",
+      "title": "AI Automation for your business — Selena Systems",
       "description": "Selena Systems designs and builds practical AI systems for sales, content, knowledge, automation and operations. Separate from AI Visibility.",
-      "ogTitle": "AI Systems for your business — Selena Systems",
+      "ogTitle": "AI Automation for your business — Selena Systems",
       "ogDescription": "Selena Systems designs and builds practical AI systems for sales, content, knowledge, automation and operations. Separate from AI Visibility.",
       "ogUrl": "https://www.selenasystems.com/ai-systems",
       "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
@@ -95,9 +95,9 @@
       "finalUrl": "http://127.0.0.1:3100/ai-systems/ai-audit",
       "contentType": "text/html; charset=utf-8",
       "lang": "en",
-      "title": "AI Audit | AI Systems — Selena Systems",
+      "title": "AI Audit | AI Automation — Selena Systems",
       "description": "Map your workflows and AI opportunities before building, with a focused scope, deliverables and a practical next step for your team.",
-      "ogTitle": "AI Audit | AI Systems — Selena Systems",
+      "ogTitle": "AI Audit | AI Automation — Selena Systems",
       "ogDescription": "Map your workflows and AI opportunities before building, with a focused scope, deliverables and a practical next step for your team.",
       "ogUrl": "https://www.selenasystems.com/ai-systems/ai-audit",
       "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
@@ -113,10 +113,10 @@
       "finalUrl": "http://127.0.0.1:3100/ai-systems/ai-sprint",
       "contentType": "text/html; charset=utf-8",
       "lang": "en",
-      "title": "7-Day AI Sprint | AI Systems — Selena Systems",
-      "description": "Design, build and test one priority AI workflow in seven focused days, with a practical handover your team can run after launch.",
-      "ogTitle": "7-Day AI Sprint | AI Systems — Selena Systems",
-      "ogDescription": "Design, build and test one priority AI workflow in seven focused days, with a practical handover your team can run after launch.",
+      "title": "4-Week AI Sprint | AI Automation — Selena Systems",
+      "description": "Design, build and test one priority AI workflow in four focused weeks, with a practical handover your team can run after launch.",
+      "ogTitle": "4-Week AI Sprint | AI Automation — Selena Systems",
+      "ogDescription": "Design, build and test one priority AI workflow in four focused weeks, with a practical handover your team can run after launch.",
       "ogUrl": "https://www.selenasystems.com/ai-systems/ai-sprint",
       "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
       "twitterCard": "summary_large_image",
@@ -131,10 +131,10 @@
       "finalUrl": "http://127.0.0.1:3100/ai-systems/business-os",
       "contentType": "text/html; charset=utf-8",
       "lang": "en",
-      "title": "AI Business OS | AI Systems — Selena Systems",
-      "description": "Design a connected AI operating layer across sales, operations, knowledge and automation, with clear human approval boundaries.",
-      "ogTitle": "AI Business OS | AI Systems — Selena Systems",
-      "ogDescription": "Design a connected AI operating layer across sales, operations, knowledge and automation, with clear human approval boundaries.",
+      "title": "AI Business OS | AI Automation — Selena Systems",
+      "description": "A turnkey 8-week implementation of a connected AI operating layer across sales, operations, knowledge and automation, with your team trained.",
+      "ogTitle": "AI Business OS | AI Automation — Selena Systems",
+      "ogDescription": "A turnkey 8-week implementation of a connected AI operating layer across sales, operations, knowledge and automation, with your team trained.",
       "ogUrl": "https://www.selenasystems.com/ai-systems/business-os",
       "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
       "twitterCard": "summary_large_image",
@@ -407,10 +407,10 @@
       "finalUrl": "http://127.0.0.1:3100/pricing",
       "contentType": "text/html; charset=utf-8",
       "lang": "en",
-      "title": "Pricing — AI Visibility and AI Systems — Selena Systems",
-      "description": "Compare AI Visibility&#x27;s free check and four paid options separately from Selena Systems&#x27; four custom AI Systems services.",
-      "ogTitle": "Pricing — AI Visibility and AI Systems — Selena Systems",
-      "ogDescription": "Compare AI Visibility&#x27;s free check and four paid options separately from Selena Systems&#x27; four custom AI Systems services.",
+      "title": "Pricing — AI Visibility and AI Automation — Selena Systems",
+      "description": "Compare AI Visibility&#x27;s free check and four paid options separately from Selena Systems&#x27; four custom AI Automation services.",
+      "ogTitle": "Pricing — AI Visibility and AI Automation — Selena Systems",
+      "ogDescription": "Compare AI Visibility&#x27;s free check and four paid options separately from Selena Systems&#x27; four custom AI Automation services.",
       "ogUrl": "https://www.selenasystems.com/pricing",
       "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
       "twitterCard": "summary_large_image",
@@ -441,10 +441,10 @@
       "finalUrl": "http://127.0.0.1:3100/ru/pricing",
       "contentType": "text/html; charset=utf-8",
       "lang": "ru",
-      "title": "Цены — AI Visibility и AI Systems — Selena Systems",
-      "description": "Сравните бесплатную проверку и четыре варианта AI Visibility отдельно от четырёх индивидуальных услуг AI Systems и выберите следующий шаг.",
-      "ogTitle": "Цены — AI Visibility и AI Systems — Selena Systems",
-      "ogDescription": "Сравните бесплатную проверку и четыре варианта AI Visibility отдельно от четырёх индивидуальных услуг AI Systems и выберите следующий шаг.",
+      "title": "Цены — AI Visibility и AI Automation — Selena Systems",
+      "description": "Сравните бесплатную проверку и четыре варианта AI Visibility отдельно от четырёх индивидуальных услуг AI Automation и выберите следующий шаг.",
+      "ogTitle": "Цены — AI Visibility и AI Automation — Selena Systems",
+      "ogDescription": "Сравните бесплатную проверку и четыре варианта AI Visibility отдельно от четырёх индивидуальных услуг AI Automation и выберите следующий шаг.",
       "ogUrl": "https://www.selenasystems.com/ru/pricing",
       "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
       "twitterCard": "summary_large_image",
@@ -475,10 +475,10 @@
       "finalUrl": "http://127.0.0.1:3100/lab",
       "contentType": "text/html; charset=utf-8",
       "lang": "en",
-      "title": "Selena Lab — research and courses — Selena Systems",
-      "description": "Research, practical guides, experiments and courses from Selena Systems for clearer AI decisions, stronger evidence and useful business systems.",
-      "ogTitle": "Selena Lab — research and courses — Selena Systems",
-      "ogDescription": "Research, practical guides, experiments and courses from Selena Systems for clearer AI decisions, stronger evidence and useful business systems.",
+      "title": "Selena Lab — research, tools and articles — Selena Systems",
+      "description": "Research, practical guides, experiments, tools and articles from Selena Systems for clearer AI decisions and stronger evidence.",
+      "ogTitle": "Selena Lab — research, tools and articles — Selena Systems",
+      "ogDescription": "Research, practical guides, experiments, tools and articles from Selena Systems for clearer AI decisions and stronger evidence.",
       "ogUrl": "https://www.selenasystems.com/lab",
       "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
       "twitterCard": "summary_large_image",
@@ -509,10 +509,10 @@
       "finalUrl": "http://127.0.0.1:3100/ru/lab",
       "contentType": "text/html; charset=utf-8",
       "lang": "ru",
-      "title": "Selena Lab — исследования и курсы — Selena Systems",
-      "description": "Исследования, практические руководства, эксперименты и курсы Selena Systems для ясных AI-решений, проверяемых evidence и рабочих систем.",
-      "ogTitle": "Selena Lab — исследования и курсы — Selena Systems",
-      "ogDescription": "Исследования, практические руководства, эксперименты и курсы Selena Systems для ясных AI-решений, проверяемых evidence и рабочих систем.",
+      "title": "Selena Lab — исследования, инструменты и блог — Selena Systems",
+      "description": "Исследования, практические методики, эксперименты, инструменты, кейсы и блог Selena Systems для ясных AI-решений.",
+      "ogTitle": "Selena Lab — исследования, инструменты и блог — Selena Systems",
+      "ogDescription": "Исследования, практические методики, эксперименты, инструменты, кейсы и блог Selena Systems для ясных AI-решений.",
       "ogUrl": "https://www.selenasystems.com/ru/lab",
       "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
       "twitterCard": "summary_large_image",
@@ -535,6 +535,60 @@
           "rawHref": "https://www.selenasystems.com/ru/lab"
         }
       ],
+      "redirects": []
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/blog",
+      "status": 200,
+      "finalUrl": "http://127.0.0.1:3100/ru/blog",
+      "contentType": "text/html; charset=utf-8",
+      "lang": "ru",
+      "title": "Блог Selena Systems — AI-инструменты и личный опыт — Selena Systems",
+      "description": "Статьи, личный опыт, разборы AI-инструментов, новости AI Visibility и практические обновления Selena Systems.",
+      "ogTitle": "Блог Selena Systems — AI-инструменты и личный опыт — Selena Systems",
+      "ogDescription": "Статьи, личный опыт, разборы AI-инструментов, новости AI Visibility и практические обновления Selena Systems.",
+      "ogUrl": "https://www.selenasystems.com/ru/blog",
+      "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
+      "twitterCard": "summary_large_image",
+      "h1Count": 1,
+      "canonical": "http://127.0.0.1:3100/ru/blog",
+      "alternates": [],
+      "redirects": []
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/tools",
+      "status": 200,
+      "finalUrl": "http://127.0.0.1:3100/ru/tools",
+      "contentType": "text/html; charset=utf-8",
+      "lang": "ru",
+      "title": "Инструменты Selena Systems — Selena Systems",
+      "description": "Каталог доступных инструментов Selena Systems: технические проверки, назначение, источники данных и честные границы результата.",
+      "ogTitle": "Инструменты Selena Systems — Selena Systems",
+      "ogDescription": "Каталог доступных инструментов Selena Systems: технические проверки, назначение, источники данных и честные границы результата.",
+      "ogUrl": "https://www.selenasystems.com/ru/tools",
+      "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
+      "twitterCard": "summary_large_image",
+      "h1Count": 1,
+      "canonical": "http://127.0.0.1:3100/ru/tools",
+      "alternates": [],
+      "redirects": []
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/blog/kak-proveryat-ai-kod",
+      "status": 200,
+      "finalUrl": "http://127.0.0.1:3100/ru/blog/kak-proveryat-ai-kod",
+      "contentType": "text/html; charset=utf-8",
+      "lang": "ru",
+      "title": "Как проверять AI-код, если вы не разработчик | Selena Systems",
+      "description": "Практический workflow перекрёстной проверки AI-разработки: Codex, Claude Code, GitHub, автоматические тесты и обязательные решения владельца.",
+      "ogTitle": "Как проверять AI-код, если вы не разработчик | Selena Systems",
+      "ogDescription": "Практический workflow перекрёстной проверки AI-разработки: Codex, Claude Code, GitHub, автоматические тесты и обязательные решения владельца.",
+      "ogUrl": "https://www.selenasystems.com/ru/blog/kak-proveryat-ai-kod",
+      "ogImage": "https://www.selenasystems.com/media/school/codex-claude-cross-review-workflow-ru.png",
+      "twitterCard": "summary_large_image",
+      "h1Count": 1,
+      "canonical": "http://127.0.0.1:3100/ru/blog/kak-proveryat-ai-kod",
+      "alternates": [],
       "redirects": []
     },
     {
@@ -1014,6 +1068,236 @@
       "redirects": []
     },
     {
+      "url": "http://127.0.0.1:3100/lab/experiments/two-agent-code-review",
+      "status": 200,
+      "finalUrl": "http://127.0.0.1:3100/lab/experiments/two-agent-code-review",
+      "contentType": "text/html; charset=utf-8",
+      "lang": "en",
+      "title": "Reviewing AI-written code — Selena Lab — Selena Systems",
+      "description": "A reproducible note on reviewing AI-written code with two independent agents. Two confident explanations of a failing check were both wrong; reading the workflow file settled it.",
+      "ogTitle": "Reviewing AI-written code — Selena Lab — Selena Systems",
+      "ogDescription": "A reproducible note on reviewing AI-written code with two independent agents. Two confident explanations of a failing check were both wrong; reading the workflow file settled it.",
+      "ogUrl": "https://www.selenasystems.com/lab/experiments/two-agent-code-review",
+      "ogImage": "https://www.selenasystems.com/media/lab/two-agent-review-en.png",
+      "twitterCard": "summary_large_image",
+      "h1Count": 1,
+      "canonical": "http://127.0.0.1:3100/lab/experiments/two-agent-code-review",
+      "alternates": [
+        {
+          "hreflang": "x-default",
+          "href": "http://127.0.0.1:3100/lab/experiments/two-agent-code-review",
+          "rawHref": "https://www.selenasystems.com/lab/experiments/two-agent-code-review"
+        },
+        {
+          "hreflang": "en",
+          "href": "http://127.0.0.1:3100/lab/experiments/two-agent-code-review",
+          "rawHref": "https://www.selenasystems.com/lab/experiments/two-agent-code-review"
+        },
+        {
+          "hreflang": "ru",
+          "href": "http://127.0.0.1:3100/ru/lab/experiments/two-agent-code-review",
+          "rawHref": "https://www.selenasystems.com/ru/lab/experiments/two-agent-code-review"
+        }
+      ],
+      "redirects": []
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/lab/experiments/two-agent-code-review",
+      "status": 200,
+      "finalUrl": "http://127.0.0.1:3100/ru/lab/experiments/two-agent-code-review",
+      "contentType": "text/html; charset=utf-8",
+      "lang": "ru",
+      "title": "Проверка кода, написанного ИИ — Selena Lab — Selena Systems",
+      "description": "Воспроизводимая запись опыта: проверку кода вели два независимых агента. Оба уверенно объяснили красную проверку — и оба ошиблись. Вопрос закрыл сам файл workflow.",
+      "ogTitle": "Проверка кода, написанного ИИ — Selena Lab — Selena Systems",
+      "ogDescription": "Воспроизводимая запись опыта: проверку кода вели два независимых агента. Оба уверенно объяснили красную проверку — и оба ошиблись. Вопрос закрыл сам файл workflow.",
+      "ogUrl": "https://www.selenasystems.com/ru/lab/experiments/two-agent-code-review",
+      "ogImage": "https://www.selenasystems.com/media/lab/two-agent-review-ru.png",
+      "twitterCard": "summary_large_image",
+      "h1Count": 1,
+      "canonical": "http://127.0.0.1:3100/ru/lab/experiments/two-agent-code-review",
+      "alternates": [
+        {
+          "hreflang": "x-default",
+          "href": "http://127.0.0.1:3100/lab/experiments/two-agent-code-review",
+          "rawHref": "https://www.selenasystems.com/lab/experiments/two-agent-code-review"
+        },
+        {
+          "hreflang": "en",
+          "href": "http://127.0.0.1:3100/lab/experiments/two-agent-code-review",
+          "rawHref": "https://www.selenasystems.com/lab/experiments/two-agent-code-review"
+        },
+        {
+          "hreflang": "ru",
+          "href": "http://127.0.0.1:3100/ru/lab/experiments/two-agent-code-review",
+          "rawHref": "https://www.selenasystems.com/ru/lab/experiments/two-agent-code-review"
+        }
+      ],
+      "redirects": []
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/projects",
+      "status": 200,
+      "finalUrl": "http://127.0.0.1:3100/ru/projects",
+      "contentType": "text/html; charset=utf-8",
+      "lang": "ru",
+      "title": "Журнал замеров — Selena Systems",
+      "description": "Собственные проекты проходят весь путь замера публично: с чего начали, что показали цифры, что мы поправили и что получилось после. С датами и без задним числом переписанных выводов. Один проект в журнале не наш — он опубликован с разрешения владельца.",
+      "ogTitle": "Журнал замеров — Selena Systems",
+      "ogDescription": "Собственные проекты проходят весь путь замера публично: с чего начали, что показали цифры, что мы поправили и что получилось после. С датами и без задним числом переписанных выводов. Один проект в журнале не наш — он опубликован с разрешения владельца.",
+      "ogUrl": "https://www.selenasystems.com/ru/projects",
+      "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
+      "twitterCard": "summary_large_image",
+      "h1Count": 1,
+      "canonical": "http://127.0.0.1:3100/ru/projects",
+      "alternates": [],
+      "redirects": []
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/projects/korafoodhall",
+      "status": 200,
+      "finalUrl": "http://127.0.0.1:3100/ru/projects/korafoodhall",
+      "contentType": "text/html; charset=utf-8",
+      "lang": "ru",
+      "title": "KORA Food Hall — проект и замеры — Selena Systems",
+      "description": "Точка отсчёта, замеры и исправления по проекту KORA Food Hall: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogTitle": "KORA Food Hall — проект и замеры — Selena Systems",
+      "ogDescription": "Точка отсчёта, замеры и исправления по проекту KORA Food Hall: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogUrl": "https://www.selenasystems.com/ru/projects/korafoodhall",
+      "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
+      "twitterCard": "summary_large_image",
+      "h1Count": 1,
+      "canonical": "http://127.0.0.1:3100/ru/projects/korafoodhall",
+      "alternates": [],
+      "redirects": []
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/projects/otherbali",
+      "status": 200,
+      "finalUrl": "http://127.0.0.1:3100/ru/projects/otherbali",
+      "contentType": "text/html; charset=utf-8",
+      "lang": "ru",
+      "title": "otherbali.com — проект и замеры — Selena Systems",
+      "description": "Точка отсчёта, замеры и исправления по проекту otherbali.com: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogTitle": "otherbali.com — проект и замеры — Selena Systems",
+      "ogDescription": "Точка отсчёта, замеры и исправления по проекту otherbali.com: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogUrl": "https://www.selenasystems.com/ru/projects/otherbali",
+      "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
+      "twitterCard": "summary_large_image",
+      "h1Count": 1,
+      "canonical": "http://127.0.0.1:3100/ru/projects/otherbali",
+      "alternates": [],
+      "redirects": []
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/projects/petid",
+      "status": 200,
+      "finalUrl": "http://127.0.0.1:3100/ru/projects/petid",
+      "contentType": "text/html; charset=utf-8",
+      "lang": "ru",
+      "title": "PetID.care — проект и замеры — Selena Systems",
+      "description": "Точка отсчёта, замеры и исправления по проекту PetID.care: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogTitle": "PetID.care — проект и замеры — Selena Systems",
+      "ogDescription": "Точка отсчёта, замеры и исправления по проекту PetID.care: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogUrl": "https://www.selenasystems.com/ru/projects/petid",
+      "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
+      "twitterCard": "summary_large_image",
+      "h1Count": 1,
+      "canonical": "http://127.0.0.1:3100/ru/projects/petid",
+      "alternates": [],
+      "redirects": []
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/projects/selenasystems",
+      "status": 200,
+      "finalUrl": "http://127.0.0.1:3100/ru/projects/selenasystems",
+      "contentType": "text/html; charset=utf-8",
+      "lang": "ru",
+      "title": "Selena Systems — проект и замеры — Selena Systems",
+      "description": "Точка отсчёта, замеры и исправления по проекту Selena Systems: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogTitle": "Selena Systems — проект и замеры — Selena Systems",
+      "ogDescription": "Точка отсчёта, замеры и исправления по проекту Selena Systems: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogUrl": "https://www.selenasystems.com/ru/projects/selenasystems",
+      "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
+      "twitterCard": "summary_large_image",
+      "h1Count": 1,
+      "canonical": "http://127.0.0.1:3100/ru/projects/selenasystems",
+      "alternates": [],
+      "redirects": []
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/projects/doki",
+      "status": 200,
+      "finalUrl": "http://127.0.0.1:3100/ru/projects/doki",
+      "contentType": "text/html; charset=utf-8",
+      "lang": "ru",
+      "title": "Doki.help — проект и замеры — Selena Systems",
+      "description": "Точка отсчёта, замеры и исправления по проекту Doki.help: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogTitle": "Doki.help — проект и замеры — Selena Systems",
+      "ogDescription": "Точка отсчёта, замеры и исправления по проекту Doki.help: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogUrl": "https://www.selenasystems.com/ru/projects/doki",
+      "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
+      "twitterCard": "summary_large_image",
+      "h1Count": 1,
+      "canonical": "http://127.0.0.1:3100/ru/projects/doki",
+      "alternates": [],
+      "redirects": []
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/projects/remhaos",
+      "status": 200,
+      "finalUrl": "http://127.0.0.1:3100/ru/projects/remhaos",
+      "contentType": "text/html; charset=utf-8",
+      "lang": "ru",
+      "title": "remhaos.com — проект и замеры — Selena Systems",
+      "description": "Точка отсчёта, замеры и исправления по проекту remhaos.com: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogTitle": "remhaos.com — проект и замеры — Selena Systems",
+      "ogDescription": "Точка отсчёта, замеры и исправления по проекту remhaos.com: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogUrl": "https://www.selenasystems.com/ru/projects/remhaos",
+      "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
+      "twitterCard": "summary_large_image",
+      "h1Count": 1,
+      "canonical": "http://127.0.0.1:3100/ru/projects/remhaos",
+      "alternates": [],
+      "redirects": []
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/projects/villaops",
+      "status": 200,
+      "finalUrl": "http://127.0.0.1:3100/ru/projects/villaops",
+      "contentType": "text/html; charset=utf-8",
+      "lang": "ru",
+      "title": "VillaOps — проект и замеры — Selena Systems",
+      "description": "Точка отсчёта, замеры и исправления по проекту VillaOps: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogTitle": "VillaOps — проект и замеры — Selena Systems",
+      "ogDescription": "Точка отсчёта, замеры и исправления по проекту VillaOps: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogUrl": "https://www.selenasystems.com/ru/projects/villaops",
+      "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
+      "twitterCard": "summary_large_image",
+      "h1Count": 1,
+      "canonical": "http://127.0.0.1:3100/ru/projects/villaops",
+      "alternates": [],
+      "redirects": []
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/projects/bigdragonvillas",
+      "status": 200,
+      "finalUrl": "http://127.0.0.1:3100/ru/projects/bigdragonvillas",
+      "contentType": "text/html; charset=utf-8",
+      "lang": "ru",
+      "title": "Big Dragon Villas Ubud — проект и замеры — Selena Systems",
+      "description": "Точка отсчёта, замеры и исправления по проекту Big Dragon Villas Ubud: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogTitle": "Big Dragon Villas Ubud — проект и замеры — Selena Systems",
+      "ogDescription": "Точка отсчёта, замеры и исправления по проекту Big Dragon Villas Ubud: что показали цифры, что мы поменяли и что эти числа не доказывают.",
+      "ogUrl": "https://www.selenasystems.com/ru/projects/bigdragonvillas",
+      "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
+      "twitterCard": "summary_large_image",
+      "h1Count": 1,
+      "canonical": "http://127.0.0.1:3100/ru/projects/bigdragonvillas",
+      "alternates": [],
+      "redirects": []
+    },
+    {
       "url": "http://127.0.0.1:3100/about",
       "status": 200,
       "finalUrl": "http://127.0.0.1:3100/about",
@@ -1028,7 +1312,57 @@
       "twitterCard": "summary_large_image",
       "h1Count": 1,
       "canonical": "http://127.0.0.1:3100/about",
-      "alternates": [],
+      "alternates": [
+        {
+          "hreflang": "x-default",
+          "href": "http://127.0.0.1:3100/en/about",
+          "rawHref": "https://www.selenasystems.com/en/about"
+        },
+        {
+          "hreflang": "en",
+          "href": "http://127.0.0.1:3100/en/about",
+          "rawHref": "https://www.selenasystems.com/en/about"
+        },
+        {
+          "hreflang": "ru",
+          "href": "http://127.0.0.1:3100/about",
+          "rawHref": "https://www.selenasystems.com/about"
+        }
+      ],
+      "redirects": []
+    },
+    {
+      "url": "http://127.0.0.1:3100/en/about",
+      "status": 200,
+      "finalUrl": "http://127.0.0.1:3100/en/about",
+      "contentType": "text/html; charset=utf-8",
+      "lang": "en",
+      "title": "About Selena Systems — Selena Systems",
+      "description": "How Selena Systems designs AI Automation and measures AI Visibility with clear evidence, practical handover and human control.",
+      "ogTitle": "About Selena Systems — Selena Systems",
+      "ogDescription": "How Selena Systems designs AI Automation and measures AI Visibility with clear evidence, practical handover and human control.",
+      "ogUrl": "https://www.selenasystems.com/en/about",
+      "ogImage": "https://www.selenasystems.com/media/selena-systems-process-visual.png",
+      "twitterCard": "summary_large_image",
+      "h1Count": 1,
+      "canonical": "http://127.0.0.1:3100/en/about",
+      "alternates": [
+        {
+          "hreflang": "x-default",
+          "href": "http://127.0.0.1:3100/en/about",
+          "rawHref": "https://www.selenasystems.com/en/about"
+        },
+        {
+          "hreflang": "en",
+          "href": "http://127.0.0.1:3100/en/about",
+          "rawHref": "https://www.selenasystems.com/en/about"
+        },
+        {
+          "hreflang": "ru",
+          "href": "http://127.0.0.1:3100/about",
+          "rawHref": "https://www.selenasystems.com/about"
+        }
+      ],
       "redirects": []
     },
     {
@@ -1236,5 +1570,54 @@
       "redirects": []
     }
   ],
-  "issues": []
+  "issues": [
+    {
+      "url": "http://127.0.0.1:3100/ru/lab",
+      "code": "TITLE_LENGTH",
+      "message": "Title length 62 is outside the 30–60 character guidance.",
+      "severity": "warning"
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/lab",
+      "code": "DESCRIPTION_LENGTH",
+      "message": "Description length 113 is outside the 120–160 character guidance.",
+      "severity": "warning"
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/blog",
+      "code": "TITLE_LENGTH",
+      "message": "Title length 67 is outside the 30–60 character guidance.",
+      "severity": "warning"
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/blog",
+      "code": "DESCRIPTION_LENGTH",
+      "message": "Description length 109 is outside the 120–160 character guidance.",
+      "severity": "warning"
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/blog/kak-proveryat-ai-kod",
+      "code": "TITLE_LENGTH",
+      "message": "Title length 61 is outside the 30–60 character guidance.",
+      "severity": "warning"
+    },
+    {
+      "url": "http://127.0.0.1:3100/lab/experiments/two-agent-code-review",
+      "code": "DESCRIPTION_LENGTH",
+      "message": "Description length 178 is outside the 120–160 character guidance.",
+      "severity": "warning"
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/lab/experiments/two-agent-code-review",
+      "code": "DESCRIPTION_LENGTH",
+      "message": "Description length 163 is outside the 120–160 character guidance.",
+      "severity": "warning"
+    },
+    {
+      "url": "http://127.0.0.1:3100/ru/projects",
+      "code": "DESCRIPTION_LENGTH",
+      "message": "Description length 252 is outside the 120–160 character guidance.",
+      "severity": "warning"
+    }
+  ]
 }

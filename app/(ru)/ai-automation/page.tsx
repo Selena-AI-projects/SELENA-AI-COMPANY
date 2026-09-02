@@ -13,6 +13,10 @@ import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
+import { CinemaFrame } from "@/components/ui/CinemaFrame";
+import { pageCinema } from "@/lib/data/page-cinema";
+
+const cinema = pageCinema("ru").automation;
 
 export const metadata = buildMetadata({
   title: "AI-автоматизация",
@@ -86,6 +90,10 @@ export default function AiAutomationPage() {
         eyebrow="Автоматизация"
         title="AI-автоматизация без сложного кода"
         intro="Собираю no-code связки, которые убирают ручную рутину из заявок, коммуникаций и данных — на Make, Zapier, Telegram/WhatsApp, CRM и Notion."
+        media={{
+          video: { src: cinema.hero.video, poster: cinema.hero.poster },
+          alt: cinema.hero.alt,
+        }}
       >
         <div className="flex flex-wrap gap-4">
           <Button href={cta.primary.href} size="lg">
@@ -125,6 +133,9 @@ export default function AiAutomationPage() {
             intro="Типовой сценарий обработки заявки — не кейс клиента, а схема, которая настраивается под ваш процесс."
           />
           <Reveal className="mt-12">
+            <CinemaFrame tone="light" image={cinema.flow.image} alt={cinema.flow.alt} caption={cinema.flow.caption} />
+          </Reveal>
+          <Reveal className="mt-8">
             <div className="card-premium bg-ivory p-6 sm:p-10">
               <ol className="flex flex-col items-stretch gap-3 lg:flex-row lg:items-center">
                 {flowSteps.map((step, i) => (
