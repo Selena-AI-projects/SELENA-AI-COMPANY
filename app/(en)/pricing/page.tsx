@@ -39,7 +39,7 @@ export default function PricingPage() {
         }}
       />
       <PromotionBanner locale="en" />
-      <PricingDirectory content={content.pricing.directory} />
+      <PricingDirectory content={content.pricing.directory} tiles={pageCinema("en").pricingDirectory} />
       <PricingTracks content={content.pricing} showHeader={false} />
       <PackagesSection content={homepage} />
       <FAQSection items={content.faq} headline="Frequently asked questions" />

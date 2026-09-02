@@ -1,18 +1,38 @@
+import Image from "next/image";
 import Link from "next/link";
 import { labContent, labPath, type LabItem, type LabLocale, type LabSectionId } from "@/lib/lab/content";
 import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { LabDiagram } from "@/components/lab/LabDiagram";
+import { pageCinema } from "@/lib/data/page-cinema";
 
 function ItemLink({ item, locale }: { item: LabItem; locale: LabLocale }) {
+  const frame = pageCinema(locale).lab.articles[item.slug];
   return (
     <Link
       href={labPath(locale, item.section, item.slug)}
       className="group grid gap-4 border-b border-line py-7 first:border-t sm:grid-cols-[9rem_1fr_auto] sm:items-start"
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-copper-deep">{item.label}</p>
+      {/* The article's staged frame as a small thumbnail; the row stays a
+          text row when an entry has no frame. */}
+      {frame ? (
+        <div className="relative aspect-[16/10] overflow-hidden rounded-lg border border-line sm:w-[9rem]">
+          <Image
+            src={frame.image}
+            alt={frame.alt}
+            fill
+            sizes="(min-width: 640px) 9rem, 100vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+          />
+        </div>
+      ) : (
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-copper-deep">{item.label}</p>
+      )}
       <div>
+        {frame ? (
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-copper-deep">{item.label}</p>
+        ) : null}
         <h3 className="font-serif text-2xl font-semibold text-ink transition-colors group-hover:text-copper-deep">
           {item.title}
         </h3>
@@ -46,6 +66,7 @@ function LabNextSteps({ locale }: { locale: LabLocale }) {
 
 export function LabLandingPage({ locale }: { locale: LabLocale }) {
   const content = labContent[locale];
+  const cinema = pageCinema(locale).lab;
   const researchLinks = locale === "ru"
     ? [
         ...content.sections
@@ -70,7 +91,12 @@ export function LabLandingPage({ locale }: { locale: LabLocale }) {
 
   return (
     <>
-      <PageHero eyebrow={content.eyebrow} title={content.title} intro={content.intro}>
+      <PageHero
+        eyebrow={content.eyebrow}
+        title={content.title}
+        intro={content.intro}
+        media={{ video: { src: cinema.hero.video, poster: cinema.hero.poster }, alt: cinema.hero.alt }}
+      >
         <div className="flex flex-wrap items-center gap-4">
           <Button href={labPath(locale, "guides")}>{locale === "ru" ? "Открыть руководства" : "Explore the guides"}</Button>
           <p className="text-sm font-medium text-muted">{content.supportingLine}</p>
@@ -135,9 +161,15 @@ export function LabSectionPage({ locale, sectionId }: { locale: LabLocale; secti
   const content = labContent[locale];
   const section = content.sections.find((item) => item.id === sectionId)!;
   const items = content.items.filter((item) => item.section === sectionId);
+  const frame = pageCinema(locale).lab.sections[sectionId];
   return (
     <>
-      <PageHero eyebrow={content.sectionEyebrow} title={section.title} intro={section.description}>
+      <PageHero
+        eyebrow={content.sectionEyebrow}
+        title={section.title}
+        intro={section.description}
+        media={frame ? { image: frame.image, alt: frame.alt } : undefined}
+      >
         <Link href={labPath(locale)} className="inline-flex min-h-11 items-center font-medium text-link underline decoration-link/45 underline-offset-4">
           ← {content.backLabel}
         </Link>
@@ -163,9 +195,15 @@ export function LabSectionPage({ locale, sectionId }: { locale: LabLocale; secti
 
 export function LabArticlePage({ locale, item }: { locale: LabLocale; item: LabItem }) {
   const content = labContent[locale];
+  const frame = pageCinema(locale).lab.articles[item.slug];
   return (
     <>
-      <PageHero eyebrow={`${content.eyebrow} · ${item.label}`} title={item.title} intro={item.summary}>
+      <PageHero
+        eyebrow={`${content.eyebrow} · ${item.label}`}
+        title={item.title}
+        intro={item.summary}
+        media={frame ? { image: frame.image, alt: frame.alt } : undefined}
+      >
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted">
           <Link href={labPath(locale, item.section)} className="inline-flex min-h-11 items-center font-medium text-link underline decoration-link/45 underline-offset-4">
             ← {content.backLabel}

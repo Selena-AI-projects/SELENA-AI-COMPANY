@@ -10,6 +10,7 @@ import { detailsFor } from "@/lib/visibility-log/measurement-detail";
 import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { pageCinema } from "@/lib/data/page-cinema";
 import {
   clickForms,
   clickRate,
@@ -139,6 +140,7 @@ export default async function JournalProjectPage({
 
   const firstEntry = project.entries[0];
   const lastEntry = project.entries[project.entries.length - 1];
+  const frame = pageCinema("ru").projects.frames[project.slug];
 
   return (
     <>
@@ -155,7 +157,12 @@ export default async function JournalProjectPage({
           })}
         />
       ) : null}
-      <PageHero eyebrow="Журнал замеров" title={project.name} intro={project.category}>
+      <PageHero
+        eyebrow="Журнал замеров"
+        title={project.name}
+        intro={project.category}
+        media={{ image: frame.image, alt: frame.alt }}
+      >
         {project.publishedByPermission ? (
           <div className="mb-8 max-w-2xl rounded-xl border border-line bg-surface p-6">
             <p className="text-sm font-semibold tracking-[0.16em] text-copper-deep uppercase">

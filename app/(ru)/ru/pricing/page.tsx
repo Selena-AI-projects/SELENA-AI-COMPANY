@@ -38,7 +38,7 @@ export default function RussianPricingPage() {
         }}
       />
       <PromotionBanner locale="ru" />
-      <PricingDirectory content={content.pricing.directory} />
+      <PricingDirectory content={content.pricing.directory} tiles={pageCinema("ru").pricingDirectory} />
       <PricingTracks content={content.pricing} showHeader={false} />
       <PackagesSection content={ruHomepage} />
       <FAQSection items={content.faq} />

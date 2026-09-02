@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { PricingPlan, VisibilityContent } from "@/lib/visibility/types";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -6,12 +7,21 @@ import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 import { CLIENT_PORTAL_ENABLED } from "@/lib/visibility/routes";
 
+type DirectoryTile = { image: string; alt: string };
+
 export function PricingDirectory({
   content,
+  tiles,
 }: {
   content: VisibilityContent["pricing"]["directory"];
+  /** A staged frame per destination — the outward lens, the inward gears.
+      The comparison table below stays typography on purpose. */
+  tiles?: { visibility: DirectoryTile; systems: DirectoryTile };
 }) {
-  const destinations = [content.visibility, content.systems];
+  const destinations = [
+    { ...content.visibility, tile: tiles?.visibility },
+    { ...content.systems, tile: tiles?.systems },
+  ];
 
   return (
     <section className="border-y border-line bg-ivory py-10 sm:py-12">
@@ -29,6 +39,17 @@ export function PricingDirectory({
                   href={destination.href}
                   className="group flex h-full flex-col bg-surface p-5 transition-colors duration-300 hover:bg-warm-canvas sm:p-6"
                 >
+                  {destination.tile ? (
+                    <div className="relative mb-5 aspect-[21/9] overflow-hidden rounded-xl border border-line">
+                      <Image
+                        src={destination.tile.image}
+                        alt={destination.tile.alt}
+                        fill
+                        sizes="(min-width: 1024px) 32vw, (min-width: 768px) 50vw, 100vw"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                      />
+                    </div>
+                  ) : null}
                   <h3 className="text-h3 text-ink">{destination.title}</h3>
                   <p className="mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-copper-deep">
                     {destination.count}
