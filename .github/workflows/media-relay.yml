@@ -49,6 +49,12 @@ jobs:
               poster)
                 ffmpeg -y -i "$tmp" -frames:v 1 -vf "scale=1280:-2" -c:v libwebp -quality 78 "$out"
                 ;;
+              midframe)
+                ffmpeg -y -ss 2.5 -i "$tmp" -frames:v 1 -vf "scale=640:-2" -q:v 6 "$out"
+                ;;
+              endframe)
+                ffmpeg -y -ss 4.5 -i "$tmp" -frames:v 1 -vf "scale=640:-2" -q:v 6 "$out"
+                ;;
               copy)
                 cp "$tmp" "$out"
                 ;;
