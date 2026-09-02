@@ -1,4 +1,5 @@
 import { contact, founder, site } from "@/lib/site";
+import { legalDocuments } from "@/lib/data/legal";
 import type { Service } from "@/lib/data/services";
 import {
   amountForStructuredData,
@@ -677,9 +678,8 @@ export function buildContactStructuredData(locale: StructuredLocale) {
  * Structured data for the privacy and terms pages.
  *
  * These are the two pages an assistant reads to answer "who operates this and
- * what are the rules" — and they were the only public routes with no markup at
- * all. No `dateModified` is emitted: the site does not publish an effective
- * date for either document, and the build date is not one.
+ * what are the rules". The date comes from `legalDocuments` — the day the
+ * current revision goes live, written by hand, never the build date.
  */
 export function buildLegalPageStructuredData({
   locale,
@@ -704,6 +704,9 @@ export function buildLegalPageStructuredData({
       {
         ...webPageNode({ locale, pageUrl, name, description }),
         about: { "@id": `${site.url}/#organization` },
+        // Only what the site can check. `datePublished` would claim a first
+        // publication date for the document, and no such date was ever recorded.
+        dateModified: legalDocuments[kind].revisionPublished,
         ...(kind === "privacy"
           ? { significantLink: localizedContactUrl(locale) }
           : {}),

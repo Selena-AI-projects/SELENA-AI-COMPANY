@@ -4,6 +4,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
 import { site } from "@/lib/site";
 import { buildLegalPageStructuredData } from "@/lib/structured-data";
+import { revisionLine } from "@/lib/data/legal";
 
 const title = "Условия использования";
 const description =
@@ -87,7 +88,7 @@ export default function TermsPage() {
               </div>
             ))}
             <p className="border-t border-line pt-6 text-sm leading-relaxed text-muted">
-              Последнее обновление: 15 августа 2026. Отдельные условия оплаты,
+              {revisionLine("terms", "ru")} Отдельные условия оплаты,
               возврата и коммерческого обслуживания будут опубликованы и проверены
               юристом до включения реальных онлайн-платежей.
             </p>

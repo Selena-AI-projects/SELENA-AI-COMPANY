@@ -4,6 +4,7 @@ import { visibilityLanguages } from "@/lib/visibility/routes";
 import { labContent, labLanguages, labPath, labSectionIds } from "@/lib/lab/content";
 import { journalProjects } from "@/lib/visibility-log/data";
 import { aiCodeCrossReviewArticle } from "@/lib/school/ai-code-cross-review";
+import { legalDocuments } from "@/lib/data/legal";
 
 type PublicRoute = {
   path: string;
@@ -92,10 +93,13 @@ const routes: PublicRoute[] = [
   { path: "/en/about", priority: 0.6, languages: { "x-default": "/en/about", en: "/en/about", ru: "/about" } },
   { path: "/contact", priority: 0.9, languages: { "x-default": "/en/contact", en: "/en/contact", ru: "/contact" } },
   { path: "/en/contact", priority: 0.9, languages: { "x-default": "/en/contact", en: "/en/contact", ru: "/contact" } },
-  { path: "/en/privacy", priority: 0.2, languages: { "x-default": "/en/privacy", en: "/en/privacy", ru: "/privacy" } },
-  { path: "/en/terms", priority: 0.2, languages: { "x-default": "/en/terms", en: "/en/terms", ru: "/terms" } },
-  { path: "/privacy", priority: 0.2, languages: { "x-default": "/en/privacy", en: "/en/privacy", ru: "/privacy" } },
-  { path: "/terms", priority: 0.2, languages: { "x-default": "/en/terms", en: "/en/terms", ru: "/terms" } },
+  // The legal pages state the day their current revision goes live, so they can
+  // say it here too. Hand-written in the commit that changes the document —
+  // never the build clock, and never inferred from a commit date.
+  { path: "/en/privacy", priority: 0.2, lastModified: legalDocuments.privacy.revisionPublished, languages: { "x-default": "/en/privacy", en: "/en/privacy", ru: "/privacy" } },
+  { path: "/en/terms", priority: 0.2, lastModified: legalDocuments.terms.revisionPublished, languages: { "x-default": "/en/terms", en: "/en/terms", ru: "/terms" } },
+  { path: "/privacy", priority: 0.2, lastModified: legalDocuments.privacy.revisionPublished, languages: { "x-default": "/en/privacy", en: "/en/privacy", ru: "/privacy" } },
+  { path: "/terms", priority: 0.2, lastModified: legalDocuments.terms.revisionPublished, languages: { "x-default": "/en/terms", en: "/en/terms", ru: "/terms" } },
 ];
 
 function absoluteUrl(path: string) {
