@@ -14,11 +14,15 @@ import { cn } from "@/lib/cn";
 export function CinemaLoop({
   video,
   poster,
+  alt,
   className,
   priority = false,
 }: {
   video: string;
   poster: string;
+  /** Describes the poster frame. Required: the site's SEO gate rejects
+      images with a missing or empty alt, aria-hidden or not. */
+  alt: string;
   className?: string;
   /** true only for the hero loop: loads with the page. */
   priority?: boolean;
@@ -58,7 +62,7 @@ export function CinemaLoop({
       className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
       aria-hidden
     >
-      <Image src={poster} alt="" fill sizes="100vw" priority={priority} className="object-cover" />
+      <Image src={poster} alt={alt} fill sizes="100vw" priority={priority} className="object-cover" />
       {active ? (
         <video
           className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"

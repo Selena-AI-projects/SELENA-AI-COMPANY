@@ -41,7 +41,7 @@ export function CinemaFrame({
     >
       <div className={cn("relative", aspect)}>
         {video ? (
-          <CinemaLoop video={video.src} poster={video.poster} />
+          <CinemaLoop video={video.src} poster={video.poster} alt={alt} />
         ) : image ? (
           <Image src={image} alt={alt} fill sizes={sizes} className="object-cover" />
         ) : null}

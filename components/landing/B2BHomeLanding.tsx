@@ -143,6 +143,7 @@ function HeroSection({ content }: { content: HomepageContent }) {
         <CinemaLoop
           video={content.cinema.hero.video}
           poster={content.cinema.hero.poster}
+          alt={content.cinema.hero.alt}
           priority
           className="opacity-60"
         />

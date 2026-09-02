@@ -97,7 +97,7 @@ export function MeasurementFilmstrip({ content }: { content: MeasurementContent 
               >
                 <div className="relative aspect-[16/10]">
                   {"video" in slide && slide.video ? (
-                    <CinemaLoop video={slide.video} poster={slide.image} />
+                    <CinemaLoop video={slide.video} poster={slide.image} alt={slide.alt} />
                   ) : (
                     <Image
                       src={slide.image}

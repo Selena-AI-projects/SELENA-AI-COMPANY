@@ -2,10 +2,10 @@
 
 - Base URL: http://127.0.0.1:3100
 - Sitemap: http://127.0.0.1:3100/sitemap.xml
-- Checked: 2026-08-17T08:20:54.589Z
-- URLs: 40
+- Checked: 2026-09-02T01:38:38.932Z
+- URLs: 55
 - Errors: 0
-- Warnings: 0
+- Warnings: 8
 
 ## URL results
 
@@ -30,6 +30,9 @@
 | http://127.0.0.1:3100/ru/pricing | 200 | http://127.0.0.1:3100/ru/pricing | ru | yes | 1 | yes | 3 |
 | http://127.0.0.1:3100/lab | 200 | http://127.0.0.1:3100/lab | en | yes | 1 | yes | 3 |
 | http://127.0.0.1:3100/ru/lab | 200 | http://127.0.0.1:3100/ru/lab | ru | yes | 1 | yes | 3 |
+| http://127.0.0.1:3100/ru/blog | 200 | http://127.0.0.1:3100/ru/blog | ru | yes | 1 | yes | 0 |
+| http://127.0.0.1:3100/ru/tools | 200 | http://127.0.0.1:3100/ru/tools | ru | yes | 1 | yes | 0 |
+| http://127.0.0.1:3100/ru/blog/kak-proveryat-ai-kod | 200 | http://127.0.0.1:3100/ru/blog/kak-proveryat-ai-kod | ru | yes | 1 | yes | 0 |
 | http://127.0.0.1:3100/lab/research | 200 | http://127.0.0.1:3100/lab/research | en | yes | 1 | yes | 3 |
 | http://127.0.0.1:3100/ru/lab/research | 200 | http://127.0.0.1:3100/ru/lab/research | ru | yes | 1 | yes | 3 |
 | http://127.0.0.1:3100/lab/guides | 200 | http://127.0.0.1:3100/lab/guides | en | yes | 1 | yes | 3 |
@@ -44,7 +47,19 @@
 | http://127.0.0.1:3100/ru/lab/guides/prepare-site-for-ai-systems | 200 | http://127.0.0.1:3100/ru/lab/guides/prepare-site-for-ai-systems | ru | yes | 1 | yes | 3 |
 | http://127.0.0.1:3100/lab/guides/read-ai-visibility-report-evidence | 200 | http://127.0.0.1:3100/lab/guides/read-ai-visibility-report-evidence | en | yes | 1 | yes | 3 |
 | http://127.0.0.1:3100/ru/lab/guides/read-ai-visibility-report-evidence | 200 | http://127.0.0.1:3100/ru/lab/guides/read-ai-visibility-report-evidence | ru | yes | 1 | yes | 3 |
-| http://127.0.0.1:3100/about | 200 | http://127.0.0.1:3100/about | ru | yes | 1 | yes | 0 |
+| http://127.0.0.1:3100/lab/experiments/two-agent-code-review | 200 | http://127.0.0.1:3100/lab/experiments/two-agent-code-review | en | yes | 1 | yes | 3 |
+| http://127.0.0.1:3100/ru/lab/experiments/two-agent-code-review | 200 | http://127.0.0.1:3100/ru/lab/experiments/two-agent-code-review | ru | yes | 1 | yes | 3 |
+| http://127.0.0.1:3100/ru/projects | 200 | http://127.0.0.1:3100/ru/projects | ru | yes | 1 | yes | 0 |
+| http://127.0.0.1:3100/ru/projects/korafoodhall | 200 | http://127.0.0.1:3100/ru/projects/korafoodhall | ru | yes | 1 | yes | 0 |
+| http://127.0.0.1:3100/ru/projects/otherbali | 200 | http://127.0.0.1:3100/ru/projects/otherbali | ru | yes | 1 | yes | 0 |
+| http://127.0.0.1:3100/ru/projects/petid | 200 | http://127.0.0.1:3100/ru/projects/petid | ru | yes | 1 | yes | 0 |
+| http://127.0.0.1:3100/ru/projects/selenasystems | 200 | http://127.0.0.1:3100/ru/projects/selenasystems | ru | yes | 1 | yes | 0 |
+| http://127.0.0.1:3100/ru/projects/doki | 200 | http://127.0.0.1:3100/ru/projects/doki | ru | yes | 1 | yes | 0 |
+| http://127.0.0.1:3100/ru/projects/remhaos | 200 | http://127.0.0.1:3100/ru/projects/remhaos | ru | yes | 1 | yes | 0 |
+| http://127.0.0.1:3100/ru/projects/villaops | 200 | http://127.0.0.1:3100/ru/projects/villaops | ru | yes | 1 | yes | 0 |
+| http://127.0.0.1:3100/ru/projects/bigdragonvillas | 200 | http://127.0.0.1:3100/ru/projects/bigdragonvillas | ru | yes | 1 | yes | 0 |
+| http://127.0.0.1:3100/about | 200 | http://127.0.0.1:3100/about | ru | yes | 1 | yes | 3 |
+| http://127.0.0.1:3100/en/about | 200 | http://127.0.0.1:3100/en/about | en | yes | 1 | yes | 3 |
 | http://127.0.0.1:3100/contact | 200 | http://127.0.0.1:3100/contact | ru | yes | 1 | yes | 3 |
 | http://127.0.0.1:3100/en/contact | 200 | http://127.0.0.1:3100/en/contact | en | yes | 1 | yes | 3 |
 | http://127.0.0.1:3100/en/privacy | 200 | http://127.0.0.1:3100/en/privacy | en | yes | 1 | yes | 3 |
@@ -54,4 +69,11 @@
 
 ## Issues
 
-No issues detected.
+- **WARNING TITLE_LENGTH** — http://127.0.0.1:3100/ru/lab: Title length 62 is outside the 30–60 character guidance.
+- **WARNING DESCRIPTION_LENGTH** — http://127.0.0.1:3100/ru/lab: Description length 113 is outside the 120–160 character guidance.
+- **WARNING TITLE_LENGTH** — http://127.0.0.1:3100/ru/blog: Title length 67 is outside the 30–60 character guidance.
+- **WARNING DESCRIPTION_LENGTH** — http://127.0.0.1:3100/ru/blog: Description length 109 is outside the 120–160 character guidance.
+- **WARNING TITLE_LENGTH** — http://127.0.0.1:3100/ru/blog/kak-proveryat-ai-kod: Title length 61 is outside the 30–60 character guidance.
+- **WARNING DESCRIPTION_LENGTH** — http://127.0.0.1:3100/lab/experiments/two-agent-code-review: Description length 178 is outside the 120–160 character guidance.
+- **WARNING DESCRIPTION_LENGTH** — http://127.0.0.1:3100/ru/lab/experiments/two-agent-code-review: Description length 163 is outside the 120–160 character guidance.
+- **WARNING DESCRIPTION_LENGTH** — http://127.0.0.1:3100/ru/projects: Description length 252 is outside the 120–160 character guidance.
