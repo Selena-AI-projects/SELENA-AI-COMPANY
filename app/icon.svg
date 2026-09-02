@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#181614"/>
-  <text x="32" y="39" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="28" font-weight="600" fill="#F7F2EA">SS</text>
-  <circle cx="47" cy="43" r="3" fill="#B9825B"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Selena Systems">
+  <rect width="64" height="64" rx="14" fill="#0d1421"/>
+  <text x="27" y="45" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-style="italic" fill="#f7f2ea">S</text>
+  <circle cx="46" cy="40" r="4" fill="#b9825b"/>
 </svg>

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { CinemaImage } from "@/components/ui/CinemaImage";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 
@@ -62,7 +62,7 @@ export function CinemaLoop({
       className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
       aria-hidden
     >
-      <Image src={poster} alt={alt} fill sizes="100vw" priority={priority} className="object-cover" />
+      <CinemaImage src={poster} alt={alt} fill sizes="100vw" priority={priority} className="object-cover" />
       {active ? (
         <video
           className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"

@@ -1,10 +1,11 @@
-import Image from "next/image";
+import { CinemaImage } from "@/components/ui/CinemaImage";
 import Link from "next/link";
 import { buildMetadata } from "@/lib/metadata";
 import { site } from "@/lib/site";
 import { buildJournalStructuredData } from "@/lib/structured-data";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHero } from "@/components/sections/PageHero";
+import { JournalSummaryTable } from "@/components/journal/JournalSummaryTable";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { pageCinema } from "@/lib/data/page-cinema";
@@ -35,13 +36,49 @@ export const metadata = buildMetadata({
   locale: "ru_RU",
 });
 
+/**
+ * The protocol the journal is kept by. Each rule carries a short name because
+ * six paragraphs of prose read as a manifesto and got skimmed; the name is
+ * what a reader takes away, and the sentence beside it is what it means in
+ * practice.
+ */
 const rules = [
-  "У каждой записи есть дата. Ничего не переписывается задним числом — если вывод оказался неверным, появляется новая запись, а старая остаётся.",
-  "Цифры и слова разделены. Числа приходят из Search Console и обновляются сами. Утверждения о том, что сработало, пишет и подтверждает человек.",
-  "Сравниваем только одинаковые замеры: тот же список вопросов, те же системы, тот же язык. Иначе сравнивать нечего.",
-  "Публикуем общие числа по проекту. Сам список запросов остаётся закрытым — в нём попадаются чужие бренды.",
-  "Ноль — это тоже результат. У трёх проектов на старте ноль показов, и он остаётся на странице.",
-  "Чужой бизнес попадает в журнал только с записанного разрешения владельца. Сказать, что заведение не называют в AI-ответах, — это утверждение о нём, а не о нас.",
+  {
+    name: "У каждой записи есть дата",
+    text: "Ничего не переписывается задним числом. Если вывод оказался неверным, появляется новая запись, а старая остаётся на месте.",
+  },
+  {
+    name: "Цифры отдельно от слов",
+    text: "Числа приходят из Search Console и обновляются сами. Утверждения о том, что сработало, пишет и подтверждает человек.",
+  },
+  {
+    name: "Сравниваем только одинаковое",
+    text: "Тот же список вопросов, те же системы, тот же язык, то же окно. Иначе сравнивать нечего.",
+  },
+  {
+    name: "Публикуем итоги, не запросы",
+    text: "Общие числа по проекту открыты. Сам список запросов закрыт: в нём попадаются чужие бренды.",
+  },
+  {
+    name: "Ноль остаётся на странице",
+    text: "Ноль — это тоже результат. У трёх проектов ноль показов за окно, и он не убран и не заменён прочерком.",
+  },
+  {
+    name: "Чужой бизнес — только с разрешения",
+    text: "Сказать, что заведение не называют в AI-ответах, — это утверждение о нём, а не о нас. Нужно записанное разрешение владельца.",
+  },
+];
+
+/** What the numbers on this page are, stated once, as specification. */
+const method = [
+  { term: "Источник чисел поиска", value: journalMeta.source },
+  {
+    term: "Окно",
+    value: `${journalMeta.windowDays} дней — ровно четыре недели, поэтому в сравнении с прошлым периодом совпадают дни недели`,
+  },
+  { term: "Данные сняты", value: formatDate(journalMeta.measuredAt) },
+  { term: "Замеры AI-ответов", value: "отдельные события: у каждого свой номер и своя дата, они не связаны с окном поиска" },
+  { term: "Не публикуется", value: "список запросов — в нём попадаются чужие бренды" },
 ];
 
 export default function JournalIndexPage() {
@@ -65,24 +102,30 @@ export default function JournalIndexPage() {
         }}
         intro="Мы продаём измерение видимости в поиске и в AI-ответах. Поэтому первыми через него проходим сами: фиксируем точку отсчёта, показываем каждый следующий шаг лестницы и публикуем результат — включая тот, где результата пока нет. Один проект в списке не наш: мы помогаем ему с видимостью, и он разрешил показать свой замер."
       >
+        {/* The full terms are stated once, as a spec, beside the summary table. */}
         <p className="max-w-2xl text-sm leading-relaxed text-muted">
-          Источник: {journalMeta.source}. Окно — {journalMeta.windowDays} дней, а не месяц:
-          это ровно четыре недели, поэтому в сравнении с прошлым периодом совпадают дни
-          недели. У «30 дней» они сдвигаются, и часть движения оказывается календарной,
-          а не настоящей.
+          {journalProjects.length} проектов · источник чисел поиска — {journalMeta.source} · окно{" "}
+          {journalMeta.windowDays} дней · данные сняты {formatDate(journalMeta.measuredAt)}.
         </p>
       </PageHero>
 
       <section className="border-y border-line bg-surface py-20 sm:py-28">
         <Container size="narrow">
           <h2 className="text-h2 text-ink">Как мы это ведём</h2>
-          <ol className="mt-10 grid gap-7">
+          <p className="mt-5 leading-relaxed text-muted">
+            Шесть правил, по которым живёт журнал. Они не меняются от проекта к проекту.
+          </p>
+          <ol className="mt-10 overflow-hidden rounded-xl border border-line bg-surface">
             {rules.map((rule, index) => (
-              <li key={rule} className="grid grid-cols-[2.5rem_1fr] gap-4 border-t border-line pt-5">
-                <span className="font-serif text-xl font-semibold text-copper-deep">
+              <li
+                key={rule.name}
+                className="grid gap-1 border-t border-line p-5 first:border-t-0 sm:grid-cols-[2.5rem_15rem_1fr] sm:items-baseline sm:gap-5 sm:p-6"
+              >
+                <span className="font-serif text-lg font-semibold text-copper-deep">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <p className="leading-relaxed text-ink/85">{rule}</p>
+                <span className="font-semibold text-ink">{rule.name}</span>
+                <span className="leading-relaxed text-ink/80">{rule.text}</span>
               </li>
             ))}
           </ol>
@@ -120,15 +163,29 @@ export default function JournalIndexPage() {
           <div className="max-w-3xl">
             <h2 className="text-h2 text-ink">Что мы измерили</h2>
             <p className="mt-5 leading-relaxed text-muted">
-              Числа ниже — обычный поиск Google за {journalMeta.windowDays} дней: это окно, за
-              которое Google отдаёт данные, а не срок работы. Замеры AI-ответов — отдельные
-              события: у каждого свой номер и своя дата, и они лежат внутри карточек. У чужого
-              проекта чисел из поиска нет: Search Console — это доступ к сайту, и брать его ради
-              замера незачем.
+              Сначала методика — что именно считается и за какой период. Затем все проекты одной
+              таблицей, включая строки с нулём. Подробности каждого проекта — в карточках ниже.
             </p>
           </div>
 
-          <ul className="mt-12 grid gap-6">
+          {/* The terms first, so every number in the table below has a stated
+              meaning before a reader meets it. */}
+          <dl className="mt-10 grid overflow-hidden rounded-xl border border-line bg-ivory sm:grid-cols-2">
+            {method.map((row) => (
+              <div key={row.term} className="border-t border-line p-5 first:border-t-0 sm:border-t sm:p-6">
+                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-copper-deep">
+                  {row.term}
+                </dt>
+                <dd className="mt-2 leading-relaxed text-ink/85">{row.value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <JournalSummaryTable projects={journalProjects} />
+
+          <h3 className="mt-16 text-h3 text-ink">Каждый проект по отдельности</h3>
+
+          <ul className="mt-8 grid gap-6">
             {journalProjects.map((project) => {
               const metrics = project.metrics;
               const rate = metrics ? clickRate(metrics) : null;
@@ -161,7 +218,7 @@ export default function JournalIndexPage() {
                     {/* A staged scene from the project's world; the numbers
                         beside it stay the proof. */}
                     <div className="relative aspect-[21/9] overflow-hidden border-b border-line">
-                      <Image
+                      <CinemaImage
                         src={cinema.frames[project.slug].image}
                         alt={cinema.frames[project.slug].alt}
                         fill

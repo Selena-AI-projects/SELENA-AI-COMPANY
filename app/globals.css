@@ -168,6 +168,14 @@
     color: inherit;
     text-decoration: none;
   }
+
+  /* The header is fixed, so an anchor jump would otherwise park its target's
+     heading underneath it. 6rem clears the 4.5rem bar with air to spare. In
+     the base layer, so an element that needs a different offset can still say
+     so with a scroll-mt-* utility. */
+  [id] {
+    scroll-margin-top: 6rem;
+  }
 }
 
 /* ---------- Reusable premium primitives ---------- */

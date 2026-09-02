@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CinemaImage } from "@/components/ui/CinemaImage";
 import { cn } from "@/lib/cn";
 import { CinemaLoop } from "@/components/ui/CinemaLoop";
 
@@ -48,7 +48,7 @@ export function CinemaFrame({
         {video ? (
           <CinemaLoop video={video.src} poster={video.poster} alt={alt} priority={priority} />
         ) : image ? (
-          <Image src={image} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
+          <CinemaImage src={image} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
         ) : null}
         {caption ? (
           <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-charcoal/85 via-charcoal/40 to-transparent p-5 pt-14 sm:p-6">

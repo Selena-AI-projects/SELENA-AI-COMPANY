@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CinemaImage } from "@/components/ui/CinemaImage";
 import type { PricingPlan, VisibilityContent } from "@/lib/visibility/types";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -41,7 +41,7 @@ export function PricingDirectory({
                 >
                   {destination.tile ? (
                     <div className="relative mb-5 aspect-[21/9] overflow-hidden rounded-xl border border-line">
-                      <Image
+                      <CinemaImage
                         src={destination.tile.image}
                         alt={destination.tile.alt}
                         fill

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { CinemaImage } from "@/components/ui/CinemaImage";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -230,7 +230,7 @@ export function InsideWorkspaceSection({ content, cta }: { content: WorkspaceCon
                     hidden={!selected}
                     className={cn("absolute inset-0", !reduced && "transition-opacity duration-500")}
                   >
-                    <Image
+                    <CinemaImage
                       src={tab.image}
                       alt={tab.alt}
                       fill
@@ -288,7 +288,7 @@ export function InsideWorkspaceSection({ content, cta }: { content: WorkspaceCon
                     <p className="text-base leading-relaxed text-ivory/66">{card.text}</p>
                   </div>
                   <div className="relative min-h-56 sm:min-h-0">
-                    <Image
+                    <CinemaImage
                       src={card.image}
                       alt={card.alt}
                       fill

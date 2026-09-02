@@ -17,7 +17,7 @@ export default function EnglishRootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <ShellHead />
+      <ShellHead script="latin" />
       <body>
         <SiteShell>{children}</SiteShell>
       </body>
