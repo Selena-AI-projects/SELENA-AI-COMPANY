@@ -15,10 +15,13 @@ import { JournalTeaser } from "@/components/visibility/JournalTeaser";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { CinemaFrame } from "@/components/ui/CinemaFrame";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { pageCinema } from "@/lib/data/page-cinema";
 
 const content = visibilityContentRu;
+const cinema = pageCinema("ru").visibility;
 
 export const metadata = buildMetadata({
   title: "AI Visibility для бизнеса",
@@ -40,19 +43,47 @@ export default function RussianVisibilityPage() {
         intro={content.hero.intro}
         primaryCta={content.cta.primary}
         secondaryCta={content.cta.secondary}
+        backdrop={cinema.hero}
       />
 
       <MeasurementLayers content={content.measurementLayers} />
 
+      <section className="bg-ivory pb-20 sm:pb-28">
+        <Container>
+          <Reveal>
+            <CinemaFrame tone="light" image={cinema.layers.image} alt={cinema.layers.alt} caption={cinema.layers.caption} />
+          </Reveal>
+        </Container>
+      </section>
+
       <section className="bg-surface pb-20 sm:pb-28 pt-20 sm:pt-28">
         <Container size="narrow">
+          <Reveal className="mb-10">
+            <CinemaFrame tone="light" image={cinema.boundary.image} alt={cinema.boundary.alt} caption={cinema.boundary.caption} />
+          </Reveal>
           <MeasurementBoundary content={content.measurementBoundary} />
         </Container>
       </section>
 
       <ActionReadinessSection content={content.actionReadiness} />
 
+      <section className="bg-surface pb-20 sm:pb-28">
+        <Container>
+          <Reveal>
+            <CinemaFrame tone="light" image={cinema.readiness.image} alt={cinema.readiness.alt} caption={cinema.readiness.caption} />
+          </Reveal>
+        </Container>
+      </section>
+
       <LocalBusinessModeSection content={content.localBusinessMode} />
+
+      <section className="bg-ivory pb-20 sm:pb-28">
+        <Container size="narrow">
+          <Reveal>
+            <CinemaFrame tone="light" image={cinema.local.image} alt={cinema.local.alt} caption={cinema.local.caption} aspect="aspect-[16/9]" />
+          </Reveal>
+        </Container>
+      </section>
 
       <ProductPath
         eyebrow={content.productPath.eyebrow}
@@ -60,6 +91,14 @@ export default function RussianVisibilityPage() {
         intro={content.productPath.intro}
         steps={content.productPath.steps}
       />
+
+      <section className="bg-surface pb-20 sm:pb-28">
+        <Container>
+          <Reveal>
+            <CinemaFrame tone="light" image={cinema.path.image} alt={cinema.path.alt} caption={cinema.path.caption} />
+          </Reveal>
+        </Container>
+      </section>
 
       <JournalTeaser />
 

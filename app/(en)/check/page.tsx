@@ -7,10 +7,13 @@ import { PromotionBanner } from "@/components/visibility/PromotionBanner";
 import { VisibilityCheckForm } from "@/components/visibility/VisibilityCheckForm";
 import { MeasurementBoundary } from "@/components/visibility/MeasurementBoundary";
 import { Container } from "@/components/ui/Container";
+import { CinemaFrame } from "@/components/ui/CinemaFrame";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { pageCinema } from "@/lib/data/page-cinema";
 
 const content = visibilityContentEn;
+const cinema = pageCinema("en").check;
 
 export const metadata = buildMetadata({
   title: "Website Public Readiness — free check",
@@ -30,6 +33,10 @@ export default function CheckPage() {
         eyebrow="Free Public Readiness"
         title={content.checkForm.title}
         intro={content.checkForm.intro}
+        media={{
+          video: { src: cinema.hero.video, poster: cinema.hero.poster },
+          alt: cinema.hero.alt,
+        }}
       />
 
       <PromotionBanner locale="en" />
@@ -43,6 +50,9 @@ export default function CheckPage() {
                 reportCopy={content.liveReport}
                 locale="en"
               />
+            </Reveal>
+            <Reveal>
+              <CinemaFrame tone="light" image={cinema.boundary.image} alt={cinema.boundary.alt} caption={cinema.boundary.caption} />
             </Reveal>
             <MeasurementBoundary content={content.freeMeasurementBoundary} />
           </div>

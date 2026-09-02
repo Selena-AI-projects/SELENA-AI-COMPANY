@@ -9,8 +9,10 @@ import { PricingDirectory, PricingTracks } from "@/components/visibility/Pricing
 import { PromotionBanner } from "@/components/visibility/PromotionBanner";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { pageCinema } from "@/lib/data/page-cinema";
 
 const content = visibilityContentEn;
+const cinema = pageCinema("en").pricing;
 
 export const metadata = buildMetadata({
   title: "Pricing — AI Visibility and AI Automation",
@@ -31,6 +33,10 @@ export default function PricingPage() {
         title="Two products, clearly separated."
         intro="AI Visibility measures how AI sees your business. AI Automation diagnoses and builds the workflows inside it. Start with the map below, then compare only the offers that match your goal."
         compact
+        media={{
+          video: { src: cinema.hero.video, poster: cinema.hero.poster },
+          alt: cinema.hero.alt,
+        }}
       />
       <PromotionBanner locale="en" />
       <PricingDirectory content={content.pricing.directory} />

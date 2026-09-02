@@ -7,10 +7,13 @@ import { PromotionBanner } from "@/components/visibility/PromotionBanner";
 import { VisibilityCheckForm } from "@/components/visibility/VisibilityCheckForm";
 import { MeasurementBoundary } from "@/components/visibility/MeasurementBoundary";
 import { Container } from "@/components/ui/Container";
+import { CinemaFrame } from "@/components/ui/CinemaFrame";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { pageCinema } from "@/lib/data/page-cinema";
 
 const content = visibilityContentRu;
+const cinema = pageCinema("ru").check;
 
 export const metadata = buildMetadata({
   title: "Бесплатная Public Readiness",
@@ -29,6 +32,10 @@ export default function RussianCheckPage() {
         eyebrow="Бесплатная Public Readiness"
         title={content.checkForm.title}
         intro={content.checkForm.intro}
+        media={{
+          video: { src: cinema.hero.video, poster: cinema.hero.poster },
+          alt: cinema.hero.alt,
+        }}
       />
 
       <PromotionBanner locale="ru" />
@@ -42,6 +49,9 @@ export default function RussianCheckPage() {
                 reportCopy={content.liveReport}
                 locale="ru"
               />
+            </Reveal>
+            <Reveal>
+              <CinemaFrame tone="light" image={cinema.boundary.image} alt={cinema.boundary.alt} caption={cinema.boundary.caption} />
             </Reveal>
             <MeasurementBoundary content={content.freeMeasurementBoundary} />
           </div>

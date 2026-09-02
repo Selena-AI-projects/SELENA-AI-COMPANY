@@ -7,6 +7,8 @@ import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { pageCinema } from "@/lib/data/page-cinema";
+import Image from "next/image";
 
 export const metadata = buildMetadata({
   title: "AI Automation for your business",
@@ -16,6 +18,8 @@ export const metadata = buildMetadata({
   locale: "en_US",
 });
 
+const cinema = pageCinema("en").automation;
+
 const offers = [
   {
     name: "60-minute mini-audit",
@@ -23,12 +27,14 @@ const offers = [
     description:
       "You send questions and process details in advance, the hour on Zoom goes into the work itself, and a short memo follows.",
     href: "/en/contact",
+    frame: cinema.offers.miniAudit,
   },
   {
     name: "AI Audit",
     price: commercialFacts.aiSystems.audit.en,
     description: "Map the workflows, bottlenecks and highest-leverage AI opportunities before building.",
     href: "/ai-systems/ai-audit",
+    frame: cinema.offers.audit,
   },
   {
     name: "4-Week AI Sprint",
@@ -36,6 +42,7 @@ const offers = [
     description:
       "We take one priority process and hand over a working, tested system your team is trained to run — in four focused weeks.",
     href: "/ai-systems/ai-sprint",
+    frame: cinema.offers.sprint,
   },
   {
     name: "AI Business OS",
@@ -43,6 +50,7 @@ const offers = [
     description:
       "A turnkey 8-week implementation: connected sales, operations, knowledge and automation systems running inside your company, with your team trained.",
     href: "/ai-systems/business-os",
+    frame: cinema.offers.businessOs,
   },
 ] as const;
 
@@ -54,6 +62,10 @@ export default function AISystemsPage() {
         eyebrow="AI Automation"
         title="Build the AI system your business actually needs."
         intro="AI Automation is Selena Systems' custom work: we diagnose, design and implement practical workflows inside your business. It is separate from AI Visibility, which measures how AI sees your public presence."
+        media={{
+          video: { src: cinema.hero.video, poster: cinema.hero.poster },
+          alt: cinema.hero.alt,
+        }}
       >
         <div className="flex flex-wrap gap-4">
           <Button href="/en/contact" size="lg">Book an AI Audit</Button>
@@ -66,7 +78,17 @@ export default function AISystemsPage() {
           <div className="grid gap-5 md:grid-cols-2">
             {offers.map((offer, index) => (
               <Reveal key={offer.name} delay={index * 70} className="h-full">
-                <Card className="flex h-full flex-col">
+                <Card className="group flex h-full flex-col">
+                  {/* A staged object from the offer's world — never a screenshot. */}
+                  <div className="relative mb-6 aspect-[16/9] overflow-hidden rounded-2xl border border-line">
+                    <Image
+                      src={offer.frame.image}
+                      alt={offer.frame.alt}
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    />
+                  </div>
                   <div className="flex flex-wrap items-start justify-between gap-4 border-b border-line pb-5">
                     <h2 className="text-h3 text-ink">{offer.name}</h2>
                     <span className="font-serif text-2xl font-semibold text-copper-deep">{offer.price}</span>

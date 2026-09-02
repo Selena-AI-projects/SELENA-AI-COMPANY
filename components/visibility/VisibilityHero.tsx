@@ -2,6 +2,7 @@ import { homepage, type HomepageContent } from "@/lib/data/homepage";
 import { ruHomepage } from "@/lib/data/homepage-ru";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { CinemaLoop } from "@/components/ui/CinemaLoop";
 import { Reveal } from "@/components/ui/Reveal";
 import { VisibilityLadder } from "@/components/landing/B2BHomeLanding";
 import type { VisibilityLocale } from "@/lib/visibility/types";
@@ -9,7 +10,9 @@ import type { VisibilityLocale } from "@/lib/visibility/types";
 /**
  * Dark hero for the /visibility pages, mirroring the homepage hero:
  * question, free entry with its honest note, then the paid ladder in the
- * same two sales groups. Visibility always presents on dark.
+ * same two sales groups. Visibility always presents on dark. With
+ * `backdrop`, a cinematic loop sits behind the first screen exactly as on
+ * the homepage, fading to flat charcoal before the ladder.
  */
 export function VisibilityHero({
   locale,
@@ -18,6 +21,7 @@ export function VisibilityHero({
   intro,
   primaryCta,
   secondaryCta,
+  backdrop,
 }: {
   locale: VisibilityLocale;
   eyebrow: string;
@@ -25,11 +29,25 @@ export function VisibilityHero({
   intro: string;
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
+  backdrop?: { video: string; poster: string; alt: string };
 }) {
   const home: HomepageContent = locale === "ru" ? ruHomepage : homepage;
 
   return (
     <section className="relative overflow-hidden bg-charcoal pb-10 pt-28 text-ivory sm:pt-32 lg:pt-36">
+      {backdrop ? (
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[46rem]" aria-hidden>
+          <CinemaLoop
+            video={backdrop.video}
+            poster={backdrop.poster}
+            alt={backdrop.alt}
+            priority
+            className="opacity-80"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/20 via-charcoal/45 to-charcoal" />
+          <div className="absolute inset-0 bg-gradient-to-r from-charcoal/65 via-charcoal/20 to-transparent" />
+        </div>
+      ) : null}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.08]"
         style={{
