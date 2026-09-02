@@ -504,6 +504,27 @@ export const homepage = {
       alt: "Tangled dark threads passing through a brass comb and emerging as parallel copper threads",
       caption: "Inward: scattered manual work becomes one working system.",
     },
+    problemsBand: {
+      image: "/media/cinematic/problems-desk.webp",
+      alt: "A desk buried in handwritten notes and loose pages, an old telephone lost among them",
+      caption: "This is what it usually looks like from the inside: everything works — on someone's attention.",
+    },
+    processBand: {
+      video: "/media/cinematic/process-loop.mp4",
+      poster: "/media/cinematic/process-poster.webp",
+      alt: "Hands assembling a small precise brass mechanism at a dark workbench",
+      caption: "The sprint is assembly work: one process, built piece by piece until the team can run it.",
+    },
+    packagesBand: {
+      image: "/media/cinematic/packages-cases.webp",
+      alt: "Three brass-cornered cases of increasing size in a row on dark stone",
+      caption: "Three depths of the same work: audit, one built process, or a connected operating system.",
+    },
+    proofBand: {
+      image: "/media/cinematic/proof-city.webp",
+      alt: "A miniature night city where a cluster of small buildings glows with warm window light",
+      caption: "The systems below run in the founder's own projects first.",
+    },
     ctaBand: {
       image: "/media/cinematic/cta-dawn.webp",
       alt: "A calm ordered desk by a large window at dawn, warm light entering a cool room",

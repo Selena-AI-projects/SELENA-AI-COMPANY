@@ -145,10 +145,10 @@ function HeroSection({ content }: { content: HomepageContent }) {
           poster={content.cinema.hero.poster}
           alt={content.cinema.hero.alt}
           priority
-          className="opacity-60"
+          className="opacity-80"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-charcoal/70 to-charcoal" />
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/75 via-charcoal/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/20 via-charcoal/45 to-charcoal" />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/65 via-charcoal/20 to-transparent" />
       </div>
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.08]"
@@ -316,6 +316,16 @@ function ProblemSection({ content }: { content: HomepageContent }) {
           </div>
         </Reveal>
 
+        <Reveal delay={60}>
+          <CinemaFrame
+            tone="light"
+            image={content.cinema.problemsBand.image}
+            alt={content.cinema.problemsBand.alt}
+            caption={content.cinema.problemsBand.caption}
+            className="mb-16"
+          />
+        </Reveal>
+
         <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr]">
           <Reveal>
             <SectionIntro
@@ -433,6 +443,18 @@ function ProcessSection({ content }: { content: HomepageContent }) {
           />
         </Reveal>
 
+        <Reveal delay={80} className="mt-12">
+          <CinemaFrame
+            tone="light"
+            video={{
+              src: content.cinema.processBand.video,
+              poster: content.cinema.processBand.poster,
+            }}
+            alt={content.cinema.processBand.alt}
+            caption={content.cinema.processBand.caption}
+          />
+        </Reveal>
+
         <ol className="mt-14 grid gap-4 lg:grid-cols-5">
           {content.process.map((step, index) => (
             <Reveal as="li" key={step.day} delay={index * 70}>
@@ -533,6 +555,16 @@ export function PackagesSection({ content }: { content: HomepageContent }) {
             eyebrow={content.packagesIntro.eyebrow}
             headline={content.packagesIntro.headline}
             intro={content.packagesIntro.intro}
+          />
+        </Reveal>
+
+        <Reveal delay={80}>
+          <CinemaFrame
+            tone="light"
+            image={content.cinema.packagesBand.image}
+            alt={content.cinema.packagesBand.alt}
+            caption={content.cinema.packagesBand.caption}
+            className="mt-10"
           />
         </Reveal>
 
@@ -642,6 +674,16 @@ function ProofSection({ content }: { content: HomepageContent }) {
             headline={content.proof.headline}
           />
           <p className="mt-5 max-w-2xl leading-relaxed text-muted">{content.proof.founderLine}</p>
+        </Reveal>
+
+        <Reveal delay={80}>
+          <CinemaFrame
+            tone="light"
+            image={content.cinema.proofBand.image}
+            alt={content.cinema.proofBand.alt}
+            caption={content.cinema.proofBand.caption}
+            className="mt-12"
+          />
         </Reveal>
 
         <div className="mt-14 grid gap-px overflow-hidden border border-line bg-line md:grid-cols-2">

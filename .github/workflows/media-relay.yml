@@ -46,6 +46,9 @@ jobs:
               video)
                 ffmpeg -y -i "$tmp" -vf "scale=1280:-2" -an -c:v libx264 -crf 27 -preset slow -pix_fmt yuv420p -movflags +faststart "$out"
                 ;;
+              videowebm)
+                ffmpeg -y -i "$tmp" -vf "scale=1280:-2" -an -c:v libvpx-vp9 -crf 38 -b:v 0 -row-mt 1 "$out"
+                ;;
               poster)
                 ffmpeg -y -i "$tmp" -frames:v 1 -vf "scale=1280:-2" -c:v libwebp -quality 78 "$out"
                 ;;

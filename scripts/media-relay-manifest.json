@@ -1,20 +1,5 @@
 [
-  { "file": "public/media/cinematic/hero-poster.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260901_163504_83afbd37-2c36-4323-ace1-609fc949f8ec.png" },
-  { "file": "public/media/cinematic/slide-ask.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260901_163526_2e3899e8-9b8e-45a6-86c5-cc411536ce8f.png" },
-  { "file": "public/media/cinematic/slide-surfaces.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260901_163504_c6e730c9-7490-4bfa-bf73-009c854977d8.png" },
-  { "file": "public/media/cinematic/slide-evidence.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260901_163527_132b15a1-77eb-466c-8ef5-aa1038efd551.png" },
-  { "file": "public/media/cinematic/slide-report.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260901_163504_c5d05ff3-abb9-41ef-a971-8cceeeb9acb7.png" },
-  { "file": "public/media/cinematic/automation-poster.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260901_163504_597c71ef-6607-445c-a8b0-18a3972f5a64.png" },
-  { "file": "public/media/cinematic/cta-dawn.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260901_163504_e7e19aa4-4706-4df4-8c4f-f025dd2220d8.png" },
-  { "file": "public/media/cinematic/visibility-lens-tele.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260901_170110_8a35e2bf-f8a5-4db3-a348-b901602eeb4f.png" },
-  { "file": "public/media/cinematic/visibility-lens-macro.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260901_170110_48e2e01a-3ad9-450b-8581-6fcb1fa504b2.png" },
-  { "file": "public/media/cinematic/hero-loop.mp4", "mode": "video", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_011747_c70d9ab6-78ab-4f6b-9383-c20207db2d71.mp4" },
-  { "file": "public/media/cinematic/automation-loop.mp4", "mode": "video", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_011747_8145cc16-1423-4c57-8956-2b3152dad94a.mp4" },
-  { "file": "public/media/cinematic/prisms-loop.mp4", "mode": "video", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_011747_6d0ecfea-133e-4c13-92d0-38541a976c84.mp4" },
-  { "file": "preview/hero-mid.jpg", "mode": "midframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_011747_c70d9ab6-78ab-4f6b-9383-c20207db2d71.mp4" },
-  { "file": "preview/hero-end.jpg", "mode": "endframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_011747_c70d9ab6-78ab-4f6b-9383-c20207db2d71.mp4" },
-  { "file": "preview/automation-mid.jpg", "mode": "midframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_011747_8145cc16-1423-4c57-8956-2b3152dad94a.mp4" },
-  { "file": "preview/automation-end.jpg", "mode": "endframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_011747_8145cc16-1423-4c57-8956-2b3152dad94a.mp4" },
-  { "file": "preview/prisms-mid.jpg", "mode": "midframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_011747_6d0ecfea-133e-4c13-92d0-38541a976c84.mp4" },
-  { "file": "preview/prisms-end.jpg", "mode": "endframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_011747_6d0ecfea-133e-4c13-92d0-38541a976c84.mp4" }
+  { "file": "public/media/cinematic/process-loop.mp4", "mode": "video", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_020828_d71a3ccd-ee94-449c-92a1-fe2d90df5215.mp4" },
+  { "file": "public/media/cinematic/process-loop.webm", "mode": "videowebm", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_020828_d71a3ccd-ee94-449c-92a1-fe2d90df5215.mp4" },
+  { "file": "preview/process-mid.jpg", "mode": "midframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_020828_d71a3ccd-ee94-449c-92a1-fe2d90df5215.mp4" }
 ]
