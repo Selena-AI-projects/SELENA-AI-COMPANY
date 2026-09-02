@@ -53,10 +53,6 @@ export function ChaosToSystemSection() {
         <div className="mt-14 grid items-center gap-10 sm:mt-16 lg:grid-cols-[1fr_auto_1fr] lg:gap-8">
           {/* ---------- Before: scattered notes ---------- */}
           <div className="relative">
-            <div
-              className="grid-texture pointer-events-none absolute -inset-8 opacity-70"
-              aria-hidden
-            />
 
             <Reveal className="relative">
               <p className="flex items-center gap-3 text-base font-semibold uppercase tracking-[0.22em] text-muted">

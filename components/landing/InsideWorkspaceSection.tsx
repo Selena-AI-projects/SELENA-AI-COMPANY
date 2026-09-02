@@ -154,21 +154,13 @@ export function InsideWorkspaceSection({ content, cta }: { content: WorkspaceCon
       className="relative overflow-hidden border-t border-ivory/10 bg-charcoal py-20 text-ivory sm:py-28"
       style={{ "--scene": 0.5 } as React.CSSProperties}
     >
-      {/* Layer 0: the copper glow and the grid, drifting slowest. */}
+      {/* Layer 0: the copper glow, drifting slowest. */}
       <div className="pointer-events-none absolute inset-0 will-change-transform" style={layer(-90)} aria-hidden>
         <div
           className="absolute inset-x-0 -top-40 h-[42rem]"
           style={{
             background:
               "radial-gradient(ellipse 60% 55% at 50% 0%, rgba(185,130,91,0.34), rgba(13,20,33,0) 70%)",
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(247,242,234,0.6) 1px, transparent 1px), linear-gradient(to bottom, rgba(247,242,234,0.6) 1px, transparent 1px)",
-            backgroundSize: "4rem 4rem",
           }}
         />
       </div>

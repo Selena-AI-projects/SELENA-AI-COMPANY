@@ -13,10 +13,6 @@ export function CoreLoopSection() {
     <section className="relative overflow-hidden bg-charcoal py-20 text-ivory sm:py-28">
       {/* Subtle texture + warm glow — decoration only */}
       <div
-        className="grid-texture pointer-events-none absolute -right-40 -top-24 h-[36rem] w-[36rem] opacity-40 invert"
-        aria-hidden
-      />
-      <div
         className="pointer-events-none absolute -left-32 bottom-[-8rem] h-96 w-96 rounded-full bg-copper/10 blur-3xl"
         aria-hidden
       />
