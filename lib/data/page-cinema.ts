@@ -76,6 +76,7 @@ const paths = {
   labExperiments: "/media/cinematic/pages/lab-experiments.webp",
   labArticles: "/media/cinematic/pages/lab-articles.webp",
   labBlueprint: "/media/cinematic/pages/lab-blueprint.webp",
+  twoAgents: "/media/cinematic/pages/two-agents.webp",
   loupe: "/media/cinematic/pages/loupe.webp",
   projects: {
     korafoodhall: "/media/cinematic/projects/kora.webp",
@@ -124,7 +125,7 @@ const en: PageCinema = {
       "what-is-ai-visibility": { image: paths.lens, alt: "A lens standing in darkness, its glass filled with one warm circle of light" },
       "prepare-site-for-ai-systems": { image: paths.labBlueprint, alt: "A large unrolled drafting sheet with faint grid lines, held flat by a brass plate and a small brass weight" },
       "read-ai-visibility-report-evidence": { image: paths.loupe, alt: "A brass loupe standing in a beam of light in a dark room" },
-      "two-agent-code-review": { image: paths.labExperiments, alt: "Two brass balance scales side by side, each weighing one glass sphere" },
+      "two-agent-code-review": { image: paths.twoAgents, alt: "Two identical brass mechanisms standing side by side on a dark bench" },
     },
   },
   visibility: {
@@ -229,7 +230,7 @@ const ru: PageCinema = {
       "what-is-ai-visibility": { image: paths.lens, alt: "Линза в темноте, в стекле которой стоит один тёплый круг света" },
       "prepare-site-for-ai-systems": { image: paths.labBlueprint, alt: "Большой развёрнутый чертёжный лист с едва заметной сеткой, прижатый латунной пластиной и маленьким латунным грузиком" },
       "read-ai-visibility-report-evidence": { image: paths.loupe, alt: "Латунная лупа стоит в луче света в тёмной комнате" },
-      "two-agent-code-review": { image: paths.labExperiments, alt: "Двое латунных весов рядом, на каждых — по одному стеклянному шару" },
+      "two-agent-code-review": { image: paths.twoAgents, alt: "Два одинаковых латунных механизма стоят рядом на тёмной скамье" },
     },
   },
   visibility: {
