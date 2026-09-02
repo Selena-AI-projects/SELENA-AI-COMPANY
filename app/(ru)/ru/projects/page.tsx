@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { buildMetadata } from "@/lib/metadata";
 import { site } from "@/lib/site";
@@ -6,6 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { pageCinema } from "@/lib/data/page-cinema";
 import { detailsFor, systemTotals } from "@/lib/visibility-log/measurement-detail";
 import {
   clickForms,
@@ -22,6 +24,7 @@ import {
 
 const journalPath = "/ru/projects";
 const journalTitle = "Журнал замеров";
+const cinema = pageCinema("ru").projects;
 const journalDescription =
   "Собственные проекты проходят весь путь замера публично: с чего начали, что показали цифры, что мы поправили и что получилось после. С датами и без задним числом переписанных выводов. Один проект в журнале не наш — он опубликован с разрешения владельца.";
 
@@ -56,6 +59,10 @@ export default function JournalIndexPage() {
       <PageHero
         eyebrow="Журнал замеров"
         title="Мы измеряем себя первыми — и показываем результат целиком."
+        media={{
+          video: { src: cinema.hero.video, poster: cinema.hero.poster },
+          alt: cinema.hero.alt,
+        }}
         intro="Мы продаём измерение видимости в поиске и в AI-ответах. Поэтому первыми через него проходим сами: фиксируем точку отсчёта, показываем каждый следующий шаг лестницы и публикуем результат — включая тот, где результата пока нет. Один проект в списке не наш: мы помогаем ему с видимостью, и он разрешил показать свой замер."
       >
         <p className="max-w-2xl text-sm leading-relaxed text-muted">
@@ -149,8 +156,20 @@ export default function JournalIndexPage() {
                 <li key={project.slug}>
                   <Link
                     href={`/ru/projects/${project.slug}`}
-                    className="group block rounded-xl border border-line bg-ivory p-7 transition-all duration-300 hover:-translate-y-px hover:border-copper-deep/50 sm:p-9"
+                    className="group block overflow-hidden rounded-xl border border-line bg-ivory transition-all duration-300 hover:-translate-y-px hover:border-copper-deep/50"
                   >
+                    {/* A staged scene from the project's world; the numbers
+                        beside it stay the proof. */}
+                    <div className="relative aspect-[21/9] overflow-hidden border-b border-line">
+                      <Image
+                        src={cinema.frames[project.slug].image}
+                        alt={cinema.frames[project.slug].alt}
+                        fill
+                        sizes="(min-width: 1280px) 1152px, 100vw"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                      />
+                    </div>
+                    <div className="p-7 sm:p-9">
                     <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr]">
                       <div>
                         <h3 className="font-serif text-2xl font-semibold text-ink">{project.name}</h3>
@@ -226,6 +245,7 @@ export default function JournalIndexPage() {
                         →
                       </span>
                     </span>
+                    </div>
                   </Link>
                 </li>
               );
