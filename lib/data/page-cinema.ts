@@ -72,7 +72,7 @@ const en: PageCinema = {
     },
     local: {
       image: paths.local,
-      alt: "A small neighbourhood café doorway at dusk, warm light on wet pavement",
+      alt: "A small corner shop at dusk, its window glowing under an awning, a bicycle leaning outside on wet cobblestones",
       caption: "For local businesses the question is simpler: does AI name you when someone nearby asks?",
     },
     path: {
@@ -140,7 +140,7 @@ const ru: PageCinema = {
     },
     local: {
       image: paths.local,
-      alt: "Дверь небольшого кафе в сумерках, тёплый свет на мокрой мостовой",
+      alt: "Маленькая угловая лавка в сумерках: светится витрина под навесом, у стены велосипед, мокрая брусчатка",
       caption: "Для локального бизнеса вопрос проще: называет ли AI вас, когда спрашивают рядом?",
     },
     path: {
