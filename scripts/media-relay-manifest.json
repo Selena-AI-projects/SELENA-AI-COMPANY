@@ -1,5 +1,14 @@
 [
-  { "file": "public/media/cinematic/process-loop.mp4", "mode": "video", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_020828_d71a3ccd-ee94-449c-92a1-fe2d90df5215.mp4" },
-  { "file": "public/media/cinematic/process-loop.webm", "mode": "videowebm", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_020828_d71a3ccd-ee94-449c-92a1-fe2d90df5215.mp4" },
-  { "file": "preview/process-mid.jpg", "mode": "midframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_020828_d71a3ccd-ee94-449c-92a1-fe2d90df5215.mp4" }
+  { "file": "public/media/cinematic/projects/kora-a.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_033135_78de278a-fcd7-46da-94fd-aa636f456a7f.png" },
+  { "file": "public/media/cinematic/projects/kora-b.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_033134_2085e312-1b38-4374-b4e6-f4ba4f9b4d70.png" },
+  { "file": "public/media/cinematic/projects/petid-a.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_033134_bbbe6ec6-e6e2-47d0-8e3b-8115a4055496.png" },
+  { "file": "public/media/cinematic/projects/petid-b.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_033134_bac90813-45cf-4464-ad23-86952f19ff3e.png" },
+  { "file": "public/media/cinematic/projects/doki-a.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_033135_68b94963-4a43-4a16-8528-18d729e617ba.png" },
+  { "file": "public/media/cinematic/projects/doki-b.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_033135_a7a7c30a-1d18-48c6-9bc9-ce0025934ada.png" },
+  { "file": "public/media/cinematic/projects/remhaos-a.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_033135_dabd10af-e20a-407b-ac15-cd4fc28b0f9d.png" },
+  { "file": "public/media/cinematic/projects/remhaos-b.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_033135_907bf335-583d-4d78-b1f5-2477589af3c5.png" },
+  { "file": "public/media/cinematic/projects/otherbali-a.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_033134_92db642e-586e-44f5-a34e-3c7d2796a621.png" },
+  { "file": "public/media/cinematic/projects/otherbali-b.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_033134_ca5a8cd5-1060-4e0e-972c-ccedfa32ba1f.png" },
+  { "file": "public/media/cinematic/projects/villaops-a.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_033134_50d91905-758e-4d9c-a845-bf992ee3af4b.png" },
+  { "file": "public/media/cinematic/projects/villaops-b.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_033134_34ea37e5-b826-45c0-afbc-67db559fca96.png" }
 ]
