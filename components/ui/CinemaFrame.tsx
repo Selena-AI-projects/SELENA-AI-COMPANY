@@ -16,6 +16,7 @@ export function CinemaFrame({
   tone = "dark",
   sizes = "(min-width: 1280px) 1152px, 100vw",
   className,
+  priority = false,
 }: {
   alt: string;
   /** Still frame; ignored when `video` is set (the poster covers it). */
@@ -28,6 +29,10 @@ export function CinemaFrame({
   tone?: "dark" | "light";
   sizes?: string;
   className?: string;
+  /** True for a frame in the first viewport (a page opener): the still
+      loads eagerly and a loop mounts at once instead of waiting for the
+      intersection observer. */
+  priority?: boolean;
 }) {
   return (
     <figure
@@ -41,9 +46,9 @@ export function CinemaFrame({
     >
       <div className={cn("relative", aspect)}>
         {video ? (
-          <CinemaLoop video={video.src} poster={video.poster} alt={alt} />
+          <CinemaLoop video={video.src} poster={video.poster} alt={alt} priority={priority} />
         ) : image ? (
-          <Image src={image} alt={alt} fill sizes={sizes} className="object-cover" />
+          <Image src={image} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
         ) : null}
         {caption ? (
           <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-charcoal/85 via-charcoal/40 to-transparent p-5 pt-14 sm:p-6">

@@ -62,6 +62,7 @@ export function PageHero({
               caption={media.caption}
               aspect="aspect-[4/3] sm:aspect-[16/10]"
               sizes="(min-width: 1024px) 46vw, 100vw"
+              priority
             />
           </div>
         ) : null}
