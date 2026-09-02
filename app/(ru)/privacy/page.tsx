@@ -1,11 +1,17 @@
 import { buildMetadata } from "@/lib/metadata";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
+import { site } from "@/lib/site";
+import { buildLegalPageStructuredData } from "@/lib/structured-data";
+
+const title = "Политика конфиденциальности";
+const description =
+  "Как Selena Systems обрабатывает данные из форм сайта: что собирается, зачем, через какие каналы передаётся и как запросить удаление.";
 
 export const metadata = buildMetadata({
-  title: "Политика конфиденциальности",
-  description:
-    "Как Selena Systems обрабатывает данные из форм сайта: что собирается, зачем, через какие каналы передаётся и как запросить удаление.",
+  title,
+  description,
   path: "/privacy",
   languages: {
     "x-default": "/en/privacy",
@@ -56,6 +62,15 @@ const sections = [
 export default function PrivacyPage() {
   return (
     <>
+      <JsonLd
+        data={buildLegalPageStructuredData({
+          locale: "ru",
+          kind: "privacy",
+          pageUrl: `${site.url}/privacy`,
+          name: title,
+          description,
+        })}
+      />
       <PageHero
         eyebrow="Документы"
         title="Политика конфиденциальности"

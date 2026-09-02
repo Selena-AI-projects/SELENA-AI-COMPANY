@@ -26,8 +26,12 @@ test("the Russian blog article has the approved canonical metadata and no fake h
   assert.equal((metadata.openGraph as { type?: string })?.type, "article");
   assert.equal((metadata.twitter as { card?: string })?.card, "summary_large_image");
   assert.deepEqual(metadata.title, {
-    absolute: "Как проверять AI-код, если вы не разработчик | Selena Systems",
+    absolute: "Как проверять AI-код без разработчика — Selena Systems",
   });
+  // The rendered title has to survive the search-result gate the sitemap
+  // validator enforces: 30–60 characters, brand suffix included.
+  const renderedTitle = (metadata.title as { absolute: string }).absolute;
+  assert.ok(renderedTitle.length >= 30 && renderedTitle.length <= 60, renderedTitle);
 });
 
 test("the Article and HowTo graphs match the visible workflow", () => {

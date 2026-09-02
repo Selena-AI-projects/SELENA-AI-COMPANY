@@ -333,7 +333,7 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
         slug: "two-agent-code-review",
         title: "Reviewing AI-written code: what two agents got wrong",
         summary:
-          "A reproducible note on reviewing AI-written code with two independent agents. Two confident explanations of a failing check were both wrong; reading the workflow file settled it.",
+          "Reviewing AI-written code with two independent agents: both explained the failing check confidently, both were wrong, and the workflow file settled it.",
         label: "Experiment",
         readingTime: "6 min",
         publishedAt: "2026-08-29",
@@ -692,7 +692,7 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
         slug: "two-agent-code-review",
         title: "Проверка кода, написанного ИИ: как два агента ошиблись",
         summary:
-          "Воспроизводимая запись опыта: проверку кода вели два независимых агента. Оба уверенно объяснили красную проверку — и оба ошиблись. Вопрос закрыл сам файл workflow.",
+          "Проверку кода вели два независимых агента. Оба уверенно объяснили красную проверку — и оба ошиблись. Вопрос закрыл сам файл workflow.",
         label: "Опыт",
         readingTime: "6 мин",
         publishedAt: "2026-08-29",

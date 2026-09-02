@@ -673,6 +673,61 @@ export function buildContactStructuredData(locale: StructuredLocale) {
   };
 }
 
+/**
+ * Structured data for the privacy and terms pages.
+ *
+ * These are the two pages an assistant reads to answer "who operates this and
+ * what are the rules" — and they were the only public routes with no markup at
+ * all. No `dateModified` is emitted: the site does not publish an effective
+ * date for either document, and the build date is not one.
+ */
+export function buildLegalPageStructuredData({
+  locale,
+  kind,
+  pageUrl,
+  name,
+  description,
+}: {
+  locale: StructuredLocale;
+  kind: "privacy" | "terms";
+  pageUrl: string;
+  name: string;
+  description: string;
+}) {
+  const isRussian = locale === "ru";
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationNode(locale),
+      websiteNode(locale),
+      {
+        ...webPageNode({ locale, pageUrl, name, description }),
+        about: { "@id": `${site.url}/#organization` },
+        ...(kind === "privacy"
+          ? { significantLink: localizedContactUrl(locale) }
+          : {}),
+      },
+      breadcrumbNode(
+        [
+          { name: "Selena Systems", item: site.url },
+          {
+            name: isRussian
+              ? kind === "privacy"
+                ? "Политика конфиденциальности"
+                : "Условия использования"
+              : kind === "privacy"
+                ? "Privacy Policy"
+                : "Terms of Use",
+            item: pageUrl,
+          },
+        ],
+        pageUrl,
+      ),
+    ],
+  };
+}
+
 /** Structured data for Lab articles and guides with explicit dates and provenance. */
 /**
  * Structured data for the visibility journal index.

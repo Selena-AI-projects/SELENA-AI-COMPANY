@@ -5,8 +5,9 @@ import { site } from "@/lib/site";
 import { buildLabSectionStructuredData } from "@/lib/structured-data";
 
 const path = "/ru/blog";
-const title = "Блог Selena Systems — AI-инструменты и личный опыт";
-const description = "Статьи, личный опыт, разборы AI-инструментов, новости AI Visibility и практические обновления Selena Systems.";
+const title = "Блог — AI-инструменты и личный опыт";
+const description =
+  "Статьи, личный опыт, разборы AI-инструментов, новости AI Visibility и практические обновления Selena Systems — без обещаний и выдуманных цифр.";
 
 export const metadata = {
   ...buildMetadata({ title, description, path, locale: "ru_RU" }),

@@ -22,14 +22,13 @@ const baseMetadata = buildMetadata({
   },
 });
 
-const socialTitle = "Как проверять AI-код, если вы не разработчик | Selena Systems";
-
+// This page used to hand-write its own title with a pipe separator; it came out
+// 61 characters, past the length the search-result gate allows, and used a
+// separator no other page uses. buildMetadata already composes
+// "<seoTitle> — Selena Systems", which fits and matches the rest of the site.
 export const metadata = {
   ...baseMetadata,
-  title: { absolute: socialTitle },
   robots: { index: true, follow: true },
-  openGraph: { ...baseMetadata.openGraph, title: socialTitle },
-  twitter: { ...baseMetadata.twitter, title: socialTitle },
 };
 
 export default function AiCodeCrossReviewBlogPage() {

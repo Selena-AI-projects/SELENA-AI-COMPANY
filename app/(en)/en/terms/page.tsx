@@ -1,10 +1,16 @@
 import { buildMetadata } from "@/lib/metadata";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
+import { site } from "@/lib/site";
+import { buildLegalPageStructuredData } from "@/lib/structured-data";
+
+const title = "Terms of Use and Site Rules";
+const description =
+  "Terms for Selena Systems: public-site use, early-access requests, AI Visibility scope, human review boundaries and separate commercial agreements.";
 
 export const metadata = buildMetadata({
-  title: "Terms of Use and Site Rules",
-  description:
-    "Terms for Selena Systems: public-site use, early-access requests, AI Visibility scope, human review boundaries and separate commercial agreements.",
+  title,
+  description,
   path: "/en/terms",
   locale: "en_US",
   languages: {
@@ -17,6 +23,15 @@ export const metadata = buildMetadata({
 export default function EnglishTermsPage() {
   return (
     <div lang="en" className="bg-ivory py-32 sm:py-40">
+      <JsonLd
+        data={buildLegalPageStructuredData({
+          locale: "en",
+          kind: "terms",
+          pageUrl: `${site.url}/en/terms`,
+          name: title,
+          description,
+        })}
+      />
       <Container>
         <article className="mx-auto max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-copper-deep">
