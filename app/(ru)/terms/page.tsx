@@ -1,11 +1,17 @@
 import { buildMetadata } from "@/lib/metadata";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
+import { site } from "@/lib/site";
+import { buildLegalPageStructuredData } from "@/lib/structured-data";
+
+const title = "Условия использования";
+const description =
+  "Условия использования сайта Selena Systems: сайт носит информационный характер, услуги оказываются по договорённости после брифа и обсуждения задачи.";
 
 export const metadata = buildMetadata({
-  title: "Условия использования",
-  description:
-    "Условия использования сайта Selena Systems: сайт носит информационный характер, услуги оказываются по договорённости после брифа и обсуждения задачи.",
+  title,
+  description,
   path: "/terms",
   languages: {
     "x-default": "/en/terms",
@@ -56,6 +62,15 @@ const sections = [
 export default function TermsPage() {
   return (
     <>
+      <JsonLd
+        data={buildLegalPageStructuredData({
+          locale: "ru",
+          kind: "terms",
+          pageUrl: `${site.url}/terms`,
+          name: title,
+          description,
+        })}
+      />
       <PageHero
         eyebrow="Документы"
         title="Условия использования"

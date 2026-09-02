@@ -1,7 +1,7 @@
 export const aiCodeCrossReviewArticle = {
   path: "/ru/blog/kak-proveryat-ai-kod",
   title: "Как проверять код, если вы не разработчик",
-  seoTitle: "Как проверять AI-код, если вы не разработчик",
+  seoTitle: "Как проверять AI-код без разработчика",
   description:
     "Практический workflow перекрёстной проверки AI-разработки: Codex, Claude Code, GitHub, автоматические тесты и обязательные решения владельца.",
   subtitle:

@@ -1,10 +1,16 @@
 import { buildMetadata } from "@/lib/metadata";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
+import { site } from "@/lib/site";
+import { buildLegalPageStructuredData } from "@/lib/structured-data";
+
+const title = "Privacy Policy";
+const description =
+  "Privacy policy for Selena Systems: what public-form and readiness-check data we collect, why we use it and how to request deletion.";
 
 export const metadata = buildMetadata({
-  title: "Privacy Policy",
-  description:
-    "Privacy policy for Selena Systems: what public-form and readiness-check data we collect, why we use it and how to request deletion.",
+  title,
+  description,
   path: "/en/privacy",
   locale: "en_US",
   languages: {
@@ -17,6 +23,15 @@ export const metadata = buildMetadata({
 export default function EnglishPrivacyPage() {
   return (
     <div lang="en" className="bg-ivory py-32 sm:py-40">
+      <JsonLd
+        data={buildLegalPageStructuredData({
+          locale: "en",
+          kind: "privacy",
+          pageUrl: `${site.url}/en/privacy`,
+          name: title,
+          description,
+        })}
+      />
       <Container>
         <article className="mx-auto max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-copper-deep">

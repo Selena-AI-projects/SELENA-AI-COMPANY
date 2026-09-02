@@ -7,9 +7,12 @@ import {
   type AiAutomationOfferSlug,
 } from "@/lib/structured-data";
 import { PageHero } from "@/components/sections/PageHero";
+import { FAQSection } from "@/components/sections/FAQSection";
+import { OperatingRangeBand } from "@/components/sections/OperatingRangeBand";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { offerDetail } from "@/lib/data/ai-automation-detail";
 
 const details = {
   "ai-audit": {
@@ -109,6 +112,7 @@ export default async function AISystemDetailPage({ params }: { params: Promise<{
   const { slug } = await params;
   const detail = details[slug as Slug];
   if (!detail) notFound();
+  const extra = offerDetail[slug as Slug];
 
   return (
     <>
@@ -161,6 +165,33 @@ export default async function AISystemDetailPage({ params }: { params: Promise<{
           </ol>
         </Container>
       </section>
+
+      {/* The steps above say what happens; this says when you hold what. A
+          buyer of an expensive build asks the second question, and the page
+          used to end before it. */}
+      <section className="border-t border-line bg-charcoal py-20 text-ivory sm:py-28">
+        <Container size="narrow">
+          <h2 className="text-h2 text-ivory">{extra.timelineTitle}</h2>
+          <p className="mt-5 max-w-2xl leading-relaxed text-ivory/70">{extra.timelineNote}</p>
+          <ol className="mt-12 grid gap-px overflow-hidden rounded-xl border border-line-dark bg-line-dark">
+            {extra.timeline.map((point) => (
+              <li key={point.when} className="grid gap-2 bg-charcoal-2 p-6 sm:grid-cols-[9rem_1fr] sm:gap-7 sm:p-7">
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-copper">
+                  {point.when}
+                </p>
+                <div>
+                  <h3 className="font-serif text-xl font-semibold text-ivory">{point.title}</h3>
+                  <p className="mt-2 leading-relaxed text-ivory/72">{point.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </Container>
+      </section>
+
+      <OperatingRangeBand />
+
+      <FAQSection items={extra.faq} headline="Before you commit" />
     </>
   );
 }

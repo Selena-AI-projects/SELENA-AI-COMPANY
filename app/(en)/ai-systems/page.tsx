@@ -2,6 +2,9 @@ import { buildMetadata } from "@/lib/metadata";
 import { buildAiSystemsStructuredData } from "@/lib/structured-data";
 import { commercialFacts } from "@/lib/commercial-facts";
 import { PageHero } from "@/components/sections/PageHero";
+import { FAQSection } from "@/components/sections/FAQSection";
+import { OperatingRangeBand } from "@/components/sections/OperatingRangeBand";
+import { automationFaq } from "@/lib/data/ai-automation-detail";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
@@ -106,6 +109,10 @@ export default function AISystemsPage() {
           </p>
         </Container>
       </section>
+
+      <OperatingRangeBand />
+
+      <FAQSection items={automationFaq} headline="Questions before choosing a format" />
     </>
   );
 }

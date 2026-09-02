@@ -5,9 +5,9 @@ import { buildLabStructuredData } from "@/lib/structured-data";
 import { JsonLd } from "@/components/seo/JsonLd";
 
 export const metadata = buildMetadata({
-  title: "Selena Lab — исследования, инструменты и блог",
+  title: "Selena Lab — исследования и инструменты",
   description:
-    "Исследования, практические методики, эксперименты, инструменты, кейсы и блог Selena Systems для ясных AI-решений.",
+    "Исследования, практические методики, эксперименты, инструменты и кейсы Selena Systems: как измерять AI-видимость и принимать решения по AI без догадок.",
   path: "/ru/lab",
   locale: "ru_RU",
   languages: labLanguages(),
