@@ -6,6 +6,7 @@ import { CinemaLoop } from "@/components/ui/CinemaLoop";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { LabEntryTeaser } from "@/components/lab/LabEntryTeaser";
+import { InsideWorkspaceSection } from "@/components/landing/InsideWorkspaceSection";
 import { MeasurementFilmstrip } from "@/components/sections/MeasurementFilmstrip";
 import type { VisibilityLocale } from "@/lib/visibility/types";
 import { cn } from "@/lib/cn";
@@ -786,6 +787,7 @@ export function B2BHomeLanding({
   return (
     <>
       <HeroSection content={content} />
+      <InsideWorkspaceSection content={content.workspace} cta={content.hero.primaryCta} />
       <VisibilityOverviewSection content={content} />
       <MeasurementFilmstrip content={content.cinema.measurement} />
       <ProductSwitchSection content={content} />
