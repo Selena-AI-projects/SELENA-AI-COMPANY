@@ -7,6 +7,10 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { FounderPortrait } from "@/components/ui/FounderPortrait";
+import { CinemaFrame } from "@/components/ui/CinemaFrame";
+import { pageCinema } from "@/lib/data/page-cinema";
+
+const cinema = pageCinema("en").about;
 
 export const metadata = buildMetadata({
   title: "About Selena Systems",
@@ -58,6 +62,10 @@ export default function EnglishAboutPage() {
         eyebrow="About Selena Systems"
         title="AI systems built around real business work"
         intro="Selena Systems is a founder-led practice with two connected directions. AI Visibility measures what public evidence and named AI systems show. AI Automation designs and implements the internal workflows behind the business. Selena Lab supports both with research, guides and documented limits."
+        media={{
+          video: { src: cinema.hero.video, poster: cinema.hero.poster },
+          alt: cinema.hero.alt,
+        }}
       >
         <Button href="/en/contact" size="lg">
           Book an AI Audit
@@ -101,6 +109,14 @@ export default function EnglishAboutPage() {
             headline="Process first, then the right AI layer"
             intro="Every engagement follows the same decision logic while the implementation scope changes with the workflow."
           />
+          <Reveal className="mt-10">
+            <CinemaFrame
+              image={cinema.method.image}
+              alt={cinema.method.alt}
+              caption={cinema.method.caption}
+              sizes="(min-width: 1280px) 1200px, 100vw"
+            />
+          </Reveal>
           <ol className="mt-12 grid gap-8 md:grid-cols-3">
             {method.map((step, index) => (
               <Reveal as="li" key={step.title} delay={index * 70} className="border-t-2 border-copper/45 pt-5">

@@ -52,6 +52,13 @@ type PageCinema = {
     hero: Loop;
     boundary: Frame;
   };
+  contact: {
+    hero: Loop;
+  };
+  about: {
+    hero: Loop;
+    method: Frame;
+  };
 };
 
 const paths = {
@@ -78,6 +85,8 @@ const paths = {
   labBlueprint: "/media/cinematic/pages/lab-blueprint.webp",
   twoAgents: "/media/cinematic/pages/two-agents.webp",
   loupe: "/media/cinematic/pages/loupe.webp",
+  contactHero: { video: "/media/cinematic/pages/contact-loop.mp4", poster: "/media/cinematic/pages/contact-desk.webp" },
+  aboutHero: { video: "/media/cinematic/pages/about-loop.mp4", poster: "/media/cinematic/pages/about-studio.webp" },
   projects: {
     korafoodhall: "/media/cinematic/projects/kora.webp",
     otherbali: "/media/cinematic/projects/otherbali.webp",
@@ -91,6 +100,23 @@ const paths = {
 };
 
 const en: PageCinema = {
+  contact: {
+    hero: {
+      ...paths.contactHero,
+      alt: "A blank folded letter on a dark desk beside a brass fountain pen under warm lamp light",
+    },
+  },
+  about: {
+    hero: {
+      ...paths.aboutHero,
+      alt: "A calm workshop desk at dusk with brass tools laid in a neat row under one warm lamp",
+    },
+    method: {
+      image: paths.gears,
+      alt: "Brass gears meshing on a dark bench under warm copper light",
+      caption: "Process first, then the AI layer: every part is there because the one before it needs it.",
+    },
+  },
   pricingDirectory: {
     visibility: { image: paths.lens, alt: "A lens standing in darkness, its glass filled with one warm circle of light" },
     systems: { image: paths.gears, alt: "A row of polished brass gears meshing on a dark workbench in warm light" },
@@ -196,6 +222,23 @@ const en: PageCinema = {
 };
 
 const ru: PageCinema = {
+  contact: {
+    hero: {
+      ...paths.contactHero,
+      alt: "Чистый сложенный лист на тёмном столе рядом с латунной перьевой ручкой под тёплым светом лампы",
+    },
+  },
+  about: {
+    hero: {
+      ...paths.aboutHero,
+      alt: "Спокойный рабочий стол в сумерках: латунные инструменты выложены в ряд под одной тёплой лампой",
+    },
+    method: {
+      image: paths.gears,
+      alt: "Латунные шестерни в зацеплении на тёмной скамье под тёплым медным светом",
+      caption: "Сначала процесс, потом инструмент: каждая деталь стоит на месте, потому что её требует предыдущая.",
+    },
+  },
   pricingDirectory: {
     visibility: { image: paths.lens, alt: "Линза в темноте, в стекле которой стоит один тёплый круг света" },
     systems: { image: paths.gears, alt: "Ряд полированных латунных шестерёнок сцеплен на тёмном верстаке в тёплом свете" },

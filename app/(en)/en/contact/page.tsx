@@ -6,6 +6,9 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { buildContactStructuredData } from "@/lib/structured-data";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { pageCinema } from "@/lib/data/page-cinema";
+
+const cinema = pageCinema("en").contact;
 
 export const metadata = buildMetadata({
   title: "Book an AI Audit",
@@ -44,6 +47,10 @@ export default function EnglishContactPage() {
         eyebrow="Book an AI Audit"
         title="Start with one workflow that should not stay manual."
         intro="Describe the process in plain language. We will map the bottleneck, identify the right AI system and keep human approval where it matters."
+        media={{
+          video: { src: cinema.hero.video, poster: cinema.hero.poster },
+          alt: cinema.hero.alt,
+        }}
       />
 
       <section className="pb-20 sm:pb-28">

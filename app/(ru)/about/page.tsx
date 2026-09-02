@@ -10,6 +10,10 @@ import { FounderPortrait } from "@/components/ui/FounderPortrait";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildAboutStructuredData } from "@/lib/structured-data";
 import { cta } from "@/lib/site";
+import { CinemaFrame } from "@/components/ui/CinemaFrame";
+import { pageCinema } from "@/lib/data/page-cinema";
+
+const cinema = pageCinema("ru").about;
 
 export const metadata = buildMetadata({
   title: "О Selena Systems",
@@ -43,6 +47,10 @@ export default function AboutPage() {
         eyebrow="Обо мне"
         title="Помогаю бизнесу внедрять AI спокойно и по делу"
         intro="Selena Systems — это практическое внедрение AI для предпринимателей, экспертов и небольших команд: диагностика, автоматизация, обучение и сопровождение. Без хайпа и обещаний магии."
+        media={{
+          video: { src: cinema.hero.video, poster: cinema.hero.poster },
+          alt: cinema.hero.alt,
+        }}
       >
         <div className="flex flex-wrap gap-4">
           <Button href={cta.primary.href} size="lg">
@@ -94,6 +102,14 @@ export default function AboutPage() {
             headline={coreLoop.headline}
             intro={coreLoop.intro}
           />
+          <Reveal className="mt-10">
+            <CinemaFrame
+              image={cinema.method.image}
+              alt={cinema.method.alt}
+              caption={cinema.method.caption}
+              sizes="(min-width: 1280px) 1200px, 100vw"
+            />
+          </Reveal>
           <ol className="mt-12 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
             {coreLoop.steps.map((step, i) => (
               <Reveal as="li" key={step.n} delay={i * 60}>

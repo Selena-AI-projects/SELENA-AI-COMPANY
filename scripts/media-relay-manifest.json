@@ -1,10 +1,6 @@
 [
-  { "file": "public/media/cinematic/pages/journal-loop.mp4", "mode": "video", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053536_f195b270-d6a5-4858-9d3c-48bddeb0d0e5.mp4" },
-  { "file": "public/media/cinematic/pages/journal-loop.webm", "mode": "videowebm", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053536_f195b270-d6a5-4858-9d3c-48bddeb0d0e5.mp4" },
-  { "file": "preview/journal-mid.jpg", "mode": "midframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053536_f195b270-d6a5-4858-9d3c-48bddeb0d0e5.mp4" },
-  { "file": "preview/journal-end.jpg", "mode": "endframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053536_f195b270-d6a5-4858-9d3c-48bddeb0d0e5.mp4" },
-  { "file": "public/media/cinematic/pages/lab-loop.mp4", "mode": "video", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053540_01936d6e-15df-4ded-980c-6f4495608415.mp4" },
-  { "file": "public/media/cinematic/pages/lab-loop.webm", "mode": "videowebm", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053540_01936d6e-15df-4ded-980c-6f4495608415.mp4" },
-  { "file": "preview/lab-mid.jpg", "mode": "midframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053540_01936d6e-15df-4ded-980c-6f4495608415.mp4" },
-  { "file": "preview/lab-end.jpg", "mode": "endframe", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_053540_01936d6e-15df-4ded-980c-6f4495608415.mp4" }
+  { "file": "public/media/cinematic/pages/contact-a.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_060656_41920320-38e9-454e-b06e-e21baffdc2b4.png" },
+  { "file": "public/media/cinematic/pages/contact-b.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_060656_a24db87c-046d-4f96-80a3-32889a72ed12.png" },
+  { "file": "public/media/cinematic/pages/about-a.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_060656_c61100e4-559a-423d-b5ed-a2d4991953ca.png" },
+  { "file": "public/media/cinematic/pages/about-b.webp", "mode": "image", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EKntK4EDjG8nay4H1dy1TK30mB/hf_20260902_060656_acdf05b2-55e6-4035-8399-c2e5957bc914.png" }
 ]
