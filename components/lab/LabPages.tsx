@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CinemaImage } from "@/components/ui/CinemaImage";
 import Link from "next/link";
 import { labContent, labPath, type LabItem, type LabLocale, type LabSectionId } from "@/lib/lab/content";
 import { PageHero } from "@/components/sections/PageHero";
@@ -18,7 +18,7 @@ function ItemLink({ item, locale }: { item: LabItem; locale: LabLocale }) {
           text row when an entry has no frame. */}
       {frame ? (
         <div className="relative aspect-[16/10] overflow-hidden rounded-lg border border-line sm:w-[9rem]">
-          <Image
+          <CinemaImage
             src={frame.image}
             alt={frame.alt}
             fill

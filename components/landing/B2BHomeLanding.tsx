@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CinemaImage } from "@/components/ui/CinemaImage";
 import { homepage, type HomepageContent } from "@/lib/data/homepage";
 import { Button } from "@/components/ui/Button";
 import { CinemaFrame } from "@/components/ui/CinemaFrame";
@@ -676,7 +676,7 @@ function ProofSection({ content }: { content: HomepageContent }) {
                 {/* A staged scene from the project's world, not a screenshot:
                     the link below is the proof, the frame sets the mood. */}
                 <div className="relative aspect-[16/10] overflow-hidden border-b border-line">
-                  <Image
+                  <CinemaImage
                     src={project.image}
                     alt={project.imageAlt}
                     fill
