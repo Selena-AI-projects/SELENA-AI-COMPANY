@@ -544,6 +544,65 @@ export const homepage = {
       alt: "A calm ordered desk by a large window at dawn, warm light entering a cool room",
     },
   },
+  // Inside the workspace: the product's own screens on sample data,
+  // labelled as such on the frame — never a live measurement.
+  workspace: {
+    eyebrow: "Inside the workspace",
+    headline: "One workspace: measurement, evidence, actions.",
+    intro:
+      "Every report is dated and every number has a source. Below are real screens of the client workspace on sample data, in the order a client sees them.",
+    demoLabel: "Sample data · not a measurement",
+    frameCaption:
+      "The client workspace at app.selenasystems.com. Brands and numbers on these screens are illustrative sample data, not results.",
+    tabsLabel: "Workspace screens",
+    tabs: [
+      {
+        id: "overview",
+        label: "Overview",
+        image: "/media/cinematic/workspace/overview.webp",
+        alt: "Workspace overview screen on sample data: visibility and share-of-voice panels with trend charts",
+      },
+      {
+        id: "share",
+        label: "Share of voice",
+        image: "/media/cinematic/workspace/share.webp",
+        alt: "Share-of-voice screen on sample data: a percentage, a trend chart and a leaderboard of brands",
+      },
+      {
+        id: "opportunities",
+        label: "Opportunities",
+        image: "/media/cinematic/workspace/opportunities.webp",
+        alt: "Opportunities screen on sample data: a summary and a list of content to create",
+      },
+    ],
+    cards: [
+      {
+        kicker: "Measurement",
+        title: "What ChatGPT, Gemini and Perplexity answer about you",
+        text: "Share of voice, sources, citations. The same list of questions, the same systems, the same date — otherwise there is nothing to compare.",
+        image: "/media/cinematic/workspace/share.webp",
+        alt: "Fragment of the share-of-voice screen on sample data",
+        tone: "copper" as const,
+      },
+      {
+        kicker: "Implementation",
+        title: "Processes inside the business that stop being manual",
+        text: "Process first, tool second. Requests, client replies, content, knowledge base — with a written handover to the team.",
+        image: "/media/cinematic/pages/gears.webp",
+        alt: "Brass gears meshing on a dark bench under warm copper light",
+        tone: "sage" as const,
+      },
+    ],
+    statement: {
+      kicker: "About",
+      paragraphs: [
+        "Selena Systems is a founder-led practice with two directions. AI Visibility measures what AI systems show about a business. AI Automation builds the processes inside it.",
+        "We sell measurement, so we go through it first ourselves: we fix a baseline and publish the result — including the one where there is no result yet.",
+        "Every measurement is dated. Nothing is rewritten after the fact: if a conclusion turns out wrong, a new entry appears and the old one stays.",
+      ],
+    },
+    ctaNote: "No phone, registration or card",
+  },
   productSwitch: {
     kicker: "Above — product 01 · AI Visibility",
     headline: "Next — product 02: AI Automation",
