@@ -72,8 +72,12 @@ export function CinemaLoop({
           playsInline
           preload={priority ? "auto" : "metadata"}
           poster={poster}
-          src={video}
-        />
+        >
+          {/* Every loop ships as a .webm/.mp4 pair with one basename, so
+              codec-less Chromium builds (no H.264) still get the VP9 track. */}
+          <source src={video.replace(/\.mp4$/, ".webm")} type="video/webm" />
+          <source src={video} type="video/mp4" />
+        </video>
       ) : null}
     </div>
   );

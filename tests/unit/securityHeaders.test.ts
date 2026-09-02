@@ -17,18 +17,24 @@ test("CSP ships from middleware only, so a response never carries two policies",
   assert.ok(!keys.includes("content-security-policy-report-only"));
 });
 
-test("the policy is enforcing and script-src never falls back to 'unsafe-inline'", () => {
-  for (const policy of [contentSecurityPolicy(), contentSecurityPolicy("dGVzdC1ub25jZQ==")]) {
-    assert.match(policy, /default-src 'self'/);
-    const scriptSrc = policy.split("; ").find((directive) => directive.startsWith("script-src "));
-    assert.ok(scriptSrc, "script-src directive is present");
-    assert.ok(!scriptSrc.includes("'unsafe-inline'"));
-  }
+test("the policy is enforcing and same-origin by default", () => {
+  const policy = contentSecurityPolicy();
+  assert.match(policy, /default-src 'self'/);
+  assert.match(policy, /object-src 'none'/);
+  assert.match(policy, /frame-ancestors 'none'/);
 });
 
-test("a nonce is carried into script-src with strict-dynamic", () => {
-  assert.match(
-    contentSecurityPolicy("dGVzdC1ub25jZQ=="),
-    /script-src 'self' 'nonce-dGVzdC1ub25jZQ==' 'strict-dynamic'/,
-  );
+// The site is prerendered: a per-request nonce can never match the frozen
+// script tags, and once a nonce is present browsers ignore 'self' — the
+// policy then rejects every script on every static page. Guard against that
+// regression: script-src must work for build-time HTML.
+test("script-src works for prerendered pages: self + inline, no nonce, no strict-dynamic", () => {
+  const scriptSrc = contentSecurityPolicy()
+    .split("; ")
+    .find((directive) => directive.startsWith("script-src "));
+  assert.ok(scriptSrc, "script-src directive is present");
+  assert.match(scriptSrc, /'self'/);
+  assert.match(scriptSrc, /'unsafe-inline'/);
+  assert.ok(!scriptSrc.includes("nonce-"));
+  assert.ok(!scriptSrc.includes("strict-dynamic"));
 });
