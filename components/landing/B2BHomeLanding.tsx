@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { homepage, type HomepageContent } from "@/lib/data/homepage";
 import { Button } from "@/components/ui/Button";
 import { CinemaFrame } from "@/components/ui/CinemaFrame";
@@ -676,20 +677,22 @@ function ProofSection({ content }: { content: HomepageContent }) {
           <p className="mt-5 max-w-2xl leading-relaxed text-muted">{content.proof.founderLine}</p>
         </Reveal>
 
-        <Reveal delay={80}>
-          <CinemaFrame
-            tone="light"
-            image={content.cinema.proofBand.image}
-            alt={content.cinema.proofBand.alt}
-            caption={content.cinema.proofBand.caption}
-            className="mt-12"
-          />
-        </Reveal>
-
         <div className="mt-14 grid gap-px overflow-hidden border border-line bg-line md:grid-cols-2">
           {content.proof.projects.map((project, index) => (
             <Reveal key={project.name} delay={index * 70}>
-              <article className="group h-full bg-surface p-6 sm:p-8">
+              <article className="group flex h-full flex-col bg-surface">
+                {/* A staged scene from the project's world, not a screenshot:
+                    the link below is the proof, the frame sets the mood. */}
+                <div className="relative aspect-[16/10] overflow-hidden border-b border-line">
+                  <Image
+                    src={project.image}
+                    alt={project.imageAlt}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-6 sm:p-8">
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper-deep">
                   {project.category}
                 </p>
@@ -734,6 +737,7 @@ function ProofSection({ content }: { content: HomepageContent }) {
                     </li>
                   ))}
                 </ul>
+                </div>
               </article>
             </Reveal>
           ))}

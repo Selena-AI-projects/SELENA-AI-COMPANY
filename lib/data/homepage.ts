@@ -8,6 +8,13 @@ export type ProofProject = {
   /** Which operating-system layers this project exercises — mirrors the Systems section. */
   layers: string[];
   /**
+   * Staged art direction for the card: a scene from the project's world
+   * (its venue, its objects), never a fake screenshot or fake data. The
+   * link on the card is the proof; the frame only sets the mood.
+   */
+  image: string;
+  imageAlt: string;
+  /**
    * Honesty rule: only ship a metric when it is real.
    * value — the number or artifact ("−18 h/week of manual work", "3 AI flows in production").
    * basis — period + how it was measured ("Apr–Jun 2026 · from intake logs").
@@ -392,6 +399,8 @@ export const homepage = {
       {
         name: "KORA Food Hall",
         url: "https://korafoodhall.com",
+        image: "/media/cinematic/projects/kora.webp",
+        imageAlt: "Evening inside a food hall: warm pendant lamps over the counters",
         category: "Hospitality operations",
         text: "Menu, vendor, customer communication and local operations workflows shaped into a clearer operating model.",
         layers: ["AI Sales", "AI Operations", "AI Content"],
@@ -403,6 +412,8 @@ export const homepage = {
       {
         name: "PetID.care",
         url: "https://petid.care",
+        image: "/media/cinematic/projects/petid.webp",
+        imageAlt: "A cat peeking over a desk with a notebook and a small pet tag",
         category: "Care and service infrastructure",
         text: "Customer, pet profile and support workflows organized around trust, data and repeatable assistance.",
         layers: ["AI Knowledge Base", "AI Operations"],
@@ -412,6 +423,8 @@ export const homepage = {
       {
         name: "Doki.help",
         url: "https://doki.help",
+        image: "/media/cinematic/projects/doki.webp",
+        imageAlt: "An open blank document booklet with a brass clip, a fountain pen and a stamp",
         category: "Documents and support",
         text: "Document-heavy processes translated into clearer guidance, intake and customer-facing support paths.",
         layers: ["AI Knowledge Base", "AI Automation"],
@@ -421,6 +434,8 @@ export const homepage = {
       {
         name: "remhaos.com",
         url: "https://remhaos.com",
+        image: "/media/cinematic/projects/remhaos.webp",
+        imageAlt: "Interior samples on a designer's desk: fabric, stone and brass",
         category: "Real estate and interiors",
         text: "An AI-assisted presales flow for interior designers: project intake, risk review, pricing context and proposal preparation.",
         layers: ["AI Sales", "AI Automation"],
@@ -430,6 +445,8 @@ export const homepage = {
       {
         name: "otherbali.com",
         url: "https://otherbali.com",
+        image: "/media/cinematic/projects/otherbali.webp",
+        imageAlt: "Bali rice terraces at dawn with a volcano rising from the mist",
         category: "Travel media and guides",
         text: "A Bali guide and media platform: places, guides and recommendations organized so visitors and residents find the right answer quickly.",
         layers: ["AI Content", "AI Knowledge Base"],
@@ -439,6 +456,8 @@ export const homepage = {
       {
         name: "VillaOps",
         url: "https://villaops.selenasystems.com",
+        image: "/media/cinematic/projects/villaops.webp",
+        imageAlt: "A private Bali villa at dusk, its pool reflecting the lit rooms",
         category: "Villa & hospitality operations",
         text: "An operating system for villa management and guest services — day-to-day operations organized into one clear workflow.",
         layers: ["AI Operations", "AI Automation"],
@@ -519,11 +538,6 @@ export const homepage = {
       image: "/media/cinematic/packages-cases.webp",
       alt: "Three brass-cornered cases of increasing size in a row on dark stone",
       caption: "Three depths of the same work: audit, one built process, or a connected operating system.",
-    },
-    proofBand: {
-      image: "/media/cinematic/proof-city.webp",
-      alt: "A miniature night city where a cluster of small buildings glows with warm window light",
-      caption: "The systems below run in the founder's own projects first.",
     },
     ctaBand: {
       image: "/media/cinematic/cta-dawn.webp",
