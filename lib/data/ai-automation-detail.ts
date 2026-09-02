@@ -42,7 +42,7 @@ const sharedFaq: FaqItem[] = [
   },
   {
     q: "What if it does not work?",
-    a: "Failures are found during testing, not after: normal cases and edge cases are both tested, and anything still unresolved is written into the handover rather than left silent. If a workflow turns out to be a bad fit for automation during the engagement, we say so and stop building it — that answer is part of the work, not a failure of it.",
+    a: "Where something is built, normal cases and edge cases are both tested before handover, and anything still unresolved is written into the handover rather than left silent. Testing narrows what reaches production; it does not promise nothing will fail there, which is exactly why the approval boundary and the written limits exist. And if a workflow turns out to be a bad fit for automation during the engagement, we say so and stop building it — that answer is part of the work, not a failure of it.",
   },
 ];
 
@@ -170,7 +170,7 @@ export const automationFaq: FaqItem[] = [
   },
   {
     q: "Do you guarantee a result or a saving?",
-    a: "No. Nobody honestly can before seeing the process, and a guaranteed percentage is a sales device, not a measurement. What is committed is the scope, the timeline and the handover: a working system, tested, with your team trained and the limits written down.",
+    a: "No. Nobody honestly can before seeing the process, and a guaranteed percentage is a sales device, not a measurement. What is committed is the scope, the timeline and the deliverable of the format you choose: a short memo for the 60-minute mini-audit, a workflow map and a scoped next-step brief for the AI Audit, and — for the Sprint and the Business OS engagement — a working system, tested, with your team trained and the limits written down.",
   },
   ...sharedFaq,
 ];
