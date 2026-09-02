@@ -208,7 +208,7 @@ export function InsideWorkspaceSection({ content, cta }: { content: WorkspaceCon
                   tabIndex={selected ? 0 : -1}
                   onClick={() => setActive(tab.id)}
                   className={cn(
-                    "whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-300 sm:px-7 sm:text-[15px]",
+                    "whitespace-nowrap rounded-full px-3.5 py-2 text-[13px] font-medium transition-colors duration-300 sm:px-7 sm:py-2.5 sm:text-[15px]",
                     selected ? "bg-ivory/12 text-ivory" : "text-ivory/60 hover:text-ivory",
                   )}
                 >
