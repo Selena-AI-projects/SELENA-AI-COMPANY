@@ -415,7 +415,7 @@ const EN: SampleReportContentV2 = {
         { attempt: 2, at: "Mon 09:01", result: "Failed — Telegram API timeout" },
         { attempt: 3, at: "Mon 09:06", result: "Scheduled — next retry in 30 min; report already readable in the workspace" },
       ],
-      note: "Never more than 5 send attempts in total. Each retry waits longer than the last (1 min, 5 min, 30 min, 2 h, then 12 h) and the schedule stops as soon as the cap is reached. No attempt repeats a measurement. A 403 or missing chat unbinds the recipient and stops retries.",
+      note: "No more than 5 send attempts in total. After the initial failed attempt, up to four retries are made: after 1 minute, 5 minutes, 30 minutes and 2 hours. Delivery stops after the fifth attempt. No attempt repeats a measurement. A 403 or missing chat unbinds the recipient and stops retries.",
     },
     disclosure:
       "Verified means the same locked question set, systems and repeats observed the change in a later cycle. It does not prove the action caused the change, and it does not predict the next cycle.",
@@ -767,7 +767,7 @@ const RU: SampleReportContentV2 = {
         { attempt: 2, at: "Пн 09:01", result: "Ошибка — таймаут Telegram API" },
         { attempt: 3, at: "Пн 09:06", result: "Запланировано — следующая попытка через 30 мин; отчёт уже доступен в кабинете" },
       ],
-      note: "Не больше 5 попыток отправки всего. Каждый повтор ждёт дольше предыдущего (1 мин, 5 мин, 30 мин, 2 ч, затем 12 ч), и расписание останавливается, как только достигнут лимит. Ни одна попытка не повторяет замер. Ошибка 403 или отсутствие чата отвязывает получателя и останавливает повторы.",
+      note: "Не более 5 попыток отправки всего. После первой неудачной попытки допускаются четыре повтора: через 1 минуту, 5 минут, 30 минут и 2 часа. После пятой попытки доставка прекращается. Ни одна попытка не повторяет замер. Ошибка 403 или отсутствие чата отвязывает получателя и останавливает повторы.",
     },
     disclosure:
       "Verified означает, что тот же зафиксированный набор вопросов, систем и повторов наблюдал изменение в более позднем цикле. Это не доказывает, что изменение вызвала именно задача, и не предсказывает следующий цикл.",
