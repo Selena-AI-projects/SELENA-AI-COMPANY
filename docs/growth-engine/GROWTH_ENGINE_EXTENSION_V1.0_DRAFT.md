@@ -18,6 +18,7 @@
 |---|---|
 | `[ИСТОЧНИК]` | Пересказ требования утверждённой архитектуры или Master ТЗ. Ссылка на документ и раздел |
 | `[ФАКТ]` | Проверено в коде репозитория на точном SHA либо по безопасным метаданным хостинга (имена сервисов, доменов, SHA деплоя). Значения переменных и секретов не читались |
+| `[ОТЧЁТ]` | Взято из отчёта другого исполнителя, commit-сообщения или execution-документа (`docs/execution/*`, `HANDOFF.md`, `MASTER_HANDOFF`). Автором не воспроизведено; не является behavior-level evidence (v1.4 §23) |
 | `[PROPOSED]` | Предложение этого документа. Не является решением до принятия владельцем |
 | `[OWNER_DECISION]` | Требует отдельного явного решения владельца |
 | `[UNKNOWN]` | Нет достаточного evidence. Не равно «отсутствует» и не равно «сломано» |
@@ -74,18 +75,18 @@ SHA256 исходников совпадают с `SHA256.json` пакета (п
 | Selena OS + Control Room + Content OS | `parkourcafe/selena-OS` | `main` @ `39ec0ea3` («Establish Content OS Stage 1 foundation (#26)»). **Развёрнута другая ветка:** `claude/new-session-r64y7u` @ `05599f98` (2026-09-05), +55 файлов к `main`, миграции `0032`–`0036` | Railway project `selena-os-staging` (создан 2026-09-02): сервисы `web`, `worker`, `gateway`, `receiver`, `migrate`, `Postgres`; env называется `production`; custom domain **`cabinet.selenasystems.com`** |
 | Aether Runtime / Studio | `parkourcafe/Aether-Medium` | Клон по умолчанию `claude/friendly-mccarthy-z6bla5` @ `e6fd6590`. **Развёрнута ветка** `claude/new-session-r64y7u` @ `29d0e381` (2026-09-04), +88 файлов; ветки `main` в remote нет | Railway project `OS Selena agent systems`: сервисы `OS Selens Agent` (web+API), `worker`, `Redis`; домены **`os.selenasystems.com` и `studio.selenasystems.com`** ведут в один сервис |
 | AI Visibility SaaS | `parkourcafe/selena-ai-visibility` | Integration branch `release/selena-visibility-mvp` @ `0d18053c` (= рабочая ветка сессии) | Railway project `selena-ai-visibility`: env `staging` обслуживает **`app.selenasystems.com`** и `staging.selenasystems.com` (web, worker, measure, migrate, publish); env `production` содержит только PostgreSQL, приложения не развёрнуты. `SELENA_EMERGENCY_STOP=true` по HANDOFF |
-| Публичный сайт | `parkourcafe/SELENA-AI-COMPANY` | `main`-based @ `4bd1a053` | Vercel из `main` (по HANDOFF); контейнер сессии не имеет сети кроме GitHub и Google APIs |
+| Публичный сайт | `parkourcafe/SELENA-AI-COMPANY` | рабочая ветка `claude/new-session-wik9v3`, база `4bd1a053`; документы этого пакета добавлены коммитами поверх неё | Vercel из `main` (по HANDOFF); контейнер сессии не имеет сети кроме GitHub и Google APIs |
 | Knowledge OS | `parkourcafe/ai-council` | `main` @ `7947502e` (2026-08-02); карта экосистемы на ветке `docs/selena-ecosystem-map` (2026-09-01), не в `main` | Не runtime |
 
 ### 3.2. Готовые строительные блоки
 
 | Блок | Где | Статус | Значение для Growth Engine |
 |---|---|---|---|
-| Content Control Room: 8 разделов, `content_items`/`content_versions` (immutable, `content_hash`), `approvals` (actor, `binding_hash`, scope `channel_account_id`, `expires_at`, revoke append-only), `release_intents`, `release_manifests` (Ed25519), `kill_switches`, outbound outbox с DLQ | `selena-OS` `apps/web/src/routes/_authed/app/$brand/control-room.tsx`, `apps/web/src/server/selena-control-room.ts`, `packages/lib/src/selena-control-room.ts`, миграции `0021`–`0031`, pgTAP | `[ФАКТ]` код и тесты (unit + pgTAP 145 ok на чистой базе по отчёту r64y7u); живой запуск отдаёт 200 и восемь разделов; владелец открыл Control Room в браузере 2026-09-05 (commit message на развёрнутой ветке). Deployed acceptance матрицы гап-репорта 27.08 остаётся 0/12 по строгому критерию | Это система записи Growth Engine. Не дублировать |
+| Content Control Room: 8 разделов, `content_items`/`content_versions` (immutable, `content_hash`), `approvals` (actor, `binding_hash`, scope `channel_account_id`, `expires_at`, revoke append-only), `release_intents`, `release_manifests` (Ed25519), `kill_switches`, outbound outbox с DLQ | `selena-OS` `apps/web/src/routes/_authed/app/$brand/control-room.tsx`, `apps/web/src/server/selena-control-room.ts`, `packages/lib/src/selena-control-room.ts`, миграции `0021`–`0031`, pgTAP | `[ФАКТ]` код и тесты (vitest, 9 pgTAP-наборов в `main`, 14 на r64y7u). `[ОТЧЁТ]` pgTAP 145 ok на чистой базе, живой запуск 200 с восемью разделами, скриншот владельца 2026-09-05 — по `docs/execution/EVIDENCE/index.md` и commit-сообщению `05599f98`. Deployed acceptance матрицы гап-репорта 27.08 остаётся 0/12 по строгому критерию | Это система записи Growth Engine. Не дублировать |
 | Правило «изменение контента аннулирует approval», «сотрудник не одобряет», идемпотентный release intent | `packages/lib/src/selena-control-room.test.ts` | `[ФАКТ]` EXISTING_WITH_TESTS | Переиспользуется без изменений |
 | Provider-neutral contract, Postiz adapter, Blotato adapter, «один активный провайдер» как ограничение БД (`0032`), allowlist провайдеров (`0033`), запрет публикации на трёх уровнях (environment, точный flag `SELENA_RELEASE_PUBLISH_ENABLED`, транспорт) | `selena-OS` ветка r64y7u, `packages/lib/src/selena-postiz.ts`, миграции `0032`–`0033` | `[ФАКТ]` на развёрнутой ветке (pgTAP `0032` 13, `0033` 11; 31 тест publish policy); в `main` Blotato отсутствует, ограничение только `(brand, platform, provider_account_ref)`. create-post calls = 0. Контракт и адаптеры не импортируются из `apps/` (D15) | Канал LinkedIn готов к dry-run на уровне библиотеки; подключение к gateway и реальная публикация — отдельные шаги и решения |
-| Aether → Control Room bridge: versioned event contract v1 (`control-room-event.v1.schema.json` + fixtures), transactional outbox в Aether (HMAC-SHA256, окно ±5 мин, DLQ после 8 попыток), signed receiver в `selena-OS` worker (`/v1/bridge/aether`), inbox `selena_ingest_raw.aether_events` (`0035`), signing key custody `0036` | `Aether-Medium` r64y7u `backend/app/services/bridge_*.py`; `selena-OS` r64y7u `apps/worker/src/selena-aether-receiver.ts`, `packages/lib/src/selena-aether-bridge.ts` | `[ФАКТ]` код и тесты на развёрнутых ветках; сквозной прогон на живом контуре 2026-09-03 (событие Other Bali `sent`, повтор опознан как `duplicate`). **Ограничение:** единственный тип события `task.result.ready`; payload — только `title`, `status`, `summary ≤4000`, `artifact_count`; приёмник пишет **сырую строку события**, Inbox item / `content_versions` не создаёт, web-код таблицу не читает. В `main` обоих репозиториев моста нет | Единственный разрешённый транспорт результата агента. Для Growth Engine не хватает проекции события в Inbox item и переноса содержимого черновика (см. D14) |
-| Aether: registry из 20 агентов (seo, copywriter, smm, research, fact-checker, qa, weekly-report…), skill packs по 6 бизнесам, 22 файловых `SKILL.md` (в т.ч. `selena-personal-brand-system`, `weekly-ai-business-report`, `otherbali-editorial-page-builder`), `project_records` с дедупликацией, YouTube транскрипты через Supadata (`backend/app/services/youtube.py`, без тестов), Redis/ARQ очередь, immutable approval record (`0020` на r64y7u), envelope-шифрование секретов | `Aether-Medium` | `[ФАКТ]` код и 227 тестов (по отчёту r64y7u); `youtube.py` CODE_ONLY | Исполнительный слой research/drafting. Not a system of record для контента |
+| Aether → Control Room bridge: versioned event contract v1 (`control-room-event.v1.schema.json` + fixtures), transactional outbox в Aether (HMAC-SHA256, окно ±5 мин, DLQ после 8 попыток), signed receiver в `selena-OS` worker (`/v1/bridge/aether`), inbox `selena_ingest_raw.aether_events` (`0035`), signing key custody `0036` | `Aether-Medium` r64y7u `backend/app/services/bridge_*.py`; `selena-OS` r64y7u `apps/worker/src/selena-aether-receiver.ts`, `packages/lib/src/selena-aether-bridge.ts` | `[ФАКТ]` код и тесты на развёрнутых ветках. `[ОТЧЁТ]` сквозной прогон на живом контуре 2026-09-03 (событие Other Bali `sent`, повтор опознан как `duplicate`) — по `EVIDENCE/index.md`. **Ограничение:** единственный тип события `task.result.ready`; payload — только `title`, `status`, `summary ≤4000`, `artifact_count`; приёмник пишет **сырую строку события**, Inbox item / `content_versions` не создаёт, web-код таблицу не читает. В `main` обоих репозиториев моста нет | Единственный разрешённый транспорт результата агента. Для Growth Engine не хватает проекции события в Inbox item и переноса содержимого черновика (см. D14) |
+| Aether: registry из 20 агентов (seo, copywriter, smm, research, fact-checker, qa, weekly-report…), skill packs по 6 бизнесам, 22 файловых `SKILL.md` (в т.ч. `selena-personal-brand-system`, `weekly-ai-business-report`, `otherbali-editorial-page-builder`), `project_records` с дедупликацией, YouTube транскрипты через Supadata (`backend/app/services/youtube.py`, без тестов), Redis/ARQ очередь, immutable approval record (`0020` на r64y7u), envelope-шифрование секретов | `Aether-Medium` | `[ФАКТ]` код и 39 pytest-файлов на r64y7u (`[ОТЧЁТ]` 227 passed по `EXECUTION_REPORT.md`); `youtube.py` CODE_ONLY | Исполнительный слой research/drafting. Not a system of record для контента |
 | AI Visibility: `sv_recommendation_{runs,manifests,evidence,findings,actions,tasks}` с `evidence_ids[]`, `validateGrounding`, `blocked/block_reason`, `verification_plan`; permits, journal claims, pre-transport boundary, `SELENA_EMERGENCY_STOP` | `selena-ai-visibility` `packages/lib/src/recommendation-engine.ts`, schema | `[ФАКТ]` EXISTING_WITH_TESTS. Входа `GET /recommendations` нет; recommendations читаются через `findings`, `dashboard` или `action_plan jsonb` | Источник Growth-сигналов класса DERIVED. Нужен read-only export endpoint, не доступ к БД |
 | Search intelligence по собственным свойствам: GSC report (12 properties), SEO validate-sitemap, `data/seo-control.json`, Public Readiness free check | `SELENA-AI-COMPANY` `scripts/gsc-report.ts`, `gsc-report.yml` (cron), `validate-sitemap.mjs`, `app/api/checks` | `[ФАКТ]` EXISTING_WITH_TESTS; отчёты GSC — только artifact, gitignored (несут live-данные чужих свойств) | Готовый SEARCH-адаптер для бренда Selena Systems и 11 портфельных свойств |
 | Competitor intelligence | `SELENA-AI-COMPANY` `data/competitors.json`, `competitor-patterns.json` (internal only) | `[ФАКТ]` статические дossier от 2026-07-06, без refresh | Стартовый EXTERNAL-источник без сбора |
@@ -116,6 +117,8 @@ SHA256 исходников совпадают с `SHA256.json` пакета (п
 | YOUTUBE OWN / EXTERNAL | PUBLIC; права различаются | Content OS research registry (реестр каналов, видео, транскриптов, provenance, timecodes, ограничения использования) | `Aether youtube.py` (Supadata, CODE_ONLY), Video Radar port (spec, не построен) | Fixture; live — отдельный flag + потолок + ledger |
 | AI_VISIBILITY результаты | DERIVED | Остаётся в AI Visibility; Growth хранит только ссылку (`sv_recommendation_run_id`, `action_id`, `evidence_ids`) | нет export endpoint | Только read-only API AI Visibility + явный маппинг (раздел 5). Прямого чтения БД нет |
 | OWN_CONTENT: Lab, journal, существующие страницы | PUBLIC/OWN | Content OS | `lib/lab/content.ts`, journal | Разрешён |
+
+Граница с AI Visibility: YouTube в Growth — реестр источников, транскриптов и provenance для редакционной работы, не измерение Social-видимости; Social family (v1.4 §12, включая YouTube) остаётся в AI Visibility под своими HOLD.
 
 Правила: реестр источников хранит `kind`, `access_class`, `rights` (OWN/EXTERNAL/LICENSED/UNKNOWN), `provenance`, `captured_at`, `language`, `transcript_available`, `limitations`. Речевой транскрипт демонстрации интерфейса не является доказательством того, что было видно на экране; такой факт помечается `UNVERIFIED_VISUAL`.
 
@@ -194,7 +197,7 @@ QA PASS не равен разрешению выпуска (B5).
 
 | Система | Корень tenancy | Единица работы | Связь |
 |---|---|---|---|
-| `selena-OS` (Control Room / Content OS) | Better Auth `public.organization` | `public.brands.organization_id`; `brandId` — канонический идентификатор проекта Content OS (spec §6) | Каждая строка Control Room несёт **и** `organization_id`, **и** `brand_id`; контекст ставится `selena_registry.set_request_context(...)`; brand выбирается server-side под организацией (commit 8ac08e39 на r64y7u закрыл кросс-организационный выбор brand). База staging «не содержит brands вообще» на 2026-09-05 |
+| `selena-OS` (Control Room / Content OS) | Better Auth `public.organization` | `public.brands.organization_id`; `brandId` — канонический идентификатор проекта Content OS (spec §6) | Каждая строка Control Room несёт **и** `organization_id`, **и** `brand_id`; контекст ставится `selena_registry.set_request_context(...)`; brand выбирается server-side под организацией (commit 8ac08e39 на r64y7u закрыл кросс-организационный выбор brand). `[ОТЧЁТ]` staging-БД «не содержит brands вообще» — commit-сообщение `ae74c818` на r64y7u (2026-09-05) |
 | `selena-ai-visibility` | `public.organization` | `sv_projects.organization_id`; **FK на Elmo `brands` нет**; бренд — free-text `sv_project_profiles.brand_name` и иерархия `sv_entities` (`MASTER_BRAND/SUBBRAND/…`) | RLS `app.organization_id`, 35 политик (`0034`), forced RLS в поздних миграциях. `TENANT_ISOLATION_DESIGN.md` устарел в §4 |
 | `Aether-Medium` | Команда 2–3 человека; роли admin/editor/viewer; organization как сущности нет | `projects.business_key ∈ {other_bali, kora, petid, doki, archidom, selena}` (CHECK constraint) | Skill pack и bridge scope привязаны к `business_key`. Кросс-системного ID нет |
 | `ai-council` (Knowledge OS) | — | `registry/projects.json`: 7 проектов; contradiction #8 предлагает portfolio-wide `project_id`, `business_key` как alias | DRAFT 2026-09-01 |
@@ -206,7 +209,8 @@ QA PASS не равен разрешению выпуска (B5).
 ```text
 growth_project_bindings
   brand_id (canonical, FK public.brands)  ·  organization_id
-  aether_business_key?      — alias для Aether/skill packs/bridge scope
+  aether_project_id?        — UUID проекта Aether; глобально уникален среди активных bindings; ключ поиска при проекции событий
+  aether_business_key?      — alias для skill packs/bridge scope; шесть значений не уникальны между организациями, поэтому НЕ ключ поиска
   sv_project_id?            — только после явного подтверждения владельца; без вывода по имени или URL
   gsc_property?             — свойство Search Console из config/gsc-properties.json
   site_repo? / site_path?   — канал «сайт»
@@ -216,7 +220,7 @@ growth_project_bindings
 
 Канонический ID — `brand_id` из `selena-OS`, потому что там уже живут approvals и releases. Четвёртый идентификатор не вводится; предложение Knowledge OS о portfolio-wide `project_id` совместимо: `brand_id` играет эту роль, остальные — aliases. Это `[OWNER_DECISION]` O2.
 
-Правило изоляции: bridge-событие от Aether принимается в Inbox бренда только если `business_key` события есть в подтверждённом binding этого бренда. Иначе — отказ и audit.
+Правило изоляции: событие Aether проецируется в бренд только по `project_id` конверта, совпавшему с `aether_project_id` активного binding, и только если `business_key` события равен `aether_business_key` этого binding. Иначе — отказ (`NO_BINDING` / `BUSINESS_KEY_MISMATCH`) и audit. Receiver при этом остаётся recorder под ingestion-ролью; проекцию выполняет отдельный внутренний worker (ТЗ GE-3, решение O15).
 
 ## 6. Данные и контракты
 
@@ -230,7 +234,7 @@ growth_project_bindings
 | `content_items.kind`, `content_versions.kind` | `BRIEF / ARTICLE / PAGE_UPDATE / SOCIAL_ADAPTATION / VIDEO_SCRIPT` | если колонки нет — additive |
 | review evidence | результаты проверок 4.4 как evidence на версии | существующая модель `claims/evidence` в `content_versions` + `addReviewEvidenceFn` |
 | события bridge v1.x | `content.draft_ready`, `content.qa_evidence`, `content.brief_ready` | minor-версия существующей схемы; fixtures обязательны |
-| AI Visibility read-only export | `GET /api/v1/selena/recommendation-runs/{id}/actions` (или аналог) с API key и tenant recheck | новый endpoint в `selena-ai-visibility`; никакого доступа к БД из Growth |
+| AI Visibility read-only export | `GET /api/v1/selena/recommendation-runs/{id}/actions` (или аналог) с API key и tenant recheck | новый endpoint в `selena-ai-visibility`; никакого доступа к БД из Growth. Это cross-product data flow по v1.4 §15/§24.3 → `[OWNER_DECISION]` O17 и Delta к v1.4; ключ AIV — только в managed secret store selena-OS, read-only scope |
 
 Универсальная таблица результатов запрещена (v1.4 §5, B4). Review, social post, статья, транскрипт остаются в своих сущностях и связываются ссылками.
 
@@ -291,7 +295,7 @@ growth_project_bindings
 | D14 | **Мост доставляет событие, не контент.** Payload `task.result.ready` = title/status/summary/artifact_count; receiver пишет только `aether_events`; проекции в `content_versions` нет; документы r64y7u называют это «один Inbox item» | `selena-aether-receiver.ts`, `0035`, `COVERAGE.md` Gate 6 | Для Growth Engine — первый инженерный элемент (раздел 4.5). Формулировку «Inbox item» в отчётах читать как «принятое событие» |
 | D15 | Provider-neutral contract, registry, Postiz/Blotato release providers, publish policy и `authorize_provider_dispatch` существуют и покрыты тестами только в `packages/lib` и SQL; ни один файл в `apps/` их не импортирует | git grep на r64y7u | Канал LinkedIn — CODE_ONLY на уровне приложения; в ТЗ учтено как зависимость этапа G6 |
 | D16 | Внутренние противоречия execution-документов r64y7u: число миграций (32/35/36/37), pgTAP (145/157/171), `DECISIONS.md` §9 «кода Blotato нет» при наличии `selena-blotato.ts`, `EXECUTION_REPORT.md` с устаревшими BLOCKED-строками, `REMAINING_BLOCKERS.md` #5 не обновлён после скриншота владельца 05.09 | agent audit | Не влияет на архитектуру; при merge (O1) документы синхронизировать |
-| D17 | Aether: approval задачи выдаёт admin или project owner (не только владелец компании); это approval задачи со scope `send/publish/all`, а не content approval Control Room. Final Architecture: owner approval контента — только в Control Room | `approvals.py`, `0020` | Не конфликт при чтении «две разные approvals»: Aether-approval разрешает отправку результата, Control Room-approval — выпуск. Growth Engine закрепляет это словами в контракте |
+| D17 | Aether: approval задачи выдаёт admin или project owner (не только владелец компании); это approval задачи со scope `send/publish/all`, а не content approval Control Room. Final Architecture: owner approval контента — только в Control Room | `approvals.py`, `0020` | Не конфликт при чтении «две разные approvals»: Aether-approval (scope `send`) управляет доставкой результата клиенту через `delivery.py`; мост в Control Room срабатывает на статусах `REPORTABLE_STATUSES` (уже при `pending_approval`) независимо от него; Control Room-approval — единственный approval выпуска. Growth Engine закрепляет это словами в контракте |
 
 ## 11. Решения владельца, необходимые до реализации
 
@@ -307,6 +311,9 @@ growth_project_bindings
 | O8 | Судьба `daily-blog-draft.yaml` (scheduled paid) в двух репозиториях | Не трогать в рамках этого пакета |
 | O9 | Перевыпуск `SELENA_AETHER_BRIDGE_SECRET` / `CONTROL_ROOM_BRIDGE_SECRET` (REMAINING_BLOCKERS #3) | Мост считается NOT-VERIFIED для новых событий до ротации |
 | O10 | Live-источники (Supadata, YouTube Data API, Video Radar port с code-transfer authorization, Gemini) — по каждому отдельно: flag, потолок, права | Все выключены |
+| O15 | Исполнитель проекции события в `content_versions`: отдельный worker под логином `worker` (default) или расширение прав ingestion-роли receiver | Отдельный worker |
+| O16 | Fixture-прогон GE-5 с production Aether (production-изменение) или с локального Aether владельца | Локальный Aether владельца |
+| O17 | Экспорт результатов AI Visibility в Growth: pull-API/signed event, custody ключа, Delta к v1.4 §15/§24.3 | Не подключать |
 
 ## 12. Связь с утверждёнными архитектурами
 
@@ -325,7 +332,7 @@ growth_project_bindings
 | Что | Изменение |
 |---|---|
 | Нормативные документы (три исходника) | Не изменены |
-| Репозитории | Добавлены только два DRAFT-файла в `SELENA-AI-COMPANY/docs/growth-engine/`. Код, миграции, workflows, env, DNS, Railway — не изменены |
+| Репозитории | Добавлены только два DRAFT-файла в `SELENA-AI-COMPANY/docs/growth-engine/` коммитами на ветке `claude/new-session-wik9v3`. Код, миграции, workflows, env, DNS, Railway — не изменены |
 | Внешние вызовы | Платных provider calls: 0. Публикаций: 0. Railway: только read-only метаданные (списки проектов, сервисов, доменов, деплоев). Значения переменных не читались |
 | Клоны для аудита | `selena-OS`, `Aether-Medium`, `ai-council` подключены к сессии read-only; ветки `claude/new-session-r64y7u`, `docs/content-os-stage1-execution-plan`, `docs/selena-ecosystem-map`, `claude/content-promotion-methods-uaoywq` получены shallow-fetch для чтения |
 
