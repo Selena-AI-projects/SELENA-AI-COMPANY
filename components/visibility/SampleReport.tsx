@@ -6,6 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { EvidenceList, SourceBadge } from "./EvidenceList";
 import { ActionReadinessCard } from "./ActionReadinessCard";
 import { ActionPathTimeline } from "./ActionPathTimeline";
+import { VerificationLoopReport } from "./VerificationLoopReport";
 
 /**
  * Full sample report (Codex Execution TZ V1.2, section E) — nine required
@@ -163,6 +164,25 @@ export function SampleReport({ content }: { content: SampleReportContentV2 }) {
                 </li>
               ))}
             </ol>
+          </div>
+        </Reveal>
+
+        {/* 7. Verification loop */}
+        <Reveal delay={140}>
+          <div className="mt-10">
+            <h2 className="text-h3 text-ink">{content.verificationLoop.title}</h2>
+            <p className="mt-2 text-muted">{content.verificationLoop.question}</p>
+            <ol className="mt-5 flex flex-wrap gap-2 text-sm">
+              {content.verificationLoop.stages.map((stage, i) => (
+                <li key={stage.id} className="rounded-full border border-line bg-surface px-3 py-1 text-ink/80">
+                  <span className="mr-1.5 font-semibold text-copper-deep">{i + 1}</span>
+                  {stage.label}
+                </li>
+              ))}
+            </ol>
+            <div className="mt-6">
+              <VerificationLoopReport section={content.verificationLoop} />
+            </div>
           </div>
         </Reveal>
 

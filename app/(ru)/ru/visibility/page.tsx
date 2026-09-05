@@ -11,6 +11,8 @@ import {
 } from "@/components/visibility/ActionReadinessSection";
 import { MeasurementBoundary } from "@/components/visibility/MeasurementBoundary";
 import { ProductPath } from "@/components/visibility/ProductPath";
+import { VerificationCycleSection } from "@/components/visibility/VerificationCycleSection";
+import { getSampleReport } from "@/lib/visibility/sample-report-data";
 import { JournalTeaser } from "@/components/visibility/JournalTeaser";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { Container } from "@/components/ui/Container";
@@ -99,6 +101,8 @@ export default function RussianVisibilityPage() {
           </Reveal>
         </Container>
       </section>
+
+      <VerificationCycleSection content={content.verificationCycle} sample={getSampleReport("ru").verificationLoop} />
 
       <JournalTeaser />
 
