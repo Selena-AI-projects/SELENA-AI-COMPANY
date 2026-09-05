@@ -1,3 +1,5 @@
+import type { VerificationStage } from "./measurement";
+
 export type VisibilityLocale = "en" | "ru";
 export type SiteProfile = "all_checks" | "content_site" | "api_application" | "commerce";
 
@@ -228,6 +230,27 @@ export type SampleReportContent = {
 
 export type VisibilityFaqItem = { q: string; a: string };
 
+/**
+ * Copy for the verification loop on the Visibility page. The stages are the
+ * normative seven in normative order; the sample rows they are shown with
+ * come from the sample report so both surfaces tell one story.
+ */
+export type VerificationCycleContent = {
+  eyebrow: string;
+  headline: string;
+  intro: string;
+  stages: VerificationStage[];
+  /** Why a loop and not a one-off report, in the owner's words. */
+  loopRule: string;
+  sampleReport: {
+    eyebrow: string;
+    heading: string;
+    intro: string;
+    /** Marketing-page sample marker (v1.4 §19.2). Shown next to the sample rows, never omitted. */
+    sampleLabel: string;
+  };
+};
+
 export type VisibilityContent = {
   locale: VisibilityLocale;
   nav: {
@@ -260,6 +283,7 @@ export type VisibilityContent = {
     intro: string;
     steps: ProductPathStep[];
   };
+  verificationCycle: VerificationCycleContent;
   methodology: {
     eyebrow: string;
     title: string;

@@ -208,6 +208,65 @@ export const visibilityContentEn: VisibilityContent = {
       },
     ],
   },
+  verificationCycle: {
+    eyebrow: "Verification loop",
+    headline: "A report is not the end of a cycle. A verified outcome is.",
+    intro:
+      "Every paid cycle runs the same seven stages in the same order. Nothing skips a stage: a recommendation without evidence IDs is not published, an action without an owner is not tracked, and an outcome is only called verified after a comparable recheck.",
+    stages: [
+      {
+        id: "measure",
+        label: "Measure",
+        produces: "A locked question set, systems and repeats, run under an immutable configuration lock.",
+        rule: "The lock is fixed before the first provider call and never edited afterwards.",
+      },
+      {
+        id: "evidence",
+        label: "Evidence",
+        produces: "Raw answers, captures and findings, each with an evidence ID, capture time and source.",
+        rule: "Raw evidence is stored before anything is interpreted; hashes and versions stay with it.",
+      },
+      {
+        id: "recommendation",
+        label: "Recommendation",
+        produces: "A grounded action: problem, impact, priority and the evidence IDs it rests on.",
+        rule: "A recommendation without evidence IDs, or one that fails the grounding check, is not published.",
+      },
+      {
+        id: "assigned_action",
+        label: "Assigned action",
+        produces: "An owner, a priority and a verification plan agreed before the next cycle.",
+        rule: "The same finding is never re-issued week after week; the open action carries over instead.",
+      },
+      {
+        id: "recheck",
+        label: "Recheck",
+        produces: "The next comparable cycle: same lock, same systems, same repeats, a new immutable cycle.",
+        rule: "An old cycle is never rerun or overwritten; the recheck references its baseline.",
+      },
+      {
+        id: "verified_outcome",
+        label: "Verified outcome",
+        produces: "Before and after, side by side, with the status NEW, STILL_OPEN, NEEDS_RECHECK, VERIFIED or CLOSED.",
+        rule: "Verified means the change was observed in a comparable cycle. It does not claim the action caused it.",
+      },
+      {
+        id: "weekly_telegram_report",
+        label: "Weekly Telegram report",
+        produces: "A short digest to one verified recipient with a link into the workspace, after the report is saved there.",
+        rule: "Telegram never starts a measurement. A failed delivery only resends a report that already exists.",
+      },
+    ],
+    loopRule:
+      "The loop is the product. A single score can be argued with; a dated evidence trail, an owned action and a comparable recheck cannot.",
+    sampleReport: {
+      eyebrow: "Sample weekly report",
+      heading: "What the digest shows for each action",
+      intro:
+        "The rows below are illustrative. They show the shape of the weekly report: who owns the action, where it stands, which evidence it rests on, how it is rechecked, what changed, and whether the digest reached its recipient.",
+      sampleLabel: "Sample data · not a measurement",
+    },
+  },
   methodology: {
     eyebrow: "Methodology",
     title: "What we measured, when, and what it does not prove.",

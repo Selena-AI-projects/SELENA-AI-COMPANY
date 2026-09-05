@@ -1,9 +1,14 @@
 import type {
+  ActionLifecycleStatus,
   ActionPathStep,
   ActionReadinessState,
   EvidenceRatio,
   EvidenceRow,
   SourceStatus,
+  TelegramDeliveryAttempt,
+  TelegramDeliveryStatus,
+  VerificationStageId,
+  VerifiedActionRow,
 } from "./measurement";
 import type { VisibilityLocale } from "./types";
 import { commercialFacts } from "@/lib/commercial-facts";
@@ -63,6 +68,39 @@ export interface SampleNextAction {
   detail: string;
 }
 
+/**
+ * The verification loop as the weekly report shows it: the seven stages in
+ * normative order, the action rows with owner, status, evidence IDs, recheck
+ * method and before/after, and the delivery record of the digest itself.
+ */
+export interface SampleVerificationLoopSection {
+  title: string;
+  question: string;
+  stages: { id: VerificationStageId; label: string }[];
+  window: { baseline: string; recheck: string; lock: string };
+  columns: {
+    action: string;
+    owner: string;
+    status: string;
+    evidenceIds: string;
+    recheck: string;
+    before: string;
+    after: string;
+  };
+  statusLabels: Record<ActionLifecycleStatus, string>;
+  telegramStatusLabels: Record<TelegramDeliveryStatus, string>;
+  rows: VerifiedActionRow[];
+  delivery: {
+    heading: string;
+    recipient: string;
+    dueAt: string;
+    status: TelegramDeliveryStatus;
+    attempts: TelegramDeliveryAttempt[];
+    note: string;
+  };
+  disclosure: string;
+}
+
 export interface SampleBoundaries {
   heading: string;
   measured: string[];
@@ -86,6 +124,7 @@ export interface SampleReportContentV2 {
   actionReadiness: SampleActionReadinessSection;
   topBlocker: { heading: string; item: SampleTopBlocker };
   nextActions: { heading: string; items: SampleNextAction[] };
+  verificationLoop: SampleVerificationLoopSection;
   boundaries: SampleBoundaries;
   routing: { heading: string; intro: string; options: SampleRoutingOption[] };
   sampleDisclaimer: string;
@@ -269,8 +308,120 @@ const EN: SampleReportContentV2 = {
       { title: "Add direct-answer content", detail: "Publish plain answers to the questions asked before booking, on a page that is linked from the homepage." },
     ],
   },
+  verificationLoop: {
+    title: "7. Verification loop",
+    question: "What happened to each action after the report, and was the change observed in a comparable cycle?",
+    stages: [
+      { id: "measure", label: "Measure" },
+      { id: "evidence", label: "Evidence" },
+      { id: "recommendation", label: "Recommendation" },
+      { id: "assigned_action", label: "Assigned action" },
+      { id: "recheck", label: "Recheck" },
+      { id: "verified_outcome", label: "Verified outcome" },
+      { id: "weekly_telegram_report", label: "Weekly Telegram report" },
+    ],
+    window: {
+      baseline: "Baseline: cycle C1, 10 Aug 2026 (sample)",
+      recheck: "Recheck: cycle C2, 17 Aug 2026 (sample)",
+      lock: "Lock v1 · 25 questions · 3 systems · 4 repeats · comparable",
+    },
+    columns: {
+      action: "Action",
+      owner: "Owner",
+      status: "Status",
+      evidenceIds: "Evidence IDs",
+      recheck: "Recheck method",
+      before: "Before",
+      after: "After",
+    },
+    statusLabels: {
+      NEW: "New",
+      STILL_OPEN: "Still open",
+      NEEDS_RECHECK: "Needs recheck",
+      VERIFIED: "Verified",
+      CLOSED: "Closed",
+    },
+    telegramStatusLabels: {
+      DELIVERED: "Delivered",
+      RETRY_SCHEDULED: "Retry scheduled",
+      DELAY_NOTICE: "Delay notice sent",
+      UNBOUND: "Recipient unbound",
+      PAUSED: "Delivery paused",
+    },
+    rows: [
+      {
+        id: "ACT-C1-01",
+        action: "Publish one canonical service description on the homepage and About page",
+        owner: "Client owner",
+        status: "VERIFIED",
+        evidenceIds: ["EV-C1-0412", "EV-C1-0418", "EV-C2-0507"],
+        recheck: "Re-crawl of the same 3 pages, then the same 25 questions on the same 3 systems under Lock v1 in C2",
+        before: "Description differed on 2 of 3 pages; brand named in 3 of 25 answers (C1)",
+        after: "One description on 3 of 3 pages; brand named in 6 of 25 answers (C2)",
+        sourceStatus: "sample",
+      },
+      {
+        id: "ACT-C1-02",
+        action: "State the booking inputs (dates, guests, contact) before the flow starts",
+        owner: "Client developer",
+        status: "NEEDS_RECHECK",
+        evidenceIds: ["EV-C1-0431"],
+        recheck: "Action-path check of the booking page in C3; the C2 crawl ran before the change was deployed",
+        before: "Action understandable: partial — required inputs not stated (C1)",
+        after: "Deployed 19 Aug; not yet observed in a cycle, so no outcome is claimed",
+        sourceStatus: "sample",
+      },
+      {
+        id: "ACT-C1-03",
+        action: "Publish a direct-answer FAQ page linked from the homepage",
+        owner: "Client owner",
+        status: "STILL_OPEN",
+        evidenceIds: ["EV-C1-0407", "EV-C1-0409"],
+        recheck: "Same 25 questions under Lock v1 in C3; owned-page citations counted per system",
+        before: "0 of 25 answers cite an owned page (C1)",
+        after: "Not started — carried over from W34, not re-issued as a new finding",
+        sourceStatus: "sample",
+      },
+      {
+        id: "ACT-C1-04",
+        action: "Remove the robots.txt rule that blocked /rooms/ for every crawler",
+        owner: "Client developer",
+        status: "CLOSED",
+        evidenceIds: ["EV-C1-0402", "EV-C2-0501"],
+        recheck: "robots.txt fetched again and the 4 room pages re-crawled in C2",
+        before: "/rooms/ disallowed; 0 of 4 room pages fetchable (C1)",
+        after: "Rule removed; 4 of 4 room pages fetched (C2). Verified in C2, closed in W35",
+        sourceStatus: "sample",
+      },
+      {
+        id: "ACT-C2-05",
+        action: "Decide how to answer the two questions where a competitor is cited instead",
+        owner: "Client owner",
+        status: "NEW",
+        evidenceIds: ["EV-C2-0519", "EV-C2-0523"],
+        recheck: "Same 2 questions under Lock v1 in C3, competitor citations counted per system",
+        before: "Competitor cited in 5 of 12 answers to these 2 questions (C2)",
+        after: "No recheck yet — created and assigned in C2, first recheck in C3",
+        sourceStatus: "sample",
+      },
+    ],
+    delivery: {
+      heading: "Digest delivery · W35",
+      recipient: "One verified recipient, private chat, bound by one-time link (sample)",
+      dueAt: "Due Monday 09:00 project time; deadline due_at + 6 h",
+      status: "RETRY_SCHEDULED",
+      attempts: [
+        { attempt: 1, at: "Mon 09:00", result: "Failed — Telegram API timeout" },
+        { attempt: 2, at: "Mon 09:01", result: "Failed — Telegram API timeout" },
+        { attempt: 3, at: "Mon 09:06", result: "Scheduled — next retry in 30 min; report already readable in the workspace" },
+      ],
+      note: "Never more than 5 send attempts in total. Each retry waits longer than the last (1 min, 5 min, 30 min, 2 h, then 12 h) and the schedule stops as soon as the cap is reached. No attempt repeats a measurement. A 403 or missing chat unbinds the recipient and stops retries.",
+    },
+    disclosure:
+      "Verified means the same locked question set, systems and repeats observed the change in a later cycle. It does not prove the action caused the change, and it does not predict the next cycle.",
+  },
   boundaries: {
-    heading: "7. Measurement boundaries",
+    heading: "8. Measurement boundaries",
     measured: [
       "Publicly available pages",
       "Technical accessibility and indexability signals",
@@ -290,7 +441,7 @@ const EN: SampleReportContentV2 = {
     ],
   },
   routing: {
-    heading: "8. Where this leads",
+    heading: "9. Where this leads",
     intro: "Routing shown for the sample. A real report routes on its own evidence.",
     options: [
       {
@@ -509,8 +660,120 @@ const RU: SampleReportContentV2 = {
       { title: "Добавить контент с прямыми ответами", detail: "Опубликовать понятные ответы на вопросы, которые задают до бронирования, на странице со ссылкой с главной." },
     ],
   },
+  verificationLoop: {
+    title: "7. Цикл верификации",
+    question: "Что произошло с каждой задачей после отчёта и было ли изменение зафиксировано в сопоставимом цикле?",
+    stages: [
+      { id: "measure", label: "Measure · замер" },
+      { id: "evidence", label: "Evidence · доказательства" },
+      { id: "recommendation", label: "Recommendation · рекомендация" },
+      { id: "assigned_action", label: "Assigned Action · задача" },
+      { id: "recheck", label: "Recheck · повторная проверка" },
+      { id: "verified_outcome", label: "Verified Outcome · результат" },
+      { id: "weekly_telegram_report", label: "Weekly Telegram Report" },
+    ],
+    window: {
+      baseline: "Baseline: цикл C1, 10 августа 2026 (пример)",
+      recheck: "Recheck: цикл C2, 17 августа 2026 (пример)",
+      lock: "Lock v1 · 25 вопросов · 3 системы · 4 повтора · сопоставимо",
+    },
+    columns: {
+      action: "Задача",
+      owner: "Владелец",
+      status: "Статус",
+      evidenceIds: "Evidence IDs",
+      recheck: "Способ повторной проверки",
+      before: "До",
+      after: "После",
+    },
+    statusLabels: {
+      NEW: "Новая",
+      STILL_OPEN: "Ещё открыта",
+      NEEDS_RECHECK: "Нужна повторная проверка",
+      VERIFIED: "Проверено",
+      CLOSED: "Закрыта",
+    },
+    telegramStatusLabels: {
+      DELIVERED: "Доставлен",
+      RETRY_SCHEDULED: "Повтор запланирован",
+      DELAY_NOTICE: "Отправлено уведомление о задержке",
+      UNBOUND: "Получатель отвязан",
+      PAUSED: "Доставка на паузе",
+    },
+    rows: [
+      {
+        id: "ACT-C1-01",
+        action: "Опубликовать одно каноничное описание услуги на главной и странице «О нас»",
+        owner: "Владелец бизнеса",
+        status: "VERIFIED",
+        evidenceIds: ["EV-C1-0412", "EV-C1-0418", "EV-C2-0507"],
+        recheck: "Повторный обход тех же 3 страниц, затем те же 25 вопросов в тех же 3 системах под Lock v1 в C2",
+        before: "Описание расходится на 2 из 3 страниц; бренд назван в 3 из 25 ответов (C1)",
+        after: "Одно описание на 3 из 3 страниц; бренд назван в 6 из 25 ответов (C2)",
+        sourceStatus: "sample",
+      },
+      {
+        id: "ACT-C1-02",
+        action: "Указать входные данные бронирования (даты, гости, контакт) до начала потока",
+        owner: "Разработчик клиента",
+        status: "NEEDS_RECHECK",
+        evidenceIds: ["EV-C1-0431"],
+        recheck: "Проверка action path страницы бронирования в C3; обход C2 прошёл до выкладки изменения",
+        before: "Понятность действия: частично — входные данные не указаны (C1)",
+        after: "Выложено 19 августа; ещё не наблюдалось ни в одном цикле, поэтому результат не заявляется",
+        sourceStatus: "sample",
+      },
+      {
+        id: "ACT-C1-03",
+        action: "Опубликовать FAQ-страницу с прямыми ответами и ссылкой с главной",
+        owner: "Владелец бизнеса",
+        status: "STILL_OPEN",
+        evidenceIds: ["EV-C1-0407", "EV-C1-0409"],
+        recheck: "Те же 25 вопросов под Lock v1 в C3; цитирования собственных страниц считаются по каждой системе",
+        before: "0 из 25 ответов цитируют собственную страницу (C1)",
+        after: "Не начато — перенесено из W34, а не выдано заново как новая находка",
+        sourceStatus: "sample",
+      },
+      {
+        id: "ACT-C1-04",
+        action: "Убрать правило robots.txt, закрывавшее /rooms/ для всех краулеров",
+        owner: "Разработчик клиента",
+        status: "CLOSED",
+        evidenceIds: ["EV-C1-0402", "EV-C2-0501"],
+        recheck: "robots.txt запрошен заново, 4 страницы номеров повторно обойдены в C2",
+        before: "/rooms/ закрыт; 0 из 4 страниц номеров доступны (C1)",
+        after: "Правило убрано; 4 из 4 страниц получены (C2). Проверено в C2, закрыто в W35",
+        sourceStatus: "sample",
+      },
+      {
+        id: "ACT-C2-05",
+        action: "Решить, как отвечать на два вопроса, где вместо бренда цитируется конкурент",
+        owner: "Владелец бизнеса",
+        status: "NEW",
+        evidenceIds: ["EV-C2-0519", "EV-C2-0523"],
+        recheck: "Те же 2 вопроса под Lock v1 в C3, цитирования конкурента считаются по каждой системе",
+        before: "Конкурент процитирован в 5 из 12 ответов на эти 2 вопроса (C2)",
+        after: "Повторной проверки ещё не было — создана и назначена в C2, первая проверка в C3",
+        sourceStatus: "sample",
+      },
+    ],
+    delivery: {
+      heading: "Доставка дайджеста · W35",
+      recipient: "Один подтверждённый получатель, приватный чат, привязан одноразовой ссылкой (пример)",
+      dueAt: "Срок: понедельник 09:00 по времени проекта; дедлайн due_at + 6 ч",
+      status: "RETRY_SCHEDULED",
+      attempts: [
+        { attempt: 1, at: "Пн 09:00", result: "Ошибка — таймаут Telegram API" },
+        { attempt: 2, at: "Пн 09:01", result: "Ошибка — таймаут Telegram API" },
+        { attempt: 3, at: "Пн 09:06", result: "Запланировано — следующая попытка через 30 мин; отчёт уже доступен в кабинете" },
+      ],
+      note: "Не больше 5 попыток отправки всего. Каждый повтор ждёт дольше предыдущего (1 мин, 5 мин, 30 мин, 2 ч, затем 12 ч), и расписание останавливается, как только достигнут лимит. Ни одна попытка не повторяет замер. Ошибка 403 или отсутствие чата отвязывает получателя и останавливает повторы.",
+    },
+    disclosure:
+      "Verified означает, что тот же зафиксированный набор вопросов, систем и повторов наблюдал изменение в более позднем цикле. Это не доказывает, что изменение вызвала именно задача, и не предсказывает следующий цикл.",
+  },
   boundaries: {
-    heading: "7. Границы измерения",
+    heading: "8. Границы измерения",
     measured: [
       "Публично доступные страницы",
       "Техническая доступность и сигналы индексируемости",
@@ -530,7 +793,7 @@ const RU: SampleReportContentV2 = {
     ],
   },
   routing: {
-    heading: "8. К чему это ведёт",
+    heading: "9. К чему это ведёт",
     intro: "Маршрутизация показана для примера. Реальный отчёт направляет по собственным доказательствам.",
     options: [
       {
