@@ -48,7 +48,7 @@ export function VerificationLoopReport({ section }: { section: SampleVerificatio
 
       <figure className="mt-6 overflow-hidden rounded-xl border border-line bg-surface">
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[64rem] border-collapse text-sm">
+          <table className="w-full min-w-[56rem] border-collapse text-sm">
             <caption className="sr-only">{section.question}</caption>
             <thead>
               <tr className="bg-ivory text-left">
@@ -60,7 +60,6 @@ export function VerificationLoopReport({ section }: { section: SampleVerificatio
                   columns.recheck,
                   columns.before,
                   columns.after,
-                  columns.telegram,
                 ].map((label) => (
                   <th key={label} scope="col" className="px-4 py-3 align-bottom font-semibold text-ink">
                     {label}
@@ -90,13 +89,6 @@ export function VerificationLoopReport({ section }: { section: SampleVerificatio
                   <td className="border-t border-line px-4 py-4 align-top text-muted">{row.recheck}</td>
                   <td className="border-t border-line px-4 py-4 align-top text-ink/80">{row.before}</td>
                   <td className="border-t border-line px-4 py-4 align-top text-ink/80">{row.after}</td>
-                  <td className="border-t border-line px-4 py-4 align-top">
-                    <p className="font-medium text-ink">{row.telegram.digest}</p>
-                    <Pill
-                      label={telegramStatusLabels[row.telegram.status]}
-                      className={cn("mt-1", TELEGRAM_CLASS[row.telegram.status])}
-                    />
-                  </td>
                 </tr>
               ))}
             </tbody>

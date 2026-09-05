@@ -202,7 +202,6 @@ export interface VerifiedActionRow {
   recheck: string;
   before: string;
   after: string;
-  telegram: { digest: string; status: TelegramDeliveryStatus };
   sourceStatus: SourceStatus;
 }
 

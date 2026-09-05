@@ -86,7 +86,6 @@ export interface SampleVerificationLoopSection {
     recheck: string;
     before: string;
     after: string;
-    telegram: string;
   };
   statusLabels: Record<ActionLifecycleStatus, string>;
   telegramStatusLabels: Record<TelegramDeliveryStatus, string>;
@@ -334,7 +333,6 @@ const EN: SampleReportContentV2 = {
       recheck: "Recheck method",
       before: "Before",
       after: "After",
-      telegram: "Telegram digest",
     },
     statusLabels: {
       NEW: "New",
@@ -360,7 +358,6 @@ const EN: SampleReportContentV2 = {
         recheck: "Re-crawl of the same 3 pages, then the same 25 questions on the same 3 systems under Lock v1 in C2",
         before: "Description differed on 2 of 3 pages; brand named in 3 of 25 answers (C1)",
         after: "One description on 3 of 3 pages; brand named in 6 of 25 answers (C2)",
-        telegram: { digest: "W34", status: "DELIVERED" },
         sourceStatus: "sample",
       },
       {
@@ -372,7 +369,6 @@ const EN: SampleReportContentV2 = {
         recheck: "Action-path check of the booking page in C3; the C2 crawl ran before the change was deployed",
         before: "Action understandable: partial — required inputs not stated (C1)",
         after: "Deployed 19 Aug; not yet observed in a cycle, so no outcome is claimed",
-        telegram: { digest: "W34", status: "DELIVERED" },
         sourceStatus: "sample",
       },
       {
@@ -384,7 +380,6 @@ const EN: SampleReportContentV2 = {
         recheck: "Same 25 questions under Lock v1 in C3; owned-page citations counted per system",
         before: "0 of 25 answers cite an owned page (C1)",
         after: "Not started — carried over from W34, not re-issued as a new finding",
-        telegram: { digest: "W35", status: "RETRY_SCHEDULED" },
         sourceStatus: "sample",
       },
       {
@@ -396,7 +391,6 @@ const EN: SampleReportContentV2 = {
         recheck: "robots.txt fetched again and the 4 room pages re-crawled in C2",
         before: "/rooms/ disallowed; 0 of 4 room pages fetchable (C1)",
         after: "Rule removed; 4 of 4 room pages fetched (C2). Verified in C2, closed in W35",
-        telegram: { digest: "W35", status: "RETRY_SCHEDULED" },
         sourceStatus: "sample",
       },
       {
@@ -408,7 +402,6 @@ const EN: SampleReportContentV2 = {
         recheck: "Same 2 questions under Lock v1 in C3, competitor citations counted per system",
         before: "Competitor cited in 5 of 12 answers to these 2 questions (C2)",
         after: "No recheck yet — the action was created in C2",
-        telegram: { digest: "W35", status: "RETRY_SCHEDULED" },
         sourceStatus: "sample",
       },
     ],
@@ -692,7 +685,6 @@ const RU: SampleReportContentV2 = {
       recheck: "Способ повторной проверки",
       before: "До",
       after: "После",
-      telegram: "Telegram-дайджест",
     },
     statusLabels: {
       NEW: "Новая",
@@ -718,7 +710,6 @@ const RU: SampleReportContentV2 = {
         recheck: "Повторный обход тех же 3 страниц, затем те же 25 вопросов в тех же 3 системах под Lock v1 в C2",
         before: "Описание расходится на 2 из 3 страниц; бренд назван в 3 из 25 ответов (C1)",
         after: "Одно описание на 3 из 3 страниц; бренд назван в 6 из 25 ответов (C2)",
-        telegram: { digest: "W34", status: "DELIVERED" },
         sourceStatus: "sample",
       },
       {
@@ -730,7 +721,6 @@ const RU: SampleReportContentV2 = {
         recheck: "Проверка action path страницы бронирования в C3; обход C2 прошёл до выкладки изменения",
         before: "Понятность действия: частично — входные данные не указаны (C1)",
         after: "Выложено 19 августа; ещё не наблюдалось ни в одном цикле, поэтому результат не заявляется",
-        telegram: { digest: "W34", status: "DELIVERED" },
         sourceStatus: "sample",
       },
       {
@@ -742,7 +732,6 @@ const RU: SampleReportContentV2 = {
         recheck: "Те же 25 вопросов под Lock v1 в C3; цитирования собственных страниц считаются по каждой системе",
         before: "0 из 25 ответов цитируют собственную страницу (C1)",
         after: "Не начато — перенесено из W34, а не выдано заново как новая находка",
-        telegram: { digest: "W35", status: "RETRY_SCHEDULED" },
         sourceStatus: "sample",
       },
       {
@@ -754,7 +743,6 @@ const RU: SampleReportContentV2 = {
         recheck: "robots.txt запрошен заново, 4 страницы номеров повторно обойдены в C2",
         before: "/rooms/ закрыт; 0 из 4 страниц номеров доступны (C1)",
         after: "Правило убрано; 4 из 4 страниц получены (C2). Проверено в C2, закрыто в W35",
-        telegram: { digest: "W35", status: "RETRY_SCHEDULED" },
         sourceStatus: "sample",
       },
       {
@@ -766,7 +754,6 @@ const RU: SampleReportContentV2 = {
         recheck: "Те же 2 вопроса под Lock v1 в C3, цитирования конкурента считаются по каждой системе",
         before: "Конкурент процитирован в 5 из 12 ответов на эти 2 вопроса (C2)",
         after: "Повторной проверки ещё не было — задача создана в C2",
-        telegram: { digest: "W35", status: "RETRY_SCHEDULED" },
         sourceStatus: "sample",
       },
     ],

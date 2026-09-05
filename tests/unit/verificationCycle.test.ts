@@ -65,8 +65,9 @@ test("both Visibility pages render the verification cycle from the sample report
 
 /**
  * Every row of the sample weekly report carries what the owner asked to see:
- * owner, status, evidence IDs, recheck method, before/after and the digest's
- * delivery status — and every value is tagged as sample.
+ * owner, status, evidence IDs, recheck method and before/after — and every
+ * value is tagged as sample. Delivery is a property of the digest, so it is
+ * recorded once per report, never per row.
  */
 test("every sample action row is complete and tagged as sample", () => {
   for (const locale of ["en", "ru"] as const) {
@@ -85,8 +86,6 @@ test("every sample action row is complete and tagged as sample", () => {
       assert.ok(row.recheck.trim(), `${where} recheck method`);
       assert.ok(row.before.trim(), `${where} before`);
       assert.ok(row.after.trim(), `${where} after`);
-      assert.ok(row.telegram.digest.trim(), `${where} digest`);
-      assert.ok(TELEGRAM_DELIVERY_STATUSES.includes(row.telegram.status), `${where} telegram status`);
       assert.equal(row.sourceStatus, "sample", where);
     }
   }
@@ -109,8 +108,9 @@ test("the sample weekly report demonstrates every action lifecycle status", () =
  */
 test("the sample digest delivery record follows the delivery rules", () => {
   for (const locale of ["en", "ru"] as const) {
-    const { delivery, statusLabels, telegramStatusLabels } = getSampleReport(locale).verificationLoop;
+    const { delivery, rows, statusLabels, telegramStatusLabels } = getSampleReport(locale).verificationLoop;
     assert.ok(TELEGRAM_DELIVERY_STATUSES.includes(delivery.status));
+    for (const row of rows) assert.ok(!("telegram" in row), `${locale} ${row.id} carries a per-row delivery status`);
     assert.ok(delivery.attempts.length >= 1 && delivery.attempts.length <= 5, `${locale} attempts`);
     assert.deepEqual(
       delivery.attempts.map((a) => a.attempt),
