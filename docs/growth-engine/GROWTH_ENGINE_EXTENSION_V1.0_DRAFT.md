@@ -311,6 +311,10 @@ growth_project_bindings
 | O8 | Судьба `daily-blog-draft.yaml` (scheduled paid) в двух репозиториях | Не трогать в рамках этого пакета |
 | O9 | Перевыпуск `SELENA_AETHER_BRIDGE_SECRET` / `CONTROL_ROOM_BRIDGE_SECRET` (REMAINING_BLOCKERS #3) | Мост считается NOT-VERIFIED для новых событий до ротации |
 | O10 | Live-источники (Supadata, YouTube Data API, Video Radar port с code-transfer authorization, Gemini) — по каждому отдельно: flag, потолок, права | Все выключены |
+| O11 | Лимит тела `content.draft_ready`: payload ≤ 48 KB с расширением лимита приёмника до 96 KiB, либо `artifact_ref` + подписанный fetch | payload ≤ 48 KB; `artifact_ref` для большего |
+| O12 | UI подтверждения binding: форма в Content OS Settings или серверная функция без UI в первом срезе | Серверная функция + минимальная форма |
+| O13 | Нумерация миграций между Growth и Content OS Slice 1 | Lead выдаёт номера последовательно от `0037` |
+| O14 | `content_versions.cta_url NOT NULL` (`0021`): требовать CTA от producer или ослабить до nullable additive-миграцией | Требовать от producer; ограничение не трогать |
 | O15 | Исполнитель проекции события в `content_versions`: отдельный worker под логином `worker` (default) или расширение прав ingestion-роли receiver | Отдельный worker |
 | O16 | Fixture-прогон GE-5 с production Aether (production-изменение) или с локального Aether владельца | Локальный Aether владельца |
 | O17 | Экспорт результатов AI Visibility в Growth: pull-API/signed event, custody ключа, Delta к v1.4 §15/§24.3 | Не подключать |
