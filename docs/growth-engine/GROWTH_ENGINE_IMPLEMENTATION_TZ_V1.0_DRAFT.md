@@ -1,0 +1,371 @@
+# Selena Growth Engine — исполнимое ТЗ на реализацию
+
+| Поле | Значение |
+|---|---|
+| Версия | 1.0 |
+| Статус | **DRAFT для утверждения владельцем.** Не разрешение на разработку. Реализация начинается только после утверждения конкретного среза и прохождения gate GE-0 |
+| Дата | 2026-09-05 |
+| Парный документ | `GROWTH_ENGINE_EXTENSION_V1.0_DRAFT.md` (архитектурное дополнение; разделы 2, 5, 10, 11 там являются нормативными для этого ТЗ) |
+| Режим подготовки | READ-ONLY DISCOVERY + DOCS-ONLY. Платных provider calls: 0. Публикаций: 0. Миграций: 0. Изменений env/DNS/Railway: 0 |
+| Независимый review | Приложение C. Статус на момент публикации указан там |
+
+## 1. Что заказано и что нет
+
+Заказано: инженерная спецификация одного минимального вертикального среза Growth Engine и последовательности следующих этапов, с точными репозиториями, путями, зависимостями, проверками и критериями приёмки.
+
+Не заказано и не разрешено этим ТЗ: реализация, миграции в любой общей базе, deploy, изменения DNS/auth/secrets, платные вызовы, публикации, включение HOLD-функций, повторный запуск Master ТЗ 2026-09-02.
+
+## 2. Точная база кода
+
+Все пути ниже даны относительно корня соответствующего репозитория. SHA проверены 2026-09-05.
+
+| Репозиторий | Нормативная ветка | Развёрнутая ветка (Railway) | База для этого ТЗ |
+|---|---|---|---|
+| `parkourcafe/selena-OS` | `main` @ `39ec0ea3cf9b945babeaa288a49ef31d157035b8` | `claude/new-session-r64y7u` @ `05599f98434a8ee66496d5dfe1f523ddde98a4b8` | **r64y7u** (единственная ветка с мостом, `0032`–`0036`, provider contract). Требует решения O1 |
+| `parkourcafe/Aether-Medium` | ветки `main` нет | `claude/new-session-r64y7u` @ `29d0e3814e35a8d5dc851db97163013c4cba4bf7` | **r64y7u** (bridge outbox, `0020` approvals, `0022` bridge_events). Требует O1 |
+| `parkourcafe/selena-ai-visibility` | `release/selena-visibility-mvp` @ `0d18053cd0bce67939ac82526ca9258ed55fe469` (PR-ы идут сюда, не в `main`) | та же | та же |
+| `parkourcafe/SELENA-AI-COMPANY` | `main` (Vercel) | `main` | `main` |
+
+Правило: каждая ветка среза начинается от точного SHA принятой базы и указывает его в PR. Незакоммиченные изменения других людей не трогаются (на 2026-09-05 все четыре рабочих дерева чистые).
+
+## 3. Preflight перед любой реализацией
+
+| Проверка | Требование | Источник |
+|---|---|---|
+| Node.js | 24.x (`engines` selena-OS) | `AGENTS.md` selena-OS |
+| pnpm | версия из `packageManager`; supply-chain controls не ослаблять | `AGENTS.md`, `pnpm-workspace.yaml` |
+| Python | 3.11 (Aether CI) | `.github/workflows/ci.yml` Aether |
+| Диск | ≥ 10 GiB свободно | Content OS execution plan §3.5 |
+| Рабочее дерево | чистое; base SHA записан | там же |
+| Секреты | `.env`, credential, key, cert файлы не читаются; значения не печатаются | там же; Master ТЗ |
+| Disposable PostgreSQL | локальный кластер `127.0.0.1:5432`; `run-pgtap.sh` дропает БД по имени первого аргумента — использовать только `selena_pgtap_*` имена | `packages/lib/scripts/run-pgtap.sh` (r64y7u) |
+| Сеть | Контейнер Claude Code не достигает `*.up.railway.app`, `kaiten.ru`, Hetzner; браузерные проверки выполняет владелец | REMAINING_BLOCKERS #5; MASTER_HANDOFF §9 |
+
+Если пункт не выполнен — фиксируется и останавливается только зависимая работа.
+
+## 4. Карта зависимостей и последовательность
+
+```text
+GE-0  Утверждение DRAFT + решения O1, O2, O3 (owner)
+  │
+  ├─► GE-1  Контракт v1.1 (schema + fixtures + тесты обеих сторон)      [selena-OS lib, Aether backend]  — без БД
+  │      │
+  │      ├─► GE-2  Bindings: миграция 0037 + pgTAP + repeat/no-op        [selena-OS]      — disposable DB, owner-authorized
+  │      │      │
+  │      │      └─► GE-3  Проекция события → content_version + audit     [selena-OS worker/lib] — disposable DB
+  │      │
+  │      └─► GE-3a Producer `content.draft_ready` + fixture-task          [Aether]         — локальный Postgres
+  │
+  └─► GE-4  Fixture vertical локально: Aether fixture → outbox → receiver → content_version → Inbox (Control Room UI)
+              externalProviderCalls = 0, LLM calls = 0
+          │
+          ├─► GE-5  Staging: deploy receiver/worker (owner GO), ротация bridge secret (O9), брендовая строка bindings (owner в UI),
+          │         один fixture-item в Inbox на cabinet.selenasystems.com — браузерная проверка владельцем
+          │
+          └─► GE-6  Одна реальная Aether-задача под существующим бюджетом (O4) → тот же путь
+                       │
+                       └─► следующие этапы G4–G7 (сигналы, решения, каналы, результат) — отдельные ТЗ-дельты
+```
+
+Параллельно допустимо: GE-1 и подготовка GE-2 (SQL + pgTAP без применения); GE-3 и GE-3a после freeze контракта. Последовательно обязательно: freeze контракта → producer/consumer; миграция → проекция; локальный vertical → staging.
+
+Content OS Stage 1 (Slices 1–5) не является предпосылкой: срез использует уже существующие `content_items`/`content_versions` (`0021`) и не создаёт параллельных таблиц для профиля, research или creation. Если Slice 1 стартует раньше, оба потока делят одну нумерацию миграций (`0037+`) через Lead.
+
+## 5. Спецификация этапов
+
+### GE-0. Утверждение
+
+Вход: оба DRAFT-документа. Выход: письменные решения O1 (база), O2 (bindings/ID), O3 (источник для среза). Без них ни одна ветка не создаётся.
+
+### GE-1. Контракт `control-room-event` v1.1
+
+**Цель.** Событие может переносить содержимое черновика и результаты QA, а не только `title/status/summary`.
+
+| Сторона | Путь | Изменение |
+|---|---|---|
+| selena-OS | `packages/lib/src/contracts/control-room-event.v1.1.schema.json` (новый) | `schema_version` const `"1.1"`; `event_type` enum: `task.result.ready`, **`content.draft_ready`**; payload для `content.draft_ready`: `content_kind ∈ {BRIEF, ARTICLE, PAGE_UPDATE, SOCIAL_ADAPTATION, VIDEO_SCRIPT}`, `title ≤200`, `body_markdown ≤ 48 000 байт` **или** `artifact_ref {artifact_id, sha256, bytes}` (одно из двух, `oneOf`), `language`, `metadata {slug?, meta_title?, meta_description?, internal_links[]}`, `claims[] {text, status ∈ {EXTRACTED, INTERPRETED, HYPOTHESIS, UNKNOWN}, source_ref?}`, `evidence[] {kind, ref, captured_at}`, `qa_results[] {check ∈ {FACTS, LINKS, NOVELTY, BRAND, TECHNICAL, ISOLATION}, verdict ∈ {PASS, FAIL, UNKNOWN}, detail ≤ 500}`, `source {kind ∈ {OWN, EXTERNAL, SYNTHETIC_FIXTURE}, ref, rights}`, `business_key`. `additionalProperties: false`. `payload_hash` покрывает весь payload |
+| selena-OS | `packages/lib/src/contracts/control-room-event.v1.1.fixtures.json` (новый) | Минимум 10 кейсов: `accepted_draft`, `draft_tampered`, `hash_mismatch`, `unknown_kind`, `body_too_large`, `both_body_and_artifact`, `neither_body_nor_artifact`, `business_key_missing`, `stale_version`, `v1_event_still_accepted` |
+| selena-OS | `packages/lib/src/selena-aether-bridge.ts` | `SCHEMA_VERSIONS = ["1","1.1"]`; `parseEnvelope` ветвится по `event_type`; экспорт `EVENT_CONTENT_DRAFT_READY`. Существующие 16 тестов не меняются; добавляются кейсы по каждой fixture |
+| Aether | `contracts/control-room-event.v1.1.schema.json`, `backend/scripts/generate_bridge_fixtures.py` | Генератор детерминированных fixtures расширяется; JSON-schema идентична байт-в-байт файлу selena-OS (проверка `sha256` в тесте обеих сторон) |
+| Aether | `backend/app/services/bridge_events.py` | `build_envelope` принимает `event_type`; `REPORTABLE_STATUSES` не меняется; `payload_hash` — тот же canonical JSON |
+
+**Тесты.** selena-OS: `packages/lib/src/selena-aether-bridge.test.ts` (расширить), `apps/worker/src/selena-aether-receiver.test.ts` (413 при `body_markdown` > лимита; лимит тела приёмника 64 KiB пересматривается до 96 KiB или вводится `artifact_ref`). Aether: `backend/tests/test_bridge_events.py` (расширить). Кросс-проверка: тест в каждом репозитории читает fixtures другого репозитория из зафиксированного файла (копия с SHA в комментарии).
+
+**Критерий приёмки GE-1.** Обе схемы идентичны; fixtures проходят с обеих сторон; `pnpm --filter @workspace/lib test` и `pnpm --dir apps/worker test` зелёные; `pytest -q backend/tests/test_bridge_events.py` зелёный; v1-события принимаются без изменений. Контракт объявлен FROZEN записью в PR.
+
+### GE-2. Реестр соответствий `growth_project_bindings`
+
+| Путь | Содержимое |
+|---|---|
+| `packages/lib/src/db/migrations/0037_growth_project_bindings.sql` | Таблица `selena_registry.growth_project_bindings (id uuid pk, organization_id text not null references public.organization(id), brand_id text not null references public.brands(id), aether_business_key text, sv_project_id text, gsc_property text, site_repo text, site_path text, youtube_channel_ids text[] default '{}', confirmed_by text not null, confirmed_at timestamptz not null default now(), version integer not null default 1, revoked_at timestamptz)`; composite FK `(brand_id, organization_id)` → `public.brands(id, organization_id)` (индекс `channel_accounts_identity_unique` показывает принятый паттерн); `unique (brand_id) where revoked_at is null`; `unique (organization_id, aether_business_key) where revoked_at is null and aether_business_key is not null`; `check (aether_business_key ~ '^[a-z_]{2,32}$')`; `enable row level security` + `force row level security`; политики по `selena_registry.set_request_context` как у `content_items`; `selena_web_runtime` — SELECT + INSERT только через функцию `selena_registry.confirm_growth_binding(...)` (SECURITY DEFINER, проверяет `role = 'owner'` и `auth_type = 'session'` из request context); `selena_ingestion_runtime` — SELECT `(brand_id, organization_id, aether_business_key)` только |
+| `packages/lib/src/db/tests/0037_growth_project_bindings.pgtap.sql` | ≥ 12 утверждений: forced RLS; чужая организация не видит строку; не-owner не может подтвердить; второй активный binding того же бренда → `23505`; тот же `business_key` во второй бренд той же организации → `23505`; revoke сохраняет историю; ingestion role не читает `gsc_property` |
+| `packages/lib/src/db/migrations/meta/_journal.json` | запись idx 37; snapshot по текущей конвенции Drizzle (проверить, не предполагать) |
+| `packages/lib/src/db/schema.ts` | экспорт `scrGrowthProjectBindings` |
+| `apps/web/src/server/selena-growth-bindings.ts` (новый) | `confirmGrowthBindingFn` (owner-only через `assertHumanReviewer`), `getGrowthBindingFn` |
+| `apps/web/src/routes/_authed/app/$brand/control-room.tsx` | Не расширяется в этом срезе: подтверждение binding — минимальная форма в Settings-разделе Content OS или серверная функция, вызываемая из существующего экрана. UI-решение фиксируется в PR |
+
+**Правила.** Исторические миграции неизменны. Применение только в disposable БД и только после письменной авторизации владельца на этап (Content OS plan §3.4). Повторный прогон — no-op.
+
+**Критерий приёмки GE-2.** `bash packages/lib/scripts/run-pgtap.sh selena_pgtap_ge2` проходит все 15 наборов (14 существующих + новый), 0 not ok; `node packages/lib/scripts/run-migrations.mjs` дважды на чистой БД — второй прогон no-op; ни одна строка не создаётся без owner-сессии в тесте.
+
+### GE-3. Проекция события в Control Room
+
+| Путь | Содержимое |
+|---|---|
+| `packages/lib/src/db/migrations/0038_aether_events_content_draft.sql` | (a) Пересоздание CHECK на `selena_ingest_raw.aether_events.event_type` с добавлением `content.draft_ready` и `schema_version in ('1','1.1')`; колонки `projected_content_version_id uuid null references selena_registry.content_versions(id)`, `projection_error text null`; функция `selena_ingest_raw.mark_aether_event_projected(event_id, content_version_id)`. (b) `selena_registry.content_items`: additive колонки `kind text null check (kind in ('BRIEF','ARTICLE','PAGE_UPDATE','SOCIAL_ADAPTATION','VIDEO_SCRIPT'))`, `external_source text null` (`'aether'`), `external_ref uuid null` (= `aggregate_id`); partial unique `(brand_id, external_source, external_ref) where external_ref is not null`. (c) `content_versions.cta_url` сегодня `NOT NULL` (`0021`): срез **не** ослабляет ограничение; producer обязан передать `metadata.cta_url` (для статьи — канонический URL страницы бренда или явный `about:blank`-запрет отклоняется валидатором → событие `recorded`, проекция `projection_error = 'CTA_URL_MISSING'`). Решение о nullable — O14. (d) `policy_version` берётся из текущей активной `selena_registry.content_policies` бренда; при отсутствии политики проекция не выполняется (`projection_error = 'NO_CONTENT_POLICY'`). pgTAP `0038_*.pgtap.sql` ≥ 10 утверждений |
+| `packages/lib/src/selena-aether-projection.ts` (новый, pure) | `projectDraftEvent(envelope, binding) → ContentDraftInput` : проверка `envelope.payload.business_key == binding.aether_business_key`, иначе `ProjectionRejected('BUSINESS_KEY_MISMATCH')`; расчёт `content_hash` через существующий `contentVersionHash`; маппинг `claims/evidence/qa_results` в `content_versions.claims/evidence` и review evidence; `UNKNOWN`-claims помечают версию `needs_verification = true` (если поля нет — в `disclosure`) |
+| `packages/lib/src/content-workflow-repositories.ts` (новый, целевое место по Content OS spec §8) | `createDraftVersionFromEvent(tx, input)`: в одной транзакции под `set_request_context('service:receiver', organization_id, brand_id, 'service', correlation=trace_id, 'receiver', 'service')`: upsert `content_items` по `(brand_id, external_ref = aggregate_id)`, insert `content_versions` с `version = payload.version`, `immutable = true`; `appendAudit('content.draft_received', {event_id, aggregate_id, version, content_hash})`; `mark_aether_event_projected`. Идемпотентность: `unique (content_id, version)` уже существует → повтор = no-op с возвратом существующего id |
+| `apps/worker/src/selena-aether-receiver.ts` | После `record_aether_event` = `recorded` и `event_type = content.draft_ready`: загрузить binding по `(business_key)` через ingestion-роль; при отсутствии → `202 {outcome: "recorded", projection: "no_binding"}` + audit; иначе → проекция. `duplicate`/`stale` → без проекции. Любая ошибка проекции не теряет событие (строка остаётся `recorded`, `projection_error` в отдельной колонке, без тела) |
+| `packages/config/src/env-registry.ts`, `turbo.json`, `apps/web/src/env.d.ts` | Флаг `GROWTH_ENGINE_STAGE1_ENABLED` (только точное `"true"`; fail-closed как `CONTENT_OS_STAGE1_ENABLED`); проекция и `confirmGrowthBindingFn` выключены без него |
+
+**Тесты (vitest + disposable PG).** `apps/worker/src/selena-aether-receiver.test.ts`: одно событие → ровно одна `content_versions`; повтор того же `event_id` → 0 новых строк; тот же `aggregate_id` с меньшей `version` → `stale`, 0 строк; неверная подпись → 401, 0 строк, audit; `business_key`, не связанный с брендом → `no_binding`, 0 строк; `business_key` связан с брендом другой организации → `BUSINESS_KEY_MISMATCH`, 0 строк; `qa_results` с `FAIL` → версия создаётся, но `disclosure`/policy помечает `qa_failed` и `evaluateReleaseGate` возвращает блокирующую причину; попытка `approveContentVersionFn` от `member` → отказ (существующий тест `isInteractiveOwnerSession`). `packages/lib/src/selena-aether-projection.test.ts`: pure-маппинг, хэш стабилен, отклонения.
+
+**Критерий приёмки GE-3.** Все перечисленные негативные проверки — отдельные `it()`; `pnpm --dir apps/worker test` зелёный; pgTAP 16 наборов 0 not ok; повторный `run-migrations.mjs` no-op; в Control Room Inbox (локальный запуск на мигрированной БД) строка версии видна с источником `Aether · SYNTHETIC_FIXTURE`.
+
+### GE-3a. Producer в Aether
+
+| Путь | Содержимое |
+|---|---|
+| `backend/app/services/bridge_events.py` | `build_content_draft_envelope(task, artifacts)`: читает из workspace задачи файлы контракта результата (ниже), собирает payload v1.1; `body_markdown` из `draft.md`, `qa_results` из `qa.json`, `claims` из `claims.json`; размер > лимита → `artifact_ref` (артефакт уже хранится в `project_files`/`artifacts`) |
+| `backend/app/services/repository.py` | В `_update_task_status_in_transaction`: если задача помечена `result.kind == "content_draft"` и статус ∈ `REPORTABLE_STATUSES` — enqueue `content.draft_ready` в тот же outbox `bridge_events` (таблица `0022`), `destination='control_room'`, unique `(destination, aggregate_id, version)` уже есть |
+| `backend/app/agents/skills/selena-growth-draft/SKILL.md` (новый) | Контракт результата: агент обязан записать `draft.md`, `social_linkedin.md`, `brief.json`, `claims.json` (каждое утверждение с `status`), `qa.json` (6 проверок, `UNKNOWN` разрешён), `source.json` (`kind`, `ref`, `rights`); запрет выдумывать цифры; EXTERNAL-источник только для исследования. Загружается существующим `skills.py` по префиксу `selena` |
+| `backend/app/services/fixtures/growth_draft_fixture.py` (новый) | Детерминированный набор файлов результата без LLM (для GE-4); помечен `source.kind = SYNTHETIC_FIXTURE`; используется только в тестах и в явно запущенной fixture-задаче (`CreateTaskRequest.agent_key = "growth-fixture"` доступен только admin и только при `AETHER_GROWTH_FIXTURE_ENABLED = "true"`) |
+| `backend/app/services/bridge_scope.py` | Без изменений: `CONTROL_ROOM_BRIDGE_BUSINESS_KEYS` остаётся единственным allow-list |
+
+**Тесты.** `backend/tests/test_bridge_events.py` (payload v1.1, лимиты, hash), `backend/tests/test_growth_draft_fixture.py` (файлы контракта валидны по schema), `backend/tests/test_bridge_delivery.py` (без изменений: транспорт тот же). `ruff check app tests scripts` чист.
+
+**Критерий приёмки GE-3a.** `pytest -q` зелёный на локальном Postgres 16 (CI-паттерн); одна fixture-задача создаёт ровно одну строку `bridge_events` со статусом `pending`; повторный переход статуса той же версии — 0 новых строк; задача без `business_key` или вне allow-list — 0 строк.
+
+### GE-4. Локальный vertical (fixture)
+
+Среда: локальные Aether (inline-режим, без Redis) и selena-OS receiver + web на disposable БД; `CONTROL_ROOM_BRIDGE_URL` указывает на локальный receiver; секрет — тестовый, сгенерированный локально, не сохраняемый.
+
+Сценарий: admin создаёт проект `business_key=selena` → запускает `growth-fixture` → задача доходит до `pending_approval` → outbox `sent` → receiver `recorded` → проекция → в Control Room `/app/$brand/control-room#inbox` видна одна версия `ARTICLE` и одна `SOCIAL_ADAPTATION` (два события, две версии двух `content_items`, связанных `brief_id`) → review evidence содержит 6 QA-строк → Approve недоступен для `member`, доступен `owner`, **но не выполняется в срезе** → Release не создаётся.
+
+Доказательства: логи receiver (verdict + ids), строки `aether_events`, `content_versions`, `audit_events`; вывод счётчика внешних вызовов (`disarmedFetch`, счётчик `externalProviderCalls = 0`, LLM calls = 0 по логу Aether `agent_runs` пусто).
+
+**Критерий приёмки GE-4.** Все строки таблицы «Обязательные негативные проверки» (раздел 7) имеют PASS с evidence; ни одного внешнего вызова; `pnpm test` и `pytest -q` полных наборов зелёные на финальном SHA каждой ветки; blind delta-review (Приложение C, процесс) без BLOCKER.
+
+### GE-5. Staging (owner GO)
+
+Предпосылки: O1 выполнен (код в базе, которую собирает Railway); O9 — ротация bridge secret обеими сторонами (comma-list, без простоя); владелец создал бренд `Selena Systems` в `cabinet.selenasystems.com` (БД staging брендов не содержит) и подтвердил binding `business_key=selena` в UI; `GROWTH_ENGINE_STAGE1_ENABLED="true"` только на staging web/receiver; `AETHER_GROWTH_FIXTURE_ENABLED="true"` на Aether только на время прогона.
+
+Действие: одна fixture-задача с прод-Aether → staging receiver → Inbox. Браузерная проверка владельцем (скриншот с URL, брендом, ролью, карточкой). Затем `AETHER_GROWTH_FIXTURE_ENABLED` выключается.
+
+Что не делается: approve, release, публикация, изменение DNS, production AI Visibility.
+
+### GE-6. Одна реальная задача (O4)
+
+Та же дорожка с настоящим агентом по `selena-growth-draft` и источником по O3. LLM-затраты — в пределах `MAX_TASK_BUDGET_USD`; счётчик стоимости из `agent_runs` прилагается к отчёту. Внешние источники — выключены (`source.kind = OWN`, материал предоставлен локально). Публикации нет.
+
+### Этапы G4–G7 (после приёмки среза; отдельные ТЗ-дельты)
+
+| Этап | Репозиторий / путь | Что | Зависимость |
+|---|---|---|---|
+| G4-a Search import | `SELENA-AI-COMPANY/scripts/gsc-report.ts` → новый `scripts/gsc-export-growth.ts`: агрегаты по собственным свойствам без query-строк третьих лиц → JSON артефакт → загрузка как UPLOADED в Content OS через owner-действие | Класс UPLOADED, consent, checksum (v1.4 §13.1) | GE-4 |
+| G4-b AI Visibility export | `selena-ai-visibility/apps/web/src/routes/api/v1/selena/recommendation-runs/$runId/actions.ts` (GET; API key; tenant recheck; cursor 50/200) + тест `apps/web/src/lib/__tests__/selena-recommendation-export.test.ts` | Только чтение `sv_recommendation_actions/tasks` с `evidence_ids`; без изменения измерений | O2 (`sv_project_id` в binding) |
+| G4-c Source registry | `selena-OS` миграции `0039+`: `growth_signal_sources`, `growth_signals` с fixture-адаптерами; live-адаптеры (Supadata, YouTube Data API, Video Radar port) — каждый под свой flag/потолок/ledger по Content OS spec §11 | O10; code-transfer authorization для Video Radar | GE-4 |
+| G5 Opportunities | `selena-OS` `packages/content-workflow/src/research/` (целевое место spec §8) + `growth_opportunities` с decision enum | Не второй research module: расширение spec §7.2 | G4 |
+| G6 Каналы | Подключение `createReleaseProviderRegistry` к gateway (`apps/worker/src/selena-release-gateway.ts`) и `authorize_provider_dispatch` (SQL, без TS-вызова сегодня); site-adapter по O7 | Master ТЗ Stage 7–8; owner GO на первую публикацию | O7 |
+| G7 Outcome | `selena_performance.metric_snapshots` с `source=GSC` per URL; связка `publication_attempt ↔ content_version ↔ goal` | UNKNOWN по умолчанию | G6 |
+
+## 6. Работа агентов
+
+| Роль | Ответственность | Изоляция |
+|---|---|---|
+| Lead Orchestrator | DAG, leases, freeze контракта, merge только узких PR, повтор интеграционных тестов на merge SHA, финальная приёмка | Единственный интегратор |
+| Contracts Agent | GE-1: schema + fixtures в обоих репозиториях; кросс-проверка sha256 | worktree в каждом репозитории, только `contracts/**`, `packages/lib/src/contracts/**`, `selena-aether-bridge.ts`, `bridge_events.py` |
+| Content OS Agent | GE-2, GE-3 | worktree selena-OS; **единственный DB writer** для disposable БД (lease) |
+| Aether Agent | GE-3a | worktree Aether; локальный Postgres 16 |
+| QA / Reviewer Agent | Blind delta-review каждой PR по exact head SHA; получает BRIEF/DoD и diff, не выводы автора; не исправляет код | Отдельный агент; результат — findings с severities BLOCKER/MAJOR/MINOR |
+| Owner | Решения O1–O10; создание бренда и binding в UI; браузерные проверки; GO на GE-5/GE-6 | — |
+
+Правила: один агент — один worktree — одна ветка — явные пути; чужие файлы не редактируются; перед изменением disposable БД — письменный lease от Lead; GitHub Actions на каждый промежуточный commit не запускать без необходимости; локальные targeted-проверки до push. Master ТЗ: не запускается повторно; используются только его правила single-writer, leases, форматы отчётов.
+
+## 7. Обязательные негативные проверки среза
+
+| Проверка | Где доказывается | Ожидание |
+|---|---|---|
+| Дубли: тот же `event_id` дважды | receiver test; `aether_events` unique | `duplicate`, 0 новых версий |
+| Дубли: та же `(aggregate_id, version)` с другим `event_id` | receiver test | `record_aether_event` raise / `stale`; 0 версий |
+| Неверная подпись / истёкшая метка времени | receiver test (fixtures `signed_with_another_secret`, `timestamp_outside_window`) | 401; тело не парсится; audit |
+| Смешение проектов: `business_key` без binding / binding другой организации | receiver + projection tests; pgTAP RLS | `no_binding` / `BUSINESS_KEY_MISMATCH`; 0 версий; чужая организация не видит строку |
+| Неподтверждённые утверждения: `claims[].status = UNKNOWN`, `qa_results FAILS` | projection test + `evaluateReleaseGate` | Версия создаётся как черновик, помечена `needs_verification`; release gate блокирует |
+| Изменение одобренной версии | существующий `selena-control-room.test.ts` «invalidates an approval when protected content changes» | Approval аннулирован; новая версия |
+| Отсутствие разрешения выпуска | `selena-release-publish-policy.test.ts` (31 тест), `SELENA_RELEASE_PUBLISH_ENABLED` не задан, окружение `STAGING` | `PublishRefusedError`; provider calls 0 |
+| Сотрудник/агент одобряет | `isInteractiveOwnerSession` тест; Aether `assert_can_approve` (автор не одобряет себя) | Отказ |
+| Событие из Aether без `business_key` / вне allow-list | `test_n8n_bridge_scope.py`, `test_bridge_is_off_by_default` | 0 строк outbox |
+
+## 8. Бюджеты и ресурсы
+
+| Ресурс | GE-1…GE-4 | GE-5 | GE-6 | G4+ |
+|---|---|---|---|---|
+| Платные provider calls (Bright Data, DataForSEO, Supadata, YouTube API, Gemini) | 0 | 0 | 0 | по flag и потолку каждого источника; `UNKNOWN_COST_BLOCKED` по умолчанию |
+| LLM (Aether агенты) | 0 (fixture) | 0 | 1 задача ≤ `MAX_TASK_BUDGET_USD` (существующая настройка) | по задаче |
+| Публикации | 0 | 0 | 0 | только после Gate 8 Master ТЗ и owner GO |
+| Миграции | disposable only | staging (owner GO, `migrate` service) | — | disposable → staging по тому же правилу |
+| Railway | без изменений | 2 переменные-флага на staging (owner) | 1 флаг Aether на время прогона | — |
+
+## 9. Recovery
+
+- Все миграции additive; исторические файлы и ledger не правятся; откат = forward-correction или restore из snapshot (RECOVERY.md r64y7u).
+- Флаги `GROWTH_ENGINE_STAGE1_ENABLED`, `AETHER_GROWTH_FIXTURE_ENABLED` скрывают функциональность без удаления данных.
+- Событие, не спроецированное из-за ошибки, остаётся `recorded` в `aether_events`; повторная проекция — идемпотентная админ-операция, не повторная доставка.
+- Bridge secret — ротация comma-list без простоя; компрометация → замена обеих сторон.
+- Перед любым применением в staging — backup/snapshot и repeat/no-op проверка на disposable БД.
+
+## 10. Реальные блокеры и их владельцы
+
+| # | Блокер | Владелец | Разблокирует |
+|---|---|---|---|
+| B-1 | База кода: развёрнутые ветки `claude/new-session-r64y7u` не в `main` (оба репозитория); в Aether `main` отсутствует | Владелец (O1) | GE-1 |
+| B-2 | Бренд в staging БД selena-OS отсутствует; binding подтверждает только owner в UI | Владелец | GE-5 |
+| B-3 | Ротация bridge secret (REMAINING_BLOCKERS #3) | Владелец | GE-5 |
+| B-4 | Сетевая политика контейнера: `*.up.railway.app`, `kaiten.ru`, Hetzner недоступны; браузерные проверки — владелец | Среда | GE-5 evidence |
+| B-5 | Источник для среза (OWN-материал или fixture) не выбран | Владелец (O3) | GE-6 |
+| B-6 | Content OS Stage 1 Slice 1–5 `NOT_STARTED`; execution plan PR #27 в `CHANGES_REQUESTED`; нумерация миграций spec устарела | Владелец / Lead | Совместная нумерация `0037+` |
+
+Не блокеры: TODO в коде, зелёный CI, наличие таблиц или UI без behavior-level evidence.
+
+## 11. Definition of Done среза G3 (GE-1…GE-4)
+
+Срез принят, когда одновременно:
+
+1. Контракт v1.1 FROZEN, схемы идентичны в двух репозиториях, fixtures проходят с обеих сторон.
+2. Миграции `0037`, `0038` применяются на чистой disposable БД, повторный прогон no-op, pgTAP 16 наборов 0 not ok, forced RLS на новых таблицах.
+3. Одно fixture-событие создаёт ровно одну `content_versions`; все строки раздела 7 — PASS с evidence.
+4. `externalProviderCalls = 0`, LLM calls = 0, create-post = 0, публикаций 0.
+5. Полные `pnpm test` (selena-OS) и `pytest -q` (Aether) зелёные на финальных SHA; `ruff` чист; `turbo run check-types` 0 ошибок.
+6. Каждая PR имеет exact base/head SHA, реальный CI и blind delta-review без BLOCKER; merge — решение владельца.
+7. Ни один нормативный документ не изменён; в PR нет secret-like значений и приватных идентификаторов.
+
+Приёмка среза не является staging- или production-приёмкой и не разрешает GE-5/GE-6 автоматически.
+
+## 12. Что разрешено после отправки этого ТЗ и что требует решения
+
+| Действие | После отправки ТЗ | Требует решения владельца |
+|---|---|---|
+| Чтение кода, подготовка веток без push, локальные тесты без БД | Да | — |
+| Создание веток и PR по GE-1 | — | Утверждение среза + O1 |
+| Disposable миграции GE-2/GE-3 | — | Авторизация на этап (Content OS plan §2.1) |
+| Локальный vertical GE-4 | — | Утверждение среза |
+| Staging deploy, флаги, ротация секрета | — | O9 + GO на GE-5 |
+| Реальная LLM-задача | — | O4 |
+| Любой внешний источник, публикация, Remotion | — | O10, O7, Gate 8 |
+
+---
+
+## Приложение A. Матрица требований и пробелов (этап B стартового задания)
+
+Статусы: `EXISTING_VERIFIED` (код + тест/pgTAP + при наличии живое evidence), `CODE_ONLY`, `NOT_FOUND_IN_INSPECTED_SCOPE`, `UNKNOWN`, `PROPOSED`, `BLOCKED`. Отсутствие в одном репозитории не означает отсутствие в системе — колонка «Repo» называет, где искали.
+
+| ID | Требование | Источник | Назначение | Владелец состояния | Repo / path / symbol | Статус | Evidence | Пробел | Зависимость | Следующий безопасный шаг |
+|---|---|---|---|---|---|---|---|---|---|---|
+| R01 | Control Room с 8 разделами внутри Selena OS | FA §5; MT Stage 5 | Кабинет владельца | selena-OS | `apps/web/src/routes/_authed/app/$brand/control-room.tsx` (hash-секции), `apps/web/src/server/selena-control-room.ts` | EXISTING_VERIFIED | vitest + pgTAP; live 200 с 8 секциями (r64y7u); скриншот владельца 05.09 | Разделы — фрагменты одного route; исполнитель не может открыть браузер | — | Использовать как есть |
+| R02 | Immutable content versions + hash | FA §6 | Основа approvals | selena-OS | `selena_registry.content_versions` (`0021`), `contentVersionHash` | EXISTING_VERIFIED | `selena-control-room.test.ts` | — | — | Использовать |
+| R03 | Approval привязан к версии; изменение аннулирует; сотрудник не одобряет | FA §6; MT Stage 3 | Fail-closed выпуск | selena-OS | `approvals` (append-only revoke), `isInteractiveOwnerSession`, `evaluateReleaseGate` | EXISTING_VERIFIED | тесты L45, L163; pgTAP `0024`, `0027` | — | — | Использовать |
+| R04 | Release Gateway: manifest, подпись, expiry, kill switch, idempotent intent | FA §6; MT Stage 7 | Выпуск | selena-OS | `packages/lib/src/selena-release-gateway.ts` (Ed25519), `apps/worker/src/selena-release-gateway.ts`, `0027`, `0036` | EXISTING_VERIFIED (lib) | тесты + pgTAP 14 на `0036` | Gateway не вызывает provider registry (D15) | — | G6 |
+| R05 | Один активный провайдер на channel/environment; allowlist провайдеров | FA §10; MT Stage 7 | Без второго dispatch | selena-OS r64y7u | `0032_channel_provider_binding.sql`, `0033_release_provider_allowlist.sql` | EXISTING_VERIFIED (DB) | pgTAP 13 + 11 | В `main` нет; `authorize_provider_dispatch` без TS-вызова | O1 | G6 |
+| R06 | Postiz сохранён; Blotato как второй адаптер; create-post = 0 | FA §10; MT Stage 8 | Каналы | selena-OS r64y7u | `selena-postiz.ts`, `selena-blotato.ts`, `selena-release-provider-*.ts`, `selena-release-publish-policy.ts` | CODE_ONLY (app), EXISTING_VERIFIED (lib) | 31 тест policy; 0 вызовов | Не импортируется из `apps/` | O1 | G6 |
+| R07 | Aether → Control Room bridge: envelope, подпись, replay, idempotency, DLQ | FA §9; MT Stage 6 | Единственный путь результата | Aether + selena-OS r64y7u | `bridge_events.py`, `bridge_delivery.py`, `0022`; `selena-aether-receiver.ts`, `selena-aether-bridge.ts`, `0035` | EXISTING_VERIFIED | 28+20 pytest; 9+16 vitest; live crossing 03.09 | Один тип события; payload без контента; нет проекции в Inbox (D14) | O1, O9 | GE-1, GE-3 |
+| R08 | Ровно один Inbox item на результат | MT Gate 6 | Idempotent handoff | selena-OS | `record_aether_event` → `recorded/duplicate/stale` | CODE_ONLY как «Inbox item» | `aether_events` unique; UI не читает | Проекция отсутствует | R07 | GE-3 |
+| R09 | Immutable approval record в Aether; автор не одобряет | MT Stage 3 | Task lifecycle | Aether r64y7u | `approvals.py`, `0020_task_approvals.sql` | EXISTING_VERIFIED | `test_task_approvals.py` 15 | Комментарии в коде ссылаются на «0019»; TTL env-var не существует | O1 | Мелкие правки в PR |
+| R10 | Секреты зашифрованы, fail-closed, ротация | MT Stage 1 | Security | Aether r64y7u | `crypto.py` (`enc:v2`), `redact.py`, `test_secret_leaks.py` | EXISTING_VERIFIED | 13 + тесты утечек | Перевыпуск 5 credentials — действие владельца (NOT-VERIFIED) | Владелец | Не в scope Growth |
+| R11 | Три lifecycle раздельны; GitHub не в content lifecycle | FA §7 | Границы | все | Content OS без PR; Aether task без PR | EXISTING_VERIFIED (по конструкции) | — | Канал «сайт» технически PR-based (O7) | O7 | G6 |
+| R12 | AI Visibility отдельно: repo, DB, deployment | FA §4; v1.4 §2 | Изоляция | selena-ai-visibility | Railway project `selena-ai-visibility`; миграции расходятся с `0021` | EXISTING_VERIFIED | migration diff; Railway meta | Elmo-база внутри selena-OS (D3) | — | Формулировка владельца |
+| R13 | Cross-product только versioned API/events | FA §9; v1.4 §2 | Изоляция | selena-ai-visibility | `packages/selena-visibility-contracts` 0.1.0; API keys; idempotency records | EXISTING_VERIFIED | тесты idempotency | Нет export recommendations; нет событий в Selena OS | O2 | G4-b |
+| R14 | Recommendation с evidence IDs; grounding | v1.4 §5, §13 | Growth-сигнал DERIVED | selena-ai-visibility | `sv_recommendation_*`, `validateGrounding` | EXISTING_VERIFIED | `recommendation-engine.test.ts` | Ingress только POST action-plan | — | G4-b |
+| R15 | Permits, emergency stop, journal claims | v1.4 §10, §22 | Spend control | selena-ai-visibility | `spend-gate.ts`, `sv_run_permits`, `sv_journal_*` | EXISTING_VERIFIED | `spend-gate.test.ts` и др. | Perplexity BLOCKED (D11) | — | Не в scope |
+| R16 | Tenant RLS | v1.4 §21 | Isolation | selena-ai-visibility | `0034_tenant_rls_policies.sql` (35 политик), `withOrganizationTransaction` | EXISTING_VERIFIED | тесты | `TENANT_ISOLATION_DESIGN.md` устарел; `reports` без org | — | Обновить документ |
+| R17 | Tenancy Control Room: organization + brand в каждой строке; server-side brand | FA §13; spec §6 | Isolation | selena-OS | `public.brands.organization_id`, `set_request_context`, `getContentOsBrandFn` | EXISTING_VERIFIED | pgTAP `0021`,`0023`; commit 8ac08e39 | Staging БД без брендов | Владелец | GE-5 |
+| R18 | Явный маппинг brand ↔ sv_project ↔ business_key | spec §6; Start §4 | Growth identity | — | нет ни в одном репозитории | NOT_FOUND_IN_INSPECTED_SCOPE | 3 аудита | Нет таблицы | O2 | GE-2 |
+| R19 | Реестр YouTube каналов/видео/транскриптов с provenance, OWN/EXTERNAL | Start §4 | Входы | — | Aether `youtube.py` (Supadata, без тестов, без реестра); spec Video Radar не построен | CODE_ONLY (ingest) / NOT_FOUND (реестр) | audit | Реестра нет; live вызовы платные | O10 | G4-c |
+| R20 | Search/site intelligence | Start §4 | Входы | SELENA-AI-COMPANY | `scripts/gsc-report.ts`, `gsc-report.yml`, `config/gsc-properties.json` (12), `validate-sitemap.mjs` | EXISTING_VERIFIED | `gscReport.test.ts` | Отчёты gitignored; в Content OS не попадают | — | G4-a |
+| R21 | Competitor intelligence | Start §4 | Входы | SELENA-AI-COMPANY | `data/competitors.json`, `competitor-patterns.json` | CODE_ONLY | static 2026-07-06 | Нет сбора; internal only | O10 | Later |
+| R22 | Opportunities: fusion, dedupe, decision enum, priority rationale | Start §4 | Решения | — | spec §7.2 (не построен); Aether `project_records/check` (дедуп записей) | PROPOSED | — | Нет модели | G4 | G5 |
+| R23 | Производство: brief, draft, links, metadata, social | Start §4 | Контент | Aether | агенты `copywriter/seo/smm`, skills `selena-personal-brand-system`, `otherbali-editorial-page-builder`; Elmo `daily-blog-draft` (PR bot) | CODE_ONLY | 20 агентов в реестре; skills тесты | Нет контракта результата; нет доставки в Control Room | GE-1 | GE-3a (skill контракт) |
+| R24 | QA: факты, ссылки, новизна, бренд, техника, изоляция | Start §4 | Проверка | Aether + selena-OS | `fact-checker-agent`, `qa-agent`, `COMMON_QA`, `validate-sitemap`, `content_policies` | CODE_ONLY | — | Нет `qa.json` контракта и связи с review evidence | GE-1 | GE-3a/GE-3 |
+| R25 | Каналы: сайт, соцсети, Telegram ↔ адаптеры | Start §4 | Доставка | selena-OS / SELENA-AI-COMPANY | LinkedIn: Postiz/Blotato lib; сайт: нет; Telegram publish: нет (Aether `delivery.py` — доставка результата владельцу) | CODE_ONLY / NOT_FOUND | audit | Site adapter (O7); Telegram provider | O7 | G6 |
+| R26 | Результат: раздельные метрики, UNKNOWN | Start §4; v1.4 §16 | Outcome | selena-OS / SELENA-AI-COMPANY | `selena_performance.metric_snapshots`, `0031` Postiz ingestion; GSC отчёт; `/api/leads` → Telegram | CODE_ONLY | — | Нет связки publication ↔ version ↔ goal | G6 | G7 |
+| R27 | Remotion — опциональный кандидат | Start §4 | Видео | SELENA-AI-COMPANY | `remotion/Root.tsx` (10 stills) | CODE_ONLY | — | Видео-композиций нет | O10 | Later |
+| R28 | Никакой scheduler платных вызовов | v1.4 §4.1; Start §6 | Spend | оба Elmo-форка | `daily-blog-draft.yaml` cron, `claude-opus-5` до $3+$1, Oxylabs | EXISTING (нарушение духа) | yaml | Scheduled paid workflow существует | O8 | Решение владельца |
+| R29 | Разделение сред: production/staging/smoke | v1.4 §20; FA §13 | Ops | все | selena-OS: один env `production` в проекте `selena-os-staging`; AIV: `staging` обслуживает `app.`; production — только Postgres | UNKNOWN (по назначению) | Railway meta | Имена env расходятся с ролью | Владелец/infra | Зафиксировать словами |
+| R30 | Домены: os/app/studio/www | FA §1 | Двери | Railway | `os.`+`studio.` → Aether; `app.` → AIV staging; `cabinet.` → selena-OS | EXISTING (частично) | Railway domains | `cabinet` вне архитектуры; `os` cutover не сделан; DNS mismatch `app.` (MASTER_HANDOFF §10) | Владелец | Отдельное решение |
+| R31 | Один исполнительный слой — Aether; агентам запрещён Bash | FA §2; Aether policy | Runtime | Aether r64y7u | `AGENT_TOOL_VOCABULARY`, `disallowed_tools=["Bash"]`, MCP per agent (`0019`) | EXISTING_VERIFIED | `test_agent_tools_policy.py` | Ни одна реальная задача агента не доказана в проде (MASTER_HANDOFF §11) | Владелец (canary) | Вне Growth; предпосылка GE-6 |
+| R32 | Knowledge OS: правила отбора методик | ai-council | Decision rules | ai-council ветка `claude/content-promotion-methods-uaoywq` | `selena-growth-method-operator/SKILL.md` | CODE_ONLY (docs) | — | Не в `main`; не runtime | — | Источник для G5 правил |
+| R33 | Content OS Stage 1 slices | spec; execution plan | Каркас | selena-OS | Slice 0 MERGED (`e63da891`→#25/#26); Slices 1–5 NOT_STARTED; plan PR #27 CHANGES_REQUESTED | CODE_ONLY (shell) | plan §5 | Нумерация миграций spec устарела (D5) | Владелец | Синхронизировать с GE-2 |
+| R34 | Central Memory как канонический слой памяти | FA §12 | Память | `parkourcafe/central-memory` | не клонирован в этой сессии | UNKNOWN | MASTER_HANDOFF: «нигде не развёрнут» | Две правды при развёртывании (skill_packs/project_records) | Владелец | Вне scope Growth; отметить |
+
+Сокращения: FA — Final Architecture 2026-09-04; MT — Master ТЗ 2026-09-02; spec — Content OS YouTube Stage 1 spec; Start — `00_START_CLAUDE_CODE.md`.
+
+## Приложение B. Аудит исходного состояния (этап A)
+
+### B.1. Репозитории
+
+| Repo | Ветка / SHA | Dirty | Тесты | CI | Миграции |
+|---|---|---|---|---|---|
+| selena-ai-visibility | `claude/new-session-wik9v3` = `release/selena-visibility-mvp` @ `0d18053c` | 0 | 195 `*.test.ts` (88 selena-специфичных) | 10 workflows; платные: `daily-blog-draft` (cron), `claude.yml`; `test-providers` и `selena-first-live-order` — без provider calls | 63 (`0000`–`0062`) |
+| selena-OS `main` | `39ec0ea3` | 0 | 99 `*.test.ts`, 9 pgTAP, 6 Playwright | 9 workflows; платные: `daily-blog-draft`, `test-providers` (cron, Elmo-провайдеры), `claude.yml` | 32 (`0000`–`0031`); совпадают с AIV до `0020` |
+| selena-OS r64y7u | `05599f98` | — | +vitest в worker; 14 pgTAP | — | 37 (`0000`–`0036`) |
+| Aether-Medium (клон) | `claude/friendly-mccarthy-z6bla5` @ `e6fd6590` | 0 | 27 pytest файлов | 1 workflow `CI` (ruff, pytest на Postgres 16, frontend build) | 18 |
+| Aether-Medium r64y7u | `29d0e381` | — | 39 pytest файлов (227 passed по отчёту) | тот же | 22 (`0019`–`0022` новые) |
+| SELENA-AI-COMPANY | `claude/new-session-wik9v3` @ `4bd1a053` | 0 | 37 unit-тестов (node --test) | 7 workflows; платные — только `workflow_dispatch` (Bright Data, OpenRouter) с бюджетом; `gsc-report` cron бесплатный | Supabase scaffolding 4 файла, не используется |
+| ai-council | `main` @ `7947502e` (2026-08-02) | 0 | — | — | — |
+
+### B.2. Хостинг (только безопасные метаданные)
+
+| Railway project | Сервисы | Домены | Собирается с |
+|---|---|---|---|
+| `selena-os-staging` (2026-09-02) | web, worker, gateway, receiver, migrate, Postgres; env `production` | `cabinet.selenasystems.com`, `web-production-6cb6b.up.railway.app` | selena-OS `claude/new-session-r64y7u` @ 05599f98 (deploy 2026-09-05 01:19 UTC, SUCCESS для web/receiver/migrate) |
+| `OS Selena agent systems` | OS Selens Agent, worker, Redis; env `production` | `os.selenasystems.com`, `studio.selenasystems.com`, два `*.up.railway.app` | Aether `claude/new-session-r64y7u` @ 29d0e381 (2026-09-04 23:48 UTC, SUCCESS) |
+| `selena-ai-visibility` | env `staging`: web, worker, measure, migrate, publish + 8 вспомогательных/disposable Postgres; env `production`: `Postgres-production`, `Postgres-W_9y` | staging web: `app.selenasystems.com`, `staging.selenasystems.com` | `release/selena-visibility-mvp` @ 0d18053c (migrate SUCCESS 2026-09-05 07:22 UTC; measure SKIPPED) |
+
+Значения переменных не запрашивались и не читались. Приватные идентификаторы сервисов в документ не переносятся.
+
+### B.3. Дополнительные документы, влияющие на Growth
+
+- `selena-OS` `docs/control-room/CONTENT_OS_YOUTUBE_STAGE1_TECHNICAL_SPEC.md` (2026-09-01) и `docs/control-room/STAGE1_EXECUTION_PLAN.md` (ветка `docs/content-os-stage1-execution-plan`, PR #27).
+- `selena-OS` r64y7u `docs/execution/*` (SNAPSHOT, EXECUTION_REPORT, COVERAGE Gates 0–8, DECISIONS, EVIDENCE, RECOVERY, REMAINING_BLOCKERS, SECURITY_REPORT), `docs/control-room/DEPLOYING.md`.
+- `Aether-Medium` r64y7u `docs/MASTER_HANDOFF_2026-09-04.md`, `docs/MIGRATIONS.md`, `backend/app/agents/skills/_system/*`.
+- `selena-ai-visibility` `HANDOFF.md` (Perplexity auth wall 05.09), `docs/selena-visibility/PLATFORM_AUDIT_2026-09-03.md` (62/100, NO-GO production), `ACCEPTANCE_MATRIX_V1_3.md` overlay 03.09.
+- `SELENA-AI-COMPANY` `HANDOFF.md`, `SELENA_SEO_GROWTH_AUDIT_2026-08-17.md`, `docs/20-seo-top5-system.md`, `docs/21-seo-control.md`, `docs/18-kora-content-engine-and-lead-magnets.md`.
+- `ai-council` ветка `docs/selena-ecosystem-map`: `START_HERE.md`, `00-governance/DECISION_LOG.md` (решения 2026-09-01 по Kaiten), `02-research/2026-09-01__project-operating-architecture/02-contradictions.md`.
+
+### B.4. Что не удалось проверить
+
+| Что | Почему | Статус |
+|---|---|---|
+| Поведение живых контуров в браузере (`cabinet.`, `os.`, `studio.`, `app.`) | сетевая политика контейнера | UNKNOWN; evidence только из документов и метаданных Railway |
+| Значения env, секреты, subscription за `CLAUDE_CODE_OAUTH_TOKEN` | намеренно не запрашивались | UNKNOWN |
+| `parkourcafe/central-memory`, `video-radar-marketing-tool`, `youtube-pro` | не подключались к сессии; не требовались для docs-only этапа | UNKNOWN |
+| Merge-статус r64y7u в `main` | ветки существуют; PR не открыты (по списку веток) | ФАКТ: не смержены |
+| Реальный прогон Aether-агента в проде | MASTER_HANDOFF §11: canary не выполнен | UNKNOWN |
+
+## Приложение C. Независимый review (этап D)
+
+Заполняется после проверки отдельным reviewer-агентом, не являющимся автором. Reviewer получает: три исходника, `00_START_CLAUDE_CODE.md`, оба DRAFT-документа, отчёты аудита. Проверяет: противоречия архитектурам, самовольное снятие HOLD, дублирование Aether/AI Visibility, пропущенные approvals, выдуманные пути или integrations, отсутствие проверяемого DoD.
+
+Статус: см. раздел C.1 ниже.
+
+### C.1. Результат
+
+_(будет заполнено)_
+
+## Приложение D. Реестр расхождений
+
+См. `GROWTH_ENGINE_EXTENSION_V1.0_DRAFT.md` §10 (D1–D17). Этот ТЗ не разрешает расхождения и не меняет продукт под них.
+
+## Приложение E. Решения владельца
+
+См. `GROWTH_ENGINE_EXTENSION_V1.0_DRAFT.md` §11 (O1–O10). Дополнительно для этого ТЗ:
+
+| # | Решение | Default |
+|---|---|---|
+| O11 | Лимит тела `content.draft_ready`: 48 KB в payload с расширением лимита приёмника до 96 KiB, либо `artifact_ref` + подписанный fetch | payload ≤ 48 KB; `artifact_ref` для большего |
+| O12 | UI подтверждения binding: отдельная форма в Content OS Settings или серверная функция без UI в первом срезе | Серверная функция + минимальная форма; без расширения route Control Room |
+| O13 | Нумерация миграций между Growth и Content OS Slice 1 | Lead выдаёт номера последовательно от `0037` |
+| O14 | `content_versions.cta_url NOT NULL` (`0021`): требовать CTA от producer или ослабить до nullable отдельной additive-миграцией | Требовать от producer; ограничение не трогать |
+
+---
+
+Публикаций: 0. Платных provider calls: 0. Документ не объявляет Growth Engine работающим.
