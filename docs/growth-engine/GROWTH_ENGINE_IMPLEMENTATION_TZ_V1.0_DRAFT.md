@@ -8,6 +8,7 @@
 | Парный документ | `GROWTH_ENGINE_EXTENSION_V1.0_DRAFT.md` (архитектурное дополнение; разделы 2, 5, 10, 11 там являются нормативными для этого ТЗ) |
 | Режим подготовки | READ-ONLY DISCOVERY + DOCS-ONLY. Платных provider calls: 0. Публикаций: 0. Миграций: 0. Изменений env/DNS/Railway: 0 |
 | Независимый review | Приложение C. Статус на момент публикации указан там |
+| Поправка 1.1 (2026-09-06) | Раздел 5A: уточнение контракта, модели материалов и bindings по решению владельца (разрешение GE-1…GE-4). Реестр решений — `DECISION_LOG.md` |
 
 ## 1. Что заказано и что нет
 
@@ -72,6 +73,41 @@ GE-0  Утверждение DRAFT + решения O1, O2, O3 (owner)
 Content OS Stage 1 (Slices 1–5) не является предпосылкой: срез использует уже существующие `content_items`/`content_versions` (`0021`) и не создаёт параллельных таблиц для профиля, research или creation. Если Slice 1 стартует раньше, оба потока делят одну нумерацию миграций (`0037+`) через Lead.
 
 ## 5. Спецификация этапов
+
+
+### 5A. Уточнения по решению владельца от 2026-09-06 (приоритет над текстом GE-1…GE-4 ниже)
+
+**5A.1. Модель материалов.** Одна fixture-задача создаёт **два материала**: `ARTICLE` и `SOCIAL_ADAPTATION` (LinkedIn). Каждый материал — отдельный агрегат со **стабильным `aggregate_id`**: `uuid5(GROWTH_MATERIAL_NAMESPACE, "<task_id>:<content_kind>")`, где `GROWTH_MATERIAL_NAMESPACE` — фиксированная константа контракта (одинаковая в обоих репозиториях, проверяется тестом). Общий `brief_ref = task_id` связывает оба материала с одним заданием. `version` — монотонная версия **агрегата-материала** (`max(version)+1` по `(destination, aggregate_id)` в outbox Aether); в Control Room `content_versions.version = envelope.version`, отдельного номера версии в payload нет. Повторная постановка того же содержимого не создаёт новую версию (сравнение `payload_hash` с последней версией агрегата); изменение одного материала даёт новую версию только его агрегата и не трогает второй. Формулировка «один Inbox item на задание» снята: **один Inbox item = одна карточка материала**; на одно задание — две карточки. Событие `task.result.ready` (v1) сохраняется без изменений: его `aggregate_id = task_id`, что не пересекается с uuid5-идентификаторами материалов; в Aether FK `bridge_events.aggregate_id → tasks(id)` снимается миграцией `0023`, ссылка на задачу переносится в новую колонку `task_id`.
+
+**5A.2. Контракт `content.draft_ready` (schema 1.1).** Payload:
+
+| Поле | Правило |
+|---|---|
+| `content_kind` | `ARTICLE` \| `SOCIAL_ADAPTATION` (остальные виды enum зарезервированы, в срезе не производятся) |
+| `title` | строка 1–200 символов |
+| `language` | BCP-47, 2–16 символов |
+| `body_markdown` | **только inline**; 1 … **48 000 байт UTF-8** (проверка по байтам, не по символам); `artifact_ref` и внешние артефакты — вне среза |
+| `metadata.cta_url` | **обязателен**; абсолютный `https://` URL ≤ 2048 символов, без userinfo, без `#fragment`; парсится `URL`/`urlsplit`; иначе `EventRejected('payload')`. Проецируется в `content_versions.cta_url` (NOT NULL по `0021`) |
+| `metadata.slug`, `meta_title`, `meta_description` | опциональны, ≤ 200 / 200 / 500 |
+| `metadata.internal_links[]` | ≤ 20 `https://` URL |
+| `claims[]` | ≤ 50 × `{text ≤ 500, status ∈ {EXTRACTED, INTERPRETED, HYPOTHESIS, UNKNOWN}, source_ref?}` |
+| `evidence[]` | ≤ 50 × `{kind, ref, captured_at}` |
+| `qa_results[]` | ровно шесть проверок `FACTS, LINKS, NOVELTY, BRAND, TECHNICAL, ISOLATION`, каждая один раз, `verdict ∈ {PASS, FAIL, UNKNOWN}`, `detail ≤ 500` |
+| `source` | `{kind ∈ {OWN, EXTERNAL, SYNTHETIC_FIXTURE}, ref ≤ 500, rights ≤ 200}` |
+| `brief_ref` | UUID задания |
+| `business_key` | `^[a-z_]{2,32}$`, проверочный alias |
+
+Конверт: `schema_version = "1.1"`, `trace_id` — UUID, остальные поля как в v1. `payload_hash` покрывает весь payload. Лимит **всего HTTP-тела** приёмника — отдельная константа `MAX_BODY_BYTES = 96 KiB` (v1-события остаются далеко ниже); превышение → `413 {reason: "body"}`; превышение лимита `body_markdown` → `400 {reason: "payload"}` с текстом причины.
+
+**Конфликт содержимого.** Одинаковые `aggregate_id`/`version` с другим `payload_sha256` — **конфликт**, не дубль: функция записи поднимает ошибку с SQLSTATE `SE409`, приёмник отвечает `409 {reason: "conflict"}` и пишет audit-строку без тела; повтор того же `event_id` с другим содержимым — тот же `409`. Одинаковые `aggregate_id`/`version` с тем же хэшем — `duplicate` (202). `version` меньше уже записанной — `stale` (202).
+
+**5A.3. Bindings и роль worker.** Таблица `selena_registry.growth_project_bindings`: `organization_id`, `brand_id`, `aether_project_id uuid NOT NULL`, `aether_business_key text NOT NULL CHECK (~ '^[a-z_]{2,32}$')`, `source_environment text NOT NULL CHECK (IN ('local','staging','production'))`, `confirmed_by`, `confirmed_at`, `revoked_at`, `revoked_by`, `revoke_reason`; composite FK `(brand_id, organization_id) → public.brands(id, organization_id)` (добавляется уникальный индекс `brands_identity_unique`); **`UNIQUE (aether_project_id, source_environment) WHERE revoked_at IS NULL`** — один активный binding на проект и среду во всей базе; `business_key` — только сверка, не ключ и не основание выбора бренда. Подтверждение и отзыв — только SECURITY DEFINER-функции `confirm_growth_binding` / `revoke_growth_binding`, доступные `selena_web_runtime` и требующие `can_human_approve` (интерактивная owner-сессия под `set_request_context`). Web читает строки по RLS `can_access_brand(..., ARRAY['web'])`.
+
+Путь projection worker: подключение логином `selena_worker_login` → группа `selena_registry_worker_runtime` (NOINHERIT, `SET ROLE` автоматически); worker ставит `app.selena_service_identity = 'registry_worker'`, `app.selena_auth_type = 'service'`, `app.selena_actor_id = 'service:registry-worker'` и вызывает `selena_registry.resolve_growth_binding(p_aether_project_id, p_source_environment)` — SECURITY DEFINER, EXECUTE только у worker-роли, внутри проверяет `pg_has_role(session_user, 'selena_registry_worker_runtime')` и настройки контекста, возвращает **только активную** строку (`revoked_at IS NULL`) для среды, объявленной переменной `SELENA_GROWTH_SOURCE_ENVIRONMENT` самого worker. Затем worker вызывает штатный `selena_registry.set_request_context('service:registry-worker', organization_id, brand_id, 'service', <uuid>, 'registry_worker', 'service')` и пишет `content_items`/`content_versions`/`audit_events` **под RLS-политиками** `can_write_brand(..., ARRAY['registry_worker'])`, которые добавляет миграция `0039`. Отзыв binding → `resolve_*` возвращает пустой результат → `projection_error = 'NO_BINDING'`, версия не создаётся. Ни один шаг не выполняется под `selena_schema_owner` или суперпользователем; pgTAP проверяет это отрицательными утверждениями.
+
+**5A.4. Нумерация миграций.** Занято на 2026-09-06: `0032`–`0036` (база), `0037_content_project_profiles` (параллельная ветка `feat/content-os-slice1`). Срез использует **`0038_growth_project_bindings`** и **`0039_aether_events_content_draft`**; Aether — **`0023_bridge_material_events`**.
+
+**5A.5. Definition of Done среза (замена п. 3 §11).** Одна fixture-задача → ровно две карточки (две `content_items`, по одной `content_versions` каждая, общий `brief_ref`); повтор доставки и повтор запуска worker не увеличивают число карточек и версий; новая версия одного материала не изменяет второй; отдельные тесты: неверная подпись, устаревшее событие, конфликт содержимого, отсутствующий и отозванный binding, чужая организация, неверный `business_key`, `QA FAIL`, `QA UNKNOWN`; approval/release в основном сценарии не создаются; provider dispatch и публикации = 0; тесты под штатными runtime-ролями; миграции воспроизводимы, повтор — no-op.
 
 ### GE-0. Утверждение
 
@@ -191,7 +227,8 @@ Content OS Stage 1 (Slices 1–5) не является предпосылкой
 | Проверка | Где доказывается | Ожидание |
 |---|---|---|
 | Дубли: тот же `event_id` дважды | receiver test; `aether_events` unique | `duplicate`, 0 новых версий |
-| Дубли: та же `(aggregate_id, version)` с другим `event_id` | receiver test | `record_aether_event` raise / `stale`; 0 версий |
+| Конфликт: та же `(aggregate_id, version)` с другим `payload_sha256` (любой `event_id`) | pgTAP `0039`, receiver test | SQLSTATE `SE409` → `409 {reason: conflict}`; 0 версий; audit |
+| Дубли: та же `(aggregate_id, version)` с тем же хэшем, другой `event_id` | pgTAP `0039` | `duplicate`; 0 версий |
 | Неверная подпись / истёкшая метка времени | receiver test (fixtures `signed_with_another_secret`, `timestamp_outside_window`) | 401; тело не парсится; audit |
 | Смешение проектов: `project_id` без binding; `project_id` с binding, но `business_key` не совпадает; попытка второго binding того же `project_id` другой организацией | projection-worker + projection tests; pgTAP `0037` | `NO_BINDING` / `BUSINESS_KEY_MISMATCH`; 0 версий; `23505`; чужая организация не видит строку |
 | Неподтверждённые утверждения: `claims[].status = UNKNOWN`, `qa_results FAILS` | projection test + `evaluateReleaseGate` | Версия создаётся как черновик, помечена `needs_verification`; release gate блокирует |
@@ -237,7 +274,7 @@ Content OS Stage 1 (Slices 1–5) не является предпосылкой
 
 1. Контракт v1.1 FROZEN, схемы идентичны в двух репозиториях, fixtures проходят с обеих сторон.
 2. Миграции `0037`, `0038` применяются на чистой disposable БД, повторный прогон no-op, pgTAP 16 наборов 0 not ok, forced RLS на новых таблицах.
-3. Одно fixture-событие создаёт ровно одну `content_versions`; все строки раздела 7 — PASS с evidence.
+3. Одна fixture-задача создаёт ровно две карточки (см. 5A.5); все строки раздела 7 — PASS с evidence.
 4. `externalProviderCalls = 0`, LLM calls = 0, create-post = 0, публикаций 0.
 5. Полные `pnpm test` (selena-OS) и `pytest -q` (Aether) зелёные на финальных SHA; `ruff` чист; `turbo run check-types` 0 ошибок.
 6. Каждая PR имеет exact base/head SHA, реальный CI и blind delta-review без BLOCKER; merge — решение владельца.

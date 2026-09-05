@@ -161,7 +161,7 @@ QA PASS не равен разрешению выпуска (B5).
 
 `[PROPOSED]` Growth Engine закрывает разрыв двумя шагами, не меняя транспорт:
 
-1. **Проекция**: серверная функция в `selena-OS`, которая из принятого события создаёт или обновляет `content_items`/`content_versions` бренда (по binding раздела 5), идемпотентно по `(aggregate_id, version)`; запись в `audit_events`.
+1. **Проекция**: отдельный внутренний worker в `selena-OS` (роль `selena_registry_worker_runtime`), который из принятого события создаёт или обновляет `content_items`/`content_versions` бренда (по binding раздела 5), идемпотентно по `(aggregate_id, version)`; запись в `audit_events`. Один материал = один агрегат = одна карточка; задание из двух материалов даёт две карточки, связанные `brief_ref` (решение владельца 2026-09-06, `DECISION_LOG.md` GD-01).
 2. **Содержимое**: minor-версия контракта `control-room-event.v1.1` с типом `content.draft_ready` и payload, несущим `content_kind`, `body_markdown` (или ссылку на artifact + `artifact_sha256`), `metadata`, `claims[]`, `evidence[]`, `qa_results[]`; `payload_hash` покрывает всё. Размер ограничен (receiver уже отвергает тело > 64 KiB — лимит пересматривается или вводится artifact fetch по подписанной ссылке). Fixtures генерируются на стороне Aether и проверяются приёмником, как сейчас.
 
 Точный список полей и тестов — ТЗ, этап G3.
@@ -208,9 +208,10 @@ QA PASS не равен разрешению выпуска (B5).
 
 ```text
 growth_project_bindings
-  brand_id (canonical, FK public.brands)  ·  organization_id
-  aether_project_id?        — UUID проекта Aether; глобально уникален среди активных bindings; ключ поиска при проекции событий
-  aether_business_key?      — alias для skill packs/bridge scope; шесть значений не уникальны между организациями, поэтому НЕ ключ поиска
+  organization_id + brand_id  — рабочая принадлежность в Content OS (FK на public.brands(id, organization_id))
+  aether_project_id           — UUID проекта Aether; ключ поиска при проекции; один активный binding на (проект, среда) во всей базе
+  source_environment          — доверенный контекст источника (local / staging / production), должен совпадать со средой worker
+  aether_business_key         — проверочный alias; сверяется, но не выбирает организацию или бренд
   sv_project_id?            — только после явного подтверждения владельца; без вывода по имени или URL
   gsc_property?             — свойство Search Console из config/gsc-properties.json
   site_repo? / site_path?   — канал «сайт»
@@ -218,7 +219,7 @@ growth_project_bindings
   confirmed_by, confirmed_at, version
 ```
 
-Канонический ID — `brand_id` из `selena-OS`, потому что там уже живут approvals и releases. Четвёртый идентификатор не вводится; предложение Knowledge OS о portfolio-wide `project_id` совместимо: `brand_id` играет эту роль, остальные — aliases. Это `[OWNER_DECISION]` O2.
+Решение O2 (2026-09-06): рабочая принадлежность в Content OS — `organization_id + brand_id`; связь с Aether — точный UUID проекта плюс доверенный контекст среды; `brand_id` **не** становится глобальным идентификатором всей экосистемы и identity AI Visibility не меняется. Предложение Knowledge OS о portfolio-wide `project_id` остаётся открытым вне этого среза.
 
 Правило изоляции: событие Aether проецируется в бренд только по `project_id` конверта, совпавшему с `aether_project_id` активного binding, и только если `business_key` события равен `aether_business_key` этого binding. Иначе — отказ (`NO_BINDING` / `BUSINESS_KEY_MISMATCH`) и audit. Receiver при этом остаётся recorder под ingestion-ролью; проекцию выполняет отдельный внутренний worker (ТЗ GE-3, решение O15).
 
