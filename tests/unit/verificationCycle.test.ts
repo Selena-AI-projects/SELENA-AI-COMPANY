@@ -80,6 +80,7 @@ test("every sample action row is complete and tagged as sample", () => {
       ids.add(row.id);
       assert.ok(row.action.trim(), `${where} action`);
       assert.ok(row.owner.trim(), `${where} owner`);
+      assert.doesNotMatch(row.owner, /unassigned|не назначен/i, `${where} is tracked, so it must have an owner`);
       assert.ok(ACTION_LIFECYCLE_STATUSES.includes(row.status), `${where} status ${row.status}`);
       assert.ok(row.evidenceIds.length > 0, `${where} needs at least one evidence ID`);
       for (const id of row.evidenceIds) assert.match(id, /^EV-C\d+-\d{4}$/, `${where} evidence id ${id}`);
