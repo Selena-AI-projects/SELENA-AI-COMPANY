@@ -119,9 +119,20 @@ Railway собирает образы только из GitHub по SHA, лок�
 локально): `21c7873e`, `0277f256`, `a6f7ccf3`. Последний отправленный SHA —
 `78e46937`.
 
-Что нужно от владельца: переподключить GitHub в claude.ai → Settings →
-Connectors и убедиться, что `parkourcafe/selena-OS` входит в набор доступных
-репозиториев. После этого прогон продолжается без новых согласований.
+Разрешилось 2026-09-07 02:27 UTC: репозитории переехали в организацию
+**`Selena-AI-projects`** (`Selena-AI-projects/selena-OS`,
+`…/SELENA-AI-COMPANY`, `…/Aether-Medium`), приложение Claude получило к ним
+доступ, все коммиты отправлены (`integration/content-os-growth-ge5` @ `a6f7ccf3`).
+
+Осталась вторая половина того же переезда — **Railway**. Все сервисы staging
+привязаны к старому пути `parkourcafe/selena-OS`; деплой по SHA отвечает
+`No GitHub installation found for repo: parkourcafe/selena-OS`, а перепривязка
+на `Selena-AI-projects/selena-OS` — `User does not have access to the repo`.
+Значит, GitHub-приложение Railway не установлено на организацию
+`Selena-AI-projects`. Это действие владельца в GitHub/Railway; из сессии оно
+недоступно. Пока оно не сделано, ни один сервис staging (`web`, `receiver`,
+`projection`, `migrate`, временные) пересобрать нельзя — работающие деплои при
+этом продолжают работать.
 
 ### Установленный факт: staging принимает ровно один аккаунт
 
