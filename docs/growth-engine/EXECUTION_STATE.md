@@ -14,7 +14,7 @@
 | База интеграции | `313daa0c5812d34f8ab7b977f6cc500fde751869` (= `main`, merge PR #28, Content OS Slice 1 + `0037`) |
 | Влито | `growth/ge1-4-local-slice` @ `9d7428df794b397d324168620c7c200685f81545` |
 | Merge-base | `05599f98434a8ee66496d5dfe1f523ddde98a4b8` |
-| HEAD интеграции (финальный) | `9cdfc6753fa2d95fe424392d6e08443643ee976c` (37 коммитов над базой) |
+| HEAD интеграции (финальный) | `fed46d4617db0540c344dd73735374cb7a7b090e` (38 коммитов над базой) |
 | Aether (финальный) | `Selena-AI-projects/Aether-Medium`, ветка `growth/ge1-4-local-slice` @ `18289d46fa78f7184545518f6aba7484834de45b` |
 
 Репозитории переехали в организацию `Selena-AI-projects` 2026-09-07 ~02:27 UTC;
@@ -31,7 +31,7 @@ receiver с этой ветки вернул бы код **старее** раз
 
 | Сервис | Развёрнуто | Деплой | Источник | Автодеплой |
 |---|---|---|---|---|
-| `web` | `a9f79560` (с фиксами review; финальный `9cdfc675` отличается только удалением временной Docker-стадии) | `d84b78ee` SUCCESS 04:10 | `Selena-AI-projects/selena-OS` | **выключен** |
+| `web` | `a9f79560` (с фиксами review; финальный `fed46d46` — пересборка `web` на нём идёт, см. ниже) | `d84b78ee` SUCCESS 04:10 | `Selena-AI-projects/selena-OS` | **выключен** |
 | `projection` | `bc909406`, `GROWTH_ENGINE_STAGE1_ENABLED=true` (код воркера не менялся до `9cdfc675`) | `88310594` SUCCESS 03:48 | `Selena-AI-projects/selena-OS` | **выключен** |
 | `migrate` | `a9f79560`, команда — инспектор | `4dc63301` SUCCESS 04:14 (инспектор после `0041`; сама миграция — `ef13d811` 04:12) | `Selena-AI-projects/selena-OS` | **выключен** |
 | `receiver` | `1a0a1aa3` (код receiver не менялся после) | `ee6a9fdb` SUCCESS | `parkourcafe/selena-OS` (старый путь; пересборка потребует перепривязки) | **выключен** |
@@ -234,8 +234,14 @@ FAILED, ничего не запускалось). Деплой `87870aed` @ `26
 - Финальная `verify` @ `a9f79560`: 20 событий, 10 материалов (5 brief × 2), brief
   `5ec3b3f0` под `staging-check-2`, внешние эффекты = 0, Inbox 10 / Review 0.
 - Уборка кода: временная стадия `owner-path-check-temp` и исключение
-  `!e2e/staging` сняты в `9cdfc675` (финальный SHA); скрипт `e2e/staging/owner-path.mjs`
+  `!e2e/staging` сняты в `9cdfc675`; скрипт `e2e/staging/owner-path.mjs`
   оставлен для следующей приёмки.
+- Повторное review дельты `bc909406..9cdfc675`: **0 BLOCKER, 0 MAJOR**, два MINOR
+  (черновик Control Room при отозванной политике брал версию клиента; предусловие
+  `0040` не было записано в самом репозитории). Оба закрыты в `fed46d46` —
+  финальном SHA: `policyVersionInForce` отказывает, если все политики бренда
+  отозваны; запись в `docs/control-room/DECISION_LOG.md` с проверочным запросом.
+  `web` пересобран на `fed46d46`.
 
 Итог — `FINAL_REPORT_2026-09-07.md`. За владельцем: удаление трёх временных
 сервисов (`serviceDelete` токену не разрешён), решение об автодеплое после merge,
