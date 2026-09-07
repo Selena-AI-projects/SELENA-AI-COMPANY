@@ -3,7 +3,7 @@
 Один файл состояния для продолжения после перезапуска сессии. Читать его, а не
 повторять аудит с нуля. Обновляется после каждого существенного шага.
 
-Обновлено: 2026-09-07 02:30 UTC.
+Обновлено: 2026-09-07 03:05 UTC.
 
 ## Ссылки кода
 
@@ -150,28 +150,65 @@ Railway собирает образы только из GitHub по SHA, лок�
 установку», потому что иначе отдельного синтетического владельца на этом стенде
 не существует.
 
-Дальше по плану:
+### Путь владельца пройден (2026-09-07 02:49 UTC)
 
-1. **Runner с браузером.** Один временный сервис из `selena-OS` (репозиторий
-   доступен для деплоя по SHA, в отличие от `aether-medium`) с образом на базе
-   Playwright. В репозитории уже есть готовый образец процедуры: `e2e/auth-setup.ts`
-   регистрирует пользователя через `/api/auth/sign-up/email` и добивает
-   организацию и членство прямыми записями — это и есть разрешённая ТЗ
-   «техническая подготовка синтетического аккаунта через предусмотренную
-   auth-процедуру».
-2. **Сценарий:** синтетический owner входит → создаёт бренд штатным путём →
-   задаёт версионированную политику → подтверждает источник
-   `3b8c9d1e-5a2f-4c7b-8e6d-9f0a1b2c3d4e` для окружения staging.
-3. **Включить `projection`** флагом только после шага 2.
-4. Отложенные события должны стать двумя связанными карточками с общим
-   `brief_ref` и собственными версиями; повтор доставки копий не создаёт.
-5. Матрица A01–A14 с доказательствами.
-6. Финальный независимый review итогового SHA.
-7. Уборка: `aether-test-runner-temp` (`6bbfd548-…`), `restore-check-temp`
-   (`f54138f6-…`), новый браузерный runner; снять с них автодеплой.
+Runner `owner-path-check-temp` (`aab1d95a-…`, образ — стадия `owner-path-check-temp`
+в `docker/Dockerfile`, сценарий `e2e/staging/owner-path.mjs`, источник
+`Selena-AI-projects/selena-OS`, деплой только по SHA). Прогон `54c921f0` @ `26d6f9d3`:
 
-Пока шаг 2 не сделан, карточек в Inbox быть не должно — это правильное
-состояние, а не сбой: события отложены с причиной `NO_BINDING`.
+| Шаг | Как | Результат |
+|---|---|---|
+| Вход | `/api/auth/sign-in/email` штатно, аккаунт `growth-check@synthetic.invalid` | `200` |
+| Организация | `growth-check-org`, членство `admin` — прямые записи, как в `e2e/auth-setup.ts` | есть |
+| Бренд | форма онбординга `/app/growth-check-org`, сайт `https://growth-check.synthetic.invalid` | `brands.id = growth-check-org` |
+| Политика | карточка «Content policy», версия `staging-check-1`, evidence required | `status = active` |
+| Источник | карточка «Confirm a source»: `3b8c9d1e-…`, `selena`, `staging` | binding, `revoked = false` |
+| Аудит | `selena_audit.audit_events` для бренда | `content.policy_set` 1, `growth.binding_confirmed` 1 |
+
+Одна поправка робота по дороге: значение, введённое до гидратации страницы,
+форма отбрасывает («Website URL is required») — ожидание `networkidle` и
+проверка значения поля после ввода (`26d6f9d3`).
+
+### Проекция включена, карточки появились (02:56 UTC)
+
+`projection`: `GROWTH_ENGINE_STAGE1_ENABLED=true`, перепривязан на
+`Selena-AI-projects/selena-OS` (по старому пути Railway перестал читать
+`railway.json` и собирал Railpack'ом без start command — деплой `f10c97d8`
+FAILED, ничего не запускалось). Деплой `87870aed` @ `26d6f9d3`, автодеплой снят.
+Лог: два `aether material projected`.
+
+Проверочный прогон `0994a01f` @ `c96eb58e` (режим `verify`, только чтение):
+
+- события: 8; два `content.draft_ready` v1 проекта `3b8c9d1e-…` — `projected`,
+  attempts 0; шесть `task.result.ready` (v1-совместимые, не материалы) — не
+  трогаются проекцией;
+- материалы бренда `growth-check-org`: **2**, общий `brief_ref`
+  `0aa70000-484c-440f-b1cc-ab6c23ef372f`, `ARTICLE` и `SOCIAL_ADAPTATION`, у
+  каждого версия 1 под политикой `staging-check-1`, `created_by =
+  service:registry-worker`, статус `DRAFT`;
+- материалы из внешних источников под любым другим брендом: **0**;
+- Inbox глазами синтетического владельца: 2 строки, помечены
+  «Aether · SYNTHETIC_FIXTURE», «Synthetic», «Needs verification», «Pending»;
+  Review: 0 строк. Approvals, release, публикации — 0.
+
+Дальше:
+
+1. Повторная доставка тех же событий (`aether-test-runner-temp`, перепривязан
+   на `Selena-AI-projects/Aether-Medium`) — карточек должно остаться 2; по
+   функции `record_aether_event` повтор с тем же `event_id` даёт `duplicate`,
+   пересозданный с новым `event_id` и той же версией — `stale`; строк не
+   добавляют оба.
+2. Матрица A01–A14 с доказательствами.
+3. Финальный независимый review итогового SHA.
+4. Уборка: снять временную стадию из `docker/Dockerfile` и исключение
+   `!e2e/staging` из `.dockerignore`; сервисы `aether-test-runner-temp`
+   (`6bbfd548-…`), `restore-check-temp` (`f54138f6-…`), `owner-path-check-temp`
+   (`aab1d95a-…`) — удаление за владельцем (`serviceDelete` токену не разрешён).
+
+Открыто после переезда репозиториев: `web`, `receiver`, `migrate` привязаны к
+`parkourcafe/selena-OS`; работают, но пересборка по этому пути невозможна.
+Перепривязка — только по слову владельца (создаёт trigger автодеплоя, который
+нужно тут же снять, как сделано для `projection` и runner-ов).
 
 ## Границы, действующие всё время
 
