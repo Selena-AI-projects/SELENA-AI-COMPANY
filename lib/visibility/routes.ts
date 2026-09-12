@@ -38,6 +38,7 @@ export const selenaAppRoutes = {
   home: "https://app.selenasystems.com",
   login: "https://app.selenasystems.com/auth/login",
   register: "https://app.selenasystems.com/auth/register",
+  freeAiVisibility: "https://app.selenasystems.com/free-ai-visibility",
   workspace: "https://app.selenasystems.com/app/selena",
 } as const;
 

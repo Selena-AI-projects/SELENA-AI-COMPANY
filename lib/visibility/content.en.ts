@@ -490,6 +490,11 @@ export const visibilityContentEn: VisibilityContent = {
       aiAnswersLabel: "AI answers — that is the paid measurement",
       priceLabel: "and no card required",
     },
+    freeAiVisibility: {
+      heading: "Continue with a verified AI Visibility check",
+      body: "After signing in and verifying your email, you can run one no-cost check in ChatGPT and Gemini. It opens in the Selena Systems app and does not transfer the website or result from this page.",
+      ctaLabel: "Open verified AI Visibility check",
+    },
     lockedItems: [
       {
         title: "How AI systems see you",

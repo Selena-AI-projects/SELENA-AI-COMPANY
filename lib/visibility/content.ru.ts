@@ -489,6 +489,11 @@ export const visibilityContentRu: VisibilityContent = {
       aiAnswersLabel: "AI-ответов — это платный замер",
       priceLabel: "и без карты",
     },
+    freeAiVisibility: {
+      heading: "Продолжите с подтверждённой проверкой AI Visibility",
+      body: "После входа и подтверждения email можно один раз бесплатно проверить ChatGPT и Gemini. Проверка откроется в приложении Selena Systems и не передаст сайт или результат с этой страницы.",
+      ctaLabel: "Открыть подтверждённую проверку AI Visibility",
+    },
     lockedItems: [
       {
         title: "Как вас видят AI-системы",

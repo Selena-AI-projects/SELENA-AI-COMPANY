@@ -145,6 +145,11 @@ export type LiveReportCopy = {
     aiAnswersLabel: string;
     priceLabel: string;
   };
+  freeAiVisibility: {
+    heading: string;
+    body: string;
+    ctaLabel: string;
+  };
   /** Paid-report sections named honestly as locked, never previewed with fake data. */
   lockedItems: { title: string; body: string }[];
   cta: {
