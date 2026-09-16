@@ -19,21 +19,12 @@ export const visibilityRoutes = {
   },
 } as const;
 
-/**
- * Emergency switch for every link into the client portal. The portal being
- * reachable is the normal state, so the links show unless
- * `NEXT_PUBLIC_CLIENT_PORTAL_ENABLED=false` is set — a deploy that forgets the
- * variable shows the site as intended rather than silently dropping the
- * portal. Set it to "false" if the portal goes down again, so visitors are not
- * sent to an error page. It is read on the client because the header and
- * footer are client components; it gates nothing but link visibility, so it is
- * deliberately not one of the server-only capability flags in
- * lib/diagnostics/flags.ts.
- */
-export const CLIENT_PORTAL_ENABLED = process.env.NEXT_PUBLIC_CLIENT_PORTAL_ENABLED !== "false";
+/** Production hostname evidence is still missing. An environment variable alone
+ * cannot promote the known staging hostname into a customer destination. */
+export const CLIENT_PORTAL_ENABLED = false;
 
-/** Public app entry points. The app can stay deployment-provider neutral while
- * the marketing site always links to the stable customer-facing hostname. */
+/** Historical app routes, retained for compatibility but not published while
+ * CLIENT_PORTAL_ENABLED is false. The hostname currently resolves to staging. */
 export const selenaAppRoutes = {
   home: "https://app.selenasystems.com",
   login: "https://app.selenasystems.com/auth/login",

@@ -1,3 +1,4 @@
+import { discoveryTracks } from "./sales";
 import type { VisibilityContent } from "./types";
 import { commercialFacts } from "@/lib/commercial-facts";
 import { selenaAppRoutes, visibilityRoutes } from "./routes";
@@ -528,7 +529,7 @@ export const visibilityContentRu: VisibilityContent = {
     eyebrow: "Цены",
     title: "Выберите, какую часть AI-ландшафта вам нужно видеть.",
     intro:
-      "Каталог текущей версии зафиксирован. Онлайн-оплата остаётся закрытой до production-приёмки; сейчас можно запросить ранний доступ или войти в уже активный кабинет.",
+      "Одна продуктовая лестница: бесплатная готовность, ранний доступ к мониторингу, экспертный аудит и внедрение. Регулярные замеры и Telegram ещё не активированы; онлайн-оплата закрыта.",
     freePlan: {
       name: "Website Public Readiness",
       price: commercialFacts.aiVisibility.publicReadiness.ru,
@@ -592,98 +593,7 @@ export const visibilityContentRu: VisibilityContent = {
     },
     disclosure:
       "Цены указаны в USD. Ни один AI-замер не начинается до утверждения заказа и лимита провайдеров. Услуги AI Visibility оказывает Selena Systems LLC (Вайоминг, США). Реальные онлайн-платежи сейчас выключены.",
-    tracks: [
-      {
-        title: "Автоматическая видимость",
-        intro: "Доказательства, конкуренты и рекомендации без проверки аналитиком.",
-        plans: [
-          {
-            name: "AI Visibility Snapshot",
-            price: commercialFacts.aiVisibility.snapshot.ru,
-            status: "founding_soon",
-            statusLabel: "Ранний доступ · оплата не открыта",
-            description:
-              "Локальному бизнесу — увидеть себя в трёх главных AI-сервисах.",
-            systemsLabel: "3 системы: ChatGPT, Gemini, Perplexity",
-            volumeLabel: "25 вопросов × 3 системы × еженедельно = 300 ответов в месяц",
-            progressionLabel: "Первый реальный замер. Только Visitor View.",
-            features: [
-              "1 сайт, бренд, город",
-              "1 язык, 1 повтор",
-              "Упоминания, позиции, цитаты, конкуренты",
-              "Кабинет и CSV каждый месяц",
-            ],
-            href: visibilityRoutes.ru.check,
-            ctaLabel: "Начать с проверки",
-          },
-          {
-            name: "AI Visibility Landscape",
-            price: commercialFacts.aiVisibility.landscape.ru,
-            status: "founding_soon",
-            statusLabel: "Ранний доступ · оплата не открыта",
-            description:
-              "Командам — сравнить все восемь систем и два канала ответов.",
-            systemsLabel: "8 систем: ChatGPT, Gemini, Perplexity, Claude, DeepSeek, Qwen, Mistral, Grok",
-            volumeLabel: "25 вопросов × 8 систем × еженедельно = 800 ответов в месяц",
-            progressionLabel: "Всё из Snapshot плюс API View и расхождение каналов.",
-            features: [
-              "До 2 языков внутри 25 вопросов",
-              "Visitor и API View отдельно",
-              "Карта конкурентов и источников",
-              "Evidence Ledger с экспортом",
-            ],
-            featured: true,
-            href: visibilityRoutes.ru.check,
-            ctaLabel: "Начать с проверки",
-          },
-        ],
-      },
-      {
-        title: "Решения с проверкой человеком",
-        intro: "Когда выводы требуют смысловой проверки, проверки цитат и фактических ошибок аналитиком.",
-        plans: [
-          {
-            name: "Expert Verified",
-            price: commercialFacts.aiVisibility.expertVerified.ru,
-            status: "founding_soon",
-            statusLabel: "По заявке · проверяет аналитик",
-            description: "Тем, кому нужен baseline, проверенный человеком.",
-            systemsLabel: "8 систем: ChatGPT, Gemini, Perplexity, Claude, DeepSeek, Qwen, Mistral, Grok",
-            volumeLabel: "20 сценариев × 8 систем × 5 повторов = 800 ответов",
-            progressionLabel: "Пять повторов и ручная проверка аналитиком.",
-            features: [
-              "Глубокий разбор топ-10 приоритетов",
-              "Проверка цитат и фактических ошибок",
-              "Evidence Ledger и Action Plan",
-              "5–10 приоритетов, утверждённых аналитиком",
-            ],
-            href: visibilityRoutes.ru.contact,
-            ctaLabel: "Запросить",
-          },
-          {
-            name: "Implementation + 90 days",
-            price: commercialFacts.aiVisibility.implementation90Days.ru,
-            status: "active",
-            statusLabel: "Заявки открыты · ручное подтверждение",
-            description: "Тем, кто хочет не отчёт, а исправления и результат «до и после».",
-            systemsLabel: "8 систем + опциональная Connected Analytics",
-            volumeLabel: "Индивидуальный объём, фиксируется до старта",
-            progressionLabel: "Expert Verified плюс внедрение, мониторинг и повторный замер.",
-            features: [
-              "Expert Verified baseline и Action Plan",
-              "До 10 часов внедрения нашими руками",
-              "90 дней мониторинга и повторный замер",
-              "Гарантия: объём плана выполнен в срок — или возврат",
-              "Гарантия: «до» и «после» в одной конфигурации",
-              "Не обещаем конкретное место в ответах AI",
-              "Оплаченный Expert Verified ($399) — в зачёт (30 дней)",
-            ],
-            href: visibilityRoutes.ru.contact,
-            ctaLabel: "Обсудить программу",
-          },
-        ],
-      },
-    ],
+    tracks: discoveryTracks("ru"),
   },
   faq: [
     {

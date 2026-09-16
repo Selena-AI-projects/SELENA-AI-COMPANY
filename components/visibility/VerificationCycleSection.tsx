@@ -1,3 +1,4 @@
+import { visibilityActivation } from "@/lib/visibility/activation";
 import type { VerificationCycleContent } from "@/lib/visibility/types";
 import type { SampleVerificationLoopSection } from "@/lib/visibility/sample-report-data";
 import { Container } from "@/components/ui/Container";
@@ -21,6 +22,7 @@ export function VerificationCycleSection({
   return (
     <section className="bg-ivory py-20 sm:py-28" id="verification-loop">
       <Container>
+        {!visibilityActivation.recurring && <p className="mb-6 max-w-3xl font-semibold text-ink">{content.sampleReport.sampleLabel === "Sample data · not a measurement" ? "Preview workflow only. Weekly recurring measurements and Telegram production delivery are not activated." : "Пример процесса. Регулярные замеры и production-доставка в Telegram пока не активированы."}</p>}
         <SectionHeader eyebrow={content.eyebrow} headline={content.headline} intro={content.intro} />
 
         <ol className="mt-12 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4">

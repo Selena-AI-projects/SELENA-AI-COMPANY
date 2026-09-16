@@ -1,3 +1,4 @@
+import { discoveryTracks } from "@/lib/visibility/sales";
 import type {
   HomepageContent,
   ProofProject,
@@ -52,7 +53,7 @@ export const ruHomepage = {
           "Начните с бесплатной Public Readiness. Затем подключайте реальные AI-замеры, evidence, исправления и мониторинг, когда нужен более глубокий ответ.",
         ladderLabel: "Дальше — 4 платных шага",
         ladderGroups: {
-          auto: "Автоматические замеры · работают без вашего участия",
+          auto: "Мониторинг · ранний доступ",
           expert: "С экспертом · вручную и нашими руками",
         },
         outcomesLabel: "На какие вопросы отвечает замер",
@@ -77,7 +78,7 @@ export const ruHomepage = {
     stats: [
       { value: "Бесплатно", label: "вход: проверка сайта с результатом сразу" },
       { value: "8 систем", label: "максимальный объём платного замера" },
-      { value: "25 вопросов", label: "еженедельный замер в подписке" },
+      { value: "25 вопросов", label: "на замер; регулярный режим — ранний доступ" },
     ],
   },
   productPaths: {
@@ -102,55 +103,14 @@ export const ruHomepage = {
           ],
           cta: { label: "Проверить бесплатно", href: "/ru/check" },
         },
-        {
-          price: commercialFacts.aiVisibility.snapshot.ru.replace("/месяц", "/мес"),
-          name: "AI Visibility Snapshot",
-          summary: "Замер упоминаний, позиций и citations в ассистентах, у которых спрашивают ваши клиенты.",
-          systems: ["ChatGPT", "Gemini", "Perplexity"],
-          includes: [
-            "До 25 вопросов × 3 системы × еженедельный замер = 300 ответов в месяц",
-            "Упоминания, позиции, citations, конкуренты",
-            "Dashboard и CSV каждый месяц",
-          ],
-          cta: { label: "Начать с проверки", href: "/ru/check" },
-        },
-        {
-          price: commercialFacts.aiVisibility.landscape.ru.replace("/месяц", "/мес"),
-          name: "AI Visibility Landscape",
-          summary: "Сравнение всех восьми систем, конкурентов и источников, стоящих за ответами.",
-          systems: ["ChatGPT", "Gemini", "Perplexity", "Claude", "DeepSeek", "Qwen", "Mistral", "Grok"],
-          includes: [
-            "До 25 вопросов × 8 систем × еженедельный замер = 800 ответов в месяц",
-            "Пользовательские и API-ответы отдельно",
-            "Evidence Ledger в PDF, XLSX и CSV",
-          ],
-          cta: { label: "Начать с проверки", href: "/ru/check" },
-        },
-        {
-          price: commercialFacts.aiVisibility.expertVerified.ru.replace(" разово", ""),
-          name: "Expert Verified",
-          summary: "Аналитик вручную проверяет каждое упоминание, citation и фактическую ошибку.",
-          systems: ["ChatGPT", "Gemini", "Perplexity", "Claude", "DeepSeek", "Qwen", "Mistral", "Grok"],
-          includes: [
-            "20 сценариев × 8 систем × 5 повторов = 800 ответов",
-            "Ручной QC упоминаний и citations",
-            "5–10 утверждённых приоритетов и план действий",
-          ],
-          cta: { label: "Начать с проверки", href: "/ru/check" },
-        },
-        {
-          price: commercialFacts.aiVisibility.implementation90Days.ru,
-          name: "Implementation + 90 days",
-          summary: "Исправляем пробелы, мониторим результат и показываем «до/после».",
-          systems: ["ChatGPT", "Gemini", "Perplexity", "Claude", "DeepSeek", "Qwen", "Mistral", "Grok"],
-          includes: [
-            "Базовый замер Expert Verified включён",
-            "Оплаченный Expert Verified ($399) идёт в зачёт программы при апгрейде в течение 30 дней",
-            "До 10 часов внедрения",
-            "90 дней мониторинга и повторный замер в том же scope",
-          ],
-          cta: { label: "Начать с проверки", href: "/ru/check" },
-        },
+        ...discoveryTracks("ru").flatMap(track => track.plans.map(plan => ({
+          price: plan.price,
+          name: plan.name,
+          summary: `${plan.description} ${plan.statusLabel}`,
+          systems: [plan.systemsLabel],
+          includes: [plan.volumeLabel, plan.progressionLabel, ...plan.features.slice(0, 2)],
+          cta: { label: plan.ctaLabel!, href: plan.href! },
+        }))),
       ],
       primaryCta: { label: "Проверить готовность сайта для AI — бесплатно", href: "/ru/check" },
       secondaryCta: { label: "Открыть AI Visibility", href: "/ru/visibility" },
@@ -528,7 +488,7 @@ export const ruHomepage = {
       "Каждый отчёт датирован, у каждой цифры есть источник. Ниже — реальные экраны кабинета на демо-данных, в том порядке, в котором их видит клиент.",
     demoLabel: "Демо-данные · не замер",
     frameCaption:
-      "Кабинет клиента на app.selenasystems.com. Бренды и цифры на этих экранах — иллюстративные демо-данные, а не результаты.",
+      "Демонстрация кабинета; production-вход для клиентов ещё не активирован. Бренды и цифры на этих экранах — иллюстративные демо-данные, а не результаты.",
     tabsLabel: "Экраны кабинета",
     tabs: [
       {

@@ -12,7 +12,7 @@ import {
   serializeFullReadinessReport,
 } from "@/lib/visibility/readiness/export";
 import { buildAuditHtmlDocument } from "@/lib/visibility/readiness/htmlReport";
-import { selenaAppRoutes } from "@/lib/visibility/routes";
+import { CLIENT_PORTAL_ENABLED, selenaAppRoutes } from "@/lib/visibility/routes";
 import { cn } from "@/lib/cn";
 
 export type ReadinessComparison = {
@@ -381,7 +381,7 @@ export function LiveReportView({
             <p className="text-xs text-muted">{copy.freeMethod.priceLabel}</p>
           </div>
         </div>
-        <div className="mt-6 border-t border-line pt-6">
+        {CLIENT_PORTAL_ENABLED && <div className="mt-6 border-t border-line pt-6">
           <h3 className="font-serif text-xl font-semibold text-ink">{copy.freeAiVisibility.heading}</h3>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">{copy.freeAiVisibility.body}</p>
           <Link
@@ -390,7 +390,7 @@ export function LiveReportView({
           >
             {copy.freeAiVisibility.ctaLabel}
           </Link>
-        </div>
+        </div>}
       </div>
 
 

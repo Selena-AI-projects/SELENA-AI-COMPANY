@@ -69,14 +69,6 @@ export function PublicEventTracker() {
         plan: "all",
       });
     }
-
-    if (pathname === "/visibility" || pathname === "/ru/visibility") {
-      trackPublicEvent("pricing_view", {
-        locale,
-        product_line: "ai_visibility",
-        plan: "all",
-      });
-    }
   }, [locale, pathname]);
 
   useEffect(() => {
@@ -85,6 +77,10 @@ export function PublicEventTracker() {
       if (!(target instanceof Element)) return;
       const link = target.closest<HTMLAnchorElement>("a[href]");
       if (!link) return;
+      const action = link.closest<HTMLElement>("[data-visibility-cta]")?.dataset.visibilityCta;
+      if (action && ["hero_free", "hero_plans", "snapshot", "landscape", "audit", "managed", "methodology", "telegram_preview"].includes(action)) {
+        trackPublicEvent("visibility_cta_click", { locale, action });
+      }
       const route = routeForHref(link.href);
       if (!route) return;
       trackPublicEvent("route_select", { locale, route });
@@ -93,6 +89,23 @@ export function PublicEventTracker() {
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
   }, [locale]);
+
+  useEffect(() => {
+    if (!("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const section = (entry.target as HTMLElement).dataset.visibilityView;
+        if (section === "pricing" || section === "audit_terms") {
+          trackPublicEvent("visibility_section_view", { locale, section });
+          if (section === "pricing") trackPublicEvent("pricing_view", { locale, product_line: "ai_visibility", plan: "all" });
+        }
+        observer.unobserve(entry.target);
+      }
+    }, { threshold: 0.1 });
+    document.querySelectorAll("[data-visibility-view]").forEach(element => observer.observe(element));
+    return () => observer.disconnect();
+  }, [locale, pathname]);
 
   return null;
 }

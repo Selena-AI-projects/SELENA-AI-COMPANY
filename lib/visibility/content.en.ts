@@ -1,3 +1,4 @@
+import { discoveryTracks, discoverySales } from "./sales";
 import type { VisibilityContent } from "./types";
 import { commercialFacts } from "@/lib/commercial-facts";
 import { selenaAppRoutes, visibilityRoutes } from "./routes";
@@ -12,21 +13,16 @@ export const visibilityContentEn: VisibilityContent = {
   locale: "en",
   nav: { label: "Visibility" },
   homeTeaser: {
-    eyebrow: "New: AI Visibility",
+    eyebrow: "AI Visibility for hospitality",
     headline:
       "See how search and AI systems can find, understand and represent your business — and whether a customer or agent can complete the next action.",
     intro:
       "A free, evidence-based Public Readiness check of your public pages, crawler access, site structure, entity clarity and whether your primary action can be understood. No paid AI-answer providers are called.",
     formNote: "Free. Takes a few minutes. No credit card, no login.",
-    primaryCta: { label: "Run Free Visibility Check", href: visibilityRoutes.en.check },
+    primaryCta: { label: "Check AI readiness — free", href: visibilityRoutes.en.check },
     secondaryCta: { label: "See AI Visibility plans", href: visibilityRoutes.en.pricing },
   },
-  hero: {
-    eyebrow: "AI Visibility by Selena Systems",
-    title: "AI visibility you can verify.",
-    intro:
-      "Start with a live public website check. Paid plans add a dated, disclosed measurement across up to eight AI systems, an Evidence Ledger and a grounded action plan — with Visitor View and API View always reported separately.",
-  },
+  hero: discoverySales.hero,
   metrics: [
     {
       name: "Public Readiness",
@@ -212,7 +208,7 @@ export const visibilityContentEn: VisibilityContent = {
     eyebrow: "Verification loop",
     headline: "A report is not the end of a cycle. A verified outcome is.",
     intro:
-      "Every paid cycle runs the same seven stages in the same order. Nothing skips a stage: a recommendation without evidence IDs is not published, an action without an owner is not tracked, and an outcome is only called verified after a comparable recheck.",
+      "The illustrative workflow follows seven stages; weekly production delivery remains gated. Nothing skips a stage: a recommendation without evidence IDs is not published, an action without an owner is not tracked, and an outcome is only called verified after a comparable recheck.",
     stages: [
       {
         id: "measure",
@@ -529,7 +525,7 @@ export const visibilityContentEn: VisibilityContent = {
     eyebrow: "Pricing",
     title: "Choose how much of the AI landscape you need to see.",
     intro:
-      "The catalog is fixed for the current release. Online checkout stays closed until production acceptance; you can request early access now or sign in if your workspace is already active.",
+      "One hospitality discovery ladder: free readiness, monitoring early access, human-led diagnosis and managed implementation. Weekly recurring and Telegram delivery are not activated; online checkout is closed.",
     freePlan: {
       name: "Website Public Readiness",
       price: commercialFacts.aiVisibility.publicReadiness.en,
@@ -538,7 +534,7 @@ export const visibilityContentEn: VisibilityContent = {
       description:
         "For anyone who wants the site checked before paying for measurements.",
       boundary:
-        "Technical readiness only. 0 paid AI provider calls.",
+        "Public Readiness is not an AI visibility measurement. Technical readiness only; no competitor or ranking claims.",
       systemsLabel: "Your website only",
       volumeLabel: "Up to 5 pages · result right away",
       progressionLabel: "The starting point for the paid plans.",
@@ -554,7 +550,7 @@ export const visibilityContentEn: VisibilityContent = {
     paidPlans: {
       heading: "One free entry and four paid options",
       intro:
-        "Each step up adds systems, measurement scope and depth of checking. Compare exactly what changes.",
+        "FREE: understand the website. $49: where, who, sources and change. $79: the full AI + Local landscape. $399: why and what exactly. $2,490: do and verify over 90 days.",
       comparisonLabels: {
         offer: "Offer",
         status: "Status",
@@ -593,125 +589,13 @@ export const visibilityContentEn: VisibilityContent = {
     },
     disclosure:
       "Prices are in USD. No AI measurement starts before an approved order and fixed provider cap. AI Visibility services are operated by Selena Systems LLC (Wyoming, USA). Live online payments are currently off.",
-    tracks: [
-      {
-        title: "Automated visibility",
-        intro: "Evidence, competitors and recommendations without analyst review.",
-        plans: [
-          {
-            name: "AI Visibility Snapshot",
-            price: commercialFacts.aiVisibility.snapshot.en,
-            status: "founding_soon",
-            statusLabel: "Early access · checkout not open",
-            description:
-              "For a local business — see yourself in the three main AI assistants.",
-            systemsLabel: "3 systems: ChatGPT, Gemini, Perplexity",
-            volumeLabel: "25 questions × 3 systems × weekly = 300 answers a month",
-            progressionLabel: "The first real measurement. Visitor View only.",
-            features: [
-              "1 site, brand, city",
-              "1 language, 1 repeat",
-              "Mentions, positions, citations, competitors",
-              "Dashboard and CSV every month",
-            ],
-            href: visibilityRoutes.en.check,
-            ctaLabel: "Start with the free check",
-          },
-          {
-            name: "AI Visibility Landscape",
-            price: commercialFacts.aiVisibility.landscape.en,
-            status: "founding_soon",
-            statusLabel: "Early access · checkout not open",
-            description:
-              "For teams — compare all eight systems and both answer channels.",
-            systemsLabel: "8 systems: ChatGPT, Gemini, Perplexity, Claude, DeepSeek, Qwen, Mistral, Grok",
-            volumeLabel: "25 questions × 8 systems × weekly = 800 answers a month",
-            progressionLabel: "Everything in Snapshot plus API View and channel divergence.",
-            features: [
-              "Up to 2 languages within 25 questions",
-              "Visitor and API View reported apart",
-              "Competitor and source map",
-              "Evidence Ledger with export",
-            ],
-            featured: true,
-            href: visibilityRoutes.en.check,
-            ctaLabel: "Start with the free check",
-          },
-        ],
-      },
-      {
-        title: "Human-verified action",
-        intro: "When the decision needs semantic, citation and factual review by an analyst.",
-        plans: [
-          {
-            name: "Expert Verified",
-            price: commercialFacts.aiVisibility.expertVerified.en,
-            status: "founding_soon",
-            statusLabel: "On request · analyst reviewed",
-            description: "For those who need a baseline verified by a human.",
-            systemsLabel: "8 systems: ChatGPT, Gemini, Perplexity, Claude, DeepSeek, Qwen, Mistral, Grok",
-            volumeLabel: "20 scenarios × 8 systems × 5 repeats = 800 answers",
-            progressionLabel: "Five repeats and manual analyst review.",
-            features: [
-              "Deep review of the top 10 priorities",
-              "Citation and factual-error checks",
-              "Evidence Ledger and Action Plan",
-              "5–10 analyst-approved priorities",
-            ],
-            href: visibilityRoutes.en.contact,
-            ctaLabel: "Request",
-          },
-          {
-            name: "Implementation + 90 days",
-            price: commercialFacts.aiVisibility.implementation90Days.en,
-            status: "active",
-            statusLabel: "Applications open · manual approval",
-            description: "For those who want fixes and a proven before/after, not a report.",
-            systemsLabel: "8 systems + optional connected analytics",
-            volumeLabel: "Custom scope locked before work begins",
-            progressionLabel: "Expert Verified plus implementation, monitoring and remeasurement.",
-            features: [
-              "Expert Verified baseline and Action Plan",
-              "Up to 10 implementation hours by us",
-              "90 days of monitoring and a remeasurement",
-              "Guarantee: the full plan scope on time — or your money back",
-              "Guarantee: before and after in one configuration",
-              "We do not promise a specific position in AI answers",
-              "A paid Expert Verified ($399) counts toward it (30 days)",
-            ],
-            href: visibilityRoutes.en.contact,
-            ctaLabel: "Discuss the program",
-          },
-        ],
-      },
-    ],
+    tracks: discoveryTracks("en"),
   },
-  faq: [
-    {
-      q: "Is this the same as \"what ChatGPT thinks about my business\"?",
-      a: "No. We do not ask a chatbot for its opinion. Paid measurement tracks a locked, dated set of specific prompts through named, supported environments and reports exact counts — mentioned in X of Y valid answers — not a vibe.",
-    },
-    {
-      q: "Will this guarantee AI recommends us?",
-      a: "No tool can guarantee that. The free check finds verifiable technical, entity and content-readiness gaps. Real AI mentions and citations are measured only in a separate paid cycle with a locked prompt set and named systems.",
-    },
-    {
-      q: "Does having schema/structured data mean AI will quote us correctly?",
-      a: "No. Structured data is machine-readable corroboration, not proof of future citation. We report it as present-and-valid or missing, nothing more.",
-    },
-    {
-      q: "Is llms.txt required?",
-      a: "No. It is an emerging, unproven convention. Its score weight in our methodology is zero, and we do not recommend it as a priority fix.",
-    },
-    {
-      q: "What happens after I submit the free check?",
-      a: "The check reads public pages from the website you submit and returns website-readiness findings on the page. It does not call paid AI providers. To save a project or order an eight-system measurement, request early access or sign in to the client workspace.",
-    },
-  ],
+  faq: [...discoverySales.faq],
   cta: {
     primary: { label: "Check if your site is ready for AI — free", href: visibilityRoutes.en.check },
     secondary: { label: "See plans", href: visibilityRoutes.en.pricing },
     compareNote:
-      "Prices are at the top of this page. The line-by-line comparison of all five options, alongside the AI Automation services, lives on the pricing page.",
+      "Compare monitoring early access, the human-led Competitive Audit and Managed Discovery Growth on the pricing page.",
   },
 };

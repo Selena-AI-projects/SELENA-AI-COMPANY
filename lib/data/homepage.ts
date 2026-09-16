@@ -1,3 +1,4 @@
+import { discoveryTracks } from "@/lib/visibility/sales";
 import { commercialFacts } from "@/lib/commercial-facts";
 
 export type ProofProject = {
@@ -71,12 +72,12 @@ export const homepage = {
     directions: {
       visibility: {
         eyebrow: "AI Visibility · measure outward",
-        headline: "See what AI can find, understand and recommend about your business.",
+        headline: "See how guests discover your hospitality business — and who appears instead.",
         description:
-          "Start with a free Public Readiness check. Then move to real AI measurements, evidence, fixes and monitoring when you need a deeper answer.",
+          "For hotels, villas, restaurants, spas, beach clubs and experience businesses worldwide. Start with free Public Readiness; explore monitoring early access, a Competitive Audit or managed implementation.",
         ladderLabel: "Then — four paid steps",
         ladderGroups: {
-          auto: "Automatic measurements · run without you",
+          auto: "Monitoring · early access",
           expert: "With an expert · by hand and hands-on",
         },
         outcomesLabel: "What the measurement answers",
@@ -101,7 +102,7 @@ export const homepage = {
     stats: [
       { value: "Free", label: "entry: a website check with instant results" },
       { value: "8 systems", label: "the largest paid measurement" },
-      { value: "25 questions", label: "a weekly run on subscription" },
+      { value: "25 questions", label: "per measurement; recurring in early access" },
     ],
   },
   productPaths: {
@@ -126,55 +127,14 @@ export const homepage = {
           ],
           cta: { label: "Run the free check", href: "/check" },
         },
-        {
-          price: commercialFacts.aiVisibility.snapshot.en.replace("/month", "/mo"),
-          name: "AI Visibility Snapshot",
-          summary: "Measure mentions, positions and citations in the assistants your customers ask.",
-          systems: ["ChatGPT", "Gemini", "Perplexity"],
-          includes: [
-            "Up to 25 questions × 3 systems × a weekly run = 300 answers a month",
-            "Mentions, positions, citations, competitors",
-            "Dashboard and CSV every month",
-          ],
-          cta: { label: "Start with the check", href: "/check" },
-        },
-        {
-          price: commercialFacts.aiVisibility.landscape.en.replace("/month", "/mo"),
-          name: "AI Visibility Landscape",
-          summary: "Compare all eight systems, competitors and the sources behind the answers.",
-          systems: ["ChatGPT", "Gemini", "Perplexity", "Claude", "DeepSeek", "Qwen", "Mistral", "Grok"],
-          includes: [
-            "Up to 25 questions × 8 systems × a weekly run = 800 answers a month",
-            "Consumer and API answers reported apart",
-            "Evidence Ledger in PDF, XLSX and CSV",
-          ],
-          cta: { label: "Start with the check", href: "/check" },
-        },
-        {
-          price: commercialFacts.aiVisibility.expertVerified.en.replace(" one-time", ""),
-          name: "Expert Verified",
-          summary: "A human analyst reviews every mention, citation and factual error.",
-          systems: ["ChatGPT", "Gemini", "Perplexity", "Claude", "DeepSeek", "Qwen", "Mistral", "Grok"],
-          includes: [
-            "20 scenarios × 8 systems × 5 repeats = 800 answers",
-            "Analyst QC of mentions and citations",
-            "5–10 approved priorities and action plan",
-          ],
-          cta: { label: "Start with the check", href: "/check" },
-        },
-        {
-          price: commercialFacts.aiVisibility.implementation90Days.en,
-          name: "Implementation + 90 days",
-          summary: "We fix the gaps, monitor the result and prove the before/after.",
-          systems: ["ChatGPT", "Gemini", "Perplexity", "Claude", "DeepSeek", "Qwen", "Mistral", "Grok"],
-          includes: [
-            "Expert Verified baseline included",
-            "A paid Expert Verified ($399) counts toward the program when you upgrade within 30 days",
-            "Up to 10 implementation hours",
-            "90-day monitoring and a locked-scope remeasure",
-          ],
-          cta: { label: "Start with the check", href: "/check" },
-        },
+        ...discoveryTracks("en").flatMap(track => track.plans.map(plan => ({
+          price: plan.price,
+          name: plan.name,
+          summary: `${plan.description} ${plan.statusLabel}`,
+          systems: [plan.systemsLabel],
+          includes: [plan.volumeLabel, plan.progressionLabel, ...plan.features.slice(0, 2)],
+          cta: { label: plan.ctaLabel!, href: plan.href! },
+        }))),
       ],
       primaryCta: { label: "Check AI readiness — free", href: "/check" },
       secondaryCta: { label: "Explore AI Visibility", href: "/visibility" },
@@ -553,7 +513,7 @@ export const homepage = {
       "Every report is dated and every number has a source. Below are real screens of the client workspace on sample data, in the order a client sees them.",
     demoLabel: "Sample data · not a measurement",
     frameCaption:
-      "The client workspace at app.selenasystems.com. Brands and numbers on these screens are illustrative sample data, not results.",
+      "Workspace preview; the production customer entry is not yet activated. Brands and numbers on these screens are illustrative sample data, not results.",
     tabsLabel: "Workspace screens",
     tabs: [
       {

@@ -8,6 +8,8 @@ import {
 
 test("public analytics dictionary contains the approved no-PII event names", () => {
   assert.deepEqual([...PUBLIC_EVENT_NAMES], [
+    "visibility_cta_click",
+    "visibility_section_view",
     "hero_view",
     "route_select",
     "pricing_view",

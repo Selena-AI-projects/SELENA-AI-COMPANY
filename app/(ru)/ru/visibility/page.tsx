@@ -1,3 +1,4 @@
+import { DiscoveryOrderSections } from "@/components/visibility/DiscoverySales";
 import { buildMetadata } from "@/lib/metadata";
 import { buildAiVisibilityStructuredData } from "@/lib/structured-data";
 import { visibilityContentRu } from "@/lib/visibility/content.ru";
@@ -109,6 +110,7 @@ export default function RussianVisibilityPage() {
       <NotClaimedSection content={content.notClaimed} />
 
       <FAQSection items={content.faq} />
+      <DiscoveryOrderSections locale="ru" />
 
       <section className="bg-charcoal py-20 text-ivory sm:py-28">
         <Container size="narrow">

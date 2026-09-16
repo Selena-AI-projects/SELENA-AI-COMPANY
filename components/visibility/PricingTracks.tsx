@@ -110,7 +110,7 @@ export function PricingTracks({
         ) : null}
 
         <Reveal className={cn("max-w-3xl", showHeader && "mt-12")}>
-          <h3 className="text-h2 text-ink">{content.paidPlans.heading}</h3>
+          <h2 className="text-h2 text-ink">{content.paidPlans.heading}</h2>
           <p className="mt-4 leading-relaxed text-muted">{content.paidPlans.intro}</p>
         </Reveal>
 
@@ -210,7 +210,7 @@ function PlanCard({ entry, labels }: { entry: ComparedPlan; labels: ComparisonLa
       )}
     >
       <p className="text-sm text-muted">{trackTitle}</p>
-      <h4 className="mt-2 font-sans text-lg font-semibold leading-snug text-ink">{plan.name}</h4>
+      <h3 className="mt-2 font-sans text-lg font-semibold leading-snug text-ink">{plan.name}</h3>
       <p className="mt-3 font-serif text-4xl font-semibold leading-none tabular-nums text-ink">
         {plan.price}
       </p>
@@ -242,7 +242,7 @@ function PlanCard({ entry, labels }: { entry: ComparedPlan; labels: ComparisonLa
       </ul>
 
       {plan.href && plan.ctaLabel ? (
-        <a href={plan.href} className={cn("mt-7", planCtaClass(featured))}>
+        <a href={plan.href} data-visibility-cta={plan.name === "Visibility Snapshot" ? "snapshot" : plan.name === "Full Discovery Landscape" ? "landscape" : plan.href.endsWith("#audit-order") ? "audit" : plan.href.endsWith("#managed-application") ? "managed" : undefined} className={cn("mt-7", planCtaClass(featured))}>
           {plan.ctaLabel}
         </a>
       ) : null}
@@ -377,7 +377,7 @@ function PlanComparisonTable({
             {plans.map(({ plan }) => (
               <td key={plan.name} className={cn(columnClass(plan), "py-4")}>
                 {plan.href && plan.ctaLabel ? (
-                  <a href={plan.href} className={planCtaClass(plan.featured === true)}>
+                  <a href={plan.href} data-visibility-cta={plan.name === "Visibility Snapshot" ? "snapshot" : plan.name === "Full Discovery Landscape" ? "landscape" : plan.href.endsWith("#audit-order") ? "audit" : plan.href.endsWith("#managed-application") ? "managed" : undefined} className={planCtaClass(plan.featured === true)}>
                     {plan.ctaLabel}
                   </a>
                 ) : null}

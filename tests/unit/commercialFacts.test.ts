@@ -47,10 +47,10 @@ test("sample-report routing uses the locked AI Visibility catalog", () => {
   for (const locale of ["en", "ru"] as const) {
     const report = getSampleReport(locale);
     assert.deepEqual(report.routing.options.map((item) => item.name), [
-      "AI Visibility Snapshot",
-      "AI Visibility Landscape",
-      "Expert Verified",
-      "Implementation + 90 days",
+      "Visibility Snapshot",
+      "Full Discovery Landscape",
+      "Verified Discovery & Competitive Audit",
+      "Managed Discovery Growth",
     ]);
     const serialized = JSON.stringify(report.routing.options);
     for (const stale of ["$9", "$4,000", "$4 000", "Visibility Sprint", "Visibility Audit"]) {

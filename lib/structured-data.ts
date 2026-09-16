@@ -1,3 +1,4 @@
+import { visibilityActivation } from "@/lib/visibility/activation";
 import { contact, founder, site } from "@/lib/site";
 import { legalDocuments } from "@/lib/data/legal";
 import type { Service } from "@/lib/data/services";
@@ -224,10 +225,12 @@ function aiVisibilityServiceNode(locale: StructuredLocale) {
       name: isRussian ? "Варианты AI Visibility" : "AI Visibility options",
       itemListElement: [
         offerNode({ offer: visibility.publicReadiness, locale }),
-        offerNode({ offer: visibility.snapshot, locale, url: pricingUrl, category: "AI Visibility" }),
-        offerNode({ offer: visibility.landscape, locale, url: pricingUrl, category: "AI Visibility" }),
-        offerNode({ offer: visibility.expertVerified, locale, url: pricingUrl, category: "AI Visibility" }),
-        offerNode({ offer: visibility.implementation90Days, locale, url: pricingUrl, category: "AI Visibility" }),
+        ...(visibilityActivation.payments ? [
+          offerNode({ offer: visibility.snapshot, locale, url: pricingUrl, category: "AI Visibility" }),
+          offerNode({ offer: visibility.landscape, locale, url: pricingUrl, category: "AI Visibility" }),
+          offerNode({ offer: visibility.expertVerified, locale, url: pricingUrl, category: "AI Visibility" }),
+          offerNode({ offer: visibility.implementation90Days, locale, url: pricingUrl, category: "AI Visibility" }),
+        ] : []),
       ],
     },
   };
