@@ -2,7 +2,9 @@
 
 16 September 2026, Wednesday · task started 16:33 Asia/Tashkent.
 
-**Status: implementation prepared locally; acceptance is PARTIAL / HOLD.** The production build and targeted checks pass. Full acceptance remains blocked by 36 loopback-fixture tests and desktop/mobile browser verification, which this execution environment cannot run. Do not treat this as a production release or a fully completed acceptance.
+**Status: LOCAL WEBSITE ACCEPTANCE PASS within the Chromium checks documented below.** Full unit suite and actual desktop/mobile browser checks are now complete. Seven components received evidence-driven UI fixes. Changes are local and uncommitted on top of the implementation SHA; this is not a production release, cross-browser certification or activation of any gated product capability.
+
+Continuation started 16 September 2026, Wednesday, 18:24 Asia/Tashkent. The earlier environment blockers are retained below only as historical evidence.
 
 CONTEXT_MODE: repository_only, explicitly authorized by the owner in this task. The immutable owner specification is `SELENA_VISIBILITY_WEBSITE_FINAL_IMPLEMENTATION_TZ_2026-09-16.md`. Repository evidence and the pre-edit claim matrix are in [PREFLIGHT.md](PREFLIGHT.md).
 
@@ -40,6 +42,20 @@ CONTEXT_MODE: repository_only, explicitly authorized by the owner in this task. 
 
 The main sales page has no AI Automation sales section. Existing global navigation/footer and the pricing page's separate AI Automation offers remain intact.
 
+### Acceptance fixes in this continuation
+
+| File | Demonstrated defect and fix |
+| --- | --- |
+| `components/landing/B2BHomeLanding.tsx` | Long CTA labels forced/clipped the paid ladder on 320–390px; RU package cards caused a 4px page overflow at 320px; hero buttons exceeded 768px row space. Allow wrapping and zero-minimum grid tracks, wrap package badge/header, remove fixed minimum copy width. The existing five-stage tracker now uses two columns at tablet width and five at desktop to avoid text collisions. |
+| `components/layout/Header.tsx` | Dark wordmark/menu disappeared over EN/RU Visibility dark heroes. Reuse the existing light header treatment on these two paths; retain the light-background treatment after scrolling/menu opening. Active link uses the existing copper token over the dark hero. |
+| `components/visibility/VisibilityHero.tsx` | RU primary CTA text clipped inside its pill. Allow multiline labels and wrap the CTA row. |
+| `components/visibility/VisibilityCheckForm.tsx` | Submit text contrast was 3.22:1. Use existing copper-deep/copper-deeper button tokens. Readiness logic is unchanged. |
+| `components/forms/EnglishContactForm.tsx` | Same 3.22:1 submit-button defect; use the existing accessible darker tokens. Validation/submission logic unchanged. |
+| `components/forms/ContactForm.tsx` | Same submit-button contrast correction for RU. |
+| `components/visibility/VerificationLoopReport.tsx` | RU demo-delivery attempt row overflowed its 320px container; stack time/result on mobile, preserve horizontal layout from sm. No delivery or measurement contract changed. |
+
+Only existing CSS utility classes and the header tone predicate changed. No new dependency, content rewrite, price or runtime change. Existing design tokens/fonts were preserved. DESIGN.md and the older numbered source files named by AGENTS.md are absent; current implementation, PRODUCT.md (subject to the locked TZ) and global UI standard were read instead. React checklist review found no added hooks, requests, client state or dependency changes.
+
 ## B. Intentionally unchanged
 
 - No edits to measurement contracts, provider adapters, Local/Ask Maps policy or Selena OS runtime.
@@ -63,9 +79,9 @@ The initial workspace dependency install was blocked by `EPERM` removing npm's t
 | `npm ci --ignore-scripts --cache /private/tmp/selena-website-npm-cache` | PASS in temporary verification directory |
 | `npm run lint` | PASS: 0 errors, 4 existing warnings |
 | `npm run typecheck` | PASS: 0 TypeScript errors |
-| `npm test` | BLOCKED: 310 tests total, 274 passed, 36 failed solely with `listen EPERM: operation not permitted 127.0.0.1`; retry with requested expanded execution produced the same block |
-| Targeted command below | PASS: 83 tests, 0 failures |
-| Impeccable command below | PASS: `[]`, zero findings |
+| `npm test` | PASS on the final UI sources: 310 tests, 310 passed, 0 failed/skipped. Run with approved expanded execution so loopback fixtures can listen. Earlier 274/310 result is superseded. |
+| Targeted command below (initial implementation) | PASS: 83 tests, 0 failures; final full suite also covers these tests |
+| Impeccable detector on the seven continuation files | PASS: `[]`, zero findings; exact arguments in `acceptance-final-gates.json` |
 | `npm run build` | PASS: 75/75 pages generated |
 | `python3 scripts/verify-discovery-html.py /private/tmp/selena-website-verification-20260916` | PASS: 191 checks, 0 failures across 10 production-prerendered routes; not a browser test |
 | `git diff --check` | PASS |
@@ -78,18 +94,45 @@ node --import tsx --test tests/unit/discoverySales.test.ts tests/unit/visibility
 
 Warnings: SiteShell's existing `<head>` warning; three existing unused-variable/import warnings in CinematicHero. Next 15 reports `next lint` deprecation. npm install reports seven dependency vulnerabilities (1 moderate, 5 high, 1 critical) in the unchanged lockfile; exploitability was not assessed and dependency upgrades were not added to this copy task. No error was suppressed and no failing fixture test was skipped or rewritten to obtain a pass.
 
+### Reproducible final acceptance commands and evidence
+
+Cwd for quality gates and server: `/private/tmp/selena-website-verification-20260916`.
+
+```sh
+npm run lint
+npm run typecheck
+npm test
+/Users/msnigmatullaeva/.agents/skills/impeccable/scripts/impeccable detect --json components/landing/B2BHomeLanding.tsx components/visibility/VisibilityCheckForm.tsx components/forms/EnglishContactForm.tsx components/forms/ContactForm.tsx components/layout/Header.tsx components/visibility/VisibilityHero.tsx components/visibility/VerificationLoopReport.tsx
+npm run build
+python3 scripts/verify-discovery-html.py /private/tmp/selena-website-verification-20260916
+npm run start -- --hostname 127.0.0.1 --port 4316
+node '/Users/msnigmatullaeva/Downloads/selena AI company/output/visibility-20260916/browser-acceptance.cjs'
+node '/Users/msnigmatullaeva/Downloads/selena AI company/output/visibility-20260916/browser-interactions.cjs'
+node '/Users/msnigmatullaeva/Downloads/selena AI company/output/visibility-20260916/browser-contrast.cjs'
+node '/Users/msnigmatullaeva/Downloads/selena AI company/output/visibility-20260916/browser-final-details.cjs'
+```
+
+Tests, server and Chrome use approved expanded execution; ordinary sandbox loopback still returns EPERM. Browser scripts use the installed Playwright runtime and isolated installed Chrome, not a user browser profile. The bundled Playwright Chromium executable is absent. Computer Use browser inventory still reports `Unable to load browser request-header policy`; it was not bypassed. The standard agent-browser CLI was unavailable, so the installed testing runtime was used. No Terminal UI workaround, external hosting or tunnel was used.
+
+`acceptance-final-*.log` and `acceptance-final-gates.json` record final gate results. `acceptance-source-manifest.json` hashes 490 source files (excluding prohibited secrets/env and the handoff itself), verifies no differences against the temporary copy, and records the UI patch SHA-256. `acceptance-ui.patch` is the exact uncommitted seven-file patch. Browser `*-before.json` files preserve initial findings; `details.json` records the final 50-view pass.
+
 ## D. Browser verification
 
-**Desktop/mobile: BLOCKED, not passed.** Chromium launched from the execution environment aborts; local server listen fails with EPERM. Computer Use browser inventory fails to load its request-header policy; native Chrome times out. Computer Use explicitly denies access to Terminal for safety reasons, so that route was not used to work around the limitation.
+**PASS for the bounded local Chromium acceptance; actual hydrated production build.**
 
-Routes checked as production HTML, not browser sessions:
-`/`, `/ru`, `/visibility`, `/ru/visibility`, `/pricing`, `/ru/pricing`, `/check`, `/ru/check`, `/methodology`, `/ru/methodology`.
+Routes: `/`, `/ru`, `/visibility`, `/ru/visibility`, `/pricing`, `/ru/pricing`, `/check`, `/ru/check`, `/methodology`, `/ru/methodology`.
 
-Outstanding browser acceptance: actual desktop and 320/375/390/768px rendering; no horizontal overflow; focus/keyboard navigation; CTA transitions; contact and readiness form validation; contrast and screen-reader behavior. Static heading/image-alt checks and Impeccable passed, but cannot certify those browser behaviors.
+- 10 routes × 320/375/390/768/1440px = **50 views**. All return 200; no page overflow, unintended offscreen layout or clipped text remains in the final checks. Deliberately scrollable tables/filmstrip remain inside their own scroll containers.
+- Browser `pageerror`: **0** in the layout run. One H1, image alt attributes, form label associations and absent staging links confirmed across all 50 views.
+- **10/10 mobile menu flows**: opening moves focus into menu, Shift+Tab wraps, Escape closes and restores focus; visible 2px focus outline.
+- **16/16 tested CTA transitions**: eight EN sales actions and all four paid offers on EN/RU pricing. Navigation reached the intended route/hash; target sections land about 96px below the viewport top, clear of the fixed header. Static route/anchor checks also pass 191/191.
+- **8/8 form cases** at 390/1440px on EN/RU readiness and `/en/contact`, `/contact`: empty required fields show linked errors and focus the first invalid input; after filling name, contact validation focuses contact. No successful submission, message, public-site crawl or provider call was made. Interaction scripts block external destinations and non-GET requests; none were attempted in the required-field tests.
+- Solid-background contrast sampling: **1,794 text elements, 0 low-contrast findings** after excluding decorative aria-hidden glyphs. **43 complex/transparent-background cases** were not assigned a numeric pass; screenshots were reviewed. Corrected form buttons use the same accessible token as the shared Button. Visibility header visual contrast is corrected and its light tone is verified on dark heroes.
+- Screenshots were captured for desktop/mobile page views and inspected, including Visibility hero/plans/terms, narrow paid cards, readiness, pricing and methodology.
 
-A standalone, self-contained static preview is saved outside the repository at:
-`/Users/msnigmatullaeva/Downloads/selena AI company/output/visibility-20260916/visibility-static-preview.html`.
-It contains the prerendered landing page, styles and fonts, with JavaScript removed. It is for visual review only, not evidence of hydration, mobile navigation, form behavior or live delivery. No screenshot acceptance is claimed.
+Evidence: output `browser/layout.json`, `browser/interactions.json`, `browser/contrast.json`, `browser/details.json`, screenshots and four saved `.cjs` scripts. `details.json` is the final layout/text verification after all seven-file fixes. Earlier layout/screenshots are intermediate evidence where superseded by final captures.
+
+Limits: Chromium responsive viewport emulation, not real iOS/Android hardware or a Safari/Firefox run. Semantic/keyboard/contrast checks are accessibility sanity checks, not a complete screen-reader or WCAG certification. Readiness backend correctness is covered by the unit suite; no new live external readiness scan or lead delivery was part of browser validation. The old `visibility-static-preview.html` is an initial non-hydrated artifact, not final acceptance evidence.
 
 ## E. Claim gate table
 
@@ -109,15 +152,27 @@ It contains the prerendered landing page, styles and fonts, with JavaScript remo
 
 ## F. Remaining blockers
 
-1. Full website acceptance needs an execution environment that permits loopback fixture servers and an actual browser. Rerun the unchanged full unit suite and complete desktop/mobile acceptance there. This is the concrete blocker to calling this task done.
-2. Production activation gates above remain owner/runtime work; they do not prevent the honest gated website implementation, but they prevent live recurring, Telegram, automated Ask Maps, payment and client-proof claims.
+No remaining environment blocker for the requested local unit/browser acceptance. The original 36 loopback-fixture failures are resolved by the permitted execution context; no test was skipped or rewritten.
+
+Production activation gates in E remain owner/runtime work. They do not block this gated local website implementation, but still block live recurring, Telegram, automated Ask Maps, payment and client-proof claims. No production acceptance, deployment or release approval is implied.
 
 ## G. Branch / commit / PR
 
 - Repository: `Selena-AI-projects/SELENA-AI-COMPANY`.
 - Branch: `codex/visibility-hospitality-20260916`.
 - Base: `f74c142ef851be6b497252df6aac4f4acd356677`.
-- Implementation commit SHA: reported in the final task response; this handoff is part of that local commit.
+- Implementation commit SHA: `a280850673e40b70c3b3af69d563dbd473fde14b`. This exported handoff records the exact local implementation commit.
 - PR: not created; no `git push` was authorized in this conversation.
 - Merge/deploy: not performed.
-- Review status: HOLD pending the blocked acceptance checks, not merge-ready.
+- Review status: local acceptance complete, ready for owner code review; no merge/release authorization implied.
+- Working tree: seven UI files plus this updated handoff are uncommitted. No new commit was created.
+- Accepted patch SHA-256: `a7759ac681f0d129acb294d282417bc2193640f61434762a5ca8e22e028e7b99`. This patch plus implementation SHA identifies the tested UI source; the old SHA alone does not include these fixes.
+
+
+## Acceptance retry — 16 September 2026, 17:33 Asia/Tashkent
+
+Owner authorized continuing the remaining checks. The source commit remains `a280850673e40b70c3b3af69d563dbd473fde14b`, working tree clean. Both ordinary and requested-escalation loopback probes still fail with `EPERM`. Browser inventory again fails with `Unable to load browser request-header policy`. The full suite was not needlessly rerun after its prerequisites failed. Desktop/mobile acceptance is still blocked; HOLD is unchanged. No additional code changes, commit, push, merge or deploy. Machine-readable evidence: `acceptance-retry-1733.json`.
+
+## Acceptance continuation completed — 16 September 2026
+
+The 18:24 Asia/Tashkent continuation supersedes the earlier HOLD: final full unit suite 310/310, lint/typecheck/build/Impeccable pass, HTML 191/191, final browser layout matrix 50/50. All evidence and limitations are in C–D. Historical retry notes above are retained as history, not current status.

@@ -391,7 +391,7 @@ export function ContactForm() {
         type="submit"
         disabled={isSubmitting}
         className={cn(
-          "mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-copper px-8 py-4 text-base font-medium text-surface shadow-[0_10px_24px_-12px_rgba(185,130,91,0.65)] transition-all duration-300 hover:-translate-y-px hover:bg-copper-deep disabled:cursor-wait disabled:opacity-70 sm:w-auto",
+          "mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-copper-deep px-8 py-4 text-base font-medium text-surface shadow-[0_10px_24px_-12px_rgba(185,130,91,0.65)] transition-all duration-300 hover:-translate-y-px hover:bg-copper-deeper disabled:cursor-wait disabled:opacity-70 sm:w-auto",
         )}
       >
         {isSubmitting ? "Отправляем..." : "Отправить бриф"}

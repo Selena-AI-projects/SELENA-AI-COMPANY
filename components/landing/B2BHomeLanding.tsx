@@ -81,7 +81,7 @@ function LadderCard({ item, highlighted }: { item: LadderItem; highlighted?: boo
         <Button
           href={item.cta.href}
           variant={highlighted ? "primary" : "secondary"}
-          className="w-full whitespace-nowrap px-4 py-2.5 text-sm"
+          className="min-h-11 w-full whitespace-normal break-words px-4 py-2.5 text-center text-sm"
         >
           {item.cta.label}
         </Button>
@@ -104,12 +104,12 @@ export function VisibilityLadder({ content }: { content: HomepageContent }) {
         </p>
       </Reveal>
 
-      <div className="mt-6 grid gap-6 pb-6">
+      <div className="mt-6 grid min-w-0 grid-cols-1 gap-6 pb-6">
         <div className="rounded-3xl border border-ivory/12 bg-ivory/[0.03] p-6 sm:p-8">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ivory/75">
             {content.hero.directions.visibility.ladderGroups.auto}
           </p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="mt-4 grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2">
             {content.productPaths.visibility.items.slice(1, 3).map((item, index) => (
               <Reveal key={`${item.price}-${item.name}`} delay={140 + index * 60} className="h-full">
                 <LadderCard item={item} highlighted={index === 0} />
@@ -121,7 +121,7 @@ export function VisibilityLadder({ content }: { content: HomepageContent }) {
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ivory/75">
             {content.hero.directions.visibility.ladderGroups.expert}
           </p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="mt-4 grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2">
             {content.productPaths.visibility.items.slice(3).map((item, index) => (
               <Reveal key={`${item.price}-${item.name}`} delay={200 + index * 60} className="h-full">
                 <LadderCard item={item} />
@@ -159,18 +159,18 @@ function HeroSection({ content }: { content: HomepageContent }) {
           <p className="mt-6 text-lg leading-relaxed text-ivory/76 sm:text-xl">
             {content.hero.subheadline}
           </p>
-          <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
             <Button
               href={content.hero.primaryCta.href}
               size="lg"
               variant="onDark"
-              className="shrink-0 whitespace-nowrap"
+              className="max-w-full whitespace-normal text-center"
             >
               {content.hero.primaryCta.label}
             </Button>
             <a
               href={content.hero.secondaryCta.href}
-              className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-ivory/25 px-8 py-4 text-base font-medium text-ivory/85 transition-colors duration-300 hover:border-copper hover:text-link-dark"
+              className="inline-flex max-w-full items-center justify-center gap-2 whitespace-normal rounded-full border border-ivory/25 text-center px-8 py-4 text-base font-medium text-ivory/85 transition-colors duration-300 hover:border-copper hover:text-link-dark"
             >
               {content.hero.secondaryCta.label}
             </a>
@@ -190,13 +190,13 @@ function HeroSection({ content }: { content: HomepageContent }) {
             the owner moved this door below the ladder on purpose. */}
         <Reveal delay={100} className="mt-9">
           <div className="flex max-w-4xl flex-wrap items-center justify-between gap-x-6 gap-y-3 rounded-2xl border border-ivory/15 bg-ivory/5 px-6 py-5">
-            <p className="min-w-64 flex-1 text-base leading-relaxed text-ivory/76">
+            <p className="min-w-0 basis-64 flex-1 text-base leading-relaxed text-ivory/76">
               <span className="font-semibold text-ivory">{content.hero.systemsDoor.question}</span>{" "}
               {content.hero.systemsDoor.description}
             </p>
             <a
               href={content.hero.systemsDoor.cta.href}
-              className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-copper/60 px-6 py-3 text-base font-medium text-link-dark transition-colors duration-300 hover:bg-copper hover:text-charcoal"
+              className="inline-flex max-w-full items-center justify-center gap-2 whitespace-normal rounded-full border border-copper/60 text-center px-6 py-3 text-base font-medium text-link-dark transition-colors duration-300 hover:bg-copper hover:text-charcoal"
             >
               {content.hero.systemsDoor.cta.label} →
             </a>
@@ -504,7 +504,7 @@ function SprintTrackerSection({ content }: { content: HomepageContent }) {
               </div>
             </div>
 
-            <ol className="grid gap-px bg-line p-px pt-6 sm:grid-cols-5 sm:pt-6">
+            <ol className="grid gap-px bg-line p-px pt-6 sm:grid-cols-2 lg:grid-cols-5 sm:pt-6">
               {content.tracker.steps.map((step, index) => (
                 <li
                   key={step.title}
@@ -603,7 +603,7 @@ export function PackagesSection({ content }: { content: HomepageContent }) {
           </div>
         </Reveal>
 
-        <div className="mt-6 grid gap-5 lg:grid-cols-3">
+        <div className="mt-6 grid min-w-0 grid-cols-1 gap-5 lg:grid-cols-3">
           {content.packages.map((pkg, index) => (
             <Reveal key={pkg.name} delay={index * 80}>
               <article
@@ -612,7 +612,7 @@ export function PackagesSection({ content }: { content: HomepageContent }) {
                   pkg.featured ? "border-copper-deep" : "border-line",
                 )}
               >
-                <div className="flex items-start justify-between gap-6">
+                <div className="flex flex-wrap items-start justify-between gap-6">
                   <div>
                     <p className="text-sm font-semibold uppercase tracking-[0.22em] text-copper-deep">
                       {pkg.name}
@@ -644,7 +644,7 @@ export function PackagesSection({ content }: { content: HomepageContent }) {
                 <Button
                   href={content.cta.href}
                   variant={pkg.featured ? "primary" : "secondary"}
-                  className="mt-auto whitespace-nowrap"
+                  className="mt-auto max-w-full whitespace-normal text-center"
                 >
                   {content.cta.label}
                 </Button>

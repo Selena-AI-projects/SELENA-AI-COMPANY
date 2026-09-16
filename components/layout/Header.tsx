@@ -50,7 +50,8 @@ export function Header() {
   const homeHref = isEnglish ? "/" : "/ru";
   const languageHref = alternateLocalePath(pathname);
   const languageLabel = isEnglish ? "RU" : "EN";
-  const darkHero = isSalesLandingHome && !scrolled && !open;
+  const hasDarkHero = isSalesLandingHome || pathname === "/visibility" || pathname === "/ru/visibility";
+  const darkHero = hasDarkHero && !scrolled && !open;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -150,7 +151,7 @@ export function Header() {
                 className={cn(
                   "inline-flex min-h-11 items-center whitespace-nowrap text-base font-medium transition-colors hover:text-copper-deep",
                   pathname === item.href
-                    ? "text-copper-deep"
+                    ? darkHero ? "text-copper" : "text-copper-deep"
                     : darkHero
                       ? "text-ivory/76 hover:text-copper"
                       : "text-ink/80",
