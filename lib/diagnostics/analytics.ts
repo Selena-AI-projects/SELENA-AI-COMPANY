@@ -8,6 +8,8 @@ export const EVENT_NAMES = [
   // Public SEO / growth measurement contract (T-10). These names are
   // intentionally provider-neutral until an owner-approved analytics stack
   // and consent configuration exist.
+  "visibility_cta_click",
+  "visibility_section_view",
   "hero_view",
   "route_select",
   "pricing_view",
@@ -48,6 +50,8 @@ export type EventName = (typeof EVENT_NAMES)[number];
 export type ConsentClass = "transactional" | "marketing" | "anonymous_product";
 
 export const PUBLIC_EVENT_NAMES = [
+  "visibility_cta_click",
+  "visibility_section_view",
   "hero_view",
   "route_select",
   "pricing_view",

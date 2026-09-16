@@ -53,18 +53,18 @@ export function VisibilityHero({
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-copper">{eyebrow}</p>
           <h1 className="mt-6 text-display text-ivory">{title}</h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-ivory/76 sm:text-xl">{intro}</p>
-          <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
             <Button
               href={primaryCta.href}
               size="lg"
               variant="onDark"
-              className="shrink-0 whitespace-nowrap"
+              className="max-w-full whitespace-normal text-center"
             >
               {primaryCta.label}
             </Button>
             <a
               href={secondaryCta.href}
-              className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-ivory/25 px-8 py-4 text-base font-medium text-ivory/85 transition-colors duration-300 hover:border-copper hover:text-link-dark"
+              className="inline-flex max-w-full items-center justify-center gap-2 whitespace-normal text-center rounded-full border border-ivory/25 px-8 py-4 text-base font-medium text-ivory/85 transition-colors duration-300 hover:border-copper hover:text-link-dark"
             >
               {secondaryCta.label}
             </a>

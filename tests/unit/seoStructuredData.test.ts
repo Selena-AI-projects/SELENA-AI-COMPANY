@@ -20,21 +20,9 @@ test("AI Visibility structured data keeps free readiness separate from paid meas
   assert.ok(service);
 
   const catalog = service.offers as { itemListElement: Array<Record<string, string>> };
-  assert.deepEqual(
-    catalog.itemListElement.map((offer) => offer.name),
-    [
-      "Public Readiness",
-      "AI Visibility Snapshot",
-      "AI Visibility Landscape",
-      "Expert Verified",
-      "Implementation + 90 days",
-    ],
-  );
+  assert.deepEqual(catalog.itemListElement.map(offer => offer.name), ["Public Readiness"]);
   assert.equal(catalog.itemListElement[0].price, "0");
-  assert.equal(catalog.itemListElement[1].price, "49");
-  assert.equal(catalog.itemListElement[2].price, "79");
-  assert.equal(catalog.itemListElement[3].price, "399");
-  assert.equal(catalog.itemListElement[4].price, "2490");
+  assert.ok(!JSON.stringify(catalog).includes('"price":"49"'), "inactive paid checkout must not publish purchasable offers");
 });
 
 test("AI Systems structured data exposes the four custom service offers", () => {
@@ -117,6 +105,6 @@ test("each pricing page describes itself and publishes every offer it sells", ()
     // Both catalogues are sold here, so both must be readable here: five
     // Visibility offers and four AI Automation ones.
     const offers = JSON.stringify(graph).match(/"@type":"Offer"/g) ?? [];
-    assert.equal(offers.length, 9, `${locale} pricing publishes ${offers.length} of 9 offers`);
+    assert.equal(offers.length, 5, `${locale} pricing must publish free readiness and four separate AI Automation offers only`);
   }
 });

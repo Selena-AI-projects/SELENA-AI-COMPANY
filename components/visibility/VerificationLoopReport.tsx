@@ -105,7 +105,7 @@ export function VerificationLoopReport({ section }: { section: SampleVerificatio
         <p className="mt-1 text-sm text-muted">{delivery.dueAt}</p>
         <ol className="mt-4 space-y-1.5 text-sm">
           {delivery.attempts.map((attempt) => (
-            <li key={attempt.attempt} className="flex gap-3">
+            <li key={attempt.attempt} className="flex flex-col gap-1 sm:flex-row sm:gap-3">
               <span className="min-w-[8.5rem] shrink-0 whitespace-nowrap font-mono text-xs text-muted">
                 #{attempt.attempt} · {attempt.at}
               </span>

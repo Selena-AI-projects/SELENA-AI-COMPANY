@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { CLIENT_PORTAL_ENABLED, selenaAppRoutes } from "@/lib/visibility/routes";
 
-test("the portal shows unless the env var explicitly hides it", () => {
-  assert.equal(CLIENT_PORTAL_ENABLED, process.env.NEXT_PUBLIC_CLIENT_PORTAL_ENABLED !== "false");
+test("the known staging portal stays hidden regardless of environment flags", () => {
+  assert.equal(CLIENT_PORTAL_ENABLED, false);
 });
 
 test("no link into the portal is rendered outside the flag", async () => {
@@ -13,10 +13,11 @@ test("no link into the portal is rendered outside the flag", async () => {
     "components/layout/Footer.tsx",
     "components/visibility/PricingTracks.tsx",
     "components/visibility/PromotionBanner.tsx",
+    "components/visibility/LiveReportView.tsx",
   ];
   for (const file of files) {
     const source = await readFile(new URL(`../../${file}`, import.meta.url), "utf8");
-    const links = source.match(/selenaAppRoutes\.(login|register)|content\.portal\.href/g) ?? [];
+    const links = source.match(/selenaAppRoutes\.(login|register|freeAiVisibility)|content\.portal\.href/g) ?? [];
     assert.ok(links.length > 0, `${file} still owns a portal link to guard`);
     assert.ok(source.includes("CLIENT_PORTAL_ENABLED"), `${file} links to the portal without reading the flag`);
 
@@ -26,7 +27,7 @@ test("no link into the portal is rendered outside the flag", async () => {
     const beforeFirstGuard = source.slice(0, source.indexOf("CLIENT_PORTAL_ENABLED &&"));
     const unguarded = beforeFirstGuard
       .split("\n")
-      .filter((line) => !line.startsWith("import") && /selenaAppRoutes\.(login|register)|content\.portal\.href/.test(line));
+      .filter((line) => !line.startsWith("import") && /selenaAppRoutes\.(login|register|freeAiVisibility)|content\.portal\.href/.test(line));
     assert.deepEqual(unguarded, [], `${file}: a portal link is rendered before any CLIENT_PORTAL_ENABLED guard`);
   }
 });

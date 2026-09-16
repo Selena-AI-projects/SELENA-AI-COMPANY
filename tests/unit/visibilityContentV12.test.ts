@@ -24,7 +24,7 @@ test("homepage primary CTA targets the locale-correct check route", () => {
 
 /** TZ C — exact required primary CTA labels. */
 test("primary CTA labels match the binding owner copy", () => {
-  assert.equal(visibilityContentEn.homeTeaser.primaryCta.label, "Run Free Visibility Check");
+  assert.equal(visibilityContentEn.homeTeaser.primaryCta.label, "Check AI readiness — free");
   assert.equal(visibilityContentRu.homeTeaser.primaryCta.label, "Проверить видимость бесплатно");
 });
 
@@ -209,7 +209,7 @@ test("pricing shows exactly the approved RC6 four-plan catalog", () => {
     const allPlans = content.pricing.tracks.flatMap((t) => t.plans);
     assert.deepEqual(
       allPlans.map((plan) => plan.name),
-      ["AI Visibility Snapshot", "AI Visibility Landscape", "Expert Verified", "Implementation + 90 days"],
+      ["Visibility Snapshot", "Full Discovery Landscape", "Verified Discovery & Competitive Audit", "Managed Discovery Growth"],
       `${name} plan names`,
     );
     const prices = allPlans.map((plan) => plan.price).join(" | ");
@@ -218,10 +218,10 @@ test("pricing shows exactly the approved RC6 four-plan catalog", () => {
     assert.match(prices, /\$399 (one-time|разово)/, `${name} must show Expert Verified`);
     assert.match(prices, /\$2[ ,]490/, `${name} must show Implementation + 90 days`);
 
-    assert.match(allPlans[0].volumeLabel, /300/);
-    assert.match(allPlans[1].volumeLabel, /800/);
-    assert.match(allPlans[2].volumeLabel, /800/);
-    assert.match(allPlans[3].volumeLabel, /(Custom|Индивидуальный)/);
+    assert.match(allPlans[0].volumeLabel, /25/);
+    assert.match(allPlans[1].volumeLabel, /25/);
+    assert.match(allPlans[2].volumeLabel, /60/);
+    assert.match(allPlans[3].volumeLabel, /90/);
     assert.ok(allPlans.every((plan) => plan.progressionLabel.length > 0), `${name} needs plan progression copy`);
     assert.equal(allPlans[1].featured, true);
     assert.notEqual(allPlans[0].status, "active", "self-service checkout must remain closed");
@@ -236,7 +236,7 @@ test("pricing separates one free readiness entry from the four paid Visibility p
     const allPlans = content.pricing.tracks.flatMap((track) => track.plans);
     assert.equal(allPlans.length, 4, `${name} paid Visibility plan count`);
     assert.equal(content.pricing.freePlan.features.length, 4, `${name} free scope must be explicit`);
-    assert.match(content.pricing.freePlan.boundary, /0 .*provider|0 платн/i);
+    assert.match(content.pricing.freePlan.boundary, /not an AI visibility measurement|0 платн/i);
     assert.ok(!allPlans.some((plan) => /Free|Бесплат/i.test(plan.price)), `${name} Free must stay outside paid cards`);
     assert.match(content.pricing.directory.visibility.count, /1 .*free|1 бесплат/i);
     assert.match(content.pricing.directory.visibility.count, /4 .*paid|4 платн/i);
@@ -259,8 +259,8 @@ test("the global pricing page keeps four Visibility offers separate from four AI
     assert.deepEqual(
       content.productPaths.visibility.items.map((item) => item.price),
       name === "en"
-        ? ["Free", "$49/mo", "$79/mo", "$399", "$2,490"]
-        : ["Бесплатно", "$49/мес", "$79/мес", "$399", "$2,490"],
+        ? ["Free", "$49/month", "$79/month", "$399 one-time", "$2,490 · 90 days"]
+        : ["Бесплатно", "$49/месяц", "$79/месяц", "$399 разово", "$2,490 · 90 дней"],
     );
   }
 

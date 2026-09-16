@@ -1,3 +1,4 @@
+import { discoveryTracks } from "./sales";
 import type {
   ActionLifecycleStatus,
   ActionPathStep,
@@ -11,7 +12,6 @@ import type {
   VerifiedActionRow,
 } from "./measurement";
 import type { VisibilityLocale } from "./types";
-import { commercialFacts } from "@/lib/commercial-facts";
 
 /**
  * Static sample-report content (Codex Execution TZ V1.2, section E).
@@ -443,40 +443,11 @@ const EN: SampleReportContentV2 = {
   routing: {
     heading: "9. Where this leads",
     intro: "Routing shown for the sample. A real report routes on its own evidence.",
-    options: [
-      {
-        name: "AI Visibility Snapshot",
-        price: commercialFacts.aiVisibility.snapshot.en,
-        status: "Early access · checkout closed",
-        description: "A locked three-system Visitor View measurement with 300 planned answers.",
-        href: "/en/contact",
-        ctaLabel: "Request Snapshot access",
-      },
-      {
-        name: "AI Visibility Landscape",
-        price: commercialFacts.aiVisibility.landscape.en,
-        status: "Early access · checkout closed",
-        description: "Eight systems with Visitor View and API View reported separately.",
-        href: "/en/contact",
-        ctaLabel: "Request Landscape access",
-      },
-      {
-        name: "Expert Verified",
-        price: commercialFacts.aiVisibility.expertVerified.en,
-        status: "Manual review required",
-        description: "An 800-answer baseline with semantic, citation and factual QC by an analyst.",
-        href: "/en/contact",
-        ctaLabel: "Request Expert Verified",
-      },
-      {
-        name: "Implementation + 90 days",
-        price: commercialFacts.aiVisibility.implementation90Days.en,
-        status: "Manual scope approval",
-        description: "Implementation and remeasurement against an immutable approved baseline.",
-        href: "/en/contact",
-        ctaLabel: "Discuss the 90-day scope",
-      },
-    ],
+    options: discoveryTracks("en").flatMap(track => track.plans.map(plan => ({
+      name: plan.name, price: plan.price, status: plan.statusLabel,
+      description: `${plan.description} ${plan.volumeLabel}`,
+      href: plan.href!, ctaLabel: plan.ctaLabel!,
+    }))),
   },
   sampleDisclaimer:
     "Live checks are being calibrated on Selena Systems projects. This sample shows the report structure and evidence boundaries; it is not a result for any submitted website.",
@@ -795,40 +766,11 @@ const RU: SampleReportContentV2 = {
   routing: {
     heading: "9. К чему это ведёт",
     intro: "Маршрутизация показана для примера. Реальный отчёт направляет по собственным доказательствам.",
-    options: [
-      {
-        name: "AI Visibility Snapshot",
-        price: commercialFacts.aiVisibility.snapshot.ru,
-        status: "Ранний доступ · оплата закрыта",
-        description: "Зафиксированный Visitor View замер трёх систем на 300 плановых ответов.",
-        href: "/contact",
-        ctaLabel: "Запросить доступ к Snapshot",
-      },
-      {
-        name: "AI Visibility Landscape",
-        price: commercialFacts.aiVisibility.landscape.ru,
-        status: "Ранний доступ · оплата закрыта",
-        description: "Восемь систем с раздельными Visitor View и API View.",
-        href: "/contact",
-        ctaLabel: "Запросить доступ к Landscape",
-      },
-      {
-        name: "Expert Verified",
-        price: commercialFacts.aiVisibility.expertVerified.ru,
-        status: "Нужна ручная проверка",
-        description: "Baseline из 800 ответов со смысловым, citation и factual QC аналитика.",
-        href: "/contact",
-        ctaLabel: "Запросить Expert Verified",
-      },
-      {
-        name: "Implementation + 90 days",
-        price: commercialFacts.aiVisibility.implementation90Days.ru,
-        status: "Ручное согласование scope",
-        description: "Внедрение и повторный замер по неизменяемому утверждённому baseline.",
-        href: "/contact",
-        ctaLabel: "Обсудить программу на 90 дней",
-      },
-    ],
+    options: discoveryTracks("ru").flatMap(track => track.plans.map(plan => ({
+      name: plan.name, price: plan.price, status: plan.statusLabel,
+      description: `${plan.description} ${plan.volumeLabel}`,
+      href: plan.href!, ctaLabel: plan.ctaLabel!,
+    }))),
   },
   sampleDisclaimer:
     "Живые проверки калибруются на проектах Selena Systems. Этот пример показывает структуру отчёта и границы доказательности; это не результат проверки какого-либо введённого сайта.",
