@@ -154,8 +154,8 @@ export const commercialFacts = {
       productLine: "ai-visibility",
       name: { en: "Full Discovery Landscape", ru: "Full Discovery Landscape" },
       description: {
-        en: "Expanded AI + Local Discovery where verified, with Visitor View and API View kept separate. Early access.",
-        ru: "Ландшафт по восьми системам с конкурентами, citations и evidence источников.",
+        en: "Expanded AI + Google Maps / Local Visibility where automated measurement is verified, with Visitor View and API View kept separate. Early access.",
+        ru: "Расширенные AI-системы и Google Maps / Local Visibility с подтверждённым автоматическим замером; конкуренты, источники и рекомендации. Ранний доступ.",
       },
       price: 79,
       currency: "USD",

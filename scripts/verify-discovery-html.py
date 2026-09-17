@@ -16,6 +16,9 @@ class Page(HTMLParser):
         self.meta = []
         self.headings = []
         self.text = []
+        self.section_stack = []
+        self.section_text = {}
+        self.section_count = 0
         self.scripts = []
         self.script = None
         self.script_text = ''
@@ -23,6 +26,11 @@ class Page(HTMLParser):
         self.feed(source)
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
+        if tag == 'section':
+            key = a.get('id') or ('hero' if self.section_count == 0 else f'section-{self.section_count}')
+            self.section_count += 1
+            self.section_stack.append(key)
+            self.section_text.setdefault(key, [])
         if 'id' in a: self.ids.append(a['id'])
         if tag == 'a': self.links.append(a)
         if tag == 'link': self.meta.append(a)
@@ -30,12 +38,17 @@ class Page(HTMLParser):
         if tag in ('h1', 'h2', 'h3', 'h4'): self.headings.append(int(tag[1]))
         if tag == 'script': self.script = a; self.script_text = ''
     def handle_endtag(self, tag):
+        if tag == 'section' and self.section_stack:
+            self.section_stack.pop()
         if tag == 'script' and self.script is not None:
             if self.script.get('type') == 'application/ld+json': self.scripts.append(json.loads(self.script_text))
             self.script = None
     def handle_data(self, text):
         if self.script is not None: self.script_text += text
-        else: self.text.append(text)
+        else:
+            self.text.append(text)
+            for key in self.section_stack:
+                self.section_text[key].append(text)
 
 def page(path):
     return Page((built / ('index.html' if path == '/' else path.lstrip('/') + '.html')).read_text())
@@ -59,8 +72,15 @@ for route in routes:
 
 landing = page('/visibility')
 text = ' '.join(landing.text)
-for phrase in ['Public Readiness is not an AI visibility measurement', 'Visibility Snapshot', 'Full Discovery Landscape', '60-minute Strategy Session', '48 hours', '24 hours', '3 business days', '30 days', 'mandatory applicable law', 'manual observation only', 'weekly production delivery is not activated', 'fictional', 'Result: not measured']:
+for phrase in ['Public Readiness is not an AI visibility measurement', 'Visibility Snapshot', 'Full Discovery Landscape', '60-minute Strategy Session', '48 hours', '24 hours', '3 business days', '30 days', 'mandatory applicable law', 'Includes manual Google Ask Maps / Local AI investigation where relevant', 'weekly production delivery is not activated', 'fictional', 'Result: not measured']:
     check(phrase in text, 'landing: ' + phrase)
+hero_text = ' '.join(landing.section_text.get('hero', []))
+plans_text = ' '.join(landing.section_text.get('plans', []))
+audit_text = ' '.join(landing.section_text.get('competitive-audit', []))
+check(not any(term in hero_text for term in ['Ask Maps', 'Local AI']), 'hero: no manual discovery offer')
+check(not any(term in plans_text for term in ['Ask Maps', 'Local AI']), 'subscriptions: no manual Ask Maps / Local AI')
+check('production-capable automated measurement is verified' in plans_text, 'subscriptions: automated Local verification boundary')
+check('Includes manual Google Ask Maps / Local AI investigation where relevant' in audit_text, 'audit: manual discovery belongs to human investigation')
 check(not any(client in text for client in ['AVLI', 'Usha']), 'landing: no client proof identity')
 check(landing.headings[0] == 1 and all(b <= a + 1 for a, b in zip(landing.headings, landing.headings[1:])), 'landing: semantic heading order')
 for anchor in ['plans', 'readiness', 'early-access', 'audit-order', 'managed-application', 'action-plan', 'competitive-audit', 'managed']:
@@ -76,7 +96,7 @@ for route in ['/', '/ru', '/visibility', '/pricing', '/ru/pricing']:
         u = urlsplit(href)
         path = u.path or route
         file = built / ('index.html' if path == '/' else path.lstrip('/') + '.html')
-        if route == '/visibility' or (u.fragment and '/visibility' in path):
+        if path:
             check(file.exists() or path in redirect_paths, f'{route}: route {href}')
             if u.fragment and file.exists(): check(unquote(u.fragment) in page(path).ids, f'{route}: anchor {href}')
 # Only free Public Readiness can advertise an Offer on the Visibility page.

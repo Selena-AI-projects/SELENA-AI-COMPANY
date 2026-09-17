@@ -37,7 +37,7 @@ export const homepage = {
     { label: "Pricing", href: "/pricing" },
     { label: "Lab", href: "/lab" },
     { label: "About", href: "/en/about" },
-    { label: "Proof", href: "/#proof" },
+    { label: "Approach", href: "/#approach" },
   ],
   cta: { label: "Book AI Audit", href: "/en/contact" },
   visual: {
@@ -53,12 +53,11 @@ export const homepage = {
     sharedLayer: "One Selena Systems layer · research supports both",
   },
   hero: {
-    eyebrow: "For founders and small teams",
-    headline: "When customers ask AI, is your business in the answer?",
-    subheadline:
-      "ChatGPT, Gemini and Perplexity already tell people where to go and who to buy from. We measure whether your business makes it into those answers — and show what to fix. The entry is free: a check of what AI can read on your website.",
-    primaryCta: { label: "Check AI readiness — free", href: "/check" },
-    secondaryCta: { label: "Compare free and paid plans", href: "/pricing" },
+    eyebrow: "AI VISIBILITY + AI AUTOMATION",
+    headline: "AI for how customers find you — and how your business runs.",
+    subheadline: "Selena Systems works on both sides of growth.",
+    primaryCta: { label: "Explore AI Visibility", href: "/visibility" },
+    secondaryCta: { label: "Explore AI Automation", href: "/ai-systems" },
     primaryNote:
       "The free check is technical: we read the site the way AI agents read it and show what to fix. It is a separate step, not a visibility measurement — measurements start with the paid steps.",
     trustLine:
@@ -72,9 +71,9 @@ export const homepage = {
     directions: {
       visibility: {
         eyebrow: "AI Visibility · measure outward",
-        headline: "See how guests discover your hospitality business — and who appears instead.",
+        headline: "Are customers finding you — or your competitors?",
         description:
-          "For hotels, villas, restaurants, spas, beach clubs and experience businesses worldwide. Start with free Public Readiness; explore monitoring early access, a Competitive Audit or managed implementation.",
+          "Measure AI + verified Local discovery, see who appears instead, identify the sources behind the answers and get recommendations for what to improve. For hotels, villas, restaurants, cafés, spas, wellness, beach clubs and experiences.",
         ladderLabel: "Then — four paid steps",
         ladderGroups: {
           auto: "Monitoring · early access",
@@ -89,9 +88,9 @@ export const homepage = {
       },
       systems: {
         eyebrow: "AI Automation · build inward",
-        headline: "Turn scattered work into a practical AI operating system.",
+        headline: "Still running important work manually?",
         description:
-          "We map the workflow, choose the right scenario and build the rules, automations and knowledge layer your team can actually use.",
+          "We diagnose and build practical AI workflows for sales, operations, content, knowledge and customer communication — with human approval where it matters.",
         proof: [
           "AI Audit — map the opportunity",
           "AI Sprint — build one priority layer",
@@ -574,6 +573,58 @@ export const homepage = {
     text:
       "Book an AI Audit. We will map the current workflow, identify the highest-leverage system to build first and show what can realistically be automated.",
   },
+  company: {
+  "heroDescriptions": [
+    "See where customers discover your competitors instead of you, which sources support those answers, and what to improve next.",
+    "Turn repetitive work across sales, operations, content, knowledge and customer communication into practical AI-supported workflows."
+  ],
+  "doors": [
+    {
+      "title": "Are customers finding you — or your competitors?",
+      "body": "Measure how your business appears across AI and verified Local discovery. See who appears instead, which sources support those answers, and what Selena recommends improving next.",
+      "outcomes": [
+        "Your visibility across AI and verified Local",
+        "Competitors appearing instead of you",
+        "Sources and citations",
+        "Recommendations for what to improve"
+      ],
+      "audience": "Hotels · Villas · Restaurants & Cafés · Spas & Wellness · Beach Clubs · Experience Businesses"
+    },
+    {
+      "title": "Where is manual work slowing your business down?",
+      "body": "We map the workflows consuming your team’s time, identify where AI is actually useful, and build practical systems across sales, operations, content, knowledge and customer communication.",
+      "outcomes": [
+        "Workflow audit and opportunities",
+        "AI systems design and implementation",
+        "Human approval where it matters",
+        "Support, training and handover"
+      ],
+      "audience": "For founders and teams with real workflows to improve — not another tool to experiment with."
+    }
+  ],
+  "doorsTitle": "Choose the problem you want to solve.",
+  "principlesTitle": "What makes Selena Systems different",
+  "principles": [
+    {
+      "title": "Real businesses",
+      "body": "Built around actual operations, not AI demonstrations."
+    },
+    {
+      "title": "Practical AI",
+      "body": "AI is used where it solves a real workflow or discovery problem."
+    },
+    {
+      "title": "Evidence before claims",
+      "body": "Measurement, recommendations and implementation remain tied to observable evidence."
+    },
+    {
+      "title": "From insight to action",
+      "body": "The objective is not another dashboard or AI tool. The objective is a useful business action."
+    }
+  ],
+  "finalTitle": "Choose the direction your business needs.",
+  "finalBody": "Two independent products. Explore the one that addresses your current problem."
+},
   footerNote:
     "Selena Systems builds AI-powered operating systems for growing businesses. Process first, tools second.",
 };

@@ -50,7 +50,7 @@ export function Header() {
   const homeHref = isEnglish ? "/" : "/ru";
   const languageHref = alternateLocalePath(pathname);
   const languageLabel = isEnglish ? "RU" : "EN";
-  const hasDarkHero = isSalesLandingHome || pathname === "/visibility" || pathname === "/ru/visibility";
+  const hasDarkHero = pathname === "/visibility" || pathname === "/ru/visibility";
   const darkHero = hasDarkHero && !scrolled && !open;
 
   useEffect(() => {
@@ -172,9 +172,9 @@ export function Header() {
                 {isEnglish ? "Client login" : "Кабинет"}
               </Link>
             )}
-            <Button href={currentCta.href} className="ml-2 whitespace-nowrap">
+            {!isSalesLandingHome && <Button href={currentCta.href} className="ml-2 whitespace-nowrap">
               {currentCta.label}
-            </Button>
+            </Button>}
             {languageHref && (
               <Link
                 href={languageHref}
@@ -286,9 +286,9 @@ export function Header() {
                 </Link>
               </>
             )}
-            <Button href={currentCta.href} size="lg" className="mt-8 w-full">
+            {!isSalesLandingHome && <Button href={currentCta.href} size="lg" className="mt-8 w-full">
               {currentCta.label}
-            </Button>
+            </Button>}
             {languageHref && (
               <Link
                 href={languageHref}

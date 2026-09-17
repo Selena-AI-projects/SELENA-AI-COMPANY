@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { discoverySales, discoveryTracks, discoveryLinks, auditTerms } from "@/lib/visibility/sales";
+import { discoverySales, discoveryTracks, discoveryLinks, auditTerms, discoveryDecisionSteps, discoveryPlanOutcomes } from "@/lib/visibility/sales";
 import { visibilityActivation } from "@/lib/visibility/activation";
 import { CLIENT_PORTAL_ENABLED, visibilityLanguages } from "@/lib/visibility/routes";
 import { buildAiVisibilityStructuredData } from "@/lib/structured-data";
@@ -11,7 +11,7 @@ const [snapshot, landscape, audit, managed] = discoveryTracks("en").flatMap((tra
 
 test("FREE is Public Readiness, with an explicit no-measurement boundary", () => {
   assert.equal(discoveryLinks.free, "/check");
-  assert.equal(homepage.hero.primaryCta.href, "/check");
+  assert.equal(homepage.productPaths.visibility.primaryCta.href, "/check");
   assert.match(discoverySales.free.boundary, /Public Readiness is not an AI visibility measurement/);
   assert.doesNotMatch(discoveryLinks.free, /free-ai-visibility/);
 });
@@ -41,12 +41,17 @@ test("Full Discovery adds separate API classes and qualified Local Discovery", (
   assert.match(text, /API output is not the consumer experience/);
 });
 
-test("Ask Maps cannot be sold as automatic execution", () => {
+test("manual Ask Maps belongs to human work, never the automated subscriptions", () => {
   assert.equal(visibilityActivation.localAi, "MANUAL_ONLY");
-  const claim = landscape.features.find((text) => text.includes("Ask Maps"))!;
-  assert.match(claim, /manual observation only/);
-  assert.match(claim, /no automated execution/);
-  assert.match(claim, /where verified measurement is available/);
+  for (const locale of ["en", "ru"] as const) {
+    const [basic, expanded, human, execution] = discoveryTracks(locale).flatMap(track => track.plans);
+    assert.doesNotMatch(JSON.stringify([basic, expanded]), /Ask Maps|Local AI/);
+    assert.match(expanded.features.join(" "), /automated measurement is verified|автоматическим production-замером/);
+    assert.match(human.features.join(" "), /manual Google Ask Maps|Ручное исследование Google Ask Maps/i);
+    assert.match(execution.features.join(" "), /only where agreed in scope|только в согласованном объёме/);
+  }
+  assert.doesNotMatch(JSON.stringify(discoveryPlanOutcomes), /Ask Maps|Local AI/);
+  assert.match(discoverySales.audit.investigation.join(" "), /Includes manual Google Ask Maps \/ Local AI investigation where relevant/);
 });
 
 test("subscriptions and Telegram fail closed with a visible preview boundary", () => {
@@ -104,7 +109,7 @@ test("proof is fictional, no client identity or unverified result is published",
     telegram: discoverySales.telegram,
   });
   assert.doesNotMatch(proof, /AVLI|KORA|Usha/i);
-  assert.match(discoverySales.preview.label, /fictional.*not a measurement/);
+  assert.match(discoverySales.preview.label, /fictional.*not client results/);
   assert.equal(visibilityActivation.clientProof, false);
   assert.match(proof, /Result: not measured/);
 });
@@ -151,4 +156,51 @@ test("EN/RU pairing stays exact and inactive paid checkout has no Offer schema",
     assert.match(schema, /"price":"0"/);
     assert.doesNotMatch(schema, /"price":"(?:49|79|399|2490)"/);
   }
+});
+
+
+test("the company hero offers both product destinations without changing free readiness", () => {
+  assert.equal(homepage.hero.primaryCta.href, "/visibility");
+  assert.equal(homepage.hero.secondaryCta.href, "/ai-systems");
+  assert.match(homepage.hero.eyebrow, /AI VISIBILITY.*AI AUTOMATION/);
+  assert.equal(homepage.productPaths.visibility.items[0].cta.href, "/check");
+});
+
+test("recommendations and competitors are explicit before the human audit", () => {
+  assert.match(discoverySales.hero.intro, /competitors.*sources.*improve next/);
+  assert.equal(discoverySales.answers.length, 5);
+  assert.match(snapshot.features.join(" "), /Automatic recommendations included/);
+  assert.match(landscape.features.join(" "), /Expanded recommendations included/);
+  assert.equal(snapshot.progressionLabel, "WHERE → WHO → SOURCES → CHANGE → NEXT ACTION");
+  assert.equal(landscape.progressionLabel, "AI + LOCAL → COMPETITORS → SOURCES → OPPORTUNITIES → NEXT ACTION");
+  assert.match(JSON.stringify(discoveryPlanOutcomes[0]), /Competitors.*Sources.*Recommendations/);
+  assert.match(discoverySales.bridge, /automatic recommendation is not the same as a verified business decision/);
+  assert.match(discoveryDecisionSteps[2].body, /human analyst.*challenges.*Action Plan/i);
+});
+
+test("every competitor demo includes a next action without inventing client proof or a trend", () => {
+  for (const row of discoverySales.preview.rows) {
+    assert.match(row.competitor, /^Example /);
+    assert.match(row.source, /^Example /);
+    assert.ok(row.recommendation.length > 20);
+  }
+  assert.match(discoverySales.preview.label, /fictional.*not client results/);
+  assert.match(discoverySales.preview.boundary, /single-cycle demo establishes no recurring pattern or change/);
+  assert.match(discoverySales.preview.boundary, /not proof of why/);
+});
+
+
+test("company homepage routes to independent products without a first-then promise", () => {
+  assert.equal(homepage.hero.eyebrow, "AI VISIBILITY + AI AUTOMATION");
+  assert.equal(homepage.hero.headline, "AI for how customers find you — and how your business runs.");
+  assert.equal(homepage.company.doors.length, 2);
+  assert.equal(homepage.company.principles.length, 4);
+  assert.match(homepage.company.heroDescriptions[0], /competitors.*sources.*improve/);
+  assert.match(homepage.company.heroDescriptions[1], /workflows/);
+  for (const door of homepage.company.doors) assert.equal(door.outcomes.length, 4);
+  assert.doesNotMatch(JSON.stringify(homepage.company), /Trusted by|first Visibility.*then Automation/i);
+  assert.doesNotMatch(JSON.stringify(homepage.company), /Hospitality & Experience focus/i);
+  assert.match(homepage.company.heroDescriptions[0], /sources support those answers/);
+  assert.match(homepage.company.doors[0]?.audience ?? "", /Hotels.*Experience/);
+  assert.doesNotMatch(homepage.company.doors[1]?.audience ?? "", /Hotels|Hospitality/i);
 });
