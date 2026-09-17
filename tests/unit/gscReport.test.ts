@@ -764,3 +764,105 @@ test("CLI fails after saving a private diagnostic when every property fails", as
     await rm(root, { recursive: true, force: true });
   }
 });
+
+test("Selena-only export requests one property and retains both 90-day dimension datasets", async () => {
+  const calls: Array<{ site: string; start: string; dimensions: string[] }> = [];
+  const target = "https://www.selenasystems.com/";
+  const client = createGscClient({
+    getAccessToken: async () => "test-token",
+    fetchImpl: (async (input, init) => {
+      const url = new URL(String(input));
+      assert.notEqual(url.pathname, "/webmasters/v3/sites", "must not enumerate properties");
+      const site = decodeURIComponent(url.pathname.split("/sites/")[1].split("/searchAnalytics/")[0]);
+      assert.equal(site, target, "must not query another property");
+      const body = JSON.parse(String(init?.body));
+      const dimensions: string[] = body.dimensions ?? [];
+      calls.push({ site, start: body.startDate, dimensions });
+      const values: Record<string, string> = {
+        query: "AI readiness", page: `${target}check`, country: "usa", device: "MOBILE", date: body.startDate,
+      };
+      return Response.json({ rows: [{ keys: dimensions.map((key) => values[key]), clicks: 2,
+        impressions: 20, ctr: 0.1, position: 8.25 }] });
+    }) as typeof fetch,
+  });
+  const report = await generateGscReport({
+    client,
+    config: { schemaVersion: 2, properties: {
+      [target]: { projectId: "selena-systems", canonicalSiteUrl: target, label: "Selena Systems", brandTerms: ["selena"] },
+      "https://unrelated.invalid/": { projectId: "unrelated", canonicalSiteUrl: "https://unrelated.invalid/", label: "unrelated", brandTerms: [] },
+    } },
+    serviceAccount: TEST_SERVICE_ACCOUNT, expectedServiceAccount: TEST_SERVICE_ACCOUNT,
+    now: new Date("2026-09-17T01:00:00Z"), selenaOnly: true,
+  });
+  assert.equal(report.windowDays, 90);
+  assert.deepEqual(report.windows, {
+    current: { startDate: "2026-06-16", endDate: "2026-09-13" },
+    previous: { startDate: "2026-03-18", endDate: "2026-06-15" },
+  });
+  assert.equal(report.scope?.reportingTimeZone, "America/Los_Angeles");
+  assert.equal(report.sites.length, 1);
+  assert.equal(report.projects.length, 1);
+  assert.deepEqual(report.missingCanonicalProperties, []);
+  assert.doesNotMatch(JSON.stringify(report), /unrelated|gsc-audit@example/);
+  const site = report.sites[0];
+  assert.ok("rawRows" in site && site.rawRows);
+  assert.deepEqual(site.rawRows.current.combined[0].keys, ["AI readiness", `${target}check`, "usa", "MOBILE"]);
+  assert.equal(site.rawRows.previous.combined[0].position, 8.25);
+  for (const start of [report.windows.current.startDate, report.windows.previous.startDate]) {
+    const dimensions = calls.filter((call) => call.start === start).map((call) => call.dimensions.join(","));
+    for (const required of ["", "query", "page", "query,page", "country", "device", "date", "query,page,country,device"]) {
+      assert.ok(dimensions.includes(required), `${start} missing ${required}`);
+    }
+  }
+});
+
+test("Selena-only export fails closed on an unavailable property instead of producing zero metrics", async () => {
+  const target = "https://www.selenasystems.com/";
+  const client = createGscClient({
+    getAccessToken: async () => "test-token", maxRetries: 0,
+    fetchImpl: (async (input) => {
+      assert.ok(String(input).includes(encodeURIComponent(target)));
+      return Response.json({ error: { message: "private diagnostic detail" } }, { status: 403 });
+    }) as typeof fetch,
+  });
+  await assert.rejects(generateGscReport({
+    client, config: { schemaVersion: 2, properties: {
+      [target]: { projectId: "selena-systems", canonicalSiteUrl: target, label: "Selena", brandTerms: [] },
+    } }, serviceAccount: TEST_SERVICE_ACCOUNT, expectedServiceAccount: TEST_SERVICE_ACCOUNT,
+    selenaOnly: true,
+  }), (error: unknown) => {
+    assert.ok(error instanceof Error);
+    assert.match(error.message, /Selena-only export failed.*HTTP 403/);
+    assert.doesNotMatch(error.message, /private diagnostic detail/);
+    return true;
+  });
+});
+
+test("Selena-only export rejects an unverified project binding before any account request", async () => {
+  let requests = 0;
+  const client = createGscClient({
+    getAccessToken: async () => "test-token",
+    fetchImpl: (async () => { requests += 1; return Response.json({}); }) as typeof fetch,
+  });
+  await assert.rejects(generateGscReport({
+    client, config: { schemaVersion: 2, properties: {} },
+    serviceAccount: TEST_SERVICE_ACCOUNT, expectedServiceAccount: TEST_SERVICE_ACCOUNT, selenaOnly: true,
+  }), /requires the configured Selena Systems canonical property/);
+  assert.equal(requests, 0);
+});
+
+test("invalid GSC JSON cannot masquerade as an empty successful baseline", async () => {
+  const client = createGscClient({
+    getAccessToken: async () => "test-token", maxRetries: 0,
+    fetchImpl: (async () => new Response("private malformed payload", { status: 200 })) as typeof fetch,
+  });
+  await assert.rejects(client.queryAggregate("https://www.selenasystems.com/", {
+    startDate: "2026-06-17", endDate: "2026-09-14",
+  }), /^Error: Search Console returned invalid JSON\.$/);
+});
+
+
+test("Selena-only CLI cannot be combined with account property enumeration", async () => {
+  await assert.rejects(runGscCli({ args: ["--selena-only", "--list-sites"], env: {} }),
+    /cannot enumerate account properties/);
+});
