@@ -379,7 +379,11 @@ export function createGscClient({
         throw new GscApiError(response.status);
       }
 
-      return (await response.json().catch(() => ({}))) as T;
+      try {
+        return (await response.json()) as T;
+      } catch {
+        throw new Error("Search Console returned invalid JSON.");
+      }
     }
     throw new Error("Search Console retry loop ended unexpectedly.");
   }
@@ -479,6 +483,7 @@ async function auditSite(
   siteEntry: GscSiteEntry,
   property: GscPropertyConfig | undefined,
   windows: { current: DateWindow; previous: DateWindow },
+  includeRawRows = false,
 ) {
   const [total, previousTotal, currentQueries, previousQueries, pages, queryPages] = await Promise.all([
     client.queryAggregate(siteEntry.siteUrl, windows.current),
@@ -488,6 +493,28 @@ async function auditSite(
     client.queryAllRows(siteEntry.siteUrl, windows.current, ["page"]),
     client.queryAllRows(siteEntry.siteUrl, windows.current, ["query", "page"]),
   ]);
+  let rawRows;
+  if (includeRawRows) {
+    const [previousPages, previousQueryPages, countries, previousCountries, devices,
+      previousDevices, combined, previousCombined, dates, previousDates] = await Promise.all([
+      client.queryAllRows(siteEntry.siteUrl, windows.previous, ["page"]),
+      client.queryAllRows(siteEntry.siteUrl, windows.previous, ["query", "page"]),
+      client.queryAllRows(siteEntry.siteUrl, windows.current, ["country"]),
+      client.queryAllRows(siteEntry.siteUrl, windows.previous, ["country"]),
+      client.queryAllRows(siteEntry.siteUrl, windows.current, ["device"]),
+      client.queryAllRows(siteEntry.siteUrl, windows.previous, ["device"]),
+      client.queryAllRows(siteEntry.siteUrl, windows.current, ["query", "page", "country", "device"]),
+      client.queryAllRows(siteEntry.siteUrl, windows.previous, ["query", "page", "country", "device"]),
+      client.queryAllRows(siteEntry.siteUrl, windows.current, ["date"]),
+      client.queryAllRows(siteEntry.siteUrl, windows.previous, ["date"]),
+    ]);
+    rawRows = {
+      current: { queries: currentQueries, pages, queryPages, countries, devices, combined, dates },
+      previous: { queries: previousQueries, pages: previousPages, queryPages: previousQueryPages,
+        countries: previousCountries, devices: previousDevices, combined: previousCombined, dates: previousDates },
+      combinedDimensions: ["query", "page", "country", "device"],
+    };
+  }
   const currentSplit = splitVisibleQueries(currentQueries, property?.brandTerms);
   const previousSplit = splitVisibleQueries(previousQueries, property?.brandTerms);
   const visible = rowTotals(currentQueries);
@@ -496,6 +523,7 @@ async function auditSite(
   );
 
   return {
+    ...(rawRows ? { rawRows } : {}),
     siteUrl: siteEntry.siteUrl,
     projectId: property?.projectId ?? null,
     canonical: property?.canonicalSiteUrl === siteEntry.siteUrl,
@@ -571,6 +599,7 @@ type GenerateReportOptions = {
   windowDays?: number;
   lagDays?: number;
   concurrency?: number;
+  selenaOnly?: boolean;
 };
 
 export async function generateGscReport({
@@ -579,23 +608,47 @@ export async function generateGscReport({
   serviceAccount,
   expectedServiceAccount,
   now = new Date(),
-  windowDays = 28,
+  selenaOnly = false,
+  windowDays = selenaOnly ? 90 : 28,
   lagDays = 3,
   concurrency = 3,
 }: GenerateReportOptions) {
   if (serviceAccount !== expectedServiceAccount) {
     throw new Error("Authenticated service account does not match the configured account.");
   }
-  const siteEntries = await client.listSites();
+  const targetSiteUrl = "https://www.selenasystems.com/";
+  const targetProperty = resolvePropertyConfig(config, targetSiteUrl);
+  if (selenaOnly && (targetProperty?.projectId !== "selena-systems" || targetProperty.canonicalSiteUrl !== targetSiteUrl)) {
+    throw new Error("Selena-only export requires the configured Selena Systems canonical property.");
+  }
+  // A scoped run never lists or queries the account's other properties.
+  const siteEntries: GscSiteEntry[] = selenaOnly
+    ? [{ siteUrl: targetSiteUrl, permissionLevel: "UNKNOWN (not queried; API authorizes each request)" }]
+    : await client.listSites();
   if (siteEntries.length === 0) {
     throw new Error("The service account has no readable Search Console properties.");
   }
-  const windows = buildDateWindows(now, windowDays, lagDays);
+  const reportConfig: GscConfig = selenaOnly
+    ? { schemaVersion: 2, properties: { [targetSiteUrl]: targetProperty! } }
+    : config;
+  let windowClock = now;
+  if (selenaOnly) {
+    const parts = Object.fromEntries(new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit", day: "2-digit",
+    }).formatToParts(now).map(({ type, value }) => [type, value]));
+    windowClock = new Date(`${parts.year}-${parts.month}-${parts.day}T00:00:00Z`);
+  }
+  const windows = buildDateWindows(windowClock, windowDays, lagDays);
   const sites = await mapConcurrent(siteEntries, concurrency, async (siteEntry) => {
-    const property = resolvePropertyConfig(config, siteEntry.siteUrl);
+    const property = resolvePropertyConfig(reportConfig, siteEntry.siteUrl);
     try {
-      return await auditSite(client, siteEntry, property, windows);
+      return await auditSite(client, siteEntry, property, windows, selenaOnly);
     } catch (error) {
+      if (selenaOnly) {
+        throw new Error(error instanceof GscApiError
+          ? `Selena-only export failed: ${error.message}`
+          : "Selena-only export failed; no baseline was written.");
+      }
       return {
         siteUrl: siteEntry.siteUrl,
         projectId: property?.projectId ?? null,
@@ -644,7 +697,7 @@ export async function generateGscReport({
       visibleQueryBreakdown: site.visibleQueryBreakdown,
     }))
     .sort((a, b) => a.label.localeCompare(b.label));
-  const missingCanonicalProperties = Object.values(config.properties)
+  const missingCanonicalProperties = Object.values(reportConfig.properties)
     .filter((property) => !availableSiteUrls.has(property.canonicalSiteUrl))
     .map((property) => ({
       projectId: property.projectId,
@@ -656,7 +709,14 @@ export async function generateGscReport({
   return {
     schemaVersion: 3,
     generatedAt: now.toISOString(),
-    serviceAccount,
+    serviceAccount: selenaOnly ? "REDACTED (identity verified before export)" : serviceAccount,
+    ...(selenaOnly ? { scope: {
+      siteUrl: targetSiteUrl,
+      reportingTimeZone: "America/Los_Angeles",
+      searchType: "web (API default)",
+      dataState: "final",
+      caveat: "API rows are limited and may omit anonymized queries; pagination is not a completeness guarantee. Country is search geography, not business location or language; Bali is not a country dimension.",
+    } } : {}),
     windowDays,
     windows,
     limitations: [
@@ -788,6 +848,10 @@ export async function runGscCli({
   stdout = console.log,
   now = new Date(),
 }: RunCliOptions = {}) {
+  const selenaOnly = args.includes("--selena-only");
+  if (selenaOnly && args.includes("--list-sites")) {
+    throw new Error("Selena-only export cannot enumerate account properties.");
+  }
   const configPath = argumentValue(args, "--config") ?? env.GSC_CONFIG_PATH ?? "config/gsc-properties.json";
   const config = await loadGscConfig(configPath);
   const expectedServiceAccount = env.GSC_EXPECTED_SERVICE_ACCOUNT?.trim();
@@ -831,15 +895,16 @@ export async function runGscCli({
 
   const report = await generateGscReport({
     client,
+    selenaOnly,
     config,
     serviceAccount: auth.serviceAccount,
     expectedServiceAccount,
     now,
-    windowDays: positiveInteger(env.GSC_WINDOW_DAYS, 28, "GSC_WINDOW_DAYS"),
+    windowDays: positiveInteger(env.GSC_WINDOW_DAYS, selenaOnly ? 90 : 28, "GSC_WINDOW_DAYS"),
     lagDays: positiveInteger(env.GSC_DATA_LAG_DAYS, 3, "GSC_DATA_LAG_DAYS"),
     concurrency: positiveInteger(env.GSC_CONCURRENCY, 3, "GSC_CONCURRENCY"),
   });
-  const outputDir = resolve(env.GSC_REPORT_DIR ?? "reports/gsc");
+  const outputDir = resolve(env.GSC_REPORT_DIR ?? (selenaOnly ? "reports/gsc/selena-only" : "reports/gsc"));
   const written = await writeGscReport(report, outputDir);
   stdout(`Report saved: ${written.jsonPath} and ${written.textPath}`);
   if (report.sites.every((site) => "error" in site)) {

@@ -7,6 +7,14 @@ name: Search Console report
 
 on:
   workflow_dispatch:
+    # <!-- ai-standard:start -->
+    inputs:
+      selena_baseline:
+        description: "Export ONLY www.selenasystems.com: 90 days versus previous 90"
+        type: boolean
+        required: true
+        default: true
+    # <!-- ai-standard:end -->
   schedule:
     # Mondays 02:00 UTC — Search Console data for the previous week has landed.
     - cron: "0 2 * * 1"
@@ -31,6 +39,9 @@ jobs:
         run: npm ci
 
       - name: Pull Search Console performance
+        # <!-- ai-standard:start -->
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.selena_baseline }}
+        # <!-- ai-standard:end -->
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GSC_EXPECTED_SERVICE_ACCOUNT: ${{ vars.GSC_EXPECTED_SERVICE_ACCOUNT }}
@@ -48,6 +59,17 @@ jobs:
             exit 1
           fi
           npm run gsc:report
+
+      # <!-- ai-standard:start -->
+      - name: Pull Selena-only Search Console baseline
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.selena_baseline }}
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GSC_EXPECTED_SERVICE_ACCOUNT: ${{ vars.GSC_EXPECTED_SERVICE_ACCOUNT }}
+          GSC_WINDOW_DAYS: "90"
+          GSC_DATA_LAG_DAYS: "3"
+        run: npm run gsc:report -- --selena-only
+      # <!-- ai-standard:end -->
 
       - name: Keep the report as an artifact
         if: always()
