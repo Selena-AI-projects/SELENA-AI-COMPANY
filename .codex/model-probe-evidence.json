@@ -1,0 +1,26 @@
+{
+  "source": "Codex rollout turn_context metadata, not model self-report",
+  "runs": [
+    {
+      "session_file": "rollout-2026-09-17T12-44-04-01a0ae52-9c34-7042-b5f5-395f074b16d4.jsonl",
+      "model": "gpt-6-astra",
+      "effort": "medium"
+    },
+    {
+      "session_file": "rollout-2026-09-17T12-57-55-01a0ae5f-4a1f-7bb0-af19-7be7794167d9.jsonl",
+      "model": "gpt-5.6-sol",
+      "effort": "medium"
+    },
+    {
+      "session_file": "rollout-2026-09-17T12-47-06-01a0ae55-615e-79d1-8c75-8f6a86be915e.jsonl",
+      "model": "gpt-6-astra",
+      "effort": "high"
+    },
+    {
+      "session_file": "rollout-2026-09-17T12-46-58-01a0ae55-41be-7dc2-b88f-723eb1813316.jsonl",
+      "model": "gpt-5.6-luna",
+      "effort": "medium"
+    }
+  ],
+  "limitation": "Explicit model spawn smoke tests; not proof of project custom-agent discovery or backend model identity beyond exposed metadata"
+}

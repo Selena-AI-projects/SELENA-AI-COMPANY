@@ -1,0 +1,28 @@
+{
+  "html": {
+    "kind": "production-prerendered-HTML-only",
+    "routes": [
+      "/",
+      "/ru",
+      "/visibility",
+      "/ru/visibility",
+      "/pricing",
+      "/ru/pricing",
+      "/check",
+      "/ru/check",
+      "/methodology",
+      "/ru/methodology"
+    ],
+    "passed": 344,
+    "failed": 0
+  },
+  "local_tests": {
+    "passed": 277,
+    "failed": 37,
+    "reason": "loopback listen EPERM"
+  },
+  "lint": "PASS with 4 existing warnings",
+  "typecheck": "PASS",
+  "build": "PASS",
+  "impeccable": []
+}

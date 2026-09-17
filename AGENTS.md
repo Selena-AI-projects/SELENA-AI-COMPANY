@@ -98,3 +98,18 @@ Before finishing:
 Do not hardcode private keys, tokens, emails, API credentials, or webhook URLs.
 
 If a form integration is needed but no endpoint is provided, create a safe placeholder and document the TODO.
+
+<!-- ai-standard:start -->
+## Autonomous model routing (project only)
+- Break each brief into verifiable stages and select helpers autonomously without asking the owner to choose models again.
+- The primary agent owns the final result and validates every helper result against evidence and acceptance criteria before use.
+- Handle small tasks directly. Use ordinary scripts for calculations, sorting and deterministic validation.
+- Use custom agent `routine` for narrow processing of supplied data, fact extraction and preliminary classification under explicit rules; keep final strategy with the primary agent.
+- Use custom agent `expert` for difficult bugs, consequential ambiguity, or problems unresolved after a reasoned primary attempt. Supply the evidence and prior attempt.
+- Use at most two helpers concurrently. Execute dependent stages sequentially; assign disjoint file ownership before edits. Helpers must preserve others' changes.
+- If routine fails validation, the primary fixes or takes over. Escalate remaining difficult problems to expert. After two failed correction/verification cycles on the same problem, stop that branch and report the concrete blocker and needed next action.
+- Missing access or source data is a blocker, not a reason to upgrade models. Mark unavailable metrics NO_DATA; never invent sources, statistics or test results.
+- Spawn named project custom agents; if unavailable, report it rather than silently replacing a model. For APIs requiring context selection, use fresh/bounded context with a self-contained handoff.
+- Model configuration does not authorize publishing, production mutations or changes outside the approved scope.
+- For setup verification, overrides and rollback, read `docs/codex-model-routing.md`.
+<!-- ai-standard:end -->

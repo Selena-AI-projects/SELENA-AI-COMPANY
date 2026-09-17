@@ -1,0 +1,7 @@
+# <!-- ai-standard:start -->
+name = "routine"
+description = "Narrow extraction and preliminary classification of supplied data."
+model = "gpt-5.6-luna"
+model_reasoning_effort = "medium"
+developer_instructions = "Work only on the bounded supplied data and rules. Return facts with source references and mark missing values NO_DATA. Leave final strategic decisions to the primary agent. Do not spawn agents. Edit only files explicitly assigned to you; otherwise return findings without file changes."
+# <!-- ai-standard:end -->

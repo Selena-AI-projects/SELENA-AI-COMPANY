@@ -1,0 +1,10 @@
+# <!-- ai-standard:start -->
+model = "gpt-5.6-sol"
+model_reasoning_effort = "medium"
+
+[agents]
+enabled = true
+# Legacy key intentionally overrides the existing global max_threads value.
+max_threads = 2
+max_depth = 1
+# <!-- ai-standard:end -->

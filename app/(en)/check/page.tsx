@@ -6,6 +6,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { PromotionBanner } from "@/components/visibility/PromotionBanner";
 import { VisibilityCheckForm } from "@/components/visibility/VisibilityCheckForm";
 import { MeasurementBoundary } from "@/components/visibility/MeasurementBoundary";
+import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { CinemaFrame } from "@/components/ui/CinemaFrame";
 import { Reveal } from "@/components/ui/Reveal";
@@ -16,9 +17,9 @@ const content = visibilityContentEn;
 const cinema = pageCinema("en").check;
 
 export const metadata = buildMetadata({
-  title: "Website Public Readiness — free check",
+  title: "Free AI Readiness Check for Your Website",
   description:
-    "Check what machine readers can find, understand and reuse on your site, see evidence for the gaps, and get the first fix. Free, no login.",
+    "Check public website access, indexability, structured data and business clarity. Get evidence and fixes without login. AI recommendations are measured separately.",
   path: "/check",
   locale: "en_US",
   languages: visibilityLanguages("check"),
@@ -30,7 +31,7 @@ export default function CheckPage() {
       <JsonLd data={buildPublicReadinessStructuredData("en")} />
       <div lang="en">
       <PageHero
-        eyebrow="Free Public Readiness"
+        eyebrow="Free website check"
         title={content.checkForm.title}
         intro={content.checkForm.intro}
         media={{
@@ -55,6 +56,14 @@ export default function CheckPage() {
               <CinemaFrame tone="light" image={cinema.boundary.image} alt={cinema.boundary.alt} caption={cinema.boundary.caption} />
             </Reveal>
             <MeasurementBoundary content={content.freeMeasurementBoundary} />
+            <div className="border-t border-line pt-8">
+              <h2 className="font-serif text-h3 text-ink">Does AI recommend your business? That needs a separate check.</h2>
+              <p className="mt-4 text-base leading-relaxed text-muted">For restaurant, hotel, spa and beach club owners: website readiness is the starting point. AI Visibility investigates answers to guest questions, competing businesses and cited sources. Monitoring is in early access; review the scope before requesting it.</p>
+              <div className="mt-6 flex flex-wrap gap-4">
+                <Button href="/visibility">Explore AI Visibility and audit options</Button>
+                <Button href="/methodology" variant="secondary">See how measurement works</Button>
+              </div>
+            </div>
           </div>
         </Container>
       </section>

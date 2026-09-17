@@ -1,0 +1,11 @@
+id,business_country,business_area,language,segment,prompt,audience,intent,system,run_date,verified_search_location,answer,brand_mentioned,source_links,status
+P01,United States,national,en,restaurant,"Which services can audit AI search visibility for an independent restaurant, and what evidence should an owner request?",buyer,discovery,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NOT_RUN
+P02,United States,national,en,spa,How can a spa owner compare a free website readiness check with an AI recommendation audit?,buyer,discovery,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NOT_RUN
+P03,Indonesia,Bali,en,hotel,What should a Bali hotel owner compare when choosing an AI visibility audit service?,buyer,discovery,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NOT_RUN
+P04,Indonesia,Bali,ru,beach club,Как владельцу beach club на Бали выбрать сервис аудита видимости в AI-поиске?,buyer,discovery,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NOT_RUN
+P05,Indonesia,national,id,restaurant,Bagaimana pemilik restoran di Indonesia memilih layanan audit visibilitas di pencarian AI?,buyer,discovery,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NOT_RUN
+P06,Uzbekistan,national,ru,hotel,Как владельцу отеля в Узбекистане проверить видимость бизнеса в ChatGPT и сравнить услуги аудита?,buyer,discovery,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NOT_RUN
+P07,Uzbekistan,national,uz,spa,O‘zbekistondagi spa egasi AI qidiruvdagi ko‘rinishni tekshirish xizmatini qanday tanlashi mumkin?,buyer,discovery,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NOT_RUN
+P08,Russia,national,ru,restaurant,Какие услуги помогают владельцу ресторана измерить видимость в нейросетях и проверить источники ответов?,buyer,discovery,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NOT_RUN
+P09,Russia,national,ru,hotel,Чем технический AI-аудит сайта отеля отличается от проверки рекомендаций нейросетей?,buyer,discovery,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NOT_RUN
+P10,United States,national,en,all,"What does Selena Systems AI Visibility measure, and what does its free website check not measure?",buyer,branded validation,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NO_DATA,NOT_RUN
