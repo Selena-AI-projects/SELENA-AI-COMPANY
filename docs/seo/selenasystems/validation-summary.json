@@ -19,10 +19,26 @@
   "local_tests": {
     "passed": 277,
     "failed": 37,
-    "reason": "loopback listen EPERM"
+    "reason": "36 loopback EPERM plus 1 copy regression, subsequently corrected"
   },
   "lint": "PASS with 4 existing warnings",
   "typecheck": "PASS",
   "build": "PASS",
-  "impeccable": []
+  "impeccable": [],
+  "initial_ci": {
+    "passed": 313,
+    "failed": 1,
+    "run": 35198115130,
+    "reason": "on-page result promise omitted; corrected"
+  },
+  "preview_browser": {
+    "routes": 4,
+    "widths": [
+      390,
+      768,
+      1280
+    ],
+    "overflow_failures": 0,
+    "real_free_scan": "completed; 4 pages, 40 checks, 0 paid AI calls"
+  }
 }

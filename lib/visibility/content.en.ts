@@ -297,7 +297,7 @@ export const visibilityContentEn: VisibilityContent = {
   checkForm: {
     title: "Free AI readiness check for your website",
     intro:
-      "Check whether machines can access and understand your public website. Get evidence and fixes without a login or card. This technical check does not test whether AI recommends your business.",
+      "Check whether machines can access and understand your public website. Evidence and fixes appear here without a login or card. This technical check does not test whether AI recommends your business.",
     formTitle: "Run your free readiness check",
     formIntro:
       "The URL is the only required field. Profile and customer action are optional context that make applicability and fixes more precise.",
