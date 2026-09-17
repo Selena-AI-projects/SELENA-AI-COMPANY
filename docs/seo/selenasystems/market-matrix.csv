@@ -1,0 +1,21 @@
+business_country,business_area,research_languages,segment,actual_search_location,demand
+Indonesia,Bali,en,restaurant,NO_DATA,NO_DATA
+Indonesia,Bali,en,spa,NO_DATA,NO_DATA
+Indonesia,Bali,en,hotel,NO_DATA,NO_DATA
+Indonesia,Bali,en,beach club,NO_DATA,NO_DATA
+Indonesia,national,id,restaurant,NO_DATA,NO_DATA
+Indonesia,national,id,spa,NO_DATA,NO_DATA
+Indonesia,national,id,hotel,NO_DATA,NO_DATA
+Indonesia,national,id,beach club,NO_DATA,NO_DATA
+United States,national,en,restaurant,NO_DATA,NO_DATA
+United States,national,en,spa,NO_DATA,NO_DATA
+United States,national,en,hotel,NO_DATA,NO_DATA
+United States,national,en,beach club,NO_DATA,NO_DATA
+Uzbekistan,national,ru;uz,restaurant,NO_DATA,NO_DATA
+Uzbekistan,national,ru;uz,spa,NO_DATA,NO_DATA
+Uzbekistan,national,ru;uz,hotel,NO_DATA,NO_DATA
+Uzbekistan,national,ru;uz,beach club,NO_DATA,NO_DATA
+Russia,national,ru,restaurant,NO_DATA,NO_DATA
+Russia,national,ru,spa,NO_DATA,NO_DATA
+Russia,national,ru,hotel,NO_DATA,NO_DATA
+Russia,national,ru,beach club,NO_DATA,NO_DATA

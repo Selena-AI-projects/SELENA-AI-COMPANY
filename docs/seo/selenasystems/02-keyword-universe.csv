@@ -1,0 +1,29 @@
+cluster_id,query,audience_or_exclusion,business_market,language,sources,evidence_class,monthly_volume,gsc_impressions
+K1,AI readiness checker,A: buyer,US; Indonesia/Bali,en,S9; S8,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K1,free AI readiness audit,A: buyer,US; Indonesia/Bali,en,S9; S8,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K1,check website for AI search,A: buyer,US; Indonesia/Bali,en,S9; S8,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K2,проверка сайта для AI поиска,A: buyer,Uzbekistan; Russia; Indonesia/Bali,ru,S3; S4; S9,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K2,готовность сайта к нейросетям,A: buyer,Uzbekistan; Russia; Indonesia/Bali,ru,S3; S4; S9,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K2,бесплатный AI аудит сайта,A: buyer,Uzbekistan; Russia; Indonesia/Bali,ru,S3; S4; S9,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K3,AI visibility audit for restaurants,A: buyer,US; Indonesia/Bali,en,S1; S8,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K3,restaurant AI visibility monitoring,A: buyer,US; Indonesia/Bali,en,S1; S8,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K3,ChatGPT visibility for restaurants,A: buyer,US; Indonesia/Bali,en,S1; S8,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K4,hotel AI visibility audit,A: buyer,US; Indonesia/Bali,en,S2; S5; S8,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K4,AI search visibility Bali hotels,A: buyer,US; Indonesia/Bali,en,S2; S5; S8,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K4,hotel AI search monitoring,A: buyer,US; Indonesia/Bali,en,S2; S5; S8,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K5,spa AI visibility audit,A: buyer,US; Indonesia/Bali,en,S6; S8,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K5,beach club AI visibility audit,A: buyer,US; Indonesia/Bali,en,S6; S8,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K6,how to measure AI visibility,A: buyer,US; Indonesia/Bali; Uzbekistan; Russia,en; ru,S1; S2; repository methodology,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K6,AI readiness vs AI visibility,A: buyer,US; Indonesia/Bali; Uzbekistan; Russia,en; ru,S1; S2; repository methodology,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K6,как измерить видимость в нейросетях,A: buyer,US; Indonesia/Bali; Uzbekistan; Russia,en; ru,S1; S2; repository methodology,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K7,GEO аудит ресторана,A: buyer,Uzbekistan; Russia; Indonesia/Bali,ru,S3; S4,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K7,продвижение отеля в нейросетях,A: buyer,Uzbekistan; Russia; Indonesia/Bali,ru,S3; S4,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K7,видимость бизнеса ChatGPT Ташкент,A: buyer,Uzbekistan; Russia; Indonesia/Bali,ru,S3; S4,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K8,jasa GEO hotel Indonesia,A: buyer,Indonesia; Uzbekistan,id; uz,S5; S7,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K8,optimasi AI restoran,A: buyer,Indonesia; Uzbekistan,id; uz,S5; S7,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+K8,bepul sayt AI audit Toshkent,A: buyer,Indonesia; Uzbekistan,id; uz,S5; S7,seed hypothesis from observed category; not GSC query,NO_DATA,NO_DATA
+EXCLUDE,best restaurants in Bali,B: guest; client measurement only,NO_DATA,en,brief intent rules,rule-based exclusion,NO_DATA,NO_DATA
+EXCLUDE,spa near me,B: guest; client measurement only,NO_DATA,en,brief intent rules,rule-based exclusion,NO_DATA,NO_DATA
+EXCLUDE,AI visibility developer jobs,exclude jobs,NO_DATA,en,brief intent rules,rule-based exclusion,NO_DATA,NO_DATA
+EXCLUDE,visibility CSS library,exclude programming,NO_DATA,en,brief intent rules,rule-based exclusion,NO_DATA,NO_DATA
+EXCLUDE,AI automation for hotels,separate Automation product,NO_DATA,en,brief intent rules,rule-based exclusion,NO_DATA,NO_DATA

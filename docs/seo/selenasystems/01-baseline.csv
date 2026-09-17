@@ -1,0 +1,55 @@
+url,canonical_contract,indexable_contract,status_contract,primary_cta,source,source_sha,gsc_clicks,gsc_impressions,ctr,avg_position
+/,/,yes,200,Check AI visibility or discuss an AI system,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru,/ru,yes,200,Проверить AI-видимость или обсудить AI-систему,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/visibility,/visibility,yes,200,Run Public Readiness or compare plans,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/visibility,/ru/visibility,yes,200,Запустить Public Readiness или сравнить тарифы,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/check,/check,yes,200,Run Public Readiness,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/check,/ru/check,yes,200,Запустить Public Readiness,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/pricing,/pricing,yes,200,Choose a Visibility plan or discuss services,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/pricing,/ru/pricing,yes,200,Выбрать тариф или обсудить услугу,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/methodology,/methodology,yes,200,Run Public Readiness,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/methodology,/ru/methodology,yes,200,Запустить Public Readiness,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ai-systems,/ai-systems,yes,200,Discuss an AI system,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ai-systems/ai-audit,/ai-systems/ai-audit,yes,200,Discuss an AI Audit,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ai-systems/ai-sprint,/ai-systems/ai-sprint,yes,200,Discuss an AI Sprint,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ai-systems/business-os,/ai-systems/business-os,yes,200,Discuss Business OS,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ai-training,/ai-training,yes,200,Discuss AI Systems,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ai-automation,/ai-automation,yes,200,Discuss AI Systems,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ai-content,/ai-content,yes,200,Discuss AI Systems,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/lab,/lab,yes,200,Read a guide or run a check,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/lab,/ru/lab,yes,200,Открыть руководство или проверку,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/lab/research,/lab/research,yes,200,Explore AI Visibility research,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/lab/research,/ru/lab/research,yes,200,Открыть исследования AI Visibility,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/lab/guides,/lab/guides,yes,200,Run Public Readiness,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/lab/guides,/ru/lab/guides,yes,200,Запустить Public Readiness,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/lab/experiments,/lab/experiments,yes,200,Read methodology,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/lab/experiments,/ru/lab/experiments,yes,200,Открыть методологию,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/lab/articles,/lab/articles,yes,200,Run Public Readiness or discuss services,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/lab/articles,/ru/lab/articles,yes,200,Запустить Public Readiness или обсудить услугу,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/lab/articles/what-is-ai-visibility,/lab/articles/what-is-ai-visibility,yes,200,Explore AI Visibility,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/lab/articles/what-is-ai-visibility,/ru/lab/articles/what-is-ai-visibility,yes,200,Открыть AI Visibility,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/lab/guides/prepare-site-for-ai-systems,/lab/guides/prepare-site-for-ai-systems,yes,200,Run Public Readiness,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/lab/guides/prepare-site-for-ai-systems,/ru/lab/guides/prepare-site-for-ai-systems,yes,200,Запустить Public Readiness,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/lab/guides/read-ai-visibility-report-evidence,/lab/guides/read-ai-visibility-report-evidence,yes,200,Explore AI Visibility,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/lab/guides/read-ai-visibility-report-evidence,/ru/lab/guides/read-ai-visibility-report-evidence,yes,200,Открыть AI Visibility,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/lab/courses,/lab/courses,no,200 noindex,Read free Lab materials,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/lab/courses,/ru/lab/courses,no,200 noindex,Открыть бесплатные материалы Lab,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/about,/about,yes,200,Contact Selena Systems,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/contact,/contact,yes,200,Send a brief,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/en/contact,/en/contact,yes,200,Send a brief,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/privacy,/privacy,yes,200,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/en/privacy,/en/privacy,yes,200,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/terms,/terms,yes,200,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/en/terms,/en/terms,yes,200,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/en,/,no,308,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/services,/ai-systems,no,308,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/free-ai-map,/ai-systems,no,308,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/ai-map,/ru#ai-systems,no,308,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ai-visibility,/visibility,no,308,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/ai-visibility,/ru/visibility,no,308,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/report/sample,/check,no,404,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/report/[token],/check,no,404/410,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/report/sample,/ru/check,no,404,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/ru/report/[token],/ru/check,no,404/410,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/robots.txt,n/a,n/a,200,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA
+/sitemap.xml,n/a,n/a,200,None,repository route contract; not fresh HTTP measurement,3964b4deaf7f1260c4e97b9b6e183e894143be0f,NO_DATA,NO_DATA,NO_DATA,NO_DATA

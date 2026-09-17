@@ -11,6 +11,7 @@ import {
 } from "@/components/visibility/ActionReadinessSection";
 import { MeasurementBoundary } from "@/components/visibility/MeasurementBoundary";
 import { MetricDefinitionGrid } from "@/components/visibility/MetricDefinitionGrid";
+import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { buildMethodologyStructuredData } from "@/lib/structured-data";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -40,6 +41,19 @@ export default function MethodologyPage() {
       <section className="bg-ivory pb-4 sm:pb-8">
         <Container size="narrow">
           <MeasurementBoundary content={content.measurementBoundary} />
+        </Container>
+      </section>
+
+      <section className="bg-ivory py-12 sm:py-16">
+        <Container size="narrow">
+          <h2 className="font-serif text-h2 text-ink">How to compare AI visibility across markets and languages</h2>
+          <p className="mt-6 text-base leading-relaxed text-muted">Agree the business location, search location and question language separately. A Russian-language question about a Bali hotel is not automatically a search from Russia. If a system cannot verify the search location, record that limitation.</p>
+          <p className="mt-4 text-base leading-relaxed text-muted">Keep the same questions, systems, channel and repeat count for a recheck. Save the date, full answers and source links. Report missing or failed runs separately; one answer is not evidence of a stable trend or an effect caused by a website edit.</p>
+          <p className="mt-4 text-base leading-relaxed text-muted">For restaurant, hotel, spa and beach club audits, guest questions test the venue’s discovery. Questions from business owners looking for an audit test the service provider’s discovery. Keep these two prompt sets separate.</p>
+          <div className="mt-6 flex flex-wrap gap-4">
+            <Button href="/check">Start with a free website check</Button>
+            <Button href="/visibility" variant="secondary">Review AI Visibility scope</Button>
+          </div>
         </Container>
       </section>
 
