@@ -9,6 +9,8 @@ import {
   auditTerms,
   auditTermsRu,
   discoveryHeadings,
+  discoveryPlanOutcomes,
+  discoveryDecisionSteps,
   discoveryOrderCopy,
   discoveryLinks as links,
   discoverySales as copy,
@@ -139,30 +141,60 @@ export function DiscoverySales({ children }: { children: ReactNode }) {
           </div>
           <p className="mt-4 max-w-3xl text-sm">No card required. {copy.hero.gate}</p>
           <p className="mt-7 max-w-4xl text-sm">
-            {[...discoverySystems.visitor, ...discoverySystems.api, "Google Maps", "Local AI"].join(" · ")}
+            {[...discoverySystems.visitor, ...discoverySystems.api, "Google Maps"].join(" · ")}
           </p>
-          <p className="mt-2 text-sm">Local Discovery where verified. Ask Maps: manual observation only.</p>
+          <p className="mt-2 text-sm">Local Discovery where verified.</p>
           <ul
             className="mt-8 grid gap-4 border-t border-line-dark pt-6 sm:grid-cols-2 lg:grid-cols-5"
             aria-label="The Selena product ladder"
           >
             {[
               ["FREE", "Can AI understand my website?", "#readiness"],
-              [snapshot.price, "Where / who / sources / change", "#plans"],
-              [landscape.price, "Full AI + Local landscape", "#plans"],
-              [audit.price, "Why + what exactly", "#competitive-audit"],
-              [managed.price, "Do + verify", "#managed"],
-            ].map(([price, purpose, href]) => (
+              [snapshot.price, "Measure + compare + recommend", "#plans", discoverySystems.visitor.join(" · ")],
+              [landscape.price, "Expanded AI + Local → compare + recommend", "#plans", "Expanded AI + Google Maps / Local Visibility where automated measurement is verified."],
+              [audit.price, "Human competitive investigation + Action Plan", "#competitive-audit"],
+              [managed.price, "Execute + monitor + verify", "#managed"],
+            ].map(([price, purpose, href, scope]) => (
               <li key={price}>
                 <a href={href} className="block min-h-11 py-2 underline decoration-ivory/40 underline-offset-4">
                   <strong className="block">{price}</strong>
                   <span className="mt-1 block text-sm">{purpose}</span>
                 </a>
+                {scope && <p className="mt-1 text-sm text-ivory/85">{scope}</p>}
               </li>
             ))}
           </ul>
         </Container>
       </section>
+
+      <Section title={discoveryHeadings.surfaces}>
+        <div className="border-y border-line py-6">
+          <h3 className="text-h3">Every paid Selena measurement answers:</h3>
+          <dl className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+            {copy.answers.map((answer) => (
+              <div key={answer.label}>
+                <dt className="font-semibold text-copper-deep">{answer.label}</dt>
+                <dd className="mt-2 text-lg font-medium">{answer.question}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-6 max-w-3xl">{copy.answersIntro}</p>
+          <p className="mt-3 max-w-3xl text-sm text-muted">Changes require comparable measurements; recurring production is not yet activated. Automatic findings show evidence and opportunities. Human investigation starts with the $399 Audit.</p>
+        </div>
+        <p className="max-w-3xl">
+          Hotels · Villas · Restaurants & Cafés · Spas & Wellness · Beach Clubs · Experience Businesses
+        </p>
+        <div className="grid gap-8 md:grid-cols-3">
+          {copy.surfaces.map((surface) => (
+            <div key={surface.title}>
+              <h3 className="text-h3">{surface.title}</h3>
+              <p className="mt-3">{surface.body}</p>
+            </div>
+          ))}
+        </div>
+        <p className="font-semibold">One product. Multiple discovery surfaces.</p>
+        <p>SEE → UNDERSTAND → DECIDE → DO → VERIFY</p>
+      </Section>
 
       <Section title={copy.problem.title}>
         <p>
@@ -179,69 +211,51 @@ export function DiscoverySales({ children }: { children: ReactNode }) {
         </div>
       </Section>
 
-      <Section title={discoveryHeadings.surfaces}>
-        <p className="max-w-3xl">
-          Hotels · Villas · Restaurants & Cafés · Spas & Wellness · Beach Clubs · Experience Businesses
-        </p>
-        <div className="grid gap-8 md:grid-cols-3">
-          {copy.surfaces.map((surface) => (
-            <div key={surface.title}>
-              <h3 className="text-h3">{surface.title}</h3>
-              <p className="mt-3">{surface.body}</p>
+      <Section id="competitors" title={discoveryHeadings.preview}>
+        <p className="max-w-3xl text-lg">{copy.preview.intro}</p>
+        <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          {copy.preview.concepts.map((concept) => (
+            <div key={concept.title} className="border-t border-line pt-4">
+              <dt className="font-semibold text-copper-deep">{concept.title}</dt>
+              <dd className="mt-2">{concept.body}</dd>
             </div>
           ))}
-        </div>
-        <List items={copy.answers} />
-        <p className="font-semibold">One product. Multiple discovery surfaces.</p>
-        <p>SEE → UNDERSTAND → DECIDE → DO → VERIFY</p>
-      </Section>
-
-      <Section title={discoveryHeadings.preview}>
+        </dl>
         <p className="font-semibold">{copy.preview.label}</p>
-        <div className="overflow-x-auto rounded-lg border border-line bg-surface">
+        <div className="space-y-6 md:hidden">
+          {copy.preview.rows.map((row) => (
+            <article key={row.intent} className="border-y border-line bg-surface p-5">
+              <h3 className="text-h3">{row.intent}</h3>
+              <dl className="mt-4 space-y-3">
+                {[["You", row.visibility], ["Competitor shown", row.competitor], ["Evidence", row.source], ["Selena recommendation", row.recommendation]].map(([label, value]) => (
+                  <div key={label}>
+                    <dt className="font-semibold text-copper-deep">{label}</dt>
+                    <dd className="mt-1">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </article>
+          ))}
+        </div>
+        <div className="hidden overflow-x-auto border border-line bg-surface md:block">
           <table className="w-full min-w-[38rem] text-left">
-            <caption className="p-4 text-left">
-              Three illustrative guest intents · visible: 1 · absent: 2. These are synthetic values.
-            </caption>
-            <thead>
-              <tr>
-                {["Tracked guest intent", "Tracked business", "Business shown", "Cited source"].map((label) => (
-                  <th key={label} scope="col" className="border-t border-line p-4">
-                    {label}
-                  </th>
+            <caption className="p-4 text-left">Three independent guest-intent examples · suggested actions, not verified outcomes.</caption>
+            <thead><tr>
+              {["Guest intent", "You", "Competitor shown", "Evidence", "Selena recommendation"].map((label) => (
+                <th key={label} scope="col" className="border-t border-line p-4">{label}</th>
+              ))}
+            </tr></thead>
+            <tbody>{copy.preview.rows.map((row) => (
+              <tr key={row.intent}>
+                <th scope="row" className="border-t border-line p-4 font-semibold">{row.intent}</th>
+                {[row.visibility, row.competitor, row.source, row.recommendation].map((value, index) => (
+                  <td key={index} className="border-t border-line p-4">{value}</td>
                 ))}
               </tr>
-            </thead>
-            <tbody>
-              {copy.preview.rows.map((row) => (
-                <tr key={row.intent}>
-                  {Object.values(row).map((value) => (
-                    <td key={value} className="border-t border-line p-4">
-                      {value}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
+            ))}</tbody>
           </table>
         </div>
-        <div className="grid gap-8 md:grid-cols-2">
-          <div>
-            <h3 className="text-h3">Sources by demo frequency</h3>
-            <div className="mt-4">
-              <List items={copy.preview.sources} />
-            </div>
-          </div>
-          <div>
-            <h3 className="text-h3">Competitive gap</h3>
-            <p className="mt-4">{copy.preview.gap}</p>
-            <p className="mt-3">
-              Recurring competitors and movement: not established in this single-cycle demo. No real comparable history
-              is shown.
-            </p>
-          </div>
-        </div>
-        <p className="max-w-3xl">{copy.preview.boundary}</p>
+        <p className="max-w-3xl text-sm text-muted">{copy.preview.boundary}</p>
       </Section>
 
       <Section title={copy.telegram.title} dark>
@@ -283,7 +297,7 @@ export function DiscoverySales({ children }: { children: ReactNode }) {
 
       <Section id="plans" title={discoveryHeadings.plans}>
         <p className="max-w-3xl">
-          {tracks[0].intro} Competitors and sources are included already in Visibility Snapshot.
+          {tracks[0].intro} Competitors, sources and automatic recommendations are included in Visibility Snapshot. They are not reserved for the higher-priced Audit.
         </p>
         <div className="grid gap-8 lg:grid-cols-2" data-visibility-view="pricing">
           {[snapshot, landscape].map((plan, i) => (
@@ -294,12 +308,20 @@ export function DiscoverySales({ children }: { children: ReactNode }) {
               <p className="font-semibold text-copper-deep">{plan.statusLabel}</p>
               <h3 className="mt-3 text-h3">{plan.name}</h3>
               <p className="mt-3 font-serif text-h2">{plan.price}</p>
+              <p className="mt-5 border-y border-line py-3 font-semibold text-copper-deep">{i === 0 ? "Automatic recommendations included" : "Expanded recommendations included"}</p>
               <p className="mt-6 text-lg font-semibold">{plan.description}</p>
+              {i === 1 && <p className="mt-3 font-semibold">Everything in Visibility Snapshot, plus:</p>}
               <p className="mt-4">{plan.systemsLabel}</p>
               <p className="mt-4 text-sm">{plan.volumeLabel}</p>
-              <div className="my-6">
-                <List items={plan.features} />
-              </div>
+              <dl className="my-6 space-y-4">
+                {discoveryPlanOutcomes[i].map((outcome) => (
+                  <div key={outcome.title} className="border-t border-line pt-4">
+                    <dt className="font-semibold">{outcome.title}</dt>
+                    <dd className="mt-1">{outcome.body}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mb-6 text-sm text-muted">Report history; changes only between comparable measurements. Weekly recurring measurements and Telegram delivery remain gated.</p>
               <p className="mb-6 font-semibold">{plan.progressionLabel}</p>
               <div className="mt-auto" data-visibility-cta={i === 0 ? "snapshot" : "landscape"}>
                 <Button href={plan.href!}>{plan.ctaLabel}</Button>
@@ -308,19 +330,30 @@ export function DiscoverySales({ children }: { children: ReactNode }) {
           ))}
         </div>
         <p className="max-w-3xl">
-          Local Maps availability is confirmed per scope before an order. A verified owner/report flow does not
-          establish a fully activated new-customer payment and measurement path.
+          Local Maps is included only where production-capable automated measurement is verified for the agreed scope. A verified owner/report flow alone does not establish that capability.
         </p>
       </Section>
 
       <Section title={discoveryHeadings.bridge}>
         <p className="max-w-3xl text-lg">{copy.bridge}</p>
+        <ol className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+          {discoveryDecisionSteps.map((step, index) => (
+            <li key={step.label} className="border-t border-line pt-5">
+              <p className="font-serif text-h2">{[snapshot, landscape, audit, managed][index].price}</p>
+              <h3 className="mt-4 font-sans text-base font-semibold text-copper-deep">{step.label}</h3>
+              <p className="mt-3">{step.body}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="max-w-3xl font-semibold">MEASURE → COMPARE → RECOMMEND → INVESTIGATE → DECIDE → EXECUTE → RECHECK</p>
       </Section>
 
       <Section id="competitive-audit" title={discoveryHeadings.audit}>
         <p className="font-semibold">
           {audit.name} · {audit.price}
         </p>
+        <p className="font-semibold text-copper-deep">Human-verified Action Plan</p>
+        <p className="max-w-3xl font-semibold">{audit.progressionLabel}</p>
         <p className="max-w-3xl text-lg">{copy.audit.intro}</p>
         <div className="grid gap-10 lg:grid-cols-3">
           <div>
@@ -397,7 +430,8 @@ export function DiscoverySales({ children }: { children: ReactNode }) {
           {managed.name} · {managed.price}
         </p>
         <p className="max-w-3xl text-lg">{copy.managed.intro}</p>
-        <p className="font-semibold">{copy.managed.cycle}</p>
+        <p className="font-semibold">{managed.progressionLabel}</p>
+        <p>{copy.managed.cycle}</p>
         <List items={managed.features} />
         <p className="max-w-3xl">{copy.managed.boundary}</p>
         <div data-visibility-cta="managed">

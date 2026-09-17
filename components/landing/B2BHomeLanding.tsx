@@ -2,7 +2,6 @@ import { CinemaImage } from "@/components/ui/CinemaImage";
 import { homepage, type HomepageContent } from "@/lib/data/homepage";
 import { Button } from "@/components/ui/Button";
 import { CinemaFrame } from "@/components/ui/CinemaFrame";
-import { CinemaLoop } from "@/components/ui/CinemaLoop";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { LabEntryTeaser } from "@/components/lab/LabEntryTeaser";
@@ -70,7 +69,7 @@ function LadderCard({ item, highlighted }: { item: LadderItem; highlighted?: boo
         {item.systems.join(" · ")}
       </p>
       <ul className="space-y-2 border-t border-line pt-3">
-        {item.includes.map((line) => (
+        {item.includes.filter(line => !/Ask Maps|Local AI/i.test(line)).map((line) => (
           <li key={line} className="flex items-start gap-2 text-sm leading-snug text-ink/85">
             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-copper-deep" aria-hidden />
             <span className="font-medium">{line}</span>
@@ -135,78 +134,30 @@ export function VisibilityLadder({ content }: { content: HomepageContent }) {
 }
 
 function HeroSection({ content }: { content: HomepageContent }) {
+  const directions = [
+    { name: content.productPaths.visibility.name, ...content.hero.directions.visibility, cta: content.hero.primaryCta },
+    { name: content.productPaths.systems.name, ...content.hero.directions.systems, cta: content.hero.secondaryCta },
+  ];
   return (
-    <section className="relative overflow-hidden bg-charcoal pt-28 text-ivory sm:pt-32 lg:pt-36">
-      {/* Cinematic backdrop: the beam finding one storefront in a dark city —
-          the product promise as a picture. It lives only behind the first
-          screen and fades to flat charcoal before the ladder, and every
-          overlay below exists for one reason: the copy stays readable. */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[46rem]" aria-hidden>
-        <CinemaLoop
-          video={content.cinema.hero.video}
-          poster={content.cinema.hero.poster}
-          alt={content.cinema.hero.alt}
-          priority
-          className="opacity-80"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/20 via-charcoal/45 to-charcoal" />
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/65 via-charcoal/20 to-transparent" />
-      </div>
-      <Container size="wide" className="relative">
-        <Reveal className="max-w-4xl">
-          <Eyebrow tone="light">{content.hero.eyebrow}</Eyebrow>
-          <h1 className="mt-6 text-display text-ivory">{content.hero.headline}</h1>
-          <p className="mt-6 text-lg leading-relaxed text-ivory/76 sm:text-xl">
-            {content.hero.subheadline}
-          </p>
-          <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
-            <Button
-              href={content.hero.primaryCta.href}
-              size="lg"
-              variant="onDark"
-              className="max-w-full whitespace-normal text-center"
-            >
-              {content.hero.primaryCta.label}
-            </Button>
-            <a
-              href={content.hero.secondaryCta.href}
-              className="inline-flex max-w-full items-center justify-center gap-2 whitespace-normal rounded-full border border-ivory/25 text-center px-8 py-4 text-base font-medium text-ivory/85 transition-colors duration-300 hover:border-copper hover:text-link-dark"
-            >
-              {content.hero.secondaryCta.label}
-            </a>
-          </div>
-          <p className="mt-4 text-base leading-relaxed text-ivory/75">{content.hero.primaryNote}</p>
-        </Reveal>
-
-
-        {/* The whole ladder sits in the first screen: a visitor compares the
-            free entry against every paid step without scrolling for it.
-            The free check is its own product (the hero CTA above) — the
-            ladder shows only the four paid steps, grouped the way the owner
-            sells them: automatic first, expert-led after. */}
-        <VisibilityLadder content={content} />
-
-        {/* The second product speaks only after the first one has finished:
-            the owner moved this door below the ladder on purpose. */}
-        <Reveal delay={100} className="mt-9">
-          <div className="flex max-w-4xl flex-wrap items-center justify-between gap-x-6 gap-y-3 rounded-2xl border border-ivory/15 bg-ivory/5 px-6 py-5">
-            <p className="min-w-0 basis-64 flex-1 text-base leading-relaxed text-ivory/76">
-              <span className="font-semibold text-ivory">{content.hero.systemsDoor.question}</span>{" "}
-              {content.hero.systemsDoor.description}
-            </p>
-            <a
-              href={content.hero.systemsDoor.cta.href}
-              className="inline-flex max-w-full items-center justify-center gap-2 whitespace-normal rounded-full border border-copper/60 text-center px-6 py-3 text-base font-medium text-link-dark transition-colors duration-300 hover:bg-copper hover:text-charcoal"
-            >
-              {content.hero.systemsDoor.cta.label} →
-            </a>
-          </div>
-        </Reveal>
-
-
-        <Reveal delay={180} className="border-t border-ivory/12 py-6">
-          <p className="max-w-3xl text-base leading-relaxed text-ivory/75">{content.hero.trustLine}</p>
-        </Reveal>
+    <section className="bg-charcoal pb-12 pt-28 text-ivory sm:pb-16 sm:pt-32">
+      <Container size="wide">
+        <p className="font-semibold text-copper">{content.hero.eyebrow}</p>
+        <h1 className="mt-5 max-w-5xl text-h1">{content.hero.headline}</h1>
+        <p className="mt-5 max-w-3xl text-lg text-ivory/85">{content.hero.subheadline}</p>
+        <div className="mt-7 flex flex-wrap gap-3">
+          <Button href={content.hero.primaryCta.href} variant="onDark" className="max-w-full text-center">{content.hero.primaryCta.label}</Button>
+          <Button href={content.hero.secondaryCta.href} variant="secondary" className="max-w-full text-center">{content.hero.secondaryCta.label}</Button>
+        </div>
+        <div className="mt-10 grid grid-cols-1 gap-8 border-t border-line-dark pt-8 md:grid-cols-2 md:gap-12">
+          {directions.map((direction) => (
+            <div key={direction.name}>
+              <h2 className="text-h2">{direction.name}</h2>
+              <p className="mt-3 text-lg font-semibold">{direction.headline}</p>
+              <p className="mt-3 max-w-xl text-ivory/85">{direction.description}</p>
+              <a href={direction.cta.href} className="mt-4 inline-flex min-h-11 items-center font-semibold text-link-dark underline underline-offset-4">{direction.cta.label} →</a>
+            </div>
+          ))}
+        </div>
       </Container>
     </section>
   );
@@ -778,7 +729,7 @@ export function B2BHomeLanding({
   return (
     <>
       <HeroSection content={content} />
-      <InsideWorkspaceSection content={content.workspace} cta={content.hero.primaryCta} />
+      <InsideWorkspaceSection content={content.workspace} cta={content.productPaths.visibility.primaryCta} />
       <VisibilityOverviewSection content={content} />
       <MeasurementFilmstrip content={content.cinema.measurement} />
       <ProductSwitchSection content={content} />
@@ -791,6 +742,82 @@ export function B2BHomeLanding({
       <ProofSection content={content} />
       <LabEntryTeaser locale={locale} />
       <FinalCtaSection content={content} />
+    </>
+  );
+}
+
+
+/** Company-level routing only; detailed product journeys remain on their own pages. */
+export function CompanyHomeLanding({ content = homepage }: { content?: HomepageContent }) {
+  const products = [
+    { name: "AI Visibility", cta: content.hero.primaryCta, image: content.cinema.visibilityBand.image, alt: content.cinema.visibilityBand.alt, anchor: "visibility" },
+    { name: "AI Automation", cta: content.hero.secondaryCta, image: content.cinema.automationBand.poster, alt: content.cinema.automationBand.alt, anchor: "ai-systems" },
+  ];
+  return (
+    <>
+      <section className="border-b border-line bg-ivory pb-10 pt-24 text-ink sm:pb-16 sm:pt-32">
+        <Container size="wide">
+          <p className="font-semibold text-copper-deep">{content.hero.eyebrow}</p>
+          <h1 className="mt-4 max-w-5xl text-h2 md:text-h1">{content.hero.headline}</h1>
+          <p className="mt-5 text-lg">{content.hero.subheadline}</p>
+          <div className="mt-7 grid grid-cols-1 gap-7 md:grid-cols-2 md:gap-12">
+            {products.map((product, index) => (
+              <div key={product.name} className="flex flex-col items-start">
+                <h2 className="text-h3">{product.name}</h2>
+                <p className="mt-2 mb-4 max-w-xl leading-relaxed text-muted">{content.company.heroDescriptions[index]}</p>
+                <Button href={product.cta.href} className="mt-auto max-w-full text-center">{product.cta.label} →</Button>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+      <section id="products" className="bg-surface py-12 sm:py-16">
+        <Container size="wide">
+          <h2 className="max-w-3xl text-h2 text-ink">{content.company.doorsTitle}</h2>
+          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+            {products.map((product, index) => {
+              const door = content.company.doors[index];
+              return (
+                <article key={product.name} id={product.anchor} className="flex min-w-0 flex-col rounded-lg border border-line bg-ivory p-5 sm:p-8">
+                  <div className="relative aspect-[21/9] overflow-hidden rounded-lg">
+                    <CinemaImage src={product.image} alt={product.alt} fill sizes="(min-width: 768px) 45vw, 100vw" className="object-cover" />
+                  </div>
+                  <p className="mt-6 font-semibold text-copper-deep">{product.name}</p>
+                  <h3 className="mt-3 text-h2 text-ink">{door.title}</h3>
+                  <p className="mt-4 leading-relaxed text-muted">{door.body}</p>
+                  <ul className="mt-5 space-y-3">
+                    {door.outcomes.map(outcome => <li key={outcome} className="border-t border-line pt-3 font-medium">{outcome}</li>)}
+                  </ul>
+                  <p className="mt-5 mb-6 text-sm leading-relaxed text-muted">{door.audience}</p>
+                  <Button href={product.cta.href} className="mt-auto self-start text-center">{product.cta.label} →</Button>
+                </article>
+              );
+            })}
+          </div>
+        </Container>
+      </section>
+      <section id="approach" className="border-y border-line bg-ivory py-12 sm:py-16">
+        <Container size="wide">
+          <h2 className="text-h2">{content.company.principlesTitle}</h2>
+          <div className="mt-8 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4">
+            {content.company.principles.map(principle => (
+              <div key={principle.title}>
+                <h3 className="font-sans text-lg font-semibold">{principle.title}</h3>
+                <p className="mt-3 leading-relaxed text-muted">{principle.body}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+      <section className="bg-surface py-12 sm:py-16">
+        <Container size="wide">
+          <h2 className="text-h2">{content.company.finalTitle}</h2>
+          <p className="mt-4 max-w-2xl leading-relaxed text-muted">{content.company.finalBody}</p>
+          <div className="mt-6 flex flex-wrap gap-4">
+            {products.map(product => <Button key={product.name} href={product.cta.href} className="text-center">{product.cta.label} →</Button>)}
+          </div>
+        </Container>
+      </section>
     </>
   );
 }

@@ -550,7 +550,7 @@ export const visibilityContentEn: VisibilityContent = {
     paidPlans: {
       heading: "One free entry and four paid options",
       intro:
-        "FREE: understand the website. $49: where, who, sources and change. $79: the full AI + Local landscape. $399: why and what exactly. $2,490: do and verify over 90 days.",
+        "FREE: understand the website. $49: measure, compare and recommend. $79: expanded AI + verified automated Local. $399: human competitive investigation and Action Plan. $2,490: agreed implementation, monitoring and rechecks over 90 days.",
       comparisonLabels: {
         offer: "Offer",
         status: "Status",

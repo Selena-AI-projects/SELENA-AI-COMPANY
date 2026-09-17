@@ -1,13 +1,13 @@
 import { buildMetadata } from "@/lib/metadata";
 import { ruHomepage } from "@/lib/data/homepage-ru";
 import { buildHomeStructuredData } from "@/lib/structured-data";
-import { B2BHomeLanding } from "@/components/landing/B2BHomeLanding";
+import { CompanyHomeLanding } from "@/components/landing/B2BHomeLanding";
 import { JsonLd } from "@/components/seo/JsonLd";
 
 export const metadata = buildMetadata({
   title: "AI-системы и AI Visibility",
   description:
-    "Измеряйте, как AI находит, понимает и представляет ваш бизнес, а затем создавайте практичные системы для ежедневных процессов команды.",
+    "AI Visibility показывает, как клиенты находят ваш бизнес. AI Automation строит практичные процессы для команды. Два независимых продукта Selena Systems.",
   path: "/ru",
   locale: "ru_RU",
   languages: {
@@ -21,7 +21,7 @@ export default function RussianHomePage() {
   return (
     <>
       <JsonLd data={buildHomeStructuredData("ru")} />
-      <B2BHomeLanding content={ruHomepage} locale="ru" />
+      <CompanyHomeLanding content={ruHomepage} />
     </>
   );
 }
