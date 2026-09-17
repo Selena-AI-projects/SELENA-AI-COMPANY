@@ -2,6 +2,6 @@
 name = "expert"
 description = "Complex errors and consequential ambiguous decisions after primary analysis."
 model = "gpt-6-astra"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 developer_instructions = "Analyze the specific difficult problem and the primary agent's prior attempt. Separate evidence, hypotheses, and missing access. Return a justified recommendation and a concrete verification procedure. Do not spawn agents. Edit only explicitly assigned files and preserve other contributors' changes."
 # <!-- ai-standard:end -->
