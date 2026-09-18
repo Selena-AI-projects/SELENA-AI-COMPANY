@@ -2,10 +2,26 @@ import type { ReactNode } from "react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Badge";
+import { CinemaImage } from "@/components/ui/CinemaImage";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { commercialFacts } from "@/lib/commercial-facts";
 import { contactChannels } from "@/lib/site";
 import { cn } from "@/lib/cn";
+import { pageCinema } from "@/lib/data/page-cinema";
+import {
+  IconSparkChat,
+  IconTwinStar,
+  IconCompassMark,
+  IconLayers,
+  IconMapPin,
+  IconHotel,
+  IconPalm,
+  IconFork,
+  IconLotus,
+  IconUmbrella,
+  IconInfinity,
+  IconCheck,
+} from "./DiscoveryIcons";
 import {
   auditTerms,
   auditTermsRu,
@@ -18,28 +34,69 @@ import {
 } from "@/lib/visibility/sales";
 import type { PricingPlan, VisibilityLocale } from "@/lib/visibility/types";
 
+const heroBackdrop = pageCinema("en").visibility.hero;
+
+const SYSTEM_BADGES = [
+  { label: "ChatGPT", Icon: IconSparkChat },
+  { label: "Gemini", Icon: IconTwinStar },
+  { label: "Perplexity", Icon: IconCompassMark },
+  { label: "Expanded AI", Icon: IconLayers },
+  { label: "Google Maps", Icon: IconMapPin },
+] as const;
+
+const INDUSTRY_BADGES = [
+  { label: "Hotels", Icon: IconHotel },
+  { label: "Villas & Resorts", Icon: IconPalm },
+  { label: "Restaurants & Cafés", Icon: IconFork },
+  { label: "Spas & Wellness", Icon: IconLotus },
+  { label: "Beach Clubs", Icon: IconUmbrella },
+  { label: "Experiences", Icon: IconInfinity },
+] as const;
+
+/** Round step/level badge — "1", "2", "3", "4" — reused by the progression
+ * band and echoed on each paid card so a visitor can match a card to its
+ * step without rereading either. */
+function StepBadge({ n, tone = "dark" }: { n: number; tone?: "dark" | "copper" }) {
+  return (
+    <span
+      className={cn(
+        "flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-serif text-base font-semibold",
+        tone === "dark" ? "bg-charcoal text-ivory" : "bg-copper-deep text-surface",
+      )}
+    >
+      {n}
+    </span>
+  );
+}
+
 function Section({
   id,
   eyebrow,
   title,
   children,
   dark = false,
+  tint = false,
 }: {
   id?: string;
   eyebrow?: string;
   title: string;
   children: ReactNode;
   dark?: boolean;
+  /** A faint warm band, the way the reference composition separates blocks by fill instead of only by rule. */
+  tint?: boolean;
 }) {
   return (
     <section
       id={id}
-      className={`scroll-mt-24 py-16 sm:py-20 ${dark ? "bg-charcoal text-ivory" : "border-b border-line bg-ivory text-ink"}`}
+      className={cn(
+        "scroll-mt-24 py-14 sm:py-16",
+        dark ? "bg-charcoal text-ivory" : tint ? "border-b border-line bg-warm-canvas text-ink" : "border-b border-line bg-ivory text-ink",
+      )}
     >
       <Container>
         {eyebrow ? <Eyebrow onDark={dark}>{eyebrow}</Eyebrow> : null}
         <h2 className="max-w-3xl text-h2">{title}</h2>
-        <div className="mt-8 space-y-6 leading-relaxed">{children}</div>
+        <div className="mt-6 space-y-5 leading-relaxed">{children}</div>
       </Container>
     </section>
   );
@@ -130,20 +187,6 @@ const ctaKeyForPlan = (plan: PricingPlan): string | undefined => {
   return undefined;
 };
 
-/**
- * One of the four paid product cards. Every fact rendered here (price,
- * systems, scope, features) comes straight from the plan object in
- * sales.ts / commercial-facts.ts — nothing is authored in this component.
- *
- * Each visible field (status, name, price, shorthand, description, systems,
- * scope, features, CTA) is its own CSS grid row. At the `lg` breakpoint,
- * where all four cards sit side by side, every card opts into the parent
- * grid's row tracks via `subgrid` — so "Systems" in card 1 shares the exact
- * same row as "Systems" in card 4, however many lines the card above it
- * took. Below `lg` each card stacks independently as a normal flex column.
- * Nine rows: status, name, price, shorthand, description, systems, scope,
- * features, CTA — the parent grid below must declare the same nine tracks.
- */
 /** The one fact per card worth catching at a glance — the thing that most
  * distinguishes this tier from its neighbors. Matched against the existing
  * feature text verbatim; nothing here changes what a plan includes. */
@@ -154,52 +197,64 @@ const KEY_FEATURE_HINT: Record<string, string> = {
   "Managed Discovery Growth": "Selena-owned implementation",
 };
 
-function PaidPlanCard({ plan, shorthand }: { plan: PricingPlan; shorthand: string }) {
+/**
+ * One of the four paid product cards, in the tighter, numbered-badge shape
+ * the reference composition uses. Every fact rendered here (price, systems,
+ * scope, features) comes straight from the plan object in sales.ts /
+ * commercial-facts.ts — nothing is authored in this component. Rows still
+ * share one subgrid at `lg` so Systems/Scope/features line up card to card.
+ */
+function PaidPlanCard({ plan, shorthand, step }: { plan: PricingPlan; shorthand: string; step: number }) {
   const featured = plan.featured === true;
   const keyHint = KEY_FEATURE_HINT[plan.name];
   return (
     <article
       className={cn(
-        "flex flex-col rounded-lg border bg-surface p-6 sm:p-7",
+        "flex flex-col rounded-2xl border bg-surface p-5 shadow-[0_20px_45px_-28px_rgba(38,26,14,0.35)] sm:p-6",
         "lg:grid lg:[grid-row:1/-1] lg:[grid-template-rows:subgrid]",
-        featured ? "border-copper-deep bg-copper/[0.06]" : "border-line",
+        featured
+          ? "border-copper-deep bg-copper/[0.06] shadow-[0_24px_55px_-24px_rgba(143,92,52,0.4)]"
+          : "border-line",
       )}
     >
-      <p className="text-sm leading-snug text-copper-deep">{plan.statusLabel}</p>
+      <div className="flex items-center gap-3">
+        <StepBadge n={step} tone={featured ? "copper" : "dark"} />
+        <p className="text-xs leading-snug text-copper-deep">{plan.statusLabel}</p>
+      </div>
       <h3 className="mt-3 self-start text-h3">{plan.name}</h3>
-      <p className="mt-3 self-start font-serif text-3xl font-semibold leading-none tabular-nums">{plan.price}</p>
-      <p className="mt-4 self-start text-xs font-semibold uppercase tracking-[0.12em] text-copper-deep">{shorthand}</p>
-      <p className="mt-5 self-start text-lg font-semibold leading-snug">{plan.description}</p>
+      <p className="mt-2 self-start font-serif text-3xl font-semibold leading-none tabular-nums">{plan.price}</p>
+      <p className="mt-3 self-start text-xs font-semibold uppercase tracking-[0.1em] text-copper-deep">{shorthand}</p>
+      <p className="mt-4 self-start text-base font-semibold leading-snug">{plan.description}</p>
 
-      <div className="mt-5 self-start border-t border-line pt-4 text-sm">
+      <div className="mt-4 self-start border-t border-line pt-3 text-xs">
         <p className="font-semibold text-copper-deep">Systems</p>
-        <p className="mt-1 leading-snug">{plan.systemsLabel}</p>
+        <p className="mt-1 leading-snug text-ink/85">{plan.systemsLabel}</p>
       </div>
-      <div className="mt-3 self-start border-b border-line pb-4 text-sm">
+      <div className="mt-2.5 self-start border-b border-line pb-3 text-xs">
         <p className="font-semibold text-copper-deep">Scope</p>
-        <p className="mt-1 leading-snug">{plan.volumeLabel}</p>
+        <p className="mt-1 leading-snug text-ink/85">{plan.volumeLabel}</p>
       </div>
 
-      <ul className="mt-1">
-        {plan.features.map((feature, index) => {
+      <ul className="mt-1 space-y-2">
+        {plan.features.map((feature) => {
           const isKey = keyHint ? feature.includes(keyHint) : false;
           return (
             <li
               key={feature}
               className={cn(
-                "py-2 text-sm leading-snug",
-                index > 0 && "border-t border-line/70",
-                isKey && "border-l-2 border-copper-deep pl-3 font-semibold text-ink",
+                "flex items-start gap-2 text-xs leading-snug",
+                isKey ? "font-semibold text-ink" : "text-ink/85",
               )}
             >
-              {feature}
+              <IconCheck className={cn("mt-0.5 h-3.5 w-3.5 shrink-0", isKey ? "text-copper-deep" : "text-copper/70")} />
+              <span>{feature}</span>
             </li>
           );
         })}
       </ul>
 
       {plan.href && plan.ctaLabel ? (
-        <div className="mt-6 self-start" data-visibility-cta={ctaKeyForPlan(plan)}>
+        <div className="mt-5 self-start" data-visibility-cta={ctaKeyForPlan(plan)}>
           <Button href={plan.href} variant={featured ? "primary" : "secondary"} className="w-full">
             {plan.ctaLabel}
           </Button>
@@ -217,62 +272,90 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
 
   return (
     <div lang="en">
-      {/* 1 — HERO */}
+      {/* 1 — HERO: text left, staged image right, the way the reference composition splits the fold */}
       <section className="bg-charcoal pb-14 pt-28 text-ivory sm:pt-32">
-        <Container>
-          <p className="max-w-3xl text-sm font-semibold text-ivory">{copy.hero.eyebrow}</p>
-          <h1 className="mt-5 max-w-5xl text-h2 sm:text-h1">{copy.hero.title}</h1>
-          <p className="mt-6 max-w-3xl text-lg">{copy.hero.intro}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <span data-visibility-cta="hero_mechanism">
-              <Button href="#competitors" variant="onDark">
-                See how Selena works
-              </Button>
-            </span>
-            <span data-visibility-cta="hero_plans">
-              <Button href="#plans" variant="secondary">
-                View plans
-              </Button>
-            </span>
+        <Container size="wide">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-14">
+            <div>
+              <p className="max-w-xl text-sm font-semibold text-ivory">{copy.hero.eyebrow}</p>
+              <h1 className="mt-5 text-h2 sm:text-h1">{copy.hero.title}</h1>
+              <p className="mt-6 max-w-xl text-lg">{copy.hero.intro}</p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <span data-visibility-cta="hero_mechanism">
+                  <Button href="#competitors" variant="onDark">
+                    See how Selena works
+                  </Button>
+                </span>
+                <span data-visibility-cta="hero_plans">
+                  <Button href="#plans" variant="secondary">
+                    View plans
+                  </Button>
+                </span>
+              </div>
+              <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-3 border-t border-line-dark pt-6 text-sm text-ivory/85">
+                {SYSTEM_BADGES.map(({ label, Icon }) => (
+                  <li key={label} className="flex items-center gap-2">
+                    <Icon className="h-4 w-4 shrink-0 text-copper" />
+                    {label}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 max-w-xl text-sm text-ivory/60">
+                {copy.hero.gate} Local Discovery where verified. No card required to check readiness.
+              </p>
+            </div>
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl border border-line-dark sm:aspect-[5/6]">
+              <CinemaImage src={heroBackdrop.poster} alt={heroBackdrop.alt} fill sizes="(min-width: 1024px) 32vw, 80vw" className="object-cover" priority />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-transparent to-transparent" />
+            </div>
           </div>
-          <p className="mt-8 max-w-3xl border-t border-line-dark pt-6 text-sm text-ivory/85">
-            ChatGPT · Gemini · Perplexity · Expanded AI · Google Maps
-          </p>
-          <p className="mt-3 max-w-3xl text-sm text-ivory/60">
-            {copy.hero.gate} Local Discovery where verified. No card required to check readiness.
-          </p>
         </Container>
       </section>
 
-      {/* 2 — FREE, separated from the paid ladder */}
-      <Section id="readiness" eyebrow="START HERE" title="Check if AI can find and understand your website — free.">
-        <p className="max-w-3xl text-lg">
-          Before measuring who AI recommends, check whether AI systems can access and understand your website in the
-          first place.
-        </p>
-        <List items={copy.free.checks} />
-        <p className="max-w-3xl font-semibold">{copy.free.boundary}</p>
-        <div className="flex flex-wrap items-center gap-4">
-          <Button href={links.free}>Check AI readiness — free</Button>
-          <p className="text-sm text-muted">No card required.</p>
-        </div>
-      </Section>
+      {/* 2 — FREE, a single compact band the way the reference sets it apart from the paid ladder */}
+      <section id="readiness" className="scroll-mt-24 border-b border-line bg-copper/[0.05] py-10 sm:py-12">
+        <Container>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-2xl">
+              <Eyebrow>START HERE</Eyebrow>
+              <h2 className="text-h2">Check if AI can find and understand your website — free.</h2>
+              <p className="mt-4 text-lg leading-relaxed">
+                Before measuring who AI recommends, check whether AI systems can access and understand your website
+                in the first place.
+              </p>
+              <ul className="mt-5 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
+                {copy.free.checks.map((check) => (
+                  <li key={check} className="flex items-start gap-2 text-sm leading-snug">
+                    <IconCheck className="mt-0.5 h-4 w-4 shrink-0 text-copper-deep" />
+                    <span>{check}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 max-w-2xl text-sm font-semibold text-muted">{copy.free.boundary}</p>
+            </div>
+            <div className="flex shrink-0 flex-col items-start gap-3 lg:items-end">
+              <Button href={links.free}>Check AI readiness — free</Button>
+              <p className="text-sm text-muted">No card required.</p>
+            </div>
+          </div>
+        </Container>
+      </section>
 
       {/* 3 — Competitive intelligence */}
-      <Section id="competitors" eyebrow="COMPETITIVE INTELLIGENCE" title={discoveryHeadings.preview}>
+      <Section id="competitors" eyebrow="COMPETITIVE INTELLIGENCE" title={discoveryHeadings.preview} tint>
         <p className="max-w-3xl text-lg">{copy.preview.intro}</p>
-        <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        <dl className="grid grid-cols-1 gap-6 rounded-2xl border border-line bg-surface p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-5">
           {copy.preview.concepts.map((concept) => (
-            <div key={concept.title} className="border-t border-line pt-4">
+            <div key={concept.title} className="border-t border-line pt-4 first:border-t-0 sm:first:border-t sm:[&:nth-child(-n+2)]:border-t-0 lg:[&:nth-child(-n+5)]:border-t-0">
               <dt className="font-semibold text-copper-deep">{concept.title}</dt>
-              <dd className="mt-2">{concept.body}</dd>
+              <dd className="mt-2 text-sm leading-relaxed">{concept.body}</dd>
             </div>
           ))}
         </dl>
         <p className="font-semibold">{copy.preview.label}</p>
         <div className="space-y-6 md:hidden">
           {copy.preview.rows.map((row) => (
-            <article key={row.intent} className="border-y border-line bg-surface p-5">
+            <article key={row.intent} className="rounded-xl border border-line bg-surface p-5">
               <h3 className="text-h3">{row.intent}</h3>
               <dl className="mt-4 space-y-3">
                 {[
@@ -290,7 +373,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
             </article>
           ))}
         </div>
-        <div className="hidden overflow-x-auto border border-line bg-surface md:block">
+        <div className="hidden overflow-x-auto rounded-xl border border-line bg-surface md:block">
           <table className="w-full min-w-[38rem] text-left">
             <caption className="p-4 text-left">
               Three independent guest-intent examples · suggested actions, not verified outcomes.
@@ -323,18 +406,19 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
         <p className="max-w-3xl text-sm text-muted">{copy.preview.boundary}</p>
       </Section>
 
-      {/* 4 — Four-step commercial progression */}
+      {/* 4 — Four-step commercial progression, numbered like the reference composition */}
       <Section eyebrow="FOUR WAYS TO GO FURTHER" title="From insight to action.">
         <p className="max-w-3xl text-lg">Choose how far you want Selena to go.</p>
         <ol className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
           {discoveryDecisionSteps.map((step, index) => (
-            <li key={step.label} className="border-t border-line pt-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-copper-deep">
-                {index + 1} — {PROGRESSION_STAGES[index]}
-              </p>
-              <p className="mt-3 font-serif text-h2">{paidPlans[index].price}</p>
-              <h3 className="mt-3 font-sans text-base font-semibold">{step.label}</h3>
-              <p className="mt-3">{step.body}</p>
+            <li key={step.label}>
+              <div className="flex items-center gap-3">
+                <StepBadge n={index + 1} />
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-copper-deep">{PROGRESSION_STAGES[index]}</p>
+              </div>
+              <p className="mt-4 font-serif text-h2">{paidPlans[index].price}</p>
+              <h3 className="mt-2 font-sans text-base font-semibold">{step.label}</h3>
+              <p className="mt-3 text-sm leading-relaxed">{step.body}</p>
             </li>
           ))}
         </ol>
@@ -342,17 +426,17 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
       </Section>
 
       {/* 5 — Four paid product cards */}
-      <Section id="plans" eyebrow="PLANS" title={discoveryHeadings.plans}>
+      <Section id="plans" eyebrow="PLANS" title={discoveryHeadings.plans} tint>
         <p className="max-w-3xl">
           {tracks[0].intro} Competitors, sources and automatic recommendations are included in Visibility Snapshot.
           They are not reserved for the higher-priced Audit.
         </p>
         <div
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:[grid-template-rows:repeat(9,auto)]"
+          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:[grid-template-rows:repeat(9,auto)]"
           data-visibility-view="pricing"
         >
           {paidPlans.map((plan, index) => (
-            <PaidPlanCard key={plan.name} plan={plan} shorthand={discoveryDecisionSteps[index].label} />
+            <PaidPlanCard key={plan.name} plan={plan} shorthand={discoveryDecisionSteps[index].label} step={index + 1} />
           ))}
         </div>
         <p className="max-w-3xl text-sm text-muted">
@@ -419,12 +503,13 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
         <Container>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm font-semibold text-muted">Built for hospitality and experience businesses.</p>
-            <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink/80">
-              {["Hotels", "Villas & Resorts", "Restaurants & Cafés", "Spas & Wellness", "Beach Clubs", "Experiences"].map(
-                (item) => (
-                  <li key={item}>{item}</li>
-                ),
-              )}
+            <ul className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-ink/80">
+              {INDUSTRY_BADGES.map(({ label, Icon }) => (
+                <li key={label} className="flex items-center gap-2">
+                  <Icon className="h-5 w-5 shrink-0 text-copper-deep" />
+                  {label}
+                </li>
+              ))}
             </ul>
           </div>
         </Container>
