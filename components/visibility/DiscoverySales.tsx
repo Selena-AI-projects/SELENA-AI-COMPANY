@@ -66,6 +66,18 @@ function StepBadge({ n, tone = "dark" }: { n: number; tone?: "dark" | "copper" }
   );
 }
 
+/** A short copper bar marking "a new block starts here" — the page's one
+ * repeating cue for where information changes topic, echoed at the top of
+ * every major section so a reader can scan the page by these alone. */
+function SectionMark({ dark = false }: { dark?: boolean }) {
+  return (
+    <span
+      className={cn("mb-5 block h-[3px] w-12 rounded-full", dark ? "bg-link-dark" : "bg-copper-deep")}
+      aria-hidden
+    />
+  );
+}
+
 function Section({
   id,
   eyebrow,
@@ -91,6 +103,7 @@ function Section({
       )}
     >
       <Container>
+        <SectionMark dark={dark} />
         {eyebrow ? <Eyebrow onDark={dark}>{eyebrow}</Eyebrow> : null}
         <h2 className="max-w-3xl text-h2">{title}</h2>
         <div className="mt-6 space-y-5 leading-relaxed">{children}</div>
@@ -215,7 +228,7 @@ function PaidPlanCard({ plan, shorthand, step }: { plan: PricingPlan; shorthand:
       )}
     >
       <div className="flex items-center gap-3">
-        <StepBadge n={step} tone={featured ? "copper" : "dark"} />
+        <StepBadge n={step} tone="copper" />
         <p
           className={cn(
             "inline-flex rounded-full px-2.5 py-1 text-xs font-medium leading-snug",
@@ -329,6 +342,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
         <Container>
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
+              <SectionMark />
               <Eyebrow>START HERE</Eyebrow>
               <h2 className="text-h2">Check if AI can find and understand your website — free.</h2>
               <p className="mt-4 text-lg leading-relaxed">
@@ -425,7 +439,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
           {discoveryDecisionSteps.map((step, index) => (
             <li key={step.label}>
               <div className="flex items-center gap-3">
-                <StepBadge n={index + 1} />
+                <StepBadge n={index + 1} tone="copper" />
                 <p className="text-xs font-semibold uppercase tracking-[0.12em] text-copper-deep">{PROGRESSION_STAGES[index]}</p>
               </div>
               <p className="mt-4 font-serif text-h2">{paidPlans[index].price}</p>
