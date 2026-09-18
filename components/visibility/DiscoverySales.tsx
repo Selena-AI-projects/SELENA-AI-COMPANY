@@ -7,7 +7,6 @@ import { FAQSection } from "@/components/sections/FAQSection";
 import { commercialFacts } from "@/lib/commercial-facts";
 import { contactChannels } from "@/lib/site";
 import { cn } from "@/lib/cn";
-import { pageCinema } from "@/lib/data/page-cinema";
 import {
   IconSparkChat,
   IconTwinStar,
@@ -33,8 +32,6 @@ import {
   discoveryTracks,
 } from "@/lib/visibility/sales";
 import type { PricingPlan, VisibilityLocale } from "@/lib/visibility/types";
-
-const heroBackdrop = pageCinema("en").visibility.hero;
 
 const SYSTEM_BADGES = [
   { label: "ChatGPT", Icon: IconSparkChat },
@@ -219,7 +216,14 @@ function PaidPlanCard({ plan, shorthand, step }: { plan: PricingPlan; shorthand:
     >
       <div className="flex items-center gap-3">
         <StepBadge n={step} tone={featured ? "copper" : "dark"} />
-        <p className="text-xs leading-snug text-copper-deep">{plan.statusLabel}</p>
+        <p
+          className={cn(
+            "inline-flex rounded-full px-2.5 py-1 text-xs font-medium leading-snug",
+            featured ? "bg-copper-deep/15 text-copper-deep" : "bg-line/60 text-ink/70",
+          )}
+        >
+          {plan.statusLabel}
+        </p>
       </div>
       <h3 className="mt-3 self-start text-h3">{plan.name}</h3>
       <p className="mt-2 self-start font-serif text-3xl font-semibold leading-none tabular-nums">{plan.price}</p>
@@ -272,14 +276,14 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
 
   return (
     <div lang="en">
-      {/* 1 — HERO: text left, staged image right, the way the reference composition splits the fold */}
-      <section className="bg-charcoal pb-14 pt-28 text-ivory sm:pt-32">
-        <Container size="wide">
-          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-14">
-            <div>
-              <p className="max-w-xl text-sm font-semibold text-ivory">{copy.hero.eyebrow}</p>
+      {/* 1 — HERO: text left, photo bleeding to the edge on the right — matching the approved reference's split fold */}
+      <section className="relative overflow-hidden bg-charcoal pb-0 pt-28 text-ivory sm:pt-32">
+        <div className="grid lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
+          <div className="px-5 pb-12 sm:px-8 lg:py-16 lg:pl-8 lg:pr-0 lg:pb-24">
+            <div className="mx-auto max-w-xl lg:mx-0">
+              <p className="text-sm font-semibold text-ivory">{copy.hero.eyebrow}</p>
               <h1 className="mt-5 text-h2 sm:text-h1">{copy.hero.title}</h1>
-              <p className="mt-6 max-w-xl text-lg">{copy.hero.intro}</p>
+              <p className="mt-6 text-lg">{copy.hero.intro}</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <span data-visibility-cta="hero_mechanism">
                   <Button href="#competitors" variant="onDark">
@@ -300,16 +304,24 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 max-w-xl text-sm text-ivory/60">
+              <p className="mt-4 text-sm text-ivory/60">
                 {copy.hero.gate} Local Discovery where verified. No card required to check readiness.
               </p>
             </div>
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl border border-line-dark sm:aspect-[5/6]">
-              <CinemaImage src={heroBackdrop.poster} alt={heroBackdrop.alt} fill sizes="(min-width: 1024px) 32vw, 80vw" className="object-cover" priority />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-transparent to-transparent" />
-            </div>
           </div>
-        </Container>
+          <div className="relative min-h-[22rem] w-full overflow-hidden rounded-bl-[3rem] lg:min-h-full">
+            <CinemaImage
+              src="/media/cinematic/pages/visibility-hero-terrace.webp"
+              alt="A table set for dinner on a seaside terrace at golden hour, warm light over the water"
+              fill
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent" />
+            <div className="absolute inset-y-0 left-0 hidden w-24 bg-gradient-to-r from-charcoal/70 to-transparent lg:block" />
+          </div>
+        </div>
       </section>
 
       {/* 2 — FREE, a single compact band the way the reference sets it apart from the paid ladder */}
@@ -344,9 +356,9 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
       {/* 3 — Competitive intelligence */}
       <Section id="competitors" eyebrow="COMPETITIVE INTELLIGENCE" title={discoveryHeadings.preview} tint>
         <p className="max-w-3xl text-lg">{copy.preview.intro}</p>
-        <dl className="grid grid-cols-1 gap-6 rounded-2xl border border-line bg-surface p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-5">
+        <dl className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-5">
           {copy.preview.concepts.map((concept) => (
-            <div key={concept.title} className="border-t border-line pt-4 first:border-t-0 sm:first:border-t sm:[&:nth-child(-n+2)]:border-t-0 lg:[&:nth-child(-n+5)]:border-t-0">
+            <div key={concept.title} className="border-t-2 border-copper-deep pt-4">
               <dt className="font-semibold text-copper-deep">{concept.title}</dt>
               <dd className="mt-2 text-sm leading-relaxed">{concept.body}</dd>
             </div>
