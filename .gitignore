@@ -34,6 +34,9 @@ next-env.d.ts
 .vercel
 .env*
 
+# personal Claude Code settings (not shared with the team)
+.claude/settings.local.json
+
 # Search Console pulls carry live performance data for every property —
 # keep it out of the repository and out of any pull request.
 reports/gsc/
