@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Badge";
 import { CinemaImage } from "@/components/ui/CinemaImage";
+import { Reveal } from "@/components/ui/Reveal";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { commercialFacts } from "@/lib/commercial-facts";
 import { contactChannels } from "@/lib/site";
@@ -103,10 +104,16 @@ function Section({
       )}
     >
       <Container>
-        <SectionMark dark={dark} />
-        {eyebrow ? <Eyebrow onDark={dark}>{eyebrow}</Eyebrow> : null}
-        <h2 className="max-w-3xl text-h2">{title}</h2>
-        <div className="mt-6 space-y-5 leading-relaxed">{children}</div>
+        {/* Two beats per section — the opener, then its content — rather than
+            each element arriving on its own, which reads as scattered. */}
+        <Reveal>
+          <SectionMark dark={dark} />
+          {eyebrow ? <Eyebrow onDark={dark}>{eyebrow}</Eyebrow> : null}
+          <h2 className="max-w-3xl text-h2">{title}</h2>
+        </Reveal>
+        <Reveal delay={90} className="mt-6 space-y-5 leading-relaxed">
+          {children}
+        </Reveal>
       </Container>
     </section>
   );
@@ -126,15 +133,43 @@ function List({ items }: { items: readonly string[] }) {
 
 /** Existing contact destinations, reached only after the offer and its terms.
  * This is manual intake, not a checkout or a confirmed reservation. */
-function ContactOptions({ locale, offer }: { locale: VisibilityLocale; offer: string }) {
+function ContactOptions({
+  locale,
+  offer,
+  compact = false,
+  className,
+}: {
+  locale: VisibilityLocale;
+  offer: string;
+  /** In the order board the column heading already names the offer, so only the
+   * channel shows on the button face; the offer stays in the accessible name. */
+  compact?: boolean;
+  className?: string;
+}) {
   return (
-    <div className="mt-6 flex flex-wrap gap-3">
+    <div className={cn("flex flex-wrap", compact ? "mt-5 gap-2" : "mt-6 gap-3", className)}>
       {contactChannels.length ? (
-        contactChannels.map((channel) => (
-          <Button key={channel.key} href={channel.href} variant="secondary">
-            {locale === "en" ? `Discuss ${offer} via ${channel.label.en}` : `${offer}: ${channel.label.ru}`}
-          </Button>
-        ))
+        contactChannels.map((channel) => {
+          const channelName = locale === "en" ? channel.label.en : channel.label.ru;
+          const full = locale === "en" ? `Discuss ${offer} via ${channelName}` : `${offer}: ${channelName}`;
+          return (
+            <Button
+              key={channel.key}
+              href={channel.href}
+              variant="secondary"
+              className={compact ? "px-4 py-2 text-sm" : undefined}
+            >
+              {compact ? (
+                <>
+                  <span className="sr-only">{full}</span>
+                  <span aria-hidden>{channelName}</span>
+                </>
+              ) : (
+                full
+              )}
+            </Button>
+          );
+        })
       ) : (
         <Button href={locale === "en" ? "/en/contact" : "/contact"}>
           {locale === "en" ? "Contact Selena" : "Написать Selena"}
@@ -144,44 +179,82 @@ function ContactOptions({ locale, offer }: { locale: VisibilityLocale; offer: st
   );
 }
 
-export function DiscoveryOrderSections({
-  locale,
-  only,
-}: {
-  locale: VisibilityLocale;
-  only?: "early" | "audit" | "managed";
-}) {
+export function DiscoveryOrderSections({ locale }: { locale: VisibilityLocale }) {
   const en = locale === "en";
   const orderCopy = discoveryOrderCopy(locale);
   return (
     <>
-      {(!only || only === "early") && (
-        <Section id="early-access" title={orderCopy.early.title}>
-          <p className="max-w-3xl">{orderCopy.early.body}</p>
-          <ContactOptions locale={locale} offer={en ? "early access" : "Ранний доступ"} />
-        </Section>
-      )}
-      {(!only || only === "audit") && (
-        <Section id="audit-order" title={orderCopy.audit.title}>
-          <p className="max-w-3xl">{orderCopy.audit.body}</p>
-          <dl className="grid gap-x-12 gap-y-6 md:grid-cols-2" data-visibility-view="audit_terms">
-            {(en ? auditTerms : auditTermsRu).map((term) => (
-              <div key={term.title} className="border-t border-line pt-4">
-                <dt className="font-semibold">{term.title}</dt>
-                <dd className="mt-2 max-w-2xl">{term.body}</dd>
-              </div>
-            ))}
-          </dl>
-          <ContactOptions locale={locale} offer={en ? "the $399 Audit" : "Аудит $399"} />
-        </Section>
-      )}
-      {(!only || only === "managed") && (
-        <Section id="managed-application" title={orderCopy.managed.title}>
-          <p className="max-w-3xl">{orderCopy.managed.body}</p>
-          <ContactOptions locale={locale} offer={en ? "Managed Discovery" : "Managed Discovery"} />
-        </Section>
-      )}
+      <Section id="early-access" title={orderCopy.early.title}>
+        <p className="max-w-3xl">{orderCopy.early.body}</p>
+        <ContactOptions locale={locale} offer={en ? "early access" : "Ранний доступ"} />
+      </Section>
+      <Section id="audit-order" title={orderCopy.audit.title}>
+        <p className="max-w-3xl">{orderCopy.audit.body}</p>
+        <dl className="grid gap-x-12 gap-y-6 md:grid-cols-2" data-visibility-view="audit_terms">
+          {(en ? auditTerms : auditTermsRu).map((term) => (
+            <div key={term.title} className="border-t border-line pt-4">
+              <dt className="font-semibold">{term.title}</dt>
+              <dd className="mt-2 max-w-2xl">{term.body}</dd>
+            </div>
+          ))}
+        </dl>
+        <ContactOptions locale={locale} offer={en ? "the $399 Audit" : "Аудит $399"} />
+      </Section>
+      <Section id="managed-application" title={orderCopy.managed.title}>
+        <p className="max-w-3xl">{orderCopy.managed.body}</p>
+        <ContactOptions locale={locale} offer="Managed Discovery" />
+      </Section>
     </>
+  );
+}
+
+/**
+ * The three manual routes to an order, side by side in one block.
+ *
+ * They used to be three consecutive full-width sections, which gave the middle
+ * of the page three identical beats — same rule, same heading weight, same row
+ * of buttons — and no way to see that the routes differ. The anchor ids stay on
+ * the columns: the plan cards link straight into them.
+ */
+function DiscoveryOrderBoard({ plans }: { plans: readonly PricingPlan[] }) {
+  const orderCopy = discoveryOrderCopy("en");
+  const routes = [
+    { id: "early-access", serves: `${plans[0].name} and ${plans[1].name}`, copy: orderCopy.early, offer: "early access" },
+    { id: "audit-order", serves: plans[2].name, copy: orderCopy.audit, offer: "the $399 Audit" },
+    { id: "managed-application", serves: plans[3].name, copy: orderCopy.managed, offer: "Managed Discovery" },
+  ];
+  return (
+    <Section eyebrow="ORDER" title="How to start.">
+      <p className="max-w-3xl text-lg">
+        Three routes, one per plan above. Each is arranged manually: a message starts a conversation, not a
+        measurement, a booking or a payment.
+      </p>
+      <ul className="grid gap-x-8 gap-y-10 lg:grid-cols-3">
+        {routes.map((route, index) => (
+          <li key={route.id} id={route.id} className="scroll-mt-24 lg:flex">
+            <Reveal delay={index * 80} className="flex w-full flex-col border-t-2 border-copper-deep pt-5">
+              {/* One route serves two plans and wraps; reserving the second line
+                  keeps the three titles on one baseline. */}
+              <p className="text-sm font-semibold text-copper-deep lg:min-h-13">{route.serves}</p>
+              <h3 className="mt-3 font-sans text-lg font-semibold">{route.copy.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed">{route.copy.body}</p>
+              <ContactOptions locale="en" offer={route.offer} compact className="lg:mt-auto lg:pt-5" />
+            </Reveal>
+          </li>
+        ))}
+      </ul>
+      <div className="border-t border-line pt-6">
+        <p className="font-semibold">The full terms for the {plans[2].name}</p>
+        <dl className="mt-5 grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-3" data-visibility-view="audit_terms">
+          {auditTerms.map((term) => (
+            <div key={term.title} className="border-t border-line pt-4">
+              <dt className="font-semibold">{term.title}</dt>
+              <dd className="mt-2 text-sm leading-relaxed">{term.body}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </Section>
   );
 }
 
@@ -220,7 +293,11 @@ function PaidPlanCard({ plan, shorthand, step }: { plan: PricingPlan; shorthand:
   return (
     <article
       className={cn(
-        "flex flex-col rounded-2xl border bg-surface p-5 shadow-[0_20px_45px_-28px_rgba(38,26,14,0.35)] sm:p-6",
+        "grid snap-start rounded-2xl border bg-surface p-5 shadow-[0_20px_45px_-28px_rgba(38,26,14,0.35)]",
+        // The rail carries the same shared rows as the desktop grid, so a swipe
+        // lands on the neighbour's matching row instead of mid-paragraph.
+        "[grid-row:1/-1] [grid-template-rows:subgrid]",
+        "sm:flex sm:flex-col sm:p-6 sm:[grid-row:auto] sm:[grid-template-rows:none]",
         "lg:grid lg:[grid-row:1/-1] lg:[grid-template-rows:subgrid]",
         featured
           ? "border-copper-deep bg-copper/[0.06] shadow-[0_24px_55px_-24px_rgba(143,92,52,0.4)]"
@@ -340,7 +417,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
       {/* 2 — FREE, a single compact band the way the reference sets it apart from the paid ladder */}
       <section id="readiness" className="scroll-mt-24 border-b border-line bg-copper/[0.05] py-10 sm:py-12">
         <Container>
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <Reveal className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
               <SectionMark />
               <Eyebrow>START HERE</Eyebrow>
@@ -363,7 +440,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
               <Button href={links.free}>Check AI readiness — free</Button>
               <p className="text-sm text-muted">No card required.</p>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
@@ -371,11 +448,11 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
       <Section id="competitors" eyebrow="COMPETITIVE INTELLIGENCE" title={discoveryHeadings.preview} tint>
         <p className="max-w-3xl text-lg">{copy.preview.intro}</p>
         <dl className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-5">
-          {copy.preview.concepts.map((concept) => (
-            <div key={concept.title} className="border-t-2 border-copper-deep pt-4">
+          {copy.preview.concepts.map((concept, index) => (
+            <Reveal key={concept.title} delay={index * 80} className="border-t-2 border-copper-deep pt-4">
               <dt className="font-semibold text-copper-deep">{concept.title}</dt>
               <dd className="mt-2 text-sm leading-relaxed">{concept.body}</dd>
-            </div>
+            </Reveal>
           ))}
         </dl>
         <p className="font-semibold">{copy.preview.label}</p>
@@ -437,7 +514,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
         <p className="max-w-3xl text-lg">Choose how far you want Selena to go.</p>
         <ol className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
           {discoveryDecisionSteps.map((step, index) => (
-            <li key={step.label}>
+            <Reveal key={step.label} as="li" delay={index * 80}>
               <div className="flex items-center gap-3">
                 <StepBadge n={index + 1} tone="copper" />
                 <p className="text-xs font-semibold uppercase tracking-[0.12em] text-copper-deep">{PROGRESSION_STAGES[index]}</p>
@@ -445,7 +522,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
               <p className="mt-4 font-serif text-h2">{paidPlans[index].price}</p>
               <h3 className="mt-2 font-sans text-base font-semibold">{step.label}</h3>
               <p className="mt-3 text-sm leading-relaxed">{step.body}</p>
-            </li>
+            </Reveal>
           ))}
         </ol>
         <p className="max-w-3xl font-semibold">MEASURE → COMPARE → RECOMMEND → INVESTIGATE → DECIDE → EXECUTE → RECHECK</p>
@@ -457,8 +534,16 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
           {tracks[0].intro} Competitors, sources and automatic recommendations are included in Visibility Snapshot.
           They are not reserved for the higher-priced Audit.
         </p>
+        {/* Stacked, the four cards run about a thousand pixels each, so the last
+            tier sits three screens below the first and no two can be compared.
+            Below sm they become a snap rail with the next tier peeking in. */}
         <div
-          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:[grid-template-rows:repeat(9,auto)]"
+          className={cn(
+            "-mx-5 grid snap-x snap-mandatory scroll-px-5 grid-flow-col auto-cols-[82vw] gap-4 overflow-x-auto px-5 pb-5",
+            "[grid-template-rows:repeat(9,auto)]",
+            "sm:mx-0 sm:auto-cols-auto sm:grid-flow-row sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 sm:[grid-template-rows:auto]",
+            "lg:grid-cols-4 lg:[grid-template-rows:repeat(9,auto)]",
+          )}
           data-visibility-view="pricing"
         >
           {paidPlans.map((plan, index) => (
@@ -472,9 +557,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
         </p>
       </Section>
 
-      <DiscoveryOrderSections locale="en" only="early" />
-      <DiscoveryOrderSections locale="en" only="audit" />
-      <DiscoveryOrderSections locale="en" only="managed" />
+      <DiscoveryOrderBoard plans={paidPlans} />
 
       <Section title={discoveryHeadings.methodology}>
         <div className="grid gap-8 md:grid-cols-2">
@@ -527,7 +610,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
       {/* 7 — Hospitality / experience industry strip */}
       <section className="border-t border-line bg-ivory py-10 sm:py-12">
         <Container>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm font-semibold text-muted">Built for hospitality and experience businesses.</p>
             <ul className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-ink/80">
               {INDUSTRY_BADGES.map(({ label, Icon }) => (
@@ -537,7 +620,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </Container>
       </section>
     </div>
