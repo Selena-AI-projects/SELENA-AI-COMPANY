@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Badge";
 import { CinemaImage } from "@/components/ui/CinemaImage";
+import { Reveal } from "@/components/ui/Reveal";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { commercialFacts } from "@/lib/commercial-facts";
 import { contactChannels } from "@/lib/site";
@@ -103,10 +104,16 @@ function Section({
       )}
     >
       <Container>
-        <SectionMark dark={dark} />
-        {eyebrow ? <Eyebrow onDark={dark}>{eyebrow}</Eyebrow> : null}
-        <h2 className="max-w-3xl text-h2">{title}</h2>
-        <div className="mt-6 space-y-5 leading-relaxed">{children}</div>
+        {/* Two beats per section — the opener, then its content — rather than
+            each element arriving on its own, which reads as scattered. */}
+        <Reveal>
+          <SectionMark dark={dark} />
+          {eyebrow ? <Eyebrow onDark={dark}>{eyebrow}</Eyebrow> : null}
+          <h2 className="max-w-3xl text-h2">{title}</h2>
+        </Reveal>
+        <Reveal delay={90} className="mt-6 space-y-5 leading-relaxed">
+          {children}
+        </Reveal>
       </Container>
     </section>
   );
@@ -340,7 +347,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
       {/* 2 — FREE, a single compact band the way the reference sets it apart from the paid ladder */}
       <section id="readiness" className="scroll-mt-24 border-b border-line bg-copper/[0.05] py-10 sm:py-12">
         <Container>
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <Reveal className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
               <SectionMark />
               <Eyebrow>START HERE</Eyebrow>
@@ -363,7 +370,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
               <Button href={links.free}>Check AI readiness — free</Button>
               <p className="text-sm text-muted">No card required.</p>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
@@ -371,11 +378,11 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
       <Section id="competitors" eyebrow="COMPETITIVE INTELLIGENCE" title={discoveryHeadings.preview} tint>
         <p className="max-w-3xl text-lg">{copy.preview.intro}</p>
         <dl className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-5">
-          {copy.preview.concepts.map((concept) => (
-            <div key={concept.title} className="border-t-2 border-copper-deep pt-4">
+          {copy.preview.concepts.map((concept, index) => (
+            <Reveal key={concept.title} delay={index * 80} className="border-t-2 border-copper-deep pt-4">
               <dt className="font-semibold text-copper-deep">{concept.title}</dt>
               <dd className="mt-2 text-sm leading-relaxed">{concept.body}</dd>
-            </div>
+            </Reveal>
           ))}
         </dl>
         <p className="font-semibold">{copy.preview.label}</p>
@@ -437,7 +444,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
         <p className="max-w-3xl text-lg">Choose how far you want Selena to go.</p>
         <ol className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
           {discoveryDecisionSteps.map((step, index) => (
-            <li key={step.label}>
+            <Reveal key={step.label} as="li" delay={index * 80}>
               <div className="flex items-center gap-3">
                 <StepBadge n={index + 1} tone="copper" />
                 <p className="text-xs font-semibold uppercase tracking-[0.12em] text-copper-deep">{PROGRESSION_STAGES[index]}</p>
@@ -445,7 +452,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
               <p className="mt-4 font-serif text-h2">{paidPlans[index].price}</p>
               <h3 className="mt-2 font-sans text-base font-semibold">{step.label}</h3>
               <p className="mt-3 text-sm leading-relaxed">{step.body}</p>
-            </li>
+            </Reveal>
           ))}
         </ol>
         <p className="max-w-3xl font-semibold">MEASURE → COMPARE → RECOMMEND → INVESTIGATE → DECIDE → EXECUTE → RECHECK</p>
@@ -527,7 +534,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
       {/* 7 — Hospitality / experience industry strip */}
       <section className="border-t border-line bg-ivory py-10 sm:py-12">
         <Container>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm font-semibold text-muted">Built for hospitality and experience businesses.</p>
             <ul className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-ink/80">
               {INDUSTRY_BADGES.map(({ label, Icon }) => (
@@ -537,7 +544,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </Container>
       </section>
     </div>
