@@ -133,15 +133,43 @@ function List({ items }: { items: readonly string[] }) {
 
 /** Existing contact destinations, reached only after the offer and its terms.
  * This is manual intake, not a checkout or a confirmed reservation. */
-function ContactOptions({ locale, offer }: { locale: VisibilityLocale; offer: string }) {
+function ContactOptions({
+  locale,
+  offer,
+  compact = false,
+  className,
+}: {
+  locale: VisibilityLocale;
+  offer: string;
+  /** In the order board the column heading already names the offer, so only the
+   * channel shows on the button face; the offer stays in the accessible name. */
+  compact?: boolean;
+  className?: string;
+}) {
   return (
-    <div className="mt-6 flex flex-wrap gap-3">
+    <div className={cn("flex flex-wrap", compact ? "mt-5 gap-2" : "mt-6 gap-3", className)}>
       {contactChannels.length ? (
-        contactChannels.map((channel) => (
-          <Button key={channel.key} href={channel.href} variant="secondary">
-            {locale === "en" ? `Discuss ${offer} via ${channel.label.en}` : `${offer}: ${channel.label.ru}`}
-          </Button>
-        ))
+        contactChannels.map((channel) => {
+          const channelName = locale === "en" ? channel.label.en : channel.label.ru;
+          const full = locale === "en" ? `Discuss ${offer} via ${channelName}` : `${offer}: ${channelName}`;
+          return (
+            <Button
+              key={channel.key}
+              href={channel.href}
+              variant="secondary"
+              className={compact ? "px-4 py-2 text-sm" : undefined}
+            >
+              {compact ? (
+                <>
+                  <span className="sr-only">{full}</span>
+                  <span aria-hidden>{channelName}</span>
+                </>
+              ) : (
+                full
+              )}
+            </Button>
+          );
+        })
       ) : (
         <Button href={locale === "en" ? "/en/contact" : "/contact"}>
           {locale === "en" ? "Contact Selena" : "Написать Selena"}
@@ -151,44 +179,82 @@ function ContactOptions({ locale, offer }: { locale: VisibilityLocale; offer: st
   );
 }
 
-export function DiscoveryOrderSections({
-  locale,
-  only,
-}: {
-  locale: VisibilityLocale;
-  only?: "early" | "audit" | "managed";
-}) {
+export function DiscoveryOrderSections({ locale }: { locale: VisibilityLocale }) {
   const en = locale === "en";
   const orderCopy = discoveryOrderCopy(locale);
   return (
     <>
-      {(!only || only === "early") && (
-        <Section id="early-access" title={orderCopy.early.title}>
-          <p className="max-w-3xl">{orderCopy.early.body}</p>
-          <ContactOptions locale={locale} offer={en ? "early access" : "Ранний доступ"} />
-        </Section>
-      )}
-      {(!only || only === "audit") && (
-        <Section id="audit-order" title={orderCopy.audit.title}>
-          <p className="max-w-3xl">{orderCopy.audit.body}</p>
-          <dl className="grid gap-x-12 gap-y-6 md:grid-cols-2" data-visibility-view="audit_terms">
-            {(en ? auditTerms : auditTermsRu).map((term) => (
-              <div key={term.title} className="border-t border-line pt-4">
-                <dt className="font-semibold">{term.title}</dt>
-                <dd className="mt-2 max-w-2xl">{term.body}</dd>
-              </div>
-            ))}
-          </dl>
-          <ContactOptions locale={locale} offer={en ? "the $399 Audit" : "Аудит $399"} />
-        </Section>
-      )}
-      {(!only || only === "managed") && (
-        <Section id="managed-application" title={orderCopy.managed.title}>
-          <p className="max-w-3xl">{orderCopy.managed.body}</p>
-          <ContactOptions locale={locale} offer={en ? "Managed Discovery" : "Managed Discovery"} />
-        </Section>
-      )}
+      <Section id="early-access" title={orderCopy.early.title}>
+        <p className="max-w-3xl">{orderCopy.early.body}</p>
+        <ContactOptions locale={locale} offer={en ? "early access" : "Ранний доступ"} />
+      </Section>
+      <Section id="audit-order" title={orderCopy.audit.title}>
+        <p className="max-w-3xl">{orderCopy.audit.body}</p>
+        <dl className="grid gap-x-12 gap-y-6 md:grid-cols-2" data-visibility-view="audit_terms">
+          {(en ? auditTerms : auditTermsRu).map((term) => (
+            <div key={term.title} className="border-t border-line pt-4">
+              <dt className="font-semibold">{term.title}</dt>
+              <dd className="mt-2 max-w-2xl">{term.body}</dd>
+            </div>
+          ))}
+        </dl>
+        <ContactOptions locale={locale} offer={en ? "the $399 Audit" : "Аудит $399"} />
+      </Section>
+      <Section id="managed-application" title={orderCopy.managed.title}>
+        <p className="max-w-3xl">{orderCopy.managed.body}</p>
+        <ContactOptions locale={locale} offer="Managed Discovery" />
+      </Section>
     </>
+  );
+}
+
+/**
+ * The three manual routes to an order, side by side in one block.
+ *
+ * They used to be three consecutive full-width sections, which gave the middle
+ * of the page three identical beats — same rule, same heading weight, same row
+ * of buttons — and no way to see that the routes differ. The anchor ids stay on
+ * the columns: the plan cards link straight into them.
+ */
+function DiscoveryOrderBoard({ plans }: { plans: readonly PricingPlan[] }) {
+  const orderCopy = discoveryOrderCopy("en");
+  const routes = [
+    { id: "early-access", serves: `${plans[0].name} and ${plans[1].name}`, copy: orderCopy.early, offer: "early access" },
+    { id: "audit-order", serves: plans[2].name, copy: orderCopy.audit, offer: "the $399 Audit" },
+    { id: "managed-application", serves: plans[3].name, copy: orderCopy.managed, offer: "Managed Discovery" },
+  ];
+  return (
+    <Section eyebrow="ORDER" title="How to start.">
+      <p className="max-w-3xl text-lg">
+        Three routes, one per plan above. Each is arranged manually: a message starts a conversation, not a
+        measurement, a booking or a payment.
+      </p>
+      <ul className="grid gap-x-8 gap-y-10 lg:grid-cols-3">
+        {routes.map((route, index) => (
+          <li key={route.id} id={route.id} className="scroll-mt-24 lg:flex">
+            <Reveal delay={index * 80} className="flex w-full flex-col border-t-2 border-copper-deep pt-5">
+              {/* One route serves two plans and wraps; reserving the second line
+                  keeps the three titles on one baseline. */}
+              <p className="text-sm font-semibold text-copper-deep lg:min-h-13">{route.serves}</p>
+              <h3 className="mt-3 font-sans text-lg font-semibold">{route.copy.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed">{route.copy.body}</p>
+              <ContactOptions locale="en" offer={route.offer} compact className="lg:mt-auto lg:pt-5" />
+            </Reveal>
+          </li>
+        ))}
+      </ul>
+      <div className="border-t border-line pt-6">
+        <p className="font-semibold">The full terms for the {plans[2].name}</p>
+        <dl className="mt-5 grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-3" data-visibility-view="audit_terms">
+          {auditTerms.map((term) => (
+            <div key={term.title} className="border-t border-line pt-4">
+              <dt className="font-semibold">{term.title}</dt>
+              <dd className="mt-2 text-sm leading-relaxed">{term.body}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </Section>
   );
 }
 
@@ -479,9 +545,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
         </p>
       </Section>
 
-      <DiscoveryOrderSections locale="en" only="early" />
-      <DiscoveryOrderSections locale="en" only="audit" />
-      <DiscoveryOrderSections locale="en" only="managed" />
+      <DiscoveryOrderBoard plans={paidPlans} />
 
       <Section title={discoveryHeadings.methodology}>
         <div className="grid gap-8 md:grid-cols-2">
