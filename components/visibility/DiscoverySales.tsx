@@ -293,7 +293,11 @@ function PaidPlanCard({ plan, shorthand, step }: { plan: PricingPlan; shorthand:
   return (
     <article
       className={cn(
-        "flex flex-col rounded-2xl border bg-surface p-5 shadow-[0_20px_45px_-28px_rgba(38,26,14,0.35)] sm:p-6",
+        "grid snap-start rounded-2xl border bg-surface p-5 shadow-[0_20px_45px_-28px_rgba(38,26,14,0.35)]",
+        // The rail carries the same shared rows as the desktop grid, so a swipe
+        // lands on the neighbour's matching row instead of mid-paragraph.
+        "[grid-row:1/-1] [grid-template-rows:subgrid]",
+        "sm:flex sm:flex-col sm:p-6 sm:[grid-row:auto] sm:[grid-template-rows:none]",
         "lg:grid lg:[grid-row:1/-1] lg:[grid-template-rows:subgrid]",
         featured
           ? "border-copper-deep bg-copper/[0.06] shadow-[0_24px_55px_-24px_rgba(143,92,52,0.4)]"
@@ -530,8 +534,16 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
           {tracks[0].intro} Competitors, sources and automatic recommendations are included in Visibility Snapshot.
           They are not reserved for the higher-priced Audit.
         </p>
+        {/* Stacked, the four cards run about a thousand pixels each, so the last
+            tier sits three screens below the first and no two can be compared.
+            Below sm they become a snap rail with the next tier peeking in. */}
         <div
-          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:[grid-template-rows:repeat(9,auto)]"
+          className={cn(
+            "-mx-5 grid snap-x snap-mandatory scroll-px-5 grid-flow-col auto-cols-[82vw] gap-4 overflow-x-auto px-5 pb-5",
+            "[grid-template-rows:repeat(9,auto)]",
+            "sm:mx-0 sm:auto-cols-auto sm:grid-flow-row sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 sm:[grid-template-rows:auto]",
+            "lg:grid-cols-4 lg:[grid-template-rows:repeat(9,auto)]",
+          )}
           data-visibility-view="pricing"
         >
           {paidPlans.map((plan, index) => (
