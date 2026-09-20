@@ -1,0 +1,181 @@
+# SELENA VISIBILITY — PERSONALIZED EXPLANATION DISCOVERY V1
+
+**Версия:** 1.0
+**Дата:** 20 сентября 2026
+**Тип прохода:** read-only discovery. Production feature code, public copy, routes, database, deployment и внешние интеграции не менялись.
+**Против:** входящая спецификация владельца «Selena Systems — Personalized AI Visibility Diagnostic Funnel V1» (вставлена в разговор 19–20 сентября 2026).
+**Канонический источник для public-site фактов:** `docs/visibility/SELENA_MASTER_CORRECTION_RECONCILIATION_V1.md` (16 августа 2026) — сам являющийся более новым, чем `docs/architecture/SELENA_SYSTEMS_VISIBILITY_PLATFORM_ARCHITECTURE_AND_CODEX_TZ_V1_2.md`, которая объявляет себя superseded в собственной шапке.
+
+Статусы доказательности — по конвенции этого документного семейства: **VERIFIED** (прямое наблюдение кода/git), **INFERRED** (выведено из нескольких косвенных, но согласованных источников), **NEEDS_OWNER** (решение владельца), `needs_verification` (не проверено в этом проходе).
+
+---
+
+## 0. Важное предупреждение: документный след отстаёт от кода
+
+`SELENA_MASTER_CORRECTION_RECONCILIATION_V1.md` датирован 16 августа 2026 и называет себя текущим SSOT для public-site. Но `git log` показывает **28+ коммитов** по `lib/visibility/`, `components/visibility/`, `app/*check*` **после** этой даты, вплоть до 19 сентября 2026 (включая полную реструктуризацию `/visibility` в текущей рабочей сессии). Ни один новый reconciliation-документ после 16 августа не создан.
+
+**Вывод:** факты в этом discovery получены не из чтения устаревших документов, а из прямого чтения кода на HEAD (`de25879`, ветка `claude/selena-visibility-implementation-74tglz`). Документы ниже цитируются только там, где они всё ещё описывают продуктовые границы (ценник, юридические ограничения, provider-политику), а не техническую реализацию.
+
+---
+
+## 1. Baseline
+
+```text
+repository:  parkourcafe/SELENA-AI-COMPANY
+branch:      claude/selena-visibility-implementation-74tglz
+HEAD:        de25879
+dirty state: clean
+```
+
+**VERIFIED**
+
+---
+
+## 2. Сверка входящей спецификации с существующим кодом
+
+### 2.1. Уже реализовано (VERIFIED по коду, не по документам)
+
+| Пункт спецификации | Статус | Где |
+|---|---|---|
+| §4 URL — единственный обязательный вход | ✅ | `components/visibility/VisibilityCheckForm.tsx` |
+| §5, §7–9 Реальный audit engine, детерминированные правила, ограниченный по времени crawl | ✅ | `lib/visibility/liveReport.ts`, `lib/visibility/checks/*`, `lib/visibility/security/*` (SSRF-safe DNS-pinning, отдельно протестировано) |
+| §6 Business context, ≤3 вопроса | ✅ (2 поля сверх URL: `siteProfile`, `primaryAction`) | `VisibilityCheckForm.tsx`. Вопросы **не совпадают** с предложенными в спецификации (`business_type`, `primary_action`, `location`) — нет отдельного поля локации. |
+| §8 Ограниченный набор статусов, `not_measured` ≠ `fail` | ✅ | См. §3 ниже — детальный разбор |
+| §14 Evidence UI с раскрытием источника | ✅ | `<details>`-блоки в `components/visibility/LiveReportView.tsx`, `components/visibility/EvidenceList.tsx` |
+| §15–16 «Verified from your site» / «Not tested» разделение | ✅, это принцип №1 всей архитектуры, не деталь UI | Master Correction: «displayed readiness score is not AI Visibility and is never presented as a recommendation or ranking outcome»; `llms.txt` вес = 0 |
+| §18 Lead capture, привязанный к audit-контексту | ✅ | `app/api/leads/route.ts`, тип `visibility_check`, обязательные поля `["contact","website","primaryAction"]` |
+| §20 Product routing на платный каталог | ✅ как статичная ссылка. ❌ живого чекаута нет | `/visibility` (эта же ветка) |
+| §9 Rate limiting | ✅, но самим кодом задокументирован как ненадёжный (in-memory, per-process) | `lib/visibility/security/rate-limit.ts` |
+| Deterministic rules, не LLM, определяют severity/pass-fail | ✅ | Весь `lib/visibility/scoring/*`, `lib/visibility/checks/*` |
+
+### 2.2. Отсутствует полностью (VERIFIED — не найдено ни одного упоминания)
+
+| Пункт спецификации | Проверка |
+|---|---|
+| §21–23 LLM personalized-explanation слой | `grep -rn "anthropic\|openai\|ANTHROPIC_API_KEY\|OPENAI_API_KEY" lib/visibility lib/diagnostics` → 0 совпадений |
+| §26 A/B experiment infrastructure (control/variant, bucketing) | `grep -rln "experiment\|variant\|bucketing"` по `lib`/`components`/`app` → 0 релевантных совпадений (ложные срабатывания — только слово «variant» в пропсах Button-компонента) |
+| §28 LLM cost logging | Не может существовать — LLM-слоя нет |
+| Стабильный per-visitor identifier (нужен для бакетинга) | `lib/leads.ts`: `createIdempotencyKey()` генерирует новый UUID на каждый сабмит, это не persisted session id. Нигде в `components`/`lib` нет чтения/записи стабильного id в `localStorage`. |
+
+---
+
+## 3. Semantic matrix: `unavailable` vs `not_measured` (Owner Decision 1)
+
+### 3.1. Обнаруженная структура (VERIFIED)
+
+Обнаружены **два разных понятия под похожими именами**, живущие в разных, не связанных друг с другом слоях:
+
+**A. `CheckState.unavailable`** — `lib/diagnostics/contracts.ts:16`
+
+```ts
+export type CheckState = "pass" | "warn" | "fail" | "info" | "unavailable";
+```
+
+- Используется **только внутри собственного файла определения**. `grep -rn "unavailable" lib/diagnostics` не находит ни одного места, где значение `"unavailable"` присваивается или сравнивается за пределами `contracts.ts`.
+- Единственный символ из `contracts.ts`, который импортирует живой production-код (`app/api/checks/route.ts`), — это `VERSIONS`. `CheckState`, `EvidenceItem`, `EvidenceKind` **не импортируются никем в живом пути**.
+- Этот файл принадлежит mock/async-job слою PR-02/PR-03 (`lib/diagnostics/mockEvidence.ts`, `mockRun.ts`, `components/visibility/MockReportView.tsx`, `app/api/checks/[id]/status/route.ts`) — слою, который Decision Log DOC-021 явно **отменил** для публичного пути в пользу синхронной живой проверки. Этот код не удалён (см. DOC-011/DOC-015 — решение оставить его за флагами), но он не участвует в реальном `/check`-потоке сегодня.
+- **Вывод: `unavailable` в `contracts.ts` — мёртвый (для публичного пути) артефакт отменённой архитектуры, не активное понятие, требующее согласования.**
+
+**B. `SourceStatus.unavailable`** — `lib/visibility/measurement.ts:15`
+
+```ts
+export type SourceStatus = "sample" | "observed" | "provider" | "derived" | "unavailable";
+```
+
+- Это **другая ось измерения**: не результат проверки (pass/fail), а провенанс значения — «откуда взято это конкретное число». Комментарий в коде: «Provenance of every value rendered in a report... the other members exist so live evidence can be added later without changing the render contract».
+- Live-код сегодня не присваивает `sourceStatus: "unavailable"` ни в одном месте (проверено, `grep` по `lib/visibility` за пределами объявления типа — 0 совпадений); используются `sample`/`observed`.
+- **Это не тот же `unavailable`, что в A, и не должен с ним объединяться концептуально** — разные оси (результат проверки vs. происхождение значения).
+
+**C. `not_measured`** — активная, живая ось результата проверки. Используется в **четырёх независимых локальных объявлениях**:
+
+```ts
+lib/visibility/measurement.ts:23        EvidenceState = "pass" | "warn" | "fail" | "info" | "not_measured"
+lib/visibility/liveReport.ts:33         LayerState     = "pass" | "warn" | "fail" | "not_measured"
+lib/visibility/checks/actionReadiness.ts:14  ReadinessState = "pass" | "warn" | "fail" | "not_measured"
+lib/visibility/checks/technicalChecks.ts:14  CheckState     = "pass" | "warn" | "fail" | "not_measured"
+```
+
+- Пронизывает весь реально работающий движок: `technicalChecks.ts`, `crossPageChecks.ts`, `entityClarity.ts`, `publicReadiness.ts`, `liveReport.ts`, `actionReadiness.ts`.
+- Значение `"info"` живёт только в `measurement.ts`-варианте и реально присваивается только в `lib/visibility/sample-report-data.ts` (статичный sample-отчёт), не в live-движке проверок. Live-движок никогда не производит `"info"`.
+
+### 3.2. Ответ на вопрос Owner Decision 1
+
+**Реального семантического конфликта между `unavailable` и `not_measured` нет** — они принадлежат разным, не пересекающимся мирам (mock-эра vs. live-движок). Настоящая, более узкая проблема: **один и тот же живой словарь (`pass|warn|fail|not_measured`) независимо продублирован в 4 файлах** без единого источника истины — это дрейф определений, не смысловая коллизия.
+
+### 3.3. Минимальное предложенное решение
+
+1. **Не трогать `contracts.ts` и `unavailable`.** Он всё ещё используется отключённым mock-путём (`MockReportView.tsx`, `/api/checks/[id]/status`); удаление или переименование — отдельная, не связанная с этой задачей уборка, вне scope V1.
+2. **LLM explanation-слой потребляет уже существующий живой словарь как есть** (`EvidenceState`/`LayerState`/`ReadinessState`/`CheckState` из соответствующих модулей вызова) — не вводит пятый словарь из входящей спецификации (`PASS/PARTIAL/WEAK/FAIL/NOT_TESTED/NO_DATA`).
+3. **Объединение 4 дублирующихся объявлений в один канонический тип** — реальная, но отдельная задача чистого рефакторинга без функциональной необходимости для этого V1. Рекомендация: не делать её в рамках этой работы, зафиксировать как отдельный low-priority tech-debt пункт.
+
+---
+
+## 4. `elmo-source` — проверка утверждения из вчерашнего отчёта (Owner Decision request)
+
+**Статус: INFERRED (сильная, многоточечная корроборация), не VERIFIED** — буквальная строка `elmo-source` как имя репозитория/пакета не найдена ни в одном из трёх присоединённых репозиториев.
+
+Найденные точки совпадения между `SELENA-AI-COMPANY` (описание в Master Correction) и `selena-OS`/`selena-ai-visibility`:
+
+| Факт из Master Correction | Совпадение в selena-OS / selena-ai-visibility |
+|---|---|
+| «RC6 measurement contracts» | Файл `SELENA_RC6_OSS_COMPONENTS.md` существует в обоих репозиториях |
+| «Visitor View и API View kept separate» | `SELENA_PRODUCT_CATALOG_LOCK_V1.md`: «Visitor View is ChatGPT, Gemini and Perplexity. API View is Claude, DeepSeek, Qwen, Mistral and Grok» — дословное совпадение терминологии |
+| Каталог `$49/month / $79/month / $399 one-time / $2,490` | `packages/selena-visibility-contracts/src/catalog.ts`: `price: 49`, `price: 79`, `price: 399`, `price: 2490` — точное числовое совпадение всех четырёх цен |
+| Продукт «Elmo» | `package.json`: `"name": "elmo"` в обоих репозиториях; README брендирован как Elmo (`github.com/elmohq/elmo`) |
+
+Это не подтверждает конкретный remote/путь `elmo-source`, но подтверждает с высокой уверенностью: **описанный в Master Correction «paid technical base» — это тот же продукт, что живёт в `selena-OS`/`selena-ai-visibility`.** Обе кодовые базы (по структуре репозитория) выглядят как зеркала/форки одного продукта, а не два разных.
+
+**Практическое следствие:** реальное измерение AI Visibility (вызовы ChatGPT/Gemini/Perplexity/Claude/DeepSeek/Qwen/Mistral/Grok) физически не находится в `SELENA-AI-COMPANY`. Этот репозиторий хостит только (а) бесплатный Public Readiness и (б) статичные продающие страницы платного каталога — без живого выполнения провайдеров. Это ограничивает то, что personalized-explanation слой может честно утверждать про AI Visibility: он не имеет доступа к paid-измерениям и не должен на них ссылаться как на измеренные.
+
+---
+
+## 5. Инфраструктура для LLM cost protection (Owner Decision 3)
+
+**VERIFIED, всё нижеперечисленное проверено прямым чтением кода:**
+
+| Кандидат | Состояние |
+|---|---|
+| Supabase | Клиентский код существует (`lib/supabase/server.ts`, `@supabase/supabase-js` в зависимостях), но `getSupabaseServerClient()` возвращает `null`, пока не заданы `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY`. Оба пусты в `.env.example` и (судя по документам) ни в одном окружении. Блокировано D-005 (NEEDS_OWNER), как и было. |
+| Redis/KV/Upstash | Не установлено ни одной зависимости этого класса в `package.json`. |
+| In-memory rate limiter | Единственная существующая защита. `lib/visibility/security/rate-limit.ts`: 5 запросов/час на IP по умолчанию, соль на процесс, **сам код документирует себя как ненадёжный** («KNOWN LIMITATION: state lives in process memory, so on serverless each instance counts separately and a cold start resets the window»). |
+| Персистентность самого `/check` | `/api/checks` полностью синхронный и **ничего не сохраняет** — ни в БД, ни в durable store. Нет `audit_id`, переживающего запрос. |
+| Стабильный per-visitor id для кэширования/бакетинга | Не существует нигде в коде. |
+
+**Следствие для «cache/reuse explanation по audit_id + evidence_hash + context_hash» (пункт 5 запроса владельца):** технически невозможно сегодня без персистентного хранилища — `/check` не сохраняет ничего между запросами, поэтому кэшировать по `audit_id` физически негде. Это не решается выбором алгоритма кэширования — это блокировано тем же D-005, что блокирует всё остальное персистентное.
+
+---
+
+## 6. Analytics: скрытый блокер, не упомянутый во входящей спецификации
+
+**VERIFIED.** `lib/diagnostics/analytics.ts`, функция `track()`:
+
+```ts
+export function track(event: DiagnosticEvent): void {
+  const safeEvent = { ...event, properties: safeProperties(event.properties) };
+  if (process.env.NODE_ENV !== "production") {
+    console.debug("[diagnostics:event]", safeEvent.eventName, safeEvent.consentClass);
+  }
+}
+```
+
+**В production эта функция не делает ничего** — ни одного сетевого вызова, ни одной записи. Заблокировано D-018 (analytics provider/consent, NEEDS_OWNER). `components/analytics/PublicEventTracker.tsx` уже существует и уже вызывает `trackPublicEvent` на 15+ уже определённых событий (`hero_view`, `pricing_view`, `visibility_cta_click` и т.д.) — ни одно из них сегодня никуда не долетает.
+
+**Следствие:** расширение `EVENT_NAMES`/`PublicEventTracker.tsx` новыми событиями из спецификации (`check_completed`, `personalized_explanation_viewed`, `evidence_opened`, `lead_submitted`, `snapshot_cta_clicked`) — правильный архитектурный шаг (не создаём второй слой), но он **не даёт никакой видимости данных**, пока D-018 не решён. Это нужно сказать явно, а не подразумевать, что «добавили аналитику» = «теперь видно воронку».
+
+---
+
+## 7. Итог Discovery V1
+
+```text
+STATUS: GO для Phase 1 (delta design) с учётом owner decisions ниже
+
+- unavailable/not_measured: не конфликт, а дублирование объявлений одного live-словаря;
+  минимальное решение — не трогать словарь для V1 (§3.3).
+- elmo-source: INFERRED с сильной корроборацией, не VERIFIED буквально (§4).
+- LLM cost protection: не может опираться на существующую персистентность — её нет (§5).
+- Analytics: расширение оправдано архитектурно, но бессмысленно без решения D-018 (§6).
+- Стабильный visitor id для A/B: не существует, потребует минимального нового клиентского
+  примитива (не нового вендора).
+```
+
+Все три owner decisions и связанные с ними записи см. в обновлённом `SELENA_VISIBILITY_DECISION_LOG.md`.
