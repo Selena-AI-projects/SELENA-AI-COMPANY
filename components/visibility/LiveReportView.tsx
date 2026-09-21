@@ -1,11 +1,15 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import type { LiveFinding, LiveReport } from "@/lib/visibility/liveReport";
 import type {
   AgentReadinessCategoryScore,
   AgentReadinessCheckResult,
 } from "@/lib/visibility/readiness/agentReadiness";
 import type { LiveReportCopy } from "@/lib/visibility/types";
+import {
+  shouldTrackExplanationView,
+  type FindingExplanation,
+} from "@/lib/visibility/explanation/contract";
 import {
   serializeCodingAgentPrompt,
   serializeFixInstructions,
@@ -14,6 +18,7 @@ import {
 import { buildAuditHtmlDocument } from "@/lib/visibility/readiness/htmlReport";
 import { CLIENT_PORTAL_ENABLED, selenaAppRoutes } from "@/lib/visibility/routes";
 import { cn } from "@/lib/cn";
+import { trackPublicEvent } from "@/lib/diagnostics/analytics";
 
 export type ReadinessComparison = {
   baselineScanId: string;
@@ -107,10 +112,21 @@ function FindingCard({
   finding,
   copy,
   expanded,
+  explanation,
 }: {
   finding: LiveFinding;
   copy: LiveReportCopy;
   expanded?: boolean;
+  /**
+   * Present only in the `personalized_explanation` experiment arm, and only
+   * when the model returned one for this specific finding (it may
+   * legitimately return none). This is the ONLY difference the experiment
+   * is allowed to introduce between variants (owner decision, "Explanation
+   * UI") — nothing else on this card changes: not its title, severity,
+   * action text, position, or the deterministic `doesNotProve`/evidence
+   * below it.
+   */
+  explanation?: string;
 }) {
   return (
     <li className={cn("rounded-2xl border bg-surface p-5 sm:p-6", CARD_STYLES[finding.severity])}>
@@ -118,6 +134,10 @@ function FindingCard({
         <p className="font-medium text-ink">{finding.title}</p>
         <SeverityTag severity={finding.severity} copy={copy} />
       </div>
+
+      {explanation ? (
+        <p className="mt-2 text-sm leading-relaxed text-ink/80">{explanation}</p>
+      ) : null}
 
       {finding.detail ? (
         <p className="mt-2 font-mono text-xs leading-relaxed break-words text-muted">
@@ -268,6 +288,7 @@ export function LiveReportView({
   verificationError,
   onVerify,
   onRestart,
+  explanation,
 }: {
   report: LiveReport;
   copy: LiveReportCopy;
@@ -277,11 +298,33 @@ export function LiveReportView({
   verificationError?: string;
   onVerify?: () => void;
   onRestart: () => void;
+  /** null/undefined in the control arm, when the flag is off, or when the
+   * LLM call failed — every one of those renders identically to today. */
+  explanation?: FindingExplanation[] | null;
 }) {
   const passed = report.layers.flatMap((layer) => layer.passed);
   const problems = report.findings;
   const topBlocker = report.topBlocker;
   const rest = report.nextActions.filter((finding) => finding.id !== topBlocker?.id);
+  const explanationById = new Map((explanation ?? []).map((item) => [item.findingId, item.explanation]));
+  const hasExplanations = shouldTrackExplanationView(explanation);
+
+  // Fires once per report that actually renders at least one explanation.
+  // Not on the API response arriving, not on being assigned to the variant
+  // arm, and not when the list is null or empty — in all of those cases
+  // nothing was shown, so nothing was viewed.
+  const trackedExplanationView = useRef(false);
+  useEffect(() => {
+    trackedExplanationView.current = false;
+  }, [report.id]);
+  useEffect(() => {
+    if (!hasExplanations || trackedExplanationView.current) return;
+    trackedExplanationView.current = true;
+    trackPublicEvent("personalized_explanation_viewed", {
+      locale: report.locale,
+      finding_count: explanationById.size,
+    });
+  }, [hasExplanations, explanationById.size, report.locale]);
   const agentReadiness = report.readiness.agentReadiness;
   // Local AI Readiness is an unscored diagnostic group and renders in its
   // own section with a mandatory boundary disclaimer, so it is kept out of
@@ -421,7 +464,12 @@ export function LiveReportView({
           <h3 className="font-serif text-xl font-semibold text-ink">{copy.fixHeading}</h3>
           <p className="mt-1.5 text-sm text-muted">{copy.fixIntro}</p>
           <ul className="mt-5 grid gap-4">
-            <FindingCard finding={topBlocker} copy={copy} expanded />
+            <FindingCard
+              finding={topBlocker}
+              copy={copy}
+              expanded
+              explanation={explanationById.get(topBlocker.id)}
+            />
           </ul>
         </section>
       ) : null}
@@ -486,6 +534,7 @@ export function LiveReportView({
                 finding={finding}
                 copy={copy}
                 expanded={rest.some((item) => item.id === finding.id)}
+                explanation={explanationById.get(finding.id)}
               />
             ))}
           </ul>

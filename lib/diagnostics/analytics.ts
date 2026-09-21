@@ -1,7 +1,11 @@
+import { track as vercelTrack } from "@vercel/analytics";
+
 /**
- * Event taxonomy (SSOT §16.1). `track()` is a stub until an analytics
- * provider and consent class are chosen (Decision Log D-018,
- * NEEDS_OWNER) — it never calls an external endpoint on its own.
+ * Event taxonomy (SSOT §16.1). `track()` now has a real transport —
+ * Vercel Web Analytics (Decision Log D-018 mini-design) — reusing the
+ * platform this site already hosts on rather than a new vendor. The
+ * contract, call sites and event names are unchanged; only the previous
+ * `console.debug`-only stub gained an actual destination.
  */
 
 export const EVENT_NAMES = [
@@ -44,6 +48,7 @@ export const EVENT_NAMES = [
   "business_os_cta_clicked",
   "booking_started",
   "booking_completed",
+  "personalized_explanation_viewed",
 ] as const;
 
 export type EventName = (typeof EVENT_NAMES)[number];
@@ -64,6 +69,7 @@ export const PUBLIC_EVENT_NAMES = [
   "telegram_discussion_click",
   "readiness_start",
   "readiness_complete",
+  "personalized_explanation_viewed",
 ] as const satisfies readonly EventName[];
 
 export type PublicEventName = (typeof PUBLIC_EVENT_NAMES)[number];
@@ -90,14 +96,23 @@ export interface DiagnosticEvent {
 }
 
 /**
- * No provider is configured yet (D-018). Server-side callers should still
- * call this so instrumentation sites exist and are easy to wire up later
- * — it intentionally does not throw, log PII, or call any network host.
+ * Sends to Vercel Web Analytics from the browser (D-018 mini-design).
+ * `@vercel/analytics`'s `track()` is a no-op when the `<Analytics />`
+ * script has not injected (SSR, tests, JS disabled) — it never throws, so
+ * this stays safe to call from every existing call site unconditionally.
+ * Server-side callers still only get the debug line: this file
+ * deliberately does not import `@vercel/analytics/server`, so it never
+ * pulls server-only code into the client bundle this file also ships to
+ * (every existing call site today is a "use client" component; a future
+ * server-side event needs its own, separate path, not this function).
  */
 export function track(event: DiagnosticEvent): void {
   const safeEvent = { ...event, properties: safeProperties(event.properties) };
   if (process.env.NODE_ENV !== "production") {
     console.debug("[diagnostics:event]", safeEvent.eventName, safeEvent.consentClass);
+  }
+  if (typeof window !== "undefined") {
+    vercelTrack(safeEvent.eventName, safeEvent.properties ?? undefined);
   }
 }
 

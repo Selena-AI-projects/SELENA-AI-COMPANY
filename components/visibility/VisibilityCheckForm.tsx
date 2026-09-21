@@ -7,6 +7,7 @@ import { PRIMARY_ACTIONS } from "@/lib/visibility/measurement";
 import { LiveReportView, type ReadinessComparison } from "./LiveReportView";
 import { cn } from "@/lib/cn";
 import { trackPublicEvent } from "@/lib/diagnostics/analytics";
+import type { FindingExplanation } from "@/lib/visibility/explanation/contract";
 
 const inputCls =
   "w-full rounded-xl border border-line bg-surface px-4 py-3 text-ink placeholder:text-muted transition-colors focus:border-copper";
@@ -27,6 +28,11 @@ type CheckResponse = {
   error?: string;
   remainingChecks?: number;
   report?: LiveReport;
+  /** Present only for the personalized-explanation experiment arm; absent
+   * or null otherwise (flag off, control arm, or the LLM call failed) —
+   * the report itself never depends on any of this (Decision Log D-023). */
+  variant?: "control" | "personalized_explanation";
+  explanation?: FindingExplanation[] | null;
 };
 
 const SITE_PROFILES: SiteProfile[] = ["all_checks", "content_site", "api_application", "commerce"];
@@ -62,6 +68,7 @@ export function VisibilityCheckForm({
   const [lastRequest, setLastRequest] = useState<{ website: string; primaryAction: string; siteProfile: SiteProfile } | null>(null);
   const [isVerifying, setIsVerifying] = useState(false);
   const [verificationError, setVerificationError] = useState("");
+  const [explanation, setExplanation] = useState<FindingExplanation[] | null>(null);
 
   useEffect(() => {
     trackPublicEvent("form_view", { form_id: "public_readiness", locale });
@@ -76,6 +83,7 @@ export function VisibilityCheckForm({
     setLastRequest(null);
     setIsVerifying(false);
     setVerificationError("");
+    setExplanation(null);
   }
 
   async function requestReadiness(website: string, primaryAction: string, siteProfile: SiteProfile): Promise<CheckResponse> {
@@ -159,9 +167,16 @@ export function VisibilityCheckForm({
       setBaselineReport(body.report!);
       setLastRequest({ website, primaryAction, siteProfile });
       setRemainingChecks(body.remainingChecks);
+      setExplanation(body.explanation ?? null);
+      // Business context rides on the event that marks a genuinely completed
+      // step, rather than inventing a "context completed" moment this
+      // single-step form does not have. Both values are the visitor's own
+      // selections from a fixed option list — never free text, never PII.
       trackPublicEvent("readiness_complete", {
         locale,
         result_class: body.report?.readiness.score === null ? "not_measured" : "measured",
+        site_profile: siteProfile,
+        primary_action: primaryAction,
       });
     } catch (error) {
       trackPublicEvent("form_submit_error", {
@@ -187,6 +202,7 @@ export function VisibilityCheckForm({
         verificationError={verificationError}
         onVerify={comparison ? undefined : verifyReadiness}
         onRestart={restart}
+        explanation={explanation}
       />
     );
   }

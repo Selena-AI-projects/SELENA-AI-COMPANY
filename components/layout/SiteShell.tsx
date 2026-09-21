@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CursorAura } from "@/components/ui/CursorAura";
@@ -19,6 +20,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     <>
       <DocumentLanguage />
       <PublicEventTracker />
+      <Analytics />
       {/* Skip link for keyboard users */}
       <SkipLink />
       <Header />

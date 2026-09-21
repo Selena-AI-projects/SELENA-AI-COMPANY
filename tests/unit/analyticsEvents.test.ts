@@ -22,6 +22,7 @@ test("public analytics dictionary contains the approved no-PII event names", () 
     "telegram_discussion_click",
     "readiness_start",
     "readiness_complete",
+    "personalized_explanation_viewed",
   ]);
   for (const eventName of PUBLIC_EVENT_NAMES) {
     assert.ok(EVENT_NAMES.includes(eventName));
