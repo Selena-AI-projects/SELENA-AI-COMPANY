@@ -202,6 +202,22 @@ STATUS: GO для Phase 1 (delta design) с учётом owner decisions ниж�
 
 Требуется 20–30 представительных случаев, не один happy path: разные `siteProfile`, разные `primaryAction`, severity `critical`/`important`/`later`, один finding, несколько findings, ноль findings, не-латинский контекст. Измерить: schema success rate, fallback rate, p50/p95 input/output tokens, p50/p95 latency, фактическую стоимость, projected cost / 1 000 explanations, и отдельно — что LLM не ввёл ни одного нового finding (должно быть ровно 0).
 
-### 8.3. Provider-side spend protection
+### 8.3. STAGING_DEPLOY_BLOCKED — деплой недоступен
+
+**Статус: BLOCKED, вне репозитория.**
+
+`vercel.json` содержит `"git": { "deploymentEnabled": false }` — git-триггерные деплои выключены на уровне конфигурации, поэтому Vercel не создаёт ни preview, ни production деплой и не публикует check на PR. Последний записанный деплой репозитория — `Production` от 2026-09-17; после этой даты ни одного, включая коммиты этой работы.
+
+Владелец отдельно сообщал о блокировке аккаунта Vercel («Account is blocked» в checks PR #133). Проверить это из среды разработки нельзя — дашборд Vercel отсюда недоступен, и попытка аутентификации туда не предпринималась.
+
+Следствие: **staging acceptance (§8.1, §8.2) не может быть выполнен, пока деплой не восстановлен**. Флаг `VISIBILITY_PERSONALIZED_EXPLANATION_ENABLED` остаётся `false` везде; код может находиться в production-кодовой базе выключенным, но это не rollout эксперимента.
+
+Переключение `deploymentEnabled` обратно в `true` — решение владельца о деплой-политике всего сайта, а не часть scope этой работы, и бессмысленно, пока аккаунт заблокирован.
+
+### 8.4. LLM_STAGING_ACCEPTANCE_BLOCKED_NO_CREDENTIALS
+
+**Статус: BLOCKED.** `OPENAI_API_KEY` отсутствует в среде сборки, и ключ не должен попадать в репозиторий. Ни одного реального вызова OpenAI не сделано. Метрики §8.2 остаются неизмеренными; оценка стоимости остаётся `UNVERIFIED ESTIMATE`.
+
+### 8.5. Provider-side spend protection
 
 **Статус: OPEN, вне репозитория.** Лимит расходов на стороне проекта OpenAI — настройка аккаунта, а не кода. In-memory дневной счётчик в `lib/visibility/security/rate-limit.ts` — **best-effort guardrail, не hard cap** (на serverless это N независимых счётчиков, не один).
