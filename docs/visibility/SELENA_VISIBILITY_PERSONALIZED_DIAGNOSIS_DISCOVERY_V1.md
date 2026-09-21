@@ -179,3 +179,29 @@ STATUS: GO для Phase 1 (delta design) с учётом owner decisions ниж�
 ```
 
 Все три owner decisions и связанные с ними записи см. в обновлённом `SELENA_VISIBILITY_DECISION_LOG.md`.
+
+---
+
+## 8. Staging acceptance gates (Phase 2)
+
+Эти пункты обязаны быть закрыты до production activation эксперимента. Они не блокируют commit кода и не блокируют staging deploy с выключенным флагом.
+
+### 8.1. VERIFY VERCEL CUSTOM EVENT PROPERTY LIMIT BEFORE STAGING ANALYTICS ACCEPTANCE
+
+**Статус: OPEN.**
+
+Установленный пакет `@vercel/analytics@2.0.1` в `parseProperties` (`dist/index.mjs:48-69`) валидирует только **тип** значений — строки, числа, булевы, `null`; вложенные объекты либо вырезаются (в production), либо бросают ошибку. **Никакого ограничения на количество свойств в SDK нет** — если оно существует, оно серверное/плановое, и код его не увидит.
+
+Текущая схема события — 5–6 плоских свойств (`experiment_id`, `variant`, `audit_id`, `site_profile`, `primary_action`, при необходимости `finding_count`). Схема **не меняется наугад**: до фактической проверки лимита в дашборде Vercel она остаётся как есть.
+
+Проверить до приёмки аналитики на staging: фактический лимит количества custom-event properties и лимит длины значения на текущем плане, и совпадает ли он с этой схемой.
+
+### 8.2. LLM_STAGING_ACCEPTANCE — controlled smoke run
+
+**Статус: OPEN.**
+
+Требуется 20–30 представительных случаев, не один happy path: разные `siteProfile`, разные `primaryAction`, severity `critical`/`important`/`later`, один finding, несколько findings, ноль findings, не-латинский контекст. Измерить: schema success rate, fallback rate, p50/p95 input/output tokens, p50/p95 latency, фактическую стоимость, projected cost / 1 000 explanations, и отдельно — что LLM не ввёл ни одного нового finding (должно быть ровно 0).
+
+### 8.3. Provider-side spend protection
+
+**Статус: OPEN, вне репозитория.** Лимит расходов на стороне проекта OpenAI — настройка аккаунта, а не кода. In-memory дневной счётчик в `lib/visibility/security/rate-limit.ts` — **best-effort guardrail, не hard cap** (на serverless это N независимых счётчиков, не один).

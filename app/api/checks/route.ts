@@ -5,6 +5,12 @@ import {
 } from "@/lib/diagnostics/validators";
 import { runLiveCheck } from "@/lib/visibility/liveReport";
 import { checkRateLimit, clientIpFrom } from "@/lib/visibility/security/rate-limit";
+import {
+  EXPERIMENT_COOKIE_NAME,
+  EXPERIMENT_COOKIE_MAX_AGE_SECONDS,
+} from "@/lib/visibility/security/bucketing";
+import { resolveExplanation } from "@/lib/visibility/explanation/resolveExplanation";
+import type { ExplanationCallRecord } from "@/lib/visibility/explanation/generate";
 import { PRIMARY_ACTIONS, type PrimaryAction } from "@/lib/visibility/measurement";
 import { VERSIONS } from "@/lib/diagnostics/contracts";
 import type { SiteProfile } from "@/lib/visibility/types";
@@ -15,6 +21,13 @@ export const maxDuration = 30;
 
 const MAX_BODY_BYTES = 8_000;
 const TOTAL_BUDGET_MS = 20_000;
+/**
+ * The explanation call is additive, on top of the check's own budget —
+ * never eats into TOTAL_BUDGET_MS, which stays exactly what it was before
+ * this layer existed. Small on purpose: a slow LLM call must not make the
+ * free check feel slow.
+ */
+const EXPLANATION_BUDGET_MS = 6_000;
 const SITE_PROFILES: SiteProfile[] = ["all_checks", "content_site", "api_application", "commerce"];
 
 /**
@@ -78,15 +91,57 @@ export async function POST(request: Request) {
       totalBudgetMs: TOTAL_BUDGET_MS,
     });
 
-    return NextResponse.json({
+    // Gating, assignment and the provider call all live in
+    // lib/visibility/explanation/resolveExplanation.ts so the whole chain
+    // is testable without a live route. Nothing here touches
+    // `runLiveCheck`/`liveReport.ts`: the audit engine's output is
+    // identical whether this layer is on, off, or failing.
+    const { assignment, experimentId, explanation } = await resolveExplanation({
+      cookieHeader: request.headers.get("cookie"),
+      ip,
+      nextActions: report.nextActions,
+      siteProfile,
+      primaryAction,
+      locale,
+      timeoutMs: EXPLANATION_BUDGET_MS,
+      onCall: logExplanationCall,
+    });
+
+    const response = NextResponse.json({
       ok: true,
       methodologyVersion: VERSIONS.methodology,
       remainingChecks: limit.remaining,
       report,
+      experimentId,
+      variant: assignment.variant,
+      explanation,
     });
+
+    if (assignment.isNewCookie) {
+      response.cookies.set(EXPERIMENT_COOKIE_NAME, assignment.cookieValue, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+        maxAge: EXPERIMENT_COOKIE_MAX_AGE_SECONDS,
+      });
+    }
+
+    return response;
   } catch {
     // A crawl failure must not read as "your site is broken" — it is our
     // check that failed, and the message needs to say so.
     return NextResponse.json({ ok: false, error: "INTERNAL_ERROR" }, { status: 500 });
   }
+}
+
+/**
+ * Token/cost visibility (owner decision, "Cost protection"). No durable
+ * store exists yet (D-005), so a structured console line — captured by the
+ * hosting platform's own function logs — is the only honest option for V1;
+ * it is what staging measurement (p50/p95 tokens, latency, cost/explanation)
+ * has to be read from until persistence exists.
+ */
+function logExplanationCall(record: ExplanationCallRecord): void {
+  console.log("[visibility:explanation]", JSON.stringify(record));
 }

@@ -30,8 +30,10 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.111.0",
+    "@vercel/analytics": "^2.0.1",
     "google-auth-library": "^11.0.2",
     "next": "^15.5.23",
+    "openai": "^7.20.0",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },

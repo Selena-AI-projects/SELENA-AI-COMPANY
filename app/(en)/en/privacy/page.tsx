@@ -76,6 +76,18 @@ export default function EnglishPrivacyPage() {
               communication history.
             </p>
             <p>
+              The site uses one first-party technical cookie to keep a free-check
+              visitor in the same variant of a product experiment across visits —
+              for example, whether the check result includes an explanatory note.
+              The cookie holds only a random technical identifier, never a name,
+              email, phone number or other personal data, and is used only for
+              this purpose. Separately, the site uses Vercel Web Analytics for
+              aggregate usage statistics (which pages are visited, which actions
+              are taken). Events sent to analytics are technically filtered to
+              exclude any submitted contact information — such as name, email,
+              phone or address — before an event is sent.
+            </p>
+            <p>
               Early-access enquiries are reviewed at least quarterly and removed
               no later than 12 months after the last contact, unless a service
               agreement, dispute or legal obligation requires a longer period.
