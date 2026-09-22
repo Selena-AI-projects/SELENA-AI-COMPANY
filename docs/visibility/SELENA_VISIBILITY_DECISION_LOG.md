@@ -149,6 +149,15 @@
 
 ---
 
+## 9б. Staging acceptance closed — LLM smoke run and credential gate (22 сентября 2026)
+
+| ID | Date | Decision | Status | Evidence | Owner | Affected scope |
+|---|---|---|---|---|---|---|
+| D-032 | 2026-09-22 | §8.4 (`OPENAI_API_KEY` отсутствовал) закрыт: ключ добавлен владельцем в Vercel Production env. Ключ не попадал и не попадает в репозиторий | APPROVED, выполнено владельцем | Discovery V1 §8.4 (обновлено 2026-09-22): подтверждено `GET /api/internal/explanation-smoke-test/status` (`explanationProviderConfigured: true`) и 22 реальными успешными вызовами OpenAI в §8.2 | Selena | Vercel Production environment variables |
+| D-033 | 2026-09-22 | §8.2 (controlled smoke run) закрыт: первый прогон (до `5feb6a2`) дал 0% schema success rate — `gpt-5-mini` reasoning model расходовал весь `max_completion_tokens = 600` на скрытое рассуждение и возвращал пустой `content` (подтверждено: `outputTokens` каждого провалившегося случая равнялось ровно 600). Фикс — `MAX_OUTPUT_TOKENS` `600 → 2500` + `reasoning_effort: "minimal"` (`5feb6a2`, уже на `main`). Второй прогон (22/22 provider calls, оба locale, все `SiteProfile`) дал 100% schema success rate, 0% fallback rate, p50 latency 2056ms / p95 3327ms, cost $0.0077 за прогон, projected $0.35/1000 (UNVERIFIED ESTIMATE). Повторный прогон не требуется и не запланирован | APPROVED, выполнено | Discovery V1 §8.2 (обновлено 2026-09-22); временный роут `app/api/internal/explanation-smoke-test/route.ts` (удалён после записи результата, см. этот же PR) | Selena | `lib/visibility/explanation/generate.ts`; staging-acceptance gate sequence |
+
+---
+
 ## 10. Как обновлять этот документ
 
 1. Новая строка добавляется, не переписывается существующая — если решение меняется, старая строка получает статус `SUPERSEDED` со ссылкой на новую строку.

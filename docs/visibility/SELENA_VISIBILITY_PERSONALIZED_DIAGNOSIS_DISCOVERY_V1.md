@@ -201,9 +201,47 @@ Web Analytics Plus ($10/мес)          — Custom Events с 8 свойства
 
 ### 8.2. LLM_STAGING_ACCEPTANCE — controlled smoke run
 
-**Статус: OPEN.**
+**Статус: RESOLVED 2026-09-22.**
 
 Требуется 20–30 представительных случаев, не один happy path: разные `siteProfile`, разные `primaryAction`, severity `critical`/`important`/`later`, один finding, несколько findings, ноль findings, не-латинский контекст. Измерить: schema success rate, fallback rate, p50/p95 input/output tokens, p50/p95 latency, фактическую стоимость, projected cost / 1 000 explanations, и отдельно — что LLM не ввёл ни одного нового finding (должно быть ровно 0).
+
+Прогон выполнен временным secret-gated диагностическим роутом (`app/api/internal/explanation-smoke-test/route.ts`, удалён после записи результатов — см. Decision Log D-033) — 24 фиксированных синтетических случая, оба locale, все `SiteProfile`, большинство `PrimaryAction`, severity critical/important/later, 22 случая с находками (реальный вызов `generateExplanation()`) + 2 случая с нулём находок (корректно short-circuit без сетевого вызова).
+
+**Первый прогон (до фикса, PR #139 / `5feb6a2`): 0% schema success rate** — все 22 вызова с находками провалились. Причина: `gpt-5-mini` — reasoning model, скрытые reasoning tokens списываются с того же `max_completion_tokens`, что и видимый ответ; при `MAX_OUTPUT_TOKENS = 600` (`lib/visibility/explanation/generate.ts`) модель тратила весь бюджет на рассуждение и возвращала пустой `content` каждый раз — подтверждено: у каждого провалившегося случая `outputTokens` было равно ровно 600. Три отдельных прогона до фикса дали 0%, 5% и 14% — не улучшение, шум вокруг одной и той же сигнатуры отказа.
+
+**Фикс (`5feb6a2`, уже на `main`):** `MAX_OUTPUT_TOKENS` поднят `600 → 2500`, добавлен `reasoning_effort: "minimal"` — короткая перефразировка уже решённого факта не требует глубокого рассуждения; поднятый лимит токенов остаётся основной защитой, `reasoning_effort` — вторичной (по отчётам сообщества иногда игнорируется в сочетании с `max_completion_tokens` на моделях семейства gpt-5).
+
+**Второй прогон (после фикса, против production, 2026-09-22):**
+
+```json
+{
+  "generatedAt": "2026-09-22T17:57:40.582Z",
+  "model": "gpt-5-mini",
+  "wallMs": 10276,
+  "aggregate": {
+    "casesTotal": 24,
+    "casesCalledProvider": 22,
+    "casesSkippedNoFindings": 2,
+    "schemaSuccessRate": 1,
+    "fallbackRate": 0,
+    "failureReasons": {},
+    "latencyMsP50": 2056,
+    "latencyMsP95": 3327,
+    "inputTokensP50": 350,
+    "inputTokensP95": 646,
+    "outputTokensP50": 91,
+    "outputTokensP95": 233,
+    "totalInputTokens": 8924,
+    "totalOutputTokens": 2744,
+    "totalCostUsd": 0.007719,
+    "projectedCostPer1000Usd": 0.3508636363636364
+  }
+}
+```
+
+22/22 provider calls succeeded (100% schema success rate, 0% fallback rate). Стоимость этого прогона: $0.0077. Projected cost / 1 000 explanations: **$0.35 (UNVERIFIED ESTIMATE** — публичные pricing tracker'ы, не OpenAI billing console). Все 22 explanation-строки выборочно проверены вручную: короткие on-topic перефразировки только переданной находки, ни одной новой находки/оценки/вердикта не обнаружено — согласуется с жёстким ограничением схемы (`findingId` — enum только из id, переданных в конкретный вызов).
+
+Повторный прогон не требуется и не запланирован: фикс целенаправленно устраняет задокументированную причину отказа (reasoning-token starvation), результат воспроизводимо перешёл от устойчивого ~0% (три прогона до фикса, все с одинаковой сигнатурой «`outputTokens` упёрт в старый потолок») к чистым 100%, а latency/token/cost числа внутренне согласованы и правдоподобны (p50 latency упала с ~5.6с до фикса до ~2.1с после — ровно то, что ожидается, когда модель перестаёт тратить весь бюджет на скрытое рассуждение). Каждый дополнительный прогон тратит реальные деньги без дополнительного диагностического сигнала на этом этапе.
 
 ### 8.3. STAGING_DEPLOY_BLOCKED — деплой недоступен
 
@@ -227,7 +265,7 @@ Web Analytics Plus ($10/мес)          — Custom Events с 8 свойства
 
 ### 8.4. LLM_STAGING_ACCEPTANCE_BLOCKED_NO_CREDENTIALS
 
-**Статус: BLOCKED.** `OPENAI_API_KEY` отсутствует в среде сборки, и ключ не должен попадать в репозиторий. Ни одного реального вызова OpenAI не сделано. Метрики §8.2 остаются неизмеренными; оценка стоимости остаётся `UNVERIFIED ESTIMATE`.
+**Статус: RESOLVED 2026-09-22.** `OPENAI_API_KEY` добавлен владельцем в Vercel Production environment. Подтверждено двумя независимыми путями: (а) `GET /api/internal/explanation-smoke-test/status` (публичный, без секрета, без сетевого вызова, без утечки значения — только booleans) вернул `explanationProviderConfigured: true`; (б) §8.2 — 22 реальных успешных вызова OpenAI в production в рамках того же прогона. Ключ не попадал и не попадает в репозиторий. Оценка стоимости в §8.2 остаётся `UNVERIFIED ESTIMATE` (публичные pricing tracker'ы, не сам OpenAI billing console) — это не блокирует резолюцию гейта, стоимость сама по себе не требует подтверждения курсом OpenAI, только порядок величины.
 
 ### 8.5. Provider-side spend protection
 
