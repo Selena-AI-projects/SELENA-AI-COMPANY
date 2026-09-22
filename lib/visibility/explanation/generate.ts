@@ -26,7 +26,17 @@ const DEFAULT_MODEL = "gpt-5-mini";
 const ALLOWED_MODELS = new Set(["gpt-5-mini", "gpt-5-nano"]);
 
 const DEFAULT_TIMEOUT_MS = 6_000;
-const MAX_OUTPUT_TOKENS = 600;
+/**
+ * §8.2 smoke run (2026-09-22, 22 real calls, 0% schema success): gpt-5-mini
+ * is a reasoning model and its hidden reasoning tokens count against this
+ * same budget. At 600 the model spent the whole allowance reasoning and
+ * returned empty content with every single call — confirmed by every
+ * failed call's `outputTokens` landing on exactly 600. Raised well above
+ * the observed reasoning-token consumption, matched with `reasoning_effort:
+ * "minimal"` below so a short paraphrase task does not need to reason much
+ * in the first place.
+ */
+const MAX_OUTPUT_TOKENS = 2_500;
 /** One retry, only for a transient-looking failure — not automatic multiple retries. */
 const MAX_ATTEMPTS = 2;
 
@@ -129,6 +139,12 @@ export async function generateExplanation(
       const response = await client.chat.completions.create({
         model,
         max_completion_tokens: MAX_OUTPUT_TOKENS,
+        // A short paraphrase of already-decided facts needs little
+        // reasoning; keeping it low is a second, independent defense next
+        // to the raised token budget above (community reports show
+        // reasoning_effort is not always honored together with
+        // max_completion_tokens, so this is a mitigation, not a guarantee).
+        reasoning_effort: "minimal",
         messages: [
           { role: "system", content: systemPrompt(input.locale) },
           { role: "user", content: userPrompt(input) },
