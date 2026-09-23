@@ -105,7 +105,7 @@ If a form integration is needed but no endpoint is provided, create a safe place
 - The primary agent owns the final result and validates every helper result against evidence and acceptance criteria before use.
 - Handle small tasks directly. Use ordinary scripts for calculations, sorting and deterministic validation.
 - Use custom agent `routine` for narrow processing of supplied data, fact extraction and preliminary classification under explicit rules; keep final strategy with the primary agent.
-- Use custom agent `expert` for difficult bugs, consequential ambiguity, or problems unresolved after a reasoned primary attempt. Supply the evidence and prior attempt.
+- Use custom agent `expert` for difficult bugs, consequential ambiguity, or problems unresolved after a reasoned primary attempt. Supply the evidence and prior attempt. Keep expert reasoning at medium; high requires an explicit owner request.
 - Use at most two helpers concurrently. Execute dependent stages sequentially; assign disjoint file ownership before edits. Helpers must preserve others' changes.
 - If routine fails validation, the primary fixes or takes over. Escalate remaining difficult problems to expert. After two failed correction/verification cycles on the same problem, stop that branch and report the concrete blocker and needed next action.
 - Missing access or source data is a blocker, not a reason to upgrade models. Mark unavailable metrics NO_DATA; never invent sources, statistics or test results.
