@@ -34,6 +34,7 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
       plans: [
         {
           name: offers.snapshot.name[locale],
+          audience: en ? "Try it first" : "Попробовать",
           price: offers.snapshot[locale],
           status: "founding_soon",
           statusLabel: en ? "Early access · recurring not yet live" : "Ранний доступ · регулярный режим ещё не запущен",
@@ -65,6 +66,7 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
         },
         {
           name: offers.landscape.name[locale],
+          audience: en ? "The main choice" : "Основной выбор",
           price: offers.landscape[locale],
           status: "founding_soon",
           featured: true,
@@ -105,6 +107,7 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
       plans: [
         {
           name: offers.expertVerified.name[locale],
+          audience: en ? "Go deep once" : "Разобраться глубоко",
           price: offers.expertVerified[locale],
           status: "founding_soon",
           statusLabel: en ? "One-time · manual booking" : "Разово · запись вручную",
@@ -138,6 +141,7 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
         },
         {
           name: offers.implementation90Days.name[locale],
+          audience: en ? "We run it for you" : "Мы ведём за вас",
           price: `${offers.implementation90Days[locale]} · ${en ? "90 days" : "90 дней"}`,
           status: "active",
           statusLabel: en

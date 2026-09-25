@@ -207,6 +207,8 @@ export type PricingPlan = {
   volumeLabel: string;
   progressionLabel: string;
   features: string[];
+  /** Who the plan is for, in a few words, shown above the price. */
+  audience?: string;
   featured?: boolean;
   href?: string;
   ctaLabel?: string;
@@ -277,6 +279,8 @@ export type VisibilityContent = {
     eyebrow: string;
     title: string;
     intro: string;
+    /** Three short answers read at a glance under the headline: what you learn, see and get. */
+    answers?: { question: string; answer: string }[];
   };
   metrics: MetricDefinition[];
   measurementBoundary: MeasurementBoundaryContent;

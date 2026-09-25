@@ -44,6 +44,7 @@ export default function RussianVisibilityPage() {
         eyebrow={content.hero.eyebrow}
         title={content.hero.title}
         intro={content.hero.intro}
+        answers={content.hero.answers}
         primaryCta={content.cta.primary}
         secondaryCta={content.cta.secondary}
         backdrop={cinema.hero}

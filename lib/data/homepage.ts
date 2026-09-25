@@ -125,6 +125,8 @@ export const homepage = {
             "Prioritized fixes and one free recheck",
           ],
           cta: { label: "Run the free check", href: "/check" },
+          audience: "Start free",
+          featured: false,
         },
         ...discoveryTracks("en").flatMap(track => track.plans.map(plan => ({
           price: plan.price,
@@ -133,6 +135,8 @@ export const homepage = {
           systems: [plan.systemsLabel],
           includes: [plan.volumeLabel, plan.progressionLabel, ...plan.features.slice(0, 2)],
           cta: { label: plan.ctaLabel!, href: plan.href! },
+          audience: plan.audience,
+          featured: plan.featured === true,
         }))),
       ],
       primaryCta: { label: "Check AI readiness — free", href: "/check" },

@@ -101,6 +101,8 @@ export const ruHomepage = {
             "Приоритетные исправления и одна бесплатная повторная проверка",
           ],
           cta: { label: "Проверить бесплатно", href: "/ru/check" },
+          audience: "Начать бесплатно",
+          featured: false,
         },
         ...discoveryTracks("ru").flatMap(track => track.plans.map(plan => ({
           price: plan.price,
@@ -109,6 +111,8 @@ export const ruHomepage = {
           systems: [plan.systemsLabel],
           includes: [plan.volumeLabel, plan.progressionLabel, ...plan.features.slice(0, 2)],
           cta: { label: plan.ctaLabel!, href: plan.href! },
+          audience: plan.audience,
+          featured: plan.featured === true,
         }))),
       ],
       primaryCta: { label: "Проверить готовность сайта для AI — бесплатно", href: "/ru/check" },

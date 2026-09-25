@@ -19,6 +19,7 @@ export function VisibilityHero({
   eyebrow,
   title,
   intro,
+  answers,
   primaryCta,
   secondaryCta,
   backdrop,
@@ -27,6 +28,7 @@ export function VisibilityHero({
   eyebrow: string;
   title: string;
   intro: string;
+  answers?: { question: string; answer: string }[];
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
   backdrop?: { video: string; poster: string; alt: string };
@@ -52,6 +54,16 @@ export function VisibilityHero({
         <Reveal className="max-w-4xl">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-copper">{eyebrow}</p>
           <h1 className="mt-6 text-display text-ivory">{title}</h1>
+          {answers?.length ? (
+            <dl className="mt-8 grid gap-5 border-t border-ivory/20 pt-5 sm:grid-cols-3 sm:gap-6">
+              {answers.map((item) => (
+                <div key={item.question}>
+                  <dt className="text-sm font-semibold text-rose-dark">{item.question}</dt>
+                  <dd className="mt-1.5 text-lg font-semibold leading-snug text-ivory">{item.answer}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : null}
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-ivory/76 sm:text-xl">{intro}</p>
           <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
             <Button
