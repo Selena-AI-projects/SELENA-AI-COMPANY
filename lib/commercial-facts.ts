@@ -5,11 +5,11 @@
  * values from here. Historical paid orders remain governed by the immutable
  * catalog snapshot stored in the client application.
  */
-export const COMMERCIAL_FACTS_VERSION = "selena-commercial-facts-2026-09-16-v3" as const;
+export const COMMERCIAL_FACTS_VERSION = "selena-commercial-facts-2026-09-25-v4" as const;
 
 export type CommercialLocale = "en" | "ru";
 export type CommercialProductLine = "ai-systems" | "ai-visibility";
-export type CommercialBillingPeriod = "month" | "one-time" | "custom";
+export type CommercialBillingPeriod = "month" | "one-time" | "90-days" | "custom";
 export type CommercialAvailability = "free" | "early_access" | "manual_approval";
 
 type LocalizedText = { en: string; ru: string };
@@ -133,12 +133,12 @@ export const commercialFacts = {
       isPublic: true,
     },
     snapshot: {
-      id: "ai-visibility-snapshot",
+      id: "visibility-snapshot",
       productLine: "ai-visibility",
       name: { en: "Visibility Snapshot", ru: "Visibility Snapshot" },
       description: {
         en: "Early access to Visitor View monitoring across ChatGPT, Gemini and Perplexity; recurring delivery is not yet activated.",
-        ru: "Ежемесячный замер Visitor View в ChatGPT, Gemini и Perplexity.",
+        ru: "Ранний доступ к ежемесячному мониторингу Visitor View в ChatGPT, Gemini и Perplexity; регулярная доставка пока не активирована.",
       },
       price: 49,
       currency: "USD",
@@ -150,7 +150,7 @@ export const commercialFacts = {
       isPublic: true,
     },
     landscape: {
-      id: "ai-visibility-landscape",
+      id: "full-discovery-landscape",
       productLine: "ai-visibility",
       name: { en: "Full Discovery Landscape", ru: "Full Discovery Landscape" },
       description: {
@@ -167,12 +167,12 @@ export const commercialFacts = {
       isPublic: true,
     },
     expertVerified: {
-      id: "ai-visibility-expert-verified",
+      id: "competitive-audit",
       productLine: "ai-visibility",
       name: { en: "Verified Discovery & Competitive Audit", ru: "Verified Discovery & Competitive Audit" },
       description: {
         en: "Human-led competitive investigation, a 60-minute Strategy Session, an implementation-ready Action Plan and one comparable recheck.",
-        ru: "Разовый замер с ручной semantic, citation и factual QC.",
+        ru: "Конкурентное расследование под руководством эксперта, 60-минутная стратегическая сессия, готовый к внедрению план действий и один сопоставимый повторный замер.",
       },
       price: 399,
       currency: "USD",
@@ -184,18 +184,18 @@ export const commercialFacts = {
       isPublic: true,
     },
     implementation90Days: {
-      id: "ai-visibility-implementation-90-days",
+      id: "managed-discovery-90",
       productLine: "ai-visibility",
       name: { en: "Managed Discovery Growth", ru: "Managed Discovery Growth" },
       description: {
         en: "90 days of agreed implementation, monitoring, comparable rechecks and adjustment under manual scope approval.",
-        ru: "Внедрение, мониторинг и повторные замеры после ручного согласования.",
+        ru: "90 дней согласованного внедрения, мониторинга, сопоставимых повторных замеров и корректировок после ручного согласования объёма.",
       },
       price: 2_490,
       currency: "USD",
       en: "$2,490",
       ru: "$2,490",
-      billingPeriod: "custom",
+      billingPeriod: "90-days",
       availability: "manual_approval",
       url: { en: "/pricing", ru: "/ru/pricing" },
       isPublic: true,
