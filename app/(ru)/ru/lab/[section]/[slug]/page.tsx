@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ section: 
   if (!item) return {};
   const metadataTitles: Record<string, string> = {
     "prepare-site-for-ai-systems": "Как подготовить сайт к AI",
-    "read-ai-visibility-report-evidence": "Читать AI Visibility Report",
+    "read-ai-visibility-report-evidence": "Как читать отчёт AI Visibility",
     "two-agent-code-review": "Проверка кода, написанного ИИ",
   };
   return buildMetadata({

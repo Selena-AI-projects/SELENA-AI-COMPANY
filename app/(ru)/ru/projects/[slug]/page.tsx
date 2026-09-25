@@ -228,7 +228,7 @@ export default async function JournalProjectPage({
           <Container>
             <div className="max-w-3xl">
               <p className="text-sm font-semibold tracking-[0.18em] text-copper uppercase">
-                Замер №{index + 1} · Visitor View · {formatDate(visitorView.date)}
+                Замер №{index + 1} · Как видит посетитель · {formatDate(visitorView.date)}
               </p>
               <h2 className="mt-4 text-h2 text-ivory">Что видит человек на живой поверхности</h2>
               <p className="mt-5 leading-relaxed text-ivory/75">
@@ -391,7 +391,7 @@ export default async function JournalProjectPage({
               {[
                 { value: String(apiView.brandMentions), label: "упоминаний бренда", note: `из ${apiView.answersReceived} ответов` },
                 { value: String(apiView.questions), label: "вопросов", note: "один и тот же список при каждом замере" },
-                { value: String(apiView.models), label: "моделей", note: "канал API View" },
+                { value: String(apiView.models), label: "моделей", note: "канал «через API»" },
               ].map((fact) => (
                 <div key={fact.label} className="border-t border-line-dark pt-5">
                   <dd className="font-serif text-[2.4rem] leading-none font-semibold text-ivory">{fact.value}</dd>
@@ -434,8 +434,8 @@ export default async function JournalProjectPage({
             ) : null}
 
             <p className="mt-12 max-w-3xl text-sm leading-relaxed text-ivory/60">
-              Канал API View — это знания самих моделей. Что ответит ChatGPT живому человеку с
-              включённым веб-поиском, здесь не проверялось: это отдельный канал Visitor View.
+              Канал «через API» — это знания самих моделей. Что ответит ChatGPT живому человеку с
+              включённым веб-поиском, здесь не проверялось: это отдельный канал «как видит посетитель».
               Конфигурация замера: {apiView.configVersion}.
             </p>
           </Container>

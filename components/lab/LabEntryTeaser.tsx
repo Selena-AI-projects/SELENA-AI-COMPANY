@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 export function LabEntryTeaser({ locale }: { locale: LabLocale }) {
   const content = labContent[locale];
   const labels = locale === "ru"
-    ? ["Research с методологией", "Практические guides", "Курсы — позднее, отдельно"]
+    ? ["Исследования с раскрытой методологией", "Практические руководства", "Курсы — позднее, отдельно"]
     : ["Research with methodology", "Practical guides", "Courses later, separately"];
   return (
     <section className="bg-ivory py-20 sm:py-24">

@@ -39,7 +39,7 @@ export default function RussianMethodologyPage() {
 
       <section className="bg-ivory pb-4 sm:pb-8">
         <Container size="narrow">
-          <MeasurementBoundary content={content.measurementBoundary} />
+          <MeasurementBoundary content={content.measurementBoundary} locale="ru" />
         </Container>
       </section>
 
@@ -48,7 +48,7 @@ export default function RussianMethodologyPage() {
           <h2 className="font-serif text-h2 text-ink">Как сравнивать AI-видимость по рынкам и языкам</h2>
           <p className="mt-6 text-base leading-relaxed text-muted">Отдельно согласуйте страну бизнеса, географию поиска и язык вопроса. Вопрос на русском об отеле на Бали не означает поиск из России. Если система не позволяет подтвердить географию поиска, это ограничение нужно указать.</p>
           <p className="mt-4 text-base leading-relaxed text-muted">При повторной проверке сохраняйте вопросы, системы, канал и число повторов. Фиксируйте дату, полные ответы и ссылки на источники. Отсутствующие ответы и ошибки учитывайте отдельно: один ответ не доказывает устойчивый тренд или эффект правки сайта.</p>
-          <p className="mt-4 text-base leading-relaxed text-muted">В аудите ресторана, отеля, спа или beach club вопросы гостей проверяют видимость заведения. Вопросы владельцев, которые ищут аудит, проверяют видимость поставщика услуги. Это два отдельных набора вопросов.</p>
+          <p className="mt-4 text-base leading-relaxed text-muted">В аудите ресторана, отеля, спа или пляжного клуба вопросы гостей проверяют видимость заведения. Вопросы владельцев, которые ищут аудит, проверяют видимость поставщика услуги. Это два отдельных набора вопросов.</p>
           <div className="mt-6 flex flex-wrap gap-4">
             <Button href="/ru/check">Начать с бесплатной проверки сайта</Button>
             <Button href="/ru/visibility" variant="secondary">Изучить условия AI Visibility</Button>
@@ -64,11 +64,11 @@ export default function RussianMethodologyPage() {
 
       <MeasurementLayers content={content.measurementLayers} background="surface" />
 
-      <ActionReadinessSection content={content.actionReadiness} />
+      <ActionReadinessSection content={content.actionReadiness} locale="ru" />
 
-      <LocalBusinessModeSection content={content.localBusinessMode} />
+      <LocalBusinessModeSection content={content.localBusinessMode} locale="ru" />
 
-      <MethodologySummary content={content.methodology} />
+      <MethodologySummary content={content.methodology} locale="ru" />
 
       <NotClaimedSection content={content.notClaimed} />
     </>

@@ -46,7 +46,7 @@ test("manual Ask Maps belongs to human work, never the automated subscriptions",
   for (const locale of ["en", "ru"] as const) {
     const [basic, expanded, human, execution] = discoveryTracks(locale).flatMap(track => track.plans);
     assert.doesNotMatch(JSON.stringify([basic, expanded]), /Ask Maps|Local AI/);
-    assert.match(expanded.features.join(" "), /automated measurement is verified|автоматическим production-замером/);
+    assert.match(expanded.features.join(" "), /automated measurement is verified|подтверждён автоматический замер/);
     assert.match(human.features.join(" "), /manual Google Ask Maps|Ручное исследование Google Ask Maps/i);
     assert.match(execution.features.join(" "), /only where agreed in scope|только в согласованном объёме/);
   }

@@ -146,15 +146,15 @@ const COMPONENT_NOTES: Record<VisibilityLocale, Record<ReadinessComponentId, str
     llms_txt: "Diagnostic only. It contributes zero weight to the readiness score.",
   },
   ru: {
-    technical_accessibility: "HTTP-доступ, indexability, canonical, мобильные метаданные и evidence sitemap.",
-    ai_crawler_accessibility: "Правила robots.txt проверены отдельно для каждого указанного user-agent.",
+    technical_accessibility: "HTTP-доступ, индексируемость, canonical, мобильные метаданные и наличие sitemap.",
+    ai_crawler_accessibility: "Правила robots.txt проверены отдельно для каждого указанного краулера.",
     structured_data: "Наличие и разбираемость публичных JSON-LD данных о сущности.",
     entity_clarity: "Насколько title, заголовок и имя сущности согласованно описывают бизнес.",
-    citability: "Версионированные эвристики извлекаемого answer-first контента; это не ranking factor.",
+    citability: "Версионированные эвристики контента, который начинается с прямого ответа и легко извлекается; это не фактор ранжирования.",
     content_readiness: "Читаемый текст, содержательные заголовки, метаданные и явная страница предложения.",
     business_information_consistency: "Согласование публичного имени, географии и пути к контакту.",
     conversion_readiness: "Можно ли найти и понять заявленное основное действие клиента.",
-    llms_txt: "Только диагностика. Вес в readiness score равен нулю.",
+    llms_txt: "Только диагностика. Вес в балле готовности равен нулю.",
   },
 };
 
@@ -271,14 +271,15 @@ function extractBlocks(pageUrl: string, html: string): ReadinessBlock[] {
   });
 }
 
-function evaluateCrawlerAccess(crawl: DiscoveryResult): CrawlerAccessResult[] {
+function evaluateCrawlerAccess(crawl: DiscoveryResult, locale: VisibilityLocale): CrawlerAccessResult[] {
+  const ru = locale === "ru";
   if (crawl.robots.status === "unavailable") {
     return CRAWLERS.map((item) => ({
       ...item,
       status: "unknown" as const,
       sourceUrl: crawl.robots.url,
       matchedRule: null,
-      evidence: crawl.robots.error ?? "robots.txt could not be read",
+      evidence: crawl.robots.error ?? (ru ? "robots.txt не удалось прочитать" : "robots.txt could not be read"),
     }));
   }
   if (crawl.robots.status === "not_found" || !crawl.robots.body) {
@@ -287,7 +288,9 @@ function evaluateCrawlerAccess(crawl: DiscoveryResult): CrawlerAccessResult[] {
       status: "allowed" as const,
       sourceUrl: crawl.robots.url,
       matchedRule: null,
-      evidence: "robots.txt is not published; no explicit crawler restriction was observed.",
+      evidence: ru
+        ? "robots.txt не опубликован; явных ограничений для краулеров не обнаружено."
+        : "robots.txt is not published; no explicit crawler restriction was observed.",
     }));
   }
 
@@ -299,7 +302,7 @@ function evaluateCrawlerAccess(crawl: DiscoveryResult): CrawlerAccessResult[] {
       status: verdict.blocked ? ("blocked" as const) : ("allowed" as const),
       sourceUrl: crawl.robots.url,
       matchedRule: verdict.matchedRule,
-      evidence: verdict.matchedRule ?? "No matching Disallow rule for the site root.",
+      evidence: verdict.matchedRule ?? (ru ? "Нет правила Disallow, закрывающего корень сайта." : "No matching Disallow rule for the site root."),
     };
   });
 }
@@ -425,7 +428,7 @@ export function buildPublicReadinessAudit(options: {
       .map((check) => STATE_SCORE[check.state]),
   );
 
-  const crawlerAccess = evaluateCrawlerAccess(crawl);
+  const crawlerAccess = evaluateCrawlerAccess(crawl, locale);
   const crawler = average(
     crawlerAccess.map((item) => (item.status === "allowed" ? 100 : item.status === "blocked" ? 0 : null)),
   );
@@ -627,7 +630,7 @@ export function buildPublicReadinessAudit(options: {
     paidProviderCalls: 0,
     visibilityClaim:
       locale === "ru"
-        ? "Readiness — это техническая и контентная готовность сайта, а не наблюдаемая AI-видимость или рекомендация ChatGPT."
+        ? "Готовность — это техническая и контентная готовность сайта, а не наблюдаемая AI-видимость или рекомендация ChatGPT."
         : "Readiness is technical and content readiness, not observed AI visibility or a ChatGPT recommendation.",
   };
 }

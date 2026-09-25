@@ -29,7 +29,7 @@ const STATUS_LABELS: Record<VisibilityLocale, Record<AgentReadinessCheckResult["
     passed: "Пройдено",
     warning: "Внимание",
     failed: "Проблема",
-    not_applicable: "Неприменимо",
+    not_applicable: "Не применяется",
     unknown: "Неизвестно",
   },
 };
@@ -80,11 +80,11 @@ const COPY: Record<
     brand: "Selena Systems · AI Visibility",
     site: "Сайт",
     date: "Проверено",
-    score: "Оценка Agent Readiness",
+    score: "Балл готовности для агентов",
     notMeasured: "не измерено",
     categories: "Результаты по категориям",
     checked: "Что проверялось",
-    evidence: "Evidence",
+    evidence: "Доказательства",
     why: "Почему это важно",
     fix: "Как исправить",
     verify: "Как проверить исправление",
@@ -181,7 +181,7 @@ export function buildAuditHtmlDocument(input: {
       ? `<h2>${t.categories}</h2><table><thead><tr><th>${t.categories}</th><th>${t.score}</th></tr></thead><tbody>${readiness.categories
           .map(
             (category) =>
-              `<tr><td>${esc(category.label)}</td><td>${category.score === null ? "N/A" : `${category.score}/100`}</td></tr>`,
+              `<tr><td>${esc(category.label)}</td><td>${category.score === null ? (locale === "ru" ? "н/д" : "N/A") : `${category.score}/100`}</td></tr>`,
           )
           .join("")}</tbody></table>`
       : "";

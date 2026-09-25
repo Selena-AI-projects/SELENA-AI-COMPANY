@@ -1,10 +1,22 @@
-import type { VisibilityContent } from "@/lib/visibility/types";
+import type { VisibilityContent, VisibilityLocale } from "@/lib/visibility/types";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function MethodologySummary({ content }: { content: VisibilityContent["methodology"] }) {
+const LABELS: Record<VisibilityLocale, { supported: string; notYetSupported: string }> = {
+  en: { supported: "Supported now", notYetSupported: "Not yet supported" },
+  ru: { supported: "Уже поддерживается", notYetSupported: "Пока не поддерживается" },
+};
+
+export function MethodologySummary({
+  content,
+  locale = "en",
+}: {
+  content: VisibilityContent["methodology"];
+  locale?: VisibilityLocale;
+}) {
+  const labels = LABELS[locale];
   return (
     <section className="bg-ivory py-20 sm:py-28">
       <Container>
@@ -27,7 +39,7 @@ export function MethodologySummary({ content }: { content: VisibilityContent["me
           <Reveal>
             <Card hover={false}>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-copper-deep">
-                Supported now
+                {labels.supported}
               </p>
               <ul className="mt-4 space-y-2.5">
                 {content.supported.map((item) => (
@@ -42,7 +54,7 @@ export function MethodologySummary({ content }: { content: VisibilityContent["me
           <Reveal delay={80}>
             <Card hover={false}>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-                Not yet supported
+                {labels.notYetSupported}
               </p>
               <ul className="mt-4 space-y-2.5">
                 {content.notYetSupported.map((item) => (

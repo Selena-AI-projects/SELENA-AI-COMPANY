@@ -44,7 +44,7 @@ const automatable = [
   },
   {
     title: "Сценарии на Make / Zapier",
-    text: "No-code связки под ваш процесс — понятные, задокументированные, ваши.",
+    text: "Связки без сложного кода под ваш процесс — понятные, задокументированные, ваши.",
   },
   {
     title: "Рутинные документы",
@@ -89,7 +89,7 @@ export default function AiAutomationPage() {
       <PageHero
         eyebrow="Автоматизация"
         title="AI-автоматизация без сложного кода"
-        intro="Собираю no-code связки, которые убирают ручную рутину из заявок, коммуникаций и данных — на Make, Zapier, Telegram/WhatsApp, CRM и Notion."
+        intro="Собираю связки без сложного кода, которые убирают ручную рутину из заявок, коммуникаций и данных — на Make, Zapier, Telegram/WhatsApp, CRM и Notion."
         media={{
           video: { src: cinema.hero.video, poster: cinema.hero.poster },
           alt: cinema.hero.alt,
@@ -157,7 +157,7 @@ export default function AiAutomationPage() {
                 ))}
               </ol>
               <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-line pt-5">
-                <Badge tone="sage">Human review</Badge>
+                <Badge tone="sage">Проверка человеком</Badge>
                 <p className="text-sm leading-relaxed text-muted">
                   Черновик ответа готовит AI, но проверяет и отправляет человек.
                   Клиент никогда не остаётся один на один с ботом в сложной

@@ -1,11 +1,28 @@
-import type { ActionReadinessContent, LocalBusinessModeContent, NotClaimedContent } from "@/lib/visibility/types";
+import type {
+  ActionReadinessContent,
+  LocalBusinessModeContent,
+  NotClaimedContent,
+  VisibilityLocale,
+} from "@/lib/visibility/types";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
 
+const LABELS: Record<VisibilityLocale, { example: string; doesNotProve: string; mayInclude: string }> = {
+  en: { example: "Example: ", doesNotProve: "Does not prove: ", mayInclude: "May include" },
+  ru: { example: "Пример: ", doesNotProve: "Не доказывает: ", mayInclude: "Может включать" },
+};
+
 /** Explains the three Action Readiness states outside a report context. */
-export function ActionReadinessSection({ content }: { content: ActionReadinessContent }) {
+export function ActionReadinessSection({
+  content,
+  locale = "en",
+}: {
+  content: ActionReadinessContent;
+  locale?: VisibilityLocale;
+}) {
+  const labels = LABELS[locale];
   return (
     <section className="bg-surface py-20 sm:py-28">
       <Container>
@@ -17,11 +34,11 @@ export function ActionReadinessSection({ content }: { content: ActionReadinessCo
                 <h3 className="text-h3 text-ink">{state.label}</h3>
                 <p className="mt-3 leading-relaxed text-ink/80">{state.definition}</p>
                 <p className="mt-3 text-sm leading-relaxed text-muted">
-                  <span className="font-medium text-ink">Example: </span>
+                  <span className="font-medium text-ink">{labels.example}</span>
                   {state.example}
                 </p>
                 <p className="mt-3 border-t border-line pt-3 text-sm leading-relaxed text-muted">
-                  <span className="font-medium text-ink">Does not prove: </span>
+                  <span className="font-medium text-ink">{labels.doesNotProve}</span>
                   {state.doesNotProve}
                 </p>
               </Card>
@@ -38,14 +55,20 @@ export function ActionReadinessSection({ content }: { content: ActionReadinessCo
   );
 }
 
-export function LocalBusinessModeSection({ content }: { content: LocalBusinessModeContent }) {
+export function LocalBusinessModeSection({
+  content,
+  locale = "en",
+}: {
+  content: LocalBusinessModeContent;
+  locale?: VisibilityLocale;
+}) {
   return (
     <section className="bg-ivory py-20 sm:py-28">
       <Container size="narrow">
         <SectionHeader eyebrow={content.eyebrow} headline={content.headline} intro={content.intro} />
         <Reveal>
           <Card hover={false} className="mt-10">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-copper-deep">May include</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-copper-deep">{LABELS[locale].mayInclude}</p>
             <ul className="mt-4 space-y-2.5">
               {content.mayInclude.map((item) => (
                 <li key={item} className="flex items-start gap-3">

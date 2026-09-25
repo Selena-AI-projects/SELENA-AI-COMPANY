@@ -91,10 +91,10 @@ const CATEGORY_LABELS: Record<VisibilityLocale, Record<AgentReadinessCategory, s
   ru: {
     discoverability: "Обнаружимость и доступ краулеров",
     content_accessibility: "Контент и машиночитаемость",
-    bot_access: "Управление агентами и trust",
+    bot_access: "Управление агентами и доверие",
     protocol_discovery: "Готовность протоколов и API",
-    commerce: "Готовность действий и commerce",
-    selena_depth: "Сущность и citability — слой Selena",
+    commerce: "Готовность к действиям и покупкам",
+    selena_depth: "Сущность и цитируемость — слой Selena",
     local_ai_readiness: "Готовность к локальному AI-поиску",
   },
 };
@@ -127,10 +127,21 @@ function redactEvidence(value: string): string {
     .slice(0, 500);
 }
 
-function resourceEvidence(resource: PublicTextResource): string[] {
-  const base = [`${resource.url} → ${resource.statusCode ?? "no HTTP status"} (${resource.status})`];
+const RESOURCE_STATUS_RU: Record<PublicTextResource["status"], string> = {
+  available: "доступен",
+  not_found: "не найден",
+  unavailable: "недоступен",
+};
+
+function resourceEvidence(resource: PublicTextResource, locale: VisibilityLocale = "en"): string[] {
+  const ru = locale === "ru";
+  const base = [
+    ru
+      ? `${resource.url} → ${resource.statusCode ?? "нет HTTP-статуса"} (${RESOURCE_STATUS_RU[resource.status] ?? resource.status})`
+      : `${resource.url} → ${resource.statusCode ?? "no HTTP status"} (${resource.status})`,
+  ];
   if (resource.body) base.push(redactEvidence(resource.body.slice(0, 500)));
-  if (resource.error) base.push(`Collection warning: ${redactEvidence(resource.error)}`);
+  if (resource.error) base.push(`${ru ? "Предупреждение при сборе" : "Collection warning"}: ${redactEvidence(resource.error)}`);
   return base;
 }
 
@@ -195,7 +206,7 @@ function codeSnippet(ruleId: AgentCheckId, locale: VisibilityLocale): string[] {
   };
   const snippet = snippets[ruleId];
   if (!snippet) return [];
-  return [locale === "ru" ? `Шаблон — замените placeholders только подтверждёнными данными:\n${snippet}` : `Template — replace placeholders only with verified data:\n${snippet}`];
+  return [locale === "ru" ? `Шаблон — замените заглушки только подтверждёнными данными:\n${snippet}` : `Template — replace placeholders only with verified data:\n${snippet}`];
 }
 
 type Observation = { status: AgentReadinessStatus; evidence: string[]; explanation: string; impact: string };
@@ -414,10 +425,10 @@ function observeLocalAiRule(id: AgentCheckId, crawl: DiscoveryResult, locale: Vi
     const evidence = [
       t(`Name signal visible: ${nameVisible ? "yes" : "no"}`, `Имя видно в тексте: ${nameVisible ? "да" : "нет"}`),
       t(`Location signal visible: ${locationVisible ? "yes" : "no"}`, `Локация видна в тексте: ${locationVisible ? "да" : "нет"}`),
-      t(`Category evidence observed: ${categoryEvidence ? "yes" : "no"}`, `Evidence категории найдено: ${categoryEvidence ? "да" : "нет"}`),
+      t(`Category evidence observed: ${categoryEvidence ? "yes" : "no"}`, `Доказательство категории найдено: ${categoryEvidence ? "да" : "нет"}`),
     ];
     if (!nameVisible && analysis.facts.names.length === 0) {
-      return observed("warning", evidence, "No public business-name signal was found in headings, visible text or structured data of the pages read.", "На прочитанных страницах не найден публичный сигнал имени бизнеса — ни в заголовках, ни в тексте, ни в structured data.");
+      return observed("warning", evidence, "No public business-name signal was found in headings, visible text or structured data of the pages read.", "На прочитанных страницах не найден публичный сигнал имени бизнеса — ни в заголовках, ни в тексте, ни в структурированных данных.");
     }
     if (nameVisible && locationVisible && categoryEvidence) {
       return observed("passed", evidence, "Name, location and category signals were all observed in visible page content.", "Сигналы имени, локации и категории наблюдаются в видимом контенте страниц.");
@@ -453,14 +464,14 @@ function observeLocalAiRule(id: AgentCheckId, crawl: DiscoveryResult, locale: Vi
   }
 
   if (id === "LA-03") {
-    if (thinText && !analysis.facts.jsonLdHasOpeningHours) return observed("unknown", [thinTextEvidence], "Neither text nor structured data carried an opening-hours observation.", "Ни текст, ни structured data не дали наблюдения о часах работы.");
+    if (thinText && !analysis.facts.jsonLdHasOpeningHours) return observed("unknown", [thinTextEvidence], "Neither text nor structured data carried an opening-hours observation.", "Ни текст, ни структурированные данные не дали наблюдения о часах работы.");
     const hoursInText = HOURS_TEXT_PATTERN.test(analysis.visibleText) || HOURS_KEYWORD_PATTERN.test(analysis.visibleText);
     const evidence = [
       t(`openingHours / openingHoursSpecification in JSON-LD: ${analysis.facts.jsonLdHasOpeningHours ? "present" : "not present"}`, `openingHours / openingHoursSpecification в JSON-LD: ${analysis.facts.jsonLdHasOpeningHours ? "есть" : "нет"}`),
       t(`Opening-hours pattern in visible text: ${hoursInText ? "found" : "not found"}`, `Паттерн часов работы в видимом тексте: ${hoursInText ? "найден" : "не найден"}`),
     ];
     if (analysis.facts.jsonLdHasOpeningHours || hoursInText) {
-      return observed("passed", evidence, "An opening-hours signal was observed in visible text or structured data.", "Сигнал часов работы наблюдается в видимом тексте или structured data.");
+      return observed("passed", evidence, "An opening-hours signal was observed in visible text or structured data.", "Сигнал часов работы наблюдается в видимом тексте или структурированных данных.");
     }
     return observed("warning", evidence, "No opening-hours signal was found in visible text or JSON-LD of the pages read.", "Сигнал часов работы не найден ни в видимом тексте, ни в JSON-LD прочитанных страниц.");
   }
@@ -499,11 +510,11 @@ function observeLocalAiRule(id: AgentCheckId, crawl: DiscoveryResult, locale: Vi
         `No JSON-LD blocks were found on the pages read${analysis.facts.jsonLdParseErrors > 0 ? ` (${analysis.facts.jsonLdParseErrors} block(s) failed to parse)` : ""}.`,
         `На прочитанных страницах не найдено блоков JSON-LD${analysis.facts.jsonLdParseErrors > 0 ? ` (${analysis.facts.jsonLdParseErrors} блок(ов) не разобрались)` : ""}.`,
       )];
-      return observed("warning", evidence, "There is no LocalBusiness-type structured data to inspect.", "Structured data типа LocalBusiness для проверки отсутствует.");
+      return observed("warning", evidence, "There is no LocalBusiness-type structured data to inspect.", "Структурированных данных типа LocalBusiness для проверки нет.");
     }
     const nodes = analysis.facts.localBusinessNodes;
     if (nodes.length === 0) {
-      return observed("warning", [t("Structured data is present, but no LocalBusiness-type entity was declared.", "Structured data есть, но сущность типа LocalBusiness не объявлена.")], "Only non-local entity types were found in JSON-LD.", "В JSON-LD найдены только нелокальные типы сущностей.");
+      return observed("warning", [t("Structured data is present, but no LocalBusiness-type entity was declared.", "Структурированные данные есть, но сущность типа LocalBusiness не объявлена.")], "Only non-local entity types were found in JSON-LD.", "В JSON-LD найдены только нелокальные типы сущностей.");
     }
     const complete = nodes.find((node) => node.name && node.hasAddress && (node.hasTelephone || node.hasOpeningHours));
     if (complete) {
@@ -530,7 +541,7 @@ function observeLocalAiRule(id: AgentCheckId, crawl: DiscoveryResult, locale: Vi
         "unknown",
         [t(
           "Not enough data: no comparable structured-data facts (name, telephone, locality) were declared, so no contradiction can be measured.",
-          "Недостаточно данных: в structured data не объявлено сопоставимых фактов (name, telephone, локация), поэтому противоречие измерить нечем.",
+          "Недостаточно данных: в структурированных данных не объявлено сопоставимых фактов (name, telephone, локация), поэтому противоречие измерить нечем.",
         )],
         "There is nothing declared to compare against the visible content.",
         "Нет заявленных фактов, которые можно сравнить с видимым контентом.",
@@ -549,16 +560,16 @@ function observeLocalAiRule(id: AgentCheckId, crawl: DiscoveryResult, locale: Vi
     }
     const unique = [...new Set(missing)];
     if (unique.length === 0) {
-      return observed("passed", [t("Every declared structured-data fact was also found in the visible page text.", "Каждый заявленный в structured data факт найден и в видимом тексте страниц.")], "Structured data and visible content agree on the compared facts.", "Structured data и видимый контент согласованы по сравниваемым фактам.");
+      return observed("passed", [t("Every declared structured-data fact was also found in the visible page text.", "Каждый заявленный в структурированных данных факт найден и в видимом тексте страниц.")], "Structured data and visible content agree on the compared facts.", "Структурированные данные и видимый контент согласованы по сравниваемым фактам.");
     }
-    return observed("warning", [t(`Declared in structured data but not found in visible text: ${unique.slice(0, 4).join("; ")}.`, `Заявлено в structured data, но не найдено в видимом тексте: ${unique.slice(0, 4).join("; ")}.`)], "Some declared facts are not corroborated by the visible content.", "Часть заявленных фактов не подтверждается видимым контентом.");
+    return observed("warning", [t(`Declared in structured data but not found in visible text: ${unique.slice(0, 4).join("; ")}.`, `Заявлено в структурированных данных, но не найдено в видимом тексте: ${unique.slice(0, 4).join("; ")}.`)], "Some declared facts are not corroborated by the visible content.", "Часть заявленных фактов не подтверждается видимым контентом.");
   }
 
   if (id === "LA-07") {
     const matched = MAPS_LINK_PATTERNS.filter((pattern) => pattern.test(analysis.rawHtml));
     const noRequestNote = t("Static HTML inspection only; no Google or Maps request was made.", "Только инспекция статического HTML; запросы к Google или Maps не выполнялись.");
     if (matched.length > 0) {
-      return observed("passed", [t(`Maps link pattern observed in public HTML: ${matched.map(String).join(", ")}`, `Паттерн Maps-ссылки найден в публичном HTML: ${matched.map(String).join(", ")}`), noRequestNote], "A Maps reference link is present in the public HTML.", "Maps-ссылка присутствует в публичном HTML как reference.");
+      return observed("passed", [t(`Maps link pattern observed in public HTML: ${matched.map(String).join(", ")}`, `Шаблон ссылки на Google Maps найден в публичном HTML: ${matched.map(String).join(", ")}`), noRequestNote], "A Maps reference link is present in the public HTML.", "Ссылка на Google Maps присутствует в публичном HTML как источник.");
     }
     return observed("warning", [t("No Maps reference link was observed in the public HTML of the pages read.", "Maps-ссылка не найдена в публичном HTML прочитанных страниц."), noRequestNote], "No Maps reference link was found; only add one for a confirmed listing.", "Maps-ссылка не найдена; добавляйте её только для подтверждённой карточки.");
   }
@@ -607,7 +618,7 @@ function observeLocalAiRule(id: AgentCheckId, crawl: DiscoveryResult, locale: Vi
     if (merged) {
       return observed("warning", [t(
         `The same entity name is declared with ${merged[1].size} different localities in structured data.`,
-        `Одно и то же имя сущности объявлено в structured data с ${merged[1].size} разными локациями.`,
+        `Одно и то же имя сущности объявлено в структурированных данных с ${merged[1].size} разными локациями.`,
       )], "One entity name spans several localities; distinct concepts may be merged into one entity.", "Одно имя сущности покрывает несколько локаций; разные концепции могут быть слиты в одну сущность.");
     }
     const distinctNames = new Set(analysis.facts.names.map(normalizeFact).filter(Boolean));
@@ -620,7 +631,7 @@ function observeLocalAiRule(id: AgentCheckId, crawl: DiscoveryResult, locale: Vi
           `Multiple entity names were observed (${[...distinctNames].slice(0, 4).join(", ")}); public pages alone cannot confirm whether each concept is a distinct entity.`,
           `Наблюдается несколько имён сущностей (${[...distinctNames].slice(0, 4).join(", ")}); только по публичным страницам нельзя подтвердить, что каждая концепция — отдельная сущность.`,
         )];
-    return observed("unknown", evidence, "Public pages rarely carry enough evidence to decide this; unknown is the honest outcome.", "Публичные страницы редко содержат достаточно evidence для вывода; unknown — честный результат.");
+    return observed("unknown", evidence, "Public pages rarely carry enough evidence to decide this; unknown is the honest outcome.", "Публичные страницы редко содержат достаточно доказательств для вывода; «Неизвестно» — честный результат.");
   }
 
   return observed("unknown", [t("No deterministic local-readiness observation was produced.", "Детерминированное наблюдение локальной готовности не построено.")], "The diagnostic produced no observation.", "Диагностика не дала наблюдения.");
@@ -641,6 +652,9 @@ function observeRule(
   const homepage = crawl.pages.find((page) => page.role === "homepage")?.fetch;
   const html = homepage?.html ?? "";
   const headers = homepage?.headers ?? {};
+  const t = (en: string, ruText: string): string => (ru ? ruText : en);
+  const none = t("none", "нет");
+  const notMeasured = t("not measured", "не измерено");
   const observed = (status: AgentReadinessStatus, evidence: string[], en: string, ruText: string): Observation => ({
     status,
     evidence: evidence.map(redactEvidence).filter(Boolean),
@@ -652,39 +666,39 @@ function observeRule(
 
   if (id === "CF-D01") {
     const status = crawl.robots.status === "available" ? "passed" : crawl.robots.status === "not_found" ? "failed" : "warning";
-    return observed(status, resourceEvidence(crawl.robots), "robots.txt was fetched and inspected for public crawler rules.", "robots.txt загружен и проверен на правила публичных краулеров.");
+    return observed(status, resourceEvidence(crawl.robots, locale), "robots.txt was fetched and inspected for public crawler rules.", "robots.txt загружен и проверен на правила публичных краулеров.");
   }
   if (id === "CF-D02") {
     const status = availableResourceStatus(crawl.sitemap, (body) => /<(?:urlset|sitemapindex)\b/i.test(body));
-    return observed(status, resourceEvidence(crawl.sitemap), "The sitemap endpoint and XML root were inspected.", "Проверены endpoint sitemap и корневой XML-элемент.");
+    return observed(status, resourceEvidence(crawl.sitemap, locale), "The sitemap endpoint and XML root were inspected.", "Проверены адрес sitemap и корневой XML-элемент.");
   }
   if (id === "CF-D03") {
     const link = headers.link ?? "";
-    return observed(link && /<[^>]+>\s*;\s*rel=/i.test(link) ? "passed" : "failed", [`Homepage Link header: ${link || "not present"}`], "The homepage response was checked for typed discovery links.", "Ответ главной страницы проверен на типизированные discovery links.");
+    return observed(link && /<[^>]+>\s*;\s*rel=/i.test(link) ? "passed" : "failed", [t(`Homepage Link header: ${link || "not present"}`, `Заголовок Link главной страницы: ${link || "отсутствует"}`)], "The homepage response was checked for typed discovery links.", "Ответ главной страницы проверен на типизированные ссылки для обнаружения ресурсов.");
   }
   if (id === "CF-D04") {
     const status = crawl.dnsAid.status === "available" ? "passed" : crawl.dnsAid.status === "not_found" ? "failed" : "warning";
-    return observed(status, [...crawl.dnsAid.ownerNames.map((name) => `DNS query: ${name}`), ...crawl.dnsAid.records.slice(0, 4), crawl.dnsAid.error ?? ""], "DNS-AID owner names were queried without treating draft metadata as a trust signal.", "DNS-AID owner names запрошены без трактовки draft metadata как trust-сигнала.");
+    return observed(status, [...crawl.dnsAid.ownerNames.map((name) => t(`DNS query: ${name}`, `DNS-запрос: ${name}`)), ...crawl.dnsAid.records.slice(0, 4), crawl.dnsAid.error ?? ""], "DNS-AID owner names were queried without treating draft metadata as a trust signal.", "Имена владельцев DNS-AID запрошены; черновые метаданные не считаются сигналом доверия.");
   }
   if (id === "CF-C01") {
     const item = crawl.markdownRepresentation;
     const status = item.status === "unavailable" ? "warning" : item.status === "available" && /^text\/markdown/i.test(item.contentType ?? "") ? "passed" : "failed";
-    return observed(status, [`GET ${item.url} with Accept: text/markdown → ${item.statusCode ?? "no status"}`, `Content-Type: ${item.contentType ?? "not present"}`], "The homepage was requested with Markdown content negotiation.", "Главная страница запрошена с Markdown content negotiation.");
+    return observed(status, [t(`GET ${item.url} with Accept: text/markdown → ${item.statusCode ?? "no status"}`, `GET ${item.url} с Accept: text/markdown → ${item.statusCode ?? "нет статуса"}`), `Content-Type: ${item.contentType ?? t("not present", "отсутствует")}`], "The homepage was requested with Markdown content negotiation.", "Главная страница запрошена с заголовком Accept: text/markdown.");
   }
   if (id === "CF-B01") {
-    if (crawl.robots.status !== "available") return observed(crawl.robots.status === "not_found" ? "failed" : "warning", resourceEvidence(crawl.robots), "Named AI bot policy could not be confirmed.", "Явную политику для AI-ботов подтвердить не удалось.");
+    if (crawl.robots.status !== "available") return observed(crawl.robots.status === "not_found" ? "failed" : "warning", resourceEvidence(crawl.robots, locale), "Named AI bot policy could not be confirmed.", "Явную политику для AI-ботов подтвердить не удалось.");
     const body = crawl.robots.body ?? "";
     const agents = [...body.matchAll(/User-agent:\s*(OAI-SearchBot|ChatGPT-User|GPTBot|Google-Extended|ClaudeBot|PerplexityBot)/gi)].map((match) => match[1]);
-    return observed(agents.length > 0 ? "passed" : "warning", [`Named AI user-agents found: ${agents.join(", ") || "none"}`], "robots.txt was inspected for named AI user-agent groups and wildcard fallback.", "robots.txt проверен на группы именованных AI user-agent и wildcard fallback.");
+    return observed(agents.length > 0 ? "passed" : "warning", [t(`Named AI user-agents found: ${agents.join(", ") || "none"}`, `Найдены правила для AI-краулеров: ${agents.join(", ") || "нет"}`)], "robots.txt was inspected for named AI user-agent groups and wildcard fallback.", "robots.txt проверен на группы правил для названных AI-краулеров и общее правило для всех (*).");
   }
   if (id === "CF-B02") {
     const combined = `${crawl.robots.body ?? ""}\n${headers["content-signal"] ?? headers["content-signals"] ?? ""}`;
     const matches = combined.match(/Content-Signal[^\n]*/gi) ?? [];
-    return observed(matches.length > 0 ? "passed" : "warning", [`Content Signals: ${matches.slice(0, 3).join(" | ") || "not observed"}`], "Public policy signals were inspected without inferring legal permission.", "Публичные policy-сигналы проверены без вывода о юридическом разрешении.");
+    return observed(matches.length > 0 ? "passed" : "warning", [`Content Signals: ${matches.slice(0, 3).join(" | ") || t("not observed", "не обнаружены")}`], "Public policy signals were inspected without inferring legal permission.", "Публичные сигналы о правилах использования контента проверены без вывода о юридическом разрешении.");
   }
   if (id === "CF-B03") {
     const resource = crawl.agentResources.webBotAuth;
-    return observed(availableResourceStatus(resource), resourceEvidence(resource), "The Web Bot Auth discovery directory was fetched.", "Запрошен discovery directory Web Bot Auth.");
+    return observed(availableResourceStatus(resource), resourceEvidence(resource, locale), "The Web Bot Auth discovery directory was fetched.", "Запрошен каталог ключей Web Bot Auth.");
   }
 
   const resourceByProtocol: Partial<Record<AgentCheckId, keyof DiscoveryResult["agentResources"]>> = {
@@ -708,26 +722,26 @@ function observeRule(
       "CF-P06": (_body, parsed) => Boolean(parsed?.name && parsed.url && Array.isArray(parsed.skills)),
       "CF-P07": (_body, parsed) => Boolean(parsed && (Array.isArray(parsed.skills) || Array.isArray(parsed.items))),
     };
-    return observed(availableResourceStatus(resource, validators[id]), resourceEvidence(resource), "The standardized public discovery resource was fetched and checked for minimum structure.", "Стандартизированный публичный discovery resource загружен и проверен на минимальную структуру.");
+    return observed(availableResourceStatus(resource, validators[id]), resourceEvidence(resource, locale), "The standardized public discovery resource was fetched and checked for minimum structure.", "Стандартизированный публичный ресурс для обнаружения загружен и проверен на минимальную структуру.");
   }
   if (id === "CF-P08") {
     const markers = ["navigator.modelContext", "modelContext.registerTool", "WebMCP"].filter((marker) => html.includes(marker));
-    return observed(markers.length > 0 ? "passed" : "failed", [`Static HTML markers: ${markers.join(", ") || "none"}`, "Scanned HTML only; page JavaScript was not executed."], "Public HTML was inspected for explicit WebMCP capability registration.", "Публичный HTML проверен на явную регистрацию WebMCP capability.");
+    return observed(markers.length > 0 ? "passed" : "failed", [t(`Static HTML markers: ${markers.join(", ") || "none"}`, `Маркеры в статическом HTML: ${markers.join(", ") || "нет"}`), t("Scanned HTML only; page JavaScript was not executed.", "Проверен только HTML; JavaScript страницы не выполнялся.")], "Public HTML was inspected for explicit WebMCP capability registration.", "Публичный HTML проверен на явную регистрацию возможностей WebMCP.");
   }
 
   if (id === "CF-X01") {
     const combined = `${JSON.stringify(headers)} ${html.slice(0, 50_000)} ${crawl.agentResources.openApi.body ?? ""}`;
     const markers = combined.match(/x402|PAYMENT-REQUIRED|X-PAYMENT/gi) ?? [];
-    return observed(markers.length > 0 ? "passed" : "failed", [`x402 markers: ${[...new Set(markers)].join(", ") || "none"}`], "Public payment-discovery evidence was inspected; no transaction was attempted.", "Проверено публичное payment-discovery evidence; транзакция не выполнялась.");
+    return observed(markers.length > 0 ? "passed" : "failed", [t(`x402 markers: ${[...new Set(markers)].join(", ") || "none"}`, `Маркеры x402: ${[...new Set(markers)].join(", ") || "нет"}`)], "Public payment-discovery evidence was inspected; no transaction was attempted.", "Проверены публичные признаки платёжных протоколов; транзакция не выполнялась.");
   }
   if (id === "CF-X02") {
     const resource = crawl.agentResources.openApi;
-    return observed(availableResourceStatus(resource, (body) => /x-payment-info|mpp/i.test(body)), resourceEvidence(resource), "OpenAPI was inspected for MPP payment metadata; no payment was attempted.", "OpenAPI проверен на MPP payment metadata; платёж не выполнялся.");
+    return observed(availableResourceStatus(resource, (body) => /x-payment-info|mpp/i.test(body)), resourceEvidence(resource, locale), "OpenAPI was inspected for MPP payment metadata; no payment was attempted.", "OpenAPI проверен на платёжные метаданные MPP; платёж не выполнялся.");
   }
   if (id === "CF-X03" || id === "CF-X04" || id === "CF-X05") {
     const key = id === "CF-X03" ? "ucp" : id === "CF-X04" ? "acp" : "ap2";
     const resource = crawl.agentResources[key];
-    return observed(availableResourceStatus(resource, (_body, parsed) => Boolean(parsed)), resourceEvidence(resource), "The public commerce discovery document was fetched; no checkout or payment was started.", "Публичный commerce discovery document загружен; checkout или платёж не запускались.");
+    return observed(availableResourceStatus(resource, (_body, parsed) => Boolean(parsed)), resourceEvidence(resource, locale), "The public commerce discovery document was fetched; no checkout or payment was started.", "Публичный документ для обнаружения коммерческих возможностей загружен; оформление заказа и платёж не запускались.");
   }
 
   if (id.startsWith("LA-")) return observeLocalAiRule(id, crawl, locale);
@@ -735,7 +749,7 @@ function observeRule(
   if (id === "SE-01") {
     const canonicalEvidence = crawl.pages.map((page) => {
       const canonical = page.fetch.html ? extractHtmlSignals(page.fetch.html).canonicalUrl : null;
-      if (!canonical) return { line: `${page.fetch.finalUrl} → canonical not present`, mismatch: false };
+      if (!canonical) return { line: t(`${page.fetch.finalUrl} → canonical not present`, `${page.fetch.finalUrl} → canonical отсутствует`), mismatch: false };
       try {
         const actual = new URL(page.fetch.finalUrl);
         const declared = new URL(canonical, actual);
@@ -745,28 +759,28 @@ function observeRule(
           mismatch: normalized(actual) !== normalized(declared),
         };
       } catch {
-        return { line: `${page.fetch.finalUrl} → malformed canonical ${canonical}`, mismatch: true };
+        return { line: t(`${page.fetch.finalUrl} → malformed canonical ${canonical}`, `${page.fetch.finalUrl} → некорректный canonical ${canonical}`), mismatch: true };
       }
     });
     const base = stateGroupStatus(summary.technicalStates);
     const status = canonicalEvidence.some((item) => item.mismatch) ? "failed" : base;
-    return observed(status, [`Pages inspected: ${crawl.pages.length}`, ...crawl.pages.map((page) => `${page.requestedUrl} → ${page.fetch.finalUrl}`), ...canonicalEvidence.map((item) => item.line)], "Redirect outcomes and canonical evidence were compared across selected pages.", "Redirect outcomes и canonical evidence сопоставлены по выбранным страницам.");
+    return observed(status, [t(`Pages inspected: ${crawl.pages.length}`, `Проверено страниц: ${crawl.pages.length}`), ...crawl.pages.map((page) => `${page.requestedUrl} → ${page.fetch.finalUrl}`), ...canonicalEvidence.map((item) => item.line)], "Redirect outcomes and canonical evidence were compared across selected pages.", "Результаты редиректов и canonical-сигналы сопоставлены по выбранным страницам.");
   }
-  if (id === "SE-02") return observed(stateGroupStatus(summary.indexabilityStates), crawl.pages.map((page) => `${page.fetch.finalUrl} → HTTP ${page.fetch.statusCode}`), "Status codes and indexability directives were checked per page.", "Status codes и indexability directives проверены для каждой страницы.");
-  if (id === "SE-03") return observed(scoreStatus(summary.structuredDataScore), [`Structured-data score: ${summary.structuredDataScore ?? "not measured"}`], "Public JSON-LD was parsed and checked for entity-like types.", "Публичный JSON-LD разобран и проверен на типы сущностей.");
-  if (id === "SE-04") return observed(scoreStatus(summary.entityClarityScore), [`Entity-clarity score: ${summary.entityClarityScore ?? "not measured"}`], "Title, H1 and structured entity names were compared.", "Сопоставлены title, H1 и имена сущностей в structured data.");
-  if (id === "SE-05") return observed(scoreStatus(summary.contentReadinessScore), [`Content-readiness score: ${summary.contentReadinessScore ?? "not measured"}`, `Selected page roles: ${crawl.pages.map((page) => page.role).join(", ")}`], "Up to five relevant public pages were inspected with provenance.", "До пяти релевантных публичных страниц проверены с provenance.");
+  if (id === "SE-02") return observed(stateGroupStatus(summary.indexabilityStates), crawl.pages.map((page) => `${page.fetch.finalUrl} → HTTP ${page.fetch.statusCode}`), "Status codes and indexability directives were checked per page.", "HTTP-статусы и директивы индексации проверены для каждой страницы.");
+  if (id === "SE-03") return observed(scoreStatus(summary.structuredDataScore), [t(`Structured-data score: ${summary.structuredDataScore ?? "not measured"}`, `Балл структурированных данных: ${summary.structuredDataScore ?? notMeasured}`)], "Public JSON-LD was parsed and checked for entity-like types.", "Публичный JSON-LD разобран и проверен на типы сущностей.");
+  if (id === "SE-04") return observed(scoreStatus(summary.entityClarityScore), [t(`Entity-clarity score: ${summary.entityClarityScore ?? "not measured"}`, `Балл ясности сущности: ${summary.entityClarityScore ?? notMeasured}`)], "Title, H1 and structured entity names were compared.", "Сопоставлены title, H1 и имена сущностей в структурированных данных.");
+  if (id === "SE-05") return observed(scoreStatus(summary.contentReadinessScore), [t(`Content-readiness score: ${summary.contentReadinessScore ?? "not measured"}`, `Балл готовности контента: ${summary.contentReadinessScore ?? notMeasured}`), t(`Selected page roles: ${crawl.pages.map((page) => page.role).join(", ")}`, `Роли выбранных страниц: ${crawl.pages.map((page) => page.role).join(", ")}`)], "Up to five relevant public pages were inspected with provenance.", "До пяти релевантных публичных страниц проверены с указанием источника каждого наблюдения.");
   if (id === "SE-06") {
     const average = summary.blockScores.length ? Math.round(summary.blockScores.reduce((sum, value) => sum + value, 0) / summary.blockScores.length) : null;
-    return observed(scoreStatus(average), [`Blocks measured: ${summary.blockScores.length}`, `Average block readiness: ${average ?? "not measured"}`], "Heading-anchored blocks were scored with versioned extractability heuristics.", "Блоки с заголовками оценены версионированными эвристиками извлекаемости.");
+    return observed(scoreStatus(average), [t(`Blocks measured: ${summary.blockScores.length}`, `Оценено блоков: ${summary.blockScores.length}`), t(`Average block readiness: ${average ?? "not measured"}`, `Средняя готовность блоков: ${average ?? notMeasured}`)], "Heading-anchored blocks were scored with versioned extractability heuristics.", "Блоки с заголовками оценены версионированными эвристиками извлекаемости.");
   }
-  if (id === "SE-07") return observed(scoreStatus(summary.businessConsistencyScore, 70, 40), [`Business-consistency score: ${summary.businessConsistencyScore ?? "not measured"}`], "Public name, location and contact-path signals were compared.", "Сопоставлены публичные name, location и contact-path signals.");
+  if (id === "SE-07") return observed(scoreStatus(summary.businessConsistencyScore, 70, 40), [t(`Business-consistency score: ${summary.businessConsistencyScore ?? "not measured"}`, `Балл согласованности бизнес-данных: ${summary.businessConsistencyScore ?? notMeasured}`)], "Public name, location and contact-path signals were compared.", "Сопоставлены публичные сигналы имени, локации и способа связи.");
   if (id === "SE-08") {
     const signals = html ? extractHtmlSignals(html) : null;
     const readiness = signals ? detectActionReadiness(signals, primaryAction, html) : null;
-    return observed(readiness ? (readiness.humanReady.state === "pass" ? (readiness.machineReadable.state === "pass" ? "passed" : "warning") : "failed") : "warning", [`Primary action: ${primaryAction}`, `Human-ready: ${readiness?.humanReady.state ?? "not measured"}`, `Machine-readable: ${readiness?.machineReadable.state ?? "not measured"}`], "The declared primary action was checked separately for human and machine readability.", "Заявленное основное действие отдельно проверено на human- и machine-readability.");
+    return observed(readiness ? (readiness.humanReady.state === "pass" ? (readiness.machineReadable.state === "pass" ? "passed" : "warning") : "failed") : "warning", [t(`Primary action: ${primaryAction}`, `Основное действие: ${primaryAction}`), t(`Human-ready: ${readiness?.humanReady.state ?? "not measured"}`, `Готово для человека: ${readiness?.humanReady.state ?? notMeasured}`), t(`Machine-readable: ${readiness?.machineReadable.state ?? "not measured"}`, `Машиночитаемо: ${readiness?.machineReadable.state ?? notMeasured}`)], "The declared primary action was checked separately for human and machine readability.", "Заявленное основное действие отдельно проверено на понятность для человека и машиночитаемость.");
   }
-  if (id === "SE-09") return observed(crawl.llmsTxt.status === "available" && Boolean(crawl.llmsTxt.body?.trim()) ? "passed" : crawl.llmsTxt.status === "unavailable" ? "warning" : "failed", resourceEvidence(crawl.llmsTxt), "llms.txt is reported as a zero-weight diagnostic, never as a ranking factor.", "llms.txt показан как диагностика с нулевым весом, а не как ranking factor.");
+  if (id === "SE-09") return observed(crawl.llmsTxt.status === "available" && Boolean(crawl.llmsTxt.body?.trim()) ? "passed" : crawl.llmsTxt.status === "unavailable" ? "warning" : "failed", resourceEvidence(crawl.llmsTxt, locale), "llms.txt is reported as a zero-weight diagnostic, never as a ranking factor.", "llms.txt показан как диагностика с нулевым весом, а не как фактор ранжирования.");
   if (id === "SE-10") {
     const visible = new Set((htmlToVisibleText(html).match(/(?:US\$|\$)\s?\d[\d,.]*/g) ?? []).map((value) => value.replace(/[^\d.]/g, "")));
     const signals = html ? extractHtmlSignals(html) : null;
@@ -781,16 +795,23 @@ function observeRule(
     signals?.jsonLdBlocks.forEach(visit);
     const missing = [...structured].filter((price) => price && !visible.has(price));
     const status: AgentReadinessStatus = structured.size === 0 || visible.size === 0 ? "warning" : missing.length === 0 ? "passed" : "failed";
-    return observed(status, [`Visible USD values: ${[...visible].join(", ") || "none"}`, `Structured prices: ${[...structured].join(", ") || "none"}`, `Structured values absent from visible copy: ${missing.join(", ") || "none"}`], "Visible and structured price values were compared without assuming that different offers should have the same price.", "Видимые и structured значения цен сопоставлены без предположения, что разные предложения должны стоить одинаково.");
+    return observed(status, [t(`Visible USD values: ${[...visible].join(", ") || "none"}`, `Видимые суммы в USD: ${[...visible].join(", ") || none}`), t(`Structured prices: ${[...structured].join(", ") || "none"}`, `Цены в структурированных данных: ${[...structured].join(", ") || none}`), t(`Structured values absent from visible copy: ${missing.join(", ") || "none"}`, `Цены из разметки, которых нет в видимом тексте: ${missing.join(", ") || none}`)], "Visible and structured price values were compared without assuming that different offers should have the same price.", "Видимые цены и цены в структурированных данных сопоставлены без предположения, что разные предложения должны стоить одинаково.");
   }
 
-  return observed("warning", ["No deterministic observation was produced."], "The check could not be confirmed.", "Проверку не удалось подтвердить.");
+  return observed("warning", [t("No deterministic observation was produced.", "Детерминированное наблюдение не получено.")], "The check could not be confirmed.", "Проверку не удалось подтвердить.");
 }
+
+const PROFILE_LABEL_RU: Record<SiteProfile, string> = {
+  all_checks: "все проверки",
+  content_site: "контентный сайт",
+  api_application: "API / приложение",
+  commerce: "коммерция",
+};
 
 function profileEvidence(profile: SiteProfile, commerceEvidence: boolean, locale: VisibilityLocale): string {
   const label = profile.replaceAll("_", " ");
   return locale === "ru"
-    ? `Профиль выбран пользователем: ${label}. Commerce evidence ${commerceEvidence ? "обнаружено" : "не обнаружено"}; неприменимые проверки исключены из score.`
+    ? `Профиль выбран пользователем: ${PROFILE_LABEL_RU[profile]}. Признаки коммерции ${commerceEvidence ? "обнаружены" : "не обнаружены"}; неприменимые проверки исключены из балла.`
     : `User-selected profile: ${label}. Commerce evidence was ${commerceEvidence ? "observed" : "not observed"}; non-applicable checks are excluded from scoring.`;
 }
 
@@ -812,12 +833,12 @@ export function buildAgentReadiness(options: {
       ? observeRule(rule.id, { crawl, summary, primaryAction, locale, commerceEvidence })
       : {
           status: "not_applicable" as const,
-          evidence: [locale === "ru" ? `Профиль ${siteProfile}: проверка не применяется и не влияет на score.` : `Profile ${siteProfile}: this check is not applicable and does not affect the score.`],
+          evidence: [locale === "ru" ? `Профиль «${PROFILE_LABEL_RU[siteProfile]}»: проверка не применяется и не влияет на балл.` : `Profile ${siteProfile}: this check is not applicable and does not affect the score.`],
           explanation: locale === "ru" ? "Проверка исключена по профилю и наблюдаемому типу сайта." : "The check is excluded by the selected profile and observed site type.",
-          impact: locale === "ru" ? "Not applicable не является ошибкой." : "Not applicable is not a defect.",
+          impact: locale === "ru" ? "«Не применяется» не является ошибкой." : "Not applicable is not a defect.",
         };
     const adapter = platformFixFor(rule.id, platform, locale);
-    const checkedTarget = rule.checkedTarget
+    const checkedTarget = copy.checkedTarget
       .replace("<domain>", new URL(crawl.baseUrl).hostname);
     return {
       checkId: rule.id,
