@@ -245,6 +245,10 @@ export type VerificationCycleContent = {
   headline: string;
   intro: string;
   stages: VerificationStage[];
+  /** Localized action statuses in ACTION_LIFECYCLE_STATUSES order, shown on the verified outcome. */
+  statuses: string[];
+  /** Summary of the collapsed block holding each stage's detail and rule. */
+  detailsLabel: string;
   /** Why a loop and not a one-off report, in the owner's words. */
   loopRule: string;
   sampleReport: {

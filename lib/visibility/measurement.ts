@@ -158,6 +158,10 @@ export const VERIFICATION_STAGE_IDS: readonly VerificationStageId[] = [
 export interface VerificationStage {
   id: VerificationStageId;
   label: string;
+  /** Core stages carry the page; support stages sit between them in smaller type. */
+  tier: "core" | "support";
+  /** The one line a reader takes from the stage: what the owner gets from it. */
+  benefit: string;
   /** What this stage leaves behind for the next one. */
   produces: string;
   /** The rule that keeps the stage honest. */
