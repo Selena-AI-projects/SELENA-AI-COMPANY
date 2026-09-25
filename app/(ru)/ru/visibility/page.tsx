@@ -29,7 +29,7 @@ const cinema = pageCinema("ru").visibility;
 export const metadata = buildMetadata({
   title: "AI Visibility для бизнеса",
   description:
-    "AI Visibility от Selena Systems показывает, как AI находит и представляет ваш бизнес: readiness, рекомендации, evidence и готовность к действию.",
+    "AI Visibility от Selena Systems показывает, как AI находит и представляет ваш бизнес: готовность сайта, рекомендации, доказательства и готовность к действию.",
   path: "/ru/visibility",
   locale: "ru_RU",
   languages: visibilityLanguages("visibility"),
@@ -44,6 +44,7 @@ export default function RussianVisibilityPage() {
         eyebrow={content.hero.eyebrow}
         title={content.hero.title}
         intro={content.hero.intro}
+        answers={content.hero.answers}
         primaryCta={content.cta.primary}
         secondaryCta={content.cta.secondary}
         backdrop={cinema.hero}
@@ -64,11 +65,11 @@ export default function RussianVisibilityPage() {
           <Reveal className="mb-10">
             <CinemaFrame tone="light" image={cinema.boundary.image} alt={cinema.boundary.alt} caption={cinema.boundary.caption} />
           </Reveal>
-          <MeasurementBoundary content={content.measurementBoundary} />
+          <MeasurementBoundary content={content.measurementBoundary} locale="ru" />
         </Container>
       </section>
 
-      <ActionReadinessSection content={content.actionReadiness} />
+      <ActionReadinessSection content={content.actionReadiness} locale="ru" />
 
       <section className="bg-surface pb-20 sm:pb-28">
         <Container>
@@ -78,7 +79,7 @@ export default function RussianVisibilityPage() {
         </Container>
       </section>
 
-      <LocalBusinessModeSection content={content.localBusinessMode} />
+      <LocalBusinessModeSection content={content.localBusinessMode} locale="ru" />
 
       <section className="bg-ivory pb-20 sm:pb-28">
         <Container size="narrow">

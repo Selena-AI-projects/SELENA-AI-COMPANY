@@ -11,12 +11,12 @@ const stages = [
   },
   {
     title: "3. GitHub",
-    text: "Commit SHA · pull request · CI",
+    text: "Хеш коммита · пул-реквест · CI",
     tone: "bg-good text-surface border-good",
   },
   {
     title: "4. Claude Code",
-    text: "Независимый read-only review exact diff",
+    text: "Независимая проверка точного диффа, только чтение",
     tone: "bg-surface text-ink border-line",
   },
 ] as const;
@@ -46,23 +46,23 @@ export function CrossReviewWorkflow() {
         <div className="mx-auto mt-5 grid max-w-3xl gap-4 sm:grid-cols-2">
           <div className="rounded-lg border border-copper bg-warn-soft p-5">
             <p className="font-semibold text-ink">Да → обратно в Codex</p>
-            <p className="mt-2 leading-relaxed text-muted">Конкретная правка → новый commit → тесты и review заново.</p>
+            <p className="mt-2 leading-relaxed text-muted">Конкретная правка → новый коммит → тесты и проверка заново.</p>
           </div>
           <div className="rounded-lg border border-good bg-good-soft p-5">
-            <p className="font-semibold text-ink">Нет → owner-gate</p>
-            <p className="mt-2 leading-relaxed text-muted">Владелец отдельно решает: merge, расходы, публикация или deploy.</p>
+            <p className="font-semibold text-ink">Нет → решение владельца</p>
+            <p className="mt-2 leading-relaxed text-muted">Владелец отдельно решает: слияние, расходы, публикация или выкладка.</p>
           </div>
         </div>
 
         <div className="mx-auto mt-5 max-w-3xl rounded-lg border border-dashed border-copper-deep bg-surface p-5 text-center">
           <p className="font-semibold text-ink">Лимит Claude Max → BLOCKED_PLAN_LIMIT</p>
           <p className="mt-2 leading-relaxed text-muted">
-            Состояние сохраняется. После восстановления лимита запускается scheduled retry и проверка Claude Code продолжается с того же зафиксированного commit.
+            Состояние сохраняется. После восстановления лимита по расписанию запускается повторная попытка, и проверка Claude Code продолжается с того же зафиксированного коммита.
           </p>
         </div>
       </div>
       <figcaption id="cross-review-workflow-caption" className="mt-3 text-sm leading-relaxed text-muted">
-        Адаптивная HTML-схема. Замечание возвращает задачу к Codex; перед merge или deploy всегда остаётся отдельный owner-gate.
+        Адаптивная HTML-схема. Замечание возвращает задачу к Codex; перед слиянием или выкладкой всегда остаётся отдельное решение владельца.
       </figcaption>
     </figure>
   );

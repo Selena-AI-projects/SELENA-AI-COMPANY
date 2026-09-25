@@ -161,7 +161,7 @@ function proposedFix(ruleId: string, locale: VisibilityLocale): string {
       : '<a href="[confirmed contact or booking URL]">[Primary action]</a>',
     "crawler.access": "User-agent: [confirmed crawler]\nAllow: /\nDisallow: /[private-path]/",
     "citability.block": ru
-      ? "[Прямой ответ одним предложением]. [Конкретный scope, локация, условия и подтверждаемый факт]."
+      ? "[Прямой ответ одним предложением]. [Конкретные границы предложения, локация, условия и подтверждаемый факт]."
       : "[Direct answer in one sentence]. [Concrete scope, location, conditions and verifiable fact].",
     "content.readiness": ru
       ? "[Кто вы и что предлагаете]. [Для кого и где]. [Какое действие сделать дальше]."

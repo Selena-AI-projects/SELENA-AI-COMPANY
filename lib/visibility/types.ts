@@ -207,6 +207,8 @@ export type PricingPlan = {
   volumeLabel: string;
   progressionLabel: string;
   features: string[];
+  /** Who the plan is for, in a few words, shown above the price. */
+  audience?: string;
   featured?: boolean;
   href?: string;
   ctaLabel?: string;
@@ -245,6 +247,10 @@ export type VerificationCycleContent = {
   headline: string;
   intro: string;
   stages: VerificationStage[];
+  /** Localized action statuses in ACTION_LIFECYCLE_STATUSES order, shown on the verified outcome. */
+  statuses: string[];
+  /** Summary of the collapsed block holding each stage's detail and rule. */
+  detailsLabel: string;
   /** Why a loop and not a one-off report, in the owner's words. */
   loopRule: string;
   sampleReport: {
@@ -273,6 +279,8 @@ export type VisibilityContent = {
     eyebrow: string;
     title: string;
     intro: string;
+    /** Three short answers read at a glance under the headline: what you learn, see and get. */
+    answers?: { question: string; answer: string }[];
   };
   metrics: MetricDefinition[];
   measurementBoundary: MeasurementBoundaryContent;

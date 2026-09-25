@@ -148,14 +148,14 @@ function TaskCycleDiagram() {
       <Box x={200} y={432} width={400} height={56} title="Утверждённое ТЗ" variant="outline" />
       <Arrow d="M 400 488 L 400 516" />
 
-      <Box x={175} y={518} width={450} height={70} title="Codex · код в отдельной ветке" lines={["миграции, тесты, затем PR"]} />
+      <Box x={175} y={518} width={450} height={70} title="Codex · код в отдельной ветке" lines={["миграции, тесты, затем пул-реквест"]} />
       <Arrow d="M 400 588 L 400 612" />
 
       <Caption x={400} y={634} text="ПРОВЕРКА КОДА — на одном и том же коммите" />
 
       <Box x={92} y={650} width={200} height={70} title="GitHub CI" lines={["тесты, сборка, ключи"]} variant="green" />
-      <Box x={318} y={650} width={206} height={66} title="Codex" lines={["свой же diff"]} />
-      <Box x={552} y={650} width={228} height={84} title="Claude Code" lines={["в GitHub Actions, по @claude", "аудит и security"]} />
+      <Box x={318} y={650} width={206} height={66} title="Codex" lines={["свой же дифф"]} />
+      <Box x={552} y={650} width={228} height={84} title="Claude Code" lines={["в GitHub Actions, по @claude", "аудит и безопасность"]} />
 
       <Arrow d="M 192 722 L 320 764" />
       <Arrow d="M 421 718 L 400 762" />
@@ -212,7 +212,7 @@ function BeforeAfterDiagram() {
   const tools: [string, string][] = [
     ["ChatGPT Work", "контекст, файлы, ТЗ"],
     ["Codex", "код и миграции"],
-    ["Claude Code", "аудит и security"],
+    ["Claude Code", "аудит и безопасность"],
   ];
   const columnX = [30, 290, 550];
 

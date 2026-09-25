@@ -213,9 +213,11 @@ function aiVisibilityServiceNode(locale: StructuredLocale) {
     "@id": `${pageUrl}#ai-visibility-service`,
     url: pageUrl,
     name: "AI Visibility",
-    serviceType: "AI visibility measurement and website Public Readiness",
+    serviceType: isRussian
+      ? "Замер AI-видимости и проверка публичной готовности сайта"
+      : "AI visibility measurement and website Public Readiness",
     description: isRussian
-      ? "Public Readiness и отдельные платные AI-замеры с evidence, исправлениями и повторным измерением."
+      ? "Проверка публичной готовности сайта и отдельные платные AI-замеры с доказательствами, исправлениями и повторным измерением."
       : "Public Readiness and separate paid AI measurements with evidence, fixes and remeasurement.",
     provider: { "@id": `${site.url}/#organization` },
     areaServed: "Worldwide",
@@ -372,7 +374,7 @@ export function buildPublicReadinessStructuredData(locale: StructuredLocale) {
       webPageNode({
         locale,
         pageUrl,
-        name: "Website Public Readiness",
+        name: isRussian ? "Публичная готовность сайта" : "Website Public Readiness",
         description: isRussian
           ? "Бесплатная проверка того, могут ли машины получить и понять публичную информацию сайта."
           : "A free check of whether machines can access and understand public website information.",
@@ -380,7 +382,7 @@ export function buildPublicReadinessStructuredData(locale: StructuredLocale) {
       breadcrumbNode(
         [
           { name: "Selena Systems", item: site.url },
-          { name: "Public Readiness", item: pageUrl },
+          { name: isRussian ? "Публичная готовность сайта" : "Public Readiness", item: pageUrl },
         ],
         pageUrl,
       ),
@@ -388,8 +390,8 @@ export function buildPublicReadinessStructuredData(locale: StructuredLocale) {
         "@type": "Service",
         "@id": `${pageUrl}#public-readiness-service`,
         url: pageUrl,
-        name: "Website Public Readiness",
-        serviceType: "Website technical and content readiness check",
+        name: isRussian ? "Публичная готовность сайта" : "Website Public Readiness",
+        serviceType: isRussian ? "Проверка технической и контентной готовности сайта" : "Website technical and content readiness check",
         description: isRussian
           ? "Бесплатная проверка того, могут ли машины получить и понять публичную информацию сайта."
           : "A free check of whether machines can access and understand public website information.",
@@ -939,7 +941,7 @@ export function buildAiCodeCrossReviewStructuredData({
         url: pageUrl,
         name: "Как организовать перекрёстную проверку AI-кода",
         description:
-          "Пошаговый workflow: от постановки задачи и реализации Codex до независимой проверки Claude Code и owner-gate.",
+          "Пошаговый процесс: от постановки задачи и реализации в Codex до независимой проверки в Claude Code и решения владельца.",
         image: imageUrl,
         inLanguage: "ru",
         author: { "@id": `${site.url}/#founder` },

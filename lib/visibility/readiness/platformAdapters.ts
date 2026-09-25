@@ -70,14 +70,14 @@ export function platformFixFor(
       : "add server-side Accept handling and return text/markdown without executing client code"
     : ruleId.startsWith("CF-P") || ruleId.startsWith("CF-X") || ruleId === "CF-B03"
       ? locale === "ru"
-        ? "создайте статический well-known route из несекретных versioned данных"
+        ? "создайте статический маршрут /.well-known/ из несекретных версионированных данных"
         : "create a static well-known route from non-secret versioned data"
       : ruleId === "CF-D01" || ruleId === "CF-D02" || ruleId === "SE-09"
         ? locale === "ru"
-          ? "опубликуйте файл из public/static слоя и проверьте response headers"
+          ? "опубликуйте файл из папки статических файлов (public/static) и проверьте заголовки ответа"
           : "publish the file from the public/static layer and verify its response headers"
         : locale === "ru"
-          ? "внесите изменение в источник страницы или серверную конфигурацию, затем выполните preview и re-scan"
+          ? "внесите изменение в источник страницы или серверную конфигурацию, затем проверьте предпросмотр и запустите повторную проверку"
           : "make the change in the page source or server configuration, then preview and re-scan";
 
   const evidence = confirmed ? ` ${detection.evidence.join(" ")}` : "";

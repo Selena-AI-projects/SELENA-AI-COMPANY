@@ -26,7 +26,7 @@ export function ToolsLandingPage() {
               <p className="mt-2 text-xs uppercase tracking-[0.18em] text-muted">Техническая проверка</p>
             </div>
             <div>
-              <h3 className="font-serif text-3xl font-semibold text-ink">Public Readiness</h3>
+              <h3 className="font-serif text-3xl font-semibold text-ink">Публичная готовность сайта</h3>
               <p className="mt-4 max-w-3xl leading-7 text-muted">
                 Проверяет по публичным данным, может ли сайт быть получен и разобран машинными системами. Результат описывает техническую готовность сайта и не является измерением фактических ответов ChatGPT, Gemini или Perplexity.
               </p>

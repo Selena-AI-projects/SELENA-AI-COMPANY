@@ -80,7 +80,7 @@ export const commercialFacts = {
     sprint: {
       id: "ai-systems-sprint",
       productLine: "ai-systems",
-      name: { en: "4-Week AI Sprint", ru: "4-недельный AI Sprint" },
+      name: { en: "4-Week AI Sprint", ru: "4-недельный AI-спринт" },
       description: {
         en: "A four-week build of one priority operating-system layer, handed over with team training and written instructions.",
         ru: "4-недельная сборка одного приоритетного контура — с обучением команды и письменными инструкциями при передаче.",
@@ -118,7 +118,7 @@ export const commercialFacts = {
     publicReadiness: {
       id: "public-readiness",
       productLine: "ai-visibility",
-      name: { en: "Public Readiness", ru: "Public Readiness" },
+      name: { en: "Public Readiness", ru: "Публичная готовность сайта" },
       description: {
         en: "Free technical and content readiness check with no paid AI-provider calls.",
         ru: "Бесплатная техническая и контентная проверка без платных вызовов AI-провайдеров.",
@@ -138,7 +138,7 @@ export const commercialFacts = {
       name: { en: "Visibility Snapshot", ru: "Visibility Snapshot" },
       description: {
         en: "Early access to Visitor View monitoring across ChatGPT, Gemini and Perplexity; recurring delivery is not yet activated.",
-        ru: "Ранний доступ к ежемесячному мониторингу Visitor View в ChatGPT, Gemini и Perplexity; регулярная доставка пока не активирована.",
+        ru: "Ранний доступ к ежемесячному мониторингу «как видит посетитель» в ChatGPT, Gemini и Perplexity; регулярная доставка пока не активирована.",
       },
       price: 49,
       currency: "USD",
@@ -155,7 +155,7 @@ export const commercialFacts = {
       name: { en: "Full Discovery Landscape", ru: "Full Discovery Landscape" },
       description: {
         en: "Expanded AI + Google Maps / Local Visibility where automated measurement is verified, with Visitor View and API View kept separate. Early access.",
-        ru: "Расширенные AI-системы и Google Maps / Local Visibility с подтверждённым автоматическим замером; конкуренты, источники и рекомендации. Ранний доступ.",
+        ru: "Расширенные AI-системы и Google Maps / локальная видимость с подтверждённым автоматическим замером; конкуренты, источники и рекомендации. Ранний доступ.",
       },
       price: 79,
       currency: "USD",

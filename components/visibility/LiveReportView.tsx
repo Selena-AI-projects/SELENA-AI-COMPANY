@@ -5,7 +5,7 @@ import type {
   AgentReadinessCategoryScore,
   AgentReadinessCheckResult,
 } from "@/lib/visibility/readiness/agentReadiness";
-import type { LiveReportCopy } from "@/lib/visibility/types";
+import type { LiveReportCopy, VisibilityLocale } from "@/lib/visibility/types";
 import {
   shouldTrackExplanationView,
   type FindingExplanation,
@@ -195,13 +195,21 @@ function FindingCard({
   );
 }
 
-function CategoryCard({ category, copy }: { category: AgentReadinessCategoryScore; copy: LiveReportCopy }) {
+function CategoryCard({
+  category,
+  copy,
+  locale,
+}: {
+  category: AgentReadinessCategoryScore;
+  copy: LiveReportCopy;
+  locale: VisibilityLocale;
+}) {
   return (
     <article className="rounded-2xl border border-line bg-surface p-4">
       <div className="flex items-start justify-between gap-3">
         <h4 className="font-medium leading-snug text-ink">{category.label}</h4>
         <span className={cn("shrink-0 font-serif text-2xl font-semibold", category.score === null ? "text-muted" : scoreColor(category.score))}>
-          {category.score ?? "N/A"}{category.score === null ? "" : "/100"}
+          {category.score ?? (locale === "ru" ? "н/д" : "N/A")}{category.score === null ? "" : "/100"}
         </span>
       </div>
       <p className="mt-3 text-xs leading-relaxed text-muted">
@@ -212,7 +220,15 @@ function CategoryCard({ category, copy }: { category: AgentReadinessCategoryScor
   );
 }
 
-function StandardCheckRow({ check, copy }: { check: AgentReadinessCheckResult; copy: LiveReportCopy }) {
+function StandardCheckRow({
+  check,
+  copy,
+  locale,
+}: {
+  check: AgentReadinessCheckResult;
+  copy: LiveReportCopy;
+  locale: VisibilityLocale;
+}) {
   return (
     <details className="group rounded-2xl border border-line bg-surface open:border-copper/40">
       <summary className="grid min-h-14 cursor-pointer list-none gap-3 px-4 py-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:px-5">
@@ -222,7 +238,7 @@ function StandardCheckRow({ check, copy }: { check: AgentReadinessCheckResult; c
         </span>
         <span className={cn("w-fit rounded-full border px-2.5 py-1 text-xs font-semibold", STANDARD_STATUS_STYLES[check.status])}>
           {copy.standardStatusLabels[check.status]}
-          {check.diagnosticOnly ? " · weight 0" : ""}
+          {check.diagnosticOnly ? (locale === "ru" ? " · вес 0" : " · weight 0") : ""}
         </span>
       </summary>
       <div className="border-t border-line px-4 py-5 sm:px-5">
@@ -479,13 +495,13 @@ export function LiveReportView({
         <p className="mt-1.5 max-w-3xl text-sm leading-relaxed text-muted">{copy.standardsIntro}</p>
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {standardsCategories.map((category) => (
-            <CategoryCard key={category.id} category={category} copy={copy} />
+            <CategoryCard key={category.id} category={category} copy={copy} locale={report.locale} />
           ))}
         </div>
 
         <div className="mt-7 grid gap-3">
           {standardsChecks.map((check) => (
-            <StandardCheckRow key={check.checkId} check={check} copy={copy} />
+            <StandardCheckRow key={check.checkId} check={check} copy={copy} locale={report.locale} />
           ))}
         </div>
       </section>
@@ -499,12 +515,12 @@ export function LiveReportView({
         </p>
         {localAiCategory ? (
           <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            <CategoryCard category={localAiCategory} copy={copy} />
+            <CategoryCard category={localAiCategory} copy={copy} locale={report.locale} />
           </div>
         ) : null}
         <div className="mt-5 grid gap-3">
           {localAiChecks.map((check) => (
-            <StandardCheckRow key={check.checkId} check={check} copy={copy} />
+            <StandardCheckRow key={check.checkId} check={check} copy={copy} locale={report.locale} />
           ))}
         </div>
         {report.localAiCtaEnabled ? (

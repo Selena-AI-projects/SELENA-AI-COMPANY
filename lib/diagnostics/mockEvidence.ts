@@ -140,7 +140,7 @@ const ISSUE_POOL_RU: MockIssue[] = [
     severity: "important",
     whatWeFound: "Разметка Organization или LocalBusiness присутствует, но без части полей, обычно ожидаемых для этой категории бизнеса.",
     whyItMatters: "Неполные структурированные данные — более слабое машиночитаемое подтверждение того, кто это.",
-    whatThisDoesNotProve: "Это не доказывает и не гарантирует улучшение AI-цитирования — schema является подтверждением, а не фактором ранжирования.",
+    whatThisDoesNotProve: "Это не доказывает и не гарантирует улучшение AI-цитирования — разметка Schema.org является подтверждением, а не фактором ранжирования.",
     recommendedAction: "Заполните поля схемы Organization/LocalBusiness, релевантные категории бизнеса.",
     availablePath: `Implementation + 90 days — ${commercialFacts.aiVisibility.implementation90Days.ru}`,
   },

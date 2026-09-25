@@ -31,7 +31,7 @@ export const site = {
  */
 export const founder = {
   name: { en: "Selena Nigmatullaeva", ru: "Селена Нигматуллаева" },
-  role: { en: "Founder & AI Systems Architect", ru: "Основатель и AI Systems Architect" },
+  role: { en: "Founder & AI Systems Architect", ru: "Основатель и архитектор AI-систем" },
   image: "/images/founder/selena-2026-08.jpg",
 } as const;
 

@@ -81,7 +81,7 @@ export function LabLandingPage({ locale }: { locale: LabLocale }) {
         {
           id: "cases",
           title: "Кейсы",
-          description: "Проверяемые проекты и журналы измерений с датами, evidence и честным статусом каждого результата.",
+          description: "Проверяемые проекты и журналы измерений с датами, доказательствами и честным статусом каждого результата.",
           href: "/ru/projects",
         },
       ]

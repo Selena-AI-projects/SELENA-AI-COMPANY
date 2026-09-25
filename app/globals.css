@@ -59,11 +59,18 @@
   --color-line: #e6ddd1; /* warm hairline borders */
   /* Links are deliberately not copper. Copper marks eyebrows, numbers and
      badges all over the page, so a link painted in it is one accent among
-     many and reads as decoration. Deep burgundy is the one colour on this
-     palette that means only one thing. (AAA: 7.3:1 on ivory.) */
+     many and reads as decoration. Links take the rose hue instead, which
+     otherwise marks only a card's key benefit. (AAA: 7.3:1 on ivory.) */
   --color-link: #8c2f39;
   --color-link-dark: #e0808c; /* the same role on dark sections — 6.7:1 on charcoal */
   --color-link-deep: #6d1f28; /* hover and pressed */
+  /* Rose is the third brand accent beside copper and ink blue: the one line
+     a reader should take from a card (the benefit, the question it answers)
+     and state marks such as a verified status. Same hue as links, kept as
+     its own role so emphasis and links can be tuned apart. */
+  --color-rose: #8c2f39; /* emphasis text on light sections (AAA on ivory) */
+  --color-rose-dark: #e0808c; /* the same role on dark sections — as in the footer */
+  --color-rose-soft: #f7e4e3; /* rose-tinted fill for marks and badges on light */
   --color-good: #2e7d4f; /* pass / healthy — AA on ivory */
   --color-good-soft: #e9f2ea; /* pass background */
   --color-warn: #9a5f14; /* important / attention — AA on ivory */

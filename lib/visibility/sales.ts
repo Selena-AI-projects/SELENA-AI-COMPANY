@@ -19,8 +19,12 @@ export const discoveryLinks = {
 
 export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[] {
   const en = locale === "en";
-  const visitor = `Visitor View: ${discoverySystems.visitor.join(" · ")}`;
-  const api = `API / Model Landscape: ${discoverySystems.api.join(" · ")}`;
+  const visitor = en
+    ? `Visitor View: ${discoverySystems.visitor.join(" · ")}`
+    : `Как видит посетитель: ${discoverySystems.visitor.join(" · ")}`;
+  const api = en
+    ? `API / Model Landscape: ${discoverySystems.api.join(" · ")}`
+    : `Через API (модели): ${discoverySystems.api.join(" · ")}`;
   return [
     {
       title: en ? "Monitoring · early access" : "Мониторинг · ранний доступ",
@@ -30,6 +34,7 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
       plans: [
         {
           name: offers.snapshot.name[locale],
+          audience: en ? "Try it first" : "Попробовать",
           price: offers.snapshot[locale],
           status: "founding_soon",
           statusLabel: en ? "Early access · recurring not yet live" : "Ранний доступ · регулярный режим ещё не запущен",
@@ -54,25 +59,26 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
                 "Цитаты и источники измеренных ответов",
                 "Автоматические рекомендации включены — что улучшить дальше",
                 "История отчётов; сравнение после активации регулярного режима",
-                "Еженедельный Telegram и отчёты в кабинете после активации доставки",
+                "Еженедельный отчёт в Telegram и отчёты в кабинете после активации доставки",
               ],
           href: en ? discoveryLinks.snapshot : "/ru/visibility#early-access",
-          ctaLabel: en ? "Request Snapshot early access" : "Запросить ранний доступ Snapshot",
+          ctaLabel: en ? "Request Snapshot early access" : "Запросить ранний доступ к Visibility Snapshot",
         },
         {
           name: offers.landscape.name[locale],
+          audience: en ? "The main choice" : "Основной выбор",
           price: offers.landscape[locale],
           status: "founding_soon",
           featured: true,
-          statusLabel: en ? "Recommended for hospitality · early access" : "Для hospitality · ранний доступ",
-          description: en ? "See the whole competitive discovery landscape." : "Увидьте весь конкурентный рынок AI + Local Discovery.",
+          statusLabel: en ? "Recommended for hospitality · early access" : "Для гостеприимства · ранний доступ",
+          description: en ? "See the whole competitive discovery landscape." : "Увидьте весь конкурентный рынок в AI и локальном поиске.",
           systemsLabel: `${visitor}. ${api}.`,
           volumeLabel: en
             ? "Up to 25 questions across up to two languages; Visitor/API reported separately"
-            : "До 25 вопросов на одном или двух языках; Visitor/API отдельно",
+            : "До 25 вопросов на одном или двух языках; «как видит посетитель» и «через API» — отдельно",
           progressionLabel: en
             ? "AI + LOCAL → COMPETITORS → SOURCES → OPPORTUNITIES → NEXT ACTION"
-            : "AI + LOCAL → КОНКУРЕНТЫ → ИСТОЧНИКИ → ВОЗМОЖНОСТИ → СЛЕДУЮЩИЙ ШАГ",
+            : "AI И ЛОКАЛЬНЫЙ ПОИСК → КОНКУРЕНТЫ → ИСТОЧНИКИ → ВОЗМОЖНОСТИ → СЛЕДУЮЩИЙ ШАГ",
           features: en
             ? [
                 "Google Maps / Local Visibility only where production-capable automated measurement is verified",
@@ -82,14 +88,14 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
                 "API output is not the consumer experience; evidence classes are never blended",
               ]
             : [
-                "Google Maps / Local Visibility только с подтверждённым автоматическим production-замером",
+                "Google Maps / локальная видимость — только там, где подтверждён автоматический замер в рабочем режиме",
                 "Конкуренты по запросам гостей: где вы выигрываете, проигрываете или отсутствуете",
                 "Расширенные источники и паттерны конкурентов в разных системах",
                 "Расширенные рекомендации включены — что исследовать или улучшить первым",
                 "API-ответ не равен потребительскому опыту; классы доказательств разделены",
               ],
           href: en ? discoveryLinks.landscape : "/ru/visibility#early-access",
-          ctaLabel: en ? "Request Full Discovery early access" : "Запросить ранний доступ Full Discovery",
+          ctaLabel: en ? "Request Full Discovery early access" : "Запросить ранний доступ к Full Discovery Landscape",
         },
       ],
     },
@@ -101,13 +107,14 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
       plans: [
         {
           name: offers.expertVerified.name[locale],
+          audience: en ? "Go deep once" : "Разобраться глубоко",
           price: offers.expertVerified[locale],
           status: "founding_soon",
           statusLabel: en ? "One-time · manual booking" : "Разово · запись вручную",
           description: en ? "Know why they win." : "Поймите, почему выигрывают конкуренты.",
           systemsLabel: en
             ? "Selena baseline + human review of AI, Local, reviews and source evidence"
-            : "Базовый замер Selena + ручной анализ AI, Local, отзывов и источников",
+            : "Исходный замер Selena + ручной анализ AI-ответов, локального поиска, отзывов и источников",
           volumeLabel: en
             ? "3–5 real discovery competitors · 60-minute Strategy Session"
             : "3–5 реальных конкурентов · стратегическая сессия 60 минут",
@@ -123,9 +130,9 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
               ]
             : [
                 "Ручной анализ конкурентов и проверка слабых автоматических рекомендаций",
-                "Ручное исследование Google Ask Maps / Local AI и других discovery-поверхностей, где это релевантно",
-                "Участие владельца, GM или уполномоченного руководителя",
-                "Готовый к внедрению Action Plan за 3 рабочих дня после сессии",
+                "Ручное исследование Google Ask Maps / локального AI-поиска и других поверхностей поиска, где это релевантно",
+                "Участие владельца, управляющего или уполномоченного руководителя",
+                "Готовый к внедрению план действий за 3 рабочих дня после сессии",
                 "Один сопоставимый повторный замер по запросу в течение 30 дней",
                 "Подготовка, участие и условия возврата до записи",
               ],
@@ -134,6 +141,7 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
         },
         {
           name: offers.implementation90Days.name[locale],
+          audience: en ? "We run it for you" : "Мы ведём за вас",
           price: `${offers.implementation90Days[locale]} · ${en ? "90 days" : "90 дней"}`,
           status: "active",
           statusLabel: en
@@ -142,7 +150,7 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
           description: en ? "Want us to implement the plan?" : "Хотите поручить нам внедрение плана?",
           systemsLabel: en
             ? "Full Discovery monitoring within the agreed production-capable scope"
-            : "Мониторинг Full Discovery в согласованных production-границах",
+            : "Мониторинг Full Discovery Landscape в согласованных границах рабочего режима",
           volumeLabel: en
             ? "90 days · scope, cycles and provider cap agreed before work"
             : "90 дней · объём, циклы и лимит провайдеров согласуются до работы",
@@ -157,10 +165,10 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
                 "We do not guarantee rankings, recommendation rate, traffic, bookings or revenue",
               ]
             : [
-                "Утверждённый Action Plan и согласованное внедрение Selena",
+                "Утверждённый план действий и согласованное внедрение силами Selena",
                 "Мониторинг автоматизированных поверхностей, статусы и сопоставимые повторные замеры",
                 "Ручной Ask Maps: исходная проверка → внедрение → сопоставимая ручная перепроверка, только в согласованном объёме; не еженедельный автоматический замер",
-                "Кабинет и история; Telegram только после активации доставки",
+                "Кабинет и история; еженедельный отчёт в Telegram — только после активации доставки",
                 "Корректировка, вторая итерация и финальное сравнение до/после",
                 "Без гарантий позиций, рекомендаций, трафика, бронирований и выручки",
               ],
@@ -201,7 +209,7 @@ export const auditTermsRu = [
   },
   {
     title: "Участие",
-    body: "На сессии нужен владелец, GM или руководитель с правом утверждать изменения. Если он не может присутствовать, перенесите встречу.",
+    body: "На сессии нужен владелец, управляющий или руководитель с правом утверждать изменения. Если он не может присутствовать, перенесите встречу.",
   },
   {
     title: "Перенос",
@@ -209,7 +217,7 @@ export const auditTermsRu = [
   },
   {
     title: "Результат",
-    body: "Финальный Action Plan — в течение 3 рабочих дней после завершённой сессии. Включён один сопоставимый повторный замер, который можно запросить в течение 30 дней.",
+    body: "Финальный план действий — в течение 3 рабочих дней после завершённой сессии. Включён один сопоставимый повторный замер, который можно запросить в течение 30 дней.",
   },
   {
     title: "Возврат",
@@ -476,7 +484,7 @@ export function discoveryOrderCopy(locale: VisibilityLocale) {
     : {
         early: {
           title: "Запросить ранний доступ к мониторингу",
-          body: `${offers.snapshot.name.ru} — ${offers.snapshot.ru}. ${offers.landscape.name.ru} — ${offers.landscape.ru}. Укажите бизнес, рынок и тариф. Регулярные замеры и еженедельный Telegram ещё не активированы; онлайн-оплата выключена. До заказа согласуем доступный объём, продление, отмену и доставку. Обращение не запускает замер и не создаёт подписку.`,
+          body: `${offers.snapshot.name.ru} — ${offers.snapshot.ru}. ${offers.landscape.name.ru} — ${offers.landscape.ru}. Укажите бизнес, рынок и тариф. Регулярные замеры и еженедельный отчёт в Telegram ещё не активированы; онлайн-оплата выключена. До заказа согласуем доступный объём, продление, отмену и доставку. Обращение не запускает замер и не создаёт подписку.`,
         },
         audit: {
           title: "Перед записью: подготовка, участие и результат",
@@ -484,7 +492,7 @@ export function discoveryOrderCopy(locale: VisibilityLocale) {
         },
         managed: {
           title: "Заявка на Managed Discovery",
-          body: `${offers.implementation90Days.ru} · 90 дней. Укажите бизнес, приоритеты и ответственного за внедрение. До начала согласуем Action Plan, работу Selena, циклы мониторинга и повторных замеров, лимит провайдеров. Это ручная заявка, а не автоматическая покупка.`,
+          body: `${offers.implementation90Days.ru} · 90 дней. Укажите бизнес, приоритеты и ответственного за внедрение. До начала согласуем план действий, работу Selena, циклы мониторинга и повторных замеров, лимит провайдеров. Это ручная заявка, а не автоматическая покупка.`,
         },
       };
 }

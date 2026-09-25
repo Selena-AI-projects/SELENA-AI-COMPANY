@@ -60,6 +60,7 @@ function LadderCard({ item, highlighted }: { item: LadderItem; highlighted?: boo
       )}
     >
       {highlighted ? <div className="absolute inset-x-0 top-0 h-1.5 bg-copper" aria-hidden /> : null}
+      <p className="mb-2 text-sm font-semibold text-rose">{item.audience}</p>
       <p className="font-serif text-3xl font-semibold leading-none text-copper-deep">{item.price}</p>
       <h3 className="mt-3 min-h-[3.5rem] text-lg font-semibold leading-snug text-ink">{item.name}</h3>
       {/* The systems measured by this step, still named one by one — but as a
@@ -111,7 +112,7 @@ export function VisibilityLadder({ content }: { content: HomepageContent }) {
           <div className="mt-4 grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2">
             {content.productPaths.visibility.items.slice(1, 3).map((item, index) => (
               <Reveal key={`${item.price}-${item.name}`} delay={140 + index * 60} className="h-full">
-                <LadderCard item={item} highlighted={index === 0} />
+                <LadderCard item={item} highlighted={item.featured} />
               </Reveal>
             ))}
           </div>
@@ -123,7 +124,7 @@ export function VisibilityLadder({ content }: { content: HomepageContent }) {
           <div className="mt-4 grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2">
             {content.productPaths.visibility.items.slice(3).map((item, index) => (
               <Reveal key={`${item.price}-${item.name}`} delay={200 + index * 60} className="h-full">
-                <LadderCard item={item} />
+                <LadderCard item={item} highlighted={item.featured} />
               </Reveal>
             ))}
           </div>

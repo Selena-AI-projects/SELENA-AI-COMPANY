@@ -210,6 +210,7 @@ function PlanCard({ entry, labels }: { entry: ComparedPlan; labels: ComparisonLa
       )}
     >
       <p className="text-sm text-muted">{trackTitle}</p>
+      {plan.audience ? <p className="mt-2 text-sm font-semibold text-rose">{plan.audience}</p> : null}
       <h3 className="mt-2 font-sans text-lg font-semibold leading-snug text-ink">{plan.name}</h3>
       <p className="mt-3 font-serif text-4xl font-semibold leading-none tabular-nums text-ink">
         {plan.price}

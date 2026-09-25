@@ -1,4 +1,5 @@
 import type { SampleReportContentV2 } from "@/lib/visibility/sample-report-data";
+import type { VisibilityLocale } from "@/lib/visibility/types";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -15,8 +16,59 @@ import { VerificationLoopReport } from "./VerificationLoopReport";
  * sourceStatus: "sample". No email is collected on this page and no
  * network request is made from it.
  */
-export function SampleReport({ content }: { content: SampleReportContentV2 }) {
+const LABELS: Record<
+  VisibilityLocale,
+  {
+    business: string;
+    domain: string;
+    market: string;
+    language: string;
+    status: string;
+    sourceExamples: string;
+    evidence: string;
+    whyItMatters: string;
+    doesNotProve: string;
+    measured: string;
+    notMeasured: string;
+  }
+> = {
+  en: {
+    business: "Business:",
+    domain: "Domain:",
+    market: "Market:",
+    language: "Language:",
+    status: "Status:",
+    sourceExamples: "Source examples",
+    evidence: "Evidence",
+    whyItMatters: "Why it matters",
+    doesNotProve: "What this does NOT prove",
+    measured: "What we measured",
+    notMeasured: "What we did not measure",
+  },
+  ru: {
+    business: "Бизнес:",
+    domain: "Домен:",
+    market: "Рынок:",
+    language: "Язык:",
+    status: "Статус:",
+    sourceExamples: "Примеры источников",
+    evidence: "Доказательство",
+    whyItMatters: "Почему это важно",
+    doesNotProve: "Что это НЕ доказывает",
+    measured: "Что мы измерили",
+    notMeasured: "Что мы не измеряли",
+  },
+};
+
+export function SampleReport({
+  content,
+  locale = "en",
+}: {
+  content: SampleReportContentV2;
+  locale?: VisibilityLocale;
+}) {
   const { identity } = content;
+  const labels = LABELS[locale];
 
   return (
     <section className="bg-ivory pb-20 sm:pb-28">
@@ -28,23 +80,23 @@ export function SampleReport({ content }: { content: SampleReportContentV2 }) {
               <span className="rounded-full border border-copper-deep/40 bg-copper-deep/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-copper-deep">
                 {identity.badge}
               </span>
-              <SourceBadge sourceStatus={identity.sourceStatus} />
+              <SourceBadge sourceStatus={identity.sourceStatus} locale={locale} />
             </div>
             <div className="mt-5 grid gap-1 text-sm text-muted sm:grid-cols-2">
               <p>
-                <span className="font-medium text-ink">Business:</span> {identity.businessName}
+                <span className="font-medium text-ink">{labels.business}</span> {identity.businessName}
               </p>
               <p>
-                <span className="font-medium text-ink">Domain:</span> {identity.domain}
+                <span className="font-medium text-ink">{labels.domain}</span> {identity.domain}
               </p>
               <p>
-                <span className="font-medium text-ink">Market:</span> {identity.market}
+                <span className="font-medium text-ink">{labels.market}</span> {identity.market}
               </p>
               <p>
-                <span className="font-medium text-ink">Language:</span> {identity.language}
+                <span className="font-medium text-ink">{labels.language}</span> {identity.language}
               </p>
               <p>
-                <span className="font-medium text-ink">Status:</span> {identity.status}
+                <span className="font-medium text-ink">{labels.status}</span> {identity.status}
               </p>
               <p>{identity.methodologyVersion}</p>
             </div>
@@ -61,7 +113,7 @@ export function SampleReport({ content }: { content: SampleReportContentV2 }) {
               <h2 className="text-h3 text-ink">{section.title}</h2>
               <p className="mt-2 leading-relaxed text-muted">{section.question}</p>
               <div className="mt-5">
-                <EvidenceList rows={section.rows} />
+                <EvidenceList rows={section.rows} locale={locale} />
               </div>
             </div>
           </Reveal>
@@ -77,7 +129,7 @@ export function SampleReport({ content }: { content: SampleReportContentV2 }) {
                 <div key={ratio.label} className="rounded-xl border border-line bg-surface/70 px-5 py-4">
                   <div className="flex items-start justify-between gap-3">
                     <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{ratio.label}</p>
-                    <SourceBadge sourceStatus={ratio.sourceStatus} />
+                    <SourceBadge sourceStatus={ratio.sourceStatus} locale={locale} />
                   </div>
                   <p className="mt-2 font-serif text-2xl font-semibold text-ink">
                     {ratio.matched} / {ratio.total}
@@ -86,7 +138,7 @@ export function SampleReport({ content }: { content: SampleReportContentV2 }) {
               ))}
             </div>
             <div className="mt-5 rounded-xl border border-line bg-surface/70 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">Source examples</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">{labels.sourceExamples}</p>
               <ul className="mt-3 space-y-2">
                 {content.recommendationEvidence.citationExamples.map((example) => (
                   <li key={example.url} className="text-sm text-muted">
@@ -108,13 +160,14 @@ export function SampleReport({ content }: { content: SampleReportContentV2 }) {
             <p className="mt-2 leading-relaxed text-muted">{content.actionReadiness.question}</p>
             <div className="mt-5 grid gap-5 lg:grid-cols-3">
               {content.actionReadiness.states.map((state) => (
-                <ActionReadinessCard key={state.id} state={state} />
+                <ActionReadinessCard key={state.id} state={state} locale={locale} />
               ))}
             </div>
             <Card hover={false} className="mt-6">
               <ActionPathTimeline
                 title={content.actionReadiness.timelineTitle}
                 steps={content.actionReadiness.timeline}
+                locale={locale}
               />
             </Card>
             <p className="mt-4 rounded-xl border border-copper/30 bg-copper/[0.06] p-4 text-sm leading-relaxed text-ink/80">
@@ -131,15 +184,15 @@ export function SampleReport({ content }: { content: SampleReportContentV2 }) {
               <h3 className="font-serif text-lg font-semibold text-ink">{content.topBlocker.item.title}</h3>
               <dl className="mt-4 space-y-3 text-sm leading-relaxed">
                 <div>
-                  <dt className="font-medium text-ink">Evidence</dt>
+                  <dt className="font-medium text-ink">{labels.evidence}</dt>
                   <dd className="text-muted">{content.topBlocker.item.evidence}</dd>
                 </div>
                 <div>
-                  <dt className="font-medium text-ink">Why it matters</dt>
+                  <dt className="font-medium text-ink">{labels.whyItMatters}</dt>
                   <dd className="text-muted">{content.topBlocker.item.whyItMatters}</dd>
                 </div>
                 <div>
-                  <dt className="font-medium text-ink">What this does NOT prove</dt>
+                  <dt className="font-medium text-ink">{labels.doesNotProve}</dt>
                   <dd className="text-muted">{content.topBlocker.item.doesNotProve}</dd>
                 </div>
               </dl>
@@ -181,7 +234,7 @@ export function SampleReport({ content }: { content: SampleReportContentV2 }) {
               ))}
             </ol>
             <div className="mt-6">
-              <VerificationLoopReport section={content.verificationLoop} />
+              <VerificationLoopReport section={content.verificationLoop} locale={locale} />
             </div>
           </div>
         </Reveal>
@@ -193,7 +246,7 @@ export function SampleReport({ content }: { content: SampleReportContentV2 }) {
             <div className="mt-5 grid gap-6 sm:grid-cols-2">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-copper-deep">
-                  What we measured
+                  {labels.measured}
                 </p>
                 <ul className="mt-3 space-y-2 text-sm text-ink/80">
                   {content.boundaries.measured.map((item) => (
@@ -203,7 +256,7 @@ export function SampleReport({ content }: { content: SampleReportContentV2 }) {
               </div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-                  What we did not measure
+                  {labels.notMeasured}
                 </p>
                 <ul className="mt-3 space-y-2 text-sm text-muted">
                   {content.boundaries.notMeasured.map((item) => (

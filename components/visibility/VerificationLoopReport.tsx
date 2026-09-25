@@ -1,5 +1,6 @@
 import type { SampleVerificationLoopSection } from "@/lib/visibility/sample-report-data";
 import type { ActionLifecycleStatus, TelegramDeliveryStatus } from "@/lib/visibility/measurement";
+import type { VisibilityLocale } from "@/lib/visibility/types";
 import { SourceBadge } from "./EvidenceList";
 import { cn } from "@/lib/cn";
 
@@ -33,13 +34,19 @@ function Pill({ label, className }: { label: string; className: string }) {
  * report, so the two surfaces show the same rows. Every status is written
  * out in text: the pill colour is never the only carrier of meaning.
  */
-export function VerificationLoopReport({ section }: { section: SampleVerificationLoopSection }) {
+export function VerificationLoopReport({
+  section,
+  locale = "en",
+}: {
+  section: SampleVerificationLoopSection;
+  locale?: VisibilityLocale;
+}) {
   const { columns, statusLabels, telegramStatusLabels, delivery } = section;
 
   return (
     <div>
       <div className="flex flex-wrap items-center gap-2 text-sm text-muted">
-        <SourceBadge sourceStatus="sample" />
+        <SourceBadge sourceStatus="sample" locale={locale} />
         <span>{section.window.lock}</span>
       </div>
       <p className="mt-2 text-sm text-muted">

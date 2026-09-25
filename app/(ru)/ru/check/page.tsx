@@ -54,10 +54,10 @@ export default function RussianCheckPage() {
             <Reveal>
               <CinemaFrame tone="light" image={cinema.boundary.image} alt={cinema.boundary.alt} caption={cinema.boundary.caption} />
             </Reveal>
-            <MeasurementBoundary content={content.freeMeasurementBoundary} />
+            <MeasurementBoundary content={content.freeMeasurementBoundary} locale="ru" />
             <div className="border-t border-line pt-8">
               <h2 className="font-serif text-h3 text-ink">Рекомендуют ли нейросети ваш бизнес? Это отдельная проверка.</h2>
-              <p className="mt-4 text-base leading-relaxed text-muted">Для владельцев ресторанов, отелей, спа и beach clubs готовность сайта — первый шаг. AI Visibility исследует ответы на вопросы гостей, конкурентов и источники. Мониторинг находится в раннем доступе: изучите условия перед заявкой.</p>
+              <p className="mt-4 text-base leading-relaxed text-muted">Для владельцев ресторанов, отелей, спа и пляжных клубов готовность сайта — первый шаг. AI Visibility исследует ответы на вопросы гостей, конкурентов и источники. Мониторинг находится в раннем доступе: изучите условия перед заявкой.</p>
               <div className="mt-6 flex flex-wrap gap-4">
                 <Button href="/ru/visibility">Посмотреть AI Visibility и варианты аудита</Button>
                 <Button href="/ru/methodology" variant="secondary">Как устроено измерение</Button>

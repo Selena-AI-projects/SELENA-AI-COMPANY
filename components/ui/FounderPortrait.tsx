@@ -38,7 +38,7 @@ export function FounderPortrait({
           <p className="mt-2 max-w-sm text-sm leading-relaxed text-surface/78">
             {isEnglish
               ? "A founder-led approach: process first, then the AI workflow, automation and team training."
-              : "Живой founder-led подход: сначала процесс, потом AI-сценарий, автоматизация и обучение команды."}
+              : "Основательница ведёт работу сама: сначала процесс, потом AI-сценарий, автоматизация и обучение команды."}
           </p>
         </figcaption>
       </div>
