@@ -29,18 +29,22 @@ const pains = [
 const deliverables = [
   {
     title: "Система «1 материал → форматы»",
+    result: "Один материал — все форматы",
     text: "Один экспертный материал раскладывается на посты, статьи, сценарии и рассылки — по понятной схеме, а не по вдохновению.",
   },
   {
     title: "Шаблоны и промпты под ваш стиль",
+    result: "Черновики вашим голосом",
     text: "AI пишет черновики вашим голосом: структура, тон и темы настраиваются под вас, а не наоборот.",
   },
   {
     title: "Процесс с редактурой",
+    result: "Ничего не выходит без проверки человеком",
     text: "Черновик готовит AI — смысл и финальную форму утверждает человек. Публичный контент без ручной проверки не выходит.",
   },
   {
     title: "Упаковка продукта и смыслов",
+    result: "Понятный оффер и описания услуг",
     text: "Структура оффера, описания услуг и страниц: AI ускоряет черновики, финальные формулировки остаются вашими.",
   },
 ];
@@ -140,7 +144,8 @@ export default function AiContentPage() {
               <Reveal key={item.title} delay={(i % 2) * 80} className="h-full">
                 <div className="card-premium h-full bg-ivory p-6 sm:p-7">
                   <h3 className="text-h3 text-ink">{item.title}</h3>
-                  <p className="mt-3 leading-relaxed text-muted">{item.text}</p>
+                  <p className="mt-2 text-lg font-semibold leading-snug text-rose">{item.result}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
                 </div>
               </Reveal>
             ))}

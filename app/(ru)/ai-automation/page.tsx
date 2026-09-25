@@ -28,26 +28,32 @@ export const metadata = buildMetadata({
 const automatable = [
   {
     title: "Заявки и обращения",
+    result: "Ни одна заявка не теряется",
     text: "Обращение фиксируется автоматически, ничего не теряется в чатах и личных сообщениях.",
   },
   {
     title: "Клиентские коммуникации",
+    result: "Ответ готов — человек только проверяет",
     text: "Черновики ответов на типовые вопросы — человек проверяет и отправляет.",
   },
   {
     title: "CRM, Notion и таблицы",
+    result: "Без ручной копипасты",
     text: "Данные переносятся между инструментами сами, без ручной копипасты.",
   },
   {
     title: "Telegram / WhatsApp",
+    result: "Команда узнаёт сразу",
     text: "Уведомления команде, сценарии ответов, передача диалога человеку.",
   },
   {
     title: "Сценарии на Make / Zapier",
+    result: "Связки, которые остаются вашими",
     text: "Связки без сложного кода под ваш процесс — понятные, задокументированные, ваши.",
   },
   {
     title: "Рутинные документы",
+    result: "Черновик по шаблону, а не с нуля",
     text: "Черновики типовых описаний и текстов по шаблонам — с финальной редактурой человеком.",
   },
 ];
@@ -117,7 +123,8 @@ export default function AiAutomationPage() {
               <Reveal key={item.title} delay={(i % 3) * 80} className="h-full">
                 <Card className="h-full">
                   <h3 className="text-lg font-semibold text-ink">{item.title}</h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-muted">{item.text}</p>
+                  <p className="mt-2 text-lg font-semibold leading-snug text-rose">{item.result}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
                 </Card>
               </Reveal>
             ))}

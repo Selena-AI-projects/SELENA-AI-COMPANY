@@ -220,7 +220,7 @@ function PlanSummaryGrid({ plans, labels }: { plans: ComparedPlan[]; labels: Com
             )}
           >
             {featured ? (
-              <p className="self-start rounded-full bg-rose-dark px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-charcoal">
+              <p className="self-start whitespace-nowrap rounded-full bg-rose-dark px-3 py-1 text-[0.75rem] font-bold uppercase leading-5 tracking-[0.12em] text-charcoal">
                 {labels.mainChoice}
               </p>
             ) : null}
@@ -228,7 +228,7 @@ function PlanSummaryGrid({ plans, labels }: { plans: ComparedPlan[]; labels: Com
             <h3 className="font-sans text-base font-semibold leading-snug">{plan.name}</h3>
             <p className="font-serif text-[2rem] font-semibold leading-none tabular-nums">{plan.price}</p>
             <p className={cn("font-semibold leading-snug", featured ? "text-rose-dark" : "text-rose")}>
-              {plan.audience ?? plan.description}
+              {plan.description}
             </p>
             {plan.href && plan.ctaLabel ? (
               <a
