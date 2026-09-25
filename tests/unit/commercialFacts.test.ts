@@ -102,3 +102,19 @@ test("the promotion the site advertises is the code the application honours", ()
   assert.equal(launchPromotion.code, "AUGUST2026");
   assert.match(launchPromotion.endsOn, /^\d{4}-\d{2}-\d{2}$/);
 });
+
+test("visibility offers use the plan ids the client application sells", () => {
+  const offers = commercialFacts.aiVisibility;
+  assert.deepEqual(
+    [offers.publicReadiness, offers.snapshot, offers.landscape, offers.expertVerified, offers.implementation90Days].map(
+      (offer) => [offer.id, offer.price, offer.billingPeriod],
+    ),
+    [
+      ["public-readiness", 0, "one-time"],
+      ["visibility-snapshot", 49, "month"],
+      ["full-discovery-landscape", 79, "month"],
+      ["competitive-audit", 399, "one-time"],
+      ["managed-discovery-90", 2490, "90-days"],
+    ],
+  );
+});
