@@ -763,9 +763,10 @@ export function CompanyHomeLanding({ content = homepage }: { content?: HomepageC
           <p className="mt-5 text-lg">{content.hero.subheadline}</p>
           <div className="mt-7 grid grid-cols-1 gap-7 md:grid-cols-2 md:gap-12">
             {products.map((product, index) => (
-              <div key={product.name} className="flex flex-col items-start">
-                <h2 className="text-h3">{product.name}</h2>
-                <p className="mt-2 mb-4 max-w-xl leading-relaxed text-muted">{content.company.heroDescriptions[index]}</p>
+              <div key={product.name} className="flex flex-col items-start border-t-2 border-ink pt-4">
+                <p className="font-semibold text-rose">{content.company.heroQuestions[index]}</p>
+                <h2 className="mt-1 text-h3">{product.name}</h2>
+                <p className="mt-2 mb-5 max-w-xl text-lg font-semibold leading-snug">{content.company.heroDescriptions[index]}</p>
                 <Button href={product.cta.href} className="mt-auto max-w-full text-center">{product.cta.label} →</Button>
               </div>
             ))}
@@ -785,9 +786,12 @@ export function CompanyHomeLanding({ content = homepage }: { content?: HomepageC
                   </div>
                   <p className="mt-6 font-semibold text-copper-deep">{product.name}</p>
                   <h3 className="mt-3 text-h2 text-ink">{door.title}</h3>
-                  <p className="mt-4 leading-relaxed text-muted">{door.body}</p>
-                  <ul className="mt-5 space-y-3">
-                    {door.outcomes.map(outcome => <li key={outcome} className="border-t border-line pt-3 font-medium">{outcome}</li>)}
+                  <div className="mt-5 rounded-lg bg-rose-soft px-5 py-4">
+                    <p className="text-xs font-bold uppercase tracking-[0.12em] text-rose">{content.company.resultLabel}</p>
+                    <p className="mt-1 text-lg font-semibold leading-snug">{door.result}</p>
+                  </div>
+                  <ul className="mt-5 grid grid-cols-1 gap-x-6 gap-y-2 text-sm text-muted sm:grid-cols-2">
+                    {door.outcomes.map(outcome => <li key={outcome}><span aria-hidden="true" className="text-copper">— </span>{outcome}</li>)}
                   </ul>
                   <p className="mt-5 mb-6 text-sm leading-relaxed text-muted">{door.audience}</p>
                   <Button href={product.cta.href} className="mt-auto self-start text-center">{product.cta.label} →</Button>
@@ -802,9 +806,9 @@ export function CompanyHomeLanding({ content = homepage }: { content?: HomepageC
           <h2 className="text-h2">{content.company.principlesTitle}</h2>
           <div className="mt-8 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4">
             {content.company.principles.map(principle => (
-              <div key={principle.title}>
-                <h3 className="font-sans text-lg font-semibold">{principle.title}</h3>
-                <p className="mt-3 leading-relaxed text-muted">{principle.body}</p>
+              <div key={principle.title} className="border-t border-line pt-4">
+                <h3 className="text-h3 text-rose">{principle.title}</h3>
+                <p className="mt-2 leading-relaxed text-muted">{principle.body}</p>
               </div>
             ))}
           </div>

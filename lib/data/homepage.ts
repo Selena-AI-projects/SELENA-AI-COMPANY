@@ -578,6 +578,10 @@ export const homepage = {
       "Book an AI Audit. We will map the current workflow, identify the highest-leverage system to build first and show what can realistically be automated.",
   },
   company: {
+  "heroQuestions": [
+    "Are customers finding you or your competitors?",
+    "Where is manual work slowing your business down?"
+  ],
   "heroDescriptions": [
     "See where customers discover your competitors instead of you, which sources support those answers, and what to improve next.",
     "Turn repetitive work across sales, operations, content, knowledge and customer communication into practical AI-supported workflows."
@@ -585,6 +589,7 @@ export const homepage = {
   "doors": [
     {
       "title": "Are customers finding you — or your competitors?",
+      "result": "Who AI recommends instead of you, which sources it relies on, and what to improve first.",
       "body": "Measure how your business appears across AI and verified Local discovery. See who appears instead, which sources support those answers, and what Selena recommends improving next.",
       "outcomes": [
         "Your visibility across AI and verified Local",
@@ -596,6 +601,7 @@ export const homepage = {
     },
     {
       "title": "Where is manual work slowing your business down?",
+      "result": "Working AI processes for sales, content and customers — with human approval where it matters.",
       "body": "We map the workflows consuming your team’s time, identify where AI is actually useful, and build practical systems across sales, operations, content, knowledge and customer communication.",
       "outcomes": [
         "Workflow audit and opportunities",
@@ -606,6 +612,7 @@ export const homepage = {
       "audience": "For founders and teams with real workflows to improve — not another tool to experiment with."
     }
   ],
+  "resultLabel": "You get",
   "doorsTitle": "Choose the problem you want to solve.",
   "principlesTitle": "What makes Selena Systems different",
   "principles": [
