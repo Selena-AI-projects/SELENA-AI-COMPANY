@@ -64,6 +64,23 @@ function LabNextSteps({ locale }: { locale: LabLocale }) {
   );
 }
 
+// The one line a visitor should take from each Lab section card.
+const sectionTakeaway: Record<LabLocale, Record<string, string>> = {
+  ru: {
+    research: "Данные и выводы с источниками",
+    guides: "Пошаговые улучшения",
+    experiments: "Честные тесты, включая неудачи",
+    tools: "Проверки, которые можно запустить",
+    cases: "Проекты с датами и доказательствами",
+  },
+  en: {
+    research: "Data and conclusions with sources",
+    guides: "Step-by-step improvements",
+    experiments: "Honest tests, failures included",
+    articles: "Plain explanations for owners",
+  },
+};
+
 export function LabLandingPage({ locale }: { locale: LabLocale }) {
   const content = labContent[locale];
   const cinema = pageCinema(locale).lab;
@@ -131,6 +148,9 @@ export function LabLandingPage({ locale }: { locale: LabLocale }) {
               >
                 <p className="text-xs font-semibold tracking-[0.2em] text-copper-deep">0{index + 1}</p>
                 <h2 className="mt-8 font-serif text-2xl font-semibold text-ink group-hover:text-copper-deep">{section.title}</h2>
+                {sectionTakeaway[locale][section.id] ? (
+                  <p className="mt-2 font-semibold leading-snug text-rose">{sectionTakeaway[locale][section.id]}</p>
+                ) : null}
                 <p className="mt-3 text-sm leading-relaxed text-muted">{section.description}</p>
               </Link>
             ))}

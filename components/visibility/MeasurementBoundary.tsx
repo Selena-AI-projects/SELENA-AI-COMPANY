@@ -39,13 +39,13 @@ export function MeasurementBoundary({
             </ul>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose">
               {labels.notMeasured}
             </p>
             <ul className="mt-4 space-y-2.5">
               {content.whatWeDontMeasure.map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <span className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-line" aria-hidden />
+                  <span className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-rose" aria-hidden />
                   <span className="text-base leading-relaxed text-muted">{item}</span>
                 </li>
               ))}
