@@ -33,11 +33,17 @@ export const metadata = buildMetadata({
 // количества клиентов, регалий и образования.
 
 const focusAreas = [
-  "Контент и упаковка: системный выпуск вместо рывков",
-  "Заявки и клиентские коммуникации: порядок вместо потерянных чатов",
-  "Автоматизация рутины: связки CRM, Notion, Telegram/WhatsApp, Make/Zapier",
-  "Обучение: владелец и команда работают с AI одинаково и по делу",
+  { outcome: "Системный выпуск вместо рывков", area: "Контент и упаковка" },
+  { outcome: "Порядок вместо потерянных чатов", area: "Заявки и клиентские коммуникации" },
+  { outcome: "Рутина уходит в связки", area: "CRM, Notion, Telegram/WhatsApp, Make/Zapier" },
+  { outcome: "Команда работает с AI одинаково и по делу", area: "Обучение владельца и команды" },
 ];
+
+// The two rules a visitor should take away first; the rest follow quietly.
+const keyPrinciples = new Set(["Не выдумываю кейсы и цифры", "Говорю, если AI не нужен"]);
+const principles = [...trust.cards].sort(
+  (a, b) => Number(keyPrinciples.has(b.title)) - Number(keyPrinciples.has(a.title)),
+);
 
 export default function AboutPage() {
   return (
@@ -75,17 +81,14 @@ export default function AboutPage() {
                 intro="Большинству бизнесов не нужна «стратегия внедрения нейросетей». Нужно, чтобы контент выходил, заявки не терялись, а команда не изобретала промпты заново каждый день. Этим я и занимаюсь."
               />
               <Reveal delay={150}>
-                <ul className="mt-8 space-y-3">
-                  {focusAreas.map((area) => (
+                <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+                  {focusAreas.map((item) => (
                     <li
-                      key={area}
-                      className="flex gap-3 rounded-xl border border-line bg-surface px-5 py-4 leading-relaxed text-ink/85"
+                      key={item.outcome}
+                      className="rounded-xl border border-l-4 border-line border-l-rose bg-surface px-5 py-4"
                     >
-                      <span
-                        aria-hidden="true"
-                        className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-copper"
-                      />
-                      {area}
+                      <p className="text-lg font-semibold leading-snug text-rose">{item.outcome}</p>
+                      <p className="mt-1 text-sm leading-relaxed text-muted">{item.area}</p>
                     </li>
                   ))}
                 </ul>
@@ -136,10 +139,12 @@ export default function AboutPage() {
             intro="Эти принципы — не маркетинг, а рабочие правила. Они одинаковы для всех задач и всех клиентов."
           />
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {trust.cards.map((card, i) => (
+            {principles.map((card, i) => (
               <Reveal as="li" key={card.title} delay={(i % 3) * 80} className="h-full">
-                <div className="h-full border-t-2 border-sage/60 pt-5">
-                  <h3 className="text-lg font-semibold text-ink">{card.title}</h3>
+                <div className="h-full border-t-2 border-ink pt-5">
+                  <h3 className={keyPrinciples.has(card.title) ? "text-lg font-semibold text-rose" : "text-lg font-semibold text-ink"}>
+                    {card.title}
+                  </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted">{card.text}</p>
                 </div>
               </Reveal>

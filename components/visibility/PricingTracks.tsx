@@ -119,16 +119,34 @@ export function PricingTracks({
             sideways scroll where the price of the plan you are reading about
             has already left the viewport, so below that width each offer is
             its own card carrying the same rows top to bottom. */}
-        <Reveal className="mt-10 xl:hidden">
-          <PlanCardList plans={plans} labels={content.paidPlans.comparisonLabels} />
+        <Reveal className="mt-10">
+          <PlanSummaryGrid plans={plans} labels={content.paidPlans.comparisonLabels} />
         </Reveal>
 
-        <Reveal className="mt-10 hidden xl:block">
-          <PlanComparisonTable
-            plans={plans}
-            labels={content.paidPlans.comparisonLabels}
-            caption={content.paidPlans.heading}
-          />
+        {/* The summary above is the decision; the full comparison stays one
+            click away for the visitor who wants to check the detail. */}
+        <Reveal className="mt-8">
+          <details className="group rounded-[1rem] border border-line bg-ivory">
+            <summary className="cursor-pointer list-none px-5 py-4 font-semibold text-ink [&::-webkit-details-marker]:hidden">
+              <span aria-hidden="true" className="mr-2 inline-block text-copper-deep transition-transform group-open:rotate-90">
+                ›
+              </span>
+              {content.paidPlans.comparisonLabels.details}
+              <span className="font-normal text-muted"> — {content.paidPlans.comparisonLabels.detailsHint}</span>
+            </summary>
+            <div className="border-t border-line p-4 sm:p-5">
+              <div className="xl:hidden">
+                <PlanCardList plans={plans} labels={content.paidPlans.comparisonLabels} />
+              </div>
+              <div className="hidden xl:block">
+                <PlanComparisonTable
+                  plans={plans}
+                  labels={content.paidPlans.comparisonLabels}
+                  caption={content.paidPlans.heading}
+                />
+              </div>
+            </div>
+          </details>
         </Reveal>
 
         <Reveal className="mt-12 border-t border-line pt-6">
@@ -172,6 +190,66 @@ const SPEC_ROWS: {
   { label: (labels) => labels.scope, value: (plan) => plan.volumeLabel },
   { label: (labels) => labels.difference, value: (plan) => plan.progressionLabel },
 ];
+
+function planCtaAttribute(plan: PricingPlan): string | undefined {
+  if (plan.name === "Visibility Snapshot") return "snapshot";
+  if (plan.name === "Full Discovery Landscape") return "landscape";
+  if (plan.href?.endsWith("#audit-order")) return "audit";
+  if (plan.href?.endsWith("#managed-application")) return "managed";
+  return undefined;
+}
+
+/**
+ * The decision in one row: price, who each offer is for, and the next step.
+ * The main choice is the one dark card; everything else stays quiet.
+ */
+function PlanSummaryGrid({ plans, labels }: { plans: ComparedPlan[]; labels: ComparisonLabels }) {
+  return (
+    <div className="grid grid-cols-1 items-end gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      {plans.map(({ plan, trackTitle }) => {
+        const featured = plan.featured === true;
+        return (
+          <article
+            key={plan.name}
+            id={planAnchor(plan.name)}
+            className={cn(
+              "flex min-w-0 scroll-mt-24 flex-col gap-2 rounded-[0.9rem] border p-4",
+              featured
+                ? "order-first border-charcoal bg-charcoal text-ivory shadow-[0_20px_40px_-24px_rgba(13,20,33,0.7)] sm:col-span-2 lg:order-none lg:col-span-1 lg:min-h-[19rem]"
+                : "border-line bg-ivory lg:min-h-[16.5rem]",
+            )}
+          >
+            {featured ? (
+              <p className="self-start whitespace-nowrap rounded-full bg-rose-dark px-3 py-1 text-[0.75rem] font-bold uppercase leading-5 tracking-[0.12em] text-charcoal">
+                {labels.mainChoice}
+              </p>
+            ) : null}
+            <p className={cn("text-sm", featured ? "text-ivory/75" : "text-muted")}>{trackTitle}</p>
+            <h3 className="font-sans text-base font-semibold leading-snug">{plan.name}</h3>
+            <p className="font-serif text-[2rem] font-semibold leading-none tabular-nums">{plan.price}</p>
+            <p className={cn("font-semibold leading-snug", featured ? "text-rose-dark" : "text-rose")}>
+              {plan.description}
+            </p>
+            {plan.href && plan.ctaLabel ? (
+              <a
+                href={plan.href}
+                data-visibility-cta={planCtaAttribute(plan)}
+                className={cn(
+                  "mt-auto flex min-h-11 items-center justify-center rounded-md border px-3 py-2 text-center text-sm font-semibold leading-tight transition-colors duration-300",
+                  featured
+                    ? "border-rose-dark bg-rose-dark text-charcoal hover:bg-ivory"
+                    : "border-ink/25 text-ink hover:border-copper-deep hover:text-link-deep",
+                )}
+              >
+                {plan.ctaLabel}
+              </a>
+            ) : null}
+          </article>
+        );
+      })}
+    </div>
+  );
+}
 
 const featureListClass = (index: number) =>
   cn("py-2 leading-snug text-ink/85", index > 0 && "border-t border-line/70");
@@ -328,10 +406,9 @@ function PlanComparisonTable({
               <th
                 key={plan.name}
                 scope="col"
-                id={planAnchor(plan.name)}
                 className={cn(
                   columnClass(plan),
-                  "scroll-mt-24 py-5 align-bottom",
+                  "py-5 align-bottom",
                   plan.featured === true && "border-t-2 border-t-copper-deep",
                 )}
               >

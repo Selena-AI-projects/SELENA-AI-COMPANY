@@ -575,6 +575,9 @@ export const visibilityContentEn: VisibilityContent = {
         scope: "Measurement scope",
         difference: "What changes",
         included: "Key deliverables",
+        mainChoice: "Main choice",
+        details: "Detailed comparison",
+        detailsHint: "systems, measurement scope, what changes and key deliverables",
       },
     },
     directory: {

@@ -26,10 +26,10 @@ export const metadata = buildMetadata({
 });
 
 const focusAreas = [
-  "AI Visibility: dated, disclosed measurement instead of a mystery score",
-  "AI Automation: practical workflows across sales, operations, content and knowledge",
-  "Implementation: working rules, testing, team training and written handover",
-  "Research: methods, limits and evidence published through Selena Lab",
+  { outcome: "Dated, disclosed measurement instead of a mystery score", area: "AI Visibility" },
+  { outcome: "Practical workflows across sales, operations, content and knowledge", area: "AI Automation" },
+  { outcome: "Working rules, testing, team training and written handover", area: "Implementation" },
+  { outcome: "Methods, limits and evidence published in the open", area: "Research · Selena Lab" },
 ];
 
 const method = [
@@ -53,6 +53,9 @@ const principles = [
   "Human approval where mistakes carry real cost",
   "No fabricated results, urgency or ranking guarantees",
 ];
+
+// The two rules a visitor should take away first.
+const keyPrinciples = new Set(["Evidence before interpretation", "No fabricated results, urgency or ranking guarantees"]);
 
 export default function EnglishAboutPage() {
   return (
@@ -85,14 +88,14 @@ export default function EnglishAboutPage() {
                 intro="The work begins with the business process and the decision it needs to support. Tools, models and automations are selected only after the operating problem and evidence boundary are clear."
               />
               <Reveal delay={150}>
-                <ul className="mt-8 space-y-3">
-                  {focusAreas.map((area) => (
+                <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+                  {focusAreas.map((item) => (
                     <li
-                      key={area}
-                      className="flex gap-3 rounded-xl border border-line bg-surface px-5 py-4 leading-relaxed text-ink/85"
+                      key={item.outcome}
+                      className="rounded-xl border border-l-4 border-line border-l-rose bg-surface px-5 py-4"
                     >
-                      <span aria-hidden="true" className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-copper" />
-                      {area}
+                      <p className="text-lg font-semibold leading-snug text-rose">{item.outcome}</p>
+                      <p className="mt-1 text-sm leading-relaxed text-muted">{item.area}</p>
                     </li>
                   ))}
                 </ul>
@@ -140,7 +143,10 @@ export default function EnglishAboutPage() {
           />
           <ul className="mt-10 grid gap-5 sm:grid-cols-2">
             {principles.map((principle) => (
-              <li key={principle} className="border-t border-line pt-4 text-lg font-medium text-ink">
+              <li
+                key={principle}
+                className={keyPrinciples.has(principle) ? "border-t-2 border-ink pt-4 text-lg font-semibold text-rose" : "border-t-2 border-ink pt-4 text-lg font-medium text-ink"}
+              >
                 {principle}
               </li>
             ))}

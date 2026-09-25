@@ -34,18 +34,22 @@ const forWhom = [
 const included = [
   {
     title: "Практические сессии",
+    result: "Решённые задачи, а не конспект",
     text: "Разбираем ваши реальные задачи: контент, обращения клиентов, документы, рутину — и решаем их вместе с AI.",
   },
   {
     title: "Библиотека промптов",
+    result: "Одинаковый результат у всей команды",
     text: "Проверенные промпты под ваши процессы и ваш стиль — чтобы результат был предсказуемым у всех.",
   },
   {
     title: "Инструкции для команды",
+    result: "Ясно, что делает AI, а что — человек",
     text: "Понятные регламенты: что делает AI, что проверяет человек, где границы применения.",
   },
   {
     title: "Форматы под вас",
+    result: "Формат под ваш бриф, а не общий курс",
     text: "Индивидуально с владельцем или сессии с командой — формат подбирается после брифа.",
   },
 ];
@@ -129,7 +133,8 @@ export default function AiTrainingPage() {
               <Reveal key={item.title} delay={i * 80} className="h-full">
                 <div className="card-premium h-full bg-ivory p-6 sm:p-7">
                   <h3 className="text-h3 text-ink">{item.title}</h3>
-                  <p className="mt-3 leading-relaxed text-muted">{item.text}</p>
+                  <p className="mt-2 text-lg font-semibold leading-snug text-rose">{item.result}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -158,8 +163,8 @@ export default function AiTrainingPage() {
           </ol>
 
           <Reveal className="mt-14">
-            <div className="card-premium max-w-3xl border-l-2 border-l-copper p-6 sm:p-8">
-              <h3 className="text-xl font-semibold text-ink">
+            <div className="card-premium max-w-3xl border-l-4 border-l-rose p-6 sm:p-8">
+              <h3 className="text-xl font-semibold text-rose">
                 Честно о результате
               </h3>
               <p className="mt-3 leading-relaxed text-muted">

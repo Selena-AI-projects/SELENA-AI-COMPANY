@@ -340,6 +340,9 @@ export type VisibilityContent = {
         scope: string;
         difference: string;
         included: string;
+        mainChoice: string;
+        details: string;
+        detailsHint: string;
       };
     };
     directory: {

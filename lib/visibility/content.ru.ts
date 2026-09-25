@@ -584,6 +584,9 @@ export const visibilityContentRu: VisibilityContent = {
         scope: "Объём замера",
         difference: "Что меняется",
         included: "Главное в составе",
+        mainChoice: "Основной выбор",
+        details: "Подробное сравнение",
+        detailsHint: "системы, объём замера, что меняется и главное в составе",
       },
     },
     directory: {
