@@ -130,7 +130,7 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
     updatedLabel: "Updated",
     checkCta: {
       title: "Check the public readiness of your website",
-      text: "Run the free evidence-based audit. It uses public website data only and makes zero paid AI-provider calls.",
+      text: "Run the free evidence-based audit. It uses public website data only and does not query AI-answer systems; a short explanation may be written by an OpenAI model.",
       label: "Run Public Readiness",
       href: "/check",
     },
@@ -489,7 +489,7 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
     updatedLabel: "Обновлено",
     checkCta: {
       title: "Проверьте публичную готовность сайта",
-      text: "Запустите бесплатный аудит, основанный на доказательствах. Он использует только публичные данные сайта и делает 0 платных обращений к AI-провайдерам.",
+      text: "Запустите бесплатный аудит, основанный на доказательствах. Он использует только публичные данные сайта и не опрашивает AI-системы ответов; короткое пояснение может написать модель OpenAI.",
       label: "Запустить проверку готовности",
       href: "/ru/check",
     },

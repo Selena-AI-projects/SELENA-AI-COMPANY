@@ -520,7 +520,7 @@ export default async function JournalProjectPage({
         <Container size="narrow">
           <h2 className="text-h2 text-ivory">Тот же путь для вашего сайта</h2>
           <p className="mt-5 leading-relaxed text-ivory/75">
-            Начинается он с бесплатной ступени — без платных запросов к AI и без обязательств.
+            Начинается он с бесплатной ступени — без замера AI-ответов и без обязательств.
           </p>
           <div className="mt-9 flex flex-wrap gap-4">
             <Button href="/ru/check" variant="onDark" size="lg">

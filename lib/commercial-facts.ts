@@ -120,8 +120,8 @@ export const commercialFacts = {
       productLine: "ai-visibility",
       name: { en: "Public Readiness", ru: "Публичная готовность сайта" },
       description: {
-        en: "Free technical and content readiness check with no paid AI-provider calls.",
-        ru: "Бесплатная техническая и контентная проверка без платных вызовов AI-провайдеров.",
+        en: "Free technical and content readiness check. It does not query AI-answer systems such as ChatGPT, Gemini or Perplexity; a short plain-language explanation of the result may be written by an OpenAI model.",
+        ru: "Бесплатная техническая и контентная проверка. AI-системы ответов вроде ChatGPT, Gemini или Perplexity не опрашиваются; короткое пояснение к результату может написать модель OpenAI.",
       },
       price: 0,
       currency: "USD",
@@ -137,8 +137,8 @@ export const commercialFacts = {
       productLine: "ai-visibility",
       name: { en: "Visibility Snapshot", ru: "Visibility Snapshot" },
       description: {
-        en: "Early access to Visitor View monitoring across ChatGPT, Gemini and Perplexity; recurring delivery is not yet activated.",
-        ru: "Ранний доступ к ежемесячному мониторингу «как видит посетитель» в ChatGPT, Gemini и Perplexity; регулярная доставка пока не активирована.",
+        en: "Early access to Visitor View measurement across ChatGPT, Gemini and Perplexity; recurring measurements and delivery are not yet activated.",
+        ru: "Ранний доступ к замеру «как видит посетитель» в ChatGPT, Gemini и Perplexity; регулярные замеры и доставка пока не активированы.",
       },
       price: 49,
       currency: "USD",
@@ -155,7 +155,7 @@ export const commercialFacts = {
       name: { en: "Full Discovery Landscape", ru: "Full Discovery Landscape" },
       description: {
         en: "Expanded AI + Google Maps / Local Visibility where automated measurement is verified, with Visitor View and API View kept separate. Early access.",
-        ru: "Расширенные AI-системы и Google Maps / локальная видимость с подтверждённым автоматическим замером; конкуренты, источники и рекомендации. Ранний доступ.",
+        ru: "Расширенные AI-системы и Google Maps / локальная видимость там, где подтверждён автоматический замер; результаты «как видит посетитель» и «через API» в отчёте раздельные. Ранний доступ.",
       },
       price: 79,
       currency: "USD",

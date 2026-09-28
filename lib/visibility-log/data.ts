@@ -710,7 +710,7 @@ export const journalLadder: { stage: JournalStage; price: string; what: string }
   {
     stage: "readiness",
     price: commercialFacts.aiVisibility.publicReadiness.ru,
-    what: "Что о сайте вообще можно узнать без платных запросов к AI.",
+    what: "Что о сайте вообще можно узнать без замера AI-ответов.",
   },
   {
     stage: "snapshot",
