@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ section: 
     "two-agent-code-review": "Reviewing AI-written code",
   };
   return buildMetadata({
-    title: `${metadataTitles[item.slug] ?? item.title} — Selena Lab`,
+    title: item.metaTitle ?? `${metadataTitles[item.slug] ?? item.title} — Selena Lab`,
     description: item.summary,
     path: labPath("en", item.section, item.slug),
     locale: "en_US",

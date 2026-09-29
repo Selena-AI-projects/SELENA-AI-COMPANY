@@ -1,6 +1,6 @@
 import { CinemaImage } from "@/components/ui/CinemaImage";
 import Link from "next/link";
-import { labContent, labPath, type LabItem, type LabLocale, type LabSectionId } from "@/lib/lab/content";
+import { labContent, labPath, type LabFlowItem, type LabItem, type LabLocale, type LabSectionId } from "@/lib/lab/content";
 import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -40,6 +40,50 @@ function ItemLink({ item, locale }: { item: LabItem; locale: LabLocale }) {
       </div>
       <span className="text-sm text-muted sm:text-right">{item.readingTime} <span aria-hidden>→</span></span>
     </Link>
+  );
+}
+
+function LabFlow({ items, citeLabel }: { items: LabFlowItem[]; citeLabel: string }) {
+  return (
+    <div className="mt-6 space-y-5 text-[1.04rem] leading-8 text-ink/78">
+      {items.map((part, index) => {
+        if ("subheading" in part) {
+          return (
+            <div key={index} className="pt-4">
+              {part.tag ? (
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-copper-deep">{part.tag}</p>
+              ) : null}
+              <h3 className="mt-2 font-serif text-2xl font-semibold leading-snug text-ink">{part.subheading}</h3>
+            </div>
+          );
+        }
+        if ("points" in part) {
+          return (
+            <ul key={index} className="space-y-3 border-l-2 border-copper pl-6 text-[1.02rem] leading-7">
+              {part.points.map((point) => <li key={point}>{point}</li>)}
+            </ul>
+          );
+        }
+        if ("steps" in part) {
+          return (
+            <ol key={index} className="list-decimal space-y-3 pl-6 text-[1.02rem] leading-7 marker:font-semibold marker:text-copper-deep">
+              {part.steps.map((step) => <li key={step} className="pl-1">{step}</li>)}
+            </ol>
+          );
+        }
+        if ("cite" in part) {
+          return (
+            <p key={index} className="text-sm text-muted">
+              {citeLabel}:{" "}
+              <a href={part.cite.href} target="_blank" rel="noreferrer" className="text-link underline decoration-link/45 underline-offset-4 hover:decoration-link-deep">
+                {part.cite.publisher} — {part.cite.title}
+              </a>
+            </p>
+          );
+        }
+        return <p key={index}>{part.paragraph}</p>;
+      })}
+    </div>
   );
 }
 
@@ -235,6 +279,11 @@ export function LabArticlePage({ locale, item }: { locale: LabLocale; item: LabI
 
       <article className="bg-surface py-16 sm:py-24">
         <Container size="narrow">
+          {item.intro?.length ? (
+            <div className="mb-14 space-y-5 text-[1.12rem] leading-8 text-ink/85">
+              {item.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            </div>
+          ) : null}
           <div className="space-y-14">
             {item.blocks.map((block, index) => (
               <section key={block.heading} aria-labelledby={`lab-block-${index}`}>
@@ -242,9 +291,12 @@ export function LabArticlePage({ locale, item }: { locale: LabLocale; item: LabI
                 <h2 id={`lab-block-${index}`} className="mt-4 font-serif text-3xl font-semibold leading-tight text-ink sm:text-4xl">
                   {block.heading}
                 </h2>
-                <div className="mt-6 space-y-5 text-[1.04rem] leading-8 text-ink/78">
-                  {block.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-                </div>
+                {block.paragraphs.length > 0 ? (
+                  <div className="mt-6 space-y-5 text-[1.04rem] leading-8 text-ink/78">
+                    {block.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                  </div>
+                ) : null}
+                {block.flow ? <LabFlow items={block.flow} citeLabel={content.citeLabel} /> : null}
                 {block.figure ? (
                   <LabDiagram id={block.figure.diagram} alt={block.figure.alt} caption={block.figure.caption} />
                 ) : null}
@@ -295,6 +347,22 @@ export function LabArticlePage({ locale, item }: { locale: LabLocale; item: LabI
               </section>
             ))}
           </div>
+
+          {item.cta ? (
+            <aside className="mt-16 rounded-lg border border-line bg-ivory p-7 sm:p-9">
+              <div className="space-y-4 text-[1.04rem] leading-8 text-ink/85">
+                {item.cta.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              </div>
+              <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <Button href={item.cta.primary.href}>{item.cta.primary.title}</Button>
+                {item.cta.secondary ? (
+                  <Link href={item.cta.secondary.href} className="inline-flex min-h-11 items-center font-medium text-link underline decoration-link/45 underline-offset-4 hover:decoration-link-deep">
+                    {item.cta.secondary.title} <span className="ml-2" aria-hidden>→</span>
+                  </Link>
+                ) : null}
+              </div>
+            </aside>
+          ) : null}
 
           {item.sources.length > 0 ? (
             <aside className="mt-16 border-t border-line pt-8" aria-labelledby="lab-sources">

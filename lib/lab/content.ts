@@ -19,9 +19,23 @@ export type LabCode = {
   content: string;
 };
 
+/**
+ * Body that must keep its written order — a sentence after a list, or a
+ * sub-heading between paragraphs — which the fixed slots of a block cannot.
+ */
+export type LabFlowItem =
+  | { paragraph: string }
+  | { points: string[] }
+  | { steps: string[] }
+  /** `tag` carries the evidence status the claim was approved with (EXTRACTED, INTERPRETED). */
+  | { subheading: string; tag?: string }
+  | { cite: LabSource };
+
 export type LabContentBlock = {
   heading: string;
   paragraphs: string[];
+  /** Rendered straight after `paragraphs`, in order. */
+  flow?: LabFlowItem[];
   points?: string[];
   /** Ordered where the order is the point — reproduction steps, not a list of facts. */
   steps?: string[];
@@ -53,7 +67,17 @@ export type LabItem = {
   readingTime: string;
   publishedAt: string;
   updatedAt: string;
+  /** Opening paragraphs that sit above the first numbered section. */
+  intro?: string[];
+  /** Search title when it differs from the headline; the site name is appended. */
+  metaTitle?: string;
   blocks: LabContentBlock[];
+  /** The article's own closing ask, shown before its sources. */
+  cta?: {
+    paragraphs: string[];
+    primary: LabRelatedLink;
+    secondary?: LabRelatedLink;
+  };
   sources: LabSource[];
   related?: LabRelatedLink[];
   /** 1200x630 card for link previews; rendered from scripts/og/. */
@@ -77,6 +101,7 @@ type LabLocaleContent = {
   sectionEyebrow: string;
   backLabel: string;
   sourcesLabel: string;
+  citeLabel: string;
   relatedLabel: string;
   updatedLabel: string;
   checkCta: { title: string; text: string; label: string; href: string };
@@ -112,6 +137,16 @@ const officialSources = {
     href: "https://schema.org/docs/documents.html",
     publisher: "Schema.org",
   },
+  googleAiFeatures: {
+    title: "AI features and your website",
+    href: "https://developers.google.com/search/docs/appearance/ai-features",
+    publisher: "Google Search Central",
+  },
+  tannenbaumPromptToRecommendation: {
+    title: "From Prompt to Recommendation",
+    href: "https://arxiv.org/abs/2609.23162",
+    publisher: "Benjamin Tannenbaum",
+  },
 } satisfies Record<string, LabSource>;
 
 export const labContent: Record<LabLocale, LabLocaleContent> = {
@@ -126,6 +161,7 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
     sectionEyebrow: "Selena Lab library",
     backLabel: "Back to Selena Lab",
     sourcesLabel: "Primary references",
+    citeLabel: "Source",
     relatedLabel: "Related reading",
     updatedLabel: "Updated",
     checkCta: {
@@ -472,6 +508,166 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
           { title: "Prepare a website for AI systems", href: "/lab/guides/prepare-site-for-ai-systems" },
         ],
       },
+      {
+        section: "articles",
+        slug: "restaurant-on-google-not-in-ai-recommendations",
+        title: "Your Restaurant Is on Google. Why Doesn’t AI Recommend It?",
+        metaTitle: "Why AI Does Not Recommend Your Restaurant",
+        summary:
+          "Your restaurant appears on Google but not in AI recommendations. Test guest scenarios, sources, competitors and the path to booking before changing the site.",
+        label: "Practical diagnosis",
+        readingTime: "8 min",
+        publishedAt: "2026-09-29",
+        updatedAt: "2026-09-29",
+        intro: [
+          "Your restaurant is easy to find by name on Google. It has a website, a map listing and good reviews. But when a guest asks an AI assistant, “Where can I have a quiet dinner near the city centre?”, the restaurant does not appear.",
+          "The owner sees one symptom: we are not being recommended. But the failure can happen at several different stages. A crawler may be unable to access the site. The relevant information may exist only inside a menu image. The AI system may find the page but not use it in the answer. Or the restaurant may be named, but the guest cannot confirm opening hours or move on to a booking.",
+          "The useful question is not “How do we increase an AI Visibility Score?” It is: “At which stage does the restaurant disappear from the guest’s decision path?”",
+        ],
+        blocks: [
+          {
+            heading: "Being found by name is not the same as being recommended",
+            paragraphs: [
+              "A branded search tests whether a system can identify a specific name. A guest scenario tests something else: whether the system considers the restaurant suitable for a location, budget, cuisine, occasion, dietary constraint and time.",
+              "“Avli Bali” and “a Greek restaurant in Ubud for dinner with a group of eight” are not equivalent prompts. In the first, the name is supplied. In the second, the system has to select the restaurant from alternatives and explain why it fits.",
+              "For diagnosis, separate the path into four stages:",
+            ],
+            flow: [
+              {
+                points: [
+                  "Access: Can the system obtain the public information?",
+                  "Match: Is there a page that answers this guest’s specific need?",
+                  "Inclusion: Is the restaurant included in the answer, and which sources are shown?",
+                  "Action: Can the guest verify the facts and continue to a booking, call or route?",
+                ],
+              },
+              { paragraph: "If these stages are collapsed into one score, the owner cannot see what needs to be fixed." },
+            ],
+          },
+          {
+            heading: "What the sources actually establish",
+            paragraphs: [],
+            flow: [
+              { subheading: "Google does not require special “AI markup”", tag: "EXTRACTED" },
+              { paragraph: "Google’s official documentation says that AI Overviews and AI Mode do not require additional technical requirements or special schema markup. The usual Search foundations still apply: a page must be crawlable and eligible for indexing, important information should be available as text, and structured data should match the visible content." },
+              { paragraph: "Google also states that meeting technical requirements does not guarantee crawling, indexing or serving. A technically sound site therefore creates a necessary foundation; it does not prove that the restaurant will be recommended." },
+              { cite: officialSources.googleAiFeatures },
+              { subheading: "There is a measurable stage between the page and the recommendation", tag: "EXTRACTED" },
+              { paragraph: "Benjamin Tannenbaum’s 19 September 2026 preprint analysed 34,960 unbranded prompt-engine observations across 2,854 monitored prompts in GPT and Gemini. When neither the target brand nor its own domain appeared in the observable retrieval path, target mention rates were 2.8% for GPT and 3.8% for Gemini. With an own-domain citation but no branded fan-out, the rates were 49.0% and 58.4%." },
+              { paragraph: "The paper is explicitly observational, not causal. It is not a restaurant study, it uses a commercial Aiso sample, and it is a preprint. Visible citations also do not reveal the whole internal retrieval process. The study therefore does not justify a claim such as “add a text menu and AI will recommend the restaurant.”" },
+              { cite: officialSources.tannenbaumPromptToRecommendation },
+              { subheading: "Find the failure stage before choosing the fix", tag: "INTERPRETED" },
+              { paragraph: "Together, these sources support a practical diagnostic model: website readiness, source exposure, restaurant inclusion and the guest’s ability to act are different outcomes." },
+              { paragraph: "If the AI system cannot obtain the relevant information, improve access or content. If the information is available but competitors are consistently selected, compare the actual answers and cited pages. If the restaurant is already present but the facts or booking path are wrong, the problem is accuracy and action — not simply “ranking”." },
+            ],
+          },
+          {
+            heading: "A self-check: 30 answers instead of one vague question",
+            paragraphs: [
+              "You do not need hundreds of prompts for an initial diagnostic. Choose five genuinely different guest situations, test them in two consumer AI platforms that matter to your audience, and repeat each prompt three times. That gives 30 observations.",
+              "Example scenarios:",
+            ],
+            flow: [
+              {
+                steps: [
+                  "Where can two people have a quiet dinner in [district]?",
+                  "Which restaurant in [city] is suitable for someone with vegetarian or gluten-free requirements?",
+                  "Where can I book a table for eight after 8 p.m.?",
+                  "Which restaurant near [landmark] is open late today?",
+                  "Where can I try [specific dish] at a mid-range price?",
+                ],
+              },
+              { paragraph: "Replace the city, district, cuisine and constraints with the restaurant’s real audience. Do not use five rewrites of “best restaurant”; that tests one need five times." },
+              { paragraph: "For every answer, record:" },
+              {
+                points: [
+                  "whether the restaurant is named, and its position if the answer is ordered;",
+                  "which competitors are recommended instead;",
+                  "which links or sources are shown;",
+                  "whether a guest can confirm the menu, price, opening hours and next action.",
+                ],
+              },
+              { paragraph: "Keep the language, city, country of access, platform mode and prompt wording unchanged. If a platform does not expose location controls or sources, record that as a limitation rather than turning it into a zero." },
+            ],
+          },
+          {
+            heading: "What Selena Systems can diagnose today",
+            paragraphs: [
+              "Selena Systems currently keeps readiness checks and AI-answer checks separate. They answer different questions and should not be presented as one measurement.",
+            ],
+            flow: [
+              { subheading: "1. Public and project-level website readiness" },
+              { paragraph: "The public Public Readiness check inspects up to five public pages and public discovery resources. It looks at observable website evidence such as HTTP access, robots rules, canonical URLs, indexability, structured data, business clarity and the path to a customer action. It does not call paid AI-answer providers and does not claim that ChatGPT, Gemini or another platform recommends the restaurant." },
+              { paragraph: "An authenticated staging module also stores a dated project snapshot and a remediation plan for observable site signals. Access to that module depends on the project and account state. This article does not claim a completed client run." },
+              { subheading: "2. A limited domain signal from two AI systems" },
+              { paragraph: "A separate staging module performs a one-time check of one normalised domain in ChatGPT and Gemini for an eligible verified account. Its current client-facing output is limited to whether the domain was mentioned and a citation count for each system. It does not expose the full answer or source URLs and is not a competitor audit." },
+              { paragraph: "For a full restaurant diagnostic, Selena still needs an agreed set of guest scenarios, stored answers, competitors, sources and a comparable retest. Public materials describe those measurement products as early access; recurring delivery should not be assumed until it is explicitly activated." },
+            ],
+          },
+          {
+            heading: "Fix one observed gap",
+            paragraphs: [
+              "After the self-check, choose one documented failure rather than trying to “improve everything”.",
+            ],
+            flow: [
+              {
+                points: [
+                  "A page is inaccessible or not indexable. Fix the specific robots, CDN, canonical or indexability problem.",
+                  "The AI cannot verify a dish, price or dietary condition. Add current information as visible text on an official page. A menu image can remain, but it should not be the only source of the fact.",
+                  "The website, map listing and booking service disagree. Establish the correct version and synchronise hours, address, menu, contact details or booking rules.",
+                  "Competitors appear and the restaurant does not. Review the pages actually cited in those answers. A difference is a hypothesis to test, not proof of why the competitor won.",
+                  "The restaurant is named but the next action fails. Fix the button, form, phone number, messenger link or route. Visibility without a working action is not a completed booking path.",
+                ],
+              },
+              { paragraph: "Every action should have an owner, a deadline, a link to the original observation and a predefined retest." },
+            ],
+          },
+          {
+            heading: "Retest the same thing under the same conditions",
+            paragraphs: [
+              "After the change, repeat the same five prompts in the same two interfaces, in the same language and country of access, with the same number of repeats. Do not overwrite the original answers; the new run should point back to the baseline.",
+              "Compare these metrics separately:",
+            ],
+            flow: [
+              {
+                points: [
+                  "Mention Rate: the restaurant is named in how many valid answers?",
+                  "Owned Citation Rate: the official domain appears in how many valid answers?",
+                  "Fact Accuracy: how many verifiable claims match a current official source?",
+                  "Action Completeness: is there a correct path to book, call or get directions?",
+                  "Competitor Set: which venues appear instead for each guest scenario?",
+                ],
+              },
+              { paragraph: "If mentions increase, the defensible wording is: “After the change, we observed an increase from X of Y to A of B in a comparable retest.” Do not automatically say that the change caused the increase; the platform, index and competitors may also have changed." },
+              { paragraph: "If nothing changes, the test is still useful. It rules out one hypothesis and prevents further spending on a change that did not solve the observed problem." },
+            ],
+          },
+          {
+            heading: "The practical conclusion",
+            paragraphs: [
+              "A restaurant can be visible on Google and absent from AI recommendations without contradiction. A search by name confirms that the brand exists. An unbranded recommendation tests whether the venue fits a specific guest situation and whether the system can find evidence it considers useful at that moment.",
+              "The working model is simple:",
+              "problem → evidence → self-check → diagnosis → one action → comparable retest",
+              "This gives the owner something more useful than an abstract score: a clear view of where the restaurant loses the guest, and which change is worth testing first.",
+            ],
+          },
+        ],
+        cta: {
+          paragraphs: [
+            "Start with Selena Systems’ free Public Readiness check. If the technical foundation is sound but the restaurant is absent from important guest scenarios, request early access to an AI Visibility diagnostic with fixed prompts, preserved sources, named competitors and a comparable retest plan.",
+            "Starting the conversation defines the scope. It does not automatically start a paid measurement or payment.",
+          ],
+          primary: { title: "Run Public Readiness", href: "/check" },
+          secondary: { title: "Explore AI Visibility", href: "/visibility" },
+        },
+        sources: [officialSources.googleAiFeatures, officialSources.tannenbaumPromptToRecommendation],
+        related: [
+          { title: "Run the free Public Readiness check", href: "/check" },
+          { title: "AI Visibility for hotels, villas and restaurants", href: "/visibility" },
+          { title: "Methodology for AI Visibility", href: "/methodology" },
+          { title: "How to prepare a website for AI systems", href: "/lab/guides/prepare-site-for-ai-systems" },
+        ],
+      },
     ],
   },
   ru: {
@@ -485,6 +681,7 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
     sectionEyebrow: "Библиотека Selena Lab",
     backLabel: "Вернуться в Selena Lab",
     sourcesLabel: "Первичные источники",
+    citeLabel: "Источник",
     relatedLabel: "Смежное",
     updatedLabel: "Обновлено",
     checkCta: {
@@ -843,6 +1040,9 @@ export function labPath(locale: LabLocale, section?: LabSectionId, slug?: string
 }
 
 export function labLanguages(section?: LabSectionId, slug?: string) {
+  // An entry written in one language has no alternate to point at: a hreflang
+  // to a Russian URL that 404s is worse than none.
+  if (section && slug && !(getLabItem("en", section, slug) && getLabItem("ru", section, slug))) return undefined;
   return {
     "x-default": labPath("en", section, slug),
     en: labPath("en", section, slug),

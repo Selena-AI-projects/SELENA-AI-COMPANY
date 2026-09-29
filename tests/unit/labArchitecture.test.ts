@@ -11,6 +11,7 @@ import {
   labPath,
   labSectionIds,
 } from "@/lib/lab/content";
+import { englishOnlyLabPaths } from "@/lib/lab/untranslated";
 import { alternateLocalePath, isEnglishPublicPath } from "@/lib/localized-routes";
 import sitemap from "@/app/sitemap";
 import { readFileSync } from "node:fs";
@@ -81,6 +82,51 @@ test("a published experiment carries its reproduction steps and its limits", () 
   const urls = sitemap().map((entry) => String(entry.url));
   assert.ok(urls.includes("https://www.selenasystems.com/lab/experiments/two-agent-code-review"));
   assert.ok(urls.includes("https://www.selenasystems.com/ru/lab/experiments/two-agent-code-review"));
+});
+
+test("the restaurant article is listed under Articles and links onward into the site", () => {
+  const article = getLabItem("en", "articles", "restaurant-on-google-not-in-ai-recommendations");
+  assert.ok(article, "missing English articles/restaurant-on-google-not-in-ai-recommendations");
+  assert.ok(getLabItems("en", "articles").includes(article));
+  assert.equal(article.metaTitle, "Why AI Does Not Recommend Your Restaurant");
+  assert.ok(article.summary.length <= 160, "the summary doubles as the meta description");
+
+  const internal = [article.cta?.primary.href, ...(article.related ?? []).map((link) => link.href)];
+  for (const href of ["/check", "/visibility", "/methodology", "/lab/guides/prepare-site-for-ai-systems"]) {
+    assert.ok(internal.includes(href), `article must link to ${href}`);
+  }
+  assert.equal(article.cta?.primary.href, "/check");
+
+  // Its claims rest on these two; dropping either leaves a figure without its origin.
+  const sources = article.sources.map((source) => source.href);
+  assert.ok(sources.includes("https://developers.google.com/search/docs/appearance/ai-features"));
+  assert.ok(sources.includes("https://arxiv.org/abs/2609.23162"));
+});
+
+test("an English-only Lab entry never points search engines or visitors at a missing Russian page", () => {
+  const section = "articles";
+  const slug = "restaurant-on-google-not-in-ai-recommendations";
+  assert.equal(getLabItem("ru", section, slug), null);
+
+  assert.equal(labLanguages(section, slug), undefined);
+
+  const entries = sitemap();
+  const urls = entries.map((entry) => String(entry.url));
+  assert.ok(urls.includes(`https://www.selenasystems.com/lab/${section}/${slug}`));
+  assert.ok(!urls.includes(`https://www.selenasystems.com/ru/lab/${section}/${slug}`));
+  for (const entry of entries) {
+    const alternates = Object.values(entry.alternates?.languages ?? {}).map(String);
+    assert.ok(!alternates.some((href) => href.endsWith(`/ru/lab/${section}/${slug}`)), `${entry.url} points at a missing page`);
+  }
+
+  assert.equal(alternateLocalePath(labPath("en", section, slug)), null);
+});
+
+test("the language switch knows exactly which English Lab entries are untranslated", () => {
+  const untranslated = labContent.en.items
+    .filter((item) => !getLabItem("ru", item.section, item.slug))
+    .map((item) => labPath("en", item.section, item.slug));
+  assert.deepEqual([...englishOnlyLabPaths].sort(), untranslated.sort());
 });
 
 test("Lab courses disclose that nothing is for sale and reserve the shared learning workspace", () => {

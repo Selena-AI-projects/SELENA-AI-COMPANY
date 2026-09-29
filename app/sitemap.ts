@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { visibilityLanguages } from "@/lib/visibility/routes";
-import { labContent, labLanguages, labPath, labSectionIds } from "@/lib/lab/content";
+import { getLabItem, labContent, labLanguages, labPath, labSectionIds } from "@/lib/lab/content";
 import { journalProjects } from "@/lib/visibility-log/data";
 import { aiCodeCrossReviewArticle } from "@/lib/school/ai-code-cross-review";
 import { legalDocuments } from "@/lib/data/legal";
@@ -61,6 +61,7 @@ const routes: PublicRoute[] = [
   // Lab items carry the date they were written and the date they changed, so
   // they can say when they changed. Pages without such a date stay silent
   // rather than publish the build's date as if it were an edit.
+  // An English-only entry lists just its own URL; the Russian path would 404.
   ...labContent.en.items.flatMap((item) => [
     {
       path: labPath("en", item.section, item.slug),
@@ -68,12 +69,16 @@ const routes: PublicRoute[] = [
       lastModified: item.updatedAt,
       languages: labLanguages(item.section, item.slug),
     },
-    {
-      path: labPath("ru", item.section, item.slug),
-      priority: 0.7,
-      lastModified: item.updatedAt,
-      languages: labLanguages(item.section, item.slug),
-    },
+    ...(getLabItem("ru", item.section, item.slug)
+      ? [
+          {
+            path: labPath("ru", item.section, item.slug),
+            priority: 0.7,
+            lastModified: item.updatedAt,
+            languages: labLanguages(item.section, item.slug),
+          },
+        ]
+      : []),
   ]),
   // The journal is Russian-first by decision; the English mirror follows later,
   // so these routes deliberately carry no hreflang alternates yet.
