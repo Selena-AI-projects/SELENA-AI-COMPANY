@@ -114,6 +114,7 @@ const sectionTakeaway: Record<LabLocale, Record<string, string>> = {
     research: "Данные и выводы с источниками",
     guides: "Пошаговые улучшения",
     experiments: "Честные тесты, включая неудачи",
+    articles: "Понятные объяснения для владельцев",
     tools: "Проверки, которые можно запустить",
     cases: "Проекты с датами и доказательствами",
   },
@@ -131,7 +132,7 @@ export function LabLandingPage({ locale }: { locale: LabLocale }) {
   const researchLinks = locale === "ru"
     ? [
         ...content.sections
-          .filter((section) => ["research", "guides", "experiments"].includes(section.id))
+          .filter((section) => ["research", "guides", "experiments", "articles"].includes(section.id))
           .map((section) => ({ ...section, href: labPath(locale, section.id) })),
         {
           id: "tools",
@@ -183,7 +184,8 @@ export function LabLandingPage({ locale }: { locale: LabLocale }) {
           <p id="research-tools" className="scroll-mt-28 text-xs font-semibold uppercase tracking-[0.22em] text-copper-deep">
             {locale === "ru" ? "Исследования и инструменты" : content.browseLabel}
           </p>
-          <div className="mt-8 grid gap-px overflow-hidden border border-line bg-line md:grid-cols-2 xl:grid-cols-5">
+          {/* Six Russian cards sit as two rows of three; a fifth column would strand one. */}
+          <div className={`mt-8 grid gap-px overflow-hidden border border-line bg-line md:grid-cols-2 ${locale === "ru" ? "xl:grid-cols-3" : "xl:grid-cols-5"}`}>
             {researchLinks.map((section, index) => (
               <Link
                 key={section.id}
