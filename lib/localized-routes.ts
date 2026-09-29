@@ -1,4 +1,5 @@
 import { isBareEnglishVisibilityPath } from "@/lib/visibility/routes";
+import { englishOnlyLabPaths } from "@/lib/lab/untranslated";
 
 export function isBareEnglishLabPath(pathname: string) {
   return pathname === "/lab" || pathname.startsWith("/lab/");
@@ -30,6 +31,7 @@ export function isEnglishPublicPath(pathname: string) {
 export function alternateLocalePath(pathname: string) {
   if (pathname === "/") return "/ru";
   if (pathname === "/ru") return "/";
+  if (englishOnlyLabPaths.has(pathname)) return null;
   if (isBareEnglishLabPath(pathname) || isBareEnglishVisibilityPath(pathname)) return `/ru${pathname}`;
   if (pathname === "/ru/lab" || pathname.startsWith("/ru/lab/")) return pathname.slice(3);
   if (
