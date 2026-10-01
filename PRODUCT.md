@@ -37,8 +37,10 @@ third competing service line.
 
 - `selenasystems.com` is the public marketing and free-readiness surface.
 - `app.selenasystems.com` is the authenticated client workspace.
-- `/lab` is the public research and education library; there is no separate Blog
-  or Academy.
+- `/lab` and `/ru/lab` are the public research and education library. Every Lab
+  article is published in its Lab section in both languages under one slug; see
+  `docs/22-selena-lab-publishing.md`. A Russian-only `/ru/blog` holds personal
+  experience notes; there is no Academy.
 - `/app/learn` is reserved for future course entitlements; `/app/selena` remains
   the Visibility workspace and `/app/projects` the custom-services workspace.
 - Visitor View covers ChatGPT, Gemini and Perplexity.

@@ -84,42 +84,68 @@ test("a published experiment carries its reproduction steps and its limits", () 
   assert.ok(urls.includes("https://www.selenasystems.com/ru/lab/experiments/two-agent-code-review"));
 });
 
-test("the restaurant article is listed under Articles and links onward into the site", () => {
-  const article = getLabItem("en", "articles", "restaurant-on-google-not-in-ai-recommendations");
-  assert.ok(article, "missing English articles/restaurant-on-google-not-in-ai-recommendations");
-  assert.ok(getLabItems("en", "articles").includes(article));
-  assert.equal(article.metaTitle, "Why AI Does Not Recommend Your Restaurant");
-  assert.ok(article.summary.length <= 160, "the summary doubles as the meta description");
+test("the restaurant article is listed under Articles in both languages and links onward in its own language", () => {
+  const expected = {
+    en: { metaTitle: "Why AI Does Not Recommend Your Restaurant", links: ["/check", "/visibility", "/methodology", "/lab/guides/prepare-site-for-ai-systems"] },
+    ru: { metaTitle: "Почему ИИ не рекомендует ваш ресторан", links: ["/ru/check", "/ru/visibility", "/ru/methodology", "/ru/lab/guides/prepare-site-for-ai-systems"] },
+  } as const;
 
-  const internal = [article.cta?.primary.href, ...(article.related ?? []).map((link) => link.href)];
-  for (const href of ["/check", "/visibility", "/methodology", "/lab/guides/prepare-site-for-ai-systems"]) {
-    assert.ok(internal.includes(href), `article must link to ${href}`);
+  for (const locale of ["en", "ru"] as const) {
+    const article = getLabItem(locale, "articles", "restaurant-on-google-not-in-ai-recommendations");
+    assert.ok(article, `missing ${locale} articles/restaurant-on-google-not-in-ai-recommendations`);
+    assert.ok(getLabItems(locale, "articles").includes(article));
+    assert.equal(article.metaTitle, expected[locale].metaTitle);
+    assert.ok(article.summary.length <= 160, "the summary doubles as the meta description");
+
+    const internal = [article.cta?.primary.href, ...(article.related ?? []).map((link) => link.href)];
+    for (const href of expected[locale].links) {
+      assert.ok(internal.includes(href), `${locale} article must link to ${href}`);
+    }
+    assert.equal(article.cta?.primary.href, expected[locale].links[0]);
+
+    // Its claims rest on these two; dropping either leaves a figure without its origin.
+    const sources = article.sources.map((source) => source.href);
+    assert.ok(sources.includes("https://developers.google.com/search/docs/appearance/ai-features"));
+    assert.ok(sources.includes("https://arxiv.org/abs/2609.23162"));
   }
-  assert.equal(article.cta?.primary.href, "/check");
 
-  // Its claims rest on these two; dropping either leaves a figure without its origin.
-  const sources = article.sources.map((source) => source.href);
-  assert.ok(sources.includes("https://developers.google.com/search/docs/appearance/ai-features"));
-  assert.ok(sources.includes("https://arxiv.org/abs/2609.23162"));
+  const en = getLabItem("en", "articles", "restaurant-on-google-not-in-ai-recommendations")!;
+  const ru = getLabItem("ru", "articles", "restaurant-on-google-not-in-ai-recommendations")!;
+  assert.equal(en.blocks.length, ru.blocks.length, "both editions must tell the same story");
 });
 
-test("an English-only Lab entry never points search engines or visitors at a missing Russian page", () => {
-  const section = "articles";
-  const slug = "restaurant-on-google-not-in-ai-recommendations";
-  assert.equal(getLabItem("ru", section, slug), null);
+test("the two editions of the restaurant article point at each other", () => {
+  const en = labPath("en", "articles", "restaurant-on-google-not-in-ai-recommendations");
+  const ru = labPath("ru", "articles", "restaurant-on-google-not-in-ai-recommendations");
+  assert.deepEqual(labLanguages("articles", "restaurant-on-google-not-in-ai-recommendations"), { "x-default": en, en, ru });
+  assert.equal(alternateLocalePath(en), ru);
+  assert.equal(alternateLocalePath(ru), en);
 
-  assert.equal(labLanguages(section, slug), undefined);
+  const urls = sitemap().map((entry) => String(entry.url));
+  assert.ok(urls.includes(`https://www.selenasystems.com${en}`));
+  assert.ok(urls.includes(`https://www.selenasystems.com${ru}`));
+});
 
+test("no Lab entry points search engines or visitors at an edition that does not exist", () => {
   const entries = sitemap();
-  const urls = entries.map((entry) => String(entry.url));
-  assert.ok(urls.includes(`https://www.selenasystems.com/lab/${section}/${slug}`));
-  assert.ok(!urls.includes(`https://www.selenasystems.com/ru/lab/${section}/${slug}`));
+  const urls = new Set(entries.map((entry) => String(entry.url)));
   for (const entry of entries) {
-    const alternates = Object.values(entry.alternates?.languages ?? {}).map(String);
-    assert.ok(!alternates.some((href) => href.endsWith(`/ru/lab/${section}/${slug}`)), `${entry.url} points at a missing page`);
+    for (const href of Object.values(entry.alternates?.languages ?? {}).map(String)) {
+      assert.ok(urls.has(href), `${entry.url} names ${href}, which the sitemap does not publish`);
+    }
   }
 
-  assert.equal(alternateLocalePath(labPath("en", section, slug)), null);
+  // An entry written in one language so far carries no alternate and no switch.
+  for (const item of labContent.en.items.filter((entry) => !getLabItem("ru", entry.section, entry.slug))) {
+    assert.equal(labLanguages(item.section, item.slug), undefined);
+    assert.ok(!urls.has(`https://www.selenasystems.com${labPath("ru", item.section, item.slug)}`));
+    assert.equal(alternateLocalePath(labPath("en", item.section, item.slug)), null);
+  }
+});
+
+test("the Russian Lab landing leads to the Articles section", () => {
+  const landing = readFileSync(join(process.cwd(), "components/lab/LabPages.tsx"), "utf8");
+  assert.match(landing, /\["research", "guides", "experiments", "articles"\]/);
 });
 
 test("the language switch knows exactly which English Lab entries are untranslated", () => {
