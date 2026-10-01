@@ -86,6 +86,7 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
                 "Expanded sources and cross-system competitor patterns",
                 "Expanded recommendations included — opportunities to investigate or improve first",
                 "API output is not the consumer experience; evidence classes are never blended",
+                "Weekly Telegram and authenticated reports after delivery activation",
               ]
             : [
                 "Google Maps / локальная видимость — только там, где подтверждён автоматический замер в рабочем режиме",
@@ -93,6 +94,7 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
                 "Расширенные источники и паттерны конкурентов в разных системах",
                 "Расширенные рекомендации включены — что исследовать или улучшить первым",
                 "API-ответ не равен потребительскому опыту; классы доказательств разделены",
+                "Еженедельный отчёт в Telegram и отчёты в кабинете после активации доставки",
               ],
           href: en ? discoveryLinks.landscape : "/ru/visibility#early-access",
           ctaLabel: en ? "Request Full Discovery early access" : "Запросить ранний доступ к Full Discovery Landscape",
