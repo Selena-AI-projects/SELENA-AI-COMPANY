@@ -236,7 +236,7 @@ test("pricing separates one free readiness entry from the four paid Visibility p
     const allPlans = content.pricing.tracks.flatMap((track) => track.plans);
     assert.equal(allPlans.length, 4, `${name} paid Visibility plan count`);
     assert.equal(content.pricing.freePlan.features.length, 4, `${name} free scope must be explicit`);
-    assert.match(content.pricing.freePlan.boundary, /not an AI visibility measurement|0 платн/i);
+    assert.match(content.pricing.freePlan.boundary, /not an AI visibility measurement|не замер AI-видимости/i);
     assert.ok(!allPlans.some((plan) => /Free|Бесплат/i.test(plan.price)), `${name} Free must stay outside paid cards`);
     assert.match(content.pricing.directory.visibility.count, /1 .*free|1 бесплат/i);
     assert.match(content.pricing.directory.visibility.count, /4 .*paid|4 платн/i);
@@ -431,7 +431,9 @@ test("free surfaces contain no limited AI sample", () => {
     );
     assert.match(
       content.homeTeaser.intro,
-      name === "en" ? /No paid AI-answer providers are called/i : /Платные провайдеры AI-ответов не вызываются/i,
+      name === "en"
+        ? /No AI-answer systems are queried; a short explanation of the result may be written by an OpenAI model/i
+        : /AI-системы ответов не опрашиваются; короткое пояснение к результату может написать модель OpenAI/i,
     );
   }
 

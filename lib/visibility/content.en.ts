@@ -17,8 +17,8 @@ export const visibilityContentEn: VisibilityContent = {
     headline:
       "See how search and AI systems can find, understand and represent your business — and whether a customer or agent can complete the next action.",
     intro:
-      "A free, evidence-based Public Readiness check of your public pages, crawler access, site structure, entity clarity and whether your primary action can be understood. No paid AI-answer providers are called.",
-    formNote: "Free. Takes a few minutes. No credit card, no login.",
+      "A free, evidence-based Public Readiness check of your public pages, crawler access, site structure, entity clarity and whether your primary action can be understood. No AI-answer systems are queried; a short explanation of the result may be written by an OpenAI model.",
+    formNote: "Free. Takes under a minute. No credit card, no login.",
     primaryCta: { label: "Check AI readiness — free", href: visibilityRoutes.en.check },
     secondaryCta: { label: "See AI Visibility plans", href: visibilityRoutes.en.pricing },
   },
@@ -420,7 +420,7 @@ export const visibilityContentEn: VisibilityContent = {
       other: "Other block",
     },
     shownLabel: "Weakest blocks shown",
-    providerCallsLabel: "Paid provider calls",
+    providerCallsLabel: "AI-answer system calls",
     goodHeading: "What already works",
     goodIntro: "Machine readers found these on your site. Keep them.",
     goodEmpty:
