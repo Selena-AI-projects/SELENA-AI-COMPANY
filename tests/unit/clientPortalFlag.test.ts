@@ -1,9 +1,20 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { CLIENT_PORTAL_ENABLED, selenaAppRoutes } from "@/lib/visibility/routes";
+import { CLIENT_PORTAL_ENABLED, isClientPortalEnabled, selenaAppRoutes } from "@/lib/visibility/routes";
 
-test("the known staging portal stays hidden regardless of environment flags", () => {
-  assert.equal(CLIENT_PORTAL_ENABLED, false);
+test("the portal opens only on an explicit true and is closed by default", () => {
+  assert.equal(isClientPortalEnabled({}), false);
+  assert.equal(isClientPortalEnabled({ NEXT_PUBLIC_CLIENT_PORTAL_ENABLED: "true" }), true);
+  assert.equal(isClientPortalEnabled({ NEXT_PUBLIC_CLIENT_PORTAL_ENABLED: "TRUE " }), true);
+  assert.equal(isClientPortalEnabled({ NEXT_PUBLIC_CLIENT_PORTAL_ENABLED: "1" }), false);
+});
+
+test("the portal stays closed in the test environment", () => {
+  assert.equal(
+    CLIENT_PORTAL_ENABLED,
+    false,
+    "NEXT_PUBLIC_CLIENT_PORTAL_ENABLED must stay unset (or not \"true\") where the unit tests run",
+  );
 });
 
 test("no link into the portal is rendered outside the flag", async () => {

@@ -19,12 +19,30 @@ export const visibilityRoutes = {
   },
 } as const;
 
-/** Production hostname evidence is still missing. An environment variable alone
- * cannot promote the known staging hostname into a customer destination. */
-export const CLIENT_PORTAL_ENABLED = false;
+/**
+ * Only the literal "true" (any case, surrounding whitespace ignored) opens the
+ * portal. Anything else, including an unset variable, keeps it closed, so a
+ * deploy that never sets the variable publishes no portal link.
+ */
+export function isClientPortalEnabled(env: { readonly NEXT_PUBLIC_CLIENT_PORTAL_ENABLED?: string }) {
+  return env.NEXT_PUBLIC_CLIENT_PORTAL_ENABLED?.trim().toLowerCase() === "true";
+}
 
-/** Historical app routes, retained for compatibility but not published while
- * CLIENT_PORTAL_ENABLED is false. The hostname currently resolves to staging. */
+/**
+ * Every link into the client portal hangs off this one switch. It is driven by
+ * the environment so the owner can open the portal from Vercel once
+ * app.selenasystems.com stops serving the staging cabinet, and close it again,
+ * without a code release. The variable is spelled out as a static
+ * `process.env.NEXT_PUBLIC_*` access because Next.js inlines only that form
+ * into the client bundle; passing `process.env` itself would leave the header
+ * and footer (client components) reading an empty object in the browser.
+ */
+export const CLIENT_PORTAL_ENABLED = isClientPortalEnabled({
+  NEXT_PUBLIC_CLIENT_PORTAL_ENABLED: process.env.NEXT_PUBLIC_CLIENT_PORTAL_ENABLED,
+});
+
+/** Portal entry points, published only while CLIENT_PORTAL_ENABLED is true.
+ * The hostname currently resolves to the staging cabinet. */
 export const selenaAppRoutes = {
   home: "https://app.selenasystems.com",
   login: "https://app.selenasystems.com/auth/login",

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { discoverySales, discoveryTracks, discoveryLinks, auditTerms, discoveryDecisionSteps, discoveryPlanOutcomes } from "@/lib/visibility/sales";
 import { visibilityActivation } from "@/lib/visibility/activation";
-import { CLIENT_PORTAL_ENABLED, visibilityLanguages } from "@/lib/visibility/routes";
+import { isClientPortalEnabled, visibilityLanguages } from "@/lib/visibility/routes";
 import { buildAiVisibilityStructuredData } from "@/lib/structured-data";
 import { homepage } from "@/lib/data/homepage";
 import { visibilityContentEn } from "@/lib/visibility/content.en";
@@ -133,7 +133,7 @@ test("one adapter supplies the same four paid plans to pricing, homepage and sal
   );
 });
 
-test("every paid offer has a manual or early-access destination; known staging portal is blocked", () => {
+test("every paid offer has a manual or early-access destination; portal is closed by default", () => {
   for (const locale of ["en", "ru"] as const) {
     for (const plan of discoveryTracks(locale).flatMap((track) => track.plans)) {
       assert.match(plan.href!, /\/visibility#(early-access|audit-order|managed-application)$/);
@@ -141,7 +141,7 @@ test("every paid offer has a manual or early-access destination; known staging p
       assert.doesNotMatch(plan.href!, /staging|app\.selenasystems/);
     }
   }
-  assert.equal(CLIENT_PORTAL_ENABLED, false);
+  assert.equal(isClientPortalEnabled({}), false);
 });
 
 test("EN/RU pairing stays exact and inactive paid checkout has no Offer schema", () => {
