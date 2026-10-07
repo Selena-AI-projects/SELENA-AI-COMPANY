@@ -1,3 +1,5 @@
+import { mergeLabItems, readLabFiles } from "@/lib/lab/files";
+
 export type LabLocale = "en" | "ru";
 export type LabSectionId = "research" | "guides" | "experiments" | "articles" | "courses";
 
@@ -149,7 +151,7 @@ const officialSources = {
   },
 } satisfies Record<string, LabSource>;
 
-export const labContent: Record<LabLocale, LabLocaleContent> = {
+const handWrittenContent: Record<LabLocale, LabLocaleContent> = {
   en: {
     eyebrow: "Selena Lab",
     title: "Research, practical guides, experiments and articles for building with AI.",
@@ -1190,6 +1192,18 @@ export const labContent: Record<LabLocale, LabLocaleContent> = {
       },
     ],
   },
+};
+
+// Entries written as files under data/lab join the hand-written ones here, so
+// every list, route and sitemap entry sees one set.
+const labItems = mergeLabItems(
+  { en: handWrittenContent.en.items, ru: handWrittenContent.ru.items },
+  readLabFiles(),
+);
+
+export const labContent: Record<LabLocale, LabLocaleContent> = {
+  en: { ...handWrittenContent.en, items: labItems.en },
+  ru: { ...handWrittenContent.ru, items: labItems.ru },
 };
 
 export const labSectionIds: LabSectionId[] = ["research", "guides", "experiments", "articles", "courses"];
