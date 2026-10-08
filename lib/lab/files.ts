@@ -274,8 +274,11 @@ function key(item: LabItem) {
 
 /**
  * Hand-written entries first, then file entries by date. An entry may exist
- * once per language, and a Russian file needs its English edition: the owner
- * publishes English first (docs/22-selena-lab-publishing.md).
+ * once per language. A file entry comes as a pair — its Russian and English
+ * editions together — because selenasystems.com requires English beside the
+ * primary Russian text (docs/22-selena-lab-publishing.md). A Russian entry
+ * always needs its English edition; an English one without Russian is allowed
+ * only among the hand-written entries listed in english-only.json.
  */
 export function mergeLabItems(
   handWritten: Record<LabLocale, LabItem[]>,
@@ -293,9 +296,16 @@ export function mergeLabItems(
       merged[locale].push(item);
     }
   }
+  for (const { locale, item } of files) {
+    const other: LabLocale = locale === "en" ? "ru" : "en";
+    if (!merged[other].some((existing) => key(existing) === key(item)))
+      throw new LabFileError(
+        `${key(item)}: a Lab file needs its ${other === "en" ? "English" : "Russian"} edition in the same release`,
+      );
+  }
   for (const item of merged.ru) {
     if (!merged.en.some((existing) => key(existing) === key(item)))
-      throw new LabFileError(`${key(item)}: a Russian edition needs its English edition, which is published first`);
+      throw new LabFileError(`${key(item)}: a Russian edition needs its English edition`);
   }
   return merged;
 }

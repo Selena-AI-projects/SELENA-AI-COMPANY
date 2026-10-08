@@ -92,22 +92,28 @@ function handWritten(slug: string): LabItem {
   return { ...parse().item, slug, publishedAt: "2026-01-01", updatedAt: "2026-01-01" };
 }
 
-test("file entries join the hand-written ones once per language, English before Russian", () => {
+test("file entries join the hand-written ones as Russian and English pairs", () => {
   const english = parse().item;
   const later = { ...english, slug: "a-later-article", publishedAt: "2026-11-01", updatedAt: "2026-11-01" };
   const merged = mergeLabItems({ en: [handWritten("existing")], ru: [handWritten("existing")] }, [
     { locale: "en", item: later },
+    { locale: "ru", item: later },
     { locale: "en", item: english },
     { locale: "ru", item: english },
   ]);
   assert.deepEqual(merged.en.map((item) => item.slug), ["existing", "ai-recommendations-check", "a-later-article"]);
-  assert.deepEqual(merged.ru.map((item) => item.slug), ["existing", "ai-recommendations-check"]);
+  assert.deepEqual(merged.ru.map((item) => item.slug), ["existing", "ai-recommendations-check", "a-later-article"]);
 
   assert.throws(
-    () => mergeLabItems({ en: [handWritten("ai-recommendations-check")], ru: [] }, [{ locale: "en", item: english }]),
+    () =>
+      mergeLabItems({ en: [handWritten("ai-recommendations-check")], ru: [] }, [
+        { locale: "en", item: english },
+        { locale: "ru", item: english },
+      ]),
     /already exists/,
   );
   assert.throws(() => mergeLabItems({ en: [], ru: [] }, [{ locale: "ru", item: english }]), /needs its English edition/);
+  assert.throws(() => mergeLabItems({ en: [], ru: [] }, [{ locale: "en", item: english }]), /needs its Russian edition/);
 });
 
 test("only entry folders live under data/lab, so a stray file is an error rather than a silent skip", () => {
