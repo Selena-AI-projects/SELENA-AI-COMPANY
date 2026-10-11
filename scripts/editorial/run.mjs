@@ -4,7 +4,7 @@
 //   2  refused: no usable hook, source unreadable, or the text failed its checks
 //   3  nothing new: every eligible hook is already in the ledger
 //   1  the run itself broke
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { readSources } from "./feeds.mjs";
 import { findCovered, ledgerEntry, rankCandidates } from "./hooks.mjs";
@@ -27,6 +27,10 @@ function parseArgs(argv) {
     maxVerify: 6,
     onlySource: null,
     candidateUrl: null,
+    verifySources: false,
+    write: false,
+    includeUnverified: false,
+    verifiedWhere: "local",
   };
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -43,9 +47,14 @@ function parseArgs(argv) {
     else if (arg === "--max-verify") options.maxVerify = Number(next());
     else if (arg === "--only-source") options.onlySource = next();
     else if (arg === "--candidate-url") options.candidateUrl = next();
+    else if (arg === "--verify-sources") options.verifySources = true;
+    else if (arg === "--write") options.write = true;
+    else if (arg === "--include-unverified") options.includeUnverified = true;
+    else if (arg === "--verified-where") options.verifiedWhere = next();
     else if (arg === "--help" || arg === "-h") {
       console.log(`usage: node scripts/editorial/run.mjs [--lookback-days 14] [--dry-run] [--allow-repeat] [--only-source id] [--candidate-url url]
-       [--fixtures map.json] [--writer claude|fixture] [--budget-usd 1] [--model name] [--no-interest] [--root editorial]`);
+       [--include-unverified] [--fixtures map.json] [--writer claude|fixture] [--budget-usd 1] [--model name] [--no-interest] [--root editorial]
+       node scripts/editorial/run.mjs --verify-sources [--write] [--verified-where label]   # read every feed, record which parse`);
       process.exit(0);
     } else throw new Error(`unknown argument ${arg}`);
   }
@@ -66,17 +75,38 @@ export async function main(argv = process.argv.slice(2), { log = console.error }
   const started = stamp();
   const fixtures = await loadFixtures(options.fixtures);
   const testData = Boolean(fixtures) || options.writer === "fixture";
-  const config = JSON.parse(await readFile(path.join(root, "sources.json"), "utf8"));
+  const sourcesFile = path.join(root, "sources.json");
+  const config = JSON.parse(await readFile(sourcesFile, "utf8"));
   const brief = await readFile(path.join(root, "PROMPT.md"), "utf8");
   const ledger = await loadLedger(draftsRoot);
-  const sources = config.sources.filter((source) => !options.onlySource || source.id === options.onlySource);
-  log(`editorial run ${started.local}${testData ? " [TEST DATA]" : ""}: ${sources.length} source(s), lookback ${options.lookbackDays} days`);
+  const named = config.sources.filter((source) => !options.onlySource || source.id === options.onlySource);
+
+  if (options.verifySources) return verifySources({ config, named, sourcesFile, fixtures, options, started, log });
+
+  // The working set is what has been read and parsed somewhere before; a feed
+  // address nobody has seen work is a candidate, not a source.
+  const sources = named.filter((source) => source.enabled !== false && (source.feedVerified || options.includeUnverified));
+  log(`editorial run ${started.local}${testData ? " [TEST DATA]" : ""}: ${sources.length} source(s) in the working set of ${named.length}, lookback ${options.lookbackDays} days`);
 
   const runEntry = { startedAt: started, options: { ...options, fixtures: options.fixtures ? "yes" : null }, testData };
   const finish = async (outcome, extra = {}) => {
     await appendRunLog(draftsRoot, { ...runEntry, outcome, finishedAt: stamp(), ...extra });
     return outcome;
   };
+
+  if (sources.length === 0 && !options.candidateUrl) {
+    const dir = await saveRefusal(draftsRoot, {
+      stamp: started,
+      reason: "рабочий набор источников пуст",
+      details: "Ни одна лента не подтверждена чтением (`feedVerified`), и флаг --include-unverified не задан. Это технический отказ до проверки источников, не отсутствие новостей. Запустите `node scripts/editorial/run.mjs --verify-sources --write`.",
+      sourceReport: named.map((source) => ({ id: source.id, status: source.enabled === false ? "disabled" : "unverified" })),
+      candidateReport: [],
+      testData,
+    });
+    log(`refused: working set empty → ${dir}`);
+    await appendRunLog(draftsRoot, { startedAt: started, options: { ...options, fixtures: options.fixtures ? "yes" : null }, testData, outcome: "refused:no-verified-sources", dir, finishedAt: stamp() });
+    return 2;
+  }
 
   let items;
   let sourceReport;
@@ -238,7 +268,44 @@ export async function main(argv = process.argv.slice(2), { log = console.error }
   return 0;
 }
 
+/**
+ * Reads every named feed, disabled ones included, and says which parse. With
+ * --write the result is recorded in sources.json, which is what admits a
+ * source into the working set.
+ */
+async function verifySources({ config, named, sourcesFile, fixtures, options, started, log }) {
+  log(`verifying ${named.length} feed(s) at ${started.local}`);
+  const { report } = await readSources(named, { fixtures, log, includeDisabled: true });
+  let ok = 0;
+  for (const entry of report) {
+    const source = config.sources.find((candidate) => candidate.id === entry.id);
+    if (!source) continue;
+    if (entry.status === "ok") {
+      ok += 1;
+      source.feedVerified = { at: started.local, where: options.verifiedWhere, items: entry.items, newest: entry.newest, finalUrl: entry.finalUrl };
+    } else {
+      source.feedVerified = null;
+      source.lastFeedError = { at: started.local, where: options.verifiedWhere, status: entry.status, detail: entry.detail ?? null };
+    }
+  }
+  for (const entry of report) log(`  ${entry.status === "ok" ? "✓" : "✗"} ${entry.id}: ${entry.status}${entry.items ? ` · ${entry.items} items · newest ${entry.newest ?? "?"}` : ""}${entry.detail ? ` · ${entry.detail}` : ""}`);
+  if (options.write) {
+    await writeFile(sourcesFile, `${JSON.stringify(config, null, 2)}\n`);
+    log(`sources.json updated: ${ok} verified feed(s)`);
+  } else log(`${ok} feed(s) parse; pass --write to record it`);
+  console.log(JSON.stringify({ verifiedAt: started, ok, report }, null, 2));
+  return ok > 0 ? 0 : 2;
+}
+
+// Verified on 22.22 and 24.21; the proxy flag the README relies on exists from 22.21.
+const MIN_NODE_MAJOR = 22;
+
 if (process.argv[1] && path.resolve(process.argv[1]) === new URL(import.meta.url).pathname) {
+  const major = Number(process.versions.node.split(".")[0]);
+  if (major < MIN_NODE_MAJOR) {
+    console.error(`editorial run needs Node.js ${MIN_NODE_MAJOR} or newer (running ${process.versions.node})`);
+    process.exit(1);
+  }
   main().then(
     (code) => process.exit(code),
     (error) => {

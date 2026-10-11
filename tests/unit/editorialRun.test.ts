@@ -38,7 +38,7 @@ const GOOD_BODY = `<p>TEST DATA. Google said on Tuesday that its Gemini-powered 
 <p>The company added that restaurant owners can see which review themes the AI summary draws on, and that the feature reaches hotels next month.</p>
 <p>An unrelated paragraph about the weather in Zurich that mentions nothing of interest to anyone reading this test.</p>`;
 
-async function fixtureRoot(options: { feedUnreachable?: boolean; feedItems?: string } = {}) {
+async function fixtureRoot(options: { feedUnreachable?: boolean; feedItems?: string; unverified?: boolean } = {}) {
   const root = await mkdtemp(path.join(os.tmpdir(), "editorial-test-"));
   const files = path.join(root, "fixtures");
   await mkdir(files, { recursive: true });
@@ -70,7 +70,7 @@ async function fixtureRoot(options: { feedUnreachable?: boolean; feedItems?: str
     JSON.stringify({
       officialDomains: ["blog.google"],
       internalLinks: ["https://www.selenasystems.com/ru/check"],
-      sources: [{ id: "test-feed", name: "TEST DATA feed", url: "https://example.test/", feed: FEED_URL, tier: "trade", origin: "test" }],
+      sources: [{ id: "test-feed", name: "TEST DATA feed", url: "https://example.test/", feed: FEED_URL, tier: "trade", origin: "test", feedVerified: options.unverified ? null : { at: "test", where: "test" } }],
     }),
   );
   await writeFile(path.join(root, "PROMPT.md"), "TEST DATA brief");
@@ -181,6 +181,25 @@ test("a run saves one labelled package, a second run adds nothing, and a repeat 
   const after = JSON.parse(await readFile(path.join(dir, "manifest.json"), "utf8"));
   assert.equal(after.versions.length, 2);
   assert.equal(JSON.parse(await readFile(path.join(drafts, "ledger.json"), "utf8")).entries.length, 1);
+});
+
+test("an unverified feed is a candidate until --verify-sources --write has seen it parse", async () => {
+  const root = await fixtureRoot({ unverified: true });
+  assert.equal(await main(runArgs(root), { log: silent }), 2);
+  const refusalDir = (await readdir(path.join(root, "drafts"))).find((name) => name.includes("refusal"));
+  assert.match(await readFile(path.join(root, "drafts", refusalDir!, "refusal.md"), "utf8"), /рабочий набор источников пуст/);
+
+  assert.equal(await main(runArgs(root, ["--verify-sources", "--write", "--verified-where", "unit-test"]), { log: silent }), 0);
+  const sources = JSON.parse(await readFile(path.join(root, "sources.json"), "utf8"));
+  assert.equal(sources.sources[0].feedVerified.where, "unit-test");
+  assert.equal(sources.sources[0].feedVerified.items, 4);
+  assert.equal(await main(runArgs(root), { log: silent }), 0);
+
+  const dead = await fixtureRoot({ unverified: true, feedUnreachable: true });
+  assert.equal(await main(runArgs(dead, ["--verify-sources", "--write"]), { log: silent }), 2);
+  const deadSources = JSON.parse(await readFile(path.join(dead, "sources.json"), "utf8"));
+  assert.equal(deadSources.sources[0].feedVerified, null);
+  assert.match(deadSources.sources[0].lastFeedError.detail, /unreachable/);
 });
 
 test("an unreachable source and a page without evidence both end in a written refusal", async () => {

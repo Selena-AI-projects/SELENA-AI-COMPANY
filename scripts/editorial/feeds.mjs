@@ -66,11 +66,11 @@ export function normalizeDate(text) {
  * Reads every enabled source. A source that cannot be read is a finding of
  * the run (reported and counted), never an exception that hides the rest.
  */
-export async function readSources(sources, { fixtures = null, log = () => {} } = {}) {
+export async function readSources(sources, { fixtures = null, log = () => {}, includeDisabled = false } = {}) {
   const items = [];
   const report = [];
   for (const source of sources) {
-    if (source.enabled === false) {
+    if (source.enabled === false && !includeDisabled) {
       report.push({ id: source.id, status: "disabled" });
       continue;
     }
@@ -83,7 +83,8 @@ export async function readSources(sources, { fixtures = null, log = () => {} } =
         continue;
       }
       items.push(...parsed);
-      report.push({ id: source.id, status: "ok", items: parsed.length });
+      const newest = parsed.map((item) => item.publishedAt).filter(Boolean).sort().at(-1) ?? null;
+      report.push({ id: source.id, status: "ok", items: parsed.length, newest, finalUrl: response.url });
       log(`source ${source.id}: ${parsed.length} items`);
     } catch (error) {
       report.push({ id: source.id, status: "unreachable", detail: error.message });
