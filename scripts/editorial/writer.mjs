@@ -1,10 +1,16 @@
 // The writing step is the official Claude Code CLI in print mode, signed in
 // with the owner's subscription: no API key, no tools, no session on disk.
-// What comes back is checked against the evidence pack before anything is
-// saved, so a sentence the sources do not support never reaches a draft.
+// What comes back gets structural checks against the evidence pack before
+// anything is saved: evidence ids, numbers, links, banned phrases. Whether a
+// sentence means what its passage says is not checked here; that reading is
+// the editor's and is recorded in verification.md.
 import { spawn } from "node:child_process";
 
-/** Runs the CLI with the prompt on stdin; execFile has no stdin option. */
+/**
+ * Runs the CLI with the prompt on stdin; execFile has no stdin option. A
+ * non-zero exit rejects, but the error keeps what the CLI printed: `auth
+ * status` exits 1 when logged out while still printing its JSON.
+ */
 function run(command, args, { input, env }) {
   return new Promise((resolve, reject) => {
     const child = spawn(command, args, { env, stdio: ["pipe", "pipe", "pipe"] });
@@ -13,9 +19,24 @@ function run(command, args, { input, env }) {
     child.stdout.on("data", (chunk) => (stdout += chunk));
     child.stderr.on("data", (chunk) => (stderr += chunk));
     child.on("error", reject);
-    child.on("close", (code) => (code === 0 ? resolve({ stdout, stderr }) : reject(new Error(`${command} exited ${code}: ${stderr.slice(0, 2000)}`))));
+    child.on("close", (code) => {
+      if (code === 0) return resolve({ stdout, stderr, code });
+      const error = new Error(`${command} exited ${code}: ${stderr.slice(0, 2000)}`);
+      Object.assign(error, { stdout, stderr, code });
+      reject(error);
+    });
     child.stdin.end(input);
   });
+}
+
+function parseJsonObject(text) {
+  const start = String(text ?? "").indexOf("{");
+  if (start < 0) return null;
+  try {
+    return JSON.parse(String(text).slice(start));
+  } catch {
+    return null;
+  }
 }
 
 const LANG_SHAPE = {
@@ -83,12 +104,17 @@ export function buildPrompt({ brief, pack }) {
 export async function checkAuth({ exec = run, env = process.env } = {}) {
   const apiKeyInEnv = Boolean(env.ANTHROPIC_API_KEY);
   const checkedAt = new Date().toISOString();
-  let status;
+  let stdout;
+  let failure = null;
   try {
-    const { stdout } = await exec("claude", ["auth", "status"], { input: "", env });
-    status = JSON.parse(stdout.slice(stdout.indexOf("{")));
+    ({ stdout } = await exec("claude", ["auth", "status"], { input: "", env }));
   } catch (error) {
-    return { ok: false, apiKeyInEnv, loggedIn: null, authMethod: null, apiProvider: null, checkedAt, reason: `claude auth status unreadable: ${String(error.message).slice(0, 200)}` };
+    stdout = error?.stdout ?? "";
+    failure = error;
+  }
+  const status = parseJsonObject(stdout);
+  if (!status) {
+    return { ok: false, apiKeyInEnv, loggedIn: null, authMethod: null, apiProvider: null, checkedAt, reason: `claude auth status unreadable: ${String(failure?.message ?? "no JSON in output").slice(0, 200)}` };
   }
   const subscription = status.loggedIn === true && status.authMethod === "oauth_token" && status.apiProvider === "firstParty";
   const reason = apiKeyInEnv
@@ -116,28 +142,44 @@ export async function runClaude(prompt, { model = null, budgetUsd = 1, maxTurns 
   ];
   if (model) args.push("--model", model);
   const started = Date.now();
-  const { stdout } = await exec("claude", args, { input: prompt, env: process.env });
-  const result = JSON.parse(stdout);
-  if (result.is_error) throw new Error(`claude -p failed: ${result.result ?? result.subtype}`);
+  // A failed call still cost something by the CLI's estimate (a budget stop is
+  // reported only after the response that crossed it), so the estimate rides
+  // on the error for the caller to record.
+  const fail = (message, result = {}) => {
+    const error = new Error(message);
+    error.meta = metaOf(result, { started, budgetUsd });
+    throw error;
+  };
+  let stdout;
+  try {
+    ({ stdout } = await exec("claude", args, { input: prompt, env: process.env }));
+  } catch (error) {
+    fail(error.message, parseJsonObject(error?.stdout) ?? {});
+  }
+  const result = parseJsonObject(stdout);
+  if (!result) fail("claude -p returned no JSON");
+  if (result.is_error) fail(`claude -p failed: ${result.subtype ?? ""} ${result.result ?? ""}`.trim(), result);
   let output = result.structured_output ?? null;
   if (!output) {
     const text = String(result.result ?? "");
-    const json = text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1);
-    output = JSON.parse(json);
+    output = parseJsonObject(text.slice(0, text.lastIndexOf("}") + 1));
+    if (!output) fail("claude -p returned no structured output", result);
   }
+  return { output, meta: metaOf(result, { started, budgetUsd }) };
+}
+
+function metaOf(result, { started, budgetUsd }) {
   return {
-    output,
-    meta: {
-      model: Object.keys(result.modelUsage ?? {}).join(",") || null,
-      // The CLI's own estimate of the call; what the account is charged, if
-      // anything, is visible only in the account.
-      estimatedCostUsd: typeof result.total_cost_usd === "number" ? result.total_cost_usd : null,
-      budgetUsd,
-      durationMs: Date.now() - started,
-      turns: result.num_turns ?? null,
-      stopReason: result.stop_reason ?? null,
-      authority: "claude-code-cli-print-mode",
-    },
+    model: Object.keys(result.modelUsage ?? {}).join(",") || null,
+    // The CLI's own estimate of the call; what the account is charged, if
+    // anything, is visible only in the account.
+    estimatedCostUsd: typeof result.total_cost_usd === "number" ? result.total_cost_usd : null,
+    budgetUsd,
+    durationMs: Date.now() - started,
+    turns: result.num_turns ?? null,
+    stopReason: result.stop_reason ?? null,
+    subtype: result.subtype ?? null,
+    authority: "claude-code-cli-print-mode",
   };
 }
 

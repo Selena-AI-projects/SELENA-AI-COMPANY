@@ -18,16 +18,18 @@ import { main } from "../../scripts/editorial/run.mjs";
 
 type WriterCall = { budgetUsd: number; model: string | null };
 type WriterResult = { output: Record<string, unknown>; meta: Record<string, unknown> };
-type WriterStep = { output: Record<string, unknown>; estimatedCostUsd: number | null };
+type WriterStep = { output?: Record<string, unknown>; estimatedCostUsd: number | null; fails?: string };
 
-/** A writer that returns scripted outputs with scripted CLI cost estimates and records what budget each call was given. */
+/** A writer that returns scripted outputs with scripted CLI cost estimates and records what budget each call was given; a step with `fails` rejects the way runClaude does, estimate attached. */
 function scriptedWriter(steps: WriterStep[]) {
   const calls: WriterCall[] = [];
   const writer = async (_prompt: string, options: WriterCall): Promise<WriterResult> => {
     calls.push({ budgetUsd: options.budgetUsd, model: options.model });
     const step = steps[calls.length - 1];
     if (!step) throw new Error(`writer called ${calls.length} times, only ${steps.length} scripted`);
-    return { output: step.output, meta: { model: "scripted (TEST DATA)", estimatedCostUsd: step.estimatedCostUsd, budgetUsd: options.budgetUsd, authority: "scripted-writer (TEST DATA)" } };
+    const meta = { model: "scripted (TEST DATA)", estimatedCostUsd: step.estimatedCostUsd, budgetUsd: options.budgetUsd, authority: "scripted-writer (TEST DATA)" };
+    if (step.fails) throw Object.assign(new Error(step.fails), { meta: { ...meta, subtype: "error_max_budget_usd" } });
+    return { output: step.output!, meta };
   };
   return { writer, calls };
 }
@@ -286,9 +288,12 @@ test("a claim that widens the source's scope passes the structural checks, so a 
   assert.deepEqual(manifest.checks.semantic.scope, ["article.ru.md", "article.en.md", "telegram.ru.md"]);
   assert.ok(manifest.checks.structural.warnings.some((w: string) => /widens scope/.test(w)), "the scope hint is a warning for the editor, not a verdict");
   const verification = await readFile(path.join(dir, "verification.md"), "utf8");
-  assert.match(verification, /Смысловая сверка с источником: не выполнена/);
-  assert.match(verification, /Статус: не выполнена/);
-  assert.doesNotMatch(verification, /факты проверены\b(?!» этот файл не означает)/u);
+  assert.match(verification, /^Структурные проверки: пройдены · Смысловая сверка с источником: не выполнена/m);
+  assert.match(verification, /^Статус: не выполнена\./m);
+  // The only place the phrase may appear is the sentence that denies it.
+  const body = verification.replace("«Факты проверены» этот файл не означает.", "");
+  assert.doesNotMatch(body, /факты проверены/iu);
+  assert.doesNotMatch(verification, /сверка с источником: (выполнена|пройдена)/u);
   assert.doesNotMatch(verification, /^Статус: пройдена/m);
   for (const file of ["article.ru.md", "article.en.md"]) {
     const text = await readFile(path.join(dir, file), "utf8");
@@ -331,6 +336,37 @@ test("a retry gets only what the first attempt left of the estimated budget, and
   const noEstimate = scriptedWriter([{ output: bad, estimatedCostUsd: null }]);
   assert.equal(await main(runArgs(unknownCost, ["--writer", "claude"]), { log: silent, runWriter: noEstimate.writer as never, checkWriterAuth: subscriptionAuth as never }), 2);
   assert.equal(noEstimate.calls.length, 1, "an unreported first cost counts as the whole budget");
+
+  const thinRemainder = await fixtureRoot();
+  const tooSmall = scriptedWriter([{ output: bad, estimatedCostUsd: 0.3 }]);
+  assert.equal(await main(runArgs(thinRemainder, ["--writer", "claude", "--budget-usd", "0.5"]), { log: silent, runWriter: tooSmall.writer as never, checkWriterAuth: subscriptionAuth as never }), 2);
+  assert.equal(tooSmall.calls.length, 1, "a remainder below the first attempt's own estimate cannot hold a retry");
+  const thinDir = (await readdir(path.join(thinRemainder, "drafts"))).find((name) => name.includes("refusal"))!;
+  assert.match(JSON.parse(await readFile(path.join(thinRemainder, "drafts", thinDir, "refusal.json"), "utf8")).writerMeta.budgetStop, /меньше оценки первой попытки/);
+});
+
+test("a model call that fails on the retry still leaves every attempt's estimate in a written refusal", async () => {
+  const root = await fixtureRoot();
+  const good = draftOutput({ ruClaim: "Google Maps отвечает на вопросы о ресторанах и отелях.", enClaim: "Google Maps answers questions about restaurants and hotels.", evidenceId: "q1" });
+  const bad = { ...good, en: { ...good.en, facts: [{ text: "invented", evidence_id: "q9" }] } };
+  const { writer, calls } = scriptedWriter([
+    { output: bad, estimatedCostUsd: 0.3 },
+    { estimatedCostUsd: 0.26, fails: "claude -p failed: error_max_budget_usd" },
+  ]);
+  assert.equal(await main(runArgs(root, ["--writer", "claude", "--budget-usd", "1"]), { log: silent, runWriter: writer as never, checkWriterAuth: subscriptionAuth as never }), 2);
+  assert.deepEqual(calls.map((call) => call.budgetUsd), [1, 0.7]);
+  const drafts = path.join(root, "drafts");
+  const refusalDir = (await readdir(drafts)).find((name) => name.includes("refusal"))!;
+  const refusal = JSON.parse(await readFile(path.join(drafts, refusalDir, "refusal.json"), "utf8"));
+  assert.equal(refusal.reason, "вызов модели завершился ошибкой");
+  assert.equal(refusal.writerMeta.attemptCount, 2);
+  assert.deepEqual(refusal.writerMeta.attempts.map((a: { estimatedCostUsd: number }) => a.estimatedCostUsd), [0.3, 0.26]);
+  assert.equal(refusal.writerMeta.estimatedCostUsd, 0.56);
+  assert.match(refusal.writerMeta.attempts[1].error, /error_max_budget_usd/);
+  assert.equal(existsSync(path.join(drafts, "ledger.json")), false);
+  const runs = (await readFile(path.join(drafts, "runs.jsonl"), "utf8")).trim().split("\n").map((line) => JSON.parse(line));
+  assert.equal(runs.at(-1).outcome, "refused:writer-error");
+  assert.equal(runs.at(-1).writerMeta.estimatedCostUsd, 0.56);
 });
 
 test("the model is not called unless the subscription login is confirmed", async () => {
@@ -354,6 +390,15 @@ test("the model is not called unless the subscription login is confirmed", async
   assert.match(String(withKey.reason), /ANTHROPIC_API_KEY/);
   const apiLogin = await checkAuth({ exec: status({ loggedIn: true, authMethod: "api_key", apiProvider: "firstParty" }), env: {} } as never);
   assert.equal(apiLogin.ok, false);
-  const loggedOut = await checkAuth({ exec: status({ loggedIn: false }), env: {} } as never);
+  // `claude auth status` exits 1 when logged out but still prints its JSON.
+  const exitOne = async () => {
+    throw Object.assign(new Error("claude exited 1: "), { stdout: JSON.stringify({ loggedIn: false, authMethod: "none", apiProvider: "firstParty" }), stderr: "", code: 1 });
+  };
+  const loggedOut = await checkAuth({ exec: exitOne, env: {} } as never);
   assert.equal(loggedOut.ok, false);
+  assert.equal(loggedOut.loggedIn, false);
+  assert.match(String(loggedOut.reason), /loggedIn=false/);
+  const garbage = await checkAuth({ exec: async () => ({ stdout: "not json", stderr: "" }), env: {} } as never);
+  assert.equal(garbage.ok, false);
+  assert.match(String(garbage.reason), /unreadable/);
 });

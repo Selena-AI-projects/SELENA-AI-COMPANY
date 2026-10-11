@@ -245,32 +245,9 @@ export async function main(argv = process.argv.slice(2), { log = console.error, 
     const attempts = [];
     const costKnown = () => attempts.every((entry) => typeof entry.estimatedCostUsd === "number");
     const spent = () => roundUsd(attempts.reduce((sum, entry) => sum + (entry.estimatedCostUsd ?? 0), 0));
-    let attempt = await runWriter(prompt, { model: options.model, budgetUsd: options.budgetUsd });
-    output = attempt.output;
-    attempts.push({ ...attempt.meta, budgetUsd: options.budgetUsd });
-    checks = checkOutput(output, pack, { allowedInternalLinks });
-    if (!checks.ok) {
-      // The retry gets only what the first attempt left of the estimate; a
-      // first attempt whose cost the CLI did not report counts as all of it.
-      const remaining = costKnown() ? roundUsd(options.budgetUsd - spent()) : 0;
-      if (remaining <= 0) {
-        budgetStop = costKnown()
-          ? `оценочный бюджет ${options.budgetUsd} USD исчерпан первой попыткой (оценка CLI ${spent()} USD); повтор не выполнялся`
-          : "оценка расхода первой попытки от CLI не получена; повтор не выполнялся";
-        log(`writer output failed checks, no retry: ${budgetStop}`);
-      } else {
-        log(`writer output failed checks, one retry within ${remaining} USD: ${checks.errors.join(" | ")}`);
-        const retryPrompt = `${prompt}\n\n## Исправь ошибки предыдущей версии\n${checks.errors.map((e) => `- ${e}`).join("\n")}`;
-        attempt = await runWriter(retryPrompt, { model: options.model, budgetUsd: remaining });
-        output = attempt.output;
-        attempts.push({ ...attempt.meta, budgetUsd: remaining, fixes: checks.errors });
-        checks = checkOutput(output, pack, { allowedInternalLinks });
-      }
-    }
-    const last = attempts.at(-1);
-    writerMeta = {
-      authority: last.authority,
-      model: last.model,
+    const summary = () => ({
+      authority: attempts.at(-1)?.authority ?? "claude-code-cli-print-mode",
+      model: attempts.at(-1)?.model ?? null,
       auth: { loggedIn: auth.loggedIn, authMethod: auth.authMethod, apiProvider: auth.apiProvider, apiKeyInEnv: auth.apiKeyInEnv, checkedAt: auth.checkedAt },
       attempts,
       attemptCount: attempts.length,
@@ -279,7 +256,57 @@ export async function main(argv = process.argv.slice(2), { log = console.error, 
       remainingBudgetUsd: costKnown() ? roundUsd(options.budgetUsd - spent()) : null,
       costBasis: "сумма total_cost_usd по оценке Claude Code CLI за все попытки; не фактическое списание и не гарантированный денежный потолок",
       ...(budgetStop ? { budgetStop } : {}),
+    });
+    // A call that fails still gets recorded with whatever estimate the CLI
+    // reported, so no attempt's cost is lost on the error path either.
+    const callWriter = async (text, { budgetUsd, fixes = null }) => {
+      try {
+        const attempt = await runWriter(text, { model: options.model, budgetUsd });
+        attempts.push({ ...attempt.meta, budgetUsd, ...(fixes ? { fixes } : {}) });
+        return attempt.output;
+      } catch (error) {
+        attempts.push({ ...(error?.meta ?? {}), budgetUsd, ...(fixes ? { fixes } : {}), error: String(error?.message ?? error).slice(0, 500) });
+        const dir = await saveRefusal(draftsRoot, {
+          stamp: started,
+          reason: "вызов модели завершился ошибкой",
+          details: `Попытка ${attempts.length}: ${attempts.at(-1).error}. Оценка расхода по всем попыткам сохранена в refusal.json → writerMeta.`,
+          sourceReport,
+          candidateReport,
+          testData,
+          extra: { writerMeta: summary(), pack: { ...pack, page: { ...pack.page, text: undefined } } },
+        });
+        log(`refused: writer call failed → ${dir}`);
+        await finish("refused:writer-error", { dir, writerMeta: summary() });
+        return null;
+      }
     };
+    output = await callWriter(prompt, { budgetUsd: options.budgetUsd });
+    if (output === null) return 2;
+    checks = checkOutput(output, pack, { allowedInternalLinks });
+    if (!checks.ok) {
+      // The retry gets only what the first attempt left of the estimate. The
+      // CLI stops only after the response that crosses its budget, so a
+      // remainder smaller than the first attempt's own estimate would not
+      // hold a retry either; an unreported first cost counts as all of it.
+      const first = attempts[0].estimatedCostUsd;
+      const remaining = costKnown() ? roundUsd(options.budgetUsd - spent()) : 0;
+      if (remaining <= 0) {
+        budgetStop = costKnown()
+          ? `оценочный бюджет ${options.budgetUsd} USD исчерпан первой попыткой (оценка CLI ${spent()} USD); повтор не выполнялся`
+          : "оценка расхода первой попытки от CLI не получена; повтор не выполнялся";
+        log(`writer output failed checks, no retry: ${budgetStop}`);
+      } else if (remaining < first) {
+        budgetStop = `остаток ${remaining} USD меньше оценки первой попытки (${first} USD); повтор не выполнялся`;
+        log(`writer output failed checks, no retry: ${budgetStop}`);
+      } else {
+        log(`writer output failed checks, one retry within ${remaining} USD: ${checks.errors.join(" | ")}`);
+        const retryPrompt = `${prompt}\n\n## Исправь ошибки предыдущей версии\n${checks.errors.map((e) => `- ${e}`).join("\n")}`;
+        output = await callWriter(retryPrompt, { budgetUsd: remaining, fixes: checks.errors });
+        if (output === null) return 2;
+        checks = checkOutput(output, pack, { allowedInternalLinks });
+      }
+    }
+    writerMeta = summary();
   }
 
   if (!checks.ok) {
@@ -292,7 +319,7 @@ export async function main(argv = process.argv.slice(2), { log = console.error, 
       testData,
       extra: { writerOutput: output, writerMeta, pack: { ...pack, page: { ...pack.page, text: undefined } } },
     });
-    log(`refused: writer output failed verification → ${dir}`);
+    log(`refused: writer output failed the structural checks → ${dir}`);
     await finish("refused:checks-failed", { dir, errors: checks.errors });
     return 2;
   }
