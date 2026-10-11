@@ -42,3 +42,6 @@ next-env.d.ts
 reports/gsc/
 reports/readiness/
 reports/api-view/
+
+# Editorial drafts wait for the owner's approval and never enter the repository.
+editorial/drafts/

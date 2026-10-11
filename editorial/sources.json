@@ -1,0 +1,231 @@
+{
+  "$comment": "Sources the editorial run reads. `origin.kind` says how a source got here: `monitoring-list` — named for ongoing monitoring in an earlier owner document; `cited-before` — a publication earlier Selena material cited for a specific article (the Master Standard §33 is a registry of sources used, not a monitoring selection; Radar #1 cites per signal); `new-candidate` — proposed in the 2026-10-11 setup. `origin.where` names the document. The monitoring document was written for KORA, VillaOps, otherbali and DOKI and gated its expansion list until after January; its reuse for Selena Systems editorial is this task's brief, not that document's decision. The earlier documents name publications, not feeds, so `feedGuess: true` marks a feed address assumed from the publisher's usual layout. `feedVerified` names the last environment in which the feed was fetched and parsed; the session container of 2026-10-11 denied every one of these hosts at its egress proxy, so each feed waits for the owner's first local run. Interest channels (Hacker News, Bluesky, Google News search) are queried in verify.mjs; they are the free channels the unmodified Elmo workflow file in selena-ai-visibility also queries, which never ran in Selena's organisation.",
+  "officialDomains": [
+    "blog.google",
+    "developers.google.com",
+    "support.google.com",
+    "openai.com",
+    "help.openai.com",
+    "perplexity.ai",
+    "docs.perplexity.ai",
+    "anthropic.com",
+    "support.claude.com",
+    "microsoft.com",
+    "apple.com",
+    "tripadvisor.com",
+    "tripadvisor.mediaroom.com",
+    "booking.com",
+    "expedia.com",
+    "expediagroup.com",
+    "opentable.com",
+    "yelp.com",
+    "airbnb.com",
+    "investor.uber.com"
+  ],
+  "internalLinks": [
+    "https://www.selenasystems.com/ru/check",
+    "https://www.selenasystems.com/check",
+    "https://www.selenasystems.com/ru/visibility",
+    "https://www.selenasystems.com/visibility",
+    "https://www.selenasystems.com/ru/methodology",
+    "https://www.selenasystems.com/methodology"
+  ],
+  "sources": [
+    {
+      "id": "hotel-dive",
+      "name": "Hotel Dive",
+      "url": "https://www.hoteldive.com/",
+      "feed": "https://www.hoteldive.com/feeds/news/",
+      "tier": "trade",
+      "origin": {
+        "kind": "monitoring-list",
+        "where": "Drive doc «Ролевые модели и мониторинг рынка HoReCa-tech» (08.08.2026), core list #1 (written for KORA/VillaOps/otherbali/DOKI); also cited in HoReCa Intelligence Radar #1"
+      },
+      "feedGuess": true,
+      "feedVerified": null
+    },
+    {
+      "id": "skift",
+      "name": "Skift",
+      "url": "https://skift.com/",
+      "feed": "https://skift.com/feed/",
+      "tier": "trade",
+      "origin": {
+        "kind": "monitoring-list",
+        "where": "Monitoring doc, expansion list gated «после январского гейта» → Новости (Skift Daily Briefing)"
+      },
+      "feedGuess": false,
+      "feedVerified": null
+    },
+    {
+      "id": "restaurant-technology-news",
+      "name": "Restaurant Technology News",
+      "url": "https://restauranttechnologynews.com/",
+      "feed": "https://restauranttechnologynews.com/feed/",
+      "tier": "trade",
+      "origin": {
+        "kind": "monitoring-list",
+        "where": "Monitoring doc, expansion list gated «после январского гейта» → Новости"
+      },
+      "feedGuess": true,
+      "feedVerified": null
+    },
+    {
+      "id": "hospitality-technology",
+      "name": "Hospitality Technology",
+      "url": "https://hospitalitytech.com/",
+      "feed": "https://hospitalitytech.com/rss.xml",
+      "tier": "trade",
+      "origin": {
+        "kind": "monitoring-list",
+        "where": "Monitoring doc, expansion list gated «после январского гейта» → Новости"
+      },
+      "feedGuess": true,
+      "feedVerified": null
+    },
+    {
+      "id": "phocuswire",
+      "name": "PhocusWire",
+      "url": "https://www.phocuswire.com/",
+      "feed": "https://www.phocuswire.com/rss",
+      "tier": "trade",
+      "origin": {
+        "kind": "cited-before",
+        "where": "HoReCa Intelligence Radar #1 (27.07.2026): per-signal citations for S-02 and S-03"
+      },
+      "feedGuess": true,
+      "feedVerified": null
+    },
+    {
+      "id": "hospitality-net",
+      "name": "Hospitality Net",
+      "url": "https://www.hospitalitynet.org/",
+      "feed": "https://www.hospitalitynet.org/rss/news.xml",
+      "tier": "trade",
+      "origin": {
+        "kind": "cited-before",
+        "where": "HoReCa Intelligence Radar #1: per-signal citation for S-03"
+      },
+      "feedGuess": true,
+      "feedVerified": null
+    },
+    {
+      "id": "nrn-technology",
+      "name": "Nation's Restaurant News — Technology",
+      "url": "https://www.nrn.com/restaurant-technology",
+      "feed": "https://www.nrn.com/rss.xml",
+      "tier": "trade",
+      "origin": {
+        "kind": "cited-before",
+        "where": "HoReCa Intelligence Radar #1: per-signal citation for S-05"
+      },
+      "feedGuess": true,
+      "feedVerified": null
+    },
+    {
+      "id": "google-search-central",
+      "name": "Google Search Central Blog",
+      "url": "https://developers.google.com/search/blog",
+      "feed": "https://feeds.feedburner.com/blogspot/amDG",
+      "tier": "official",
+      "origin": {
+        "kind": "cited-before",
+        "where": "AI_VISIBILITY_MASTER_STANDARD_RU.md §33 «Реестр использованных источников» (specific pages); cited by Lab articles in lib/lab/content.ts"
+      },
+      "feedGuess": true,
+      "feedVerified": null
+    },
+    {
+      "id": "google-keyword-search",
+      "name": "Google The Keyword — Search",
+      "url": "https://blog.google/products/search/",
+      "feed": "https://blog.google/products/search/rss/",
+      "tier": "official",
+      "origin": {
+        "kind": "cited-before",
+        "where": "AI_VISIBILITY_MASTER_STANDARD_RU.md §33 (one blog.google article)"
+      },
+      "feedGuess": true,
+      "feedVerified": null
+    },
+    {
+      "id": "google-keyword-maps",
+      "name": "Google The Keyword — Maps",
+      "url": "https://blog.google/products/maps/",
+      "feed": "https://blog.google/products/maps/rss/",
+      "tier": "official",
+      "origin": {
+        "kind": "new-candidate",
+        "where": "Added 2026-10-11: Maps announcements are where restaurant and hotel discovery changes first; the scouts found no earlier source for official Maps news"
+      },
+      "feedGuess": true,
+      "feedVerified": null
+    },
+    {
+      "id": "openai-news",
+      "name": "OpenAI News",
+      "url": "https://openai.com/news/",
+      "feed": "https://openai.com/news/rss.xml",
+      "tier": "official",
+      "origin": {
+        "kind": "new-candidate",
+        "where": "Added 2026-10-11: the Master Standard lists OpenAI help pages as Tier 1 but no newsroom feed was selected for ongoing monitoring (scout gap)"
+      },
+      "feedGuess": true,
+      "feedVerified": null
+    },
+    {
+      "id": "search-engine-land",
+      "name": "Search Engine Land",
+      "url": "https://searchengineland.com/",
+      "feed": "https://searchengineland.com/feed",
+      "tier": "press",
+      "origin": {
+        "kind": "cited-before",
+        "where": "AI_VISIBILITY_MASTER_STANDARD_RU.md §33 (specific articles)"
+      },
+      "feedGuess": false,
+      "feedVerified": null
+    },
+    {
+      "id": "seroundtable",
+      "name": "Search Engine Roundtable",
+      "url": "https://www.seroundtable.com/",
+      "feed": "https://www.seroundtable.com/feed",
+      "tier": "press",
+      "origin": {
+        "kind": "cited-before",
+        "where": "AI_VISIBILITY_MASTER_STANDARD_RU.md §33 (specific articles)"
+      },
+      "feedGuess": false,
+      "feedVerified": null
+    },
+    {
+      "id": "search-engine-journal",
+      "name": "Search Engine Journal",
+      "url": "https://www.searchenginejournal.com/",
+      "feed": "https://www.searchenginejournal.com/feed/",
+      "tier": "press",
+      "origin": {
+        "kind": "cited-before",
+        "where": "AI_VISIBILITY_MASTER_STANDARD_RU.md §33 (specific articles)"
+      },
+      "feedGuess": false,
+      "feedVerified": null
+    },
+    {
+      "id": "restaurant-business",
+      "name": "Restaurant Business",
+      "url": "https://www.restaurantbusinessonline.com/",
+      "feed": "https://www.restaurantbusinessonline.com/rss.xml",
+      "tier": "trade",
+      "origin": {
+        "kind": "new-candidate",
+        "where": "Added 2026-10-11 as a second restaurant trade source beside NRN; owner may drop it"
+      },
+      "feedGuess": true,
+      "feedVerified": null,
+      "enabled": false
+    }
+  ]
+}

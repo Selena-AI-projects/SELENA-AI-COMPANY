@@ -26,7 +26,8 @@
     "measure:visitor-view-probe": "tsx scripts/visitor-view-probe.ts",
     "measure:visitor-view": "tsx scripts/visitor-view-measure.ts",
     "journal:readiness": "tsx scripts/journal-readiness.ts",
-    "measure:api-view": "tsx scripts/api-view-measure.ts"
+    "measure:api-view": "tsx scripts/api-view-measure.ts",
+    "editorial:draft": "node scripts/editorial/run.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.111.0",
