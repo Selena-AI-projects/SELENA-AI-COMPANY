@@ -75,6 +75,30 @@ export function buildPrompt({ brief, pack }) {
     .join("\n");
 }
 
+/**
+ * The run writes only under the owner's subscription login. An API key in the
+ * environment or a non-OAuth login is a different billing path, so the model
+ * is not called at all rather than called some other way.
+ */
+export async function checkAuth({ exec = run, env = process.env } = {}) {
+  const apiKeyInEnv = Boolean(env.ANTHROPIC_API_KEY);
+  const checkedAt = new Date().toISOString();
+  let status;
+  try {
+    const { stdout } = await exec("claude", ["auth", "status"], { input: "", env });
+    status = JSON.parse(stdout.slice(stdout.indexOf("{")));
+  } catch (error) {
+    return { ok: false, apiKeyInEnv, loggedIn: null, authMethod: null, apiProvider: null, checkedAt, reason: `claude auth status unreadable: ${String(error.message).slice(0, 200)}` };
+  }
+  const subscription = status.loggedIn === true && status.authMethod === "oauth_token" && status.apiProvider === "firstParty";
+  const reason = apiKeyInEnv
+    ? "ANTHROPIC_API_KEY is set in the environment"
+    : subscription
+      ? null
+      : `loggedIn=${status.loggedIn}, authMethod=${status.authMethod}, apiProvider=${status.apiProvider}`;
+  return { ok: subscription && !apiKeyInEnv, apiKeyInEnv, loggedIn: status.loggedIn ?? null, authMethod: status.authMethod ?? null, apiProvider: status.apiProvider ?? null, checkedAt, reason };
+}
+
 export async function runClaude(prompt, { model = null, budgetUsd = 1, maxTurns = 3, exec = run } = {}) {
   const args = [
     "-p",
@@ -105,7 +129,10 @@ export async function runClaude(prompt, { model = null, budgetUsd = 1, maxTurns 
     output,
     meta: {
       model: Object.keys(result.modelUsage ?? {}).join(",") || null,
-      costUsd: result.total_cost_usd ?? null,
+      // The CLI's own estimate of the call; what the account is charged, if
+      // anything, is visible only in the account.
+      estimatedCostUsd: typeof result.total_cost_usd === "number" ? result.total_cost_usd : null,
+      budgetUsd,
       durationMs: Date.now() - started,
       turns: result.num_turns ?? null,
       stopReason: result.stop_reason ?? null,
@@ -113,6 +140,37 @@ export async function runClaude(prompt, { model = null, budgetUsd = 1, maxTurns 
     },
   };
 }
+
+/** What the automated checks never establish: that a sentence means what its evidence says. */
+export const SEMANTIC_NOT_CHECKED = Object.freeze({
+  status: "not-checked",
+  by: "automation",
+  note: "смысловая сверка с источником не выполнялась: структурные проверки подтверждают только ссылки на id, числа, адреса и запрещённые фразы",
+});
+
+// Words that widen a claim beyond what a passage says. A hint for the
+// editor's reading, never a verdict: meaning is not checked here.
+const SCOPE_TERMS = [
+  "по всему миру",
+  "во всём мире",
+  "во всем мире",
+  "во всех странах",
+  "в любой стране",
+  "везде",
+  "глобально",
+  "всем пользователям",
+  "для всех ресторанов",
+  "для всех отелей",
+  "worldwide",
+  "globally",
+  "everywhere",
+  "in all countries",
+  "in every country",
+  "around the world",
+  "all users",
+  "all restaurants",
+  "all hotels",
+];
 
 const AI_SLOP = ["в современном мире", "в эпоху", "революци", "game-changer", "game changer", "unlock", "leverage", "delve", "в заключение", "не секрет, что", "как известно", "cutting-edge", "seamless"];
 const FABRICATION = ["наши клиенты", "наш клиент", "мы измерили", "мы протестировали", "по нашим данным", "наш эксперимент", "our clients", "our client", "we measured", "we tested", "our data shows", "our experiment"];
@@ -126,14 +184,23 @@ function urlsIn(text) {
 }
 
 /**
- * Deterministic checks on the writer's output. Errors stop the save;
- * warnings are kept in the package for the editor.
+ * Deterministic, structural checks on the writer's output. Errors stop the
+ * save; warnings are kept in the package for the editor. None of this reads
+ * meaning: a sentence can cite the right evidence id and still say more than
+ * the passage does, which only a person comparing the two can catch.
  */
 export function checkOutput(output, pack, { allowedInternalLinks = [] } = {}) {
   const errors = [];
   const warnings = [];
   const evidenceIds = new Set(pack.quotes.map((quote) => quote.id));
   const evidenceText = pack.quotes.map((quote) => quote.text).join("\n");
+  const evidenceLower = evidenceText.toLowerCase();
+  const scopeHints = (label, text) => {
+    for (const term of SCOPE_TERMS) {
+      if (text.toLowerCase().includes(term) && !evidenceLower.includes(term)) warnings.push(`${label} widens scope beyond the evidence ("${term}"): compare with the source by hand`);
+    }
+  };
+  scopeHints("telegram_ru", output.telegram_ru ?? "");
   const allowedUrls = new Set([pack.page.url, pack.page.finalUrl, pack.primaryUrl, ...(pack.primaryLinks ?? []), ...allowedInternalLinks]);
   const packNumbers = new Set([...numbersIn(evidenceText), ...numbersIn(pack.page.publishedAt ?? ""), ...numbersIn(JSON.stringify(pack.interest?.signals ?? {}))]);
   for (const field of ["hero", "situation", "main_takeaway", "next_action", "telegram_ru"]) {
@@ -164,6 +231,7 @@ export function checkOutput(output, pack, { allowedInternalLinks = [] } = {}) {
     const haystack = `${version.body_md} ${version.summary} ${version.title}`.toLowerCase();
     for (const phrase of FABRICATION) if (haystack.includes(phrase)) errors.push(`${lang} claims first-hand results ("${phrase}")`);
     for (const phrase of AI_SLOP) if (haystack.includes(phrase)) warnings.push(`${lang} uses "${phrase}"`);
+    scopeHints(lang, haystack);
   }
   if (output.ru && output.en) {
     const ruIds = new Set((output.ru.facts ?? []).map((fact) => fact.evidence_id));
@@ -180,7 +248,7 @@ export function checkOutput(output, pack, { allowedInternalLinks = [] } = {}) {
       if (!packNumbers.has(number)) errors.push(`ru uses a number absent from the evidence: ${number}`);
     }
   }
-  return { ok: errors.length === 0, errors, warnings };
+  return { ok: errors.length === 0, errors, warnings, semantic: SEMANTIC_NOT_CHECKED };
 }
 
 /** A canned writer for tests; its output is labelled so it can never pass for a draft. */

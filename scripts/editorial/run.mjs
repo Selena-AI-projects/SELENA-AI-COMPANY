@@ -11,7 +11,9 @@ import { findCovered, ledgerEntry, rankCandidates } from "./hooks.mjs";
 import { appendRunLog, loadLedger, saveLedger, savePackage, saveRefusal, slugify } from "./package.mjs";
 import { stamp } from "./time.mjs";
 import { interestSignals, verifyCandidate } from "./verify.mjs";
-import { buildPrompt, checkOutput, fixtureWriter, runClaude } from "./writer.mjs";
+import { buildPrompt, checkAuth, checkOutput, fixtureWriter, runClaude } from "./writer.mjs";
+
+const roundUsd = (value) => Math.round(value * 10_000) / 10_000;
 
 function parseArgs(argv) {
   const options = {
@@ -68,7 +70,7 @@ async function loadFixtures(file) {
   return Object.fromEntries(Object.entries(map).map(([url, target]) => [url, target === "unreachable" || /^status:\d{3}$/.test(target) ? target : path.resolve(base, target)]));
 }
 
-export async function main(argv = process.argv.slice(2), { log = console.error } = {}) {
+export async function main(argv = process.argv.slice(2), { log = console.error, runWriter = runClaude, checkWriterAuth = checkAuth } = {}) {
   const options = parseArgs(argv);
   const root = path.resolve(options.root);
   const draftsRoot = path.join(root, "drafts");
@@ -218,31 +220,73 @@ export async function main(argv = process.argv.slice(2), { log = console.error }
   let output;
   let writerMeta;
   let checks;
+  let budgetStop = null;
   if (options.writer === "fixture") {
     output = fixtureWriter(pack);
-    writerMeta = { model: "fixture", costUsd: 0, authority: "fixture-writer (TEST DATA)" };
+    writerMeta = { model: "fixture", authority: "fixture-writer (TEST DATA)", attempts: [], attemptCount: 1, budgetUsd: options.budgetUsd, estimatedCostUsd: 0, remainingBudgetUsd: options.budgetUsd };
     checks = checkOutput(output, pack, { allowedInternalLinks });
   } else {
+    const auth = await checkWriterAuth();
+    if (!auth.ok) {
+      const dir = await saveRefusal(draftsRoot, {
+        stamp: started,
+        reason: "способ авторизации модели не подтверждён",
+        details: `Запуск пишет только под подписочным входом Claude Code (loggedIn, authMethod oauth_token, apiProvider firstParty) и без ANTHROPIC_API_KEY в окружении. Сейчас: ${auth.reason}. Модель не вызывалась; на API или другой платный режим запуск не переключается.`,
+        sourceReport,
+        candidateReport,
+        testData,
+        extra: { auth },
+      });
+      log(`refused: writer auth not confirmed (${auth.reason}) → ${dir}`);
+      await finish("refused:auth", { dir, auth });
+      return 2;
+    }
     const prompt = buildPrompt({ brief, pack });
-    let attempt = await runClaude(prompt, { model: options.model, budgetUsd: options.budgetUsd });
+    const attempts = [];
+    const costKnown = () => attempts.every((entry) => typeof entry.estimatedCostUsd === "number");
+    const spent = () => roundUsd(attempts.reduce((sum, entry) => sum + (entry.estimatedCostUsd ?? 0), 0));
+    let attempt = await runWriter(prompt, { model: options.model, budgetUsd: options.budgetUsd });
     output = attempt.output;
-    writerMeta = { ...attempt.meta, attempts: 1 };
+    attempts.push({ ...attempt.meta, budgetUsd: options.budgetUsd });
     checks = checkOutput(output, pack, { allowedInternalLinks });
     if (!checks.ok) {
-      log(`writer output failed checks, one retry: ${checks.errors.join(" | ")}`);
-      const retryPrompt = `${prompt}\n\n## Исправь ошибки предыдущей версии\n${checks.errors.map((e) => `- ${e}`).join("\n")}`;
-      attempt = await runClaude(retryPrompt, { model: options.model, budgetUsd: options.budgetUsd });
-      output = attempt.output;
-      writerMeta = { ...attempt.meta, attempts: 2, firstAttemptErrors: checks.errors };
-      checks = checkOutput(output, pack, { allowedInternalLinks });
+      // The retry gets only what the first attempt left of the estimate; a
+      // first attempt whose cost the CLI did not report counts as all of it.
+      const remaining = costKnown() ? roundUsd(options.budgetUsd - spent()) : 0;
+      if (remaining <= 0) {
+        budgetStop = costKnown()
+          ? `оценочный бюджет ${options.budgetUsd} USD исчерпан первой попыткой (оценка CLI ${spent()} USD); повтор не выполнялся`
+          : "оценка расхода первой попытки от CLI не получена; повтор не выполнялся";
+        log(`writer output failed checks, no retry: ${budgetStop}`);
+      } else {
+        log(`writer output failed checks, one retry within ${remaining} USD: ${checks.errors.join(" | ")}`);
+        const retryPrompt = `${prompt}\n\n## Исправь ошибки предыдущей версии\n${checks.errors.map((e) => `- ${e}`).join("\n")}`;
+        attempt = await runWriter(retryPrompt, { model: options.model, budgetUsd: remaining });
+        output = attempt.output;
+        attempts.push({ ...attempt.meta, budgetUsd: remaining, fixes: checks.errors });
+        checks = checkOutput(output, pack, { allowedInternalLinks });
+      }
     }
+    const last = attempts.at(-1);
+    writerMeta = {
+      authority: last.authority,
+      model: last.model,
+      auth: { loggedIn: auth.loggedIn, authMethod: auth.authMethod, apiProvider: auth.apiProvider, apiKeyInEnv: auth.apiKeyInEnv, checkedAt: auth.checkedAt },
+      attempts,
+      attemptCount: attempts.length,
+      budgetUsd: options.budgetUsd,
+      estimatedCostUsd: costKnown() ? spent() : null,
+      remainingBudgetUsd: costKnown() ? roundUsd(options.budgetUsd - spent()) : null,
+      costBasis: "сумма total_cost_usd по оценке Claude Code CLI за все попытки; не фактическое списание и не гарантированный денежный потолок",
+      ...(budgetStop ? { budgetStop } : {}),
+    };
   }
 
   if (!checks.ok) {
     const dir = await saveRefusal(draftsRoot, {
       stamp: started,
-      reason: "текст не прошёл проверку по источникам",
-      details: checks.errors.map((e) => `- ${e}`).join("\n"),
+      reason: "текст не прошёл структурную проверку по источникам",
+      details: [...checks.errors.map((e) => `- ${e}`), ...(budgetStop ? ["", `Повтор: ${budgetStop}.`] : [])].join("\n"),
       sourceReport,
       candidateReport,
       testData,

@@ -13,8 +13,51 @@ import test from "node:test";
 import { canonicalUrl, eventKey, rankCandidates, sameEvent, tokens } from "../../scripts/editorial/hooks.mjs";
 import { parseFeed } from "../../scripts/editorial/feeds.mjs";
 import { findQuotes, htmlToText, quoteFound, verifyCandidate } from "../../scripts/editorial/verify.mjs";
-import { checkOutput, fixtureWriter } from "../../scripts/editorial/writer.mjs";
+import { checkAuth, checkOutput, fixtureWriter } from "../../scripts/editorial/writer.mjs";
 import { main } from "../../scripts/editorial/run.mjs";
+
+type WriterCall = { budgetUsd: number; model: string | null };
+type WriterResult = { output: Record<string, unknown>; meta: Record<string, unknown> };
+type WriterStep = { output: Record<string, unknown>; estimatedCostUsd: number | null };
+
+/** A writer that returns scripted outputs with scripted CLI cost estimates and records what budget each call was given. */
+function scriptedWriter(steps: WriterStep[]) {
+  const calls: WriterCall[] = [];
+  const writer = async (_prompt: string, options: WriterCall): Promise<WriterResult> => {
+    calls.push({ budgetUsd: options.budgetUsd, model: options.model });
+    const step = steps[calls.length - 1];
+    if (!step) throw new Error(`writer called ${calls.length} times, only ${steps.length} scripted`);
+    return { output: step.output, meta: { model: "scripted (TEST DATA)", estimatedCostUsd: step.estimatedCostUsd, budgetUsd: options.budgetUsd, authority: "scripted-writer (TEST DATA)" } };
+  };
+  return { writer, calls };
+}
+
+const subscriptionAuth = async () => ({ ok: true, loggedIn: true, authMethod: "oauth_token", apiProvider: "firstParty", apiKeyInEnv: false, checkedAt: "test", reason: null });
+
+/** A complete writer output shaped like the model's, with one claim per language resting on one evidence id. */
+function draftOutput({ ruClaim, enClaim, evidenceId }: { ruClaim: string; enClaim: string; evidenceId: string }) {
+  const body = (claim: string, lang: "ru" | "en") =>
+    [
+      `> TEST DATA: scripted writer output, not a model's.`,
+      "",
+      `## ${lang === "ru" ? "Что произошло" : "What happened"}`,
+      "",
+      claim,
+      "",
+      `## ${lang === "ru" ? "Что это значит" : "What it means"}`,
+      "",
+      (lang === "ru" ? "Это гипотеза: владельцу стоит посмотреть, как заведение описано в открытых источниках. " : "This is a hypothesis: an owner should look at how the venue is described in public sources. ").repeat(14),
+    ].join("\n");
+  return {
+    hero: "владелец небольшого ресторана",
+    situation: "гости спрашивают ИИ-помощника",
+    main_takeaway: "проверить публичное описание",
+    next_action: "сверить профиль",
+    ru: { title: "Тестовый заголовок", meta_title: "Тестовый заголовок для поиска", summary: "Тестовое описание черновика, собранное скриптовым писателем без модели, ровно такой длины, какой ждёт проверка Lab, сто двадцать знаков.", body_md: body(ruClaim, "ru"), facts: [{ text: ruClaim, evidence_id: evidenceId }], hypotheses: ["Это гипотеза"] },
+    en: { title: "Test title", meta_title: "Test title for search engines", summary: "A test summary produced by the scripted writer without a model, padded to the length the Lab validator expects, one hundred and twenty plus.", body_md: body(enClaim, "en"), facts: [{ text: enClaim, evidence_id: evidenceId }], hypotheses: ["This is a hypothesis"] },
+    telegram_ru: `${ruClaim} [ссылка после публикации]`,
+  };
+}
 
 const FEED_URL = "https://example.test/feed.xml";
 const GOOD_URL = "https://example.test/news/maps-ai-restaurants";
@@ -38,7 +81,7 @@ const GOOD_BODY = `<p>TEST DATA. Google said on Tuesday that its Gemini-powered 
 <p>The company added that restaurant owners can see which review themes the AI summary draws on, and that the feature reaches hotels next month.</p>
 <p>An unrelated paragraph about the weather in Zurich that mentions nothing of interest to anyone reading this test.</p>`;
 
-async function fixtureRoot(options: { feedUnreachable?: boolean; feedItems?: string; unverified?: boolean } = {}) {
+async function fixtureRoot(options: { feedUnreachable?: boolean; feedItems?: string; unverified?: boolean; goodBody?: string } = {}) {
   const root = await mkdtemp(path.join(os.tmpdir(), "editorial-test-"));
   const files = path.join(root, "fixtures");
   await mkdir(files, { recursive: true });
@@ -50,7 +93,7 @@ async function fixtureRoot(options: { feedUnreachable?: boolean; feedItems?: str
 <item><title>ChatGPT restaurant picks from last year</title><link>${OLD_URL}</link><pubDate>${daysAgo(90)}</pubDate><description>Old restaurant AI news.</description></item>
 <item><title>Quarterly earnings of a chip maker</title><link>${UNRELATED_URL}</link><pubDate>${daysAgo(1)}</pubDate><description>Nothing about our audience.</description></item>`;
   await writeFile(path.join(files, "feed.xml"), `<?xml version="1.0"?><rss version="2.0"><channel><title>TEST DATA feed</title>${items}</channel></rss>`);
-  await writeFile(path.join(files, "good.html"), page({ title: "Google Maps AI assistant now answers restaurant and hotel questions", published: daysAgo(2), body: GOOD_BODY }));
+  await writeFile(path.join(files, "good.html"), page({ title: "Google Maps AI assistant now answers restaurant and hotel questions", published: daysAgo(2), body: options.goodBody ?? GOOD_BODY }));
   await writeFile(
     path.join(files, "thin.html"),
     page({ title: "AI Overviews reach hotel searches, says report", published: daysAgo(3), body: `<p>TEST DATA. A page that is long enough but never puts the AI side and the hospitality side in one sentence. ${"Weather, sport, and a recipe. ".repeat(30)}</p>` }),
@@ -220,4 +263,97 @@ test("an unreachable source and a page without evidence both end in a written re
   const text = await readFile(path.join(thinOnly, "drafts", thinRefusal!, "refusal.md"), "utf8");
   assert.match(text, /ни один повод не подтверждён/);
   assert.match(text, /insufficient evidence/);
+});
+
+const US_TEST_BODY = `<p>TEST DATA. Google said on Tuesday that it is testing the Gemini-powered assistant in Google Maps with a small group of restaurants and hotels in the United States.</p>
+<p>The company added that restaurant owners in the test can see which review themes the AI summary draws on.</p>`;
+
+test("a claim that widens the source's scope passes the structural checks, so a package never calls its facts verified", async () => {
+  const root = await fixtureRoot({ goodBody: US_TEST_BODY });
+  const drifted = draftOutput({
+    ruClaim: "Помощник Google Maps уже доступен ресторанам и отелям по всему миру.",
+    enClaim: "The Google Maps assistant is now available to restaurants and hotels worldwide.",
+    evidenceId: "q1",
+  });
+  const { writer, calls } = scriptedWriter([{ output: drifted, estimatedCostUsd: 0.2 }]);
+  assert.equal(await main(runArgs(root, ["--writer", "claude"]), { log: silent, runWriter: writer as never, checkWriterAuth: subscriptionAuth as never }), 0);
+  assert.equal(calls.length, 1);
+  const dir = path.join(root, "drafts", (await readdir(path.join(root, "drafts"))).find((name) => !name.includes("refusal") && !name.endsWith(".json") && !name.endsWith(".jsonl"))!);
+  const manifest = JSON.parse(await readFile(path.join(dir, "manifest.json"), "utf8"));
+  // The structural pass is the limitation on display: the evidence says "testing … in the United States".
+  assert.equal(manifest.checks.structural.ok, true);
+  assert.equal(manifest.checks.semantic.status, "pending-manual");
+  assert.deepEqual(manifest.checks.semantic.scope, ["article.ru.md", "article.en.md", "telegram.ru.md"]);
+  assert.ok(manifest.checks.structural.warnings.some((w: string) => /widens scope/.test(w)), "the scope hint is a warning for the editor, not a verdict");
+  const verification = await readFile(path.join(dir, "verification.md"), "utf8");
+  assert.match(verification, /Смысловая сверка с источником: не выполнена/);
+  assert.match(verification, /Статус: не выполнена/);
+  assert.doesNotMatch(verification, /факты проверены\b(?!» этот файл не означает)/u);
+  assert.doesNotMatch(verification, /^Статус: пройдена/m);
+  for (const file of ["article.ru.md", "article.en.md"]) {
+    const text = await readFile(path.join(dir, file), "utf8");
+    assert.match(text, /смысловая сверка с источником: не выполнена|meaning not yet checked against the source/);
+  }
+  const direct = checkOutput(drifted, { quotes: [{ id: "q1", text: "testing the assistant with restaurants in the United States" }], page: { url: "", finalUrl: "", publishedAt: "" }, primaryUrl: "", primaryLinks: [] } as never);
+  assert.equal(direct.ok, true);
+  assert.equal(direct.semantic.status, "not-checked");
+});
+
+test("a retry gets only what the first attempt left of the estimated budget, and every attempt stays in the metadata", async () => {
+  const root = await fixtureRoot();
+  const good = draftOutput({ ruClaim: "Google Maps отвечает на вопросы о ресторанах и отелях.", enClaim: "Google Maps answers questions about restaurants and hotels.", evidenceId: "q1" });
+  const bad = { ...good, en: { ...good.en, facts: [{ text: "invented", evidence_id: "q9" }] } };
+  const { writer, calls } = scriptedWriter([
+    { output: bad, estimatedCostUsd: 0.3 },
+    { output: good, estimatedCostUsd: 0.25 },
+  ]);
+  assert.equal(await main(runArgs(root, ["--writer", "claude", "--budget-usd", "1"]), { log: silent, runWriter: writer as never, checkWriterAuth: subscriptionAuth as never }), 0);
+  assert.deepEqual(calls.map((call) => call.budgetUsd), [1, 0.7]);
+  const dir = path.join(root, "drafts", (await readdir(path.join(root, "drafts"))).find((name) => !name.includes("refusal") && !name.endsWith(".json") && !name.endsWith(".jsonl"))!);
+  const { writer: meta } = JSON.parse(await readFile(path.join(dir, "manifest.json"), "utf8"));
+  assert.equal(meta.attemptCount, 2);
+  assert.deepEqual(meta.attempts.map((a: { estimatedCostUsd: number; budgetUsd: number }) => [a.estimatedCostUsd, a.budgetUsd]), [[0.3, 1], [0.25, 0.7]]);
+  assert.equal(meta.estimatedCostUsd, 0.55);
+  assert.equal(meta.remainingBudgetUsd, 0.45);
+  assert.match(meta.costBasis, /не фактическое списание/);
+  assert.ok(Array.isArray(meta.attempts[1].fixes) && meta.attempts[1].fixes.length > 0);
+
+  const exhausted = await fixtureRoot();
+  const once = scriptedWriter([{ output: bad, estimatedCostUsd: 0.3 }]);
+  assert.equal(await main(runArgs(exhausted, ["--writer", "claude", "--budget-usd", "0.25"]), { log: silent, runWriter: once.writer as never, checkWriterAuth: subscriptionAuth as never }), 2);
+  assert.equal(once.calls.length, 1, "no retry when the first estimate already used the budget");
+  const refusalDir = (await readdir(path.join(exhausted, "drafts"))).find((name) => name.includes("refusal"))!;
+  const refusal = JSON.parse(await readFile(path.join(exhausted, "drafts", refusalDir, "refusal.json"), "utf8"));
+  assert.match(refusal.writerMeta.budgetStop, /исчерпан первой попыткой/);
+  assert.equal(refusal.writerMeta.attemptCount, 1);
+
+  const unknownCost = await fixtureRoot();
+  const noEstimate = scriptedWriter([{ output: bad, estimatedCostUsd: null }]);
+  assert.equal(await main(runArgs(unknownCost, ["--writer", "claude"]), { log: silent, runWriter: noEstimate.writer as never, checkWriterAuth: subscriptionAuth as never }), 2);
+  assert.equal(noEstimate.calls.length, 1, "an unreported first cost counts as the whole budget");
+});
+
+test("the model is not called unless the subscription login is confirmed", async () => {
+  const root = await fixtureRoot();
+  const { writer, calls } = scriptedWriter([]);
+  const apiKeyAuth = async () => ({ ok: false, loggedIn: true, authMethod: "oauth_token", apiProvider: "firstParty", apiKeyInEnv: true, checkedAt: "test", reason: "ANTHROPIC_API_KEY is set in the environment" });
+  assert.equal(await main(runArgs(root, ["--writer", "claude"]), { log: silent, runWriter: writer as never, checkWriterAuth: apiKeyAuth as never }), 2);
+  assert.equal(calls.length, 0);
+  const refusalDir = (await readdir(path.join(root, "drafts"))).find((name) => name.includes("refusal"))!;
+  const refusal = await readFile(path.join(root, "drafts", refusalDir, "refusal.md"), "utf8");
+  assert.match(refusal, /способ авторизации модели не подтверждён/);
+  assert.match(refusal, /ANTHROPIC_API_KEY/);
+  const runs = (await readFile(path.join(root, "drafts", "runs.jsonl"), "utf8")).trim().split("\n").map((line) => JSON.parse(line));
+  assert.equal(runs.at(-1).outcome, "refused:auth");
+
+  const status = (json: unknown) => async () => ({ stdout: JSON.stringify(json), stderr: "" });
+  const ok = await checkAuth({ exec: status({ loggedIn: true, authMethod: "oauth_token", apiProvider: "firstParty" }), env: {} } as never);
+  assert.equal(ok.ok, true);
+  const withKey = await checkAuth({ exec: status({ loggedIn: true, authMethod: "oauth_token", apiProvider: "firstParty" }), env: { ANTHROPIC_API_KEY: "TEST-DATA-not-a-key" } } as never);
+  assert.equal(withKey.ok, false);
+  assert.match(String(withKey.reason), /ANTHROPIC_API_KEY/);
+  const apiLogin = await checkAuth({ exec: status({ loggedIn: true, authMethod: "api_key", apiProvider: "firstParty" }), env: {} } as never);
+  assert.equal(apiLogin.ok, false);
+  const loggedOut = await checkAuth({ exec: status({ loggedIn: false }), env: {} } as never);
+  assert.equal(loggedOut.ok, false);
 });

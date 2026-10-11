@@ -37,13 +37,17 @@ export async function appendRunLog(draftsRoot, entry) {
   await appendFile(path.join(draftsRoot, "runs.jsonl"), `${JSON.stringify(entry)}\n`);
 }
 
-function renderArticle(version, { lang, stamp, pack, hero, situation, takeaway, nextAction, testData }) {
+function renderArticle(version, { lang, stamp, pack, hero, situation, takeaway, nextAction, testData, checks }) {
   const label = lang === "ru" ? "Черновик" : "Draft";
+  const verification =
+    lang === "ru"
+      ? `структурные проверки: ${checks.ok ? "пройдены" : "не пройдены"}; смысловая сверка с источником: не выполнена`
+      : `structural checks: ${checks.ok ? "passed" : "failed"}; meaning not yet checked against the source`;
   // The title is the first line: that is how the Lab converter reads a draft.
   return [
     `# ${version.title}`,
     "",
-    `<!-- ${label}: ${stamp.local}; version ${version.contentHash.slice(0, 12)}; status draft; ${testData ? "TEST DATA" : "live sources"} -->`,
+    `<!-- ${label}: ${stamp.local}; version ${version.contentHash.slice(0, 12)}; status draft; ${verification}; ${testData ? "TEST DATA" : "live sources"} -->`,
     "",
     `*${version.summary}*`,
     "",
@@ -76,7 +80,17 @@ export async function savePackage(draftsRoot, { stamp, slug, pack, output, check
   const dir = path.join(draftsRoot, `${stamp.date}-${slug}`);
   await mkdir(dir, { recursive: true });
   const hash = contentHash(output);
-  const common = { stamp, pack, hero: output.hero, situation: output.situation, takeaway: output.main_takeaway, nextAction: output.next_action, testData };
+  const common = { stamp, pack, hero: output.hero, situation: output.situation, takeaway: output.main_takeaway, nextAction: output.next_action, testData, checks };
+  // Structure is what the script checked; whether each sentence means what
+  // its passage says is a reading nobody has done yet for this version.
+  const semantic = {
+    status: "pending-manual",
+    scope: ["article.ru.md", "article.en.md", "telegram.ru.md"],
+    note: "существенные утверждения всего текста сверяются с фрагментами page.txt вручную; автоматика смысл не проверяет",
+    checkedAt: null,
+    checkedBy: null,
+    result: null,
+  };
   const { text, ...pageWithoutText } = pack.page;
   // In the shape lib/lab/files.ts expects, so the Lab entry can cite them as they are.
   const labSources = [
@@ -100,7 +114,9 @@ export async function savePackage(draftsRoot, { stamp, slug, pack, output, check
     [
       `# Проверка черновика — ${stamp.local}`,
       "",
-      `Статус: ${checks.ok ? "пройдена" : "НЕ пройдена"}${testData ? " · ТЕСТОВЫЕ ДАННЫЕ" : ""}`,
+      `Структурные проверки: ${checks.ok ? "пройдены" : "НЕ пройдены"} · Смысловая сверка с источником: не выполнена${testData ? " · ТЕСТОВЫЕ ДАННЫЕ" : ""}`,
+      "",
+      "Автоматика проверяет только структуру: что каждый факт ссылается на существующий id доказательства, что числа и адреса есть в пакете, что нет фраз о собственных клиентах и замерах, что английская версия не добавляет id и чисел. Соответствует ли смысл утверждения источнику — например, не стало ли «тестируется в США» «доступно по всему миру» под тем же id, — она не проверяет. «Факты проверены» этот файл не означает.",
       "",
       "## Подтверждение события",
       "",
@@ -117,12 +133,20 @@ export async function savePackage(draftsRoot, { stamp, slug, pack, output, check
       "",
       pack.interest ? "```json\n" + JSON.stringify(pack.interest.signals, null, 2) + "\n```" : "- не собирались",
       "",
-      "## Автоматические проверки текста",
+      "## Структурные проверки текста (автоматически)",
       "",
       ...(checks.errors.length ? checks.errors.map((e) => `- ОШИБКА: ${e}`) : ["- ошибок нет"]),
       ...checks.warnings.map((w) => `- предупреждение: ${w}`),
       "",
-      "## Модель",
+      "## Смысловая сверка (вручную, весь текст)",
+      "",
+      "Статус: не выполнена.",
+      "",
+      "Порядок: каждое существенное утверждение в `article.ru.md`, `article.en.md` и `telegram.ru.md` — не только список фактов — сопоставить с конкретным фрагментом `page.txt`. Неподтверждённое исправить, обозначить гипотезой или убрать. Результат записать сюда: кто, когда, какие правки. До этой записи черновик не считается сверенным.",
+      "",
+      "## Модель и оценочный расход",
+      "",
+      "Расход — поле `total_cost_usd` из ответа CLI, суммированное по попыткам. Это оценка CLI, не фактическое списание; `--max-budget-usd` ограничивает вызов по этой же оценке и денежным потолком не является.",
       "",
       "```json\n" + JSON.stringify(writerMeta, null, 2) + "\n```",
       "",
@@ -137,7 +161,7 @@ export async function savePackage(draftsRoot, { stamp, slug, pack, output, check
     contentHash: hash,
     versions: [{ contentHash: hash, createdAt: stamp }],
     writer: writerMeta,
-    checks,
+    checks: { structural: { ok: checks.ok, errors: checks.errors, warnings: checks.warnings }, semantic },
     sourceReport,
     candidateReport,
     files: ["article.ru.md", "article.en.md", "telegram.ru.md", "hook.json", "page.txt", "writer-output.json", "verification.md"],
