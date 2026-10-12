@@ -2,14 +2,13 @@ name: Selena Systems SEO quality
 
 on:
   pull_request:
-  push:
-    branches:
-      - main
-      - release/**
-      - agent/**
 
 permissions:
   contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   site-quality:
