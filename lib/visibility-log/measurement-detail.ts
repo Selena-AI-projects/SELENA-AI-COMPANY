@@ -75,6 +75,17 @@ export function systemLabel(systemId: string): string {
 }
 
 /**
+ * The channel a column's id implies, used to correct files that under-report API.
+ * API View models are asked by their provider/model id; Visitor View surfaces
+ * are the products a person opens and carry a plain name. The runs of 27 and
+ * 28 August wrote "VISITOR" against every column, the five API models
+ * included, and the files are not edited by hand — so the reader decides.
+ */
+export function channelOf(systemId: string): MeasurementChannel {
+  return systemId.includes("/") ? "API" : "VISITOR";
+}
+
+/**
  * An API View system answers from what it remembers and shows no sources at
  * all — that is the channel, not a gap in the reading. Saying which of the two
  * it is keeps "no sources" from reading as "we lost them".
@@ -130,7 +141,18 @@ export function parseDetail(file: string, raw: string): MeasurementDetail {
         throw new Error(`${file}: "${question.text}" has no cell for ${system.systemId}`);
     }
   }
-  return value;
+  // Only ever promotes a column to API: a column the file already marks API
+  // stays API even when its id carries no provider prefix.
+  const systems = value.systems.map((system) => ({
+    ...system,
+    channel:
+      system.channel === "API" || channelOf(system.systemId) === "API"
+        ? ("API" as const)
+        : ("VISITOR" as const),
+  }));
+  // Stable, so each channel keeps the order it was measured in.
+  systems.sort((left, right) => Number(left.channel === "API") - Number(right.channel === "API"));
+  return { ...value, systems };
 }
 
 function readDetails(): Partial<Record<ProjectSlug, MeasurementDetail[]>> {

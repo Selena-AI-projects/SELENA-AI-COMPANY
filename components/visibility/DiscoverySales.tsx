@@ -11,9 +11,7 @@ import { cn } from "@/lib/cn";
 import {
   IconSparkChat,
   IconTwinStar,
-  IconCompassMark,
   IconLayers,
-  IconMapPin,
   IconHotel,
   IconPalm,
   IconFork,
@@ -37,9 +35,7 @@ import type { PricingPlan, VisibilityLocale } from "@/lib/visibility/types";
 const SYSTEM_BADGES = [
   { label: "ChatGPT", Icon: IconSparkChat },
   { label: "Gemini", Icon: IconTwinStar },
-  { label: "Perplexity", Icon: IconCompassMark },
   { label: "Expanded AI", Icon: IconLayers },
-  { label: "Google Maps", Icon: IconMapPin },
 ] as const;
 
 const INDUSTRY_BADGES = [
@@ -395,7 +391,8 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
                 ))}
               </ul>
               <p className="mt-4 text-sm text-ivory/60">
-                {copy.hero.gate} Local Discovery where verified. No card required to check readiness.
+                {copy.hero.gate} Perplexity is being connected and is not measured yet; Google Maps / Local
+                Visibility is not included yet. No card required to check readiness.
               </p>
             </div>
           </div>
@@ -551,9 +548,9 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
           ))}
         </div>
         <p className="max-w-3xl text-sm text-muted">
-          Local Maps is included only where production-capable automated measurement is verified for the agreed
-          scope. Manual Google Ask Maps / Local AI investigation belongs to the $399 Audit or an explicitly agreed
-          Managed scope — never to the $49 or $79 subscriptions.
+          Google Maps / Local Visibility is not included in any plan yet: automated local measurement is not live.
+          Manual Google Ask Maps / Local AI investigation belongs to the $399 Audit or an explicitly agreed Managed
+          scope — never to the $49 or $79 subscriptions.
         </p>
       </Section>
 
@@ -590,7 +587,7 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
       {/* 6 — Final CTA */}
       <Section title="Turn AI discovery into real guests." dark>
         <p className="max-w-2xl text-lg">
-          Choose a plan and start improving how your business appears across AI and Local discovery.
+          Choose a plan and start improving how your business appears in AI answers.
         </p>
         <div className="flex flex-wrap gap-3">
           <span data-visibility-cta="final_plans">

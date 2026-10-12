@@ -10,7 +10,7 @@ import { DiscoverySales } from "@/components/visibility/DiscoverySales";
 export const metadata = buildMetadata({
   title: "AI Visibility for Hotels, Villas & Restaurants",
   description:
-    "See where guests find your hotel, villa, restaurant or spa across AI and local discovery, who appears instead, which sources matter, and what to do next.",
+    "See where guests find your hotel, villa, restaurant or spa in AI answers, who appears instead, which sources matter, and what to do next.",
   path: "/visibility",
   locale: "en_US",
   languages: visibilityLanguages("visibility"),

@@ -20,6 +20,8 @@ import {
 } from "@/lib/visibility-log/data";
 import {
   type MeasurementDetail,
+  isApiChannel,
+  measurementDetails,
   parseDetail,
   systemLabel,
   systemTotals,
@@ -143,6 +145,86 @@ test("a broken detail file stops the build instead of disappearing", () => {
   ];
   for (const [why, raw] of broken) {
     assert.throws(() => parseDetail("t.json", raw), `${why} was accepted`);
+  }
+});
+
+test("an API View model is never counted as Visitor View, whatever the file says", () => {
+  // The shape the 27–28 August runs published: every column marked VISITOR.
+  const raw = JSON.stringify({
+    date: "2026-08-28",
+    configVersion: "test-2026-08-28",
+    systems: [
+      { systemId: "anthropic/claude-haiku-4.5", channel: "VISITOR" },
+      { systemId: "ChatGPT", channel: "VISITOR" },
+      { systemId: "x-ai/grok-4.5", channel: "VISITOR" },
+    ],
+    questions: [
+      {
+        text: "Где поужинать в Убуде?",
+        cells: [
+          { systemId: "anthropic/claude-haiku-4.5", answered: true, mentioned: true },
+          { systemId: "ChatGPT", answered: true, mentioned: false },
+          { systemId: "x-ai/grok-4.5", answered: true, mentioned: true },
+        ],
+        namedInstead: [],
+        citedDomains: [],
+      },
+    ],
+  });
+  const detail = parseDetail("t.json", raw);
+
+  const visitor = systemTotals(detail).filter((total) => total.channel === "VISITOR");
+  assert.deepEqual(visitor, [{ systemId: "ChatGPT", channel: "VISITOR", answered: 1, mentioned: 0 }]);
+  assert.equal(isApiChannel(detail, "anthropic/claude-haiku-4.5"), true);
+  assert.equal(isApiChannel(detail, "ChatGPT"), false);
+  // What a person sees comes first; each channel keeps its measured order.
+  assert.deepEqual(
+    detail.systems.map((system) => system.systemId),
+    ["ChatGPT", "anthropic/claude-haiku-4.5", "x-ai/grok-4.5"],
+  );
+});
+
+test("a column the file marks API stays API even without a provider prefix", () => {
+  const raw = JSON.stringify({
+    date: "2026-09-10",
+    configVersion: "test-2026-09-10",
+    systems: [
+      { systemId: "ChatGPT", channel: "VISITOR" },
+      { systemId: "grok", channel: "API" },
+    ],
+    questions: [
+      {
+        text: "Где поужинать в Убуде?",
+        cells: [
+          { systemId: "ChatGPT", answered: true, mentioned: false },
+          { systemId: "grok", answered: true, mentioned: true },
+        ],
+        namedInstead: [],
+        citedDomains: [],
+      },
+    ],
+  });
+  const detail = parseDetail("t.json", raw);
+
+  assert.equal(isApiChannel(detail, "grok"), true);
+  assert.deepEqual(
+    detail.systems.map((system) => [system.systemId, system.channel]),
+    [
+      ["ChatGPT", "VISITOR"],
+      ["grok", "API"],
+    ],
+  );
+});
+
+test("no published measurement shows an API model as Visitor View", () => {
+  const visitorSurfaces = new Set(["ChatGPT", "Gemini", "Perplexity"]);
+  const details = Object.values(measurementDetails).flat();
+  assert.ok(details.some((detail) => detail.systems.some((system) => !visitorSurfaces.has(system.systemId))));
+  for (const detail of details) {
+    for (const system of detail.systems) {
+      const expected = visitorSurfaces.has(system.systemId) ? "VISITOR" : "API";
+      assert.equal(system.channel, expected, `${detail.date} ${system.systemId}`);
+    }
   }
 });
 

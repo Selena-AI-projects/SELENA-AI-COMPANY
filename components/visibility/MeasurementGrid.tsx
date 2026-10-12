@@ -52,6 +52,7 @@ export function MeasurementGrid({
   ownDomain?: string;
 }) {
   const totals = systemTotals(detail);
+  const mixedChannels = new Set(detail.systems.map((system) => system.channel)).size > 1;
   const sources = citedDomains(detail);
   const ownAnswers = ownDomain
     ? (sources.find((source) => source.domain === ownDomain)?.answers ?? 0)
@@ -69,6 +70,12 @@ export function MeasurementGrid({
       <p className="mt-5 max-w-3xl leading-relaxed text-ivory/75">
         {detail.questions.length} вопросов, {detail.systems.length} систем, каждый
         вопрос задан каждой системе один раз.{" "}
+        {mixedChannels ? (
+          <>
+            Сначала идут поверхности «как видит посетитель», за ними — модели «через
+            API»: это знания самих моделей, без веб-поиска.{" "}
+          </>
+        ) : null}
         <strong className="font-semibold text-ivory">Откройте строку</strong> — под
         ней будет видно по каждой системе: назвали вас или нет, кого назвали
         вместо и на какие источники сослались.
