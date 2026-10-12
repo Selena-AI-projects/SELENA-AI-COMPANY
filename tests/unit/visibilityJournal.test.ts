@@ -20,6 +20,9 @@ import {
 } from "@/lib/visibility-log/data";
 import {
   type MeasurementDetail,
+  answersFromMemory,
+  isApiChannel,
+  measurementDetails,
   parseDetail,
   systemLabel,
   systemTotals,
@@ -146,11 +149,124 @@ test("a broken detail file stops the build instead of disappearing", () => {
   }
 });
 
+test("an API View model is never counted as Visitor View, whatever the file says", () => {
+  // The shape the 27–28 August runs published: every column marked VISITOR.
+  const raw = JSON.stringify({
+    date: "2026-08-28",
+    configVersion: "test-2026-08-28",
+    systems: [
+      { systemId: "anthropic/claude-haiku-4.5", channel: "VISITOR" },
+      { systemId: "ChatGPT", channel: "VISITOR" },
+      { systemId: "x-ai/grok-4.5", channel: "VISITOR" },
+    ],
+    questions: [
+      {
+        text: "Где поужинать в Убуде?",
+        cells: [
+          { systemId: "anthropic/claude-haiku-4.5", answered: true, mentioned: true },
+          { systemId: "ChatGPT", answered: true, mentioned: false },
+          { systemId: "x-ai/grok-4.5", answered: true, mentioned: true },
+        ],
+        namedInstead: [],
+        citedDomains: [],
+      },
+    ],
+  });
+  const detail = parseDetail("t.json", raw);
+
+  const visitor = systemTotals(detail).filter((total) => total.channel === "VISITOR");
+  assert.deepEqual(visitor, [{ systemId: "ChatGPT", channel: "VISITOR", answered: 1, mentioned: 0 }]);
+  assert.equal(isApiChannel(detail, "anthropic/claude-haiku-4.5"), true);
+  assert.equal(isApiChannel(detail, "ChatGPT"), false);
+  // What a person sees comes first; each channel keeps its measured order.
+  assert.deepEqual(
+    detail.systems.map((system) => system.systemId),
+    ["ChatGPT", "anthropic/claude-haiku-4.5", "x-ai/grok-4.5"],
+  );
+});
+
+test("a column the file marks API stays API even without a provider prefix", () => {
+  const raw = JSON.stringify({
+    date: "2026-09-10",
+    configVersion: "test-2026-09-10",
+    systems: [
+      { systemId: "ChatGPT", channel: "VISITOR" },
+      { systemId: "grok", channel: "API" },
+    ],
+    questions: [
+      {
+        text: "Где поужинать в Убуде?",
+        cells: [
+          { systemId: "ChatGPT", answered: true, mentioned: false },
+          { systemId: "grok", answered: true, mentioned: true },
+        ],
+        namedInstead: [],
+        citedDomains: [],
+      },
+    ],
+  });
+  const detail = parseDetail("t.json", raw);
+
+  assert.equal(isApiChannel(detail, "grok"), true);
+  assert.deepEqual(
+    detail.systems.map((system) => [system.systemId, system.channel]),
+    [
+      ["ChatGPT", "VISITOR"],
+      ["grok", "API"],
+    ],
+  );
+});
+
+test("no published measurement shows an API model as Visitor View", () => {
+  const visitorSurfaces = new Set(["ChatGPT", "Gemini", "Perplexity"]);
+  const details = Object.values(measurementDetails).flat();
+  assert.ok(details.some((detail) => detail.systems.some((system) => !visitorSurfaces.has(system.systemId))));
+  for (const detail of details) {
+    for (const system of detail.systems) {
+      const expected = visitorSurfaces.has(system.systemId) ? "VISITOR" : "API";
+      assert.equal(system.channel, expected, `${detail.date} ${system.systemId}`);
+    }
+  }
+});
+
 test("a model id is shown under the name people know it by", () => {
   assert.equal(systemLabel("x-ai/grok-4.5"), "Grok");
   assert.equal(systemLabel("deepseek/deepseek-v3.2"), "DeepSeek");
   // An id nobody mapped is printed as it is rather than guessed at.
   assert.equal(systemLabel("ChatGPT"), "ChatGPT");
+});
+
+test("Perplexity asked through its API reads as Perplexity (API), never as the visitor column", () => {
+  const ids = ["ChatGPT", "Perplexity", "perplexity/sonar", "anthropic/claude-haiku-4.5"];
+  const raw = JSON.stringify({
+    date: "2026-10-12",
+    configVersion: "test-2026-10-12",
+    // Marked VISITOR throughout, as the August files were: the id decides.
+    systems: ids.map((systemId) => ({ systemId, channel: "VISITOR" })),
+    questions: [
+      {
+        text: "Где поужинать в Убуде?",
+        cells: ids.map((systemId) => ({ systemId, answered: true, mentioned: false })),
+        namedInstead: [],
+        citedDomains: [],
+      },
+    ],
+  });
+  const detail = parseDetail("t.json", raw);
+
+  assert.deepEqual(
+    detail.systems.map((system) => [systemLabel(system.systemId), system.channel]),
+    [
+      ["ChatGPT", "VISITOR"],
+      ["Perplexity", "VISITOR"],
+      ["Perplexity (API)", "API"],
+      ["Claude", "API"],
+    ],
+  );
+  // Perplexity's API searches the web: no sources there is not an answer from memory.
+  assert.equal(answersFromMemory(detail, "perplexity/sonar"), false);
+  assert.equal(answersFromMemory(detail, "anthropic/claude-haiku-4.5"), true);
+  assert.equal(answersFromMemory(detail, "Perplexity"), false);
 });
 
 test("what a measurement cost us stays out of the public layer", () => {

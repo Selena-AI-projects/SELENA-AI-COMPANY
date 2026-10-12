@@ -73,7 +73,7 @@ export const homepage = {
         eyebrow: "AI Visibility · measure outward",
         headline: "Are customers finding you — or your competitors?",
         description:
-          "Measure AI + verified Local discovery, see who appears instead, identify the sources behind the answers and get recommendations for what to improve. For hotels, villas, restaurants, cafés, spas, wellness, beach clubs and experiences.",
+          "Measure AI discovery, see who appears instead, identify the sources behind the answers and get recommendations for what to improve. For hotels, villas, restaurants, cafés, spas, wellness, beach clubs and experiences.",
         ladderLabel: "Then — four paid steps",
         ladderGroups: {
           auto: "Monitoring · early access",
@@ -100,7 +100,7 @@ export const homepage = {
     },
     stats: [
       { value: "Free", label: "entry: a website check with instant results" },
-      { value: "8 systems", label: "the largest paid measurement" },
+      { value: "8 systems", label: "in the largest paid measurement, Perplexity through its API" },
       { value: "25 questions", label: "per measurement; recurring in early access" },
     ],
   },
@@ -542,7 +542,7 @@ export const homepage = {
       {
         kicker: "Measurement",
         title: "What ChatGPT, Gemini and Perplexity answer about you",
-        text: "Share of voice, sources, citations. The same list of questions, the same systems, the same date — otherwise there is nothing to compare.",
+        text: "Share of voice, sources, citations. The same list of questions, the same systems, the same date — otherwise there is nothing to compare. ChatGPT and Gemini as a visitor sees them, Perplexity through its API.",
         image: "/media/cinematic/workspace/share.webp",
         alt: "Fragment of the share-of-voice screen on sample data",
         tone: "copper" as const,
@@ -590,9 +590,9 @@ export const homepage = {
     {
       "title": "Are customers finding you — or your competitors?",
       "result": "Who AI recommends instead of you, which sources it relies on, and what to improve first.",
-      "body": "Measure how your business appears across AI and verified Local discovery. See who appears instead, which sources support those answers, and what Selena recommends improving next.",
+      "body": "Measure how your business appears in AI answers. See who appears instead, which sources support those answers, and what Selena recommends improving next.",
       "outcomes": [
-        "Your visibility across AI and verified Local",
+        "Your visibility in AI answers",
         "Competitors appearing instead of you",
         "Sources and citations",
         "Recommendations for what to improve"

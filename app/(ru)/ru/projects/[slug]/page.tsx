@@ -216,8 +216,10 @@ export default async function JournalProjectPage({
             </dl>
             <p className="mt-10 max-w-3xl text-sm leading-relaxed text-muted">
               Источник — {journalMeta.source}, окно {journalMeta.windowDays} дней. Это обычный поиск
-              Google. Как проект выглядит в ответах ChatGPT, Gemini и Perplexity, покажет платный
-              замер, и он появится здесь отдельной записью.
+              Google.{" "}
+              {details.length > 0 || summaries.length > 0
+                ? "Как проект выглядит в ответах AI-систем, показывают замеры ниже. Колонки Perplexity в них — данные августовских прогонов; новые замеры берут Perplexity через его API."
+                : "Как проект выглядит в ответах ChatGPT и Gemini (как видит посетитель) и Perplexity (через API), покажет платный замер, и он появится здесь отдельной записью."}
             </p>
           </Container>
         </section>

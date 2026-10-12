@@ -195,8 +195,9 @@ export const journalMeta = {
 
 export const stageLabels: Record<JournalStage, string> = {
   readiness: "Техническая проверка",
-  // Not a rung of the ladder: API View is the models' own knowledge, and the
-  // $49 rung sells Visitor View. Labelling this one "Замер · 3 системы" would
+  // Not a rung of the ladder: these five API models answer from their own
+  // knowledge, while the $49 rung measures ChatGPT and Gemini as a visitor sees
+  // them plus Perplexity. Labelling this one with the $49 rung's name would
   // claim a tier that has not run.
   apiView: "Замер AI-ответов · 5 моделей",
   snapshot: "Замер · 3 системы",
@@ -715,12 +716,12 @@ export const journalLadder: { stage: JournalStage; price: string; what: string }
   {
     stage: "snapshot",
     price: commercialFacts.aiVisibility.snapshot.ru,
-    what: "25 вопросов в трёх системах, каждую неделю.",
+    what: "25 вопросов в трёх системах, каждую неделю: ChatGPT и Gemini — как видит посетитель, Perplexity — через API.",
   },
   {
     stage: "landscape",
     price: commercialFacts.aiVisibility.landscape.ru,
-    what: "Те же вопросы в восьми системах, с конкурентами и источниками.",
+    what: "Те же вопросы в восьми системах, с конкурентами и источниками: к ChatGPT и Gemini добавляются шесть моделей через API — Claude, DeepSeek, Qwen, Mistral, Grok и Perplexity.",
   },
   {
     stage: "expert",

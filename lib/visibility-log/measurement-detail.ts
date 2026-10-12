@@ -68,10 +68,24 @@ const systemLabels: Record<string, string> = {
   "qwen/qwen3.5-9b": "Qwen",
   "mistralai/mistral-small-2603": "Mistral",
   "x-ai/grok-4.5": "Grok",
+  // Named with its channel: the August journal columns called "Perplexity"
+  // were read off the website a visitor opens, and this one is not.
+  "perplexity/sonar": "Perplexity (API)",
 };
 
 export function systemLabel(systemId: string): string {
   return systemLabels[systemId] ?? systemId;
+}
+
+/**
+ * The channel a column's id implies, used to correct files that under-report API.
+ * API View models are asked by their provider/model id; Visitor View surfaces
+ * are the products a person opens and carry a plain name. The runs of 27 and
+ * 28 August wrote "VISITOR" against every column, the five API models
+ * included, and the files are not edited by hand — so the reader decides.
+ */
+export function channelOf(systemId: string): MeasurementChannel {
+  return systemId.includes("/") ? "API" : "VISITOR";
 }
 
 /**
@@ -81,6 +95,15 @@ export function systemLabel(systemId: string): string {
  */
 export function isApiChannel(detail: MeasurementDetail, systemId: string): boolean {
   return detail.systems.find((system) => system.systemId === systemId)?.channel === "API";
+}
+
+/**
+ * Perplexity's API searches the web before it answers, unlike the other API
+ * models, so an empty source list there is a missing link and not an answer
+ * from memory.
+ */
+export function answersFromMemory(detail: MeasurementDetail, systemId: string): boolean {
+  return isApiChannel(detail, systemId) && !systemId.startsWith("perplexity/");
 }
 
 export type SystemTotals = {
@@ -130,7 +153,18 @@ export function parseDetail(file: string, raw: string): MeasurementDetail {
         throw new Error(`${file}: "${question.text}" has no cell for ${system.systemId}`);
     }
   }
-  return value;
+  // Only ever promotes a column to API: a column the file already marks API
+  // stays API even when its id carries no provider prefix.
+  const systems = value.systems.map((system) => ({
+    ...system,
+    channel:
+      system.channel === "API" || channelOf(system.systemId) === "API"
+        ? ("API" as const)
+        : ("VISITOR" as const),
+  }));
+  // Stable, so each channel keeps the order it was measured in.
+  systems.sort((left, right) => Number(left.channel === "API") - Number(right.channel === "API"));
+  return { ...value, systems };
 }
 
 function readDetails(): Partial<Record<ProjectSlug, MeasurementDetail[]>> {

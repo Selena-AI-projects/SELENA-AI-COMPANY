@@ -196,7 +196,7 @@ export const visibilityContentEn: VisibilityContent = {
       },
       {
         title: "Measure Visitor View and API View",
-        description: "ChatGPT, Gemini and Perplexity stay separate from Claude, DeepSeek, Qwen, Mistral and Grok so unlike channels are never blended.",
+        description: "ChatGPT and Gemini (Visitor View) stay separate from Claude, DeepSeek, Qwen, Mistral, Grok and Perplexity (API View) so unlike channels are never blended.",
       },
       {
         title: "Work from evidence",
@@ -300,7 +300,7 @@ export const visibilityContentEn: VisibilityContent = {
       "Live public page crawl (up to 5 pages)",
       "Indexability and structured-data checks",
       "PageSpeed performance evidence (when available)",
-      "A locked eight-system measurement contract in the authenticated client workspace",
+      "A locked eight-system measurement contract in the authenticated client workspace, with Perplexity measured through its API",
       "Evidence Ledger and grounded Recommendation Engine outputs",
     ],
     notYetSupported: [
@@ -308,6 +308,7 @@ export const visibilityContentEn: VisibilityContent = {
       "Connected Google Search Console, Google Business Profile or Instagram analytics",
       "Google Places (excluded from the MVP)",
       "Automatic recurring cycles before production activation",
+      "Perplexity as a visitor sees it: Perplexity is measured through its API only",
     ],
   },
   checkForm: {
@@ -510,7 +511,7 @@ export const visibilityContentEn: VisibilityContent = {
     lockedItems: [
       {
         title: "How AI systems see you",
-        body: "whether ChatGPT, Gemini and Perplexity name you — known only after a measurement.",
+        body: "whether ChatGPT and Gemini (as a visitor sees them) and Perplexity (through its API) name you — known only after a measurement.",
       },
       {
         title: "Who occupies the answers",
@@ -566,7 +567,7 @@ export const visibilityContentEn: VisibilityContent = {
     paidPlans: {
       heading: "One free entry and four paid options",
       intro:
-        "FREE: understand the website. $49: measure, compare and recommend. $79: expanded AI + verified automated Local. $399: human competitive investigation and Action Plan. $2,490: agreed implementation, monitoring and rechecks over 90 days.",
+        "FREE: understand the website. $49: measure, compare and recommend. $79: expanded AI systems. $399: human competitive investigation and Action Plan. $2,490: agreed implementation, monitoring and rechecks over 90 days.",
       comparisonLabels: {
         offer: "Offer",
         status: "Status",

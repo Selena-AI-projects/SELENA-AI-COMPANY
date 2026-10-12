@@ -3,8 +3,11 @@ import type { PricingTrackContent, VisibilityLocale } from "./types";
 
 const offers = commercialFacts.aiVisibility;
 export const discoverySystems = {
-  visitor: ["ChatGPT", "Gemini", "Perplexity"],
-  api: ["Claude", "DeepSeek", "Qwen", "Mistral", "Grok"],
+  visitor: ["ChatGPT", "Gemini"],
+  // Perplexity is asked through its API, not read off the page a visitor opens,
+  // so it is sold as API View — and is the one API system in Snapshot.
+  api: ["Claude", "DeepSeek", "Qwen", "Mistral", "Grok", "Perplexity"],
+  snapshotApi: ["Perplexity"],
 } as const;
 
 export const discoveryLinks = {
@@ -25,6 +28,9 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
   const api = en
     ? `API / Model Landscape: ${discoverySystems.api.join(" · ")}`
     : `Через API (модели): ${discoverySystems.api.join(" · ")}`;
+  const snapshotSystems = en
+    ? `${discoverySystems.visitor.join(" · ")} (Visitor View) · ${discoverySystems.snapshotApi.join(" · ")} (API)`
+    : `${discoverySystems.visitor.join(" · ")} (как видит посетитель) · ${discoverySystems.snapshotApi.join(" · ")} (через API)`;
   return [
     {
       title: en ? "Monitoring · early access" : "Мониторинг · ранний доступ",
@@ -39,7 +45,7 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
           status: "founding_soon",
           statusLabel: en ? "Early access · recurring not yet live" : "Ранний доступ · регулярный режим ещё не запущен",
           description: en ? "See what guests see — and what to do next." : "Узнайте, что видят гости и что улучшить дальше.",
-          systemsLabel: visitor,
+          systemsLabel: snapshotSystems,
           volumeLabel: en
             ? "Up to 25 guest-intent questions · one language · one repeat per measurement"
             : "До 25 вопросов гостей · один язык · один повтор на замер",
@@ -71,17 +77,16 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
           status: "founding_soon",
           featured: true,
           statusLabel: en ? "Recommended for hospitality · early access" : "Для гостеприимства · ранний доступ",
-          description: en ? "See the whole competitive discovery landscape." : "Увидьте весь конкурентный рынок в AI и локальном поиске.",
+          description: en ? "See the whole competitive discovery landscape." : "Увидьте весь конкурентный рынок в AI-ответах.",
           systemsLabel: `${visitor}. ${api}.`,
           volumeLabel: en
             ? "Up to 25 questions across up to two languages; Visitor/API reported separately"
             : "До 25 вопросов на одном или двух языках; «как видит посетитель» и «через API» — отдельно",
           progressionLabel: en
-            ? "AI + LOCAL → COMPETITORS → SOURCES → OPPORTUNITIES → NEXT ACTION"
-            : "AI И ЛОКАЛЬНЫЙ ПОИСК → КОНКУРЕНТЫ → ИСТОЧНИКИ → ВОЗМОЖНОСТИ → СЛЕДУЮЩИЙ ШАГ",
+            ? "EXPANDED AI → COMPETITORS → SOURCES → OPPORTUNITIES → NEXT ACTION"
+            : "БОЛЬШЕ AI-СИСТЕМ → КОНКУРЕНТЫ → ИСТОЧНИКИ → ВОЗМОЖНОСТИ → СЛЕДУЮЩИЙ ШАГ",
           features: en
             ? [
-                "Google Maps / Local Visibility only where production-capable automated measurement is verified",
                 "Competitors by guest intent: where you win, lose or are absent",
                 "Expanded sources and cross-system competitor patterns",
                 "Expanded recommendations included — opportunities to investigate or improve first",
@@ -89,7 +94,6 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
                 "Weekly Telegram and authenticated reports after delivery activation",
               ]
             : [
-                "Google Maps / локальная видимость — только там, где подтверждён автоматический замер в рабочем режиме",
                 "Конкуренты по запросам гостей: где вы выигрываете, проигрываете или отсутствуете",
                 "Расширенные источники и паттерны конкурентов в разных системах",
                 "Расширенные рекомендации включены — что исследовать или улучшить первым",
@@ -232,7 +236,7 @@ export const discoverySales = {
     eyebrow: "FOR HOTELS, VILLAS, RESTAURANTS, SPAS & EXPERIENCE BUSINESSES",
     title: "When guests ask AI where to stay, eat or book, do they find you — or your competitors?",
     intro:
-      "Selena measures how your business appears across AI and local discovery, shows which competitors are winning instead, which sources support those answers, and what you should improve next.",
+      "Selena measures how your business appears in AI answers, shows which competitors are winning instead, which sources support those answers, and what you should improve next.",
     gate: "Monitoring subscriptions are in early access. Weekly recurring measurements and Telegram delivery are not yet activated.",
   },
   problem: {
@@ -246,14 +250,17 @@ export const discoverySales = {
         query: "Best family villa in Canggu?",
         finding: "Your villa may appear in one discovery surface and disappear in another.",
       },
-      { query: "Best couples spa in Ubud?", finding: "A competitor repeatedly appears across AI and local discovery." },
+      { query: "Best couples spa in Ubud?", finding: "A competitor repeatedly appears across the measured AI answers." },
     ],
   },
   surfaces: [
-    { title: "AI Discovery", body: [...discoverySystems.visitor, ...discoverySystems.api].join(" · ") },
+    {
+      title: "AI Discovery",
+      body: `Visitor View: ${discoverySystems.visitor.join(" · ")}. API View: ${discoverySystems.api.join(" · ")}.`,
+    },
     {
       title: "Local Discovery",
-      body: "Google Maps / Local Visibility where production-capable automated measurement is verified. Manual discovery investigation belongs to the human-led Audit.",
+      body: "Google Maps / Local Visibility is not included yet: automated local measurement is not live. Manual discovery investigation belongs to the human-led Audit.",
     },
     { title: "Evidence", body: "Citations · Sources · Reviews · Websites" },
   ],
@@ -272,7 +279,7 @@ export const discoverySales = {
       { title: "Your business", body: "Where you appear — and where you disappear." },
       { title: "Competitors", body: "Which businesses are being recommended instead." },
       { title: "Sources", body: "Which citations and third-party sources support those answers." },
-      { title: "Patterns", body: "Which competitors repeatedly win particular guest intents across measured AI and verified Local discovery — only when comparable observations support a pattern." },
+      { title: "Patterns", body: "Which competitors repeatedly win particular guest intents across measured AI systems — only when comparable observations support a pattern." },
       { title: "Recommendations", body: "What Selena recommends improving next based on the observed evidence." },
     ],
     rows: [
@@ -379,7 +386,7 @@ export const discoverySales = {
         "Expected mechanism: remove conflicting business information; discovery improvement is not assured.",
         "Effort: Medium.",
         "Owner: Client / marketing.",
-        "Recheck method: inspect both sources and repeat the comparable AI + Local measurement where available.",
+        "Recheck method: inspect both sources and repeat the comparable AI measurement.",
         "Status: Ready for recheck.",
       ],
     },
@@ -416,7 +423,7 @@ export const discoverySales = {
   faq: [
     {
       q: "Is this SEO?",
-      a: "It overlaps with SEO, but Selena measures discovery in named AI and local surfaces, their competitors and sources. Public Readiness checks website accessibility and clarity; it does not measure recommendations.",
+      a: "It overlaps with SEO, but Selena measures discovery in named AI systems, their competitors and sources. Public Readiness checks website accessibility and clarity; it does not measure recommendations.",
     },
     {
       q: "Can Selena guarantee ChatGPT or Google rankings?",
@@ -428,11 +435,11 @@ export const discoverySales = {
     },
     {
       q: "Which AI systems do you monitor?",
-      a: "Visibility Snapshot covers ChatGPT, Gemini and Perplexity. Full Discovery adds Claude, DeepSeek, Qwen, Mistral and Grok in a separate API / Model Landscape. Recurring subscriptions are in early access.",
+      a: "Visibility Snapshot measures ChatGPT and Gemini as a visitor sees them, and Perplexity through its API. Full Discovery adds Claude, DeepSeek, Qwen, Mistral and Grok to the same API / Model Landscape, kept separate from Visitor View. Recurring subscriptions are in early access.",
     },
     {
       q: "Does $79 include Local Discovery?",
-      a: "Yes, only where production-capable automated Google Maps / Local Visibility measurement is verified. Manual Google Ask Maps / Local AI investigation is not included in the $79 subscription; it belongs to the $399 human-led Audit where relevant, or to an explicitly agreed Managed scope.",
+      a: "Not yet. Automated Google Maps / Local Visibility measurement is not live, so no plan includes it today. Manual Google Ask Maps / Local AI investigation is not part of the $79 subscription either; it belongs to the $399 human-led Audit where relevant, or to an explicitly agreed Managed scope.",
     },
     {
       q: "What happens during the $399 session?",
@@ -508,9 +515,9 @@ export const discoveryPlanOutcomes = [
     { title: "Recommendations", body: "Automatic recommendations for what deserves attention next." },
   ],
   [
-    { title: "Expanded AI", body: "Claude · DeepSeek · Qwen · Mistral · Grok. Visitor View and API / Model Landscape remain separate." },
-    { title: "Local Discovery", body: "Google Maps / Local Visibility only where production-capable automated measurement is verified. The subscription includes automated surfaces only." },
-    { title: "Competitive intelligence", body: "Which competitors win which guest intents across measured AI and Local discovery; where you win, lose or are absent." },
+    { title: "Expanded AI", body: "Claude · DeepSeek · Qwen · Mistral · Grok join Perplexity in the API / Model Landscape, which remains separate from Visitor View." },
+    { title: "Local Discovery", body: "Not included yet: automated Google Maps / Local Visibility measurement is not live. The subscription includes automated surfaces only." },
+    { title: "Competitive intelligence", body: "Which competitors win which guest intents across the measured AI systems; where you win, lose or are absent." },
     { title: "Expanded sources", body: "Broader citation and source patterns across the measured landscape." },
     { title: "Expanded recommendations", body: "Opportunities Selena recommends investigating or improving first." },
   ],
@@ -518,7 +525,7 @@ export const discoveryPlanOutcomes = [
 
 export const discoveryDecisionSteps = [
   { label: "MEASURE + COMPARE + RECOMMEND", body: "See what guests see, who appears instead and what Selena automatically recommends next." },
-  { label: "EXPANDED AI + LOCAL → COMPARE + RECOMMEND", body: "See the broader AI + verified automated Local competitive landscape and expanded recommendations." },
+  { label: "EXPANDED AI → COMPARE + RECOMMEND", body: "See the broader AI competitive landscape and expanded recommendations. Google Maps / Local Visibility is not included yet." },
   { label: "INVESTIGATE + VERIFY + PRIORITIZE", body: "A human analyst investigates the actual competitors, challenges automatic recommendations and builds the final Action Plan with the owner / GM." },
   { label: "EXECUTE + MONITOR + VERIFY", body: "Selena executes the agreed part of the plan, keeps measuring, rechecks and adjusts." },
 ] as const;

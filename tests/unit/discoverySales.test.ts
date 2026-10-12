@@ -6,6 +6,8 @@ import { isClientPortalEnabled, visibilityLanguages } from "@/lib/visibility/rou
 import { buildAiVisibilityStructuredData } from "@/lib/structured-data";
 import { homepage } from "@/lib/data/homepage";
 import { visibilityContentEn } from "@/lib/visibility/content.en";
+import { visibilityContentRu } from "@/lib/visibility/content.ru";
+import { commercialFacts } from "@/lib/commercial-facts";
 
 const [snapshot, landscape, audit, managed] = discoveryTracks("en").flatMap((track) => track.plans);
 
@@ -16,41 +18,91 @@ test("FREE is Public Readiness, with an explicit no-measurement boundary", () =>
   assert.doesNotMatch(discoveryLinks.free, /free-ai-visibility/);
 });
 
-test("Snapshot includes three consumer surfaces, competitors, answers and sources", () => {
+test("Snapshot measures ChatGPT, Gemini and Perplexity, with competitors, answers and sources", () => {
   const text = JSON.stringify(snapshot);
   for (const term of ["ChatGPT", "Gemini", "Perplexity", "competitors", "sources", "Answers", "positions", "25"])
     assert.ok(text.includes(term), term);
   assert.doesNotMatch(snapshot.systemsLabel, /Claude|DeepSeek/);
 });
 
-test("Full Discovery adds separate API classes and qualified Local Discovery", () => {
+/**
+ * Perplexity is measured through its API, so wherever a plan names it, the
+ * clause it sits in has to say API — in its own label or in the API list it
+ * belongs to — and never sell it as Visitor View or as still pending.
+ */
+function perplexityIsLabelledApi(text: string): boolean {
+  return [...text.matchAll(/Perplexity/g)].every(({ index = 0 }) => {
+    const before = text.slice(0, index).split(/[.;]\s/).pop() ?? "";
+    const after = text.slice(index).split(/[.;](?:\s|$)/)[0];
+    return /API/.test(before + after);
+  });
+}
+
+test("Perplexity is sold as an API system wherever a plan names it", () => {
+  const ru = discoveryTracks("ru").flatMap((track) => track.plans);
+  const offers = [
+    ...[snapshot, landscape].map((plan) => plan.systemsLabel),
+    ...ru.slice(0, 2).map((plan) => plan.systemsLabel),
+    commercialFacts.aiVisibility.snapshot.description.en,
+    commercialFacts.aiVisibility.snapshot.description.ru,
+    commercialFacts.aiVisibility.landscape.description.en,
+    commercialFacts.aiVisibility.landscape.description.ru,
+    ...discoverySales.faq.map((item) => item.a),
+    ...visibilityContentRu.faq.map((item) => item.a),
+    ...(visibilityContentRu.hero.answers ?? []).map((item) => item.answer),
+    ...visibilityContentEn.liveReport.lockedItems.map((item) => item.body),
+    ...visibilityContentRu.liveReport.lockedItems.map((item) => item.body),
+    ...[visibilityContentEn, visibilityContentRu].flatMap((content) => content.methodology.supported),
+    ...discoveryPlanOutcomes.flat().map((item) => item.body),
+  ].filter((text) => text.includes("Perplexity"));
+  assert.ok(offers.length >= 10, "the plans no longer name Perplexity");
+  for (const text of offers) {
+    assert.ok(perplexityIsLabelledApi(text), text);
+    assert.doesNotMatch(text, /not measured yet|пока не измеряется|being connected|подключается/, text);
+    assert.doesNotMatch(text, /Perplexity \((?:Visitor View|как видит посетитель)\)/, text);
+  }
+
+  assert.equal(snapshot.systemsLabel, "ChatGPT · Gemini (Visitor View) · Perplexity (API)");
+  assert.equal(ru[0].systemsLabel, "ChatGPT · Gemini (как видит посетитель) · Perplexity (через API)");
+  assert.equal(
+    landscape.systemsLabel,
+    "Visitor View: ChatGPT · Gemini. API / Model Landscape: Claude · DeepSeek · Qwen · Mistral · Grok · Perplexity.",
+  );
+  assert.equal(
+    ru[1].systemsLabel,
+    "Как видит посетитель: ChatGPT · Gemini. Через API (модели): Claude · DeepSeek · Qwen · Mistral · Grok · Perplexity.",
+  );
+
+  const contract = [visibilityContentEn, visibilityContentRu].map((content) =>
+    content.methodology.supported.filter((item) => item.includes("Perplexity")).join(" "),
+  );
+  assert.match(contract[0], /eight-system measurement contract.*Perplexity measured through its API/);
+  assert.match(contract[1], /восьми систем.*Perplexity — через API/);
+});
+
+test("Full Discovery adds separate API classes and promises no Local measurement", () => {
   const text = JSON.stringify(landscape);
-  for (const term of [
-    "Claude",
-    "DeepSeek",
-    "Qwen",
-    "Mistral",
-    "Grok",
-    "Google Maps",
-    "Local Visibility",
-    "Visitor View",
-    "API / Model Landscape",
-  ])
+  for (const term of ["Claude", "DeepSeek", "Qwen", "Mistral", "Grok", "Visitor View", "API / Model Landscape"])
     assert.ok(text.includes(term), term);
-  assert.match(text, /where.*verified/);
   assert.match(text, /API output is not the consumer experience/);
+  assert.match(commercialFacts.aiVisibility.landscape.description.en, /Local Visibility is not included yet/);
+  assert.match(commercialFacts.aiVisibility.landscape.description.ru, /локальная видимость пока не входят/);
 });
 
 test("manual Ask Maps belongs to human work, never the automated subscriptions", () => {
   assert.equal(visibilityActivation.localAi, "MANUAL_ONLY");
   for (const locale of ["en", "ru"] as const) {
     const [basic, expanded, human, execution] = discoveryTracks(locale).flatMap(track => track.plans);
-    assert.doesNotMatch(JSON.stringify([basic, expanded]), /Ask Maps|Local AI/);
-    assert.match(expanded.features.join(" "), /automated measurement is verified|подтверждён автоматический замер/);
+    assert.doesNotMatch(JSON.stringify([basic, expanded]), /Ask Maps|Local AI|Google Maps|Local Visibility|LOCAL|локальн/i);
     assert.match(human.features.join(" "), /manual Google Ask Maps|Ручное исследование Google Ask Maps/i);
     assert.match(execution.features.join(" "), /only where agreed in scope|только в согласованном объёме/);
   }
   assert.doesNotMatch(JSON.stringify(discoveryPlanOutcomes), /Ask Maps|Local AI/);
+  const localFaq = [discoverySales.faq, visibilityContentRu.faq].map(
+    (faq) => faq.find((item) => /\$79/.test(item.q))?.a ?? "",
+  );
+  assert.match(localFaq[0], /^Not yet\./);
+  assert.match(localFaq[1], /^Пока нет\./);
   assert.match(discoverySales.audit.investigation.join(" "), /Includes manual Google Ask Maps \/ Local AI investigation where relevant/);
 });
 
@@ -172,7 +224,7 @@ test("recommendations and competitors are explicit before the human audit", () =
   assert.match(snapshot.features.join(" "), /Automatic recommendations included/);
   assert.match(landscape.features.join(" "), /Expanded recommendations included/);
   assert.equal(snapshot.progressionLabel, "WHERE → WHO → SOURCES → CHANGE → NEXT ACTION");
-  assert.equal(landscape.progressionLabel, "AI + LOCAL → COMPETITORS → SOURCES → OPPORTUNITIES → NEXT ACTION");
+  assert.equal(landscape.progressionLabel, "EXPANDED AI → COMPETITORS → SOURCES → OPPORTUNITIES → NEXT ACTION");
   assert.match(JSON.stringify(discoveryPlanOutcomes[0]), /Competitors.*Sources.*Recommendations/);
   assert.match(discoverySales.bridge, /automatic recommendation is not the same as a verified business decision/);
   assert.match(discoveryDecisionSteps[2].body, /human analyst.*challenges.*Action Plan/i);

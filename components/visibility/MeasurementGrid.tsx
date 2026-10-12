@@ -1,7 +1,7 @@
 import {
   type MeasurementDetail,
   citedDomains,
-  isApiChannel,
+  answersFromMemory,
   systemLabel,
   systemTotals,
 } from "@/lib/visibility-log/measurement-detail";
@@ -52,6 +52,15 @@ export function MeasurementGrid({
   ownDomain?: string;
 }) {
   const totals = systemTotals(detail);
+  const mixedChannels = new Set(detail.systems.map((system) => system.channel)).size > 1;
+  const apiSystems = detail.systems.filter((system) => system.channel === "API");
+  const apiFromMemory = apiSystems.some((system) => answersFromMemory(detail, system.systemId));
+  const apiSearchesWeb = apiSystems.some((system) => !answersFromMemory(detail, system.systemId));
+  const apiNote = apiSearchesWeb
+    ? apiFromMemory
+      ? "Perplexity ищет в сети, остальные модели отвечают из собственных знаний, без веб-поиска."
+      : "Perplexity отвечает с поиском в сети."
+    : "это знания самих моделей, без веб-поиска.";
   const sources = citedDomains(detail);
   const ownAnswers = ownDomain
     ? (sources.find((source) => source.domain === ownDomain)?.answers ?? 0)
@@ -69,6 +78,13 @@ export function MeasurementGrid({
       <p className="mt-5 max-w-3xl leading-relaxed text-ivory/75">
         {detail.questions.length} вопросов, {detail.systems.length} систем, каждый
         вопрос задан каждой системе один раз.{" "}
+        {mixedChannels ? (
+          <>
+            Сначала идут поверхности «как видит посетитель», за ними — модели «через
+            API»:{" "}
+            {apiNote}{" "}
+          </>
+        ) : null}
         <strong className="font-semibold text-ivory">Откройте строку</strong> — под
         ней будет видно по каждой системе: назвали вас или нет, кого назвали
         вместо и на какие источники сослались.
@@ -134,7 +150,7 @@ export function MeasurementGrid({
                   const state = cellState(cell?.mentioned ?? null, cell?.answered ?? false);
                   const instead = cell?.namedInstead ?? [];
                   const sources = cell?.citedDomains ?? [];
-                  const isApi = isApiChannel(detail, system.systemId);
+                  const fromMemory = answersFromMemory(detail, system.systemId);
                   return (
                     <div
                       key={system.systemId}
@@ -158,7 +174,7 @@ export function MeasurementGrid({
                               <span className="text-ivory/50">Источники: </span>
                               {sources.length > 0
                                 ? sources.join(", ")
-                                : isApi
+                                : fromMemory
                                   ? "их нет — это ответ из памяти модели, без веб-поиска"
                                   : "ответ не показал ни одной ссылки"}
                             </p>
