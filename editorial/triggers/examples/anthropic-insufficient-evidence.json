@@ -1,0 +1,16 @@
+{
+  "_comment": "ТЕСТОВЫЙ ПОВОД для демонстрации отказа «недостаточно подтверждений»: источник настоящий и доступный, но вторая цитата в нём не существует (придумана для теста). Прогон обязан остановиться до вызова модели.",
+  "key": "test-anthropic-insufficient-evidence",
+  "section": "guides",
+  "slug": "test-insufficient-evidence",
+  "publisher": "Anthropic",
+  "url": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+  "sourceTitle": "Does Anthropic crawl data from the web, and how can site owners block the crawler?",
+  "datedOnPage": "April 7, 2026",
+  "quotes": [
+    "Anthropic uses different robots to enable website owner transparency and choice.",
+    "ClaudeBot ignores robots.txt on weekends."
+  ],
+  "angle": "тест",
+  "interestSignals": "тест"
+}

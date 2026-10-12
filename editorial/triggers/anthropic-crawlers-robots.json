@@ -1,0 +1,20 @@
+{
+  "key": "anthropic-crawlers-robots-2026-04",
+  "section": "guides",
+  "slug": "anthropic-crawlers-robots-txt",
+  "publisher": "Anthropic",
+  "url": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+  "sourceTitle": "Does Anthropic crawl data from the web, and how can site owners block the crawler?",
+  "datedOnPage": "April 7, 2026",
+  "quotes": [
+    "Anthropic uses different robots to enable website owner transparency and choice.",
+    "When a site restricts ClaudeBot access, it signals that the site's future materials should be excluded from our AI model training datasets.",
+    "Disabling Claude-User on your site prevents our system from retrieving your content in response to a user query, which may reduce your site's visibility for user-directed web search.",
+    "Disabling Claude-SearchBot on your site prevents our system from indexing your content for search optimization, which may reduce your site's visibility and accuracy in user search results.",
+    "Anthropic's Bots respect \"do not crawl\" signals by honoring industry standard directives in robots.txt.",
+    "To block a Bot from your entire website, add this to the robots.txt file in your top-level directory.",
+    "Alternate methods like blocking IP address(es) from which Anthropic Bots operates may not work correctly or persistently guarantee an opt-out, as doing so impedes our ability to read your robots.txt file."
+  ],
+  "angle": "Три разных робота Anthropic — три разных последствия для владельца сайта: запрет ClaudeBot касается обучения моделей, запрет Claude-User и Claude-SearchBot может снизить видимость сайта в ответах и поиске Claude. Практический разбор для владельцев сайтов заведений и услуг: что именно разрешать и запрещать в robots.txt и почему блокировка по IP не считается надёжным отказом.",
+  "interestSignals": "не измерялись в этом прогоне (нет доступа к Search Console / аналитике из среды) — поле заполняет владелец или отдельный замер"
+}

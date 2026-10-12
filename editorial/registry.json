@@ -1,0 +1,16 @@
+{
+  "_comment": "Журнал тем редакционного прогона: одна запись на выпущенный черновик. Дедупликация по key и по url повода, не по дате и не по хешу (хеш — версия текста источника). Пишется editorial/pipeline.mjs; черновики лежат в editorial/drafts/ (вне git).",
+  "entries": [
+    {
+      "key": "anthropic-crawlers-robots-2026-04",
+      "url": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+      "slug": "anthropic-crawlers-robots-txt",
+      "section": "guides",
+      "date": "2026-10-11",
+      "at": "2026-10-11 22:10:23 +08:00",
+      "draftDir": "editorial/drafts/2026-10-11-anthropic-crawlers-robots-txt",
+      "sourceTextSha256": "544727a1172aade6b768b1d21ab128af28a3d39572c103ff77f5e3523bbca7a2",
+      "status": "draft_for_owner_review"
+    }
+  ]
+}

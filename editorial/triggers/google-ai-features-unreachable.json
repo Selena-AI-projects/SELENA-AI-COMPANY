@@ -1,0 +1,15 @@
+{
+  "_comment": "Повод для демонстрации отказа: ранее выбранный источник Google (developers.google.com). Из среды, где делался прогон 2026-10-11, хост закрыт сетевой политикой — прогон обязан остановиться с причиной, а не писать статью. На машине с открытой сетью этот же файл даёт обычный прогон, если цитаты найдены.",
+  "key": "google-ai-features-2026",
+  "section": "guides",
+  "slug": "google-ai-features-site-owners",
+  "publisher": "Google",
+  "url": "https://developers.google.com/search/docs/appearance/ai-features",
+  "sourceTitle": "AI features and your website",
+  "datedOnPage": "",
+  "quotes": [
+    "AI features and your website"
+  ],
+  "angle": "Что Google официально говорит владельцам сайтов о показе в AI-функциях поиска.",
+  "interestSignals": "не измерялись"
+}

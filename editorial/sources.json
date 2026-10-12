@@ -1,0 +1,19 @@
+{
+  "_comment": "Белый список первичных источников редакционного прогона. Основа — источники, уже выбранные для Лаборатории в lib/lab/content.ts (officialSources). Любая ссылка в статье вне этого списка останавливает прогон. Добавления помечены полем addedOn и ждут подтверждения владельца.",
+  "sources": [
+    { "publisher": "OpenAI", "host": "help.openai.com", "href": "https://help.openai.com/en/articles/12627856-publishers-and-developers-faq", "selectedIn": "lib/lab/content.ts officialSources.openAiSearch" },
+    { "publisher": "Google", "host": "developers.google.com", "href": "https://developers.google.com/search/docs/crawling-indexing", "selectedIn": "lib/lab/content.ts officialSources.googleCrawling" },
+    { "publisher": "Google", "host": "developers.google.com", "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls", "selectedIn": "lib/lab/content.ts officialSources.googleCanonical" },
+    { "publisher": "Google", "host": "developers.google.com", "href": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies", "selectedIn": "lib/lab/content.ts officialSources.googleStructuredData" },
+    { "publisher": "schema.org", "host": "schema.org", "href": "https://schema.org/docs/documents.html", "selectedIn": "lib/lab/content.ts officialSources.schemaOrg" },
+    { "publisher": "Google", "host": "developers.google.com", "href": "https://developers.google.com/search/docs/appearance/ai-features", "selectedIn": "lib/lab/content.ts officialSources.googleAiFeatures" },
+    { "publisher": "arXiv", "host": "arxiv.org", "href": "https://arxiv.org/abs/2609.23162", "selectedIn": "lib/lab/content.ts officialSources.tannenbaumPromptToRecommendation" },
+    {
+      "publisher": "Anthropic",
+      "host": "support.claude.com",
+      "href": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+      "addedOn": "2026-10-11",
+      "addedWhy": "Официальная справка производителя об обходчиках ClaudeBot / Claude-User / Claude-SearchBot и robots.txt — тот же класс, что help.openai.com. Добавлена для первого локального прогона: ранее выбранные хосты (developers.google.com, help.openai.com, schema.org, arxiv.org) из этой среды недоступны (сетевая политика). Подтверждение владельца требуется."
+    }
+  ]
+}

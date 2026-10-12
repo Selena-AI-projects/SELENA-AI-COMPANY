@@ -37,6 +37,10 @@ next-env.d.ts
 # personal Claude Code settings (not shared with the team)
 .claude/settings.local.json
 
+# Editorial drafts are owner-review material, not site content: they stay local
+# until approved and published through the Lab file format (docs/22).
+editorial/drafts/
+
 # Search Console pulls carry live performance data for every property —
 # keep it out of the repository and out of any pull request.
 reports/gsc/
