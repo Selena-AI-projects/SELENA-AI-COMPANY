@@ -100,7 +100,7 @@ export const homepage = {
     },
     stats: [
       { value: "Free", label: "entry: a website check with instant results" },
-      { value: "7 systems", label: "in the largest paid measurement; the eighth, Perplexity, is being connected" },
+      { value: "8 systems", label: "in the largest paid measurement, Perplexity through its API" },
       { value: "25 questions", label: "per measurement; recurring in early access" },
     ],
   },
@@ -541,8 +541,8 @@ export const homepage = {
     cards: [
       {
         kicker: "Measurement",
-        title: "What ChatGPT and Gemini answer about you",
-        text: "Share of voice, sources, citations. The same list of questions, the same systems, the same date — otherwise there is nothing to compare. Perplexity is being connected and is not measured yet.",
+        title: "What ChatGPT, Gemini and Perplexity answer about you",
+        text: "Share of voice, sources, citations. The same list of questions, the same systems, the same date — otherwise there is nothing to compare. ChatGPT and Gemini as a visitor sees them, Perplexity through its API.",
         image: "/media/cinematic/workspace/share.webp",
         alt: "Fragment of the share-of-voice screen on sample data",
         tone: "copper" as const,

@@ -68,6 +68,9 @@ const systemLabels: Record<string, string> = {
   "qwen/qwen3.5-9b": "Qwen",
   "mistralai/mistral-small-2603": "Mistral",
   "x-ai/grok-4.5": "Grok",
+  // Named with its channel: the August journal columns called "Perplexity"
+  // were read off the website a visitor opens, and this one is not.
+  "perplexity/sonar": "Perplexity (API)",
 };
 
 export function systemLabel(systemId: string): string {
@@ -92,6 +95,15 @@ export function channelOf(systemId: string): MeasurementChannel {
  */
 export function isApiChannel(detail: MeasurementDetail, systemId: string): boolean {
   return detail.systems.find((system) => system.systemId === systemId)?.channel === "API";
+}
+
+/**
+ * Perplexity's API searches the web before it answers, unlike the other API
+ * models, so an empty source list there is a missing link and not an answer
+ * from memory.
+ */
+export function answersFromMemory(detail: MeasurementDetail, systemId: string): boolean {
+  return isApiChannel(detail, systemId) && !systemId.startsWith("perplexity/");
 }
 
 export type SystemTotals = {

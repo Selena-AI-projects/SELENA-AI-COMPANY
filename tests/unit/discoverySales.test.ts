@@ -18,36 +18,66 @@ test("FREE is Public Readiness, with an explicit no-measurement boundary", () =>
   assert.doesNotMatch(discoveryLinks.free, /free-ai-visibility/);
 });
 
-test("Snapshot measures ChatGPT and Gemini, with competitors, answers and sources", () => {
+test("Snapshot measures ChatGPT, Gemini and Perplexity, with competitors, answers and sources", () => {
   const text = JSON.stringify(snapshot);
-  for (const term of ["ChatGPT", "Gemini", "competitors", "sources", "Answers", "positions", "25"])
+  for (const term of ["ChatGPT", "Gemini", "Perplexity", "competitors", "sources", "Answers", "positions", "25"])
     assert.ok(text.includes(term), term);
   assert.doesNotMatch(snapshot.systemsLabel, /Claude|DeepSeek/);
 });
 
-test("Perplexity is named only as not measured yet wherever a plan is sold", () => {
+/**
+ * Perplexity is measured through its API, so wherever a plan names it, the
+ * clause it sits in has to say API — in its own label or in the API list it
+ * belongs to — and never sell it as Visitor View or as still pending.
+ */
+function perplexityIsLabelledApi(text: string): boolean {
+  return [...text.matchAll(/Perplexity/g)].every(({ index = 0 }) => {
+    const before = text.slice(0, index).split(/[.;]\s/).pop() ?? "";
+    const after = text.slice(index).split(/[.;](?:\s|$)/)[0];
+    return /API/.test(before + after);
+  });
+}
+
+test("Perplexity is sold as an API system wherever a plan names it", () => {
   const ru = discoveryTracks("ru").flatMap((track) => track.plans);
   const offers = [
     ...[snapshot, landscape].map((plan) => plan.systemsLabel),
     ...ru.slice(0, 2).map((plan) => plan.systemsLabel),
     commercialFacts.aiVisibility.snapshot.description.en,
     commercialFacts.aiVisibility.snapshot.description.ru,
+    commercialFacts.aiVisibility.landscape.description.en,
+    commercialFacts.aiVisibility.landscape.description.ru,
     ...discoverySales.faq.map((item) => item.a),
     ...visibilityContentRu.faq.map((item) => item.a),
     ...(visibilityContentRu.hero.answers ?? []).map((item) => item.answer),
     ...visibilityContentEn.liveReport.lockedItems.map((item) => item.body),
     ...visibilityContentRu.liveReport.lockedItems.map((item) => item.body),
+    ...[visibilityContentEn, visibilityContentRu].flatMap((content) => content.methodology.supported),
+    ...discoveryPlanOutcomes.flat().map((item) => item.body),
   ].filter((text) => text.includes("Perplexity"));
-  assert.ok(offers.length >= 6, "the plans no longer mention Perplexity at all");
-  for (const text of offers) assert.match(text, /not measured yet|пока не измеряется/, text);
-  assert.match(snapshot.systemsLabel, /^Visitor View: ChatGPT · Gemini \(Perplexity is being connected/);
+  assert.ok(offers.length >= 10, "the plans no longer name Perplexity");
+  for (const text of offers) {
+    assert.ok(perplexityIsLabelledApi(text), text);
+    assert.doesNotMatch(text, /not measured yet|пока не измеряется|being connected|подключается/, text);
+    assert.doesNotMatch(text, /Perplexity \((?:Visitor View|как видит посетитель)\)/, text);
+  }
+
+  assert.equal(snapshot.systemsLabel, "ChatGPT · Gemini (Visitor View) · Perplexity (API)");
+  assert.equal(ru[0].systemsLabel, "ChatGPT · Gemini (как видит посетитель) · Perplexity (через API)");
+  assert.equal(
+    landscape.systemsLabel,
+    "Visitor View: ChatGPT · Gemini. API / Model Landscape: Claude · DeepSeek · Qwen · Mistral · Grok · Perplexity.",
+  );
+  assert.equal(
+    ru[1].systemsLabel,
+    "Как видит посетитель: ChatGPT · Gemini. Через API (модели): Claude · DeepSeek · Qwen · Mistral · Grok · Perplexity.",
+  );
+
   const contract = [visibilityContentEn, visibilityContentRu].map((content) =>
     content.methodology.supported.filter((item) => item.includes("Perplexity")).join(" "),
   );
-  assert.match(contract[0], /seven systems measured, Perplexity being connected/);
-  assert.match(contract[1], /семь систем измеряются, Perplexity подключается/);
-  for (const content of [visibilityContentEn, visibilityContentRu])
-    assert.doesNotMatch(content.methodology.supported.join(" "), /eight|восьми/);
+  assert.match(contract[0], /eight-system measurement contract.*Perplexity measured through its API/);
+  assert.match(contract[1], /восьми систем.*Perplexity — через API/);
 });
 
 test("Full Discovery adds separate API classes and promises no Local measurement", () => {

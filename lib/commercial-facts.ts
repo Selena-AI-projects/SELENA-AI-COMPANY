@@ -5,7 +5,7 @@
  * values from here. Historical paid orders remain governed by the immutable
  * catalog snapshot stored in the client application.
  */
-export const COMMERCIAL_FACTS_VERSION = "selena-commercial-facts-2026-10-12-v5" as const;
+export const COMMERCIAL_FACTS_VERSION = "selena-commercial-facts-2026-10-12-v6" as const;
 
 export type CommercialLocale = "en" | "ru";
 export type CommercialProductLine = "ai-systems" | "ai-visibility";
@@ -137,8 +137,8 @@ export const commercialFacts = {
       productLine: "ai-visibility",
       name: { en: "Visibility Snapshot", ru: "Visibility Snapshot" },
       description: {
-        en: "Early access to Visitor View measurement in ChatGPT and Gemini; Perplexity is being connected and is not measured yet. Recurring measurements and delivery are not yet activated.",
-        ru: "Ранний доступ к замеру «как видит посетитель» в ChatGPT и Gemini; Perplexity подключается и пока не измеряется. Регулярные замеры и доставка пока не активированы.",
+        en: "Early access to measurement in three systems: ChatGPT and Gemini as a visitor sees them (Visitor View) and Perplexity through its API. Recurring measurements and delivery are not yet activated.",
+        ru: "Ранний доступ к замеру в трёх системах: ChatGPT и Gemini — «как видит посетитель», Perplexity — через API. Регулярные замеры и доставка пока не активированы.",
       },
       price: 49,
       currency: "USD",
@@ -154,8 +154,8 @@ export const commercialFacts = {
       productLine: "ai-visibility",
       name: { en: "Full Discovery Landscape", ru: "Full Discovery Landscape" },
       description: {
-        en: "Expanded AI systems, with Visitor View and API View kept separate. Google Maps / Local Visibility is not included yet. Early access.",
-        ru: "Расширенный набор AI-систем; результаты «как видит посетитель» и «через API» в отчёте раздельные. Google Maps и локальная видимость пока не входят. Ранний доступ.",
+        en: "All eight systems: ChatGPT and Gemini in Visitor View; Claude, DeepSeek, Qwen, Mistral, Grok and Perplexity in API View, reported separately. Google Maps / Local Visibility is not included yet. Early access.",
+        ru: "Все восемь систем: ChatGPT и Gemini — «как видит посетитель»; Claude, DeepSeek, Qwen, Mistral, Grok и Perplexity — «через API», в отчёте раздельно. Google Maps и локальная видимость пока не входят. Ранний доступ.",
       },
       price: 79,
       currency: "USD",

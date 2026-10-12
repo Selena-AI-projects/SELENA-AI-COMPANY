@@ -20,6 +20,7 @@ import {
 } from "@/lib/visibility-log/data";
 import {
   type MeasurementDetail,
+  answersFromMemory,
   isApiChannel,
   measurementDetails,
   parseDetail,
@@ -233,6 +234,39 @@ test("a model id is shown under the name people know it by", () => {
   assert.equal(systemLabel("deepseek/deepseek-v3.2"), "DeepSeek");
   // An id nobody mapped is printed as it is rather than guessed at.
   assert.equal(systemLabel("ChatGPT"), "ChatGPT");
+});
+
+test("Perplexity asked through its API reads as Perplexity (API), never as the visitor column", () => {
+  const ids = ["ChatGPT", "Perplexity", "perplexity/sonar", "anthropic/claude-haiku-4.5"];
+  const raw = JSON.stringify({
+    date: "2026-10-12",
+    configVersion: "test-2026-10-12",
+    // Marked VISITOR throughout, as the August files were: the id decides.
+    systems: ids.map((systemId) => ({ systemId, channel: "VISITOR" })),
+    questions: [
+      {
+        text: "Где поужинать в Убуде?",
+        cells: ids.map((systemId) => ({ systemId, answered: true, mentioned: false })),
+        namedInstead: [],
+        citedDomains: [],
+      },
+    ],
+  });
+  const detail = parseDetail("t.json", raw);
+
+  assert.deepEqual(
+    detail.systems.map((system) => [systemLabel(system.systemId), system.channel]),
+    [
+      ["ChatGPT", "VISITOR"],
+      ["Perplexity", "VISITOR"],
+      ["Perplexity (API)", "API"],
+      ["Claude", "API"],
+    ],
+  );
+  // Perplexity's API searches the web: no sources there is not an answer from memory.
+  assert.equal(answersFromMemory(detail, "perplexity/sonar"), false);
+  assert.equal(answersFromMemory(detail, "anthropic/claude-haiku-4.5"), true);
+  assert.equal(answersFromMemory(detail, "Perplexity"), false);
 });
 
 test("what a measurement cost us stays out of the public layer", () => {

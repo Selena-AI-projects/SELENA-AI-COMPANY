@@ -82,7 +82,10 @@ check(not any(term in plans_text for term in ['Ask Maps', 'Local AI']), 'subscri
 check('production-capable automated measurement is verified' not in plans_text, 'subscriptions: Local is not sold as verified')
 check('Google Maps / Local Visibility is not included in any plan yet' in plans_text, 'subscriptions: Local is not included in any plan')
 for section, section_text in [('hero', hero_text), ('plans', plans_text)]:
-    check(all('not measured yet' in section_text[i:i + 120] for i in range(len(section_text)) if section_text.startswith('Perplexity', i)), section + ': Perplexity only as not measured yet')
+    mentions = [i for i in range(len(section_text)) if section_text.startswith('Perplexity', i)]
+    check(bool(mentions), section + ': Perplexity is named')
+    check(all('API' in section_text[max(0, i - 100):i + 40] for i in mentions), section + ': Perplexity only through its API')
+    check(not any(term in section_text for term in ['not measured yet', 'being connected']), section + ': Perplexity is not sold as pending')
 check('Includes manual Google Ask Maps / Local AI investigation where relevant' in audit_text, 'audit: manual discovery belongs to human investigation')
 check(not any(client in text for client in ['AVLI', 'Usha']), 'landing: no client proof identity')
 check(landing.headings[0] == 1 and all(b <= a + 1 for a, b in zip(landing.headings, landing.headings[1:])), 'landing: semantic heading order')

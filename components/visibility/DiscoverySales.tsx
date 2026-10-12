@@ -11,6 +11,7 @@ import { cn } from "@/lib/cn";
 import {
   IconSparkChat,
   IconTwinStar,
+  IconCompassMark,
   IconLayers,
   IconHotel,
   IconPalm,
@@ -35,6 +36,7 @@ import type { PricingPlan, VisibilityLocale } from "@/lib/visibility/types";
 const SYSTEM_BADGES = [
   { label: "ChatGPT", Icon: IconSparkChat },
   { label: "Gemini", Icon: IconTwinStar },
+  { label: "Perplexity (API)", Icon: IconCompassMark },
   { label: "Expanded AI", Icon: IconLayers },
 ] as const;
 
@@ -391,8 +393,8 @@ export function DiscoverySales({ children }: { children?: ReactNode }) {
                 ))}
               </ul>
               <p className="mt-4 text-sm text-ivory/60">
-                {copy.hero.gate} Perplexity is being connected and is not measured yet; Google Maps / Local
-                Visibility is not included yet. No card required to check readiness.
+                {copy.hero.gate} Perplexity is measured through its API, not as a visitor sees it; Google Maps /
+                Local Visibility is not included yet. No card required to check readiness.
               </p>
             </div>
           </div>

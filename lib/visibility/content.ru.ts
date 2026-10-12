@@ -25,9 +25,9 @@ export const visibilityContentRu: VisibilityContent = {
     eyebrow: "AI Visibility от Selena Systems",
     title: "Узнайте, советует ли вас AI, когда гость ищет, где остановиться или поесть.",
     intro:
-      "Начните с бесплатной проверки сайта. Платные планы добавляют датированный замер до семи AI-систем и конкретный план действий. Perplexity подключается и пока не измеряется.",
+      "Начните с бесплатной проверки сайта. Платные планы добавляют датированный замер до восьми AI-систем и конкретный план действий.",
     answers: [
-      { question: "Что вы узнаете", answer: "Называют ли вас ChatGPT и Gemini. Perplexity подключается и пока не измеряется; Google Maps в замер ещё не входит" },
+      { question: "Что вы узнаете", answer: "Называют ли вас ChatGPT и Gemini (как видит посетитель) и Perplexity (через API); Google Maps в замер ещё не входит" },
       { question: "Что увидите рядом", answer: "Кого советуют вместо вас и на какие источники опирается ответ" },
       { question: "Что получите", answer: "План действий и сравнимый повторный замер: что изменилось, без обещания причин и результата" },
     ],
@@ -205,7 +205,7 @@ export const visibilityContentRu: VisibilityContent = {
       },
       {
         title: "Измерьте «как видит посетитель» и «через API»",
-        description: "ChatGPT и Gemini («как видит посетитель») отделены от Claude, DeepSeek, Qwen, Mistral и Grok («через API») — разные каналы не смешиваются. Perplexity подключается и пока не измеряется.",
+        description: "ChatGPT и Gemini («как видит посетитель») отделены от Claude, DeepSeek, Qwen, Mistral, Grok и Perplexity («через API») — разные каналы не смешиваются.",
       },
       {
         title: "Работайте с доказательствами",
@@ -309,7 +309,7 @@ export const visibilityContentRu: VisibilityContent = {
       "Живой краулинг публичных страниц (до 5 страниц)",
       "Проверки индексируемости и структурированных данных",
       "Данные PageSpeed о производительности (если доступны)",
-      "Зафиксированный контракт замера в клиентском кабинете: семь систем измеряются, Perplexity подключается",
+      "Зафиксированный контракт замера восьми систем в клиентском кабинете, Perplexity — через API",
       "Журнал доказательств и рекомендации со ссылками на доказательства",
     ],
     notYetSupported: [
@@ -317,7 +317,7 @@ export const visibilityContentRu: VisibilityContent = {
       "Подключённые Google Search Console, Google Business Profile или Instagram Analytics",
       "Google Places — исключён из первой версии",
       "Автоматические регулярные циклы до запуска в рабочем режиме",
-      "Ответы Perplexity в канале «как видит посетитель»: сбор подключается, поэтому Perplexity пока не измеряется",
+      "Perplexity «как видит посетитель»: Perplexity измеряется только через API",
     ],
   },
   checkForm: {
@@ -520,7 +520,7 @@ export const visibilityContentRu: VisibilityContent = {
     lockedItems: [
       {
         title: "Как вас видят AI-системы",
-        body: "упомянуты ли вы в ответах ChatGPT и Gemini — станет известно только после замера. Perplexity подключается и пока не измеряется.",
+        body: "упомянуты ли вы в ответах ChatGPT и Gemini (как видит посетитель) и Perplexity (через API) — станет известно только после замера.",
       },
       {
         title: "Кто занимает ответы",
@@ -636,7 +636,7 @@ export const visibilityContentRu: VisibilityContent = {
     },
     {
       q: "Какие AI-системы вы проверяете?",
-      a: "Visibility Snapshot измеряет ChatGPT и Gemini; Perplexity подключается и пока не измеряется. Full Discovery добавляет Claude, DeepSeek, Qwen, Mistral и Grok в отдельном разделе «через API». Регулярные подписки пока в раннем доступе.",
+      a: "Visibility Snapshot измеряет ChatGPT и Gemini так, как их видит посетитель, и Perplexity через API. Full Discovery добавляет Claude, DeepSeek, Qwen, Mistral и Grok в тот же раздел «через API». Регулярные подписки пока в раннем доступе.",
     },
     {
       q: "Входит ли локальный поиск в $79?",

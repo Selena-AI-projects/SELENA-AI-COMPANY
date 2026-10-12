@@ -4,10 +4,10 @@ import type { PricingTrackContent, VisibilityLocale } from "./types";
 const offers = commercialFacts.aiVisibility;
 export const discoverySystems = {
   visitor: ["ChatGPT", "Gemini"],
-  // Part of the Visitor View plan, but no collector returns its answers yet, so
-  // it is named as pending rather than sold as measured.
-  visitorPending: ["Perplexity"],
-  api: ["Claude", "DeepSeek", "Qwen", "Mistral", "Grok"],
+  // Perplexity is asked through its API, not read off the page a visitor opens,
+  // so it is sold as API View — and is the one API system in Snapshot.
+  api: ["Claude", "DeepSeek", "Qwen", "Mistral", "Grok", "Perplexity"],
+  snapshotApi: ["Perplexity"],
 } as const;
 
 export const discoveryLinks = {
@@ -23,11 +23,14 @@ export const discoveryLinks = {
 export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[] {
   const en = locale === "en";
   const visitor = en
-    ? `Visitor View: ${discoverySystems.visitor.join(" · ")} (${discoverySystems.visitorPending.join(", ")} is being connected — not measured yet)`
-    : `Как видит посетитель: ${discoverySystems.visitor.join(" · ")} (${discoverySystems.visitorPending.join(", ")} подключается — пока не измеряется)`;
+    ? `Visitor View: ${discoverySystems.visitor.join(" · ")}`
+    : `Как видит посетитель: ${discoverySystems.visitor.join(" · ")}`;
   const api = en
     ? `API / Model Landscape: ${discoverySystems.api.join(" · ")}`
     : `Через API (модели): ${discoverySystems.api.join(" · ")}`;
+  const snapshotSystems = en
+    ? `${discoverySystems.visitor.join(" · ")} (Visitor View) · ${discoverySystems.snapshotApi.join(" · ")} (API)`
+    : `${discoverySystems.visitor.join(" · ")} (как видит посетитель) · ${discoverySystems.snapshotApi.join(" · ")} (через API)`;
   return [
     {
       title: en ? "Monitoring · early access" : "Мониторинг · ранний доступ",
@@ -42,7 +45,7 @@ export function discoveryTracks(locale: VisibilityLocale): PricingTrackContent[]
           status: "founding_soon",
           statusLabel: en ? "Early access · recurring not yet live" : "Ранний доступ · регулярный режим ещё не запущен",
           description: en ? "See what guests see — and what to do next." : "Узнайте, что видят гости и что улучшить дальше.",
-          systemsLabel: visitor,
+          systemsLabel: snapshotSystems,
           volumeLabel: en
             ? "Up to 25 guest-intent questions · one language · one repeat per measurement"
             : "До 25 вопросов гостей · один язык · один повтор на замер",
@@ -253,7 +256,7 @@ export const discoverySales = {
   surfaces: [
     {
       title: "AI Discovery",
-      body: `${[...discoverySystems.visitor, ...discoverySystems.api].join(" · ")}. ${discoverySystems.visitorPending.join(", ")} is being connected and is not measured yet.`,
+      body: `Visitor View: ${discoverySystems.visitor.join(" · ")}. API View: ${discoverySystems.api.join(" · ")}.`,
     },
     {
       title: "Local Discovery",
@@ -432,7 +435,7 @@ export const discoverySales = {
     },
     {
       q: "Which AI systems do you monitor?",
-      a: "Visibility Snapshot measures ChatGPT and Gemini; Perplexity is being connected and is not measured yet. Full Discovery adds Claude, DeepSeek, Qwen, Mistral and Grok in a separate API / Model Landscape. Recurring subscriptions are in early access.",
+      a: "Visibility Snapshot measures ChatGPT and Gemini as a visitor sees them, and Perplexity through its API. Full Discovery adds Claude, DeepSeek, Qwen, Mistral and Grok to the same API / Model Landscape, kept separate from Visitor View. Recurring subscriptions are in early access.",
     },
     {
       q: "Does $79 include Local Discovery?",
@@ -512,7 +515,7 @@ export const discoveryPlanOutcomes = [
     { title: "Recommendations", body: "Automatic recommendations for what deserves attention next." },
   ],
   [
-    { title: "Expanded AI", body: "Claude · DeepSeek · Qwen · Mistral · Grok. Visitor View and API / Model Landscape remain separate." },
+    { title: "Expanded AI", body: "Claude · DeepSeek · Qwen · Mistral · Grok join Perplexity in the API / Model Landscape, which remains separate from Visitor View." },
     { title: "Local Discovery", body: "Not included yet: automated Google Maps / Local Visibility measurement is not live. The subscription includes automated surfaces only." },
     { title: "Competitive intelligence", body: "Which competitors win which guest intents across the measured AI systems; where you win, lose or are absent." },
     { title: "Expanded sources", body: "Broader citation and source patterns across the measured landscape." },

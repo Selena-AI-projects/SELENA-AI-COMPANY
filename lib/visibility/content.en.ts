@@ -196,7 +196,7 @@ export const visibilityContentEn: VisibilityContent = {
       },
       {
         title: "Measure Visitor View and API View",
-        description: "ChatGPT and Gemini stay separate from Claude, DeepSeek, Qwen, Mistral and Grok so unlike channels are never blended. Perplexity is being connected and is not measured yet.",
+        description: "ChatGPT and Gemini (Visitor View) stay separate from Claude, DeepSeek, Qwen, Mistral, Grok and Perplexity (API View) so unlike channels are never blended.",
       },
       {
         title: "Work from evidence",
@@ -300,7 +300,7 @@ export const visibilityContentEn: VisibilityContent = {
       "Live public page crawl (up to 5 pages)",
       "Indexability and structured-data checks",
       "PageSpeed performance evidence (when available)",
-      "A locked measurement contract in the authenticated client workspace: seven systems measured, Perplexity being connected",
+      "A locked eight-system measurement contract in the authenticated client workspace, with Perplexity measured through its API",
       "Evidence Ledger and grounded Recommendation Engine outputs",
     ],
     notYetSupported: [
@@ -308,7 +308,7 @@ export const visibilityContentEn: VisibilityContent = {
       "Connected Google Search Console, Google Business Profile or Instagram analytics",
       "Google Places (excluded from the MVP)",
       "Automatic recurring cycles before production activation",
-      "Perplexity answers in Visitor View: the collector is being connected, so Perplexity is not measured yet",
+      "Perplexity as a visitor sees it: Perplexity is measured through its API only",
     ],
   },
   checkForm: {
@@ -511,7 +511,7 @@ export const visibilityContentEn: VisibilityContent = {
     lockedItems: [
       {
         title: "How AI systems see you",
-        body: "whether ChatGPT and Gemini name you — known only after a measurement. Perplexity is being connected and is not measured yet.",
+        body: "whether ChatGPT and Gemini (as a visitor sees them) and Perplexity (through its API) name you — known only after a measurement.",
       },
       {
         title: "Who occupies the answers",

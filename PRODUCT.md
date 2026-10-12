@@ -43,10 +43,10 @@ third competing service line.
   experience notes; there is no Academy.
 - `/app/learn` is reserved for future course entitlements; `/app/selena` remains
   the Visibility workspace and `/app/projects` the custom-services workspace.
-- Visitor View measures ChatGPT and Gemini. Perplexity is part of Visitor View but
-  is being connected and is not measured yet.
+- Visitor View measures ChatGPT and Gemini.
 - API View covers Claude, DeepSeek, Qwen, Mistral and Grok with web search off by
-  default.
+  default, and Perplexity, which is measured through DataForSEO's Sonar API. It
+  is sold as Perplexity (API), never as Visitor View.
 - Public website readiness can run without connecting private client accounts.
 - Paid AI measurements require an approved order, fixed cardinality and provider
   budget caps.
@@ -57,15 +57,16 @@ The immutable RC6 contract keeps stable plan IDs and the internal names Visitor
 Local, Full AI Landscape, Expert Verified and Growth 90 Days. The final
 customer-facing ladder presents the same scopes as:
 
-- AI Visibility Snapshot — $49/month; up to 25 questions in one language;
-  Visitor View in ChatGPT and Gemini (Perplexity pending); one weekly run; up to
-  200 planned answers per month, 300 once Perplexity is connected.
+- AI Visibility Snapshot — $49/month; up to 25 questions in one language; three
+  systems: ChatGPT and Gemini in Visitor View plus Perplexity (API); one weekly
+  run; up to 300 planned answers per month.
 - AI Visibility Landscape — $79/month; up to 25 questions across up to two
-  languages; seven systems measured (Perplexity pending); one weekly run; up to
-  700 planned answers per month, 800 once Perplexity is connected.
-- Expert Verified — $399 one-time; 20 scenarios across two languages; seven
-  systems measured (Perplexity pending); five repeats; 700 planned answers, 800
-  once Perplexity is connected, plus human semantic, citation and factual QC.
+  languages; all eight systems: ChatGPT and Gemini in Visitor View plus Claude,
+  DeepSeek, Qwen, Mistral, Grok and Perplexity in API View; one weekly run; up to
+  800 planned answers per month.
+- Expert Verified — $399 one-time; 20 scenarios across two languages; all
+  eight systems, Perplexity through its API; five repeats; 800 planned answers
+  plus human semantic, citation and factual QC.
 - Implementation + 90 days — $2,490; manual approval and an immutable custom scope.
 
 AI Automation has four manually approved formats: a $100 60-minute mini-audit,
